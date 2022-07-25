@@ -15,9 +15,17 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/cha-admin/src/favicon.ico",
-          "apps/cha-admin/src/assets"
+          "apps/cha-admin/src/assets",
+          {
+            "input": "libs/blade/angular/ui/core/src/lib/styles/themes",
+            "glob": "**/*.css",
+            "output": "assets/themes"
+          }
         ],
-        "styles": ["apps/cha-admin/src/styles.scss"],
+        "styles": [
+          "apps/cha-admin/src/styles.scss",
+          "libs/blade/angular/ui/core/src/lib/styles/default.scss"
+        ],
         "scripts": []
       },
       "configurations": {

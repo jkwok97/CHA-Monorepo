@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/ui/core/src",
+  "prefix": "cha-hockey",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/ui/core"],
+      "options": {
+        "jestConfig": "libs/blade/angular/ui/core/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/ui/core/**/*.ts",
+          "libs/blade/angular/ui/core/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular ui"]
+}
