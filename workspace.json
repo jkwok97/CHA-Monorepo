@@ -3,7 +3,11 @@
   "version": 2,
   "projects": {
     "api-core": "libs/api/core",
+    "blade-angular-ui-button": "libs/blade/angular/ui/button",
+    "blade-angular-ui-button-toggle": "libs/blade/angular/ui/button-toggle",
     "blade-angular-ui-core": "libs/blade/angular/ui/core",
+    "blade-angular-ui-dropdown": "libs/blade/angular/ui/dropdown",
+    "blade-angular-ui-dropdown-multi": "libs/blade/angular/ui/dropdown-multi",
     "cha-admin": "apps/cha-admin",
     "cha-admin-e2e": "apps/cha-admin-e2e",
     "cha-front": "apps/cha-front",

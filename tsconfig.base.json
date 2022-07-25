@@ -16,7 +16,17 @@
     "baseUrl": ".",
     "paths": {
       "@api/core": ["libs/api/core/src/index.ts"],
-      "@blade/angular/ui/core": ["libs/blade/angular/ui/core/src/index.ts"]
+      "@blade/angular/ui/button": ["libs/blade/angular/ui/button/src/index.ts"],
+      "@blade/angular/ui/button-toggle": [
+        "libs/blade/angular/ui/button-toggle/src/index.ts"
+      ],
+      "@blade/angular/ui/core": ["libs/blade/angular/ui/core/src/index.ts"],
+      "@blade/angular/ui/dropdown": [
+        "libs/blade/angular/ui/dropdown/src/index.ts"
+      ],
+      "@blade/angular/ui/dropdown-multi": [
+        "libs/blade/angular/ui/dropdown-multi/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

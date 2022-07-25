@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/ui/dropdown/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/ui/dropdown"],
+      "options": {
+        "jestConfig": "libs/blade/angular/ui/dropdown/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/ui/dropdown/**/*.ts",
+          "libs/blade/angular/ui/dropdown/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:ui"]
+}

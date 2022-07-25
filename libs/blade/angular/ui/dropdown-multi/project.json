@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/ui/dropdown-multi/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/ui/dropdown-multi"],
+      "options": {
+        "jestConfig": "libs/blade/angular/ui/dropdown-multi/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/ui/dropdown-multi/**/*.ts",
+          "libs/blade/angular/ui/dropdown-multi/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:ui"]
+}
