@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@api/core": ["libs/api/core/src/index.ts"],
       "@blade/angular/ui/core": ["libs/blade/angular/ui/core/src/index.ts"]
     }
   },
