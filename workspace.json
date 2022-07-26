@@ -2,7 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "api-awards": "libs/api/awards",
     "api-core": "libs/api/core",
+    "api-users": "libs/api/users",
     "blade-angular-ui-button": "libs/blade/angular/ui/button",
     "blade-angular-ui-button-toggle": "libs/blade/angular/ui/button-toggle",
     "blade-angular-ui-core": "libs/blade/angular/ui/core",

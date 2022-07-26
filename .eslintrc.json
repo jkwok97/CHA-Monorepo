@@ -21,6 +21,10 @@
                 "onlyDependOnLibsWithTags": ["api:core"]
               },
               {
+                "sourceTag": "app:core",
+                "onlyDependOnLibsWithTags": ["api:module"]
+              },
+              {
                 "sourceTag": "app:angular",
                 "onlyDependOnLibsWithTags": ["angular:ui"]
               }

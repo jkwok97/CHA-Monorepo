@@ -1,3 +1,1 @@
-export * from './awards.module';
-export * from './awards.service';
-export * from './awards.controller';
+export * from './lib/api-awards.module';
