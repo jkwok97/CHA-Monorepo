@@ -1,0 +1,151 @@
+{
+  "projects": {
+    "awards": {
+      "type": "library",
+      "root": "libs/api/awards",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/awards/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/awards/tsconfig.lib.json"
+      }
+    },
+    "draft-table": {
+      "type": "library",
+      "root": "libs/api/draft-table",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/draft-table/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/draft-table/tsconfig.lib.json"
+      }
+    },
+    "draft": {
+      "type": "library",
+      "root": "libs/api/draft",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/draft/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/draft/tsconfig.lib.json"
+      }
+    },
+    "goalie-stats": {
+      "type": "library",
+      "root": "libs/api/goalie-stats",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/goalie-stats/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/goalie-stats/tsconfig.lib.json"
+      }
+    },
+    "league": {
+      "type": "library",
+      "root": "libs/api/league",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/league/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/league/tsconfig.lib.json"
+      }
+    },
+    "nhl": {
+      "type": "library",
+      "root": "libs/api/nhl",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/nhl/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/nhl/tsconfig.lib.json"
+      }
+    },
+    "player-info": {
+      "type": "library",
+      "root": "libs/api/player-info",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/player-info/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/player-info/tsconfig.lib.json"
+      }
+    },
+    "player-stats": {
+      "type": "library",
+      "root": "libs/api/player-stats",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/player-stats/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/player-stats/tsconfig.lib.json"
+      }
+    },
+    "ratings": {
+      "type": "library",
+      "root": "libs/api/ratings",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/ratings/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/ratings/tsconfig.lib.json"
+      }
+    },
+    "salaries": {
+      "type": "library",
+      "root": "libs/api/salaries",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/salaries/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/salaries/tsconfig.lib.json"
+      }
+    },
+    "schedule": {
+      "type": "library",
+      "root": "libs/api/schedule",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/schedule/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/schedule/tsconfig.lib.json"
+      }
+    },
+    "team-stats": {
+      "type": "library",
+      "root": "libs/api/team-stats",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/team-stats/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/team-stats/tsconfig.lib.json"
+      }
+    },
+    "teams": {
+      "type": "library",
+      "root": "libs/api/teams",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/teams/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/teams/tsconfig.lib.json"
+      }
+    },
+    "transactions": {
+      "type": "library",
+      "root": "libs/api/transactions",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/transactions/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/transactions/tsconfig.lib.json"
+      }
+    },
+    "users": {
+      "type": "library",
+      "root": "libs/api/users",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/users/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/users/tsconfig.lib.json"
+      }
+    },
+    "waivers": {
+      "type": "library",
+      "root": "libs/api/waivers",
+      "entryFile": "index",
+      "sourceRoot": "libs/api/waivers/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/api/waivers/tsconfig.lib.json"
+      }
+    }
+  },
+  "compilerOptions": {
+    "webpack": true
+  }
+}
