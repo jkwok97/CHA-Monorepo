@@ -17,7 +17,21 @@
     "paths": {
       "@api/awards": ["libs/api/awards/src/index.ts"],
       "@api/core": ["libs/api/core/src/index.ts"],
+      "@api/draft-table": ["libs/api/draft-table/src/index.ts"],
+      "@api/entry-draft": ["libs/api/entry-draft/src/index.ts"],
+      "@api/goalie-stats": ["libs/api/goalie-stats/src/index.ts"],
+      "@api/league": ["libs/api/league/src/index.ts"],
+      "@api/nhl": ["libs/api/nhl/src/index.ts"],
+      "@api/player-info": ["libs/api/player-info/src/index.ts"],
+      "@api/player-ratings": ["libs/api/player-ratings/src/index.ts"],
+      "@api/player-stats": ["libs/api/player-stats/src/index.ts"],
+      "@api/salaries": ["libs/api/salaries/src/index.ts"],
+      "@api/schedule": ["libs/api/schedule/src/index.ts"],
+      "@api/team-stats": ["libs/api/team-stats/src/index.ts"],
+      "@api/teams": ["libs/api/teams/src/index.ts"],
+      "@api/transactions": ["libs/api/transactions/src/index.ts"],
       "@api/users": ["libs/api/users/src/index.ts"],
+      "@api/waivers": ["libs/api/waivers/src/index.ts"],
       "@blade/angular/ui/button": ["libs/blade/angular/ui/button/src/index.ts"],
       "@blade/angular/ui/button-toggle": [
         "libs/blade/angular/ui/button-toggle/src/index.ts"

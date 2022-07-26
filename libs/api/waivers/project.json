@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/waivers/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/waivers/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/waivers"],
+      "options": {
+        "jestConfig": "libs/api/waivers/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["api:module"]
+}
