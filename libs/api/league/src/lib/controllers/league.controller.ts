@@ -1,4 +1,10 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller('league')
-export class LeagueController {}
+export class LeagueController {
+  @Get('/divisions')
+  getDivisions() {}
+
+  @Get('/current-data')
+  getCurrentData() {}
+}
