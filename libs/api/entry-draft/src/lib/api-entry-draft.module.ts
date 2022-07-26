@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { EntryDraftController } from './controllers';
 
 @Module({
-  controllers: [],
+  controllers: [EntryDraftController],
   providers: [],
   exports: [],
 })

@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TeamsController } from './controllers';
 
 @Module({
-  controllers: [],
+  controllers: [TeamsController],
   providers: [],
   exports: [],
 })

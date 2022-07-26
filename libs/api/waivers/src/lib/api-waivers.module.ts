@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { WaiversController } from './controllers';
 
 @Module({
-  controllers: [],
+  controllers: [WaiversController],
   providers: [],
   exports: [],
 })

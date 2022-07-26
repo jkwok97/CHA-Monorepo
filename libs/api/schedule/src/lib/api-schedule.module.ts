@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ScheduleController } from './controllers';
 
 @Module({
-  controllers: [],
+  controllers: [ScheduleController],
   providers: [],
   exports: [],
 })

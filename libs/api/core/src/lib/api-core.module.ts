@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ApiAwardsModule } from '@api/awards';
-import { ApiUsersModule } from '@api/users';
 import { configuration, validationSchema } from './config';
 
 @Module({
@@ -11,8 +9,6 @@ import { configuration, validationSchema } from './config';
       load: [configuration],
       validationSchema,
     }),
-    ApiUsersModule,
-    ApiAwardsModule,
   ],
   controllers: [],
   providers: [],

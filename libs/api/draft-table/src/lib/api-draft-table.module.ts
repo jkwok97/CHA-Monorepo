@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { DraftTableController } from './controllers';
 
 @Module({
-  controllers: [],
+  controllers: [DraftTableController],
   providers: [],
   exports: [],
 })
