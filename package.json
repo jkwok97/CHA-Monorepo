@@ -2,6 +2,9 @@
   "name": "cha-hockey",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "npm": "8.7.0"
+  },
   "scripts": {
     "ng": "nx",
     "start": "nx serve",
@@ -10,6 +13,8 @@
     "cha-admin-serve": "nx run cha-admin:serve --port 3000",
     "cha-front-serve": "nx run cha-front:serve --port 4000",
     "cha-server-serve": "nx run cha-server:serve",
+    "cha-server-build-dev": "nx run cha-server:build",
+    "cha-server-build-prod": "nx run cha-server:build:production",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
   },
   "private": true,
