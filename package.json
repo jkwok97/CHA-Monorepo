@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "engines": {
-    "npm": "8.7.0"
+    "npm": "8.7.0",
+    "node": "16.x"
   },
   "scripts": {
     "ng": "nx",
-    "start": "nx serve",
+    "start": "node dist/apps/cha-server/main",
     "build": "nx build",
     "test": "nx test",
     "cha-admin-serve": "nx run cha-admin:serve --port 3000",
