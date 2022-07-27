@@ -1,4 +1,12 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 
 @Controller('player-info')
 export class PlayerInfoController {
@@ -6,29 +14,29 @@ export class PlayerInfoController {
   getAllPlayers() {}
 
   @Get('/players/:id')
-  getPlayerInfoById() {}
+  getPlayerInfoById(@Param('id') id: string) {}
 
   @Get('/goalies/:id')
-  getGoalieInfoById() {}
+  getGoalieInfoById(@Param('id') id: string) {}
 
   @Get('/players/nhl/logo/:id')
-  getPlayerLogoByNhlId() {}
+  getPlayerLogoByNhlId(@Param('id') id: string) {}
 
   @Get('/goalies/nhl/logo/:id')
-  getGoalieLogoByNhlId() {}
+  getGoalieLogoByNhlId(@Param('id') id: string) {}
 
   @Get('/players/active')
   getActivePlayers() {}
 
   @Get('/player/:id')
-  getPlayerForEditById() {}
+  getPlayerForEditById(@Param('id') id: string) {}
 
   @Put('/player/:id')
-  updatePlayerById() {}
+  updatePlayerById(@Body() body: any, @Param('id') id: string) {}
 
   @Post('/players/add')
-  addPlayer() {}
+  addPlayer(@Body() body: any) {}
 
   @Delete('/delete/:id')
-  deletePlayer() {}
+  deletePlayer(@Body() body: any, @Param('id') id: string) {}
 }

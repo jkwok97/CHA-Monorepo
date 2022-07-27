@@ -16,10 +16,10 @@ export class UsersController {
   }
 
   @Get('/:email')
-  getUser() {}
+  getUser(@Param('email') email: string) {}
 
   @Get('/userId/:id')
-  getUserById() {}
+  getUserById(@Param('id') id: string) {}
 
   @Put('/userId/:id')
   updateUserById(@Body() body: any): void {
