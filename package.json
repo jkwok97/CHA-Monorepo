@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "engines": {
-    "npm": "8.15.1",
-    "node": "16.x"
+    "npm": "6.14.15",
+    "node": "14.x"
   },
   "scripts": {
     "ng": "nx",
@@ -80,7 +80,7 @@
     "primeicons": "^5.0.0",
     "primeng": "^14.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "~6.5.3",
+    "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.7",
     "zone.js": "~0.11.4"
