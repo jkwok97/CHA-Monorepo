@@ -76,6 +76,7 @@
     "@ngrx/store": "^14.0.2",
     "@ngrx/store-devtools": "^14.0.2",
     "@nrwl/angular": "14.4.3",
+    "hbs": "^4.2.0",
     "joi": "^17.6.0",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",

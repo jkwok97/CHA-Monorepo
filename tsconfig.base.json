@@ -45,5 +45,5 @@
       ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["ormconfig.js", "node_modules", "tmp"]
 }
