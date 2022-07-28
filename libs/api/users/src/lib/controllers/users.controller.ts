@@ -27,12 +27,8 @@ export class UsersController {
   }
 
   @Post('/add')
-  addUser(@Body() body: any): void {
-    console.log(body);
-  }
+  addUser(@Body() body: any): void {}
 
   @Delete('/delete/:id')
-  deleteUserById(@Param('id') id: string): void {
-    console.log(id);
-  }
+  deleteUserById(@Param('id') id: string): void {}
 }
