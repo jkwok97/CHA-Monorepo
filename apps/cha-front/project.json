@@ -23,7 +23,7 @@
           }
         ],
         "styles": [
-          "apps/cha-front/src/styles.scss",
+          "apps/cha-front/src/scss/styles.scss",
           "libs/blade/angular/ui/core/src/lib/styles/default.scss"
         ],
         "scripts": []
