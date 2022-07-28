@@ -17,9 +17,8 @@ async function bootstrap() {
   const config = app.get(ConfigService);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-
   app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setBaseViewsDir(join(__dirname, 'assets/views'));
   app.setViewEngine('hbs');
 
   const port = process.env.PORT || 3333;
