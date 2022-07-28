@@ -16,7 +16,7 @@
     "cha-front-serve": "nx run cha-front:serve --port 4000",
     "cha-front-build": "nx run cha-front:build:production",
     "cha-server-serve": "nx run cha-server:serve",
-    "cha-server-build-prod": "nx run cha-server:build:production",
+    "cha-server-build-prod": "nx run cha-server:build:production & node dist/apps/cha-server/main",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
   },
   "private": true,

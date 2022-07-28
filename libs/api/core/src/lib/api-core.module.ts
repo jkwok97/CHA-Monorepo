@@ -12,9 +12,9 @@ import { dbConfig } from '../../../../../ormconfig.js';
       load: [configuration],
       validationSchema,
     }),
-    TypeOrmModule.forRoot({
-      ...dbConfig,
-    }),
+    // TypeOrmModule.forRoot({
+    //   ...dbConfig,
+    // }),
   ],
   controllers: [],
   providers: [],
