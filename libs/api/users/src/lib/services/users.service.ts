@@ -8,6 +8,6 @@ export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
   findUserByEmail(email: string) {
-    return this.repo.findOneByOrFail({ email });
+    return this.repo.createQueryBuilder().where('email = :email', { email });
   }
 }
