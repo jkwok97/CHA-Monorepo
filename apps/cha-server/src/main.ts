@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger, ValidationPipe } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
@@ -22,7 +22,6 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, 'assets/views'));
   app.setViewEngine('hbs');
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.enableCors();
 
   app.use((req, res, next) => {
