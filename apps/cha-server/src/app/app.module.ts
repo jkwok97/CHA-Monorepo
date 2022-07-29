@@ -6,7 +6,6 @@ import { AppService } from './app.service';
 
 import { ApiCoreModule } from '@api/core';
 import { User } from '@api/users';
-import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -34,8 +33,4 @@ import { DataSource } from 'typeorm';
   providers: [AppService],
 })
 export class AppModule {
-  constructor(dataSource: DataSource) {
-    console.log(dataSource);
-    console.log(process.env.DATABASE_URL);
-  }
 }
