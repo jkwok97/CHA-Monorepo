@@ -8,7 +8,7 @@
   },
   "scripts": {
     "ng": "nx",
-    "start": "node dist/apps/cha-server/main",
+    "start:server:prod": "node dist/apps/cha-server/main",
     "build": "nx build",
     "test": "nx test",
     "cha-admin-serve": "nx run cha-admin:serve --port 3000",
@@ -17,7 +17,7 @@
     "cha-front-build": "nx run cha-front:build:production",
     "cha-server-serve": "nx run cha-server:serve",
     "cha-server-serve-prod": "nx run cha-server:serve:production",
-    "cha-server-build-prod": "nx run cha-server:build:production",
+    "build:server:prod": "nx run cha-server:build:production",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
   },
   "private": true,
