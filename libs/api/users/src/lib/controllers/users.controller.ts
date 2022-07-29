@@ -19,7 +19,7 @@ export class UsersController {
     console.log('hello');
   }
 
-  @Get('/:email')
+  @Get('/email/:email')
   async getUserByEmail(@Param('email') email: string) {
     console.log('the email param is:', email);
     const user = await this.usersService.findUserByEmail(email);
