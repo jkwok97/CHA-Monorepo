@@ -24,7 +24,7 @@ import { DataSource } from 'typeorm';
       url: process.env.DATABASE_URL,
       synchronize: false,
       entities: [User],
-      ssl: true,
+      ssl: { rejectUnauthorized: false },
     }),
     ApiCoreModule,
   ],
