@@ -9,6 +9,7 @@
   "scripts": {
     "ng": "nx",
     "start:server:prod": "node dist/apps/cha-server/main",
+    "heroku-prebuild:":"heroku config:set USE_NPM_INSTALL=true",
     "build": "nx build",
     "test": "nx test",
     "cha-admin-serve": "nx run cha-admin:serve --port 3000",
