@@ -8,16 +8,13 @@
   },
   "scripts": {
     "ng": "nx",
-    "start:server:prod": "node dist/apps/cha-server/main",
-    "heroku-prebuild:":"heroku config:set USE_NPM_INSTALL=true",
-    "build": "nx build",
     "test": "nx test",
     "cha-admin-serve": "nx run cha-admin:serve --port 3000",
     "cha-admin-build": "nx run cha-admin:build:production",
     "cha-front-serve": "nx run cha-front:serve --port 4000",
     "cha-front-build": "nx run cha-front:build:production",
     "cha-server-serve": "nx run cha-server:serve",
-    "cha-server-serve-prod": "nx run cha-server:serve:production",
+    "serve:server:prod": "nx run cha-server:serve:production",
     "build:server:prod": "nx run cha-server:build:production",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
   },
