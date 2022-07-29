@@ -18,16 +18,8 @@ import { ApiTeamsModule } from '@api/teams';
 import { ApiTransactionsModule } from '@api/transactions';
 import { ApiWaiversModule } from '@api/waivers';
 
-import { User } from '@api/users';
-
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.DATABASE_URL,
-      synchronize: false,
-      entities: [User],
-    }),
     ApiUsersModule,
     ApiAwardsModule,
     ApiDraftTableModule,
