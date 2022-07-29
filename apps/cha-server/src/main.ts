@@ -21,6 +21,7 @@ async function bootstrap() {
   app.setBaseViewsDir(join(__dirname, 'assets/views'));
   app.setViewEngine('hbs');
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.enableCors();
 
   app.use((req, res, next) => {
     next();
