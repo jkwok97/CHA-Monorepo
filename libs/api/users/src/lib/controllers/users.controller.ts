@@ -21,10 +21,13 @@ export class UsersController {
 
   @Get('/:email')
   async getUser(@Param('email') email: string) {
+    console.log(email);
     const user = await this.usersService.findUserByEmail(email);
     if (!user) {
+      console.log('no user found');
       throw new NotFoundException('user not found');
     }
+    console.log(user);
     return user;
   }
 
