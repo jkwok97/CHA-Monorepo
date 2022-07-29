@@ -5,9 +5,9 @@ import { dbConfig } from '../../../../../ormconfig.js';
 
 @Module({
   imports: [
-    // TypeOrmModule.forRoot({
-    //   ...dbConfig,
-    // }),
+    TypeOrmModule.forRoot({
+      ...dbConfig,
+    }),
   ],
   controllers: [],
   providers: [],
