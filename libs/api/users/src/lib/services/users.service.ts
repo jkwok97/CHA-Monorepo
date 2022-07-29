@@ -9,6 +9,6 @@ export class UsersService {
 
   findUserByEmail(email: string) {
     console.log(email);
-    return this.repo.createQueryBuilder().where('email = :email', { email });
+    return this.repo.findOneByOrFail({ email });
   }
 }
