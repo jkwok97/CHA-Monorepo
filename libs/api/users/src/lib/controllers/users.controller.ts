@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from '../services';
 
@@ -19,8 +20,8 @@ export class UsersController {
     console.log('hello');
   }
 
-  @Get('/email/:email')
-  async getUserByEmail(@Param('email') email: string) {
+  @Get('/email')
+  async getUserByEmail(@Query('email') email: string) {
     console.log('the email param is:', email);
     const user = await this.usersService.findUserByEmail(email);
     if (!user) {
