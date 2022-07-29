@@ -8,6 +8,7 @@ export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
   findUserByEmail(email: string) {
+    console.log(email);
     return this.repo.findOneByOrFail({ email });
   }
 }
