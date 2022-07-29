@@ -3,20 +3,30 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
 } from '@nestjs/common';
+import { UsersService } from '../services';
 
 @Controller('users')
 export class UsersController {
+  constructor(private usersService: UsersService) {}
+
   @Get()
   getUsers() {
     console.log('hello');
   }
 
   @Get('/:email')
-  getUser(@Param('email') email: string) {}
+  async getUser(@Param('email') email: string) {
+    const user = await this.usersService.findUserByEmail(email);
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    return user;
+  }
 
   @Get('/userId/:id')
   getUserById(@Param('id') id: string) {}
