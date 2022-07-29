@@ -13,6 +13,7 @@ export class UsersService {
   }
 
   async getAll(): Promise<User[]> {
+    console.log('hello from service');
     return await this.repo.find();
   }
 }
