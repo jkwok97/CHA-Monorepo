@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -39,6 +40,11 @@ import { ApiWaiversModule } from '@api/waivers';
     ApiTeamsModule,
     ApiTransactionsModule,
     ApiWaiversModule,
+
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
