@@ -10,6 +10,7 @@
     "ng": "nx",
     "start:server:prod": "node dist/apps/cha-server/main",
     "heroku-prebuild": "npm install --legacy-peer-deps",
+    "heroku-postbuild": "npm run build:server:prod",
     "build": "nx build",
     "test": "nx test",
     "cha-admin-serve": "nx run cha-admin:serve --port 3000",
