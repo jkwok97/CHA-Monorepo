@@ -16,19 +16,25 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  getUsers() {
+  async getUsers() {
     console.log('hello');
-    return this.usersService.getAll();
-  }
+    const users = await this.usersService.getAll();
 
-  @Get()
-  async getUserByEmail(@Query('email') email: string) {
-    console.log('the email param is:', email);
-    const user = await this.usersService.findUserByEmail(email);
-    if (!user) {
+    if (!users || users.length < 1) {
       throw new NotFoundException('user not found');
     }
-    return JSON.stringify(user);
+    return users;
+  }
+
+  @Get('/:email')
+  async getUserByEmail(@Param() param) {
+    console.log('the email param is:', param.email);
+    return `${param.email}`;
+    // const user = await this.usersService.findUserByEmail(param.email);
+    // if (!user) {
+    //   throw new NotFoundException('user not found');
+    // }
+    // return JSON.stringify(user);
   }
 
   @Get('/userId/:id')
