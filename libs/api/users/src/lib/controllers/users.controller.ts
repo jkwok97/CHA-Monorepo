@@ -20,15 +20,11 @@ export class UsersController {
   }
 
   @Get('/:email')
-  @ApiOkResponse({status: 201, description: 'success'})
   async getUserByEmail(@Param('email') email: string) {
-    console.log(email);
     const user = await this.usersService.findUserByEmail(email);
     if (!user) {
-      console.log('no user found');
       throw new NotFoundException('user not found');
     }
-    console.log(user);
     return user;
   }
 

@@ -20,12 +20,12 @@ import { ApiWaiversModule } from '@api/waivers';
 
 import { User } from '@api/users';
 
-import { dbConfig } from '../../../../../ormconfig.js';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      ...dbConfig,
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      synchronize: false,
       entities: [User],
     }),
     ApiUsersModule,
