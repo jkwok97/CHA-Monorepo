@@ -25,7 +25,7 @@ export class UsersController {
     if (!user) {
       throw new NotFoundException('user not found');
     }
-    return user;
+    return JSON.stringify(user);
   }
 
   @Get('/userId/:id')
