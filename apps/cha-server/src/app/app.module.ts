@@ -16,12 +16,15 @@ import { DataSource } from 'typeorm';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
+      database: 'defaultdb',
+      host: process.env.DATABASE_HOST,
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      port: parseInt(process.env.DATABASE_PORT),
       url: process.env.DATABASE_URL,
       synchronize: false,
       entities: [User],
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      ssl: true,
     }),
     ApiCoreModule,
   ],
