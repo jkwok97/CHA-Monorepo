@@ -4,7 +4,7 @@
   "license": "MIT",
   "engines": {
     "npm": "8.15.1",
-    "node": "16.x"
+    "node": "16.14.2"
   },
   "scripts": {
     "ng": "nx",
