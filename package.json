@@ -17,7 +17,7 @@
     "cha-front-build": "nx run cha-front:build:production",
     "cha-server-serve": "nx run cha-server:serve",
     "cha-server-serve-prod": "nx run cha-server:serve:production",
-    "build:server:prod": "nx run cha-server:build:production",
+    "build:server:prod": "npm install --legacy-peer-deps & nx run cha-server:build:production",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main"
   },
   "private": true,
