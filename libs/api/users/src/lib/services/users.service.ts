@@ -11,4 +11,8 @@ export class UsersService {
     console.log(email);
     return await this.repo.findOneByOrFail({ email });
   }
+
+  async getAll(): Promise<User[]> {
+    return await this.repo.find();
+  }
 }

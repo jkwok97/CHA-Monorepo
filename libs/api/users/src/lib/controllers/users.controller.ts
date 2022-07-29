@@ -18,6 +18,7 @@ export class UsersController {
   @Get()
   getUsers() {
     console.log('hello');
+    return this.usersService.getAll();
   }
 
   @Get()
