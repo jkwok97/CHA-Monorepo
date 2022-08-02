@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ApiCoreModule } from '@api/core';
-import { User } from '@api/users';
+import { Users_V2 } from '@api/users';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { User } from '@api/users';
       // password: process.env.DATABASE_PASSWORD,
       // port: parseInt(process.env.DATABASE_PORT),
       synchronize: false,
-      entities: [User],
+      entities: [Users_V2],
       ssl: {
         rejectUnauthorized: false,
       },
