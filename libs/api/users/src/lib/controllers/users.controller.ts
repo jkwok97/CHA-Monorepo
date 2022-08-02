@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from '../services';
-import { UserCreateDto } from '@cha/shared/dtos';
+import { UserCreateDto } from '@cha/shared/entities';
 
 @Controller('users')
 export class UsersController {
