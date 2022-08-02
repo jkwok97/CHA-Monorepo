@@ -18,15 +18,15 @@
               },
               {
                 "sourceTag": "app:api",
-                "onlyDependOnLibsWithTags": ["api:core", "api:module"]
+                "onlyDependOnLibsWithTags": ["api:core", "api:module", "shared"]
               },
               {
                 "sourceTag": "app:core",
-                "onlyDependOnLibsWithTags": ["api:module"]
+                "onlyDependOnLibsWithTags": ["api:module", "shared"]
               },
               {
                 "sourceTag": "app:angular",
-                "onlyDependOnLibsWithTags": ["angular:ui"]
+                "onlyDependOnLibsWithTags": ["angular:ui", "shared"]
               }
             ]
           }

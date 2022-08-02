@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ApiCoreModule } from '@api/core';
-import { Users_V2 } from '@cha/shared/entities';
+import { Users_V2, Teams_V2 } from '@cha/shared/entities';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { Users_V2 } from '@cha/shared/entities';
       // password: process.env.DATABASE_PASSWORD,
       // port: parseInt(process.env.DATABASE_PORT),
       synchronize: false,
-      entities: [Users_V2],
+      entities: [Users_V2, Teams_V2],
       ssl: {
         rejectUnauthorized: false,
       },
