@@ -8,12 +8,14 @@ export class UsersService {
   constructor(@InjectRepository(Users_V2) private repo: Repository<Users_V2>) {}
 
   async findUserByEmail(email: string): Promise<Users_V2> {
-    console.log(email);
     return await this.repo.findOneByOrFail({ email });
   }
 
   async getAll(): Promise<Users_V2[]> {
-    console.log('hello from service');
     return await this.repo.find();
+  }
+
+  async findUserById(id: number): Promise<Users_V2> {
+    return await this.repo.findOneByOrFail({ id });
   }
 }
