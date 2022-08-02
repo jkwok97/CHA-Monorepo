@@ -10,22 +10,22 @@ import {
 @Entity()
 export class Users_V2 {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  firstname: string;
+  firstname!: string;
 
   @Column()
-  lastname: string;
+  lastname!: string;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  isadmin: boolean;
+  isadmin!: boolean;
 
   @Column()
-  isactive: boolean;
+  isactive!: boolean;
 
   @AfterInsert()
   logInsert() {
@@ -39,6 +39,6 @@ export class Users_V2 {
 
   @AfterRemove()
   logRemove() {
-    console.log('Removed User with id', this.id);
+    console.log('Removed User');
   }
 }

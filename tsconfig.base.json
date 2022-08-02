@@ -43,7 +43,7 @@
       "@blade/angular/ui/dropdown-multi": [
         "libs/blade/angular/ui/dropdown-multi/src/index.ts"
       ],
-      "@cha/shared/dtos": ["libs/cha/shared/dtos/src/index.ts"]
+      "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"]
     }
   },
   "exclude": ["ormconfig.js", "node_modules", "tmp"]

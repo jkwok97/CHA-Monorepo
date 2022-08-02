@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ApiCoreModule } from '@api/core';
-import { Users_V2 } from '@api/users';
+import { Users_V2 } from '@cha/shared/entities';
 
 @Module({
   imports: [
@@ -32,5 +32,4 @@ import { Users_V2 } from '@api/users';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'cha-shared-dtos',
+  displayName: 'cha-shared-entities',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/cha/shared/dtos',
+  coverageDirectory: '../../../../coverage/libs/cha/shared/entities',
 };

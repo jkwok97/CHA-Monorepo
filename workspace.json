@@ -29,6 +29,6 @@
     "cha-front": "apps/cha-front",
     "cha-front-e2e": "apps/cha-front-e2e",
     "cha-server": "apps/cha-server",
-    "cha-shared-dtos": "libs/cha/shared/dtos"
+    "cha-shared-entities": "libs/cha/shared/entities"
   }
 }
