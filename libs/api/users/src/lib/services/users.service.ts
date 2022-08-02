@@ -16,6 +16,7 @@ export class UsersService {
   }
 
   async findUserById(id: number): Promise<Users_V2> {
+    console.log(id);
     return await this.repo.findOneByOrFail({ id });
   }
 }
