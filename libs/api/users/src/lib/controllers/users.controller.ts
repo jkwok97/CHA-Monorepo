@@ -34,7 +34,7 @@ export class UsersController {
   }
 
   @Get('/userId/:id')
-  async getUserById(@Param('id') param) {
+  async getUserById(@Param() param) {
     console.log(parseInt(param.id));
     const user = await this.usersService.findUserById(parseInt(param.id));
     if (!user) {
