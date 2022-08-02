@@ -35,7 +35,6 @@ export class UsersController {
 
   @Get('/userId/:id')
   async getUserById(@Param() param) {
-    console.log(parseInt(param.id));
     const user = await this.usersService.findUserById(parseInt(param.id));
     if (!user) {
       throw new NotFoundException('user not found');
@@ -44,13 +43,14 @@ export class UsersController {
   }
 
   @Put('/userId/:id')
-  updateUserById(@Body() body: any): void {
+  updateUserById(@Param() param, @Body() body) {
     console.log(body);
+    return this.usersService.updateUserById(parseInt(param.id), body);
   }
 
   @Post('/add')
-  addUser(@Body() body: any): void {}
+  addUser(@Body() body: any) {}
 
   @Delete('/delete/:id')
-  deleteUserById(@Param('id') id: string): void {}
+  deleteUserById(@Param('id') id: string) {}
 }
