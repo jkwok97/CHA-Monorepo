@@ -33,7 +33,7 @@ export class UsersService {
     return this.repo.save(user);
   }
 
-  async addUser(body: UserCreateDto): Promise<Users_V2[]> {
+  async addUser(body: UserCreateDto) {
     const user = await this.repo.create(body);
 
     return this.repo.save(user);
