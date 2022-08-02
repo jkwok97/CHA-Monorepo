@@ -28,6 +28,7 @@
     "cha-admin-e2e": "apps/cha-admin-e2e",
     "cha-front": "apps/cha-front",
     "cha-front-e2e": "apps/cha-front-e2e",
-    "cha-server": "apps/cha-server"
+    "cha-server": "apps/cha-server",
+    "cha-shared-dtos": "libs/cha/shared/dtos"
   }
 }

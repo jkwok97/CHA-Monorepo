@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users_V2 } from '../entities';
 
+import { UserCreateDto } from '@cha/shared/dtos';
+
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(Users_V2) private repo: Repository<Users_V2>) {}
@@ -29,5 +31,20 @@ export class UsersService {
     Object.assign(user, attrs);
 
     return this.repo.save(user);
+  }
+
+  async addUser(body: UserCreateDto): Promise<Users_V2[]> {
+    const user = await this.repo.create(body);
+
+    return this.repo.save(user);
+  }
+
+  async deleteUser(id: number): Promise<Users_V2> {
+    const user = await this.repo.findOneByOrFail({ id });
+
+    if (!user) {
+      throw new NotFoundException('user not found');
+    }
+    return this.repo.remove(user);
   }
 }

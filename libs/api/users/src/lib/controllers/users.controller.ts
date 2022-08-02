@@ -9,6 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from '../services';
+import { UserCreateDto } from '@cha/shared/dtos';
 
 @Controller('users')
 export class UsersController {
@@ -44,13 +45,16 @@ export class UsersController {
 
   @Put('/userId/:id')
   updateUserById(@Param() param, @Body() body) {
-    console.log(body);
     return this.usersService.updateUserById(parseInt(param.id), body);
   }
 
   @Post('/add')
-  addUser(@Body() body: any) {}
+  addUser(@Body() body: UserCreateDto) {
+    return this.usersService.addUser(body);
+  }
 
   @Delete('/delete/:id')
-  deleteUserById(@Param('id') id: string) {}
+  deleteUserById(@Param() param) {
+    return this.usersService.deleteUser(parseInt(param.id));
+  }
 }

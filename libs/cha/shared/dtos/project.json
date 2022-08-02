@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cha/shared/dtos/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/cha/shared/dtos",
+        "main": "libs/cha/shared/dtos/src/index.ts",
+        "tsConfig": "libs/cha/shared/dtos/tsconfig.lib.json",
+        "assets": ["libs/cha/shared/dtos/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/cha/shared/dtos/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/shared/dtos"],
+      "options": {
+        "jestConfig": "libs/cha/shared/dtos/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["shared"]
+}
