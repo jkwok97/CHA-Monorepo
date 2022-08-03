@@ -5,7 +5,27 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ApiCoreModule } from '@api/core';
-import { Users_V2, Teams_V2 } from '@cha/shared/entities';
+import {
+  Award_Type_V2,
+  Awards_V2,
+  Draft_Order_V2,
+  Drafts_V2,
+  Conferences_V2,
+  Current_Season_V2,
+  Divisions_V2,
+  Goalie_Ratings_V2,
+  Player_Ratings_V2,
+  Salaries_V2,
+  Schedule_V2,
+  Goalies_Stats_V2,
+  Players_Stats_V2,
+  Team_Stats_V2,
+  Transactions_V2,
+  Waivers_V2,
+  Players_V2,
+  Teams_V2,
+  Users_V2,
+} from '@cha/shared/entities';
 
 @Module({
   imports: [
@@ -22,7 +42,27 @@ import { Users_V2, Teams_V2 } from '@cha/shared/entities';
       // password: process.env.DATABASE_PASSWORD,
       // port: parseInt(process.env.DATABASE_PORT),
       synchronize: false,
-      entities: [Users_V2, Teams_V2],
+      entities: [
+        Users_V2,
+        Teams_V2,
+        Award_Type_V2,
+        Awards_V2,
+        Draft_Order_V2,
+        Drafts_V2,
+        Conferences_V2,
+        Current_Season_V2,
+        Divisions_V2,
+        Players_V2,
+        Goalie_Ratings_V2,
+        Player_Ratings_V2,
+        Salaries_V2,
+        Schedule_V2,
+        Goalies_Stats_V2,
+        Players_Stats_V2,
+        Team_Stats_V2,
+        Transactions_V2,
+        Waivers_V2,
+      ],
       ssl: {
         rejectUnauthorized: false,
       },

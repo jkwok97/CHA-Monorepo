@@ -13,7 +13,6 @@ import { Drafts_V2 } from '../draft';
 import { Goalie_Ratings_V2, Player_Ratings_V2 } from '../ratings';
 import { Salaries_V2 } from '../salaries';
 import { Goalies_Stats_V2, Players_Stats_V2 } from '../stats';
-import { Teams_V2 } from '../teams';
 
 @Entity()
 export class Players_V2 {
