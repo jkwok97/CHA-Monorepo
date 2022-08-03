@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Teams_V2 } from "../teams";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Players_V2 } from '../players/player.entity';
+import { Teams_V2 } from '../teams';
 
 @Entity()
 export class Drafts_V2 {
@@ -24,5 +25,6 @@ export class Drafts_V2 {
   @ManyToOne(() => Teams_V2, (team) => team.id)
   team!: Teams_V2;
 
-  //TODO NEED ONE FOR PLAYERS ENTITY
+  @ManyToOne(() => Players_V2, (player) => player.id)
+  player!: Players_V2;
 }

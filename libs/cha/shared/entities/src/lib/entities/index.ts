@@ -5,3 +5,6 @@ export * from './league';
 export * from './draft';
 export * from './ratings';
 export * from './stats';
+export * from './salaries';
+export * from './schedule';
+export * from './transactions';

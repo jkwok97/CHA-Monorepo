@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Players_V2 } from "../players/player.entity";
 
 @Entity()
 export class Goalie_Ratings_V2 {
@@ -68,5 +69,6 @@ export class Goalie_Ratings_V2 {
   @Column()
   playing_year!: string;
 
-  //TODO NEED ONE FOR PLAYERS ENTITY
+  @ManyToOne(() => Players_V2, (player) => player.id)
+  player!: Players_V2;
 }

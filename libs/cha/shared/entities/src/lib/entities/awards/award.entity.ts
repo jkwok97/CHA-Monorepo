@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  ManyToOne,
+} from 'typeorm';
+import { Players_V2 } from '../players/player.entity';
 import { Teams_V2 } from '../teams';
 import { Users_V2 } from '../user';
 import { Award_Type_V2 } from './award-type.entity';
@@ -29,11 +36,12 @@ export class Awards_V2 {
   @OneToOne(() => Award_Type_V2, (type) => type.id)
   type!: Award_Type_V2;
 
-  @OneToOne(() => Users_V2, (user) => user.id)
+  @ManyToOne(() => Users_V2, (user) => user.id)
   user!: Users_V2;
 
-  @OneToOne(() => Teams_V2, (team) => team.id)
+  @ManyToOne(() => Teams_V2, (team) => team.id)
   team!: Teams_V2;
 
-  //TODO NEED ONE FOR PLAYERS ENTITY
+  @ManyToOne(() => Players_V2, (player) => player.id)
+  player!: Players_V2;
 }
