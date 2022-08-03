@@ -9,14 +9,14 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from '../services';
-import { UserCreateDto } from '@cha/shared/entities';
+import { UserCreateDto, UserDto } from '@cha/shared/entities';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Get()
-  async getUsers() {
+  async getUsers(): Promise<UserDto[]> {
     const users = await this.usersService.getAll();
 
     if (!users || users.length < 1) {
@@ -26,7 +26,7 @@ export class UsersController {
   }
 
   @Get('/:email')
-  async getUserByEmail(@Param() param) {
+  async getUserByEmail(@Param() param): Promise<UserDto> {
     const user = await this.usersService.findUserByEmail(param.email);
     if (!user) {
       throw new NotFoundException('user not found');
@@ -35,7 +35,7 @@ export class UsersController {
   }
 
   @Get('/userId/:id')
-  async getUserById(@Param() param) {
+  async getUserById(@Param() param): Promise<UserDto> {
     const user = await this.usersService.findUserById(parseInt(param.id));
     if (!user) {
       throw new NotFoundException('user not found');
@@ -44,7 +44,7 @@ export class UsersController {
   }
 
   @Put('/userId/:id')
-  updateUserById(@Param() param, @Body() body) {
+  updateUserById(@Param() param, @Body() body): Promise<UserDto> {
     return this.usersService.updateUserById(parseInt(param.id), body);
   }
 
