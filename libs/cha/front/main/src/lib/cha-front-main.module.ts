@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './containers/main/main.component';
+
+import { ChaFrontMainRoutingModule } from './cha-front-main-routing.module';
+
+import { MainResolver } from './resolvers';
+
+import { MainComponent } from './containers';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, ChaFrontMainRoutingModule],
   declarations: [MainComponent],
+  providers: [MainResolver],
 })
 export class ChaFrontMainModule {}

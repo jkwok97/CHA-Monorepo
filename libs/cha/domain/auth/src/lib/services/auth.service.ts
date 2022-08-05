@@ -29,7 +29,7 @@ export class AuthService {
 
   login(email: string) {
     return this.http
-      .get<UserDto>(`${this.appConfig.apiUrl}api/users/${email}`)
+      .get<UserDto>(`${this.appConfig.apiUrl}/users/${email}`)
       .pipe(map((user: UserDto) => user));
   }
 
