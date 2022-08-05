@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/shared/services/src",
+  "prefix": "cha",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/shared/services"],
+      "options": {
+        "jestConfig": "libs/cha/shared/services/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/shared/services/**/*.ts",
+          "libs/cha/shared/services/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["services", "shared"]
+}

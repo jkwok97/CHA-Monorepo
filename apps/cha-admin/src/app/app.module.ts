@@ -8,19 +8,21 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
 import { APP_CONFIG } from '@cha/domain/app-config';
 import { MainTitleComponent } from '@cha/domain/main-title';
 import { ChaDomainAuthModule } from '@cha/domain/auth';
+import { ChaDomainLoginModule } from '@cha/domain/login';
+import { ChaDomainCoreModule } from '@cha/domain/core';
 
 import { AppRoutingModule } from './app-router.module';
 import { AppConfigService } from '../services';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { ChaDomainLoginModule } from '@cha/domain/login';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -46,8 +48,11 @@ const getApiUrl = (appConfig: AppConfigService) => {
 
     ChaDomainAuthModule,
     ChaDomainLoginModule,
+    ChaDomainCoreModule,
 
     BladeAngularUiLayoutModule,
+
+    ToastModule,
 
     EffectsModule.forRoot(),
     StoreModule.forRoot(

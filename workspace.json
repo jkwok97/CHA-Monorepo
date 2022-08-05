@@ -43,6 +43,7 @@
     "cha-front-home": "libs/cha/front/home",
     "cha-front-main": "libs/cha/front/main",
     "cha-server": "apps/cha-server",
-    "cha-shared-entities": "libs/cha/shared/entities"
+    "cha-shared-entities": "libs/cha/shared/entities",
+    "cha-shared-services": "libs/cha/shared/services"
   }
 }

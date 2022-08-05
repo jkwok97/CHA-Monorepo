@@ -8,11 +8,13 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 import { APP_CONFIG } from '@cha/domain/app-config';
 import { ChaDomainAuthModule } from '@cha/domain/auth';
 import { ChaDomainLoginModule } from '@cha/domain/login';
 import { MainTitleComponent } from '@cha/domain/main-title';
+import { ChaDomainCoreModule } from '@cha/domain/core';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
@@ -45,8 +47,11 @@ const getApiUrl = (appConfig: AppConfigService) => {
 
     MainTitleComponent,
 
+    ToastModule,
+
     ChaDomainAuthModule,
     ChaDomainLoginModule,
+    ChaDomainCoreModule,
 
     BladeAngularUiLayoutModule,
 

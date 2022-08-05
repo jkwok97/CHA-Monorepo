@@ -61,7 +61,8 @@
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
       "@cha/front/main": ["libs/cha/front/main/src/index.ts"],
-      "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"]
+      "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"],
+      "@cha/shared/services": ["libs/cha/shared/services/src/index.ts"]
     }
   },
   "exclude": ["ormconfig.js", "node_modules", "tmp"]
