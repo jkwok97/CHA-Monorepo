@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FormlyModule } from '@ngx-formly/core';
 
+import { LogoComponent } from '@cha/domain/logo';
+
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { ButtonComponent } from '@blade/angular/ui/button';
 import {
@@ -23,6 +25,7 @@ import { LoginCardComponent, LoginFormComponent } from './components';
     ReactiveFormsModule,
     BladeAngularUiCardModule,
     ButtonComponent,
+    LogoComponent,
 
     FormlyModule.forRoot({
       wrappers: [

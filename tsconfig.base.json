@@ -57,6 +57,7 @@
       "@cha/domain/auth": ["libs/cha/domain/auth/src/index.ts"],
       "@cha/domain/core": ["libs/cha/domain/core/src/index.ts"],
       "@cha/domain/login": ["libs/cha/domain/login/src/index.ts"],
+      "@cha/domain/logo": ["libs/cha/domain/logo/src/index.ts"],
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
       "@cha/front/main": ["libs/cha/front/main/src/index.ts"],

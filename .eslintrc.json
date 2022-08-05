@@ -40,6 +40,10 @@
               {
                 "sourceTag": "app:front",
                 "onlyDependOnLibsWithTags": ["front"]
+              },
+              {
+                "sourceTag": "domain",
+                "onlyDependOnLibsWithTags": ["domain", "angular:ui", "shared"]
               }
             ]
           }

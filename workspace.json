@@ -36,6 +36,7 @@
     "cha-domain-auth": "libs/cha/domain/auth",
     "cha-domain-core": "libs/cha/domain/core",
     "cha-domain-login": "libs/cha/domain/login",
+    "cha-domain-logo": "libs/cha/domain/logo",
     "cha-domain-main-title": "libs/cha/domain/main-title",
     "cha-front": "apps/cha-front",
     "cha-front-e2e": "apps/cha-front-e2e",

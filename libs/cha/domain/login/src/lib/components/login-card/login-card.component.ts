@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 
-import { PrimeButtonClass } from '@cha/shared/entities';
-// import { ChaAngLogoEnum } from '@cha/shared/ui/angular/logo';
+import { ChaLogoEnum, PrimeButtonClass } from '@cha/shared/entities';
 
 import { LoginFormComponent } from '..';
 import { AuthFacade } from '@cha/domain/auth';
@@ -20,7 +19,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class LoginCardComponent {
   PrimeIcons = PrimeIcons;
   PrimeButtonClass = PrimeButtonClass;
-  // ChaLogo = ChaAngLogoEnum;
+  ChaLogo = ChaLogoEnum;
 
   @ViewChild(LoginFormComponent, { static: false })
   public loginFormRef?: LoginFormComponent;

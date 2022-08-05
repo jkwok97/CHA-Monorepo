@@ -17,6 +17,11 @@
           "apps/cha-admin/src/favicon.ico",
           "apps/cha-admin/src/assets",
           {
+            "input": "libs/cha/domain/logo/src/lib/assets",
+            "glob": "**/*",
+            "output": "assets"
+          },
+          {
             "input": "libs/blade/angular/ui/core/src/lib/styles/themes",
             "glob": "**/*.css",
             "output": "assets/themes"
