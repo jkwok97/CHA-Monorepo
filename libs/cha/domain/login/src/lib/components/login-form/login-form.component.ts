@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { EmailValidatorMessage } from '@cha/shared/ui/angular/forms';
+import { EmailValidatorMessage } from '@blade/angular/formly/types/email-input';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 
 @Component({
-  selector: 'cha-ang-login-form',
+  selector: 'cha-login-form',
   templateUrl: './login-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

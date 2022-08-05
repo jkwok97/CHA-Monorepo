@@ -19,6 +19,8 @@
     "api-transactions": "libs/api/transactions",
     "api-users": "libs/api/users",
     "api-waivers": "libs/api/waivers",
+    "blade-angular-formly-types-email-input": "libs/blade/angular/formly/types/email-input",
+    "blade-angular-formly-wrappers-default": "libs/blade/angular/formly/wrappers/default",
     "blade-angular-ui-button": "libs/blade/angular/ui/button",
     "blade-angular-ui-button-toggle": "libs/blade/angular/ui/button-toggle",
     "blade-angular-ui-card": "libs/blade/angular/ui/card",
@@ -28,6 +30,8 @@
     "blade-angular-ui-layout": "libs/blade/angular/ui/layout",
     "cha-admin": "apps/cha-admin",
     "cha-admin-e2e": "apps/cha-admin-e2e",
+    "cha-admin-home": "libs/cha/admin/home",
+    "cha-admin-main": "libs/cha/admin/main",
     "cha-domain-app-config": "libs/cha/domain/app-config",
     "cha-domain-auth": "libs/cha/domain/auth",
     "cha-domain-core": "libs/cha/domain/core",
@@ -35,6 +39,8 @@
     "cha-domain-main-title": "libs/cha/domain/main-title",
     "cha-front": "apps/cha-front",
     "cha-front-e2e": "apps/cha-front-e2e",
+    "cha-front-home": "libs/cha/front/home",
+    "cha-front-main": "libs/cha/front/main",
     "cha-server": "apps/cha-server",
     "cha-shared-entities": "libs/cha/shared/entities"
   }

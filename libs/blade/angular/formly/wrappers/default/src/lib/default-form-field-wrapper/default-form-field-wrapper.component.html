@@ -1,0 +1,28 @@
+<div class="p-field">
+  <label
+    *ngIf="props.label && props['hideLabel'] !== true"
+    [for]="id"
+    class="blade-label"
+  >
+    {{ props.label }}
+    <span
+      *ngIf="props.required && props['hideRequiredMarker'] !== true"
+      aria-hidden="true"
+      >*</span
+    >
+  </label>
+
+  <ng-container #fieldComponent></ng-container>
+
+  <small *ngIf="showError" class="p-error">
+    <formly-validation-message
+      [attr.data-ele]="'validation-msg'"
+      class="ui-message-text"
+      [field]="field"
+    ></formly-validation-message>
+  </small>
+
+  <small *ngIf="props['hint']" class="blade-hint">
+    {{ props['hint'] }}
+  </small>
+</div>

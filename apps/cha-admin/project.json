@@ -97,5 +97,5 @@
       }
     }
   },
-  "tags": ["app:angular"]
+  "tags": ["app:angular", "app:admin"]
 }

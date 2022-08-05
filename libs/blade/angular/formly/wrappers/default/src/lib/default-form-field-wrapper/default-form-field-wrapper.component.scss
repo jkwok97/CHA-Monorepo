@@ -1,0 +1,18 @@
+.p-field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.blade-label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 7px;
+}
+
+.blade-hint {
+  margin-top: 3.5px;
+  font-weight: 400;
+}

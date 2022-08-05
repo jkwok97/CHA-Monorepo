@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, Route, RouterModule } from '@angular/router';
 import { SharedAuthResolver } from '@cha/domain/auth';
+import { LoginComponent } from '@cha/domain/login';
 
 const ROUTES: Route[] = [
   {
@@ -10,9 +11,7 @@ const ROUTES: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('@cha/cha-angular/features/main').then(
-        (mod) => mod.ChaAngularFeaturesMainModule
-      ),
+      import('@cha/front/main').then((mod) => mod.ChaFrontMainModule),
     resolve: {
       main: SharedAuthResolver,
     },

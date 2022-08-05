@@ -26,7 +26,20 @@
               },
               {
                 "sourceTag": "app:angular",
-                "onlyDependOnLibsWithTags": ["angular:ui", "shared", "domain"]
+                "onlyDependOnLibsWithTags": [
+                  "angular:ui",
+                  "shared",
+                  "domain",
+                  "angular:feature"
+                ]
+              },
+              {
+                "sourceTag": "app:admin",
+                "onlyDependOnLibsWithTags": ["admin"]
+              },
+              {
+                "sourceTag": "app:front",
+                "onlyDependOnLibsWithTags": ["front"]
               }
             ]
           }

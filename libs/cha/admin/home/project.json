@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/admin/home/src",
+  "prefix": "cha-admin",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/admin/home"],
+      "options": {
+        "jestConfig": "libs/cha/admin/home/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/admin/home/**/*.ts",
+          "libs/cha/admin/home/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "admin"]
+}

@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/formly/wrappers/default/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/formly/wrappers/default"],
+      "options": {
+        "jestConfig": "libs/blade/angular/formly/wrappers/default/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/formly/wrappers/default/**/*.ts",
+          "libs/blade/angular/formly/wrappers/default/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:forms"]
+}

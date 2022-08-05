@@ -32,6 +32,12 @@
       "@api/transactions": ["libs/api/transactions/src/index.ts"],
       "@api/users": ["libs/api/users/src/index.ts"],
       "@api/waivers": ["libs/api/waivers/src/index.ts"],
+      "@blade/angular/formly/types/email-input": [
+        "libs/blade/angular/formly/types/email-input/src/index.ts"
+      ],
+      "@blade/angular/formly/wrappers/default": [
+        "libs/blade/angular/formly/wrappers/default/src/index.ts"
+      ],
       "@blade/angular/ui/button": ["libs/blade/angular/ui/button/src/index.ts"],
       "@blade/angular/ui/button-toggle": [
         "libs/blade/angular/ui/button-toggle/src/index.ts"
@@ -45,11 +51,15 @@
         "libs/blade/angular/ui/dropdown-multi/src/index.ts"
       ],
       "@blade/angular/ui/layout": ["libs/blade/angular/ui/layout/src/index.ts"],
+      "@cha/admin/home": ["libs/cha/admin/home/src/index.ts"],
+      "@cha/admin/main": ["libs/cha/admin/main/src/index.ts"],
       "@cha/domain/app-config": ["libs/cha/domain/app-config/src/index.ts"],
       "@cha/domain/auth": ["libs/cha/domain/auth/src/index.ts"],
       "@cha/domain/core": ["libs/cha/domain/core/src/index.ts"],
       "@cha/domain/login": ["libs/cha/domain/login/src/index.ts"],
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
+      "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
+      "@cha/front/main": ["libs/cha/front/main/src/index.ts"],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"]
     }
   },

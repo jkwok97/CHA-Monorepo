@@ -1,0 +1,10 @@
+<input
+  class="p-inputtext p-component p-element w-full"
+  type="text"
+  [class.ng-invalid]="formControl.valid === false"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [placeholder]="props.placeholder"
+  [attr.data-ele]="key"
+  [maxlength]="props.maxLength ? props.maxLength : null"
+/>

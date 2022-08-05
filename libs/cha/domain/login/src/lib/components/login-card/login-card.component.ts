@@ -1,18 +1,18 @@
 import { Component, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 
-import { PrimeButtonClass } from '@cha/shared/api';
-import { ChaAngLogoEnum } from '@cha/shared/ui/angular/logo';
+import { PrimeButtonClass } from '@cha/shared/entities';
+// import { ChaAngLogoEnum } from '@cha/shared/ui/angular/logo';
 
 import { LoginFormComponent } from '..';
-import { AuthFacade } from '@cha/shared/auth/angular/auth-angular';
+import { AuthFacade } from '@cha/domain/auth';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'cha-ang-login-card',
+  selector: 'cha-login-card',
   templateUrl: './login-card.component.html',
   styleUrls: ['./login-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,7 +20,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class LoginCardComponent {
   PrimeIcons = PrimeIcons;
   PrimeButtonClass = PrimeButtonClass;
-  ChaLogo = ChaAngLogoEnum;
+  // ChaLogo = ChaAngLogoEnum;
 
   @ViewChild(LoginFormComponent, { static: false })
   public loginFormRef?: LoginFormComponent;

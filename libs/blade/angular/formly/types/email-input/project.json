@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/formly/types/email-input/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/formly/types/email-input"],
+      "options": {
+        "jestConfig": "libs/blade/angular/formly/types/email-input/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/formly/types/email-input/**/*.ts",
+          "libs/blade/angular/formly/types/email-input/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:forms"]
+}
