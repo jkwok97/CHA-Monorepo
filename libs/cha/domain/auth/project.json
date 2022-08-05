@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/domain/auth/src",
+  "prefix": "cha",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/domain/auth"],
+      "options": {
+        "jestConfig": "libs/cha/domain/auth/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/domain/auth/**/*.ts",
+          "libs/cha/domain/auth/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain"]
+}

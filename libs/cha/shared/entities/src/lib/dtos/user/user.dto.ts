@@ -5,4 +5,5 @@ export class UserDto {
   lastname!: string;
   isactive!: boolean;
   isadmin!: boolean;
+  authdata?: string;
 }
