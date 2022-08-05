@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne } from "typeorm";
-import { Players_V2 } from "../players/player.entity";
-import { Teams_V2 } from "../teams";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Teams_V2 } from '../teams';
 
 @Entity()
 export class Players_Stats_V2 {
@@ -159,7 +158,4 @@ export class Players_Stats_V2 {
 
   @OneToOne(() => Teams_V2, (team) => team.shortname)
   team!: Teams_V2;
-
-  @ManyToOne(() => Players_V2, (player) => player.id)
-  player!: Players_V2;
 }

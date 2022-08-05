@@ -29,9 +29,6 @@ export class Users_V2 {
   @Column()
   isactive!: boolean;
 
-  @OneToMany(() => Teams_V2, (team: { users_id: number }) => team.users_id)
-  teams!: Teams_V2[];
-
   @AfterInsert()
   logInsert() {
     console.log('Inserted User with id', this.id);

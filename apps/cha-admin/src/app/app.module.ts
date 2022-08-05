@@ -7,16 +7,20 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { MessageService } from 'primeng/api';
+
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
 import { APP_CONFIG } from '@cha/domain/app-config';
 import { MainTitleComponent } from '@cha/domain/main-title';
+import { ChaDomainAuthModule } from '@cha/domain/auth';
 
 import { AppRoutingModule } from './app-router.module';
 import { AppConfigService } from '../services';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { ChaDomainLoginModule } from '@cha/domain/login';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -39,6 +43,9 @@ const getApiUrl = (appConfig: AppConfigService) => {
     RouterModule,
     AppRoutingModule,
     MainTitleComponent,
+
+    ChaDomainAuthModule,
+    ChaDomainLoginModule,
 
     BladeAngularUiLayoutModule,
 
@@ -63,6 +70,7 @@ const getApiUrl = (appConfig: AppConfigService) => {
   declarations: [AppComponent],
   providers: [
     AppConfigService,
+    MessageService,
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFn,

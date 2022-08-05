@@ -24,7 +24,4 @@ export class Drafts_V2 {
 
   @ManyToOne(() => Teams_V2, (team) => team.id)
   team!: Teams_V2;
-
-  @ManyToOne(() => Players_V2, (player) => player.id)
-  player!: Players_V2;
 }

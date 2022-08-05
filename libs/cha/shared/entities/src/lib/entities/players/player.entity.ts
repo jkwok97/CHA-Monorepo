@@ -46,9 +46,6 @@ export class Players_V2 {
   @OneToOne(() => Salaries_V2, (salary) => salary.player_id)
   salary!: Salaries_V2;
 
-  @OneToMany(() => Awards_V2, (award) => award.player_id)
-  award!: Awards_V2;
-
   @OneToMany(() => Drafts_V2, (draft) => draft.player_id)
   draft!: Drafts_V2;
 

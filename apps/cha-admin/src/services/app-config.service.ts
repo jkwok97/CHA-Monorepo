@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AppConfigModel } from '@cha/cha-angular/domain/app-config';
+import { AppConfigModel } from '@cha/domain/app-config';
 import { APP_CONFIG_BASE } from '../config/app-config.base';
 
 @Injectable()

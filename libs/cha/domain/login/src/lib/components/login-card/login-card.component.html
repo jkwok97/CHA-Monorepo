@@ -17,6 +17,7 @@
       iconPosition="right"
       [disabled]="loginFormRef?.form?.invalid"
       [isLoading]="(loggingIn$ | async) ? true : false"
+      [buttonClass]="PrimeButtonClass.DANGER"
       (click)="onSubmit()"
     ></blade-button>
   </blade-card-footer>

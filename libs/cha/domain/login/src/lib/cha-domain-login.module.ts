@@ -6,7 +6,11 @@ import { FormlyModule } from '@ngx-formly/core';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { ButtonComponent } from '@blade/angular/ui/button';
-import { EmailInputComponent } from '@blade/angular/formly/types/email-input';
+import {
+  EmailInputComponent,
+  EmailValidator,
+  EmailValidatorMessage,
+} from '@blade/angular/formly/types/email-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
 
 import { LoginComponent } from './containers';
@@ -17,7 +21,6 @@ import { LoginCardComponent, LoginFormComponent } from './components';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormlyModule,
     BladeAngularUiCardModule,
     ButtonComponent,
 
@@ -35,6 +38,8 @@ import { LoginCardComponent, LoginFormComponent } from './components';
           wrappers: ['control-wrapper'],
         },
       ],
+      validators: [{ name: 'email', validation: EmailValidator() }],
+      validationMessages: [{ name: 'email', message: EmailValidatorMessage }],
     }),
   ],
   declarations: [LoginComponent, LoginCardComponent, LoginFormComponent],

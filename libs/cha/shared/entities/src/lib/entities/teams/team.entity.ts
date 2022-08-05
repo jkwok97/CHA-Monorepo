@@ -6,7 +6,6 @@ import {
   AfterRemove,
   AfterUpdate,
   ManyToOne,
-  OneToOne,
 } from 'typeorm';
 import { Users_V2 } from '../user';
 
@@ -44,9 +43,6 @@ export class Teams_V2 {
 
   @Column()
   divisions_id!: number;
-
-  @ManyToOne(() => Users_V2, (user) => user.teams)
-  user!: Users_V2;
 
   @AfterInsert()
   logInsert() {

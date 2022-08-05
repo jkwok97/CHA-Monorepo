@@ -71,7 +71,4 @@ export class Salaries_V2 {
 
   @Column()
   season_2040!: string;
-
-  @OneToOne(() => Players_V2, (player) => player.id)
-  player!: Players_V2;
 }

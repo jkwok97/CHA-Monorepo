@@ -1,12 +1,12 @@
 <div class="p-field">
   <label
-    *ngIf="props.label && props['hideLabel'] !== true"
+    *ngIf="to.label && to['hideLabel'] !== true"
     [for]="id"
     class="blade-label"
   >
-    {{ props.label }}
+    {{ to.label }}
     <span
-      *ngIf="props.required && props['hideRequiredMarker'] !== true"
+      *ngIf="to.required && to['hideRequiredMarker'] !== true"
       aria-hidden="true"
       >*</span
     >
@@ -22,7 +22,7 @@
     ></formly-validation-message>
   </small>
 
-  <small *ngIf="props['hint']" class="blade-hint">
-    {{ props['hint'] }}
+  <small *ngIf="to['hint']" class="blade-hint">
+    {{ to['hint'] }}
   </small>
 </div>

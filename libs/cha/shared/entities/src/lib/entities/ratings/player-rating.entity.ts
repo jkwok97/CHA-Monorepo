@@ -107,7 +107,4 @@ export class Player_Ratings_V2 {
 
   @Column()
   playing_year!: string;
-
-  @ManyToOne(() => Players_V2, (player) => player.id)
-  player!: Players_V2;
 }

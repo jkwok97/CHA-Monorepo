@@ -29,8 +29,8 @@ export class AuthService {
 
   login(email: string) {
     return this.http
-      .get<UserDto[]>(`${this.appConfig.apiUrl}/v2/users/${email}`)
-      .pipe(map((users: UserDto[]) => users[0]));
+      .get<UserDto>(`${this.appConfig.apiUrl}api/users/${email}`)
+      .pipe(map((user: UserDto) => user));
   }
 
   public logout() {
