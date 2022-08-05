@@ -11,18 +11,18 @@ export class Transactions_V2 {
   @Column()
   team_one_id!: number;
 
-  @Column()
+  @Column('text', { array: true })
   team_one_picks!: string[];
 
-  @Column()
+  @Column('int', { array: true })
   team_one_players!: number[];
 
   @Column()
   team_two_id!: number;
 
-  @Column()
+  @Column('text', { array: true })
   team_two_picks!: string[];
 
-  @Column()
+  @Column('int', { array: true })
   team_two_players!: number[];
 }
