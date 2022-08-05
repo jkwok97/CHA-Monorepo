@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { AuthFacade } from '@cha/domain/auth';
+import { TeamDto, UserDto } from '@cha/shared/entities';
+import { UserTeamFacade } from 'libs/cha/domain/core/src/lib/states/user-team/user-team.facade';
+import { MenuItem } from 'primeng/api';
+import { Observable, filter, first } from 'rxjs';
+import { mainMenuItems } from './main-menu-items';
 
 @Component({
   selector: 'cha-front-main',
@@ -6,4 +12,32 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent {}
+export class MainComponent implements OnInit {
+  isLoading$: Observable<boolean>;
+  currentTeam$: Observable<TeamDto | undefined>;
+  currentUser$: Observable<UserDto | null>;
+
+  items: MenuItem[] = mainMenuItems;
+
+  constructor(
+    private authFacade: AuthFacade,
+    private userTeamFacade: UserTeamFacade
+  ) {
+    this.isLoading$ = this.userTeamFacade.isLoading$;
+    this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+    this.currentUser$ = this.authFacade.user$;
+  }
+
+  ngOnInit(): void {
+    this.currentUser$
+      .pipe(
+        filter((user) => user !== null),
+        first()
+      )
+      .subscribe((user: UserDto | null) => {
+        if (user) {
+          this.userTeamFacade.get(user.id);
+        }
+      });
+  }
+}

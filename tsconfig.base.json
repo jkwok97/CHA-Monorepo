@@ -51,6 +51,7 @@
         "libs/blade/angular/ui/dropdown-multi/src/index.ts"
       ],
       "@blade/angular/ui/layout": ["libs/blade/angular/ui/layout/src/index.ts"],
+      "@blade/angular/ui/menu": ["libs/blade/angular/ui/menu/src/index.ts"],
       "@cha/admin/home": ["libs/cha/admin/home/src/index.ts"],
       "@cha/admin/main": ["libs/cha/admin/main/src/index.ts"],
       "@cha/domain/app-config": ["libs/cha/domain/app-config/src/index.ts"],

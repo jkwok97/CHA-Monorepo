@@ -5,9 +5,7 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
-  ManyToOne,
 } from 'typeorm';
-import { Users_V2 } from '../user';
 
 @Entity()
 export class Teams_V2 {

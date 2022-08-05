@@ -1,3 +1,19 @@
-<p class="text-white">main works!</p>
+<section *ngIf="currentTeam$ | async">
+  <div class="main-menu">
+    <blade-menu [items]="items" [logo]="teamLogo"></blade-menu>
+  </div>
 
-<router-outlet></router-outlet>
+  <blade-layout-feature>
+    <router-outlet></router-outlet>
+  </blade-layout-feature>
+</section>
+
+<ng-template #teamLogo>
+  <ng-container *ngIf="currentTeam$ | async as team">
+    <cha-logo
+      [height]="40"
+      [width]="40"
+      [userTeamLogo]="team.teamlogo"
+    ></cha-logo>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/ui/menu/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/ui/menu"],
+      "options": {
+        "jestConfig": "libs/blade/angular/ui/menu/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/ui/menu/**/*.ts",
+          "libs/blade/angular/ui/menu/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:ui"]
+}
