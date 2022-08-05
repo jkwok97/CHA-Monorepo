@@ -19,8 +19,8 @@ export class TeamInfoService {
 
   getUserTeams(id: number): Observable<TeamDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/teams/user/${id}`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/teams/user/${id}`)
+      .pipe(map((result: any) => result));
   }
 
   getUserByTeamName(teamName: string): Observable<number> {

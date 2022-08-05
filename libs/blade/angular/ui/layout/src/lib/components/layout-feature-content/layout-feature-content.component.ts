@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'blade-layout-feature-content',
@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./layout-feature-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutFeatureContentComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class LayoutFeatureContentComponent {}
