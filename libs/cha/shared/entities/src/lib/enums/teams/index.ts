@@ -1,1 +1,1 @@
-export * from './Team.enum';
+export * from './team.enum';
