@@ -1,7 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'libs/blade/angular/ui/core/src/lib/styles/default';
+@import 'variables';
 
-html,
+*:focus {
+  outline: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  line-height: 1.5;
+  tab-size: 4;
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
 body {
+  font-family: inherit;
+  line-height: inherit;
+  height: 100%;
   margin: 0;
+  padding: 0;
+  background-color: black;
+  color: whitesmoke;
+  overflow: hidden;
+}
+
+/*
+------------
+Colors
+------------
+*/
+
+.cha-color-primary {
+  color: $cha-primary-color;
+}
+
+.cha-color-success {
+  color: $cha-primary-color;
+}
+
+.cha-color-danger {
+  color: $cha-warning-color;
 }

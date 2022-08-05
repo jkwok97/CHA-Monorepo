@@ -1,0 +1,72 @@
+@import './mixins/responsive.mixin';
+
+// Primary Colors
+
+$cha-white: #ffffff;
+$cha-grey-1: #9c9c9c;
+$cha-gray-2: #474747;
+$cha-black: #000000;
+
+$cha-blue-1: #3123ff;
+$cha-blue-2: #1c7eff;
+$cha-red-1: #c51919;
+$cha-red-2: red;
+$cha-yellow: yellow;
+$cha-green: green;
+
+$cha-primary-color: $cha-blue-1;
+$cha-error-color: $cha-red-2;
+$cha-highlight-color: $cha-blue-2;
+$cha-warning-color: $cha-red-2;
+$cha-normal-color: #d9d9d9;
+
+$primary: $cha-blue-1;
+$secondary: $cha-red-1;
+
+$primary-color: $cha-primary-color;
+$background-color: $cha-black;
+$static-background-color: $cha-gray-2;
+$disabled-color: #888888;
+$disabled-color-opacity: #88888820;
+
+$cha-default-box-shadow: 0 4px 16px 0 rgba(247, 247, 247, 0.2);
+$cha-default-radius: 15px;
+
+$cha-divider-color: $cha-grey-1;
+
+// Breakpoints
+$media-expressions: (
+  screen: 'screen',
+  handheld: 'handheld',
+  breakpoint-xs: 'screen and (max-width: 599px)',
+  breakpoint-sm: 'screen and (min-width: 600px) and (max-width: 959px)',
+  breakpoint-md: 'screen and (min-width: 960px) and (max-width: 1279px)',
+  breakpoint-lg: 'screen and (min-width: 1280px) and (max-width: 1919px)',
+  breakpoint-xl: 'screen and (min-width: 1920px) and (max-width: 5000px)',
+  breakpoint-lt-sm: 'screen and (max-width: 599px)',
+  breakpoint-lt-md: 'screen and (max-width: 959px)',
+  breakpoint-lt-lg: 'screen and (max-width: 1279px)',
+  breakpoint-lt-xl: 'screen and (max-width: 1919px)',
+  breakpoint-gt-xs: 'screen and (max-width: 600px)',
+  breakpoint-gt-sm: 'screen and (max-width: 960px)',
+  breakpoint-gt-md: 'screen and (max-width: 1280px)',
+  breakpoint-gt-lg: 'screen and (max-width: 1920px)',
+) !default;
+
+$breakpoints: (
+  xs: 599px,
+  sm: 640px,
+  md: 960px,
+  lg: 1280px,
+  xl: 1920px,
+) !default;
+
+// Display
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);

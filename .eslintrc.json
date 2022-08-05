@@ -22,11 +22,11 @@
               },
               {
                 "sourceTag": "app:core",
-                "onlyDependOnLibsWithTags": ["api:module", "shared"]
+                "onlyDependOnLibsWithTags": ["api:module", "shared", "domain"]
               },
               {
                 "sourceTag": "app:angular",
-                "onlyDependOnLibsWithTags": ["angular:ui", "shared"]
+                "onlyDependOnLibsWithTags": ["angular:ui", "shared", "domain"]
               }
             ]
           }

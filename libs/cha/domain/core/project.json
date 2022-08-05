@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/domain/core/src",
+  "prefix": "cha",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/domain/core"],
+      "options": {
+        "jestConfig": "libs/cha/domain/core/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/domain/core/**/*.ts",
+          "libs/cha/domain/core/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain"]
+}

@@ -43,6 +43,9 @@
       "@blade/angular/ui/dropdown-multi": [
         "libs/blade/angular/ui/dropdown-multi/src/index.ts"
       ],
+      "@blade/angular/ui/layout": ["libs/blade/angular/ui/layout/src/index.ts"],
+      "@cha/domain/app-config": ["libs/cha/domain/app-config/src/index.ts"],
+      "@cha/domain/core": ["libs/cha/domain/core/src/index.ts"],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"]
     }
   },
