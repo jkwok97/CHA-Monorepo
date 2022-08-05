@@ -1,0 +1,21 @@
+@import 'apps/continental-hockey-angular/src/scss/variables';
+
+.main-title {
+  display: grid;
+  justify-content: center;
+  padding: 20px;
+
+  h1 {
+    font-weight: 100;
+    font-size: 32px;
+    line-height: 36px;
+    margin: 0;
+    text-align: center;
+  }
+
+  h5 {
+    font-weight: 300;
+    margin: 0;
+    text-align: center;
+  }
+}

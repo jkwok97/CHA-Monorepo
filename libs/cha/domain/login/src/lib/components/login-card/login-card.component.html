@@ -1,0 +1,23 @@
+<blade-card class="login-card">
+  <blade-card-body>
+    <!-- <blade-logo
+      [logo]="ChaLogo.LEAGUE"
+      [width]="200"
+      [height]="160"
+    ></blade-logo> -->
+
+    <blade-login-form class="w-full"></blade-login-form>
+  </blade-card-body>
+
+  <blade-card-footer class="login-card-buttons">
+    <blade-button
+      label="Login"
+      [hasIcon]="true"
+      [iconType]="(loggingIn$ | async) ? PrimeIcons.SPINNER : PrimeIcons.USER"
+      iconPosition="right"
+      [disabled]="loginFormRef?.form?.invalid"
+      [isLoading]="(loggingIn$ | async) ? true : false"
+      (click)="onSubmit()"
+    ></blade-button>
+  </blade-card-footer>
+</blade-card>

@@ -1,0 +1,19 @@
+@use 'card.variables' as *;
+
+.blade-card {
+  display: flex;
+  flex-direction: column;
+  color: $blade-card-text-color;
+  box-shadow: $blade-card-box-shadow;
+  border-radius: $blade-card-border-radius;
+
+  &-header {
+    padding: $blade-card-header-padding;
+  }
+  &-body {
+    padding: $blade-card-body-padding;
+  }
+  &-footer {
+    padding: $blade-card-footer-padding;
+  }
+}

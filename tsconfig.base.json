@@ -36,6 +36,7 @@
       "@blade/angular/ui/button-toggle": [
         "libs/blade/angular/ui/button-toggle/src/index.ts"
       ],
+      "@blade/angular/ui/card": ["libs/blade/angular/ui/card/src/index.ts"],
       "@blade/angular/ui/core": ["libs/blade/angular/ui/core/src/index.ts"],
       "@blade/angular/ui/dropdown": [
         "libs/blade/angular/ui/dropdown/src/index.ts"
@@ -47,6 +48,8 @@
       "@cha/domain/app-config": ["libs/cha/domain/app-config/src/index.ts"],
       "@cha/domain/auth": ["libs/cha/domain/auth/src/index.ts"],
       "@cha/domain/core": ["libs/cha/domain/core/src/index.ts"],
+      "@cha/domain/login": ["libs/cha/domain/login/src/index.ts"],
+      "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"]
     }
   },

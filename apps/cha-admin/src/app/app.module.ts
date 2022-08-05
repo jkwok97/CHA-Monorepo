@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
 import { APP_CONFIG } from '@cha/domain/app-config';
+import { MainTitleComponent } from '@cha/domain/main-title';
 
 import { AppRoutingModule } from './app-router.module';
 import { AppConfigService } from '../services';
@@ -37,6 +38,7 @@ const getApiUrl = (appConfig: AppConfigService) => {
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
+    MainTitleComponent,
 
     BladeAngularUiLayoutModule,
 
