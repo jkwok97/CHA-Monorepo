@@ -23,6 +23,7 @@ const ROUTES: Route[] = [
     RouterModule.forRoot(ROUTES, {
       relativeLinkResolution: 'legacy',
       preloadingStrategy: PreloadAllModules,
+      useHash: true
     }),
   ],
   exports: [RouterModule],
