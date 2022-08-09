@@ -71,6 +71,8 @@
       "@cha/front/awards-rookie": ["libs/cha/front/awards-rookie/src/index.ts"],
       "@cha/front/awards-scorer": ["libs/cha/front/awards-scorer/src/index.ts"],
       "@cha/front/awards-season": ["libs/cha/front/awards-season/src/index.ts"],
+      "@cha/front/draft-current": ["libs/cha/front/draft-current/src/index.ts"],
+      "@cha/front/draft-summary": ["libs/cha/front/draft-summary/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
       "@cha/front/home-awards": ["libs/cha/front/home-awards/src/index.ts"],
       "@cha/front/home-franchise": [

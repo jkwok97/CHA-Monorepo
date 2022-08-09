@@ -47,6 +47,8 @@
     "cha-front-awards-rookie": "libs/cha/front/awards-rookie",
     "cha-front-awards-scorer": "libs/cha/front/awards-scorer",
     "cha-front-awards-season": "libs/cha/front/awards-season",
+    "cha-front-draft-current": "libs/cha/front/draft-current",
+    "cha-front-draft-summary": "libs/cha/front/draft-summary",
     "cha-front-e2e": "apps/cha-front-e2e",
     "cha-front-home": "libs/cha/front/home",
     "cha-front-home-awards": "libs/cha/front/home-awards",
