@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/admin/draft-mgmt-table/src",
+  "prefix": "cha-admin",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/admin/draft-mgmt-table"],
+      "options": {
+        "jestConfig": "libs/cha/admin/draft-mgmt-table/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/admin/draft-mgmt-table/**/*.ts",
+          "libs/cha/admin/draft-mgmt-table/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "admin"]
+}

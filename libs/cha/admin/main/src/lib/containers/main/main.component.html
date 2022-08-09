@@ -1,3 +1,9 @@
-<p class="text-white">main works!</p>
+<section>
+  <div class="main-menu">
+    <blade-menu [items]="items"></blade-menu>
+  </div>
 
-<router-outlet></router-outlet>
+  <blade-layout-feature>
+    <router-outlet></router-outlet>
+  </blade-layout-feature>
+</section>

@@ -52,8 +52,49 @@
       ],
       "@blade/angular/ui/layout": ["libs/blade/angular/ui/layout/src/index.ts"],
       "@blade/angular/ui/menu": ["libs/blade/angular/ui/menu/src/index.ts"],
+      "@cha/admin/draft-mgmt-entry": [
+        "libs/cha/admin/draft-mgmt-entry/src/index.ts"
+      ],
+      "@cha/admin/draft-mgmt-table": [
+        "libs/cha/admin/draft-mgmt-table/src/index.ts"
+      ],
       "@cha/admin/home": ["libs/cha/admin/home/src/index.ts"],
+      "@cha/admin/league-awards": ["libs/cha/admin/league-awards/src/index.ts"],
+      "@cha/admin/league-teams": ["libs/cha/admin/league-teams/src/index.ts"],
+      "@cha/admin/league-users": ["libs/cha/admin/league-users/src/index.ts"],
       "@cha/admin/main": ["libs/cha/admin/main/src/index.ts"],
+      "@cha/admin/main-draft-mgmt": [
+        "libs/cha/admin/main-draft-mgmt/src/index.ts"
+      ],
+      "@cha/admin/main-league": ["libs/cha/admin/main-league/src/index.ts"],
+      "@cha/admin/main-player-mgmt": [
+        "libs/cha/admin/main-player-mgmt/src/index.ts"
+      ],
+      "@cha/admin/main-schedule": ["libs/cha/admin/main-schedule/src/index.ts"],
+      "@cha/admin/main-transactions": [
+        "libs/cha/admin/main-transactions/src/index.ts"
+      ],
+      "@cha/admin/player-mgmt-goalie-current": [
+        "libs/cha/admin/player-mgmt-goalie-current/src/index.ts"
+      ],
+      "@cha/admin/player-mgmt-info": [
+        "libs/cha/admin/player-mgmt-info/src/index.ts"
+      ],
+      "@cha/admin/player-mgmt-player-current": [
+        "libs/cha/admin/player-mgmt-player-current/src/index.ts"
+      ],
+      "@cha/admin/player-mgmt-ratings": [
+        "libs/cha/admin/player-mgmt-ratings/src/index.ts"
+      ],
+      "@cha/admin/player-mgmt-salaries": [
+        "libs/cha/admin/player-mgmt-salaries/src/index.ts"
+      ],
+      "@cha/admin/transactions-trades": [
+        "libs/cha/admin/transactions-trades/src/index.ts"
+      ],
+      "@cha/admin/transactions-waivers": [
+        "libs/cha/admin/transactions-waivers/src/index.ts"
+      ],
       "@cha/domain/app-config": ["libs/cha/domain/app-config/src/index.ts"],
       "@cha/domain/auth": ["libs/cha/domain/auth/src/index.ts"],
       "@cha/domain/core": ["libs/cha/domain/core/src/index.ts"],

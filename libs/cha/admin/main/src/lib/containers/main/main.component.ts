@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MenuItem } from 'primeng/api';
+import { mainMenuItems } from './main-menu-items';
 
 @Component({
   selector: 'cha-admin-main',
@@ -6,4 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent {}
+export class MainComponent {
+  items: MenuItem[] = mainMenuItems;
+}
