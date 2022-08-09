@@ -73,6 +73,13 @@
       "@cha/front/awards-season": ["libs/cha/front/awards-season/src/index.ts"],
       "@cha/front/draft-current": ["libs/cha/front/draft-current/src/index.ts"],
       "@cha/front/draft-summary": ["libs/cha/front/draft-summary/src/index.ts"],
+      "@cha/front/history-goalies": [
+        "libs/cha/front/history-goalies/src/index.ts"
+      ],
+      "@cha/front/history-players": [
+        "libs/cha/front/history-players/src/index.ts"
+      ],
+      "@cha/front/history-teams": ["libs/cha/front/history-teams/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
       "@cha/front/home-awards": ["libs/cha/front/home-awards/src/index.ts"],
       "@cha/front/home-franchise": [
