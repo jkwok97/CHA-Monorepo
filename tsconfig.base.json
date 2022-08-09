@@ -73,6 +73,14 @@
       "@cha/front/awards-season": ["libs/cha/front/awards-season/src/index.ts"],
       "@cha/front/draft-current": ["libs/cha/front/draft-current/src/index.ts"],
       "@cha/front/draft-summary": ["libs/cha/front/draft-summary/src/index.ts"],
+      "@cha/front/games-all": ["libs/cha/front/games-all/src/index.ts"],
+      "@cha/front/games-current": ["libs/cha/front/games-current/src/index.ts"],
+      "@cha/front/games-playoffs": [
+        "libs/cha/front/games-playoffs/src/index.ts"
+      ],
+      "@cha/front/games-upcoming": [
+        "libs/cha/front/games-upcoming/src/index.ts"
+      ],
       "@cha/front/history-goalies": [
         "libs/cha/front/history-goalies/src/index.ts"
       ],
@@ -124,6 +132,24 @@
       "@cha/front/rules-waivers": ["libs/cha/front/rules-waivers/src/index.ts"],
       "@cha/front/rules-winnings": [
         "libs/cha/front/rules-winnings/src/index.ts"
+      ],
+      "@cha/front/stats-goalie-all": [
+        "libs/cha/front/stats-goalie-all/src/index.ts"
+      ],
+      "@cha/front/stats-goalie-leaders": [
+        "libs/cha/front/stats-goalie-leaders/src/index.ts"
+      ],
+      "@cha/front/stats-player-all": [
+        "libs/cha/front/stats-player-all/src/index.ts"
+      ],
+      "@cha/front/stats-player-leaders": [
+        "libs/cha/front/stats-player-leaders/src/index.ts"
+      ],
+      "@cha/front/stats-team-all": [
+        "libs/cha/front/stats-team-all/src/index.ts"
+      ],
+      "@cha/front/stats-team-leaders": [
+        "libs/cha/front/stats-team-leaders/src/index.ts"
       ],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"],
       "@cha/shared/services": ["libs/cha/shared/services/src/index.ts"]

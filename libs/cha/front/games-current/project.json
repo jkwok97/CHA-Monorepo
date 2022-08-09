@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/front/games-current/src",
+  "prefix": "cha-front",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/front/games-current"],
+      "options": {
+        "jestConfig": "libs/cha/front/games-current/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/front/games-current/**/*.ts",
+          "libs/cha/front/games-current/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "front"]
+}
