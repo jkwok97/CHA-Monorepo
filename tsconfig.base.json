@@ -60,6 +60,17 @@
       "@cha/domain/login": ["libs/cha/domain/login/src/index.ts"],
       "@cha/domain/logo": ["libs/cha/domain/logo/src/index.ts"],
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
+      "@cha/front/awards-champions": [
+        "libs/cha/front/awards-champions/src/index.ts"
+      ],
+      "@cha/front/awards-defense": [
+        "libs/cha/front/awards-defense/src/index.ts"
+      ],
+      "@cha/front/awards-gm": ["libs/cha/front/awards-gm/src/index.ts"],
+      "@cha/front/awards-goalie": ["libs/cha/front/awards-goalie/src/index.ts"],
+      "@cha/front/awards-rookie": ["libs/cha/front/awards-rookie/src/index.ts"],
+      "@cha/front/awards-scorer": ["libs/cha/front/awards-scorer/src/index.ts"],
+      "@cha/front/awards-season": ["libs/cha/front/awards-season/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
       "@cha/front/home-awards": ["libs/cha/front/home-awards/src/index.ts"],
       "@cha/front/home-franchise": [
