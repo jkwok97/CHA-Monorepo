@@ -43,6 +43,11 @@
     "cha-front-e2e": "apps/cha-front-e2e",
     "cha-front-home": "libs/cha/front/home",
     "cha-front-main": "libs/cha/front/main",
+    "cha-front-main-awards": "libs/cha/front/main-awards",
+    "cha-front-main-draft": "libs/cha/front/main-draft",
+    "cha-front-main-league": "libs/cha/front/main-league",
+    "cha-front-main-nhl": "libs/cha/front/main-nhl",
+    "cha-front-main-rules": "libs/cha/front/main-rules",
     "cha-server": "apps/cha-server",
     "cha-shared-entities": "libs/cha/shared/entities",
     "cha-shared-services": "libs/cha/shared/services"

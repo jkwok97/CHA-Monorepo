@@ -62,6 +62,11 @@
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
       "@cha/front/main": ["libs/cha/front/main/src/index.ts"],
+      "@cha/front/main-awards": ["libs/cha/front/main-awards/src/index.ts"],
+      "@cha/front/main-draft": ["libs/cha/front/main-draft/src/index.ts"],
+      "@cha/front/main-league": ["libs/cha/front/main-league/src/index.ts"],
+      "@cha/front/main-nhl": ["libs/cha/front/main-nhl/src/index.ts"],
+      "@cha/front/main-rules": ["libs/cha/front/main-rules/src/index.ts"],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"],
       "@cha/shared/services": ["libs/cha/shared/services/src/index.ts"]
     }
