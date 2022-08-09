@@ -22,7 +22,11 @@ export class AppComponent implements OnInit {
       .subscribe((currentTeam: TeamDto | undefined) => {
         if (currentTeam) {
           const linkElement = document.getElementById('theme-link');
-          this.setLink(linkElement, currentTeam?.shortname);
+
+          // TODO REPLACE LATER WITH ALL TEAM THEMES
+          if (currentTeam.shortname === 'STA') {
+            this.setLink(linkElement, currentTeam.shortname);
+          }
         }
       });
   }
