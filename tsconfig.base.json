@@ -90,6 +90,21 @@
       "@cha/front/main-league": ["libs/cha/front/main-league/src/index.ts"],
       "@cha/front/main-nhl": ["libs/cha/front/main-nhl/src/index.ts"],
       "@cha/front/main-rules": ["libs/cha/front/main-rules/src/index.ts"],
+      "@cha/front/nhl-leaders": ["libs/cha/front/nhl-leaders/src/index.ts"],
+      "@cha/front/nhl-stats": ["libs/cha/front/nhl-stats/src/index.ts"],
+      "@cha/front/rules-egr": ["libs/cha/front/rules-egr/src/index.ts"],
+      "@cha/front/rules-equalization": [
+        "libs/cha/front/rules-equalization/src/index.ts"
+      ],
+      "@cha/front/rules-lottery": ["libs/cha/front/rules-lottery/src/index.ts"],
+      "@cha/front/rules-player-protection": [
+        "libs/cha/front/rules-player-protection/src/index.ts"
+      ],
+      "@cha/front/rules-rosters": ["libs/cha/front/rules-rosters/src/index.ts"],
+      "@cha/front/rules-waivers": ["libs/cha/front/rules-waivers/src/index.ts"],
+      "@cha/front/rules-winnings": [
+        "libs/cha/front/rules-winnings/src/index.ts"
+      ],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"],
       "@cha/shared/services": ["libs/cha/shared/services/src/index.ts"]
     }

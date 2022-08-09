@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/front/rules-winnings/src",
+  "prefix": "cha-front",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/front/rules-winnings"],
+      "options": {
+        "jestConfig": "libs/cha/front/rules-winnings/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/front/rules-winnings/**/*.ts",
+          "libs/cha/front/rules-winnings/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "front"]
+}

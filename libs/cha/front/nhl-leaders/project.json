@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/front/nhl-leaders/src",
+  "prefix": "cha-front",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/front/nhl-leaders"],
+      "options": {
+        "jestConfig": "libs/cha/front/nhl-leaders/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/front/nhl-leaders/**/*.ts",
+          "libs/cha/front/nhl-leaders/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "front"]
+}

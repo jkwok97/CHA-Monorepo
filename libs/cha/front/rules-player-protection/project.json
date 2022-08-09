@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/cha/front/rules-player-protection/src",
+  "prefix": "cha-front",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/front/rules-player-protection"],
+      "options": {
+        "jestConfig": "libs/cha/front/rules-player-protection/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/front/rules-player-protection/**/*.ts",
+          "libs/cha/front/rules-player-protection/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "front"]
+}
