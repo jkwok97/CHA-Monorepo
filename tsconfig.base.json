@@ -68,6 +68,22 @@
       "@cha/front/home-goalies": ["libs/cha/front/home-goalies/src/index.ts"],
       "@cha/front/home-players": ["libs/cha/front/home-players/src/index.ts"],
       "@cha/front/home-summary": ["libs/cha/front/home-summary/src/index.ts"],
+      "@cha/front/league-games": ["libs/cha/front/league-games/src/index.ts"],
+      "@cha/front/league-history": [
+        "libs/cha/front/league-history/src/index.ts"
+      ],
+      "@cha/front/league-ratings": [
+        "libs/cha/front/league-ratings/src/index.ts"
+      ],
+      "@cha/front/league-salaries": [
+        "libs/cha/front/league-salaries/src/index.ts"
+      ],
+      "@cha/front/league-stats": ["libs/cha/front/league-stats/src/index.ts"],
+      "@cha/front/league-teams": ["libs/cha/front/league-teams/src/index.ts"],
+      "@cha/front/league-trades": ["libs/cha/front/league-trades/src/index.ts"],
+      "@cha/front/league-waivers": [
+        "libs/cha/front/league-waivers/src/index.ts"
+      ],
       "@cha/front/main": ["libs/cha/front/main/src/index.ts"],
       "@cha/front/main-awards": ["libs/cha/front/main-awards/src/index.ts"],
       "@cha/front/main-draft": ["libs/cha/front/main-draft/src/index.ts"],

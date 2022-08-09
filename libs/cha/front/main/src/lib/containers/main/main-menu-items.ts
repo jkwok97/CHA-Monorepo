@@ -196,8 +196,12 @@ export const mainMenuItems: MenuItem[] = [
         routerLink: ['/league/trades'],
       },
       {
-        label: 'Salaries & Ratings',
-        routerLink: ['/league/salaries-ratings'],
+        label: 'Salaries',
+        routerLink: ['/league/salaries'],
+      },
+      {
+        label: 'Ratings',
+        routerLink: ['/league/ratings'],
       },
       {
         label: 'Waiver Priority',
