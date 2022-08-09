@@ -61,6 +61,13 @@
       "@cha/domain/logo": ["libs/cha/domain/logo/src/index.ts"],
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
       "@cha/front/home": ["libs/cha/front/home/src/index.ts"],
+      "@cha/front/home-awards": ["libs/cha/front/home-awards/src/index.ts"],
+      "@cha/front/home-franchise": [
+        "libs/cha/front/home-franchise/src/index.ts"
+      ],
+      "@cha/front/home-goalies": ["libs/cha/front/home-goalies/src/index.ts"],
+      "@cha/front/home-players": ["libs/cha/front/home-players/src/index.ts"],
+      "@cha/front/home-summary": ["libs/cha/front/home-summary/src/index.ts"],
       "@cha/front/main": ["libs/cha/front/main/src/index.ts"],
       "@cha/front/main-awards": ["libs/cha/front/main-awards/src/index.ts"],
       "@cha/front/main-draft": ["libs/cha/front/main-draft/src/index.ts"],

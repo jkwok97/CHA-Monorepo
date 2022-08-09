@@ -1,0 +1,1 @@
+export * from './lib/cha-front-home-players.module';
