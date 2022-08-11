@@ -12,6 +12,7 @@ import { Observable, first } from 'rxjs';
 export class RulesRostersComponent  {
   background = 'assets/images/sidney-crosby-mario-lemieux.jpg';
   backgroundColor!: string;
+  textColor!: string;
 
   isMobile$: Observable<boolean>;
   currentTeam$: Observable<TeamDto | undefined>;
@@ -26,6 +27,7 @@ export class RulesRostersComponent  {
       .subscribe((userTeam: TeamDto | undefined) => {
         if (userTeam) {
           this.backgroundColor = userTeam.teamcolor;
+          this.textColor = userTeam.teamtextcolor;
         }
       });
   }

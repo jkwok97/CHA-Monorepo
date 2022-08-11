@@ -54,13 +54,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontRulesWaiversModule
           ),
       },
-      //   {
-      //     path: 'winnings',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-winnings').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesWinningsModule
-      //       ),
-      //   },
+      {
+        path: 'winnings',
+        loadChildren: () =>
+          import('@cha/front/rules-winnings').then(
+            (mod) => mod.ChaFrontRulesWinningsModule
+          ),
+      },
     ],
   },
 ];

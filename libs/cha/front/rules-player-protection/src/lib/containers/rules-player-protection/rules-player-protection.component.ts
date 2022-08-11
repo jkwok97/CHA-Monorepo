@@ -12,6 +12,7 @@ import { Observable, first } from 'rxjs';
 export class RulesPlayerProtectionComponent {
   background = 'assets/images/bure.jpg';
   backgroundColor!: string;
+  textColor!: string;
 
   isMobile$: Observable<boolean>;
   currentTeam$: Observable<TeamDto | undefined>;
@@ -29,6 +30,7 @@ export class RulesPlayerProtectionComponent {
       .subscribe((userTeam: TeamDto | undefined) => {
         if (userTeam) {
           this.backgroundColor = userTeam.teamcolor;
+          this.textColor = userTeam.teamtextcolor;
         }
       });
   }

@@ -1,0 +1,37 @@
+<blade-layout-feature-content
+  [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
+  [ngStyle]="{ color: (currentTeam$ | async) ? textColor : null }"
+>
+  <div
+    [ngClass]="{
+      'rules-winnings': (isMobile$ | async) === false,
+      'rules-winnings-mobile': (isMobile$ | async) === true
+    }"
+  >
+    <div *ngIf="(isMobile$ | async) === false" class="rules-winnings-image">
+      <img [src]="background" />
+    </div>
+
+    <blade-card class="rules-winnings-card">
+      <blade-card-header class="rules-winnings-card-header"
+        >CHA Winnings Allotment</blade-card-header
+      >
+      <blade-card-body>
+        <ul>
+          <li>Liberty Cup Champion - $250</li>
+          <li>Liberty Cup Runner Up - $100</li>
+          <li>Conference Finalists - $100</li>
+          <li>Regular Season Winner - $50</li>
+          <li>Division Champion - $50/ea.</li>
+          <li>CHA Leading Scorer - $50</li>
+          <li>CHA Top Defenseman - $50</li>
+          <li>CHA Top Goalie - $50</li>
+          <li>CHA Top Rookie - $250</li>
+          <li>CHA Top G.M. - $50</li>
+          <li>Website Maintenance - $25</li>
+          <li>League Administration - $25</li>
+        </ul>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>

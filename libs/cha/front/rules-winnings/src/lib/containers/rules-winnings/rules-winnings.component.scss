@@ -1,7 +1,7 @@
 @import 'apps/cha-front/src/scss/variables';
 
-.rules-equalization {
-  padding: 20px;
+.rules-winnings {
+  padding: 20px 0;
   display: grid;
   justify-items: center;
   grid-template-columns: 1.5fr 1fr;
@@ -37,15 +37,6 @@
     &-header {
       font-size: x-large;
       font-weight: 300;
-    }
-
-    &-content {
-      &-max {
-        color: $cha-yellow;
-      }
-      &-min {
-        color: $cha-green;
-      }
     }
 
     li {

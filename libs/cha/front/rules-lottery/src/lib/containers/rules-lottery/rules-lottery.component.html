@@ -1,4 +1,7 @@
-<blade-layout-feature-content [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null">
+<blade-layout-feature-content
+  [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
+  [ngStyle]="{ color: (currentTeam$ | async) ? textColor : null }"
+>
   <div
     [ngClass]="{
       'rules-lottery': (isMobile$ | async) === false,
