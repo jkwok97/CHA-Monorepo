@@ -14,12 +14,12 @@ export class LeagueDataService {
   getLeagueData(): Observable<LeagueDataDto> {
     return this._http
       .get(`${this.apiUrl}/v2/league/current-data`)
-      .pipe(map((result: any) => result['result'][0]));
+      .pipe(map((result: any) => result));
   }
 
   getTeams(): Observable<TeamDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/teams`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/teams/current`)
+      .pipe(map((result: any) => result));
   }
 }

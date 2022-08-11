@@ -15,4 +15,14 @@ export class TeamsController {
     }
     return teams;
   }
+
+  @Get('/current')
+  async getCurrentTeams(): Promise<TeamDto[]> {
+    const teams = await this.teamsService.getCurrentTeams();
+
+    if (!teams || teams.length < 1) {
+      throw new NotFoundException('No Current Teams found');
+    }
+    return teams;
+  }
 }
