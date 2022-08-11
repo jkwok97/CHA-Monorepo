@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutFeatureContentComponent {
-  @Input() backgroundColor = '#1e1e1e';
+  @Input() backgroundColor!: string | null;
 }

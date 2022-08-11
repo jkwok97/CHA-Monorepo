@@ -19,13 +19,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontRulesEqualizationModule
           ),
       },
-      //   {
-      //     path: 'lottery',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-lottery').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesLotteryModule
-      //       ),
-      //   },
+      {
+        path: 'lottery',
+        loadChildren: () =>
+          import('@cha/front/rules-lottery').then(
+            (mod) => mod.ChaFrontRulesLotteryModule
+          ),
+      },
       //   {
       //     path: 'egr',
       //     loadChildren: () =>
