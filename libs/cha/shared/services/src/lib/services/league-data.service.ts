@@ -13,7 +13,7 @@ export class LeagueDataService {
 
   getLeagueData(): Observable<LeagueDataDto> {
     return this._http
-      .get(`${this.apiUrl}/v2/league/current-data`)
+      .get(`${this.apiUrl}/league/current-data`)
       .pipe(map((result: any) => result));
   }
 

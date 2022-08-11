@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
 
     this.displayFacade.get();
-    // this.leagueDataFacade.getLeagueData();
-    // this.leagueDataFacade.getLeagueTeams();
+    this.leagueDataFacade.getLeagueData();
+    this.leagueDataFacade.getLeagueTeams();
   }
 
   ngOnInit(): void {

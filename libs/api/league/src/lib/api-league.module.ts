@@ -1,9 +1,17 @@
-import { Module } from '@nestjs/common';
+import { Current_Season_V2 } from '@cha/shared/entities';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { LeagueController } from './controllers';
+import { LeagueMiddleware } from './middlewares/league.middleware';
+import { LeagueService } from './services';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Current_Season_V2])],
   controllers: [LeagueController],
-  providers: [],
-  exports: [],
+  providers: [LeagueService],
 })
-export class ApiLeagueModule {}
+export class ApiLeagueModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LeagueMiddleware).forRoutes('*');
+  }
+}
