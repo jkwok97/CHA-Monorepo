@@ -40,13 +40,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontRulesPlayerProtectionModule
           ),
       },
-      //   {
-      //     path: 'rosters',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-rosters').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesRostersModule
-      //       ),
-      //   },
+      {
+        path: 'rosters',
+        loadChildren: () =>
+          import('@cha/front/rules-rosters').then(
+            (mod) => mod.ChaFrontRulesRostersModule
+          ),
+      },
       //   {
       //     path: 'waivers',
       //     loadChildren: () =>
