@@ -47,13 +47,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontRulesRostersModule
           ),
       },
-      //   {
-      //     path: 'waivers',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-waivers').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesWaiversModule
-      //       ),
-      //   },
+      {
+        path: 'waivers',
+        loadChildren: () =>
+          import('@cha/front/rules-waivers').then(
+            (mod) => mod.ChaFrontRulesWaiversModule
+          ),
+      },
       //   {
       //     path: 'winnings',
       //     loadChildren: () =>

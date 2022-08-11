@@ -1,0 +1,72 @@
+<blade-layout-feature-content
+  [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
+>
+  <div
+    [ngClass]="{
+      'rules-waivers': (isMobile$ | async) === false,
+      'rules-waivers-mobile': (isMobile$ | async) === true
+    }"
+  >
+    <div *ngIf="(isMobile$ | async) === false" class="rules-waivers-image">
+      <img [src]="background" />
+    </div>
+    <blade-card class="rules-waivers-card">
+      <blade-card-header class="rules-waivers-card-header"
+        >Waiver Wire</blade-card-header
+      >
+
+      <blade-card-body class="rules-waivers-card-content">
+        <ul>
+          <li>
+            Waiver claims will be made Sundays at 2 week intervals throughout
+            the regular season (there may be occurences when this number varies)
+          </li>
+          <li>
+            The first waiver claim of every year will be the first weekend
+            immediately following the preseason
+          </li>
+          <li>
+            The waiver wire will consist of all players on the disk not
+            belonging to a CHA team
+          </li>
+          <li>
+            All claims must have been sent (via email, Slack message or text
+            message) by no later than 11:59 MST saturday evenings
+          </li>
+          <li>
+            Claim priority will be determined initally by team standings for the
+            year prior. Once a successful claim has been made, teams then drop
+            to the bottom of the priority list. Teams will subsequently then
+            only climb the priority list once another team with a higher
+            priority makes a successful claim.
+          </li>
+          <li>All teams may participate in making a waiver claim</li>
+          <li>
+            Waiver priority only takes effect when two or more teams make a
+            claim for the same player
+          </li>
+          <li>
+            More than one player may be submitted for in the same claim. In such
+            situations, claims must be formed in such a way that the highest
+            prioritized player is first followed by second highest and so on and
+            so forth
+          </li>
+          <li>
+            Please try to restrict your player claims to no more than five
+            players at one time
+          </li>
+          <li>
+            In the case of a successful claim, the selected player(s) must be
+            retained for the duration of at least one waiver interval (roughly 2
+            weeks). If a team claim brings a roster total to more than league
+            roster maximum (30 players) or to a total causing a salary cap
+            infringement, players must be dropped by the day of the next set of
+            games. If no drops are made, the league will perform the
+            transactions by proxy.
+          </li>
+          <li>Waiver claim positions may not be traded.</li>
+        </ul>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>
