@@ -4,13 +4,13 @@ import { TeamDto } from '@cha/shared/entities';
 import { Observable, first } from 'rxjs';
 
 @Component({
-  selector: 'cha-front-rules-equalization',
-  templateUrl: './rules-equalization.component.html',
-  styleUrls: ['./rules-equalization.component.scss'],
+  selector: 'cha-front-rules-egr',
+  templateUrl: './rules-egr.component.html',
+  styleUrls: ['./rules-egr.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RulesEqualizationComponent {
-  background = 'assets/images/howe.jpg';
+export class RulesEgrComponent {
+  background = 'assets/images/brodeur.jpg';
   backgroundColor!: string;
 
   isMobile$: Observable<boolean>;

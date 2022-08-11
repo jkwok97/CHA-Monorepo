@@ -26,13 +26,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontRulesLotteryModule
           ),
       },
-      //   {
-      //     path: 'egr',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-egr').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesEgrModule
-      //       ),
-      //   },
+      {
+        path: 'egr',
+        loadChildren: () =>
+          import('@cha/front/rules-egr').then(
+            (mod) => mod.ChaFrontRulesEgrModule
+          ),
+      },
       //   {
       //     path: 'player-protection',
       //     loadChildren: () =>
