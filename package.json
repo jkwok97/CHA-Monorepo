@@ -81,6 +81,7 @@
     "class-transformer": "^0.5.1",
     "hbs": "^4.2.0",
     "joi": "^17.6.0",
+    "ngx-scrollbar": "^10.0.1",
     "pg": "^8.7.3",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
