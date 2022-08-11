@@ -7,18 +7,18 @@ const ROUTES: Route[] = [
     path: '',
     component: MainRulesComponent,
     children: [
-      //   {
-      //     path: '',
-      //     pathMatch: 'full',
-      //     redirectTo: 'equalization',
-      //   },
-      //   {
-      //     path: 'equalization',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-equalization').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesEqualizationModule
-      //       ),
-      //   },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'equalization',
+      },
+      {
+        path: 'equalization',
+        loadChildren: () =>
+          import('@cha/front/rules-equalization').then(
+            (mod) => mod.ChaFrontRulesEqualizationModule
+          ),
+      },
       //   {
       //     path: 'lottery',
       //     loadChildren: () =>

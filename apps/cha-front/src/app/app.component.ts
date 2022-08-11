@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamDto } from '@cha/shared/entities';
-import { UserTeamFacade } from '@cha/domain/core';
+import {
+  DisplayFacade,
+  LeagueDataFacade,
+  UserTeamFacade,
+} from '@cha/domain/core';
 import { Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
@@ -12,8 +16,16 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class AppComponent implements OnInit {
   currentTeam$: Observable<TeamDto | undefined>;
 
-  constructor(private userTeamFacade: UserTeamFacade) {
+  constructor(
+    private userTeamFacade: UserTeamFacade,
+    private displayFacade: DisplayFacade,
+    private leagueDataFacade: LeagueDataFacade
+  ) {
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+
+    this.displayFacade.get();
+    // this.leagueDataFacade.getLeagueData();
+    // this.leagueDataFacade.getLeagueTeams();
   }
 
   ngOnInit(): void {

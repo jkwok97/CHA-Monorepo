@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'blade-layout-feature-content',
@@ -6,4 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./layout-feature-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutFeatureContentComponent {}
+export class LayoutFeatureContentComponent {
+  @Input() backgroundColor = '#1e1e1e';
+}
