@@ -33,13 +33,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontRulesEgrModule
           ),
       },
-      //   {
-      //     path: 'player-protection',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/rules-player-protection').then(
-      //         (mod) => mod.ChaAngularFeaturesRulesPlayerProtectionModule
-      //       ),
-      //   },
+      {
+        path: 'player-protection',
+        loadChildren: () =>
+          import('@cha/front/rules-player-protection').then(
+            (mod) => mod.ChaFrontRulesPlayerProtectionModule
+          ),
+      },
       //   {
       //     path: 'rosters',
       //     loadChildren: () =>

@@ -1,0 +1,57 @@
+@import 'apps/cha-front/src/scss/variables';
+
+.rules-protection {
+  padding: 20px;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1.5fr 1fr;
+  grid-column-gap: 20px;
+  height: 100%;
+
+  &-image {
+    width: 100%;
+    img {
+      border-radius: 5px;
+      width: 100%;
+    }
+  }
+
+  &-mobile {
+    padding: 20px 0;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr;
+  }
+
+  &-card {
+    border: 1px solid $cha-divider-color;
+    display: grid;
+    grid-row-gap: 10px;
+    justify-items: center;
+    padding: 20px;
+    border-radius: $cha-default-radius;
+    box-shadow: $cha-default-box-shadow;
+    max-width: calc(100% - 2rem);
+    min-width: 325px;
+
+    &-header {
+      font-size: x-large;
+      font-weight: 100;
+    }
+
+    &-content {
+      &-max {
+        color: $cha-yellow;
+      }
+      &-min {
+        color: $cha-green;
+      }
+    }
+
+    li {
+      font-size: medium;
+      font-weight: 100;
+      margin: 10px 0;
+    }
+  }
+}
