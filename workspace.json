@@ -110,6 +110,7 @@
     "cha-front-stats-player-leaders": "libs/cha/front/stats-player-leaders",
     "cha-front-stats-team-all": "libs/cha/front/stats-team-all",
     "cha-front-stats-team-leaders": "libs/cha/front/stats-team-leaders",
+    "cha-front-teams-summary": "libs/cha/front/teams-summary",
     "cha-server": "apps/cha-server",
     "cha-shared-entities": "libs/cha/shared/entities"
   }

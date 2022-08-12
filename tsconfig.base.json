@@ -193,6 +193,7 @@
       "@cha/front/stats-team-leaders": [
         "libs/cha/front/stats-team-leaders/src/index.ts"
       ],
+      "@cha/front/teams-summary": ["libs/cha/front/teams-summary/src/index.ts"],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"]
     }
   },

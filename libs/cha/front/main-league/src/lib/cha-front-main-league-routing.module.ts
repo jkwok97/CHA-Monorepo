@@ -26,13 +26,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontLeagueGamesModule
           ),
       },
-      //   {
-      //     path: 'teams',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/teams').then(
-      //         (mod) => mod.ChaAngularFeaturesTeamsModule
-      //       ),
-      //   },
+      {
+        path: 'teams',
+        loadChildren: () =>
+          import('@cha/front/league-teams').then(
+            (mod) => mod.ChaFrontLeagueTeamsModule
+          ),
+      },
       {
         path: 'trades',
         loadChildren: () =>
