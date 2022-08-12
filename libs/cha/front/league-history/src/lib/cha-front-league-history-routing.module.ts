@@ -20,13 +20,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontHistoryTeamsModule
           ),
       },
-      // {
-      //   path: 'players',
-      //   loadChildren: () =>
-      //     import('@cha/cha-angular/features/league-history-players').then(
-      //       (mod) => mod.ChaAngularFeaturesLeagueHistoryPlayersModule
-      //     ),
-      // },
+      {
+        path: 'players',
+        loadChildren: () =>
+          import('@cha/front/history-players').then(
+            (mod) => mod.ChaFrontHistoryPlayersModule
+          ),
+      },
       // {
       //   path: 'goalies',
       //   loadChildren: () =>
