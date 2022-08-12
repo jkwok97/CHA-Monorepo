@@ -79,6 +79,7 @@
     "cha-front-home-awards": "libs/cha/front/home-awards",
     "cha-front-home-franchise": "libs/cha/front/home-franchise",
     "cha-front-home-goalies": "libs/cha/front/home-goalies",
+    "cha-front-home-logout": "libs/cha/front/home-logout",
     "cha-front-home-players": "libs/cha/front/home-players",
     "cha-front-home-summary": "libs/cha/front/home-summary",
     "cha-front-league-games": "libs/cha/front/league-games",

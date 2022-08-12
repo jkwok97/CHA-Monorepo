@@ -35,7 +35,7 @@ const r = createReducer(
 
   on(authActions.loginFailed, () => initialState),
 
-  on(authActions.logout, (state) => ({ ...state })),
+  on(authActions.logout, () => initialState),
 
   on(authActions.logoutConfirmed, () => initialState)
 );

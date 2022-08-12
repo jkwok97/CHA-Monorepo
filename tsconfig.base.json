@@ -136,6 +136,7 @@
         "libs/cha/front/home-franchise/src/index.ts"
       ],
       "@cha/front/home-goalies": ["libs/cha/front/home-goalies/src/index.ts"],
+      "@cha/front/home-logout": ["libs/cha/front/home-logout/src/index.ts"],
       "@cha/front/home-players": ["libs/cha/front/home-players/src/index.ts"],
       "@cha/front/home-summary": ["libs/cha/front/home-summary/src/index.ts"],
       "@cha/front/league-games": ["libs/cha/front/league-games/src/index.ts"],

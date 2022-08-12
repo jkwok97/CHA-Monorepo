@@ -31,6 +31,9 @@ export class UrlRouterService {
           if (this.loading) {
             this.loading = false;
             this.setItem('route', event.url);
+            if (event.url === '/home/logout') {
+              this.setItem('route', '');
+            }
           }
           break;
         }

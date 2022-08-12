@@ -35,7 +35,7 @@ export class AuthService {
 
   public logout() {
     localStorage.removeItem('currentUser');
-    this.authFacade.logout();
+    localStorage.removeItem('route');
   }
 
   onError() {
