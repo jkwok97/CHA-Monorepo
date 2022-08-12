@@ -40,13 +40,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontLeagueTradesModule
           ),
       },
-      //   {
-      //     path: 'salaries-ratings',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/salaries-ratings').then(
-      //         (mod) => mod.ChaAngularFeaturesSalariesRatingsModule
-      //       ),
-      //   },
+      {
+        path: 'salaries',
+        loadChildren: () =>
+          import('@cha/front/league-salaries').then(
+            (mod) => mod.ChaFrontLeagueSalariesModule
+          ),
+      },
       //   {
       //     path: 'waivers',
       //     loadChildren: () =>
