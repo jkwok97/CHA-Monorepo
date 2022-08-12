@@ -61,13 +61,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontLeagueWaiversModule
           ),
       },
-      //   {
-      //     path: 'history',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/league-history').then(
-      //         (mod) => mod.ChaAngularFeaturesLeagueHistoryModule
-      //       ),
-      //   },
+      {
+        path: 'history',
+        loadChildren: () =>
+          import('@cha/front/league-history').then(
+            (mod) => mod.ChaFrontLeagueHistoryModule
+          ),
+      },
     ],
   },
 ];
