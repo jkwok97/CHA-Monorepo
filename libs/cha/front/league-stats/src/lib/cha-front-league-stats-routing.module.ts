@@ -19,13 +19,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontStatsTeamLeadersModule
           ),
       },
-      //   {
-      //     path: 'players-leaders',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/league-stats-players').then(
-      //         (mod) => mod.ChaAngularFeaturesLeagueStatsPlayersModule
-      //       ),
-      //   },
+      {
+        path: 'players-leaders',
+        loadChildren: () =>
+          import('@cha/front/stats-player-leaders').then(
+            (mod) => mod.ChaFrontStatsPlayerLeadersModule
+          ),
+      },
       //   {
       //     path: 'goalies-leaders',
       //     loadChildren: () =>
