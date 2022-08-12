@@ -47,15 +47,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontStatsPlayerAllModule
           ),
       },
-      //   {
-      //     path: 'goalies-detailed',
-      //     loadChildren: () =>
-      //       import(
-      //         '@cha/cha-angular/features/league-stats-goalies-detailed'
-      //       ).then(
-      //         (mod) => mod.ChaAngularFeaturesLeagueStatsGoaliesDetailedModule
-      //       ),
-      //   },
+      {
+        path: 'goalies-detailed',
+        loadChildren: () =>
+          import('@cha/front/stats-goalie-all').then(
+            (mod) => mod.ChaFrontStatsGoalieAllModule
+          ),
+      },
     ],
   },
 ];
