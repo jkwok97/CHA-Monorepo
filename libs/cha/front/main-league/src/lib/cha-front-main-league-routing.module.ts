@@ -47,6 +47,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontLeagueSalariesModule
           ),
       },
+      {
+        path: 'ratings',
+        loadChildren: () =>
+          import('@cha/front/league-ratings').then(
+            (mod) => mod.ChaFrontLeagueRatingsModule
+          ),
+      },
       //   {
       //     path: 'waivers',
       //     loadChildren: () =>
