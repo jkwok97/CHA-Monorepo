@@ -40,13 +40,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontAwardsRookieModule
           ),
       },
-      //   {
-      //     path: 'goalie',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/awards-goalie').then(
-      //         (mod) => mod.ChaAngularFeaturesAwardsGoalieModule
-      //       ),
-      //   },
+      {
+        path: 'goalie',
+        loadChildren: () =>
+          import('@cha/front/awards-goalie').then(
+            (mod) => mod.ChaFrontAwardsGoalieModule
+          ),
+      },
       //   {
       //     path: 'gm',
       //     loadChildren: () =>
