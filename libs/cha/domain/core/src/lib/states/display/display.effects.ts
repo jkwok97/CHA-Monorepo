@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DisplayService } from '@cha/shared/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+import { DisplayService } from '../../services';
 import { DisplayActions } from './display.actions';
 
 @Injectable()

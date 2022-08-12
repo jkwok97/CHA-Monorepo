@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'cha-shared-services',
+  displayName: 'cha-domain-url-router',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../../coverage/libs/cha/shared/services',
+  coverageDirectory: '../../../../coverage/libs/cha/domain/url-router',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

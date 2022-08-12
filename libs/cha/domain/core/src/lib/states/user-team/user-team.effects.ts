@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TeamInfoService } from '@cha/shared/services';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { UserTeamActions } from './user-team.actions';
 import { TeamDto } from '@cha/shared/entities';
+import { TeamInfoService } from '../../services';
 
 @Injectable()
 export class UserTeamEffects {

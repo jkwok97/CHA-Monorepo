@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
-import { LeagueDataService } from '@cha/shared/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+import { LeagueDataService } from '../../services';
 import { LeagueDataActions } from './league-data.actions';
 
 @Injectable()

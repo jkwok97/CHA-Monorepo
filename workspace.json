@@ -56,6 +56,7 @@
     "cha-domain-login": "libs/cha/domain/login",
     "cha-domain-logo": "libs/cha/domain/logo",
     "cha-domain-main-title": "libs/cha/domain/main-title",
+    "cha-domain-url-router": "libs/cha/domain/url-router",
     "cha-front": "apps/cha-front",
     "cha-front-awards-champions": "libs/cha/front/awards-champions",
     "cha-front-awards-defense": "libs/cha/front/awards-defense",
@@ -110,7 +111,6 @@
     "cha-front-stats-team-all": "libs/cha/front/stats-team-all",
     "cha-front-stats-team-leaders": "libs/cha/front/stats-team-leaders",
     "cha-server": "apps/cha-server",
-    "cha-shared-entities": "libs/cha/shared/entities",
-    "cha-shared-services": "libs/cha/shared/services"
+    "cha-shared-entities": "libs/cha/shared/entities"
   }
 }

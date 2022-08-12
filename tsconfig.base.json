@@ -101,6 +101,7 @@
       "@cha/domain/login": ["libs/cha/domain/login/src/index.ts"],
       "@cha/domain/logo": ["libs/cha/domain/logo/src/index.ts"],
       "@cha/domain/main-title": ["libs/cha/domain/main-title/src/index.ts"],
+      "@cha/domain/url-router": ["libs/cha/domain/url-router/src/index.ts"],
       "@cha/front/awards-champions": [
         "libs/cha/front/awards-champions/src/index.ts"
       ],
@@ -193,7 +194,6 @@
         "libs/cha/front/stats-team-leaders/src/index.ts"
       ],
       "@cha/shared/entities": ["libs/cha/shared/entities/src/index.ts"],
-      "@cha/shared/services": ["libs/cha/shared/services/src/index.ts"]
     }
   },
   "exclude": ["ormconfig.js", "node_modules", "tmp"]

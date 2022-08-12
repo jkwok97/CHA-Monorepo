@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AwardDto } from '@cha/shared/entities';
-import { AwardsService } from '@cha/shared/services';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
+import { AwardsService } from '../../services';
 import { AwardActions } from './awards.action';
 
 @Injectable()

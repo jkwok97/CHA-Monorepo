@@ -23,6 +23,7 @@ import { AppConfigService } from '../services';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
+import { ChaDomainUrlRouterModule } from '@cha/domain/url-router';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -49,6 +50,7 @@ const getApiUrl = (appConfig: AppConfigService) => {
     ChaDomainAuthModule,
     ChaDomainLoginModule,
     ChaDomainCoreModule,
+    ChaDomainUrlRouterModule,
 
     BladeAngularUiLayoutModule,
 

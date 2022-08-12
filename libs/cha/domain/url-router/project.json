@@ -1,13 +1,13 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/cha/shared/services/src",
+  "sourceRoot": "libs/cha/domain/url-router/src",
   "prefix": "cha",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/shared/services"],
+      "outputs": ["coverage/libs/cha/domain/url-router"],
       "options": {
-        "jestConfig": "libs/cha/shared/services/jest.config.ts",
+        "jestConfig": "libs/cha/domain/url-router/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -15,11 +15,11 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/cha/shared/services/**/*.ts",
-          "libs/cha/shared/services/**/*.html"
+          "libs/cha/domain/url-router/**/*.ts",
+          "libs/cha/domain/url-router/**/*.html"
         ]
       }
     }
   },
-  "tags": ["services", "shared"]
+  "tags": ["domain"]
 }
