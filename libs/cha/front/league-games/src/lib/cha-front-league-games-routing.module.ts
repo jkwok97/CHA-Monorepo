@@ -33,13 +33,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontGamesAllModule
           ),
       },
-      //   {
-      //     path: 'playoffs',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/games-playoffs').then(
-      //         (mod) => mod.ChaAngularFeaturesGamesPlayoffsModule
-      //       ),
-      //   },
+      {
+        path: 'playoffs',
+        loadChildren: () =>
+          import('@cha/front/games-playoffs').then(
+            (mod) => mod.ChaFrontGamesPlayoffsModule
+          ),
+      },
     ],
   },
 ];
