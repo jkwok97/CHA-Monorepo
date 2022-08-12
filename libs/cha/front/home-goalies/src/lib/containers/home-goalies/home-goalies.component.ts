@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'cha-front-home-goalies',
@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./home-goalies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeGoaliesComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class HomeGoaliesComponent {}
