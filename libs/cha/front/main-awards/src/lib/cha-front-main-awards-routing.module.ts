@@ -54,13 +54,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontAwardsGmModule
           ),
       },
-      //   {
-      //     path: 'season',
-      //     loadChildren: () =>
-      //       import('@cha/cha-angular/features/awards-season').then(
-      //         (mod) => mod.ChaAngularFeaturesAwardsSeasonModule
-      //       ),
-      //   },
+      {
+        path: 'season',
+        loadChildren: () =>
+          import('@cha/front/awards-season').then(
+            (mod) => mod.ChaFrontAwardsSeasonModule
+          ),
+      },
     ],
   },
 ];
