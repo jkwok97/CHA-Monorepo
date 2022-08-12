@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcha_front=self.webpackChunkcha_front||[]).push([[454],{3454:(u,n,e)=>{e.r(n),e.d(n,{ChaFrontHomePlayersModule:()=>t});var r=e(6895),a=e(4650);let t=(()=>{class o{}return o.\u0275fac=function(s){return new(s||o)},o.\u0275mod=a.oAB({type:o}),o.\u0275inj=a.cJS({imports:[r.ez]}),o})()}}]);
