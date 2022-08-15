@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ApiAwardsModule } from '@api/awards';
 import { ApiUsersModule } from '@api/users';

@@ -1,7 +1,17 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { AwardsService } from '../services';
 
 @Controller('awards')
 export class AwardsController {
+  constructor(private awardsService: AwardsService) {}
+
   @Get()
   getAllAwardWinners() {
     console.log('in awards controller');
@@ -12,25 +22,74 @@ export class AwardsController {
   getAwardWinnersById() {}
 
   @Get('/champions')
-  getChampions() {}
+  async getChampions() {
+    const champions = await this.awardsService.getChampions();
+
+    if (!champions || champions.length < 1) {
+      throw new NotFoundException('Champions Awards not found');
+    }
+    return champions;
+  }
 
   @Get('/scorers')
-  getScorers() {}
+  async getScorerAwards() {
+    const scorers = await this.awardsService.getScorerAwards();
+
+    if (!scorers || scorers.length < 1) {
+      throw new NotFoundException('Scorers Awards not found');
+    }
+    return scorers;
+  }
 
   @Get('/defense')
-  getDefense() {}
+  async getDefenseAwards() {
+    const defense = await this.awardsService.getDefenseAwards();
+
+    if (!defense || defense.length < 1) {
+      throw new NotFoundException('Defense Awards not found');
+    }
+    return defense;
+  }
 
   @Get('/rookies')
-  getRookies() {}
+  async getRookieAwards() {
+    const rookies = await this.awardsService.getRookieAwards();
+
+    if (!rookies || rookies.length < 1) {
+      throw new NotFoundException('Rookie Awards not found');
+    }
+    return rookies;
+  }
 
   @Get('/goalies')
-  getGoalies() {}
+  async getGoalieAwards() {
+    const goalies = await this.awardsService.getGoalieAwards();
+
+    if (!goalies || goalies.length < 1) {
+      throw new NotFoundException('Goalie Awards not found');
+    }
+    return goalies;
+  }
 
   @Get('/gm')
-  getGm() {}
+  async getGmAwards() {
+    const gms = await this.awardsService.getGmAwards();
+
+    if (!gms || gms.length < 1) {
+      throw new NotFoundException('GM Awards not found');
+    }
+    return gms;
+  }
 
   @Get('/season')
-  getSeason() {}
+  async getSeasonAwards() {
+    const season = await this.awardsService.getSeasonAwards();
+
+    if (!season || season.length < 1) {
+      throw new NotFoundException('Season Awards not found');
+    }
+    return season;
+  }
 
   @Get('/player/:id')
   getPlayerAwardsByPlayerId() {}
