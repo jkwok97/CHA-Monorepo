@@ -22,8 +22,8 @@ const ROUTES: Route[] = [
       {
         path: 'salaries',
         loadChildren: () =>
-          import('@cha/admin/league-teams').then(
-            (mod) => mod.ChaAdminLeagueTeamsModule
+          import('@cha/admin/player-mgmt-salaries').then(
+            (mod) => mod.ChaAdminPlayerMgmtSalariesModule
           ),
       },
       {
