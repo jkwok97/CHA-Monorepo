@@ -19,6 +19,13 @@ const ROUTES: Route[] = [
         loadChildren: () =>
           import('@cha/admin/home').then((mod) => mod.ChaAdminHomeModule),
       },
+      {
+        path: 'league',
+        loadChildren: () =>
+          import('@cha/admin/main-league').then(
+            (mod) => mod.ChaAdminMainLeagueModule
+          ),
+      },
     ],
   },
 ];
