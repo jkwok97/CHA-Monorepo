@@ -40,6 +40,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaAdminMainDraftMgmtModule
           ),
       },
+      {
+        path: 'transactions',
+        loadChildren: () =>
+          import('@cha/admin/main-transactions').then(
+            (mod) => mod.ChaAdminMainTransactionsModule
+          ),
+      },
     ],
   },
 ];
