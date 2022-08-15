@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { AuthFacade } from '@cha/domain/auth';
 import { UserDto } from '@cha/shared/entities';
+import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { finalize, first, tap } from 'rxjs/operators';
 
@@ -14,7 +15,11 @@ import { finalize, first, tap } from 'rxjs/operators';
 export class MainResolver implements Resolve<boolean> {
   loading = false;
 
-  constructor(private authFacade: AuthFacade, private router: Router) {}
+  constructor(
+    private authFacade: AuthFacade,
+    private router: Router,
+    private messageService: MessageService
+  ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -29,19 +34,27 @@ export class MainResolver implements Resolve<boolean> {
         if (!user?.isactive) {
           this.router.navigate([`/login`]);
         } else {
-          const item = localStorage.getItem('route');
-
-          if (item) {
-            const route = JSON.parse(item);
-
-            if (route === '/') {
-              this.router.navigate(['/home']);
-            } else {
-              const route = JSON.parse(item);
-              this.router.navigateByUrl(`${route}`);
-            }
+          if (user && !user.isadmin) {
+            this.router.navigate([`/login`]);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'You Are Not Authorized',
+            });
           } else {
-            this.router.navigate(['/home']);
+            const item = localStorage.getItem('route');
+
+            if (item) {
+              const route = JSON.parse(item);
+
+              if (route === '/') {
+                this.router.navigate(['/home']);
+              } else {
+                const route = JSON.parse(item);
+                this.router.navigateByUrl(`${route}`);
+              }
+            } else {
+              this.router.navigate(['/home']);
+            }
           }
         }
       }),

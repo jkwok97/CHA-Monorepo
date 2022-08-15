@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
-import { HomeComponent } from './containers';
+import { MainLeagueComponent } from './containers';
 
 const ROUTES: Route[] = [
   {
     path: '',
-    component: HomeComponent,
+    component: MainLeagueComponent,
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'league',
+        redirectTo: 'users',
       },
       {
-        path: 'league',
+        path: 'users',
         loadChildren: () =>
-          import('@cha/admin/main-league').then(
-            (mod) => mod.ChaAdminMainLeagueModule
+          import('@cha/admin/league-users').then(
+            (mod) => mod.ChaAdminLeagueUsersModule
           ),
       },
     ],
@@ -27,4 +27,4 @@ const ROUTES: Route[] = [
   imports: [RouterModule.forChild(ROUTES)],
   exports: [RouterModule],
 })
-export class ChaAdminHomeRoutingModule {}
+export class ChaAdminMainLeagueRoutingModule {}
