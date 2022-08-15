@@ -2,10 +2,6 @@
   "name": "cha-hockey",
   "version": "0.0.0",
   "license": "MIT",
-  "engines": {
-    "npm": "8.15.1",
-    "node": "16.14.2"
-  },
   "scripts": {
     "ng": "nx",
     "start:server:prod": "node dist/apps/cha-server/main",

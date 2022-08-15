@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Controller, Get, NotFoundException } from '@nestjs/common';
 import { AwardsService } from '../services';
 
 @Controller('awards')
