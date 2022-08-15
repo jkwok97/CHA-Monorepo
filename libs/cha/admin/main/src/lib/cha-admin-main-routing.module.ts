@@ -33,6 +33,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaAdminMainPlayerMgmtModule
           ),
       },
+      {
+        path: 'draft',
+        loadChildren: () =>
+          import('@cha/admin/main-draft-mgmt').then(
+            (mod) => mod.ChaAdminMainDraftMgmtModule
+          ),
+      },
     ],
   },
 ];
