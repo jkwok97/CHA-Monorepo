@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'cha-admin-draft-mgmt-table',
@@ -6,8 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./draft-mgmt-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DraftMgmtTableComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class DraftMgmtTableComponent {}
