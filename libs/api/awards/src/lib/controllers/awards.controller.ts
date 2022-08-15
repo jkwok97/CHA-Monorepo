@@ -12,14 +12,14 @@ import { AwardsService } from '../services';
 export class AwardsController {
   constructor(private awardsService: AwardsService) {}
 
-  @Get()
-  getAllAwardWinners() {
-    console.log('in awards controller');
-    return 'awards';
-  }
+  // @Get()
+  // getAllAwardWinners() {
+  //   console.log('in awards controller');
+  //   return 'awards';
+  // }
 
-  @Get('/winners/:id')
-  getAwardWinnersById() {}
+  // @Get('/winners/:id')
+  // getAwardWinnersById() {}
 
   @Get('/champions')
   async getChampions() {
@@ -91,24 +91,24 @@ export class AwardsController {
     return season;
   }
 
-  @Get('/player/:id')
-  getPlayerAwardsByPlayerId() {}
+  // @Get('/player/:id')
+  // getPlayerAwardsByPlayerId() {}
 
-  @Get('/goalie/:id')
-  getGoalieAwardsByPlayerId() {}
+  // @Get('/goalie/:id')
+  // getGoalieAwardsByPlayerId() {}
 
-  @Get('/user/:id')
-  getTeamAwardsByUserId() {}
+  // @Get('/user/:id')
+  // getTeamAwardsByUserId() {}
 
-  @Get('/award-types')
-  getAwardTypes() {}
+  // @Get('/award-types')
+  // getAwardTypes() {}
 
-  @Post('/add')
-  addAwardWinner() {}
+  // @Post('/add')
+  // addAwardWinner() {}
 
-  @Put('/winners/:id')
-  editAwardWinnerById() {}
+  // @Put('/winners/:id')
+  // editAwardWinnerById() {}
 
-  @Delete('/winners/:id')
-  deleteAwardWinnerById() {}
+  // @Delete('/winners/:id')
+  // deleteAwardWinnerById() {}
 }
