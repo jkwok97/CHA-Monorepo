@@ -89,6 +89,9 @@
       "@cha/admin/player-mgmt-salaries": [
         "libs/cha/admin/player-mgmt-salaries/src/index.ts"
       ],
+      "@cha/admin/schedule-games": [
+        "libs/cha/admin/schedule-games/src/index.ts"
+      ],
       "@cha/admin/transactions-trades": [
         "libs/cha/admin/transactions-trades/src/index.ts"
       ],

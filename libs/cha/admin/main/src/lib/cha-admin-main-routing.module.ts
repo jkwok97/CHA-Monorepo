@@ -47,6 +47,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaAdminMainTransactionsModule
           ),
       },
+      {
+        path: 'schedule',
+        loadChildren: () =>
+          import('@cha/admin/main-schedule').then(
+            (mod) => mod.ChaAdminMainScheduleModule
+          ),
+      },
     ],
   },
 ];

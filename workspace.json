@@ -48,6 +48,7 @@
     "cha-admin-player-mgmt-player-current": "libs/cha/admin/player-mgmt-player-current",
     "cha-admin-player-mgmt-ratings": "libs/cha/admin/player-mgmt-ratings",
     "cha-admin-player-mgmt-salaries": "libs/cha/admin/player-mgmt-salaries",
+    "cha-admin-schedule-games": "libs/cha/admin/schedule-games",
     "cha-admin-transactions-trades": "libs/cha/admin/transactions-trades",
     "cha-admin-transactions-waivers": "libs/cha/admin/transactions-waivers",
     "cha-domain-app-config": "libs/cha/domain/app-config",
