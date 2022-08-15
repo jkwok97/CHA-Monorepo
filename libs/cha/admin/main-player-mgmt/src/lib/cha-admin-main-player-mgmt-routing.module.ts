@@ -29,22 +29,22 @@ const ROUTES: Route[] = [
       {
         path: 'ratings',
         loadChildren: () =>
-          import('@cha/admin/league-awards').then(
-            (mod) => mod.ChaAdminLeagueAwardsModule
+          import('@cha/admin/player-mgmt-ratings').then(
+            (mod) => mod.ChaAdminPlayerMgmtRatingsModule
           ),
       },
       {
         path: 'players-current',
         loadChildren: () =>
-          import('@cha/admin/league-awards').then(
-            (mod) => mod.ChaAdminLeagueAwardsModule
+          import('@cha/admin/player-mgmt-player-current').then(
+            (mod) => mod.ChaAdminPlayerMgmtPlayerCurrentModule
           ),
       },
       {
         path: 'goalies-current',
         loadChildren: () =>
-          import('@cha/admin/league-awards').then(
-            (mod) => mod.ChaAdminLeagueAwardsModule
+          import('@cha/admin/player-mgmt-goalie-current').then(
+            (mod) => mod.ChaAdminPlayerMgmtGoalieCurrentModule
           ),
       },
     ],
