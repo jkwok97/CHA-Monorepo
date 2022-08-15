@@ -6,6 +6,9 @@
     "types": [],
     "target": "es6"
   },
-  "include": ["**/*.ts", "../../cha/shared/entities/src/lib/entities/user/index.ts"],
+  "include": [
+    "**/*.ts",
+    "../../cha/shared/entities/src/lib/entities/user/index.ts"
+  ],
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
