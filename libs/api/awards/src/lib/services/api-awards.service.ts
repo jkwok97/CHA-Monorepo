@@ -33,9 +33,15 @@ export class ApiAwardsService {
       .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_stats_v2.player_id')
-      .where('players_stats_v2.playing_year = awards_v2.cha_season')
-      .where('players_stats_v2.season_type = :season_type', {
-        season_type: 'Regular',
+      .where((qb) => {
+        const subQuery = qb
+          .subQuery()
+          .select('player_stats_v2.*')
+          .where('players_stats_v2.playing_year = awards_v2.cha_season')
+          .andWhere('players_stats_v2.season_type = :season_type', {
+            season_type: 'Regular',
+          });
+        return subQuery;
       })
       .orderBy('awards_v2.display_season', 'DESC')
       .getMany();
