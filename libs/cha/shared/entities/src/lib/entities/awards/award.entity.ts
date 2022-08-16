@@ -22,15 +22,6 @@ export class Awards_V2 {
   @Column()
   cha_season!: string;
 
-  // @Column()
-  // team_id!: number;
-
-  // @Column()
-  // users_id!: number;
-
-  // @Column()
-  // player_id!: number;
-
   @Column()
   award_type!: number;
 
@@ -42,8 +33,10 @@ export class Awards_V2 {
   users!: Users_V2;
 
   @ManyToOne(() => Teams_V2, (team) => team.id)
+  @JoinColumn({ name: 'team_id' })
   team!: Teams_V2;
 
   @ManyToOne(() => Players_V2, (player) => player.id)
+  @JoinColumn({ name: 'player_id' })
   player!: Players_V2;
 }
