@@ -46,10 +46,10 @@ export class ApiAwardsService {
         'players_stats_v2.assists',
         'players_stats_v2.points',
       ])
-      .where('award_type_v2.id = :award_type', {
-        award_type: AwardTypeEnum.SCORER,
-      })
-      .andWhere('players_stats_v2.season_type = :season_type', {
+      // .where('award_type_v2.id = :award_type', {
+      //   award_type: AwardTypeEnum.SCORER,
+      // })
+      .where('players_stats_v2.season_type = :season_type', {
         season_type: 'Regular',
       })
       .orderBy('awards_v2.display_season', 'DESC')
