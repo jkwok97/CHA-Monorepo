@@ -25,7 +25,7 @@ export class ApiAwardsService {
       .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_stats_v2.player_id')
       .where('players_stats_v2.playing_year = awards_v2.cha_season')
-      .where('awards_v2.award_type = :award_type')
+      .where('award_type_v2.award_type = :award_type')
       .setParameter('award_type', 'scorer')
       .where('players_stats_v2.season_type = :season_type')
       .setParameter('season_type', 'Regular')
