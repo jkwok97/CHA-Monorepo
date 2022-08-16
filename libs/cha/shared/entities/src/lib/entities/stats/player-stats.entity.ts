@@ -4,6 +4,7 @@ import {
   Column,
   OneToOne,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Awards_V2 } from '../awards';
 import { Players_V2 } from '../players';
@@ -15,7 +16,7 @@ export class Players_Stats_V2 {
   id!: number;
 
   @ManyToOne(() => Players_V2, (player) => player.id)
-  @Column()
+  @JoinColumn({ name: 'player_id' })
   player_id!: number;
 
   @Column()
