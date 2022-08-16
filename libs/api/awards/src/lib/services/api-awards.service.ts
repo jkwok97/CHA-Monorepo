@@ -31,8 +31,7 @@ export class ApiAwardsService {
       .leftJoinAndSelect(
         Award_Type_V2,
         'award_type_v2',
-        'award_type_v2.id = :award_type',
-        { award_type: AwardTypeEnum.SCORER }
+        'award_type_v2.id = awards_v2.award_type'
       )
       .leftJoinAndSelect('awards_v2.team_id', 'teams_v2.id')
       .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
