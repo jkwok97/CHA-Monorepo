@@ -1,4 +1,8 @@
-import { Awards_V2, AwardTypeEnum } from '@cha/shared/entities';
+import {
+  Awards_V2,
+  AwardTypeEnum,
+  Players_Stats_V2,
+} from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -36,7 +40,8 @@ export class ApiAwardsService {
       .where((qb) => {
         const subQuery = qb
           .subQuery()
-          .select('player_stats_v2.*')
+          .select('players_stats_v2.*')
+          .from(Players_Stats_V2, 'players_stats_v2')
           .where('players_stats_v2.playing_year = awards_v2.cha_season')
           .andWhere('players_stats_v2.season_type = :season_type', {
             season_type: 'Regular',
