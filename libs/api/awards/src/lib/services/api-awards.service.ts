@@ -11,8 +11,12 @@ export class ApiAwardsService {
 
   async getChampions(): Promise<Awards_V2[]> {
     return await this.repo.find({
-      relations: ['users_id', 'team_id'],
-      where: { award_type: AwardTypeEnum.CHAMPION },
+      relations: ['users_id', 'team_id', 'award_type'],
+      where: {
+        award_type: {
+          id: AwardTypeEnum.CHAMPION,
+        },
+      },
     });
   }
 
@@ -44,35 +48,55 @@ export class ApiAwardsService {
   async getDefenseAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
       relations: ['users_id', 'team_id', 'player_id'],
-      where: { award_type: AwardTypeEnum.DEFENSE },
+      where: {
+        award_type: {
+          id: AwardTypeEnum.DEFENSE,
+        },
+      },
     });
   }
 
   async getRookieAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
       relations: ['users_id', 'team_id', 'player_id'],
-      where: { award_type: AwardTypeEnum.ROOKIE },
+      where: {
+        award_type: {
+          id: AwardTypeEnum.ROOKIE,
+        },
+      },
     });
   }
 
   async getGoalieAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
       relations: ['users_id', 'team_id', 'player_id'],
-      where: { award_type: AwardTypeEnum.GOALIE },
+      where: {
+        award_type: {
+          id: AwardTypeEnum.GOALIE,
+        },
+      },
     });
   }
 
   async getGmAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
       relations: ['users_id', 'team_id'],
-      where: { award_type: AwardTypeEnum.GM },
+      where: {
+        award_type: {
+          id: AwardTypeEnum.GM,
+        },
+      },
     });
   }
 
   async getSeasonAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
       relations: ['users_id', 'team_id'],
-      where: { award_type: AwardTypeEnum.SEASON },
+      where: {
+        award_type: {
+          id: AwardTypeEnum.SEASON,
+        },
+      },
     });
   }
 }
