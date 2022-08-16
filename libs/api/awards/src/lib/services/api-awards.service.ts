@@ -10,16 +10,12 @@ export class ApiAwardsService {
   ) {}
 
   async getChampions(): Promise<Awards_V2[]> {
-    await this.repo
-      .find({
-        relations: ['users_id', 'team_id', 'player_id'],
-        where: { award_type: AwardTypeEnum.CHAMPION },
-      })
-      .then((result) => {
-        console.log(result);
-      });
+    return await this.repo.find({
+      relations: ['users_id', 'team_id', 'player_id'],
+      where: { award_type: AwardTypeEnum.CHAMPION },
+    });
 
-    return await this.repo.findBy({ award_type: AwardTypeEnum.CHAMPION });
+    // return await this.repo.findBy({ award_type: AwardTypeEnum.CHAMPION });
   }
 
   async getScorerAwards(): Promise<Awards_V2[]> {
