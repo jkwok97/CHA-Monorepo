@@ -1,4 +1,4 @@
-import { Awards_V2, AwardTypeEnum } from '@cha/shared/entities';
+import { AwardDto, Awards_V2, AwardTypeEnum } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -10,6 +10,12 @@ export class ApiAwardsService {
   ) {}
 
   async getChampions(): Promise<Awards_V2[]> {
+    console.log(
+      this.repo.find({
+        relations: ['users_id', 'team_id', 'player_id'],
+        where: { award_type: AwardTypeEnum.CHAMPION },
+      })
+    );
     return await this.repo.findBy({ award_type: AwardTypeEnum.CHAMPION });
   }
 
