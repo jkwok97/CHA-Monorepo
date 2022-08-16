@@ -29,7 +29,8 @@ export class ApiAwardsService {
       .setParameter('award_type', 'scorer')
       .where('players_stats_v2.season_type = :season_type')
       .setParameter('season_type', 'Regular')
-      .orderBy('awards_v2.display_season', 'DESC');
+      .orderBy('awards_v2.display_season', 'DESC')
+      .getMany();
 
     // return await this.repo.find({
     //   relations: ['users_id', 'team_id', 'player_id'],
