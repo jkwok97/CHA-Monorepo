@@ -32,7 +32,8 @@ export class ApiAwardsService {
       .leftJoinAndSelect('awards_v2.team_id', 'teams')
       .leftJoinAndSelect('awards_v2.users_id', 'users')
       .leftJoinAndSelect('awards_v2.player_id', 'players')
-      .andWhere('awards_v2.award_type = :award_type', {
+      .leftJoinAndSelect(Players_Stats_V2, 'playerStats', 'playerStats.player_id = awards_v2.player_id')
+      .where('awards_v2.award_type = :award_type', {
         award_type: AwardTypeEnum.SCORER,
       })
       .orderBy('awards_v2.display_season', 'DESC')
