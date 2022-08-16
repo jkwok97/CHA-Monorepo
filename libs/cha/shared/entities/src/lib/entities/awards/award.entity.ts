@@ -5,7 +5,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { AwardTypeEnum } from '../../enums';
 import { Players_V2 } from '../players/player.entity';
 import { Teams_V2 } from '../teams';
 import { Users_V2 } from '../user';
@@ -22,7 +21,7 @@ export class Awards_V2 {
   cha_season!: string;
 
   @Column()
-  award_type!: AwardTypeEnum;
+  award_type!: number;
 
   @ManyToOne(() => Users_V2, (user) => user.id)
   @JoinColumn({ name: 'users_id' })
