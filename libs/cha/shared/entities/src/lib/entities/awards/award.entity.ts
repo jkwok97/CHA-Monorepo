@@ -5,6 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToOne,
+  Unique,
 } from 'typeorm';
 import { Players_V2 } from '../players/player.entity';
 import { Players_Stats_V2 } from '../stats';
@@ -37,7 +38,6 @@ export class Awards_V2 {
   team_id!: Teams_V2;
 
   @ManyToOne(() => Players_V2, (player) => player.id)
-  @OneToOne(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   @JoinColumn({ name: 'player_id' })
   player_id!: Players_V2;
 }
