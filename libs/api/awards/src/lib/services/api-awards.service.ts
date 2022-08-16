@@ -19,7 +19,7 @@ export class ApiAwardsService {
   async getScorerAwards() {
     return await this.repo
       .createQueryBuilder('awards_v2')
-      .leftJoinAndSelect('awards_v2.award_type', 'award_type_v2.award_type')
+      .leftJoinAndSelect('awards_v2.award_type', 'award_type_v2.id')
       .leftJoinAndSelect('awards_v2.team_id', 'teams_v2.id')
       .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
