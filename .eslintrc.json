@@ -21,8 +21,8 @@
                 "onlyDependOnLibsWithTags": ["api:core", "api:module", "shared"]
               },
               {
-                "sourceTag": "app:core",
-                "onlyDependOnLibsWithTags": ["api:module", "shared", "domain"]
+                "sourceTag": "api:core",
+                "onlyDependOnLibsWithTags": ["api:module", "shared"]
               },
               {
                 "sourceTag": "app:angular",

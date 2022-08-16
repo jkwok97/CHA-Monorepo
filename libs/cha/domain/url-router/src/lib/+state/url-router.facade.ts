@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AppRoute, RouterState } from '@cha/shared/entities';
 import { Store } from '@ngrx/store';
+import { AppRoute, RouterState } from '../models';
 import { urlRouterActions } from './url-router.actions';
 
 @Injectable()

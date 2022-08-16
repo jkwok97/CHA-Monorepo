@@ -1,21 +1,22 @@
+import { Awards_V2 } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException } from '@nestjs/common';
-import { AwardsService } from '../services';
+import { ApiAwardsService } from '../services/api-awards.service';
 
 @Controller('awards')
 export class AwardsController {
-  constructor(private awardsService: AwardsService) {}
+  constructor(private awardsService: ApiAwardsService) {}
 
-  // @Get()
-  // getAllAwardWinners() {
-  //   console.log('in awards controller');
-  //   return 'awards';
-  // }
+  @Get()
+  getAllAwardWinners() {
+    console.log('in awards controller');
+    return 'awards';
+  }
 
   // @Get('/winners/:id')
   // getAwardWinnersById() {}
 
   @Get('/champions')
-  async getChampions() {
+  async getChampions(): Promise<Awards_V2[]> {
     const champions = await this.awardsService.getChampions();
 
     if (!champions || champions.length < 1) {
@@ -25,7 +26,7 @@ export class AwardsController {
   }
 
   @Get('/scorers')
-  async getScorerAwards() {
+  async getScorerAwards(): Promise<Awards_V2[]> {
     const scorers = await this.awardsService.getScorerAwards();
 
     if (!scorers || scorers.length < 1) {
@@ -35,7 +36,7 @@ export class AwardsController {
   }
 
   @Get('/defense')
-  async getDefenseAwards() {
+  async getDefenseAwards(): Promise<Awards_V2[]> {
     const defense = await this.awardsService.getDefenseAwards();
 
     if (!defense || defense.length < 1) {
@@ -45,7 +46,7 @@ export class AwardsController {
   }
 
   @Get('/rookies')
-  async getRookieAwards() {
+  async getRookieAwards(): Promise<Awards_V2[]> {
     const rookies = await this.awardsService.getRookieAwards();
 
     if (!rookies || rookies.length < 1) {
@@ -55,7 +56,7 @@ export class AwardsController {
   }
 
   @Get('/goalies')
-  async getGoalieAwards() {
+  async getGoalieAwards(): Promise<Awards_V2[]> {
     const goalies = await this.awardsService.getGoalieAwards();
 
     if (!goalies || goalies.length < 1) {
@@ -65,7 +66,7 @@ export class AwardsController {
   }
 
   @Get('/gm')
-  async getGmAwards() {
+  async getGmAwards(): Promise<Awards_V2[]> {
     const gms = await this.awardsService.getGmAwards();
 
     if (!gms || gms.length < 1) {
@@ -75,7 +76,7 @@ export class AwardsController {
   }
 
   @Get('/season')
-  async getSeasonAwards() {
+  async getSeasonAwards(): Promise<Awards_V2[]> {
     const season = await this.awardsService.getSeasonAwards();
 
     if (!season || season.length < 1) {

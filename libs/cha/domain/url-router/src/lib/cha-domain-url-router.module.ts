@@ -1,6 +1,5 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { UrlRouterCustomSerializer } from '@cha/shared/entities';
-import { EffectsModule } from '@ngrx/effects';
+ import { EffectsModule } from '@ngrx/effects';
 import {
   routerReducer,
   StoreRouterConnectingModule,
@@ -8,6 +7,7 @@ import {
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { UrlRouterEffects } from './+state/url-router.effects';
+import { UrlRouterCustomSerializer } from './models';
 import { UrlRouterService } from './services';
 
 @NgModule({

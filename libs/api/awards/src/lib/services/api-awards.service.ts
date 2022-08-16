@@ -1,11 +1,10 @@
+import { Awards_V2, AwardTypeEnum } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Awards_V2, AwardTypeEnum } from '@cha/shared/entities';
-
 @Injectable()
-export class AwardsService {
+export class ApiAwardsService {
   constructor(
     @InjectRepository(Awards_V2) private repo: Repository<Awards_V2>
   ) {}
