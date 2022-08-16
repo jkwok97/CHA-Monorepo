@@ -157,6 +157,7 @@ export class Players_Stats_V2 {
   @Column()
   penalty_gross_misconduct!: number;
 
+  @OneToOne(() => Awards_V2, (award) => award.cha_season)
   @Column()
   playing_year!: string;
 
