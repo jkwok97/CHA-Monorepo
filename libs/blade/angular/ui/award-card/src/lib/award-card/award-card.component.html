@@ -1,29 +1,32 @@
-<div class="award-card" [style.background-color]="getColor(award.teamcolor)">
-  <div class="award-card-header">
+<div
+  class="award-card"
+  [style.background-color]="getColor(award.team_id.teamcolor)"
+>
+  <!-- <div class="award-card-header">
     <div class="award-card-header-avatar">
       <ng-container
         *ngIf="
-          award.awardTypeId === AwardTypeEnum.CHAMPION ||
-          award.awardTypeId === AwardTypeEnum.GM ||
-          award.awardTypeId === AwardTypeEnum.SEASON
+          award.award_type === AwardTypeEnum.CHAMPION ||
+          award.award_type === AwardTypeEnum.GM ||
+          award.award_type === AwardTypeEnum.SEASON
         "
       >
         <p-avatar
-          [image]="getString(award.teamlogo)"
+          [image]="getString(award.team_id.teamlogo)"
           size="xlarge"
           shape="square"
         ></p-avatar>
       </ng-container>
 
       <ng-container
-        *ngIf="award.awardTypeId !== AwardTypeEnum.CHAMPION && award.nhl_id"
+        *ngIf="award.award_type !== AwardTypeEnum.CHAMPION && award.player_id?.nhl_id"
       >
         <p-avatar
-          [image]="getPlayerPicture(award.nhl_id)"
+          [image]="getPlayerPicture(award.player_id?.nhl_id)"
           size="xlarge"
           shape="circle"
         ></p-avatar>
-        <p-avatar [image]="getString(award.teamlogo)" shape="square"></p-avatar>
+        <p-avatar [image]="getString(award.team_id.teamlogo)" shape="square"></p-avatar>
       </ng-container>
     </div>
 
@@ -31,68 +34,68 @@
       <div class="award-card-header-content-title">
         <ng-container
           *ngIf="
-            award.awardTypeId === AwardTypeEnum.CHAMPION ||
-            award.awardTypeId === AwardTypeEnum.GM ||
-            award.awardTypeId === AwardTypeEnum.SEASON
+            award.award_type === AwardTypeEnum.CHAMPION ||
+            award.award_type === AwardTypeEnum.GM ||
+            award.award_type === AwardTypeEnum.SEASON
           "
         >
-          {{ award.display_season }} - {{ award.city }} {{ award.nickname }}
+          {{ award.display_season }} - {{ award.team_id.city }} {{ award.team_id.nickname }}
         </ng-container>
         <ng-container
           *ngIf="
-            award.awardTypeId !== AwardTypeEnum.CHAMPION &&
-            award.awardTypeId !== AwardTypeEnum.GM &&
-            award.awardTypeId !== AwardTypeEnum.SEASON
+            award.award_type !== AwardTypeEnum.CHAMPION &&
+            award.award_type !== AwardTypeEnum.GM &&
+            award.award_type !== AwardTypeEnum.SEASON
           "
         >
-          {{ award.display_season }} - {{ award.playerFirst }}
-          {{ award.playerLast }}
+          {{ award.display_season }} - {{ award.users_id.firstname }}
+          {{ award.users_id.firstname }}
         </ng-container>
       </div>
 
       <div
         class="award-card-header-content-description"
         *ngIf="
-          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
-          award.awardTypeId !== AwardTypeEnum.GM &&
-          award.awardTypeId !== AwardTypeEnum.SEASON
+          award.award_type !== AwardTypeEnum.CHAMPION &&
+          award.award_type !== AwardTypeEnum.GM &&
+          award.award_type !== AwardTypeEnum.SEASON
         "
       >
-        {{ award.city }} {{ award.nickname }}
+        {{ award.team_id.city }} {{ award.team_id.nickname }}
       </div>
 
       <div class="award-card-header-content-description">
         <ng-container
           *ngIf="
-            award.awardTypeId === AwardTypeEnum.CHAMPION ||
-            award.awardTypeId === AwardTypeEnum.GM ||
-            award.awardTypeId === AwardTypeEnum.SEASON
+            award.award_type === AwardTypeEnum.CHAMPION ||
+            award.award_type === AwardTypeEnum.GM ||
+            award.award_type === AwardTypeEnum.SEASON
           "
         >
-          Owner: {{ award.ownerFirst }} {{ award.ownerLast }}
+          Owner: {{ award.users_id.firstname }} {{ award.users_id.lastname }}
         </ng-container>
       </div>
 
       <div
         class="award-card-header-content-divider"
         *ngIf="
-          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
-          award.awardTypeId !== AwardTypeEnum.GM
+          award.award_type !== AwardTypeEnum.CHAMPION &&
+          award.award_type !== AwardTypeEnum.GM
         "
       ></div>
 
       <div
         class="award-card-header-content-description"
         *ngIf="
-          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
-          award.awardTypeId !== AwardTypeEnum.GOALIE &&
-          award.nhl_id
+          award.award_type !== AwardTypeEnum.CHAMPION &&
+          award.award_type !== AwardTypeEnum.GOALIE &&
+          award.player_id?.nhl_id
         "
       >
         <p>
           Games Played:
           <span class="award-card-header-content-description-stat">{{
-            award.games_played
+            award.player_id.games_played
           }}</span>
         </p>
         <p>
@@ -118,8 +121,8 @@
       <div
         class="award-card-header-content-description"
         *ngIf="
-          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
-          award.awardTypeId === AwardTypeEnum.GOALIE &&
+          award.award_type !== AwardTypeEnum.CHAMPION &&
+          award.award_type === AwardTypeEnum.GOALIE &&
           award.nhl_id
         "
       >
@@ -152,8 +155,8 @@
       <div
         class="award-card-header-content-description"
         *ngIf="
-          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
-          award.awardTypeId === AwardTypeEnum.SEASON
+          award.award_type !== AwardTypeEnum.CHAMPION &&
+          award.award_type === AwardTypeEnum.SEASON
         "
       >
         <p>
@@ -182,5 +185,5 @@
         </p>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

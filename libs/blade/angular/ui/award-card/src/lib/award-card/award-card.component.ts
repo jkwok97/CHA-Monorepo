@@ -14,7 +14,7 @@ import { AwardDto, AwardTypeEnum } from '@cha/shared/entities';
   styleUrls: ['./award-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AwardCardComponent {
+export class BladeAwardCardComponent {
   @Input()
   award!: AwardDto;
 
@@ -30,7 +30,7 @@ export class AwardCardComponent {
     return `${color}95`;
   }
 
-  getPlayerPicture(id: number) {
+  getPlayerPicture(id: string | undefined) {
     return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
   }
 }
