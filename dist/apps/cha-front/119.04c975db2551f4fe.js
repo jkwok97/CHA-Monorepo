@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkcha_front=self.webpackChunkcha_front||[]).push([[119],{119:(c,a,o)=>{o.r(a),o.d(a,{ChaFrontMainNhlModule:()=>l});var h=o(6895),t=o(4650);let l=(()=>{class n{}return n.\u0275fac=function(r){return new(r||n)},n.\u0275mod=t.oAB({type:n}),n.\u0275inj=t.cJS({imports:[h.ez]}),n})()}}]);
