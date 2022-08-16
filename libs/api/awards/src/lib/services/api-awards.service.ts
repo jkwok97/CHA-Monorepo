@@ -35,14 +35,8 @@ export class ApiAwardsService {
       .leftJoinAndSelect(
         Players_Stats_V2,
         'playerStats',
-        'playerStats.player_id = players.id'
+        'playerStats.player_id = awards_v2.player_id'
       )
-      .addSelect((subQuery) => {
-        return subQuery
-          .select('playerStats.games_played', 'games_played')
-          .from(Players_Stats_V2, 'playerStats')
-          .where('playerStats.player_id = players.id');
-      })
       .where('awards_v2.award_type = :award_type', {
         award_type: AwardTypeEnum.SCORER,
       })
