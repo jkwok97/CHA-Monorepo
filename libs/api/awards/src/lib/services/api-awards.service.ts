@@ -28,18 +28,10 @@ export class ApiAwardsService {
   async getScorerAwards() {
     return await this.repo
       .createQueryBuilder('awards_v2')
-      .leftJoinAndSelect('awards_v2.award_type', 'award_type_v2.id')
-      .leftJoinAndSelect('awards_v2.team_id', 'teams_v2.id')
-      .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
-      .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
-      .leftJoinAndSelect(
-        Players_Stats_V2,
-        'players_stats_v2',
-        'players_v2.id = players_stats_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
-      )
-      .where('players_stats_v2.season_type = :season_type', {
-        season_type: 'Regular',
-      })
+      .leftJoinAndSelect('awards_v2.award_type', 'award_type')
+      .leftJoinAndSelect('awards_v2.team_id', 'teams')
+      .leftJoinAndSelect('awards_v2.users_id', 'users')
+      .leftJoinAndSelect('awards_v2.player_id', 'players')
       .andWhere('awards_v2.award_type = :award_type', {
         award_type: AwardTypeEnum.SCORER,
       })
