@@ -36,14 +36,17 @@ export class ApiAwardsService {
       .leftJoinAndSelect(
         Players_Stats_V2,
         'players_stats_v2',
-        'awards_v2.player_id.id = players_stats_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
+        'players_v2.id = players_stats_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
       )
-      // .addSelect([
-      //   'players_stats_v2.games_played',
-      //   'players_stats_v2.goals',
-      //   'players_stats_v2.assists',
-      //   'players_stats_v2.points',
-      // ])
+      .addSelect([
+        'players_v2.firstname',
+        'players_v2.lastname',
+        'players_v2.nhl_id',
+        'players_stats_v2.games_played',
+        'players_stats_v2.goals',
+        'players_stats_v2.assists',
+        'players_stats_v2.points',
+      ])
       // .where('players_stats_v2.season_type = :season_type', {
       //   season_type: 'Regular',
       // })
