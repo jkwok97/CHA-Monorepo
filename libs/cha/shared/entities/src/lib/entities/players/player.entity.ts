@@ -7,9 +7,7 @@ import {
   AfterUpdate,
   AfterRemove,
   OneToOne,
-  JoinColumn,
 } from 'typeorm';
-import { Awards_V2 } from '../awards';
 import { Drafts_V2 } from '../draft';
 import { Goalie_Ratings_V2, Player_Ratings_V2 } from '../ratings';
 import { Salaries_V2 } from '../salaries';
@@ -18,6 +16,7 @@ import { Goalies_Stats_V2, Players_Stats_V2 } from '../stats';
 @Entity()
 export class Players_V2 {
   @PrimaryGeneratedColumn()
+  @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   id!: number;
 
   @Column()
@@ -58,9 +57,6 @@ export class Players_V2 {
 
   @OneToMany(() => Goalies_Stats_V2, (goalieStats) => goalieStats.player_id)
   goalieStats!: Goalies_Stats_V2;
-
-  @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
-  playerStats!: Players_Stats_V2;
 
   @AfterInsert()
   logInsert() {

@@ -32,7 +32,7 @@ export class ApiAwardsService {
       .leftJoinAndSelect('awards_v2.team_id', 'teams_v2.id')
       .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
-      .leftJoinAndSelect('awards_v2.player_id', 'players_stats_v2.player_id')
+      .leftJoinAndSelect('players_v2.id', 'players_stats_v2.player_id')
       // .leftJoinAndSelect(
       //   Players_Stats_V2,
       //   'players_stats_v2',

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne } from 'typeorm';
+import { Players_V2 } from '../players';
 import { Teams_V2 } from '../teams';
 
 @Entity()
@@ -158,4 +159,7 @@ export class Players_Stats_V2 {
 
   @OneToOne(() => Teams_V2, (team) => team.shortname)
   team!: Teams_V2;
+
+  @ManyToOne(() => Players_V2, (player) => player.id)
+  playerStats!: Players_Stats_V2;
 }
