@@ -49,9 +49,9 @@ export class ApiAwardsService {
       // .where('award_type_v2.id = :award_type', {
       //   award_type: AwardTypeEnum.SCORER,
       // })
-      .where('players_stats_v2.season_type = :season_type', {
-        season_type: 'Regular',
-      })
+      // .where('players_stats_v2.season_type = :season_type', {
+      //   season_type: 'Regular',
+      // })
       .orderBy('awards_v2.display_season', 'DESC')
       .getMany();
 
