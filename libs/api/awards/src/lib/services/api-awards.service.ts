@@ -6,7 +6,7 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { createQueryBuilder, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiAwardsService {
@@ -37,6 +37,12 @@ export class ApiAwardsService {
         'playerStats',
         'playerStats.player_id = players.id'
       )
+      .addSelect((subQuery) => {
+        return subQuery
+          .select('playerStats.games_played', 'games_played')
+          .from(Players_Stats_V2, 'playerStats')
+          .where('playerStats.player_id = players.id');
+      })
       .where('awards_v2.award_type = :award_type', {
         award_type: AwardTypeEnum.SCORER,
       })
