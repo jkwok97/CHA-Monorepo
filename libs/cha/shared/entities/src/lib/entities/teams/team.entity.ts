@@ -45,10 +45,6 @@ export class Teams_V2 {
   @Column()
   divisions_id!: number;
 
-  @OneToMany(() => Awards_V2, (award) => award.id)
-  @JoinColumn({ name: 'team_id' })
-  award!: Awards_V2;
-
   @AfterInsert()
   logInsert() {
     console.log('Inserted Team with id', this.id);

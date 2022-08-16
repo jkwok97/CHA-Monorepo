@@ -62,10 +62,6 @@ export class Players_V2 {
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   playerStats!: Players_Stats_V2;
 
-  @OneToMany(() => Awards_V2, (award) => award.id)
-  @JoinColumn({ name: 'player_id' })
-  award!: Awards_V2;
-
   @AfterInsert()
   logInsert() {
     console.log('Inserted Player with id', this.id);
