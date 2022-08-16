@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  ManyToOne,
+} from 'typeorm';
+import { Awards_V2 } from '../awards';
 import { Players_V2 } from '../players';
 import { Teams_V2 } from '../teams';
 
@@ -7,6 +14,8 @@ export class Players_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @ManyToOne(() => Players_V2, (player) => player.id)
+  @OneToOne(() => Awards_V2, (award) => award.player_id)
   @Column()
   player_id!: number;
 
@@ -159,7 +168,4 @@ export class Players_Stats_V2 {
 
   @OneToOne(() => Teams_V2, (team) => team.shortname)
   team!: Teams_V2;
-
-  @ManyToOne(() => Players_V2, (player) => player.id)
-  playerStats!: Players_Stats_V2;
 }
