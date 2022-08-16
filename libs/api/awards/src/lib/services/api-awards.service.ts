@@ -32,19 +32,22 @@ export class ApiAwardsService {
       .leftJoinAndSelect('awards_v2.team_id', 'teams_v2.id')
       .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
-      .innerJoin(
-        Players_Stats_V2,
-        'players_stats_v2',
-        'players_stats_v2.player_id = awards_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
-      )
-      .addSelect([
-        'players_stats_v2.games_played',
-        'players_stats_v2.goals',
-        'players_stats_v2.assists',
-        'players_stats_v2.points',
-      ])
-      .where('players_stats_v2.season_type = :season_type', {
-        season_type: 'Regular',
+      // .innerJoin(
+      //   Players_Stats_V2,
+      //   'players_stats_v2',
+      //   'players_stats_v2.player_id = awards_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
+      // )
+      // .addSelect([
+      //   'players_stats_v2.games_played',
+      //   'players_stats_v2.goals',
+      //   'players_stats_v2.assists',
+      //   'players_stats_v2.points',
+      // ])
+      // .where('players_stats_v2.season_type = :season_type', {
+      //   season_type: 'Regular',
+      // })
+      .where('awards_v2.award_type = :award_type', {
+        award_type: AwardTypeEnum.SCORER,
       })
       .orderBy('awards_v2.display_season', 'DESC')
       .getMany();
