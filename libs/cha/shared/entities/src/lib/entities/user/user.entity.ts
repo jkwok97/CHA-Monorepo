@@ -6,7 +6,9 @@ import {
   AfterRemove,
   AfterUpdate,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
+import { Awards_V2 } from '../awards';
 import { Teams_V2 } from '../teams';
 
 @Entity()
@@ -28,6 +30,10 @@ export class Users_V2 {
 
   @Column()
   isactive!: boolean;
+
+  @OneToMany(() => Awards_V2, (award) => award.id)
+  @JoinColumn({ name: 'users_id' })
+  award!: Awards_V2;
 
   @AfterInsert()
   logInsert() {

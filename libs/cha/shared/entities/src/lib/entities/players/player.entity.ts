@@ -7,6 +7,7 @@ import {
   AfterUpdate,
   AfterRemove,
   OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Awards_V2 } from '../awards';
 import { Drafts_V2 } from '../draft';
@@ -60,6 +61,10 @@ export class Players_V2 {
 
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   playerStats!: Players_Stats_V2;
+
+  @OneToMany(() => Awards_V2, (award) => award.id)
+  @JoinColumn({ name: 'player_id' })
+  award!: Awards_V2;
 
   @AfterInsert()
   logInsert() {
