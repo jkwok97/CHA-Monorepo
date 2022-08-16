@@ -21,6 +21,7 @@
     "api-waivers": "libs/api/waivers",
     "blade-angular-formly-types-email-input": "libs/blade/angular/formly/types/email-input",
     "blade-angular-formly-wrappers-default": "libs/blade/angular/formly/wrappers/default",
+    "blade-angular-ui-award-card": "libs/blade/angular/ui/award-card",
     "blade-angular-ui-button": "libs/blade/angular/ui/button",
     "blade-angular-ui-button-toggle": "libs/blade/angular/ui/button-toggle",
     "blade-angular-ui-card": "libs/blade/angular/ui/card",

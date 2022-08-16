@@ -1,0 +1,186 @@
+<div class="award-card" [style.background-color]="getColor(award.teamcolor)">
+  <div class="award-card-header">
+    <div class="award-card-header-avatar">
+      <ng-container
+        *ngIf="
+          award.awardTypeId === AwardTypeEnum.CHAMPION ||
+          award.awardTypeId === AwardTypeEnum.GM ||
+          award.awardTypeId === AwardTypeEnum.SEASON
+        "
+      >
+        <p-avatar
+          [image]="getString(award.teamlogo)"
+          size="xlarge"
+          shape="square"
+        ></p-avatar>
+      </ng-container>
+
+      <ng-container
+        *ngIf="award.awardTypeId !== AwardTypeEnum.CHAMPION && award.nhl_id"
+      >
+        <p-avatar
+          [image]="getPlayerPicture(award.nhl_id)"
+          size="xlarge"
+          shape="circle"
+        ></p-avatar>
+        <p-avatar [image]="getString(award.teamlogo)" shape="square"></p-avatar>
+      </ng-container>
+    </div>
+
+    <div class="award-card-header-content">
+      <div class="award-card-header-content-title">
+        <ng-container
+          *ngIf="
+            award.awardTypeId === AwardTypeEnum.CHAMPION ||
+            award.awardTypeId === AwardTypeEnum.GM ||
+            award.awardTypeId === AwardTypeEnum.SEASON
+          "
+        >
+          {{ award.display_season }} - {{ award.city }} {{ award.nickname }}
+        </ng-container>
+        <ng-container
+          *ngIf="
+            award.awardTypeId !== AwardTypeEnum.CHAMPION &&
+            award.awardTypeId !== AwardTypeEnum.GM &&
+            award.awardTypeId !== AwardTypeEnum.SEASON
+          "
+        >
+          {{ award.display_season }} - {{ award.playerFirst }}
+          {{ award.playerLast }}
+        </ng-container>
+      </div>
+
+      <div
+        class="award-card-header-content-description"
+        *ngIf="
+          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
+          award.awardTypeId !== AwardTypeEnum.GM &&
+          award.awardTypeId !== AwardTypeEnum.SEASON
+        "
+      >
+        {{ award.city }} {{ award.nickname }}
+      </div>
+
+      <div class="award-card-header-content-description">
+        <ng-container
+          *ngIf="
+            award.awardTypeId === AwardTypeEnum.CHAMPION ||
+            award.awardTypeId === AwardTypeEnum.GM ||
+            award.awardTypeId === AwardTypeEnum.SEASON
+          "
+        >
+          Owner: {{ award.ownerFirst }} {{ award.ownerLast }}
+        </ng-container>
+      </div>
+
+      <div
+        class="award-card-header-content-divider"
+        *ngIf="
+          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
+          award.awardTypeId !== AwardTypeEnum.GM
+        "
+      ></div>
+
+      <div
+        class="award-card-header-content-description"
+        *ngIf="
+          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
+          award.awardTypeId !== AwardTypeEnum.GOALIE &&
+          award.nhl_id
+        "
+      >
+        <p>
+          Games Played:
+          <span class="award-card-header-content-description-stat">{{
+            award.games_played
+          }}</span>
+        </p>
+        <p>
+          Goals:
+          <span class="award-card-header-content-description-stat">{{
+            award.goals
+          }}</span>
+        </p>
+        <p>
+          Assists:
+          <span class="award-card-header-content-description-stat">{{
+            award.assists
+          }}</span>
+        </p>
+        <p>
+          Points:
+          <span class="award-card-header-content-description-stat-highlight">{{
+            award.points
+          }}</span>
+        </p>
+      </div>
+
+      <div
+        class="award-card-header-content-description"
+        *ngIf="
+          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
+          award.awardTypeId === AwardTypeEnum.GOALIE &&
+          award.nhl_id
+        "
+      >
+        <p>
+          Games Played:
+          <span class="award-card-header-content-description-stat">{{
+            award.games_played
+          }}</span>
+        </p>
+        <p>
+          Wins:
+          <span class="award-card-header-content-description-stat">{{
+            award.wins
+          }}</span>
+        </p>
+        <p>
+          GAA:
+          <span class="award-card-header-content-description-stat">{{
+            award.goals_against_avg
+          }}</span>
+        </p>
+        <p>
+          Save %:
+          <span class="award-card-header-content-description-stat">{{
+            award.save_pct
+          }}</span>
+        </p>
+      </div>
+
+      <div
+        class="award-card-header-content-description"
+        *ngIf="
+          award.awardTypeId !== AwardTypeEnum.CHAMPION &&
+          award.awardTypeId === AwardTypeEnum.SEASON
+        "
+      >
+        <p>
+          Points:
+          <span class="award-card-header-content-description-stat-highlight">{{
+            award.points
+          }}</span>
+        </p>
+        <p>
+          Wins:
+          <span class="award-card-header-content-description-stat">{{
+            award.wins
+          }}</span>
+        </p>
+        <p>
+          GF:
+          <span class="award-card-header-content-description-stat">{{
+            award.goals_for
+          }}</span>
+        </p>
+        <p>
+          GA:
+          <span class="award-card-header-content-description-stat">{{
+            award.goals_against
+          }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

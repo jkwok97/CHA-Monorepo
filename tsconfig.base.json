@@ -38,6 +38,9 @@
       "@blade/angular/formly/wrappers/default": [
         "libs/blade/angular/formly/wrappers/default/src/index.ts"
       ],
+      "@blade/angular/ui/award-card": [
+        "libs/blade/angular/ui/award-card/src/index.ts"
+      ],
       "@blade/angular/ui/button": ["libs/blade/angular/ui/button/src/index.ts"],
       "@blade/angular/ui/button-toggle": [
         "libs/blade/angular/ui/button-toggle/src/index.ts"
