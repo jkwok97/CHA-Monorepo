@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AwardDto } from '@cha/shared/entities';
+import { AwardPlayerDto, AwardTeamDto } from '@cha/shared/entities';
 
 @Injectable()
 export class AwardsService {
@@ -11,51 +11,51 @@ export class AwardsService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getAll(): Observable<AwardDto[]> {
+  // getAll(): Observable<AwardDto[]> {
+  //   return this._http
+  //     .get(`${this.apiUrl}/v2/awards`)
+  //     .pipe(map((result: any) => result['result']));
+  // }
+
+  getChampions(): Observable<AwardTeamDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/champions`)
+      .pipe(map((result: any) => result));
   }
 
-  getChampions(): Observable<AwardDto[]> {
+  getScorers(): Observable<AwardPlayerDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards/champions`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/scorers`)
+      .pipe(map((result: any) => result));
   }
 
-  getScorers(): Observable<AwardDto[]> {
+  getDefense(): Observable<AwardPlayerDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards/scorers`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/defense`)
+      .pipe(map((result: any) => result));
   }
 
-  getDefense(): Observable<AwardDto[]> {
+  getRookies(): Observable<AwardPlayerDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards/defense`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/rookies`)
+      .pipe(map((result: any) => result));
   }
 
-  getRookies(): Observable<AwardDto[]> {
+  getGoalies(): Observable<AwardPlayerDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards/rookies`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/goalies`)
+      .pipe(map((result: any) => result));
   }
 
-  getGoalies(): Observable<AwardDto[]> {
+  getGm(): Observable<AwardTeamDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards/goalies`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/gm`)
+      .pipe(map((result: any) => result));
   }
 
-  getGm(): Observable<AwardDto[]> {
+  getSeason(): Observable<AwardTeamDto[]> {
     return this._http
-      .get(`${this.apiUrl}/v2/awards/gm`)
-      .pipe(map((result: any) => result['result']));
-  }
-
-  getSeason(): Observable<AwardDto[]> {
-    return this._http
-      .get(`${this.apiUrl}/v2/awards/season`)
-      .pipe(map((result: any) => result['result']));
+      .get(`${this.apiUrl}/awards/season`)
+      .pipe(map((result: any) => result));
   }
 }
