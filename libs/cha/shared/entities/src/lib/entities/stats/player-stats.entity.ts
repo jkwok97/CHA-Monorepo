@@ -115,7 +115,7 @@ export class Players_Stats_V2 {
   blocked_shots!: number;
 
   @Column()
-  blocked_shots_per_game!: string;
+  blocked_shot_per_game!: string;
 
   @Column()
   current_points_streak!: number;
