@@ -41,6 +41,12 @@ export class ApiAwardsService {
         'players_stats_v2',
         'players_stats_v2.player_id = awards_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
       )
+      .addSelect([
+        'players_stats_v2.games_played',
+        'players_stats_v2.goals',
+        'players_stats_v2.assists',
+        'players_stats_v2.points',
+      ])
       .orderBy('awards_v2.display_season', 'DESC')
       .getMany();
 

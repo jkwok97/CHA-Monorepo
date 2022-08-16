@@ -109,7 +109,7 @@ export class Players_Stats_V2 {
   hits!: number;
 
   @Column()
-  hits_per_game!: string;
+  hit_per_game!: string;
 
   @Column()
   blocked_shots!: number;
