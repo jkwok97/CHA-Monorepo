@@ -32,11 +32,12 @@ export class ApiAwardsService {
       .leftJoinAndSelect('awards_v2.team_id', 'teams_v2.id')
       .leftJoinAndSelect('awards_v2.users_id', 'users_v2.id')
       .leftJoinAndSelect('awards_v2.player_id', 'players_v2.id')
-      .leftJoinAndSelect(
-        Players_Stats_V2,
-        'players_stats_v2',
-        'awards_v2.player_id.id = players_stats_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
-      )
+      .leftJoinAndSelect('awards_v2.player_id', 'players_stats_v2.player_id')
+      // .leftJoinAndSelect(
+      //   Players_Stats_V2,
+      //   'players_stats_v2',
+      //   'awards_v2.player_id.id = players_stats_v2.player_id and players_stats_v2.playing_year = awards_v2.cha_season'
+      // )
       // .addSelect([
       //   'players_stats_v2.games_played',
       //   'players_stats_v2.goals',
