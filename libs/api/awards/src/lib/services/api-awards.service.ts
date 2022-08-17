@@ -5,6 +5,7 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { time } from 'console';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -27,25 +28,20 @@ export class ApiAwardsService {
   }
 
   async getScorerAwards() {
-    const scorers = await this.repo
-      .find({
-        relations: ['users_id', 'team_id', 'player_id', 'award_type'],
-        where: {
-          award_type: {
-            id: AwardTypeEnum.SCORER,
-          },
+    const scorers = await this.repo.find({
+      relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+      where: {
+        award_type: {
+          id: AwardTypeEnum.SCORER,
         },
-      })
-      .then((result) => {
-        return result.map((scorer) => ({
-          ...scorer,
-          stats: this.getStats(scorer.player_id.id, scorer.cha_season),
-        }));
-      });
+      },
+    });
 
-    console.log(scorers);
+    const scorersWithStats = await this.getStats(scorers);
 
-    return scorers;
+    console.log(scorersWithStats);
+
+    return scorersWithStats;
   }
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
@@ -103,14 +99,16 @@ export class ApiAwardsService {
     });
   }
 
-  async getStats(playerId: number, chaSeason: string) {
-    console.log(playerId, chaSeason);
-    return await this.statsRepo.findOne({
-      where: {
-        player_id: playerId,
-        playing_year: chaSeason,
-        season_type: 'Regular',
-      },
-    });
+  async getStats(array: Awards_V2[]) {
+    return await array.map((item) => ({
+      ...item,
+      stats: this.statsRepo.findOne({
+        where: {
+          player_id: item.player_id.id,
+          playing_year: item.cha_season,
+          season_type: 'Regular',
+        },
+      }),
+    }));
   }
 }
