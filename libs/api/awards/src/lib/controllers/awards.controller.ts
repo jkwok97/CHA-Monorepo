@@ -26,7 +26,7 @@ export class AwardsController {
   }
 
   @Get('/scorers')
-  async getScorerAwards(): Promise<Awards_V2[]> {
+  async getScorerAwards() {
     const scorers = await this.awardsService.getScorerAwards();
 
     if (!scorers || scorers.length < 1) {

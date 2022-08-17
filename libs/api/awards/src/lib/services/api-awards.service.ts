@@ -5,7 +5,6 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { time } from 'console';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -99,10 +98,10 @@ export class ApiAwardsService {
     });
   }
 
-  async setStats(array: Awards_V2[]) {
-    return await array.map((item) => ({
+  setStats(array: Awards_V2[]) {
+    return array.map(async (item) => ({
       ...item,
-      stats: this.getStats(item.player_id.id, item.cha_season),
+      stats: await this.getStats(item.player_id.id, item.cha_season),
     }));
   }
 
