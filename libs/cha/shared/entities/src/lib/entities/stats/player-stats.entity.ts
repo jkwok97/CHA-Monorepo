@@ -16,7 +16,7 @@ export class Players_Stats_V2 {
   id!: number;
 
   @ManyToOne(() => Players_V2, (player) => player.id)
-  @JoinColumn({ name: 'player_id' })
+  @Column()
   player_id!: number;
 
   @Column()
