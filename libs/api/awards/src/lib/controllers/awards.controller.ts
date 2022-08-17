@@ -29,10 +29,10 @@ export class AwardsController {
   async getScorerAwards(): Promise<Awards_V2[]> {
     const scorers = await this.awardsService.getScorerAwards();
 
-    // if (!scorers || scorers.length < 1) {
-    //   throw new NotFoundException('Scorers Awards not found');
-    // }
-    return scorers.result.scorers;
+    if (!scorers || scorers.length < 1) {
+      throw new NotFoundException('Scorers Awards not found');
+    }
+    return scorers;
   }
 
   @Get('/defense')

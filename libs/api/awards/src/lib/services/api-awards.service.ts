@@ -36,54 +36,14 @@ export class ApiAwardsService {
       },
     });
 
+    scorers.map((scorer) => ({
+      ...scorer,
+      stats: this.getStats(scorer.player_id.id, scorer.cha_season),
+    }));
+
     console.log(scorers);
 
-    const scorerStats = await this.statsRepo
-      .createQueryBuilder('playerStats')
-      .where(
-        'playerStats.player_id = (" + scorers.getQuery().player_id.id + ") and playerStats.playing_year = (" + scorers.getQuery().cha_season + ")'
-      )
-      // .where(
-      //   'scorers.getQuery().player_id.id = playerStats.player_id and scorers.getQuery().cha_season = playerStats.playing_year'
-      // )
-      .getMany();
-
-    console.log(scorerStats);
-
-    return {
-      result: {
-        scorers: {
-          ...scorers,
-          // stats: scorerStats,
-        },
-      },
-    };
-
-    // return await this.repo
-    //   .createQueryBuilder('awards_v2')
-    //   .leftJoinAndSelect('awards_v2.award_type', 'award_type')
-    //   .where('award_type.id = :award_type', {
-    //     award_type: AwardTypeEnum.SCORER,
-    //   })
-    //   .leftJoinAndSelect('awards_v2.team_id', 'teams')
-    //   .leftJoinAndSelect('awards_v2.users_id', 'users')
-    //   .leftJoinAndSelect('awards_v2.player_id', 'players')
-    //   .leftJoin((sub) => {
-    //     const subQuery = sub
-    //       .subQuery()
-    //       .select('playerStats.*', 'playerStats')
-    //       .from(Players_Stats_V2, 'playerStats')
-    //       .where(
-    //         'awards_v2.player_id = playerStats.player_id and awards_v2.cha_season = playerStats.playing_year'
-    //       )
-    //       .getOne();
-    //       return subQuery;
-    //   })
-    //   .where('playerStats.season_type = :season_type', {
-    //     season_type: 'Regular',
-    //   })
-    //   .orderBy('awards_v2.display_season', 'DESC')
-    //   .getMany();
+    return scorers;
   }
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
@@ -137,6 +97,16 @@ export class ApiAwardsService {
         award_type: {
           id: AwardTypeEnum.SEASON,
         },
+      },
+    });
+  }
+
+  async getStats(playerId: number, chaSeason: string) {
+    return await this.statsRepo.findOne({
+      where: {
+        player_id: playerId,
+        playing_year: chaSeason,
+        season_type: 'Regular',
       },
     });
   }
