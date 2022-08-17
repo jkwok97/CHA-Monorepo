@@ -110,6 +110,17 @@ export class ApiAwardsService {
 
   async getStats(playerId: number, chaSeason: string) {
     console.log(playerId, chaSeason);
+
+    const stat = await this.statsRepo.findOne({
+      where: {
+        player_id: playerId,
+        playing_year: chaSeason,
+        season_type: 'Regular',
+      },
+    });
+
+    console.log(stat);
+
     return await this.statsRepo.findOne({
       where: {
         player_id: playerId,
