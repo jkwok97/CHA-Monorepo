@@ -27,20 +27,22 @@ export class ApiAwardsService {
   }
 
   async getScorerAwards() {
-    const scorers = await this.repo.find({
-      relations: ['users_id', 'team_id', 'player_id', 'award_type'],
-      where: {
-        award_type: {
-          id: AwardTypeEnum.SCORER,
+    const scorers = await this.repo
+      .find({
+        relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+        where: {
+          award_type: {
+            id: AwardTypeEnum.SCORER,
+          },
         },
-      },
-    });
+      })
+      .then(async (result) => {
+        return await this.setStats(result);
+      });
 
-    const scorersWithStats = await this.setStats(scorers);
+    console.log(scorers);
 
-    console.log(scorersWithStats);
-
-    return scorersWithStats;
+    return scorers;
   }
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
@@ -99,6 +101,7 @@ export class ApiAwardsService {
   }
 
   async setStats(array: Awards_V2[]) {
+    console.log(array);
     return await array.map(async (item) => ({
       ...item,
       stats: await this.getStats(item.player_id.id, item.cha_season),
@@ -106,6 +109,7 @@ export class ApiAwardsService {
   }
 
   async getStats(playerId: number, chaSeason: string) {
+    console.log(playerId, chaSeason);
     return await this.statsRepo.findOne({
       where: {
         player_id: playerId,
