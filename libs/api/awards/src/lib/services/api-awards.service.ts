@@ -28,7 +28,13 @@ export class ApiAwardsService {
 
   async getScorerAwards() {
     const scorers = await this.repo.find({
-      relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+      relations: [
+        'users_id',
+        'team_id',
+        'player_id',
+        'award_type',
+        'cha_season',
+      ],
       where: {
         award_type: {
           id: AwardTypeEnum.SCORER,
@@ -41,8 +47,11 @@ export class ApiAwardsService {
     const scorerStats = await this.statsRepo
       .createQueryBuilder('playerStats')
       .where(
-        'scorers.getQuery().player_id.id = playerStats.player_id and scorers.getQuery().cha_season = playerStats.playing_year'
+        'playerStats.player_id = (" + scorers.getQuery().player_id.id + ") and playerStats.playing_year = (" + scorers.getQuery().cha_season + ")'
       )
+      // .where(
+      //   'scorers.getQuery().player_id.id = playerStats.player_id and scorers.getQuery().cha_season = playerStats.playing_year'
+      // )
       .getMany();
 
     console.log(scorerStats);
