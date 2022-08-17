@@ -7,6 +7,7 @@ import {
   AfterUpdate,
   AfterRemove,
   OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Drafts_V2 } from '../draft';
 import { Goalie_Ratings_V2, Player_Ratings_V2 } from '../ratings';
@@ -17,6 +18,7 @@ import { Goalies_Stats_V2, Players_Stats_V2 } from '../stats';
 export class Players_V2 {
   @PrimaryGeneratedColumn()
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
+  @JoinColumn({ name: 'id' })
   id!: number;
 
   @Column()
