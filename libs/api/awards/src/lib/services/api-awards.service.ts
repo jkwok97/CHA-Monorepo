@@ -106,8 +106,11 @@ export class ApiAwardsService {
   }
 
   async getStats(playerId: number, chaSeason: string) {
-    return await this.statsRepo.findOneOrFail({
+    return await this.statsRepo.findOne({
       select: {
+        id: true,
+        player_id: true,
+        playing_year: true,
         games_played: true,
         goals: true,
         assists: true,
