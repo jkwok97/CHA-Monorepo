@@ -3,6 +3,7 @@ import {
   AwardTypeEnum,
   Goalies_Stats_V2,
   Players_Stats_V2,
+  Team_Stats_V2,
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,8 +16,56 @@ export class ApiAwardsService {
     @InjectRepository(Players_Stats_V2)
     private playerStatsRepo: Repository<Players_Stats_V2>,
     @InjectRepository(Goalies_Stats_V2)
-    private goalieStatsRepo: Repository<Goalies_Stats_V2>
+    private goalieStatsRepo: Repository<Goalies_Stats_V2>,
+    @InjectRepository(Team_Stats_V2)
+    private teamStatsRepo: Repository<Team_Stats_V2>
   ) {}
+
+  selectUserOptions = {
+    id: true,
+    display_season: true,
+    cha_season: true,
+    award_type: {
+      display_name: true,
+      id: true,
+    },
+    team_id: {
+      city: true,
+      nickname: true,
+      teamlogo: true,
+      teamcolor: true,
+    },
+    users_id: {
+      firstname: true,
+      lastname: true,
+    },
+  };
+
+  selectPlayerOptions = {
+    id: true,
+    display_season: true,
+    cha_season: true,
+    award_type: {
+      display_name: true,
+      id: true,
+    },
+    team_id: {
+      city: true,
+      nickname: true,
+      teamlogo: true,
+      teamcolor: true,
+    },
+    player_id: {
+      id: true,
+      nhl_id: true,
+      firstname: true,
+      lastname: true,
+    },
+    users_id: {
+      firstname: true,
+      lastname: true,
+    },
+  };
 
   async getChampions(): Promise<Awards_V2[]> {
     return await this.repo.find({
@@ -26,6 +75,7 @@ export class ApiAwardsService {
           id: AwardTypeEnum.CHAMPION,
         },
       },
+      select: this.selectUserOptions,
     });
   }
 
@@ -37,6 +87,7 @@ export class ApiAwardsService {
           id: AwardTypeEnum.SCORER,
         },
       },
+      select: this.selectPlayerOptions,
     });
 
     const scrorersWithStats = await this.setPlayerStats(scorers);
@@ -52,6 +103,7 @@ export class ApiAwardsService {
           id: AwardTypeEnum.DEFENSE,
         },
       },
+      select: this.selectPlayerOptions,
     });
 
     const defenseWithStats = await this.setPlayerStats(defense);
@@ -67,6 +119,7 @@ export class ApiAwardsService {
           id: AwardTypeEnum.ROOKIE,
         },
       },
+      select: this.selectPlayerOptions,
     });
 
     const rookiesWithStats = await this.setPlayerStats(rookies);
@@ -82,6 +135,7 @@ export class ApiAwardsService {
           id: AwardTypeEnum.GOALIE,
         },
       },
+      select: this.selectPlayerOptions,
     });
 
     const goaliesWithStats = await this.setGoalieStats(goalies);
@@ -97,21 +151,27 @@ export class ApiAwardsService {
           id: AwardTypeEnum.GM,
         },
       },
+      select: this.selectUserOptions,
     });
   }
 
   async getSeasonAwards(): Promise<Awards_V2[]> {
-    return await this.repo.find({
+    const seasonAwards = await this.repo.find({
       relations: ['users_id', 'team_id'],
       where: {
         award_type: {
           id: AwardTypeEnum.SEASON,
         },
       },
+      select: this.selectUserOptions,
     });
+
+    const seasonAwardsWithStats = await this.setSeasonStats(seasonAwards);
+
+    return seasonAwardsWithStats;
   }
 
-  async setPlayerStats(array: Awards_V2[]) {
+  private async setPlayerStats(array: Awards_V2[]) {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
@@ -120,7 +180,7 @@ export class ApiAwardsService {
     );
   }
 
-  async getPlayerStats(playerId: number, chaSeason: string) {
+  private async getPlayerStats(playerId: number, chaSeason: string) {
     return await this.playerStatsRepo.findOne({
       select: {
         id: true,
@@ -139,7 +199,7 @@ export class ApiAwardsService {
     });
   }
 
-  async setGoalieStats(array: Awards_V2[]) {
+  private async setGoalieStats(array: Awards_V2[]) {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
@@ -148,19 +208,48 @@ export class ApiAwardsService {
     );
   }
 
-  async getGoalieStats(playerId: number, chaSeason: string) {
+  private async getGoalieStats(playerId: number, chaSeason: string) {
     return await this.goalieStatsRepo.findOne({
       select: {
         id: true,
         player_id: true,
         playing_year: true,
         games_played: true,
-        goals: true,
-        assists: true,
-        points: true,
+        wins: true,
+        goals_against_avg: true,
+        save_pct: true,
       },
       where: {
         player_id: playerId,
+        playing_year: chaSeason,
+        season_type: 'Regular',
+      },
+    });
+  }
+
+  private async setSeasonStats(array: Awards_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        stats: await this.getSeasonStats(item.team_id.id, item.cha_season),
+      }))
+    );
+  }
+
+  private async getSeasonStats(teamId: number, chaSeason: string) {
+    return await this.teamStatsRepo.findOne({
+      select: {
+        id: true,
+        team_id: true,
+        playing_year: true,
+        games_played: true,
+        wins: true,
+        goals_for: true,
+        goals_against: true,
+        points: true,
+      },
+      where: {
+        team_id: teamId,
         playing_year: chaSeason,
         season_type: 'Regular',
       },
