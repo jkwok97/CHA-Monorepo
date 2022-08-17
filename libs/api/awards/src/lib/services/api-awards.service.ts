@@ -44,23 +44,23 @@ export class ApiAwardsService {
 
     console.log(scorers);
 
-    const scorerStats = await this.statsRepo
-      .createQueryBuilder('playerStats')
-      .where(
-        'playerStats.player_id = (" + scorers.getQuery().player_id.id + ") and playerStats.playing_year = (" + scorers.getQuery().cha_season + ")'
-      )
-      // .where(
-      //   'scorers.getQuery().player_id.id = playerStats.player_id and scorers.getQuery().cha_season = playerStats.playing_year'
-      // )
-      .getMany();
+    // const scorerStats = await this.statsRepo
+    //   .createQueryBuilder('playerStats')
+    //   .where(
+    //     'playerStats.player_id = (" + scorers.getQuery().player_id.id + ") and playerStats.playing_year = (" + scorers.getQuery().cha_season + ")'
+    //   )
+    //   // .where(
+    //   //   'scorers.getQuery().player_id.id = playerStats.player_id and scorers.getQuery().cha_season = playerStats.playing_year'
+    //   // )
+    //   .getMany();
 
-    console.log(scorerStats);
+    // console.log(scorerStats);
 
     return {
       result: {
         scorers: {
           ...scorers,
-          stats: scorerStats,
+          // stats: scorerStats,
         },
       },
     };
