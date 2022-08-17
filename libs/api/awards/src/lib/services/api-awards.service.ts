@@ -60,7 +60,7 @@ export class ApiAwardsService {
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
-      relations: ['users_id', 'team_id', 'player_id'],
+      relations: ['users_id', 'team_id', 'player_id', 'cha_season'],
       where: {
         award_type: {
           id: AwardTypeEnum.DEFENSE,
