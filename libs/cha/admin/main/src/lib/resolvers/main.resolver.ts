@@ -46,7 +46,7 @@ export class MainResolver implements Resolve<boolean> {
             if (item) {
               const route = JSON.parse(item);
 
-              if (route === '/') {
+              if (route === '/' || route === '/login') {
                 this.router.navigate(['/home']);
               } else {
                 const route = JSON.parse(item);
