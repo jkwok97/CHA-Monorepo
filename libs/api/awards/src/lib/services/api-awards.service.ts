@@ -37,6 +37,9 @@ export class ApiAwardsService {
     return await this.repo
       .createQueryBuilder('awards_v2')
       .leftJoinAndSelect('awards_v2.award_type', 'award_type')
+      .where('award_type.id = :award_type', {
+        award_type: AwardTypeEnum.SCORER,
+      })
       .leftJoinAndSelect('awards_v2.team_id', 'teams')
       .leftJoinAndSelect('awards_v2.users_id', 'users')
       .leftJoinAndSelect('awards_v2.player_id', 'players')
@@ -45,9 +48,6 @@ export class ApiAwardsService {
         'playerStats',
         'awards_v2.player_id = playerStats.player_id and awards_v2.cha_season = playerStats.playing_year'
       )
-      .where('award_type.id = :award_type', {
-        award_type: AwardTypeEnum.SCORER,
-      })
       .where('playerStats.season_type = :season_type', {
         season_type: 'Regular',
       })
@@ -57,7 +57,7 @@ export class ApiAwardsService {
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
-      relations: ['users_id', 'team_id', 'player_id', 'cha_season'],
+      relations: ['users_id', 'team_id', 'player_id'],
       where: {
         award_type: {
           id: AwardTypeEnum.DEFENSE,
