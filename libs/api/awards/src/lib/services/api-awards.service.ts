@@ -98,8 +98,8 @@ export class ApiAwardsService {
     });
   }
 
-  setStats(array: Awards_V2[]) {
-    return array.map(async (item) => ({
+  async setStats(array: Awards_V2[]) {
+    return await array.map(async (item) => ({
       ...item,
       stats: await this.getStats(item.player_id.id, item.cha_season),
     }));
