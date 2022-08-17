@@ -27,7 +27,7 @@ export class ApiAwardsService {
   }
 
   async getScorerAwards() {
-    const scorers = await this.repo
+    const scorers = this.repo
       .find({
         relations: ['users_id', 'team_id', 'player_id', 'award_type'],
         where: {
@@ -39,8 +39,6 @@ export class ApiAwardsService {
       .then(async (result) => {
         return await this.setStats(result);
       });
-
-    console.log(scorers);
 
     return scorers;
   }
@@ -101,7 +99,6 @@ export class ApiAwardsService {
   }
 
   async setStats(array: Awards_V2[]) {
-    console.log(array);
     return await array.map(async (item) => ({
       ...item,
       stats: await this.getStats(item.player_id.id, item.cha_season),
@@ -111,22 +108,18 @@ export class ApiAwardsService {
   async getStats(playerId: number, chaSeason: string) {
     console.log(playerId, chaSeason);
 
-    const stat = await this.statsRepo.findOne({
-      where: {
-        player_id: playerId,
-        playing_year: chaSeason,
-        season_type: 'Regular',
-      },
+    const stat = await this.statsRepo.findOneByOrFail({
+      player_id: playerId,
+      playing_year: chaSeason,
+      season_type: 'Regular',
     });
 
     console.log(stat);
 
-    return await this.statsRepo.findOne({
-      where: {
-        player_id: playerId,
-        playing_year: chaSeason,
-        season_type: 'Regular',
-      },
+    return await this.statsRepo.findOneByOrFail({
+      player_id: playerId,
+      playing_year: chaSeason,
+      season_type: 'Regular',
     });
   }
 }
