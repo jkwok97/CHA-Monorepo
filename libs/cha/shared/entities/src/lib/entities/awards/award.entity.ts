@@ -5,7 +5,6 @@ import {
   ManyToOne,
   JoinColumn,
   OneToOne,
-  Unique,
 } from 'typeorm';
 import { Players_V2 } from '../players/player.entity';
 import { Players_Stats_V2 } from '../stats';
@@ -22,7 +21,7 @@ export class Awards_V2 {
   display_season!: string;
 
   @OneToOne(() => Players_Stats_V2, (playerStats) => playerStats.playing_year)
-  @Column()
+  @JoinColumn({ name: 'cha_season' })
   cha_season!: string;
 
   @OneToOne(() => Award_Type_V2, (award) => award.id)

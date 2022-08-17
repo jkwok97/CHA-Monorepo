@@ -1,19 +1,16 @@
 import {
   Awards_V2,
   AwardTypeEnum,
-  Award_Type_V2,
   Players_Stats_V2,
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { createQueryBuilder, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ApiAwardsService {
   constructor(
-    @InjectRepository(Awards_V2) private repo: Repository<Awards_V2>,
-    @InjectRepository(Players_Stats_V2)
-    private statsRepo: Repository<Players_Stats_V2>
+    @InjectRepository(Awards_V2) private repo: Repository<Awards_V2>
   ) {}
 
   async getChampions(): Promise<Awards_V2[]> {
