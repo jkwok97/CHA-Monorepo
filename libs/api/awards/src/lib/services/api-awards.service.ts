@@ -37,7 +37,7 @@ export class ApiAwardsService {
       },
     });
 
-    const scorersWithStats = await this.getStats(scorers);
+    const scorersWithStats = await this.setStats(scorers);
 
     console.log(scorersWithStats);
 
@@ -99,16 +99,20 @@ export class ApiAwardsService {
     });
   }
 
-  async getStats(array: Awards_V2[]) {
+  async setStats(array: Awards_V2[]) {
     return await array.map((item) => ({
       ...item,
-      stats: this.statsRepo.findOne({
-        where: {
-          player_id: item.player_id.id,
-          playing_year: item.cha_season,
-          season_type: 'Regular',
-        },
-      }),
+      stats: this.getStats(item.player_id.id, item.cha_season),
     }));
+  }
+
+  async getStats(playerId: number, chaSeason: string) {
+    return await this.statsRepo.findOne({
+      where: {
+        player_id: playerId,
+        playing_year: chaSeason,
+        season_type: 'Regular',
+      },
+    });
   }
 }
