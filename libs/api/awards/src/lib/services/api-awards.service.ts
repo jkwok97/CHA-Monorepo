@@ -11,7 +11,9 @@ import { createQueryBuilder, Repository } from 'typeorm';
 @Injectable()
 export class ApiAwardsService {
   constructor(
-    @InjectRepository(Awards_V2) private repo: Repository<Awards_V2>
+    @InjectRepository(Awards_V2) private repo: Repository<Awards_V2>,
+    @InjectRepository(Players_Stats_V2)
+    private statsRepo: Repository<Players_Stats_V2>
   ) {}
 
   async getChampions(): Promise<Awards_V2[]> {
@@ -26,6 +28,15 @@ export class ApiAwardsService {
   }
 
   async getScorerAwards() {
+    // const scorers = await this.repo.find({
+    //   relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+    //   where: {
+    //     award_type: {
+    //       id: AwardTypeEnum.SCORER,
+    //     },
+    //   },
+    // });
+
     return await this.repo
       .createQueryBuilder('awards_v2')
       .leftJoinAndSelect('awards_v2.award_type', 'award_type')
@@ -35,18 +46,16 @@ export class ApiAwardsService {
       .leftJoinAndSelect(
         Players_Stats_V2,
         'playerStats',
-        'playerStats.player_id = awards_v2.player_id'
+        'awards_v2.player_id = playerStats.player_id and awards_v2.cha_season = playerStats.playing_year'
       )
       .where('awards_v2.award_type = :award_type', {
         award_type: AwardTypeEnum.SCORER,
       })
+      .where('playerStats.season_type = :season_type', {
+        season_type: 'Regular',
+      })
       .orderBy('awards_v2.display_season', 'DESC')
       .getMany();
-
-    // return await this.repo.find({
-    //   relations: ['users_id', 'team_id', 'player_id'],
-    //   where: { award_type: AwardTypeEnum.SCORER },
-    // });
   }
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
