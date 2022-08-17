@@ -106,10 +106,18 @@ export class ApiAwardsService {
   }
 
   async getStats(playerId: number, chaSeason: string) {
-    return await this.statsRepo.findOneByOrFail({
-      player_id: playerId,
-      playing_year: chaSeason,
-      season_type: 'Regular',
+    return await this.statsRepo.find({
+      select: {
+        games_played: true,
+        goals: true,
+        assists: true,
+        points: true,
+      },
+      where: {
+        player_id: playerId,
+        playing_year: chaSeason,
+        season_type: 'Regular',
+      },
     });
   }
 }
