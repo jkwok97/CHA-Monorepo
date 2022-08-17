@@ -17,7 +17,7 @@ export class ApiAwardsService {
 
   async getChampions(): Promise<Awards_V2[]> {
     return await this.repo.find({
-      relations: ['users_id', 'team_id', 'award_type'],
+      relations: ['users_id', 'team_id', 'award_type', 'cha_season'],
       where: {
         award_type: {
           id: AwardTypeEnum.CHAMPION,
@@ -28,13 +28,7 @@ export class ApiAwardsService {
 
   async getScorerAwards() {
     const scorers = await this.repo.find({
-      relations: [
-        'users_id',
-        'team_id',
-        'player_id',
-        'award_type',
-        'cha_season',
-      ],
+      relations: ['users_id', 'team_id', 'player_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.SCORER,
