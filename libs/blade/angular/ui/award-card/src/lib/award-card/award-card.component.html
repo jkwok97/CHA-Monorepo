@@ -55,8 +55,8 @@
             award.award_type.id !== AwardTypeEnum.SEASON
           "
         >
-          {{ award.display_season }} - {{ award.users_id.firstname }}
-          {{ award.users_id.lastname }}
+          {{ award.display_season }} - {{ award.player_id?.firstname }}
+          {{ award.player_id?.lastname }}
         </ng-container>
       </div>
 

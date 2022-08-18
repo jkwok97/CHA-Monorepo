@@ -76,21 +76,21 @@ export class ApiAwardsService {
           id: AwardTypeEnum.CHAMPION,
         },
       },
-      order: {
-        cha_season: 'DESC',
-      },
     });
   }
 
   async getScorerAwards() {
     const scorers = await this.repo.find({
+      select: this.selectPlayerOptions,
       relations: ['users_id', 'team_id', 'player_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.SCORER,
         },
       },
-      select: this.selectPlayerOptions,
+      order: {
+        display_season: 'DESC',
+      },
     });
 
     const scrorersWithStats = await this.setPlayerStats(scorers);
@@ -100,13 +100,16 @@ export class ApiAwardsService {
 
   async getDefenseAwards(): Promise<Awards_V2[]> {
     const defense = await this.repo.find({
+      select: this.selectPlayerOptions,
       relations: ['users_id', 'team_id', 'player_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.DEFENSE,
         },
       },
-      select: this.selectPlayerOptions,
+      order: {
+        display_season: 'DESC',
+      },
     });
 
     const defenseWithStats = await this.setPlayerStats(defense);
@@ -116,13 +119,16 @@ export class ApiAwardsService {
 
   async getRookieAwards(): Promise<Awards_V2[]> {
     const rookies = await this.repo.find({
+      select: this.selectPlayerOptions,
       relations: ['users_id', 'team_id', 'player_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.ROOKIE,
         },
       },
-      select: this.selectPlayerOptions,
+      order: {
+        display_season: 'DESC',
+      },
     });
 
     const rookiesWithStats = await this.setPlayerStats(rookies);
@@ -132,13 +138,16 @@ export class ApiAwardsService {
 
   async getGoalieAwards(): Promise<Awards_V2[]> {
     const goalies = await this.repo.find({
+      select: this.selectPlayerOptions,
       relations: ['users_id', 'team_id', 'player_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.GOALIE,
         },
       },
-      select: this.selectPlayerOptions,
+      order: {
+        display_season: 'DESC',
+      },
     });
 
     const goaliesWithStats = await this.setGoalieStats(goalies);
@@ -148,25 +157,31 @@ export class ApiAwardsService {
 
   async getGmAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
+      select: this.selectUserOptions,
       relations: ['users_id', 'team_id'],
       where: {
         award_type: {
           id: AwardTypeEnum.GM,
         },
       },
-      select: this.selectUserOptions,
+      order: {
+        display_season: 'DESC',
+      },
     });
   }
 
   async getSeasonAwards(): Promise<Awards_V2[]> {
     const seasonAwards = await this.repo.find({
+      select: this.selectUserOptions,
       relations: ['users_id', 'team_id'],
       where: {
         award_type: {
           id: AwardTypeEnum.SEASON,
         },
       },
-      select: this.selectUserOptions,
+      order: {
+        display_season: 'DESC',
+      },
     });
 
     const seasonAwardsWithStats = await this.setSeasonStats(seasonAwards);

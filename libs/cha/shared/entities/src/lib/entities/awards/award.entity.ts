@@ -12,7 +12,11 @@ import { Teams_V2 } from '../teams';
 import { Users_V2 } from '../user';
 import { Award_Type_V2 } from './award-type.entity';
 
-@Entity()
+@Entity({
+  orderBy: {
+    display_season: 'DESC',
+  },
+})
 export class Awards_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
