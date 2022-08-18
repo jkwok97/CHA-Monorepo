@@ -15,7 +15,7 @@ export class ApiDraftTableService {
     seasonType: string
   ): Promise<Draft_Order_V2[]> {
     const draftTable = await this.repo.find({
-      relations: ['team_id', 'team_stats'],
+      relations: ['team_id'],
       where: {
         draft_year: draftYear,
       },
