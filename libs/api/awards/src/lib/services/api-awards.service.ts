@@ -237,6 +237,7 @@ export class ApiAwardsService {
   }
 
   private async getSeasonStats(teamId: number, chaSeason: string) {
+    console.log(teamId, chaSeason);
     return await this.teamStatsRepo.findOne({
       select: {
         id: true,
