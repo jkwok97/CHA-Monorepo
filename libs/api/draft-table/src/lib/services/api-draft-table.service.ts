@@ -41,12 +41,13 @@ export class ApiDraftTableService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        stats: await this.getTeamStats(item.team_id, playingYear),
+        stats: await this.getTeamStats(item.team_id.id, playingYear),
       }))
     );
   }
 
   private async getTeamStats(teamId: number, playingYear: string) {
+    console.log(teamId, playingYear);
     return await this.teamStatsRepo.findOne({
       select: {
         id: true,

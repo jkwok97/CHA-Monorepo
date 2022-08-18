@@ -14,7 +14,7 @@ export class Draft_Order_V2 {
 
   @ManyToOne(() => Teams_V2, (team) => team.id)
   @JoinColumn({ name: 'team_id' })
-  team_id!: number;
+  team_id!: Teams_V2;
 
   @Column()
   round_one!: number;
