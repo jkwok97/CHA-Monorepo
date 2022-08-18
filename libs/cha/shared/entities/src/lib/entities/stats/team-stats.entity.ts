@@ -12,7 +12,7 @@ export class Team_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @JoinColumn()
+  @JoinColumn({ name: 'team_id' })
   team_id!: number;
 
   @Column()
