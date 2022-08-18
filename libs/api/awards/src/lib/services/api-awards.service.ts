@@ -88,9 +88,6 @@ export class ApiAwardsService {
           id: AwardTypeEnum.SCORER,
         },
       },
-      order: {
-        display_season: 'DESC',
-      },
     });
 
     const scrorersWithStats = await this.setPlayerStats(scorers);
@@ -106,9 +103,6 @@ export class ApiAwardsService {
         award_type: {
           id: AwardTypeEnum.DEFENSE,
         },
-      },
-      order: {
-        display_season: 'DESC',
       },
     });
 
@@ -126,9 +120,6 @@ export class ApiAwardsService {
           id: AwardTypeEnum.ROOKIE,
         },
       },
-      order: {
-        display_season: 'DESC',
-      },
     });
 
     const rookiesWithStats = await this.setPlayerStats(rookies);
@@ -144,9 +135,6 @@ export class ApiAwardsService {
         award_type: {
           id: AwardTypeEnum.GOALIE,
         },
-      },
-      order: {
-        display_season: 'DESC',
       },
     });
 
@@ -164,9 +152,6 @@ export class ApiAwardsService {
           id: AwardTypeEnum.GM,
         },
       },
-      order: {
-        display_season: 'DESC',
-      },
     });
   }
 
@@ -178,9 +163,6 @@ export class ApiAwardsService {
         award_type: {
           id: AwardTypeEnum.SEASON,
         },
-      },
-      order: {
-        display_season: 'DESC',
       },
     });
 
