@@ -69,15 +69,15 @@ export class ApiAwardsService {
 
   async getChampions(): Promise<Awards_V2[]> {
     return await this.repo.find({
+      select: this.selectUserOptions,
       relations: ['users_id', 'team_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.CHAMPION,
         },
       },
-      select: this.selectUserOptions,
       order: {
-        display_season: 'ASC',
+        cha_season: 'DESC',
       },
     });
   }

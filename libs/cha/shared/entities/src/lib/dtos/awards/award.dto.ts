@@ -2,9 +2,7 @@ import { PlayerDto } from '../player';
 import { TeamDto } from '../teams';
 import { UserDto } from '../user';
 import { AwardAwardTypeDto } from './award-award-type.dto';
-import { AwardGoalieStatsDto } from './award-goalie-stats.dto';
-import { AwardPlayerStatsDto } from './award-player-stats.dto';
-import { AwardTeamStatsDto } from './award-team-stats.dto';
+import { AwardStatsDto } from './award-stats.dto';
 
 export interface AwardDto {
   id: number;
@@ -14,7 +12,5 @@ export interface AwardDto {
   users_id: UserDto;
   team_id: TeamDto;
   player_id?: PlayerDto;
-  player_stats?: AwardPlayerStatsDto;
-  goalie_stats?: AwardGoalieStatsDto;
-  team_stats?: AwardTeamStatsDto;
+  stats?: AwardStatsDto;
 }

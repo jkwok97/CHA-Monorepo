@@ -1,1 +1,14 @@
-<p>awards-scorer works!</p>
+<blade-layout-feature-content [backgroundColor]="'#393D47'">
+  <div class="awards-scorer">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+    <ng-container *ngIf="isLoaded$ | async">
+      <ng-container *ngFor="let scorer of scorers$ | async">
+        <blade-award-card [award]="scorer"></blade-award-card>
+      </ng-container>
+    </ng-container>
+  </div>
+</blade-layout-feature-content>
