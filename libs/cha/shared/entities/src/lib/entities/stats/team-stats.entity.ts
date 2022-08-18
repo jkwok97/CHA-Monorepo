@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Teams_V2 } from '../teams';
 
 @Entity()
@@ -12,7 +6,7 @@ export class Team_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @JoinColumn({ name: 'team_id' })
+  @Column()
   team_id!: number;
 
   @Column()
