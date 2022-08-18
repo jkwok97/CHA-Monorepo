@@ -13,8 +13,7 @@ export class DraftTableController {
     const draftTable =
       await this.draftTableService.getDraftTableByYearByStandings(
         body.draft_year,
-        body.playing_year,
-        body.season_type
+        body.playing_year
       );
 
     if (!draftTable || draftTable.length < 1) {

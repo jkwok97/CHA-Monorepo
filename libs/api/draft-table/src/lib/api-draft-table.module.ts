@@ -1,4 +1,4 @@
-import { Draft_Order_V2 } from '@cha/shared/entities';
+import { Draft_Order_V2, Team_Stats_V2 } from '@cha/shared/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DraftTableController } from './controllers';
@@ -6,7 +6,7 @@ import { DraftTableMiddleware } from './middlewares';
 import { ApiDraftTableService } from './services';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Draft_Order_V2])],
+  imports: [TypeOrmModule.forFeature([Draft_Order_V2, Team_Stats_V2])],
   controllers: [DraftTableController],
   providers: [ApiDraftTableService],
 })
