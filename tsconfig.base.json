@@ -47,6 +47,9 @@
       ],
       "@blade/angular/ui/card": ["libs/blade/angular/ui/card/src/index.ts"],
       "@blade/angular/ui/core": ["libs/blade/angular/ui/core/src/index.ts"],
+      "@blade/angular/ui/divider": [
+        "libs/blade/angular/ui/divider/src/index.ts"
+      ],
       "@blade/angular/ui/dropdown": [
         "libs/blade/angular/ui/dropdown/src/index.ts"
       ],
