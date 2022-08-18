@@ -77,7 +77,7 @@ export class ApiAwardsService {
       },
       select: this.selectUserOptions,
       order: {
-        display_season: 'DESC',
+        display_season: 'ASC',
       },
     });
   }
