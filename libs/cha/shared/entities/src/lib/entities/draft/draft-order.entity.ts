@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Team_Stats_V2 } from '../stats';
 import { Teams_V2 } from '../teams';
 
 @Entity()
@@ -6,7 +13,9 @@ export class Draft_Order_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @ManyToOne(() => Teams_V2, (team) => team.id)
+  @ManyToOne(() => Team_Stats_V2, (stats) => stats.team_id)
+  @JoinColumn({ name: 'team_id' })
   team_id!: number;
 
   @Column()
@@ -26,7 +35,4 @@ export class Draft_Order_V2 {
 
   @Column()
   draft_year!: string;
-
-  @ManyToOne(() => Teams_V2, (team) => team.id)
-  team!: Teams_V2;
 }

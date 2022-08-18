@@ -7,8 +7,8 @@ import {
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AwardsController } from './controllers';
-import { AwardsMiddleware } from './middlewares/awards.middleware';
-import { ApiAwardsService } from './services/api-awards.service';
+import { AwardsMiddleware } from './middlewares';
+import { ApiAwardsService } from './services';
 
 @Module({
   imports: [

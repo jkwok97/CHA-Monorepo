@@ -5,10 +5,7 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
-  JoinColumn,
-  OneToMany,
 } from 'typeorm';
-import { Awards_V2 } from '../awards';
 
 @Entity()
 export class Teams_V2 {
