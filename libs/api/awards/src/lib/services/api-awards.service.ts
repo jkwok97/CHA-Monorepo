@@ -30,6 +30,7 @@ export class ApiAwardsService {
       id: true,
     },
     team_id: {
+      id: true,
       city: true,
       nickname: true,
       teamlogo: true,
