@@ -1,1 +1,14 @@
-<p>awards-gm works!</p>
+<blade-layout-feature-content>
+  <div class="awards-gm">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+    <ng-container *ngIf="isLoaded$ | async">
+      <ng-container *ngFor="let scorer of gm$ | async">
+        <blade-award-card [award]="scorer"></blade-award-card>
+      </ng-container>
+    </ng-container>
+  </div>
+</blade-layout-feature-content>

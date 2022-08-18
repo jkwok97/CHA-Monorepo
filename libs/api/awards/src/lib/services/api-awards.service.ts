@@ -146,7 +146,7 @@ export class ApiAwardsService {
   async getGmAwards(): Promise<Awards_V2[]> {
     return await this.repo.find({
       select: this.selectUserOptions,
-      relations: ['users_id', 'team_id'],
+      relations: ['users_id', 'team_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.GM,
@@ -158,7 +158,7 @@ export class ApiAwardsService {
   async getSeasonAwards(): Promise<Awards_V2[]> {
     const seasonAwards = await this.repo.find({
       select: this.selectUserOptions,
-      relations: ['users_id', 'team_id'],
+      relations: ['users_id', 'team_id', 'award_type'],
       where: {
         award_type: {
           id: AwardTypeEnum.SEASON,
