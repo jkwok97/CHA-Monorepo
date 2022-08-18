@@ -56,7 +56,6 @@ export class ApiDraftTableService {
   }
 
   private async getTeamStats(teamId: number, playingYear: string) {
-    console.log(teamId, playingYear);
     return await this.teamStatsRepo.findOne({
       select: {
         id: true,
