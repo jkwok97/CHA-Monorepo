@@ -20,6 +20,15 @@ export class ApiDraftTableService {
       where: {
         draft_year: draftYear,
       },
+      select: {
+        team_id: {
+          id: true,
+          shortname: true,
+          city: true,
+          nickname: true,
+          teamlogo: true,
+        },
+      },
     });
 
     const draftTableWithStandings = await this.setTableStandings(
