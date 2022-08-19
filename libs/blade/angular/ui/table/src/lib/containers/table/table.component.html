@@ -15,22 +15,14 @@
   #dt
 >
   <ng-template pTemplate="caption">
-    <div class="header-flex">
-      <button
-        pButton
-        class="p-button-outlined"
-        icon="pi pi-filter-slash"
-        (click)="clear(dt)"
-      ></button>
-      <span class="p-input-icon-left ml-auto">
-        <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search"
-        />
-      </span>
+    <div class="p-input-icon-left ml-auto">
+      <i class="pi pi-search"></i>
+      <input
+        pInputText
+        type="text"
+        (input)="applyFilterGlobal($event, 'contains')"
+        placeholder="Search"
+      />
     </div>
   </ng-template>
 
