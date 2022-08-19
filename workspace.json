@@ -31,6 +31,7 @@
     "blade-angular-ui-dropdown-multi": "libs/blade/angular/ui/dropdown-multi",
     "blade-angular-ui-layout": "libs/blade/angular/ui/layout",
     "blade-angular-ui-menu": "libs/blade/angular/ui/menu",
+    "blade-angular-ui-table": "libs/blade/angular/ui/table",
     "cha-admin": "apps/cha-admin",
     "cha-admin-draft-mgmt-entry": "libs/cha/admin/draft-mgmt-entry",
     "cha-admin-draft-mgmt-table": "libs/cha/admin/draft-mgmt-table",

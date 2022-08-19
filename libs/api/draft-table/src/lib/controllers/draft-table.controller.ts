@@ -1,5 +1,5 @@
 import { Draft_Order_V2 } from '@cha/shared/entities';
-import { Body, Controller, Get, NotFoundException } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiDraftTableService } from '../services';
 
 @Controller('draft-table')
@@ -8,12 +8,12 @@ export class DraftTableController {
 
   @Get('/season/standings')
   async getDraftTableByYearByStandings(
-    @Body() body: any
+    @Param() param: any
   ): Promise<Draft_Order_V2[]> {
     const draftTable =
       await this.draftTableService.getDraftTableByYearByStandings(
-        body.draft_year,
-        body.playing_year
+        param.draft_year,
+        param.playing_year
       );
 
     if (!draftTable || draftTable.length < 1) {

@@ -5,6 +5,11 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { BladeDividerComponent } from '@blade/angular/ui/divider';
+import { BladeAngularUiTableModule } from '@blade/angular/ui/table';
+
 import { ChaFrontDraftCurrentRoutingModule } from './cha-front-draft-current-routing.module';
 
 import { reducer } from './+state/draft-current.reducer';
@@ -18,6 +23,10 @@ import { DraftCurrentComponent } from './containers';
     CommonModule,
     ChaFrontDraftCurrentRoutingModule,
     ProgressBarModule,
+    BladeAngularUiLayoutModule,
+    BladeAngularUiCardModule,
+    BladeAngularUiTableModule,
+    BladeDividerComponent,
     StoreModule.forFeature('draft-current', reducer),
     EffectsModule.forFeature([DraftCurrentEffects]),
   ],

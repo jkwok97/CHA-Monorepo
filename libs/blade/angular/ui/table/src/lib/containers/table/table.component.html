@@ -1,0 +1,123 @@
+<p-table
+  [responsiveLayout]="layout"
+  [value]="data"
+  [columns]="tableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [globalFilterFields]="filteringOptions"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [totalRecords]="totalRecords"
+  #dt
+>
+  <ng-template pTemplate="caption">
+    <div class="header-flex">
+      <button
+        pButton
+        class="p-button-outlined"
+        icon="pi pi-filter-slash"
+        (click)="clear(dt)"
+      ></button>
+      <span class="p-input-icon-left ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search"
+        />
+      </span>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header" let-columns let-data>
+    <tr>
+      <ng-container
+        *ngIf="tableType === 'draft-summary' || tableType === 'nhl-stats'"
+      >
+        <th
+          *ngFor="let column of tableColumns"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </ng-container>
+      <ng-container
+        *ngIf="tableType !== 'draft-summary' && tableType !== 'nhl-stats'"
+      >
+        <th *ngFor="let column of tableColumns">
+          {{ column.header }}
+        </th>
+      </ng-container>
+    </tr>
+    <!-- TODO THIS DOES NOT WORK FOR PAGINATION -->
+    <!-- <tr *ngIf="tableType === 'draft-summary'">
+      <th *ngFor="let column of tableColumns" [pSortableColumn]="column.field">
+        <div class="header-flex">
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+          <p-columnFilter
+            type="text"
+            [field]="column.field"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
+    </tr> -->
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of tableColumns">
+        <ng-container *ngIf="tableType === 'draft'"
+          ><span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <img
+              [src]="data.teamImg"
+              height="30px"
+              *ngIf="column.field === 'team'"
+            />
+            {{
+              !column.field.includes('round')
+                ? data[column.field]
+                  ? data[column.field]
+                  : rowIndex + 1
+                : ''
+            }}
+            <img
+              [src]="getLogo(data[column.field])"
+              height="30px"
+              *ngIf="column.field.includes('round')"
+            /></div
+        ></ng-container>
+
+        <ng-container *ngIf="tableType === 'draft-summary'">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <img
+              [src]="data.teamImg"
+              height="30px"
+              *ngIf="column.field === 'team'"
+            />
+            <p-avatar
+              [image]="data.playerImg"
+              shape="circle"
+              *ngIf="column.field === 'player' && data.playerImg"
+            ></p-avatar>
+            {{ data[column.field] }}
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

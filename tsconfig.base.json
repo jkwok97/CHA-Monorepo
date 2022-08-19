@@ -58,6 +58,7 @@
       ],
       "@blade/angular/ui/layout": ["libs/blade/angular/ui/layout/src/index.ts"],
       "@blade/angular/ui/menu": ["libs/blade/angular/ui/menu/src/index.ts"],
+      "@blade/angular/ui/table": ["libs/blade/angular/ui/table/src/index.ts"],
       "@cha/admin/draft-mgmt-entry": [
         "libs/cha/admin/draft-mgmt-entry/src/index.ts"
       ],

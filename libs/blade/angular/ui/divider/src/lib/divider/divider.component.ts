@@ -10,7 +10,7 @@ import { DividerModule } from 'primeng/divider';
   templateUrl: './divider.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DividerComponent {
+export class BladeDividerComponent {
   @Input() type = 'solid';
   @Input() layout = 'horizontal';
   @Input() align = 'center';

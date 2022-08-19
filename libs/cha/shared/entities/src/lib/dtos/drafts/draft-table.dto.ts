@@ -4,11 +4,8 @@ import { DraftTableStatDto } from './draft-table-stat.dto';
 
 export interface DraftTableDto {
   id: number;
-  city: string;
-  nickname: string;
-  shortname: string;
+  draft_year: string;
   team_id: TeamDto;
-  teamlogo: string;
   round_one: TeamsEnum;
   round_two: TeamsEnum;
   round_three: TeamsEnum;
