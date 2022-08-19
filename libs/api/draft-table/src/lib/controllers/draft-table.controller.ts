@@ -6,10 +6,11 @@ import { ApiDraftTableService } from '../services';
 export class DraftTableController {
   constructor(private draftTableService: ApiDraftTableService) {}
 
-  @Get('/season/standings')
+  @Get('/season/standings/:draft_year&:playing_year')
   async getDraftTableByYearByStandings(
     @Param() param: any
   ): Promise<Draft_Order_V2[]> {
+    console.log(param);
     console.log(param.draft_year, param.playing_year);
     const draftTable =
       await this.draftTableService.getDraftTableByYearByStandings(
