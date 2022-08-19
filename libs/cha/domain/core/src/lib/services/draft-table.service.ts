@@ -20,19 +20,9 @@ export class DraftTableService {
     playingYear: string
   ): Observable<DraftTableDto[]> {
     console.log(draftYear, playingYear);
-    const httpParams: HttpParamsOptions = {
-      fromObject: {
-        draft_year: draftYear.toString(),
-        playing_year: playingYear.toString(),
-      },
-    };
-
-    const options = {
-      params: new HttpParams(httpParams),
-    };
 
     return this._http
-      .get(`${this.apiUrl}/draft-table/season/standings`, options)
+      .get(`${this.apiUrl}/draft-table/${draftYear}/${playingYear}`)
       .pipe(map((result: any) => result));
   }
 
