@@ -22,6 +22,7 @@ export class BladeTableComponent {
   @Input() filteringOptions: any[] = [];
   @Input() rows = 20;
   @Input() totalRecords = 0;
+  @Input() showPaginator = false;
 
   @ViewChild('dt') dt: Table | undefined;
 

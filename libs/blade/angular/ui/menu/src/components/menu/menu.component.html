@@ -1,5 +1,5 @@
 <p-menubar [model]="items">
-  <ng-template pTemplate="start" *ngIf="logo">
+  <ng-template [pTemplate]="isMobile ? 'end' : 'start'" *ngIf="logo">
     <ng-container *ngTemplateOutlet="logo"></ng-container>
   </ng-template>
 </p-menubar>

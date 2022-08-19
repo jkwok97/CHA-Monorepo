@@ -19,4 +19,5 @@ import { TabViewModule } from 'primeng/tabview';
 export class MenuComponent {
   @Input() items: MenuItem[] = [];
   @Input() logo: TemplateRef<void> | undefined;
+  @Input() isMobile: boolean | null = false;
 }

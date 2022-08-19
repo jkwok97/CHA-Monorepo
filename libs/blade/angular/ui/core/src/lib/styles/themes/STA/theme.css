@@ -3286,11 +3286,8 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 .p-datatable .p-datatable-header {
   background: #d28507;
   color: #343a40;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-width: 1px 0 1px 0;
   padding: 1rem 1rem;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .p-datatable .p-datatable-footer {
@@ -3299,7 +3296,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
   border: 1px solid #dee2e6;
   border-width: 0 0 1px 0;
   padding: 1rem 1rem;
-  font-weight: 700;
+  font-weight: 300;
 }
 
 .p-datatable .p-datatable-thead > tr > th {

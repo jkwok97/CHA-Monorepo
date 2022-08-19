@@ -1,3 +1,7 @@
 @import 'primeicons/primeicons.css';
 @import 'primeng/resources/primeng.min.css';
 @import 'primeflex/primeflex.scss';
+
+.p-menubar-end {
+  margin-left: unset !important;
+}
