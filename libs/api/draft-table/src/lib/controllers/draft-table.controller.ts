@@ -10,6 +10,7 @@ export class DraftTableController {
   async getDraftTableByYearByStandings(
     @Param() param: any
   ): Promise<Draft_Order_V2[]> {
+    console.log(param.draft_year, param.playing_year);
     const draftTable =
       await this.draftTableService.getDraftTableByYearByStandings(
         param.draft_year,
