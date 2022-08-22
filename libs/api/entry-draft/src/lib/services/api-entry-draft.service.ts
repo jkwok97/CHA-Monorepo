@@ -23,7 +23,13 @@ export class ApiEntryDraftService {
           id: true,
           firstname: true,
           lastname: true,
+          nhl_id: true,
         },
+      },
+      order: {
+        draft_year: 'DESC',
+        draft_round: 'ASC',
+        draft_overall: 'ASC',
       },
     });
 

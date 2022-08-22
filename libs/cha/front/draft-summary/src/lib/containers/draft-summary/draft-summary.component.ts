@@ -50,10 +50,10 @@ export class DraftSummaryComponent implements OnInit {
   mapItems(items: DraftPickDto[]) {
     return items.map((item: DraftPickDto) => ({
       ...item,
-      team: `${item.city} ${item.nickname}`,
-      player: `${item.firstname} ${item.lastname}`,
-      playerImg: this.getPlayerPicture(item.nhl_id),
-      teamImg: this.getString(item.teamlogo),
+      team: `${item.team_id.city} ${item.team_id.nickname}`,
+      player: `${item.player_id?.firstname} ${item.player_id?.lastname}`,
+      playerImg: this.getPlayerPicture(item.player_id?.nhl_id),
+      teamImg: this.getString(item.team_id.teamlogo),
     }));
   }
 
@@ -63,7 +63,7 @@ export class DraftSummaryComponent implements OnInit {
     return `assets/${temp[temp.length - 1]}`;
   }
 
-  getPlayerPicture(id: number) {
+  getPlayerPicture(id: string) {
     if (id) {
       return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
     } else {

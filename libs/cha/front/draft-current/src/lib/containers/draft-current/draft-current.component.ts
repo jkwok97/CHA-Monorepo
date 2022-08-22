@@ -7,7 +7,6 @@ import { DraftCurrentFacade } from '../../+state/draft-current.facade';
 @Component({
   selector: 'cha-front-draft-current',
   templateUrl: './draft-current.component.html',
-  styleUrls: ['./draft-current.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftCurrentComponent implements OnInit {
