@@ -7,6 +7,7 @@ export class NhlController {
 
   @Get('/nhl-leaders/:season/:playerType/:statType')
   async getNhlLeaders(@Param() param) {
+    console.log(param);
     const nhlLeaders = await this.nhlService.getNhlLeaders(
       param.playerType,
       param.statType,

@@ -12,7 +12,7 @@ export class ApiNhlService {
     statType: string,
     season: string
   ): Promise<any> {
-    const leaders = this.httpService.axiosRef.get(
+    const leaders = this.httpService.get(
       `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
     );
     return leaders;
