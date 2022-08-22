@@ -1,4 +1,4 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Query } from '@nestjs/common';
 import { ApiNhlService } from '../services';
 
 @Controller('nhl')
@@ -6,11 +6,11 @@ export class NhlController {
   constructor(private nhlService: ApiNhlService) {}
 
   @Get('/nhl-leaders/:season&:playerType&:statType')
-  async getNhlLeaders(@Param() param) {
+  async getNhlLeaders(@Query() query) {
     const nhlLeaders = await this.nhlService.getNhlLeaders(
-      param.playerType,
-      param.statType,
-      param.season
+      query.playerType,
+      query.statType,
+      query.season
     );
 
     if (!nhlLeaders || nhlLeaders.length < 1) {
