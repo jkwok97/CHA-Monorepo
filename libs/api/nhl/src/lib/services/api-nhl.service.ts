@@ -20,7 +20,6 @@ export class ApiNhlService {
       )
       .pipe(map((response) => response.data));
 
-    console.log('leaders:', leaders);
     return leaders;
   }
 }
