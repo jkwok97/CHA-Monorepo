@@ -5,7 +5,7 @@ import { ApiNhlService } from '../services';
 export class NhlController {
   constructor(private nhlService: ApiNhlService) {}
 
-  @Get('/nhl-leaders/:season&:playerType&:statType&:sort&:trim')
+  @Get('/nhl-leaders/:season&:playerType&:statType')
   async getNhlLeaders(@Param() param) {
     const nhlLeaders = await this.nhlService.getNhlLeaders(
       param.playerType,
