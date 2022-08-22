@@ -1,1 +1,33 @@
-<p>draft-summary works!</p>
+<blade-layout-feature-content>
+  <div class="draft-summary">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+    <div class="draft-summary-header">
+      <div class="draft-summary-header-title">CHA Draft Summary</div>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <blade-card>
+      <blade-card-body>
+        <ng-container *ngIf="isLoaded$ | async">
+          <ng-container *ngIf="draftPicks$ | async as items">
+            <ng-container *ngIf="teams$ | async as teams"
+              ><blade-table
+                [layout]="'stack'"
+                [data]="mapItems(items)"
+                [tableColumns]="tableColumns"
+                [teams]="teams"
+                [filteringOptions]="filteringOptions"
+                [tableType]="'draft-summary'"
+              ></blade-table
+            ></ng-container>
+          </ng-container>
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>
