@@ -16,9 +16,9 @@ export class NhlController {
 
     console.log('nhlLeaders:', nhlLeaders);
 
-    if (!nhlLeaders || nhlLeaders.length < 1) {
+    if (!nhlLeaders) {
       throw new NotFoundException('Nhl Leaders not found');
     }
-    return nhlLeaders.json();
+    return nhlLeaders;
   }
 }

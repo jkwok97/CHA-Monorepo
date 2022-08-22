@@ -1,5 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { AxiosResponse } from 'axios';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class ApiNhlService {
@@ -7,16 +9,18 @@ export class ApiNhlService {
 
   nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
 
-  async getNhlLeaders(
+  getNhlLeaders(
     playerType: string,
     statType: string,
     season: string
-  ): Promise<any> {
-    const leaders = this.httpService.get(
-      `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
-    );
+  ): Observable<AxiosResponse<any[]>> {
+    const leaders = this.httpService
+      .get(
+        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
+      )
+      .pipe(map((response) => response.data));
 
-    console.log("leaders:", leaders)
+    console.log('leaders:', leaders);
     return leaders;
   }
 }
