@@ -15,6 +15,8 @@ export class ApiNhlService {
     const leaders = this.httpService.get(
       `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
     );
+
+    console.log("leaders:", leaders)
     return leaders;
   }
 }
