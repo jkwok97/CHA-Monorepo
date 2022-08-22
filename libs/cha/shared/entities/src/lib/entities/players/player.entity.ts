@@ -7,6 +7,7 @@ import {
   AfterUpdate,
   AfterRemove,
   OneToOne,
+  Relation,
 } from 'typeorm';
 import { Drafts_V2 } from '../draft';
 import { Goalie_Ratings_V2, Player_Ratings_V2 } from '../ratings';

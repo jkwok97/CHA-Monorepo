@@ -15,8 +15,6 @@ export class DraftService {
     draftYear: number,
     playingYear: string
   ): Observable<DraftTableDto[]> {
-    console.log(draftYear, playingYear);
-
     return this._http
       .get(`${this.apiUrl}/draft-table/${draftYear}/${playingYear}`)
       .pipe(map((result: any) => result));

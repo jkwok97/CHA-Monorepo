@@ -77,7 +77,7 @@ export class ApiDraftTableService {
     return data
       .sort((a: any, b: any) => {
         if (b.stats.points === a.stats.points) {
-          if (b.wins === a.wins) {
+          if (b.stats.wins === a.stats.wins) {
             if (
               b.stats.goals_for - b.stats.goals_against ===
               a.stats.goals_for - a.stats.goals_against

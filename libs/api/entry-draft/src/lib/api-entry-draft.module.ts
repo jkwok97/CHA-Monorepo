@@ -1,9 +1,17 @@
-import { Module } from '@nestjs/common';
+import { Drafts_V2 } from '@cha/shared/entities';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntryDraftController } from './controllers';
+import { EntryDraftMiddleware } from './middlewares';
+import { ApiEntryDraftService } from './services';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Drafts_V2])],
   controllers: [EntryDraftController],
-  providers: [],
-  exports: [],
+  providers: [ApiEntryDraftService],
 })
-export class ApiEntryDraftModule {}
+export class ApiEntryDraftModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(EntryDraftMiddleware).forRoutes('*');
+  }
+}
