@@ -1,15 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpParams,
-  HttpParamsOptions,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { DraftTableDto } from '@cha/shared/entities';
+import { DraftPickDto, DraftTableDto } from '@cha/shared/entities';
 
 @Injectable()
-export class DraftTableService {
+export class DraftService {
   constructor(
     private _http: HttpClient,
     @Inject('apiUrl') private apiUrl: string
@@ -26,9 +22,9 @@ export class DraftTableService {
       .pipe(map((result: any) => result));
   }
 
-  //   getDraftPicks(): Observable<DraftPickDto[]> {
-  //     return this._http
-  //       .get(`${this.apiUrl}/v2/draft/ordered`)
-  //       .pipe(map((result: any) => result['result']));
-  //   }
+  getDraftPicks(): Observable<DraftPickDto[]> {
+    return this._http
+      .get(`${this.apiUrl}/entry-draft/ordered`)
+      .pipe(map((result: any) => result));
+  }
 }

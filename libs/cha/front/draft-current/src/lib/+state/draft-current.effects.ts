@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { DraftTableService, LeagueDataFacade } from '@cha/domain/core';
+import { LeagueDataFacade, DraftService } from '@cha/domain/core';
 import { catchError, exhaustMap, map, of, withLatestFrom } from 'rxjs';
 import { DraftCurrentActions } from './draft-current.actions';
 import { DraftTableDto } from '@cha/shared/entities';
@@ -9,7 +9,7 @@ import { DraftTableDto } from '@cha/shared/entities';
 export class DraftCurrentEffects {
   constructor(
     private actions$: Actions,
-    private draftService: DraftTableService,
+    private draftService: DraftService,
     private leagueDataFacade: LeagueDataFacade
   ) {}
 

@@ -2,7 +2,7 @@ import { UserTeamFacade } from './lib/states/user-team/user-team.facade';
 import { DisplayFacade } from './lib/states/display/display.facade';
 import { LeagueDataFacade } from './lib/states/league-data/league-data.facade';
 import { AwardsFacade } from './lib/states/awards/awards.facade';
-import { DraftTableService } from './lib/services';
+import { DraftService } from './lib/services';
 
 export * from './lib/cha-domain-core.module';
 
@@ -11,5 +11,5 @@ export {
   DisplayFacade,
   LeagueDataFacade,
   AwardsFacade,
-  DraftTableService,
+  DraftService,
 };

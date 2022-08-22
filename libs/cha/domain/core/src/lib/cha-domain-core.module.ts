@@ -18,7 +18,7 @@ import {
   DisplayService,
   LeagueDataService,
   TeamInfoService,
-  DraftTableService,
+  DraftService,
 } from './services';
 
 @NgModule({
@@ -45,7 +45,7 @@ import {
     LeagueDataFacade,
     LeagueDataEffects,
     LeagueDataService,
-    DraftTableService,
+    DraftService,
   ],
 })
 export class ChaDomainCoreModule {
