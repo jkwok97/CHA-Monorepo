@@ -96,6 +96,7 @@ export class BladeNhlLeaderCardComponent implements OnInit {
 
   getPlayerStat() {
     if (this.selected) {
+      console.log(this.selected);
       switch (this.type) {
         case 'goals':
           return this.selected.goals;

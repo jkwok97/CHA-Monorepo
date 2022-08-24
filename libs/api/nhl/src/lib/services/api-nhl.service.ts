@@ -22,4 +22,18 @@ export class ApiNhlService {
 
     return leaders;
   }
+
+  getNhlGoalieLeaders(
+    playerType: string,
+    statType: string,
+    season: string
+  ): Observable<AxiosResponse<any[]>> {
+    const leaders = this.httpService
+      .get(
+        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%206`
+      )
+      .pipe(map((response) => response.data));
+
+    return leaders;
+  }
 }
