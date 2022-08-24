@@ -42,6 +42,9 @@
         "libs/blade/angular/ui/award-card/src/index.ts"
       ],
       "@blade/angular/ui/button": ["libs/blade/angular/ui/button/src/index.ts"],
+      "@blade/angular/ui/button-select": [
+        "libs/blade/angular/ui/button-select/src/index.ts"
+      ],
       "@blade/angular/ui/button-toggle": [
         "libs/blade/angular/ui/button-toggle/src/index.ts"
       ],

@@ -6,12 +6,15 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <div class="grid justify-items-center row-gap-2 pt-2">
-      <div class="text-lg" style="font-weight: 100">NHL Detailed Stats</div>
-      <blade-select-button
+    <div class="grid justify-content-center row-gap-2 pt-2">
+      <div class="text-lg col-12 text-center" style="font-weight: 100">
+        NHL Detailed Stats
+      </div>
+      <blade-button-select
+        class="col-12 flex justify-content-center"
         [options]="selectOptions"
         (optionChanged)="onOptionChanged($event)"
-      ></blade-select-button>
+      ></blade-button-select>
     </div>
 
     <blade-divider></blade-divider>

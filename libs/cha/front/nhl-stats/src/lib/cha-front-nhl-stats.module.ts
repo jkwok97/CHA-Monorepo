@@ -12,6 +12,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
+import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -44,6 +45,7 @@ import {
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,
+    BladeButtonSelectComponent,
     StoreModule.forFeature('nhl-stats', reducer),
     EffectsModule.forFeature([NhlStatsEffects]),
   ],

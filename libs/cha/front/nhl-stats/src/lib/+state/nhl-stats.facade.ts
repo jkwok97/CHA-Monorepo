@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NhlGoalieStatDto, NhlPlayerStatDto } from '@cha/shared/api';
+import { NhlPlayerStatDto, NhlGoalieStatDto } from '@cha/shared/entities';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { NhlStatsActions } from './nhl-stats.actions';

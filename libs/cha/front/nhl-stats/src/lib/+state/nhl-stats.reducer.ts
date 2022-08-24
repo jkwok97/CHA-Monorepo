@@ -1,4 +1,4 @@
-import { NhlGoalieStatDto, NhlPlayerStatDto } from '@cha/shared/api';
+import { NhlPlayerStatDto, NhlGoalieStatDto } from '@cha/shared/entities';
 import { Action, createReducer, on } from '@ngrx/store';
 import { NhlStatsActions } from './nhl-stats.actions';
 

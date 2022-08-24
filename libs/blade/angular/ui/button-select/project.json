@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/ui/button-select/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/ui/button-select"],
+      "options": {
+        "jestConfig": "libs/blade/angular/ui/button-select/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/ui/button-select/**/*.ts",
+          "libs/blade/angular/ui/button-select/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:ui"]
+}
