@@ -1,1 +1,79 @@
-<p>nhl-leaders works!</p>
+<blade-layout-feature-content>
+  <div class="nhl-leaders">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+    <ng-container *ngIf="isLoaded$ | async">
+      <div class="nhl-leaders-section">
+        <div class="nhl-leaders-section-header">Skaters</div>
+        <div class="nhl-leaders-section-body">
+          <blade-nhl-leader-card
+            [leaders]="pointsLeaders$ | async"
+            [type]="'points'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [leaders]="goalsLeaders$ | async"
+            [type]="'goals'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [leaders]="assistsLeaders$ | async"
+            [type]="'assists'"
+          ></blade-nhl-leader-card>
+        </div>
+      </div>
+      <!-- <div class="nhl-leaders-section">
+        <div class="nhl-leaders-section-header">Defense</div>
+        <div class="nhl-leaders-section-body">
+          <blade-nhl-leader-card
+            [leaders]="defensePointsLeaders$ | async"
+            [type]="'points'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [leaders]="defenseGoalsLeaders$ | async"
+            [type]="'goals'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [leaders]="defenseAssistsLeaders$ | async"
+            [type]="'assists'"
+          ></blade-nhl-leader-card>
+        </div>
+      </div> -->
+      <!-- <div class="nhl-leaders-section">
+        <div class="nhl-leaders-section-header">Rookies</div>
+        <div class="nhl-leaders-section-body">
+          <blade-nhl-leader-card
+            [leaders]="rookiePointsLeaders$ | async"
+            [type]="'points'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [leaders]="rookieGoalsLeaders$ | async"
+            [type]="'goals'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [leaders]="rookieAssistsLeaders$ | async"
+            [type]="'assists'"
+          ></blade-nhl-leader-card>
+        </div>
+      </div> -->
+      <!-- <div class="nhl-leaders-section">
+        <div class="nhl-leaders-section-header">Goalies</div>
+        <div class="nhl-leaders-section-body">
+          <blade-nhl-leader-card
+            [goalieLeaders]="gaaLeaders$ | async"
+            [type]="'gaa'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [goalieLeaders]="savePctLeaders$ | async"
+            [type]="'savePct'"
+          ></blade-nhl-leader-card>
+          <blade-nhl-leader-card
+            [goalieLeaders]="shutoutLeaders$ | async"
+            [type]="'shutouts'"
+          ></blade-nhl-leader-card>
+        </div>
+      </div> -->
+    </ng-container>
+  </div>
+</blade-layout-feature-content>

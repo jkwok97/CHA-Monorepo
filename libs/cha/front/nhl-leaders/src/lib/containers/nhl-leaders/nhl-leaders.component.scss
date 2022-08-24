@@ -1,0 +1,26 @@
+.nhl-leaders {
+  display: grid;
+  padding: 20px;
+  grid-row-gap: 20px;
+  height: 100%;
+  width: 100%;
+
+  &-section {
+    display: grid;
+    grid-row-gap: 20px;
+
+    &-header {
+      font-size: large;
+      font-weight: 100;
+    }
+
+    &-body {
+      display: grid;
+      grid-row-gap: 20px;
+      justify-content: space-between;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-column-gap: 15px;
+      height: 100%;
+    }
+  }
+}

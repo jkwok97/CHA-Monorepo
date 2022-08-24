@@ -1,0 +1,57 @@
+<div class="leader-card">
+  <div class="leader-card-highlighted">
+    <div class="leader-card-highlighted-player">
+      <div class="leader-card-highlighted-player-avatar">
+        <div class="leader-card-highlighted-player-avatar-name">
+          <div class="leader-card-highlighted-player-avatar-name-number">
+            {{ getPlayerNumber() }}
+          </div>
+          <div class="leader-card-highlighted-player-avatar-name-name">
+            <div>{{ getPlayerFirst() }}</div>
+            <div>{{ getPlayerLast() }}</div>
+          </div>
+        </div>
+
+        <img [src]="getPlayerPicture()" />
+        <p-avatar
+          [image]="getTeamPicture()"
+          shape="square"
+          size="xlarge"
+        ></p-avatar>
+        <div class="leader-card-highlighted-player-avatar-type">
+          {{ type | uppercase }}
+        </div>
+        <div class="leader-card-highlighted-player-avatar-number">
+          {{ getPlayerStat() }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="leader-card-chart">
+    <ng-container *ngFor="let item of leaders">
+      <div
+        class="leader-card-chart-item"
+        (mouseover)="onMouseOver(item)"
+        (mouseout)="onMouseOut()"
+      >
+        <div>{{ item.player.fullName }}</div>
+        <div *ngIf="item.goals">{{ item.goals }}</div>
+        <div *ngIf="item.points">{{ item.points }}</div>
+        <div *ngIf="item.assists">{{ item.assists }}</div>
+      </div>
+    </ng-container>
+    <ng-container *ngFor="let item of goalieLeaders">
+      <div
+        class="leader-card-chart-item"
+        (mouseover)="onMouseOver(item)"
+        (mouseout)="onMouseOut()"
+      >
+        <div>{{ item.player.fullName }}</div>
+        <div *ngIf="item.gaa">{{ item.gaa.toFixed(2) }}</div>
+        <div *ngIf="item.savePctg">{{ item.savePctg }}</div>
+        <div *ngIf="item.shutouts">{{ item.shutouts }}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>
