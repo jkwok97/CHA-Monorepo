@@ -8,6 +8,6 @@ export interface LeagueDataDto {
   next_draft_year: number;
   current_cap: number;
   next_cap: number;
-  min_games: number;
+  min_games: string;
   offseason: boolean;
 }

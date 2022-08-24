@@ -13,12 +13,12 @@ export class NhlLeadersEffects {
     private leagueDataFacade: LeagueDataFacade
   ) {}
 
-  getDraftTable$ = createEffect(() =>
+  getNhlLeaders$ = createEffect(() =>
     this.actions$.pipe(
       ofType(NhlLeadersActions.getLeaders),
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
-        this.nhlService.getAllLeaders(data.nhl_year).pipe(
+        this.nhlService.getAllLeaders(data.nhl_year, data.min_games).pipe(
           map((leaders) => NhlLeadersActions.getLeadersSuccess({ leaders })),
           catchError(() => of(NhlLeadersActions.error()))
         )

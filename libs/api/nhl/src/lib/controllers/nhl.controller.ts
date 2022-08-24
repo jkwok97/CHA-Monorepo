@@ -7,21 +7,26 @@ export class NhlController {
 
   @Get('/nhl-leaders/:season/:playerType/:statType')
   async getNhlLeaders(@Param() param) {
-    let nhlLeaders;
+    const nhlLeaders = await this.nhlService.getNhlLeaders(
+      param.playerType,
+      param.statType,
+      param.season
+    );
 
-    if (param.playerType === 'skater') {
-      nhlLeaders = await this.nhlService.getNhlLeaders(
-        param.playerType,
-        param.statType,
-        param.season
-      );
-    } else {
-      nhlLeaders = await this.nhlService.getNhlGoalieLeaders(
-        param.playerType,
-        param.statType,
-        param.season
-      );
+    if (!nhlLeaders) {
+      throw new NotFoundException('Nhl Leaders not found');
     }
+    return nhlLeaders;
+  }
+
+  @Get('/nhl-leaders/:season/:playerType/:statType/:minGames')
+  async getNhlGoalieLeaders(@Param() param) {
+    const nhlLeaders = await this.nhlService.getNhlGoalieLeaders(
+      param.playerType,
+      param.statType,
+      param.season,
+      param.minGames
+    );
 
     if (!nhlLeaders) {
       throw new NotFoundException('Nhl Leaders not found');

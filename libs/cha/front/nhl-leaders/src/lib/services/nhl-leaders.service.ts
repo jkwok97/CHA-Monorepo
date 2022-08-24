@@ -10,7 +10,7 @@ export class NhlLeadersService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getAllLeaders(season: string) {
+  getAllLeaders(season: string, minGames: string) {
     return combineLatest([
       this.getNhlLeaders(season, 'skater', 'points'),
       this.getNhlLeaders(season, 'skater', 'goals'),
@@ -18,9 +18,9 @@ export class NhlLeadersService {
       // this.getNhlRookieLeaders(season, 'skater', 'points'),
       // this.getNhlRookieLeaders(season, 'skater', 'goals'),
       // this.getNhlRookieLeaders(season, 'skater', 'assists'),
-      this.getNhlLeaders(season, 'goalie', 'gaa'),
-      this.getNhlLeaders(season, 'goalie', 'savePctg'),
-      this.getNhlLeaders(season, 'goalie', 'shutouts'),
+      this.getNhlGoalieLeaders(season, 'goalie', 'gaa', minGames),
+      this.getNhlGoalieLeaders(season, 'goalie', 'savePctg', minGames),
+      this.getNhlGoalieLeaders(season, 'goalie', 'shutouts', minGames),
       // this.getNhlDefenseLeaders(season, 'skater', 'points'),
       // this.getNhlDefenseLeaders(season, 'skater', 'goals'),
       // this.getNhlDefenseLeaders(season, 'skater', 'assists'),
@@ -60,6 +60,12 @@ export class NhlLeadersService {
   private getNhlLeaders(season: string, player: string, stat: string) {
     return this._http
       .get(`${this.apiUrl}/nhl/nhl-leaders/${season}/${player}/${stat}`)
+      .pipe(map((result: any) => result['data']));
+  }
+
+  private getNhlGoalieLeaders(season: string, player: string, stat: string, minGames: string) {
+    return this._http
+      .get(`${this.apiUrl}/nhl/nhl-leaders/${season}/${player}/${stat}/${minGames}`)
       .pipe(map((result: any) => result['data']));
   }
 
