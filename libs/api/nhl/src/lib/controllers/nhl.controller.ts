@@ -34,7 +34,7 @@ export class NhlController {
     return nhlLeaders;
   }
 
-  @Get('/nhl-rookie-leaders/:season/:playerType/:statType/:minGames')
+  @Get('/nhl-rookie-leaders/:season/:playerType/:statType')
   async getNhlRookieLeaders(@Param() param) {
     const nhlLeaders = await this.nhlService.getNhlRookieLeaders(
       param.playerType,
@@ -48,7 +48,7 @@ export class NhlController {
     return nhlLeaders;
   }
 
-  @Get('/nhl-defense-leaders/:season/:playerType/:statType/:minGames')
+  @Get('/nhl-defense-leaders/:season/:playerType/:statType')
   async getNhlDefenseLeaders(@Param() param) {
     const nhlLeaders = await this.nhlService.getNhlDefenseLeaders(
       param.playerType,
