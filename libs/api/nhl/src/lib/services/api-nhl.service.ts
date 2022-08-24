@@ -37,4 +37,32 @@ export class ApiNhlService {
 
     return leaders;
   }
+
+  getNhlRookieLeaders(
+    playerType: string,
+    statType: string,
+    season: string
+  ): Observable<AxiosResponse<any[]>> {
+    const leaders = this.httpService
+      .get(
+        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`
+      )
+      .pipe(map((response) => response.data));
+
+    return leaders;
+  }
+
+  getNhlDefenseLeaders(
+    playerType: string,
+    statType: string,
+    season: string
+  ): Observable<AxiosResponse<any[]>> {
+    const leaders = this.httpService
+      .get(
+        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`
+      )
+      .pipe(map((response) => response.data));
+
+    return leaders;
+  }
 }

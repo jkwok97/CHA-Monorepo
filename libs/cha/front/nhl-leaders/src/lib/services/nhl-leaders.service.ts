@@ -15,43 +15,43 @@ export class NhlLeadersService {
       this.getNhlLeaders(season, 'skater', 'points'),
       this.getNhlLeaders(season, 'skater', 'goals'),
       this.getNhlLeaders(season, 'skater', 'assists'),
-      // this.getNhlRookieLeaders(season, 'skater', 'points'),
-      // this.getNhlRookieLeaders(season, 'skater', 'goals'),
-      // this.getNhlRookieLeaders(season, 'skater', 'assists'),
+      this.getNhlRookieLeaders(season, 'skater', 'points'),
+      this.getNhlRookieLeaders(season, 'skater', 'goals'),
+      this.getNhlRookieLeaders(season, 'skater', 'assists'),
       this.getNhlGoalieLeaders(season, 'goalie', 'gaa', minGames),
       this.getNhlGoalieLeaders(season, 'goalie', 'savePctg', minGames),
       this.getNhlGoalieLeaders(season, 'goalie', 'shutouts', minGames),
-      // this.getNhlDefenseLeaders(season, 'skater', 'points'),
-      // this.getNhlDefenseLeaders(season, 'skater', 'goals'),
-      // this.getNhlDefenseLeaders(season, 'skater', 'assists'),
+      this.getNhlDefenseLeaders(season, 'skater', 'points'),
+      this.getNhlDefenseLeaders(season, 'skater', 'goals'),
+      this.getNhlDefenseLeaders(season, 'skater', 'assists'),
     ]).pipe(
       map(
         ([
           points,
           goals,
           assists,
-          // rookiePoints,
-          // rookieGoals,
-          // rookieAssists,
+          rookiePoints,
+          rookieGoals,
+          rookieAssists,
           gaa,
           savePct,
           shutouts,
-          // defensePoints,
-          // defenseGoals,
-          // defenseAssists,
+          defensePoints,
+          defenseGoals,
+          defenseAssists,
         ]) => ({
           points,
           goals,
           assists,
-          // rookiePoints,
-          // rookieGoals,
-          // rookieAssists,
+          rookiePoints,
+          rookieGoals,
+          rookieAssists,
           gaa,
           savePct,
           shutouts,
-          // defensePoints,
-          // defenseGoals,
-          // defenseAssists,
+          defensePoints,
+          defenseGoals,
+          defenseAssists,
         })
       )
     );
@@ -71,14 +71,14 @@ export class NhlLeadersService {
 
   private getNhlRookieLeaders(season: string, player: string, stat: string) {
     return this._http
-      .get(`${this.apiUrl}/nhl/nhl-rookie-leaders//${season}/${player}/${stat}`)
+      .get(`${this.apiUrl}/nhl/nhl-rookie-leaders/${season}/${player}/${stat}`)
       .pipe(map((result: any) => result['data']));
   }
 
   private getNhlDefenseLeaders(season: string, player: string, stat: string) {
     return this._http
       .get(
-        `${this.apiUrl}/nhl/nhl-defense-leaders//${season}/${player}/${stat}`
+        `${this.apiUrl}/nhl/nhl-defense-leaders/${season}/${player}/${stat}`
       )
       .pipe(map((result: any) => result['data']));
   }

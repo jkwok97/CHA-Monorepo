@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { NhlPlayerDto, NhlGoalieDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
+import { UserTeamFacade } from '@cha/domain/core';
+import { NhlPlayerDto, NhlGoalieDto, TeamDto } from '@cha/shared/entities';
+import { first, Observable } from 'rxjs';
 import { NhlLeadersFacade } from '../../+state/nhl-leaders.facade';
 
 @Component({
@@ -24,8 +25,14 @@ export class NhlLeadersComponent implements OnInit {
   gaaLeaders$: Observable<NhlGoalieDto[]>;
   savePctLeaders$: Observable<NhlGoalieDto[]>;
   shutoutLeaders$: Observable<NhlGoalieDto[]>;
+  currentTeam$: Observable<TeamDto | undefined>;
 
-  constructor(private nhlLeadersFacade: NhlLeadersFacade) {
+  backgroundColor!: string;
+
+  constructor(
+    private nhlLeadersFacade: NhlLeadersFacade,
+    private userTeamFacade: UserTeamFacade
+  ) {
     this.isLoaded$ = this.nhlLeadersFacade.isLoaded$;
     this.isLoading$ = this.nhlLeadersFacade.isLoading$;
     this.goalsLeaders$ = this.nhlLeadersFacade.goals$;
@@ -40,6 +47,15 @@ export class NhlLeadersComponent implements OnInit {
     this.gaaLeaders$ = this.nhlLeadersFacade.gaa$;
     this.savePctLeaders$ = this.nhlLeadersFacade.savePct$;
     this.shutoutLeaders$ = this.nhlLeadersFacade.shutouts$;
+    this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+
+    this.currentTeam$
+      .pipe(first())
+      .subscribe((userTeam: TeamDto | undefined) => {
+        if (userTeam) {
+          this.backgroundColor = userTeam.teamcolor;
+        }
+      });
   }
 
   ngOnInit(): void {

@@ -33,4 +33,32 @@ export class NhlController {
     }
     return nhlLeaders;
   }
+
+  @Get('/nhl-rookie-leaders/:season/:playerType/:statType/:minGames')
+  async getNhlRookieLeaders(@Param() param) {
+    const nhlLeaders = await this.nhlService.getNhlRookieLeaders(
+      param.playerType,
+      param.statType,
+      param.season,
+    );
+
+    if (!nhlLeaders) {
+      throw new NotFoundException('Nhl Leaders not found');
+    }
+    return nhlLeaders;
+  }
+
+  @Get('/nhl-defense-leaders/:season/:playerType/:statType/:minGames')
+  async getNhlDefenseLeaders(@Param() param) {
+    const nhlLeaders = await this.nhlService.getNhlDefenseLeaders(
+      param.playerType,
+      param.statType,
+      param.season,
+    );
+
+    if (!nhlLeaders) {
+      throw new NotFoundException('Nhl Leaders not found');
+    }
+    return nhlLeaders;
+  }
 }
