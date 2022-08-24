@@ -13,82 +13,79 @@ export class NhlStatsService {
 
   getNHLSummarySportsnet(
     season: string,
-    season_type: string
+    seasonType: string
   ): Observable<{ skaters: any[]; goalies: any[] }> {
-    const options = {
-      params: new HttpParams()
-        .set('season', season)
-        .set('season_type', season_type),
-    };
-    return this._http.get(`${this.apiUrl}/nhl-summary`, options).pipe(
-      map((result: any) => {
-        return {
-          skaters: result['data']['player_stats']['skaters'],
-          goalies: result['data']['player_stats']['goalies'],
-        };
-      }),
-      delay(500)
-    );
+    return this._http
+      .get(`${this.apiUrl}/nhl/nhl-summary/sportsnet/${season}/${seasonType}`)
+      .pipe(
+        map((result: any) => {
+          return {
+            skaters: result['data']['player_stats']['skaters'],
+            goalies: result['data']['player_stats']['goalies'],
+          };
+        }),
+        delay(500)
+      );
   }
 
-  getNHLsummary(
-    season: string,
-    player: string,
-    statsType: string,
-    sort: string,
-    start: number,
-    pageSize: number
-  ): Observable<{ stats: NhlPlayerStatDto[]; total: number }> {
-    const options = {
-      params: new HttpParams()
-        .set('season', season)
-        .set('playerType', player)
-        .set('statsType', statsType)
-        .set('sort', sort)
-        .set('start', start)
-        .set('pageSize', pageSize),
-    };
-    return this._http.get(`${this.apiUrl}/nhl-leaders/summary`, options).pipe(
-      map((result: any) => {
-        result['data'].forEach(
-          (stat: NhlPlayerStatDto) =>
-            (stat = this.getPlayerStatsWithChaLogo(stat))
-        );
-        return { stats: result['data'], total: result['total'] };
-        // return result['data'];
-      }),
-      delay(500)
-    );
-  }
+  //   getNHLsummary(
+  //     season: string,
+  //     player: string,
+  //     statsType: string,
+  //     sort: string,
+  //     start: number,
+  //     pageSize: number
+  //   ): Observable<{ stats: NhlPlayerStatDto[]; total: number }> {
+  //     const options = {
+  //       params: new HttpParams()
+  //         .set('season', season)
+  //         .set('playerType', player)
+  //         .set('statsType', statsType)
+  //         .set('sort', sort)
+  //         .set('start', start)
+  //         .set('pageSize', pageSize),
+  //     };
+  //     return this._http.get(`${this.apiUrl}/nhl/nhl-leaders/summary`, options).pipe(
+  //       map((result: any) => {
+  //         result['data'].forEach(
+  //           (stat: NhlPlayerStatDto) =>
+  //             (stat = this.getPlayerStatsWithChaLogo(stat))
+  //         );
+  //         return { stats: result['data'], total: result['total'] };
+  //         // return result['data'];
+  //       }),
+  //       delay(500)
+  //     );
+  //   }
 
-  getNHLGoaliesummary(
-    season: string,
-    player: string,
-    statsType: string,
-    sort: string,
-    start: number,
-    pageSize: number
-  ): Observable<{ stats: NhlGoalieStatDto[]; total: number }> {
-    const options = {
-      params: new HttpParams()
-        .set('season', season)
-        .set('playerType', player)
-        .set('statsType', statsType)
-        .set('sort', sort)
-        .set('start', start)
-        .set('pageSize', pageSize),
-    };
-    return this._http.get(`${this.apiUrl}/nhl-leaders/summary`, options).pipe(
-      map((result: any) => {
-        result['data'].forEach(
-          (stat: NhlGoalieStatDto) =>
-            (stat = this.getGoalieStatsWithChaLogo(stat))
-        );
-        return { stats: result['data'], total: result['total'] };
-      }),
-      delay(1000)
-    );
-  }
+  //   getNHLGoaliesummary(
+  //     season: string,
+  //     player: string,
+  //     statsType: string,
+  //     sort: string,
+  //     start: number,
+  //     pageSize: number
+  //   ): Observable<{ stats: NhlGoalieStatDto[]; total: number }> {
+  //     const options = {
+  //       params: new HttpParams()
+  //         .set('season', season)
+  //         .set('playerType', player)
+  //         .set('statsType', statsType)
+  //         .set('sort', sort)
+  //         .set('start', start)
+  //         .set('pageSize', pageSize),
+  //     };
+  //     return this._http.get(`${this.apiUrl}/nhl-leaders/summary`, options).pipe(
+  //       map((result: any) => {
+  //         result['data'].forEach(
+  //           (stat: NhlGoalieStatDto) =>
+  //             (stat = this.getGoalieStatsWithChaLogo(stat))
+  //         );
+  //         return { stats: result['data'], total: result['total'] };
+  //       }),
+  //       delay(1000)
+  //     );
+  //   }
 
   getNHLRookiesummary(
     season: string,
@@ -98,17 +95,10 @@ export class NhlStatsService {
     start: number,
     pageSize: number
   ): Observable<{ stats: NhlPlayerStatDto[]; total: number }> {
-    const options = {
-      params: new HttpParams()
-        .set('season', season)
-        .set('playerType', player)
-        .set('statsType', statsType)
-        .set('sort', sort)
-        .set('start', start)
-        .set('pageSize', pageSize),
-    };
     return this._http
-      .get(`${this.apiUrl}/nhl-rookie-leaders/summary`, options)
+      .get(
+        `${this.apiUrl}/nhl-summary/rookies/${season}/${player}/${statsType}/${sort}/${start}/${pageSize}`
+      )
       .pipe(
         map((result: any) => {
           result['data'].forEach(
