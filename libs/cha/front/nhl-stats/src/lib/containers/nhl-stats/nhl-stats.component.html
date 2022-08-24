@@ -19,7 +19,7 @@
 
     <blade-divider></blade-divider>
 
-    <blade-card>
+    <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="showSkaters">
           <cha-front-nhl-stats-skater-table></cha-front-nhl-stats-skater-table>
