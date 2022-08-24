@@ -1,1 +1,33 @@
-<p>nhl-stats works!</p>
+<blade-layout-feature-content>
+  <div>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="grid justify-items-center row-gap-2 pt-2">
+      <div class="text-lg" style="font-weight: 100">NHL Detailed Stats</div>
+      <blade-select-button
+        [options]="selectOptions"
+        (optionChanged)="onOptionChanged($event)"
+      ></blade-select-button>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <blade-card>
+      <blade-card-body>
+        <ng-container *ngIf="showSkaters">
+          <cha-front-nhl-stats-skater-table></cha-front-nhl-stats-skater-table>
+        </ng-container>
+        <ng-container *ngIf="showGoalies">
+          <cha-front-nhl-stats-goalie-table></cha-front-nhl-stats-goalie-table>
+        </ng-container>
+        <ng-container *ngIf="showRookies">
+          <cha-front-nhl-stats-rookie-table></cha-front-nhl-stats-rookie-table>
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>
