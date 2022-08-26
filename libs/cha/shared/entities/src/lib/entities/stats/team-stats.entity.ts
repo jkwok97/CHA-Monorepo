@@ -6,6 +6,7 @@ export class Team_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
+  @ManyToOne(() => Teams_V2, (team) => team.id)
   @Column()
   team_id!: number;
 
@@ -152,7 +153,4 @@ export class Team_Stats_V2 {
 
   @Column()
   season_type!: 'Regular' | 'Playoffs';
-
-  @ManyToOne(() => Teams_V2, (team) => team.id)
-  team!: Teams_V2;
 }
