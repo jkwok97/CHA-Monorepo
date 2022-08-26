@@ -1,0 +1,13 @@
+.league-stats-team {
+  &-container {
+    display: grid;
+    grid-row-gap: 20px;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+    grid-column-gap: 10px;
+  }
+
+  &-container:first-of-type {
+    padding-bottom: 20px;
+  }
+}

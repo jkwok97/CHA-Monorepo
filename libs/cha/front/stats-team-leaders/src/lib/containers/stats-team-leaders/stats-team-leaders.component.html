@@ -1,1 +1,24 @@
-<p>stats-team-leaders works!</p>
+<blade-layout-feature-content>
+  <div class="league-stats-team">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <div class="league-stats-team-container">
+          <cha-front-stats-team-leaders-standings></cha-front-stats-team-leaders-standings>
+          <cha-front-stats-team-leaders-streak></cha-front-stats-team-leaders-streak>
+          <cha-front-stats-team-leaders-penalties></cha-front-stats-team-leaders-penalties>
+        </div>
+        <div class="league-stats-team-container">
+          <cha-front-stats-team-leaders-differentials></cha-front-stats-team-leaders-differentials>
+          <cha-front-stats-team-leaders-pp></cha-front-stats-team-leaders-pp>
+          <cha-front-stats-team-leaders-pk></cha-front-stats-team-leaders-pk>
+        </div>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>

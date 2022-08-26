@@ -1,0 +1,71 @@
+<p-table
+  [responsiveLayout]="'scroll'"
+  [value]="mapItems(stats)"
+  [columns]="tableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  *ngIf="stats"
+>
+  <ng-template pTemplate="header" let-columns let-data>
+    <tr>
+      <th *ngFor="let column of tableColumns">
+        {{ column.header }}
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of tableColumns">
+        <span class="p-column-title">{{ column.header }}</span>
+        <div class="table-body-cell">
+          <ng-container>
+            <div class="table-body-cell">
+              <img
+                [src]="data.teamImg"
+                height="30px"
+                *ngIf="column.field === 'team'"
+              />
+              {{
+                column.field !== 'team'
+                  ? data[column.field]
+                  : isMobile
+                  ? ''
+                  : data[column.field]
+              }}
+            </div>
+            <div class="table-body-cell" *ngIf="column.field === 'win_pct'">
+              {{ ((data.wins / data.games_played) * 100).toFixed(1) }}%
+            </div>
+
+            <div class="table-body-cell" *ngIf="column.field === 'pim_game'">
+              {{ (data.penalty_minutes / data.games_played).toFixed(1) }}
+            </div>
+
+            <div class="table-body-cell" *ngIf="column.field === 'goals_diff'">
+              {{ data.goals_for - data.goals_against }}
+            </div>
+
+            <div class="table-body-cell" *ngIf="column.field === 'pp_pct'">
+              {{ ((data.pp_goals / data.pp_attempts) * 100).toFixed(1) }}%
+            </div>
+
+            <div class="table-body-cell" *ngIf="column.field === 'pk_pct'">
+              {{
+                (
+                  ((data.pk_attempts - data.pk_goals) / data.pk_attempts) *
+                  100
+                ).toFixed(1)
+              }}%
+            </div>
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

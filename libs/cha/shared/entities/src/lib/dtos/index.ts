@@ -5,3 +5,4 @@ export * from './awards';
 export * from './player';
 export * from './drafts';
 export * from './nhl';
+export * from './stats';
