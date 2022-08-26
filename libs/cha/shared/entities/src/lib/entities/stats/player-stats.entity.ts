@@ -4,7 +4,6 @@ import {
   Column,
   OneToOne,
   ManyToOne,
-  JoinColumn,
 } from 'typeorm';
 import { Awards_V2 } from '../awards';
 import { Players_V2 } from '../players';
