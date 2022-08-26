@@ -5022,10 +5022,10 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 
 .p-accordion .p-accordion-header .p-accordion-header-link {
   padding: 1.25rem;
-  border: 1px solid #dee2e6;
-  color: #6c757d;
-  background: #f8f9fa;
-  font-weight: 700;
+  border: 1px solid #393d47;
+  color: whitesmoke;
+  background: #393d47;
+  font-weight: 300;
   border-radius: 6px;
   transition: box-shadow 0.2s;
 }
@@ -5042,40 +5042,24 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
   .p-accordion-header-link:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: 0 0 0 0.2rem #c7d2fe;
-}
-
-.p-accordion
-  .p-accordion-header:not(.p-highlight):not(.p-disabled):hover
-  .p-accordion-header-link {
-  background: #e9ecef;
-  border-color: #dee2e6;
-  color: #343a40;
 }
 
 .p-accordion
   .p-accordion-header:not(.p-disabled).p-highlight
   .p-accordion-header-link {
-  background: #f8f9fa;
-  border-color: #dee2e6;
-  color: #343a40;
+  background: #393d47;
+  border-color: #393d47;
+  color: whitesmoke;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-}
-
-.p-accordion
-  .p-accordion-header:not(.p-disabled).p-highlight:hover
-  .p-accordion-header-link {
-  border-color: #dee2e6;
-  background: #e9ecef;
-  color: #343a40;
+  border-bottom: 1px solid #a1a1a1;
 }
 
 .p-accordion .p-accordion-content {
   padding: 1.25rem;
-  border: 1px solid #dee2e6;
-  background: #fff;
-  color: #495057;
+  border: 1px solid #393d47;
+  background: #393d47;
+  color: whitesmoke;
   border-top: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
