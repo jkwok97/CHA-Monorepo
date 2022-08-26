@@ -15,8 +15,8 @@ import { Goalies_Stats_V2, Players_Stats_V2 } from '../stats';
 
 @Entity()
 export class Players_V2 {
-  @PrimaryGeneratedColumn()
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
+  @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
