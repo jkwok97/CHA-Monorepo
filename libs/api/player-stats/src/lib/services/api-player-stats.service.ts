@@ -61,12 +61,11 @@ export class ApiPlayerStatsService {
   ) {
     return await this.repo
       .find({
-        // relations: ['team_name', 'player_id'],
-        relations: ['team_name'],
+        relations: ['team_name', 'player_id'],
         select: {
           hits: true,
           team_name: this.teamNameSelect,
-          // player_id: this.playerIdSelect,
+          player_id: this.playerIdSelect,
         },
         where: {
           playing_year: season,

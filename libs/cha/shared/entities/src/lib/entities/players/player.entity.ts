@@ -11,11 +11,10 @@ import {
 import { Drafts_V2 } from '../draft';
 import { Goalie_Ratings_V2, Player_Ratings_V2 } from '../ratings';
 import { Salaries_V2 } from '../salaries';
-import { Goalies_Stats_V2, Players_Stats_V2 } from '../stats';
+import { Goalies_Stats_V2 } from '../stats';
 
 @Entity()
 export class Players_V2 {
-  @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   @PrimaryGeneratedColumn()
   id!: number;
 

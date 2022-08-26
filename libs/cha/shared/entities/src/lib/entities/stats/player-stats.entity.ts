@@ -20,7 +20,7 @@ export class Players_Stats_V2 {
   player_id!: Players_V2;
 
   @OneToOne(() => Teams_V2, (team) => team.shortname)
-  @JoinColumn({ name: 'team_name' })
+  @JoinColumn({ name: 'shortname' })
   team_name!: Teams_V2;
 
   @Column()
