@@ -61,7 +61,10 @@ export class ApiPlayerStatsService {
   ) {
     return await this.repo
       .find({
-        relations: ['team_name', 'player_id'],
+        relations: {
+          player_id: true,
+          team_name: true,
+        },
         select: {
           hits: true,
           team_name: this.teamNameSelect,

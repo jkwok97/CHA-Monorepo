@@ -5,14 +5,18 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Players_Stats_V2 } from '../stats';
 
 @Entity()
 export class Teams_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
+  @OneToOne(() => Players_Stats_V2, (stats) => stats.team_name)
+  @JoinColumn({ name: 'shortname' })
   shortname!: string;
 
   @Column()

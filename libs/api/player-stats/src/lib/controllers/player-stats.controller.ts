@@ -7,9 +7,7 @@ export class PlayerStatsController {
   constructor(private playerStatsService: ApiPlayerStatsService) {}
 
   @Get('/leaders/:season/:seasonType')
-  async getTeamStatsBySeasonByType(
-    @Param() param
-  ): Promise<StatPlayerLeadersDto> {
+  async getPlayerStatsLeaders(@Param() param): Promise<StatPlayerLeadersDto> {
     const stats = await this.playerStatsService.getPlayerStatsLeaders(
       param.season,
       param.seasonType
