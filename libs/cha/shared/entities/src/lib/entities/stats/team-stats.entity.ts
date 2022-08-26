@@ -73,7 +73,7 @@ export class Team_Stats_V2 {
   road_ties!: number;
 
   @Column()
-  div_wins!: number;
+  div_win!: number;
 
   @Column()
   div_loss!: number;
@@ -82,7 +82,7 @@ export class Team_Stats_V2 {
   div_ties!: number;
 
   @Column()
-  ot_wins!: number;
+  ot_win!: number;
 
   @Column()
   ot_loss!: number;
