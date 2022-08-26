@@ -59,7 +59,7 @@ export class ApiPlayerStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ) {
     return await this.repo.find({
-      relations: ['team_id', 'player_id'],
+      relations: ['team_name', 'player_id'],
       select: {
         hits: true,
         team_name: this.teamNameSelect,
@@ -81,7 +81,7 @@ export class ApiPlayerStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ) {
     return await this.repo.find({
-      relations: ['team_id', 'player_id'],
+      relations: ['team_name', 'player_id'],
       select: {
         points: true,
         team_name: this.teamNameSelect,
