@@ -6,7 +6,7 @@ import { ApiTeamStatsService } from '../services';
 export class TeamStatsController {
   constructor(private teamsStatsService: ApiTeamStatsService) {}
 
-  @Get('/:{season}/:seasonType')
+  @Get('/:season/:seasonType')
   async getTeamStatsBySeasonByType(@Param() param): Promise<Team_Stats_V2[]> {
     const stats = await this.teamsStatsService.getTeamStatsBySeasonByType(
       param.season,
