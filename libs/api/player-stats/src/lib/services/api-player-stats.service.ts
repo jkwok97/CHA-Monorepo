@@ -10,13 +10,27 @@ export class ApiPlayerStatsService {
     private repo: Repository<Players_Stats_V2>
   ) {}
 
+  teamNameSelect = {
+    id: true,
+    teamlogo: true,
+  };
+
+  playerIdSelect = {
+    id: true,
+    firstname: true,
+    lastname: true,
+    nhl_id: true,
+    isgoalie: true,
+  };
+
   async getPlayerStatsLeaders(
     season: string,
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<any[]> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
+    const pointsLeaders = await this.getPointsLeaders(season, seasonType);
 
-    return [{ hitsLeaders }];
+    return [{ hits: hitsLeaders, points: pointsLeaders }];
     // return await this.repo.find({
     //   relations: ['team_name', 'player_id'],
     //   select: {
@@ -61,17 +75,30 @@ export class ApiPlayerStatsService {
       relations: ['team_id', 'player_id'],
       select: {
         hits: true,
-        team_name: {
-          id: true,
-          teamlogo: true,
-        },
-        player_id: {
-          id: true,
-          firstname: true,
-          lastname: true,
-          nhl_id: true,
-          isgoalie: true,
-        },
+        team_name: this.teamNameSelect,
+        player_id: this.playerIdSelect,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        hits: 'DESC',
+      },
+      take: 10,
+    });
+  }
+
+  private async getPointsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    return await this.repo.find({
+      relations: ['team_id', 'player_id'],
+      select: {
+        points: true,
+        team_name: this.teamNameSelect,
+        player_id: this.playerIdSelect,
       },
       where: {
         playing_year: season,
