@@ -92,7 +92,7 @@ export class ApiPlayerStatsService {
         season_type: seasonType,
       },
       order: {
-        hits: 'DESC',
+        points: 'DESC',
       },
       take: 10,
     });
