@@ -17,10 +17,11 @@ export class Players_Stats_V2 {
 
   @ManyToOne(() => Players_V2, (player) => player.id)
   @Column()
-  player_id!: number;
+  player_id!: Players_V2;
 
+  @OneToOne(() => Teams_V2, (team) => team.shortname)
   @Column()
-  team_name!: string;
+  team_name!: Teams_V2;
 
   @Column()
   position!: string;
@@ -166,7 +167,4 @@ export class Players_Stats_V2 {
 
   @Column()
   player_status!: 'Veteran' | 'Rookie';
-
-  @OneToOne(() => Teams_V2, (team) => team.shortname)
-  team!: Teams_V2;
 }

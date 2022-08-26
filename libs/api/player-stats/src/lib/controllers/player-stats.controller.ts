@@ -1,24 +1,23 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Players_Stats_V2 } from '@cha/shared/entities';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { ApiPlayerStatsService } from '../services';
 
 @Controller('player-stats')
 export class PlayerStatsController {
-  @Get()
-  getPlayerStats() {}
+  constructor(private playerStatsService: ApiPlayerStatsService) {}
 
-  @Get('/:id')
-  getPlayerStatsById(@Param('id') id: string) {}
+  @Get('/leaders/:season/:seasonType')
+  async getTeamStatsBySeasonByType(
+    @Param() param
+  ): Promise<Players_Stats_V2[]> {
+    const stats = await this.playerStatsService.getPlayerStatsLeaders(
+      param.season,
+      param.seasonType
+    );
 
-  @Get('/active/team/:id')
-  getActivePlayerStatsByTeamId(@Param('id') id: string) {}
-
-  @Get('/player/:id')
-  getPlayerStatsByPlayerId(@Param('id') id: string) {}
-
-  @Get('/season/current')
-  getPlayerStatsByCurrentSeasonBySeasonType() {}
-
-  @Get('/season/current/:playerType')
-  getPlayerStatsByCurrentSeasonByPlayerType(
-    @Param('playerType') playerType: string
-  ) {}
+    if (!stats || stats.length < 1) {
+      throw new NotFoundException('Player Stats not found');
+    }
+    return stats;
+  }
 }

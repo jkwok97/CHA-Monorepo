@@ -185,7 +185,6 @@ export class ApiAwardsService {
     return await this.playerStatsRepo.findOne({
       select: {
         id: true,
-        player_id: true,
         playing_year: true,
         games_played: true,
         goals: true,
@@ -193,7 +192,7 @@ export class ApiAwardsService {
         points: true,
       },
       where: {
-        player_id: playerId,
+        player_id: { id: playerId },
         playing_year: chaSeason,
         season_type: 'Regular',
       },
