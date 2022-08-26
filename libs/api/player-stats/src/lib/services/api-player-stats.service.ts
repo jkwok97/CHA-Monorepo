@@ -63,11 +63,11 @@ export class ApiPlayerStatsService {
       .find({
         relations: {
           player_id: true,
-          team_name: true,
+          // team_name: true,
         },
         select: {
           hits: true,
-          team_name: this.teamNameSelect,
+          // team_name: this.teamNameSelect,
           player_id: this.playerIdSelect,
         },
         where: {
