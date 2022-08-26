@@ -64,7 +64,6 @@ export class StatsTeamLeadersTableComponent {
   }
 
   mapItems(items: statTeamDto[]) {
-    console.log(items);
     return items.map((item: statTeamDto) => ({
       ...item,
       team: `${item.team_id.nickname}`,

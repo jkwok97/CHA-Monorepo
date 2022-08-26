@@ -1,0 +1,68 @@
+.leader-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 15px;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 16px 0 rgba(247, 247, 247, 0.2);
+  &-highlighted {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    &-player {
+      &-avatar {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        grid-row-gap: 8px;
+
+        &-name {
+          display: grid;
+          grid-template-columns: 1fr;
+          font-size: large;
+          font-weight: 100;
+          align-items: center;
+        }
+
+        :nth-child(3) {
+          position: relative;
+          left: 35px;
+          bottom: 45px;
+          height: 10px;
+        }
+
+        img {
+          width: 100px;
+          border-radius: 50px;
+        }
+
+        &-type {
+          font-weight: 100;
+        }
+        &-number {
+          font-size: x-large;
+          font-weight: 100;
+        }
+      }
+    }
+  }
+
+  &-chart {
+    font-size: small;
+    font-weight: 100;
+    display: grid;
+
+    :hover {
+      font-weight: 500;
+    }
+
+    &-item {
+      display: grid;
+      grid-template-columns: 1fr min-content;
+      justify-content: space-between;
+      padding: 2px 0;
+    }
+  }
+}
