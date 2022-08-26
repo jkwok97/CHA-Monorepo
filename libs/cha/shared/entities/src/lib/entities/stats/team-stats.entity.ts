@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Teams_V2 } from '../teams';
 
 @Entity()
@@ -7,7 +13,7 @@ export class Team_Stats_V2 {
   id!: number;
 
   @ManyToOne(() => Teams_V2, (team) => team.id)
-  @Column()
+  @JoinColumn({ name: 'team_id' })
   team_id!: number;
 
   @Column()
