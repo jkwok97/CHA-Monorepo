@@ -1,4 +1,4 @@
-import { statTeamDto, Team_Stats_V2 } from '@cha/shared/entities';
+import { Team_Stats_V2 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -22,6 +22,7 @@ export class ApiTeamStatsService {
           city: true,
           teamlogo: true,
           shortname: true,
+          nickname: true,
         },
         games_played: true,
         points: true,

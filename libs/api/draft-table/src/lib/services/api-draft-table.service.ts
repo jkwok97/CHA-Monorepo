@@ -57,16 +57,16 @@ export class ApiDraftTableService {
 
   private async getTeamStats(teamId: number, playingYear: string) {
     return await this.teamStatsRepo.findOne({
+      relations: ['team_id'],
       select: {
         id: true,
-        team_id: true,
         wins: true,
         goals_for: true,
         goals_against: true,
         points: true,
       },
       where: {
-        team_id: teamId,
+        team_id: { id: teamId },
         playing_year: playingYear,
         season_type: 'Regular',
       },

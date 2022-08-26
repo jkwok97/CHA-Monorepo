@@ -64,10 +64,11 @@ export class StatsTeamLeadersTableComponent {
   }
 
   mapItems(items: statTeamDto[]) {
+    console.log(items);
     return items.map((item: statTeamDto) => ({
       ...item,
-      team: `${item.nickname}`,
-      teamImg: this.getString(item.teamlogo),
+      team: `${item.team_id.nickname}`,
+      teamImg: this.getString(item.team_id.teamlogo),
     }));
   }
 }
