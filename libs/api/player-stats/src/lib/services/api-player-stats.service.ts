@@ -58,43 +58,47 @@ export class ApiPlayerStatsService {
     season: string,
     seasonType: 'Regular' | 'Playoffs'
   ) {
-    return await this.repo.find({
-      relations: ['team_name', 'player_id'],
-      select: {
-        hits: true,
-        team_name: this.teamNameSelect,
-        player_id: this.playerIdSelect,
-      },
-      where: {
-        playing_year: season,
-        season_type: seasonType,
-      },
-      order: {
-        hits: 'DESC',
-      },
-      take: 10,
-    });
+    return await this.repo
+      .find({
+        relations: ['team_name', 'player_id'],
+        select: {
+          hits: true,
+          team_name: this.teamNameSelect,
+          player_id: this.playerIdSelect,
+        },
+        where: {
+          playing_year: season,
+          season_type: seasonType,
+        },
+        order: {
+          hits: 'DESC',
+        },
+        take: 10,
+      })
+      .catch((err) => console.log(err));
   }
 
   private async getPointsLeaders(
     season: string,
     seasonType: 'Regular' | 'Playoffs'
   ) {
-    return await this.repo.find({
-      relations: ['team_name', 'player_id'],
-      select: {
-        points: true,
-        team_name: this.teamNameSelect,
-        player_id: this.playerIdSelect,
-      },
-      where: {
-        playing_year: season,
-        season_type: seasonType,
-      },
-      order: {
-        points: 'DESC',
-      },
-      take: 10,
-    });
+    return await this.repo
+      .find({
+        relations: ['team_name', 'player_id'],
+        select: {
+          points: true,
+          team_name: this.teamNameSelect,
+          player_id: this.playerIdSelect,
+        },
+        where: {
+          playing_year: season,
+          season_type: seasonType,
+        },
+        order: {
+          points: 'DESC',
+        },
+        take: 10,
+      })
+      .catch((err) => console.log(err));
   }
 }
