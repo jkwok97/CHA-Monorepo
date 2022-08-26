@@ -79,7 +79,7 @@ export class Team_Stats_V2 {
   div_loss!: number;
 
   @Column()
-  div_ties!: number;
+  div_tie!: number;
 
   @Column()
   ot_win!: number;
