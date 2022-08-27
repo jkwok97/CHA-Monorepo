@@ -1,4 +1,4 @@
-import { Drafts_V2 } from '@cha/shared/entities';
+import { Drafts_V2 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntryDraftController } from './controllers';

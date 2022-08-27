@@ -4,24 +4,21 @@ import {
   Column,
   OneToOne,
   ManyToOne,
-  JoinColumn,
 } from 'typeorm';
-import { Awards_V2 } from '../awards';
-import { Players_V2 } from '../players';
-import { Teams_V2 } from '../teams';
+import { Awards_V2 } from './award.entity';
+import { Players_V2 } from './player.entity';
 
 @Entity()
 export class Players_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Players_V2, (player) => player.id)
-  @JoinColumn({ name: 'player_id' })
+  @ManyToOne(() => Players_V2, (player) => player.id, { eager: true })
+  @Column()
   player_id!: Players_V2;
 
-  @OneToOne(() => Teams_V2, (team) => team.shortname)
-  @JoinColumn({ name: 'team_name' })
-  team_name!: Teams_V2;
+  @Column()
+  team_name!: string;
 
   @Column()
   position!: string;
@@ -167,4 +164,7 @@ export class Players_Stats_V2 {
 
   @Column()
   player_status!: 'Veteran' | 'Rookie';
+
+  // @OneToOne(() => Teams_V2, (team) => team.shortname)
+  // team!: Teams_V2;
 }

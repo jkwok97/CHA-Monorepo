@@ -1,4 +1,4 @@
-import { Drafts_V2 } from '@cha/shared/entities';
+import { Drafts_V2 } from '@api/entities';
 import { Controller, Get, NotFoundException } from '@nestjs/common';
 import { ApiEntryDraftService } from '../services';
 

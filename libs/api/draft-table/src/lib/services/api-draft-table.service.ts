@@ -1,4 +1,4 @@
-import { Draft_Order_V2, Team_Stats_V2 } from '@cha/shared/entities';
+import { Draft_Order_V2, Team_Stats_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

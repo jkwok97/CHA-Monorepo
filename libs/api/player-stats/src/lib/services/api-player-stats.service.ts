@@ -1,5 +1,5 @@
+import { Players_Stats_V2 } from '@api/entities';
 import {
-  Players_Stats_V2,
   StatPlayerLeaderDto,
   StatPlayerLeadersDto,
 } from '@cha/shared/entities';
@@ -61,14 +61,14 @@ export class ApiPlayerStatsService {
   ) {
     return await this.repo
       .find({
-        relations: {
-          player_id: true,
-          // team_name: true,
-        },
+        // relations: {
+        //   player_id: true,
+        //   team_name: true,
+        // },
         select: {
           hits: true,
           // team_name: this.teamNameSelect,
-          player_id: this.playerIdSelect,
+          // player_id: this.playerIdSelect,
         },
         where: {
           playing_year: season,
@@ -91,8 +91,8 @@ export class ApiPlayerStatsService {
         relations: ['team_name', 'player_id'],
         select: {
           points: true,
-          team_name: this.teamNameSelect,
-          player_id: this.playerIdSelect,
+          // team_name: this.teamNameSelect,
+          // player_id: this.playerIdSelect,
         },
         where: {
           playing_year: season,

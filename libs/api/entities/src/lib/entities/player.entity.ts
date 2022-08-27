@@ -8,14 +8,17 @@ import {
   AfterRemove,
   OneToOne,
 } from 'typeorm';
-import { Drafts_V2 } from '../draft';
-import { Goalie_Ratings_V2, Player_Ratings_V2 } from '../ratings';
-import { Salaries_V2 } from '../salaries';
-import { Goalies_Stats_V2 } from '../stats';
+import { Drafts_V2 } from './draft.entity';
+import { Goalie_Ratings_V2 } from './goalie-rating.entity';
+import { Goalies_Stats_V2 } from './goalie-stats.entity';
+import { Player_Ratings_V2 } from './player-rating.entity';
+import { Players_Stats_V2 } from './player-stats.entity';
+import { Salaries_V2 } from './salary.entity';
 
 @Entity()
 export class Players_V2 {
   @PrimaryGeneratedColumn()
+  @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   id!: number;
 
   @Column()

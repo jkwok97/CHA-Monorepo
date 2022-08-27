@@ -6,11 +6,11 @@ import {
   JoinColumn,
   OneToOne,
 } from 'typeorm';
-import { Players_V2 } from '../players/player.entity';
-import { Players_Stats_V2 } from '../stats';
-import { Teams_V2 } from '../teams';
-import { Users_V2 } from '../user';
 import { Award_Type_V2 } from './award-type.entity';
+import { Players_Stats_V2 } from './player-stats.entity';
+import { Players_V2 } from './player.entity';
+import { Teams_V2 } from './team.entity';
+import { Users_V2 } from './user.entity';
 
 @Entity({
   orderBy: {
@@ -24,7 +24,9 @@ export class Awards_V2 {
   @Column()
   display_season!: string;
 
-  @OneToOne(() => Players_Stats_V2, (playerStats) => playerStats.playing_year)
+  @OneToOne(() => Players_Stats_V2, (playerStats) => playerStats.playing_year, {
+    eager: true,
+  })
   @Column()
   cha_season!: string;
 

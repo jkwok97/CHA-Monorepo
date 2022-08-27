@@ -1,4 +1,4 @@
-import { Awards_V2 } from '@cha/shared/entities';
+import { Awards_V2 } from '@api/entities';
 import { Controller, Get, NotFoundException } from '@nestjs/common';
 import { ApiAwardsService } from '../services/api-awards.service';
 

@@ -1,4 +1,4 @@
-import { Draft_Order_V2 } from '@cha/shared/entities';
+import { Draft_Order_V2 } from '@api/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiDraftTableService } from '../services';
 

@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Teams_V2 } from '../teams';
+import { Teams_V2 } from './team.entity';
 
 @Entity()
 export class Draft_Order_V2 {

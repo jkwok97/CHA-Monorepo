@@ -1,11 +1,7 @@
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
 import { ApiCoreModule } from '@api/core';
 import {
+  Users_V2,
+  Teams_V2,
   Award_Type_V2,
   Awards_V2,
   Draft_Order_V2,
@@ -13,6 +9,7 @@ import {
   Conferences_V2,
   Current_Season_V2,
   Divisions_V2,
+  Players_V2,
   Goalie_Ratings_V2,
   Player_Ratings_V2,
   Salaries_V2,
@@ -22,10 +19,12 @@ import {
   Team_Stats_V2,
   Transactions_V2,
   Waivers_V2,
-  Players_V2,
-  Teams_V2,
-  Users_V2,
-} from '@cha/shared/entities';
+} from '@api/entities';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [

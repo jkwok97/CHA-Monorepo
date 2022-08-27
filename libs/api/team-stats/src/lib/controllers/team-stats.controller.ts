@@ -1,4 +1,4 @@
-import { Team_Stats_V2 } from '@cha/shared/entities';
+import { Team_Stats_V2 } from '@api/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiTeamStatsService } from '../services';
 

@@ -1,4 +1,4 @@
-import { Draft_Order_V2, Team_Stats_V2 } from '@cha/shared/entities';
+import { Draft_Order_V2, Team_Stats_V2 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DraftTableController } from './controllers';

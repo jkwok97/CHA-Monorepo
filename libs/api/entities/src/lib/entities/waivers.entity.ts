@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
-import { Teams_V2 } from '../teams';
+import { Teams_V2 } from './team.entity';
 
 @Entity()
 export class Waivers_V2 {

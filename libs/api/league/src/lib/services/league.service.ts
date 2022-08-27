@@ -1,4 +1,5 @@
-import { Current_Season_V2, LeagueDataDto } from '@cha/shared/entities';
+import { Current_Season_V2 } from '@api/entities';
+import { LeagueDataDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

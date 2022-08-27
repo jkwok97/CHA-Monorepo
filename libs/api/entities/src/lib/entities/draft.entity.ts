@@ -6,8 +6,8 @@ import {
   JoinColumn,
   Relation,
 } from 'typeorm';
-import { Players_V2 } from '../players/player.entity';
-import { Teams_V2 } from '../teams';
+import { Players_V2 } from './player.entity';
+import { Teams_V2 } from './team.entity';
 
 @Entity()
 export class Drafts_V2 {

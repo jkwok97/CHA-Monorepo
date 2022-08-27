@@ -1,4 +1,4 @@
-import { Drafts_V2 } from '@cha/shared/entities';
+import { Drafts_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

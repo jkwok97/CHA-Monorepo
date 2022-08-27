@@ -1,9 +1,9 @@
 import {
   Awards_V2,
-  Goalies_Stats_V2,
   Players_Stats_V2,
+  Goalies_Stats_V2,
   Team_Stats_V2,
-} from '@cha/shared/entities';
+} from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AwardsController } from './controllers';

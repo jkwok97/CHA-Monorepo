@@ -1,6 +1,6 @@
+import { Teams_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Teams_V2 } from '@cha/shared/entities';
 import { Repository } from 'typeorm';
 
 @Injectable()

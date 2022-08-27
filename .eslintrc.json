@@ -25,6 +25,10 @@
                 "onlyDependOnLibsWithTags": ["api:module", "shared"]
               },
               {
+                "sourceTag": "api:module",
+                "onlyDependOnLibsWithTags": ["api:entities", "shared"]
+              },
+              {
                 "sourceTag": "app:angular",
                 "onlyDependOnLibsWithTags": [
                   "angular:ui",

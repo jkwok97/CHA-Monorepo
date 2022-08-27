@@ -1,4 +1,4 @@
-import { Players_Stats_V2, Teams_V2 } from '@cha/shared/entities';
+import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlayerStatsController } from './controllers';

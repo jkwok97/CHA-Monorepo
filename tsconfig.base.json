@@ -18,6 +18,7 @@
       "@api/awards": ["libs/api/awards/src/index.ts"],
       "@api/core": ["libs/api/core/src/index.ts"],
       "@api/draft-table": ["libs/api/draft-table/src/index.ts"],
+      "@api/entities": ["libs/api/entities/src/index.ts"],
       "@api/entry-draft": ["libs/api/entry-draft/src/index.ts"],
       "@api/goalie-stats": ["libs/api/goalie-stats/src/index.ts"],
       "@api/league": ["libs/api/league/src/index.ts"],

@@ -8,7 +8,7 @@
   },
   "include": [
     "**/*.ts",
-    "../../cha/shared/entities/src/lib/entities/user/index.ts"
-  ],
+    "src/lib/entities/index.ts"
+, "../entities/src/lib/entities/user.entity.ts"  ],
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

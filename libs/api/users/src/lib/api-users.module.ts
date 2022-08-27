@@ -1,7 +1,7 @@
+import { Users_V2 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersController } from './controllers';
-import { Users_V2 } from '@cha/shared/entities';
 import { UserMiddleware } from './middlewares';
 import { UsersService } from './services';
 

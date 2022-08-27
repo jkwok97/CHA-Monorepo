@@ -1,10 +1,10 @@
 import {
   Awards_V2,
-  AwardTypeEnum,
-  Goalies_Stats_V2,
   Players_Stats_V2,
+  Goalies_Stats_V2,
   Team_Stats_V2,
-} from '@cha/shared/entities';
+} from '@api/entities';
+import { AwardTypeEnum } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

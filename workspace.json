@@ -5,6 +5,29 @@
     "api-awards": "libs/api/awards",
     "api-core": "libs/api/core",
     "api-draft-table": "libs/api/draft-table",
+    "api-entities": {
+      "root": "libs/api/entities",
+      "sourceRoot": "libs/api/entities/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/entities/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/entities"],
+          "options": {
+            "jestConfig": "libs/api/entities/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["api:entities"]
+    },
     "api-entry-draft": "libs/api/entry-draft",
     "api-goalie-stats": "libs/api/goalie-stats",
     "api-league": "libs/api/league",
