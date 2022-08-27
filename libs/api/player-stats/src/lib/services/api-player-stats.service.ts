@@ -33,11 +33,11 @@ export class ApiPlayerStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
-    // const pointsLeaders = await this.getPointsLeaders(season, seasonType);
+    const pointsLeaders = await this.getPointsLeaders(season, seasonType);
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
-      points: [],
+      points: pointsLeaders as unknown as StatPlayerLeaderDto[],
       assists: [],
       bestPlusMinus: [],
       blockedShots: [],
@@ -61,14 +61,14 @@ export class ApiPlayerStatsService {
   ) {
     return await this.repo
       .find({
-        // relations: {
-        //   player_id: true,
-        //   team_name: true,
-        // },
+        relations: {
+          player_id: true,
+          // team_name: true,
+        },
         select: {
           hits: true,
           // team_name: this.teamNameSelect,
-          // player_id: this.playerIdSelect,
+          player_id: this.playerIdSelect,
         },
         where: {
           playing_year: season,
@@ -88,11 +88,11 @@ export class ApiPlayerStatsService {
   ) {
     return await this.repo
       .find({
-        relations: ['team_name', 'player_id'],
+        relations: ['player_id'],
         select: {
           points: true,
           // team_name: this.teamNameSelect,
-          // player_id: this.playerIdSelect,
+          player_id: this.playerIdSelect,
         },
         where: {
           playing_year: season,
