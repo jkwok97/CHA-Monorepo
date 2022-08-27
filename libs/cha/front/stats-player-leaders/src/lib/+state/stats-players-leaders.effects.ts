@@ -3,7 +3,7 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { StatPlayerLeadersDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of, withLatestFrom } from 'rxjs';
-import { StatsPlayersLeadersService } from '../../services/stats-players-leaders.service';
+import { StatsPlayersLeadersService } from '../services/stats-players-leaders.service';
 import { LeagueStatsPlayersActions } from './stats-players-leaders.actions';
 
 @Injectable()

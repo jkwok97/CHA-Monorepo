@@ -9,9 +9,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeChaLeaderCardComponent } from '@blade/angular/ui/leader-card';
 
-import { LeagueStatsPlayersEffects } from './containers/+state/stats-players-leaders.effects';
-import { LeagueStatsPlayersFacade } from './containers/+state/stats-players-leaders.facade';
-import { reducer } from './containers/+state/stats-players-leaders.reducer';
+import { LeagueStatsPlayersEffects } from './+state/stats-players-leaders.effects';
+import { LeagueStatsPlayersFacade } from './+state/stats-players-leaders.facade';
+import { reducer } from './+state/stats-players-leaders.reducer';
 import { StatsPlayersLeadersService } from './services';
 
 import { ChaFrontStatsPlayerPleadersRoutingModule } from './cha-front-stats-player-leaders-routing.module';

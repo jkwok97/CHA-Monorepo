@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { StatPlayerLeaderDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
-import { LeagueStatsPlayersFacade } from '../+state/stats-players-leaders.facade';
+import { UserTeamFacade } from '@cha/domain/core';
+import { StatPlayerLeaderDto, TeamDto } from '@cha/shared/entities';
+import { first, Observable } from 'rxjs';
+import { LeagueStatsPlayersFacade } from '../../+state/stats-players-leaders.facade';
 
 @Component({
   selector: 'cha-front-stats-players-leaders',
@@ -28,8 +29,14 @@ export class StatsPlayersLeadersComponent implements OnInit {
   currStreakLeaders$: Observable<StatPlayerLeaderDto[]>;
   longStreakLeaders$: Observable<StatPlayerLeaderDto[]>;
   bestPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]>;
+  currentTeam$: Observable<TeamDto | undefined>;
 
-  constructor(private leagueStatsPlayersFacade: LeagueStatsPlayersFacade) {
+  backgroundColor!: string;
+
+  constructor(
+    private leagueStatsPlayersFacade: LeagueStatsPlayersFacade,
+    private userTeamFacade: UserTeamFacade
+  ) {
     this.isLoaded$ = this.leagueStatsPlayersFacade.isLoaded$;
     this.isLoading$ = this.leagueStatsPlayersFacade.isLoading$;
 
@@ -50,6 +57,16 @@ export class StatsPlayersLeadersComponent implements OnInit {
     this.longStreakLeaders$ = this.leagueStatsPlayersFacade.longStreakLeaders$;
     this.bestPlusMinusLeaders$ =
       this.leagueStatsPlayersFacade.bestPlusMinusLeaders$;
+
+    this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+
+    this.currentTeam$
+      .pipe(first())
+      .subscribe((userTeam: TeamDto | undefined) => {
+        if (userTeam) {
+          this.backgroundColor = userTeam.teamcolor;
+        }
+      });
   }
 
   ngOnInit(): void {

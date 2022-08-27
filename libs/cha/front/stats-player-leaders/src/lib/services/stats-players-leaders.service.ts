@@ -13,7 +13,7 @@ export class StatsPlayersLeadersService {
 
   getAllPlayerLeaders(season: string, seasonType: string) {
     return this._http
-      .get(`${this.apiUrl}/players-stats/leaders/${season}/${seasonType}`)
+      .get(`${this.apiUrl}/player-stats/leaders/${season}/${seasonType}`)
       .pipe(map((result: any) => result['result']));
   }
 }
