@@ -12,6 +12,7 @@ export class StatsPlayersLeadersService {
   ) {}
 
   getAllPlayerLeaders(season: string, seasonType: string) {
+    console.log('test');
     return this._http
       .get(`${this.apiUrl}/players-stats/leaders/${season}/${seasonType}`)
       .pipe(map((result: any) => result['result']));
