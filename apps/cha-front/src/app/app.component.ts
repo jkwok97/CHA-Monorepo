@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
     this.currentTeam$
       .pipe(untilDestroyed(this))
       .subscribe((currentTeam: TeamDto | undefined) => {
-        console.log(currentTeam);
         if (currentTeam) {
           const linkElement = document.getElementById('theme-link');
 

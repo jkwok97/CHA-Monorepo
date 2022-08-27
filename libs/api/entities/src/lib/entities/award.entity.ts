@@ -24,9 +24,7 @@ export class Awards_V2 {
   @Column()
   display_season!: string;
 
-  @OneToOne(() => Players_Stats_V2, (playerStats) => playerStats.playing_year, {
-    eager: true,
-  })
+  @OneToOne(() => Players_Stats_V2, (playerStats) => playerStats.playing_year)
   @Column()
   cha_season!: string;
 
