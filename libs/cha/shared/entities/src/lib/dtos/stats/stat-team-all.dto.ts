@@ -1,4 +1,5 @@
 import { DivisionsEnum, TeamsEnum } from '../../enums';
+import { DivisionDto } from '../league/division.dto';
 
 export interface StatTeamAllDto {
   id: number;
@@ -8,10 +9,8 @@ export interface StatTeamAllDto {
     city: string;
     teamlogo: string;
     nickname: string;
-    divisions_id: DivisionsEnum;
+    divisions_id: DivisionDto;
   };
-  conferencename: 'Eastern';
-  divisionname: 'South East';
   div_loss: string;
   div_tie: string;
   div_win: string;

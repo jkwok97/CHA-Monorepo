@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
-import { Divisions_V2 } from './division.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Conferences_V2 {
@@ -11,7 +10,4 @@ export class Conferences_V2 {
 
   @Column()
   isactive!: boolean;
-
-  @OneToOne(() => Divisions_V2, (division) => division.conference_id)
-  division!: Divisions_V2;
 }
