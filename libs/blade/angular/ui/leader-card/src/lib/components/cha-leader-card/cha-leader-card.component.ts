@@ -45,7 +45,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
 
   getPlayerPicture() {
     if (this.selected) {
-      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${this.selected.nhl_id}@2x.jpg`;
+      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${this.selected.player_id.nhl_id}@2x.jpg`;
     } else {
       return;
     }
@@ -59,7 +59,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
 
   getTeamPicture() {
     if (this.selected) {
-      return this.getString(this.selected.teamlogo);
+      return this.getString(this.selected.teamInfo.teamlogo);
     } else {
       return '';
     }
@@ -67,7 +67,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
 
   getPlayerName() {
     if (this.selected) {
-      return `${this.selected.firstname} ${this.selected.lastname}`;
+      return `${this.selected.player_id.firstname} ${this.selected.player_id.lastname}`;
     } else {
       return;
     }
@@ -75,7 +75,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
 
   getPlayerFirst() {
     if (this.selected) {
-      return `${this.selected.firstname}`;
+      return `${this.selected.player_id.firstname}`;
     } else {
       return;
     }
@@ -83,7 +83,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
 
   getPlayerLast() {
     if (this.selected) {
-      return `${this.selected.lastname}`;
+      return `${this.selected.player_id.lastname}`;
     } else {
       return;
     }

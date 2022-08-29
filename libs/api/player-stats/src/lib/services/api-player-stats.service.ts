@@ -56,7 +56,6 @@ export class ApiPlayerStatsService {
       rookies: [],
       shGoals: [],
       shots: [],
-      worstPlusMinus: [],
     };
   }
 

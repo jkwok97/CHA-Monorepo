@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { statTeamDto } from '@cha/shared/entities';
-import { first } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { LeagueStatsTeamFacade } from '../../+state/stats-team-leaders.facade';
 
 @Component({
@@ -16,11 +17,18 @@ export class StatsTeamLeadersStreakComponent {
     { field: 'long_win_streak', header: 'Games' },
   ];
 
-  constructor(private leagueStatsTeamFacade: LeagueStatsTeamFacade) {
+  isMobile$: Observable<boolean>;
+
+  constructor(
+    private leagueStatsTeamFacade: LeagueStatsTeamFacade,
+    private displayFacade: DisplayFacade
+  ) {
     this.leagueStatsTeamFacade.leagueTeamWinningStreak$
       .pipe(first())
       .subscribe((teamStats: statTeamDto[]) => {
         this.stats = teamStats;
       });
+
+    this.isMobile$ = this.displayFacade.isMobile$;
   }
 }

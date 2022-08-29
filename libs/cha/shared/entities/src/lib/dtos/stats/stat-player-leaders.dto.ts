@@ -16,5 +16,4 @@ export interface StatPlayerLeadersDto {
   rookies: StatPlayerLeaderDto[];
   shGoals: StatPlayerLeaderDto[];
   shots: StatPlayerLeaderDto[];
-  worstPlusMinus: StatPlayerLeaderDto[];
 }

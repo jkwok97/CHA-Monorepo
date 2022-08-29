@@ -35,10 +35,6 @@ export class LeagueStatsPlayersFacade {
     LeagueStatsPlayersSelectors.selectLongStreakLeaders
   );
 
-  worstPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
-    LeagueStatsPlayersSelectors.selectWorstPlusMinusLeaders
-  );
-
   bestPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
     LeagueStatsPlayersSelectors.selectBestPlusMinusLeaders
   );

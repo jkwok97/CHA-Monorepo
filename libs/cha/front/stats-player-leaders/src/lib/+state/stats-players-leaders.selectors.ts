@@ -36,12 +36,6 @@ const selectLongStreakLeaders = createSelector(
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.longStreak : [])
 );
 
-const selectWorstPlusMinusLeaders = createSelector(
-  selectAllLeaders,
-  (leaders: StatPlayerLeadersDto | null) =>
-    leaders ? leaders.worstPlusMinus : []
-);
-
 const selectBestPlusMinusLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) =>
@@ -111,7 +105,6 @@ export const LeagueStatsPlayersSelectors = {
   selectHitsLeaders,
   selectCurrentStreakLeaders,
   selectLongStreakLeaders,
-  selectWorstPlusMinusLeaders,
   selectBestPlusMinusLeaders,
   selectMinutesLeaders,
   selectPenaltiesLeaders,

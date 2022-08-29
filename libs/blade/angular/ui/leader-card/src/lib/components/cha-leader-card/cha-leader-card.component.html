@@ -39,7 +39,7 @@
         (mouseover)="onMouseOver(item)"
         (mouseout)="onMouseOut()"
       >
-        <div>{{ item.firstname }} {{ item.lastname }}</div>
+        <div>{{ item.player_id.firstname }} {{ item.player_id.lastname }}</div>
         <div *ngIf="type === 'goals'">{{ item.goals }}</div>
         <div *ngIf="type.includes('points')">{{ item.points }}</div>
         <div *ngIf="type === 'assists'">{{ item.assists }}</div>
@@ -65,7 +65,7 @@
         (mouseover)="onMouseOver(item)"
         (mouseout)="onMouseOut()"
       >
-        <div>{{ item.firstname }} {{ item.lastname }}</div>
+        <div>{{ item.player_id.firstname }} {{ item.player_id.lastname }}</div>
         <div *ngIf="item.goals_against_avg">{{ item.goals_against_avg }}</div>
         <div *ngIf="item.save_pct">{{ item.save_pct }}</div>
         <div *ngIf="item.shutouts">{{ item.shutouts }}</div>

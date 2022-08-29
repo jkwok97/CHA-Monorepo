@@ -1,5 +1,8 @@
 <p-accordion>
-  <p-accordionTab header="PP Efficiency%" [selected]="true">
+  <p-accordionTab
+    header="PP Efficiency%"
+    [selected]="(isMobile$ | async) === false"
+  >
     <cha-front-stats-team-leaders-table
       [tableColumns]="tableColumns"
       [stats]="stats"

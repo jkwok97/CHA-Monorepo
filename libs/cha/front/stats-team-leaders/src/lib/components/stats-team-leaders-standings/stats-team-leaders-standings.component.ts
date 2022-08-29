@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { statTeamDto } from '@cha/shared/entities';
 import { Observable, filter, first } from 'rxjs';
 import { LeagueStatsTeamFacade } from '../../+state/stats-team-leaders.facade';
@@ -23,7 +24,12 @@ export class StatsTeamLeadersStandingsComponent {
     { field: 'win_pct', header: 'Win%' },
   ];
 
-  constructor(private leagueStatsTeamFacade: LeagueStatsTeamFacade) {
+  isMobile$: Observable<boolean>;
+
+  constructor(
+    private leagueStatsTeamFacade: LeagueStatsTeamFacade,
+    private displayFacade: DisplayFacade
+  ) {
     this.teamStandings$ = this.leagueStatsTeamFacade.leagueTeamStandings$;
 
     this.teamStandings$
@@ -34,5 +40,7 @@ export class StatsTeamLeadersStandingsComponent {
       .subscribe((stats: statTeamDto[]) => {
         this.stats = stats;
       });
+
+    this.isMobile$ = this.displayFacade.isMobile$;
   }
 }
