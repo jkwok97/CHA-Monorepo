@@ -66,6 +66,9 @@ export class ApiPlayerStatsService {
           // team_name: true,
         },
         select: {
+          id: true, 
+          hits: true,
+          team_name: true,
           // team_name: this.teamNameSelect,
           player_id: this.playerIdSelect,
         },
