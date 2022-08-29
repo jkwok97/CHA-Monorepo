@@ -212,7 +212,17 @@ export class ApiAwardsService {
     return await this.goalieStatsRepo.findOne({
       select: {
         id: true,
-        player_id: true,
+        player_id: {
+          id: true,
+          nhl_id: true,
+          firstname: true,
+          lastname: true,
+          isgoalie: true,
+          is_protected: true,
+          isactive: true,
+          isdefense: true,
+          isforward: true,
+        },
         playing_year: true,
         games_played: true,
         wins: true,
@@ -220,7 +230,9 @@ export class ApiAwardsService {
         save_pct: true,
       },
       where: {
-        player_id: playerId,
+        player_id: {
+          id: playerId,
+        },
         playing_year: chaSeason,
         season_type: 'Regular',
       },

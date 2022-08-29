@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
+import { Players_V2 } from './player.entity';
 import { Teams_V2 } from './team.entity';
 
 @Entity()
@@ -6,8 +14,9 @@ export class Goalies_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column()
-  player_id!: number;
+  @ManyToOne(() => Players_V2, (player) => player.id, { eager: true })
+  @JoinColumn({ name: 'player_id' })
+  player_id!: Players_V2;
 
   @Column()
   team_name!: string;

@@ -47,6 +47,9 @@ export class Players_V2 {
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   playerStats!: Players_Stats_V2;
 
+  @OneToMany(() => Goalies_Stats_V2, (goalieStats) => goalieStats.player_id)
+  goalieStats!: Goalies_Stats_V2;
+
   @OneToOne(() => Salaries_V2, (salary) => salary.player_id)
   salary!: Salaries_V2;
 
@@ -58,9 +61,6 @@ export class Players_V2 {
 
   @OneToMany(() => Player_Ratings_V2, (playerRating) => playerRating.player_id)
   playerRating!: Player_Ratings_V2;
-
-  @OneToMany(() => Goalies_Stats_V2, (goalieStats) => goalieStats.player_id)
-  goalieStats!: Goalies_Stats_V2;
 
   @AfterInsert()
   logInsert() {
