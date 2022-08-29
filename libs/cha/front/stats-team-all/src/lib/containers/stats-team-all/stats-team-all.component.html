@@ -1,1 +1,13 @@
-<p>stats-team-all works!</p>
+<blade-layout-feature-content
+  [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
+>
+  <div class="stats-team-all">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <ng-container *ngIf="isLoaded$ | async"> </ng-container>
+  </div>
+</blade-layout-feature-content>
