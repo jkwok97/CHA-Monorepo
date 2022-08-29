@@ -5,7 +5,10 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
+  JoinColumn,
+  OneToOne,
 } from 'typeorm';
+import { Divisions_V2 } from './division.entity';
 
 @Entity()
 export class Teams_V2 {
@@ -39,8 +42,9 @@ export class Teams_V2 {
   @Column()
   teamtextcolor!: string;
 
-  @Column()
-  divisions_id!: number;
+  @OneToOne(() => Divisions_V2, (division) => division.id, { eager: true })
+  @JoinColumn({ name: 'divisions_id' })
+  divisions_id!: Divisions_V2;
 
   @AfterInsert()
   logInsert() {

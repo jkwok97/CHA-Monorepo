@@ -1,5 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
-import { Teams_V2 } from './team.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Conferences_V2 } from './conference.entity';
 
 @Entity()
 export class Divisions_V2 {
@@ -9,12 +15,10 @@ export class Divisions_V2 {
   @Column()
   divisionname!: string;
 
-  @Column()
-  conference_id!: string;
+  @OneToOne(() => Conferences_V2, (conference) => conference.id)
+  @JoinColumn({ name: 'conference_id' })
+  conference_id!: Conferences_V2;
 
   @Column()
   isactive!: boolean;
-
-  @OneToOne(() => Teams_V2, (team) => team.divisions_id)
-  team!: Teams_V2;
 }

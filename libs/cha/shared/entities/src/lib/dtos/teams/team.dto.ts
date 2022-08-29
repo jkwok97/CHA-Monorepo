@@ -1,4 +1,5 @@
 import { TeamsEnum } from '../../enums';
+import { DivisionDto } from '../league/division.dto';
 
 export interface TeamDto {
   id: TeamsEnum;
@@ -11,5 +12,5 @@ export interface TeamDto {
   teamaltlogo: string;
   teamcolor: string;
   teamtextcolor: string;
-  divisions_id: number;
+  divisions_id: DivisionDto;
 }
