@@ -13,12 +13,17 @@ export interface StatPlayerLeaderDto {
   pp_goals?: string;
   sh_goals?: string;
   shots?: string;
-  city: string;
-  firstname: string;
-  isgoalie: boolean;
-  lastname: string;
-  nhl_id: string;
-  nickname: string;
-  player_id: string;
-  teamlogo: string;
+  player_id: {
+    id: number;
+    isgoalie: boolean;
+    firstname: string;
+    lastname: string;
+    nhl_id: string;
+  };
+  teamInfo: {
+    id: number;
+    teamlogo: string;
+    city: string;
+    nickname: string;
+  };
 }

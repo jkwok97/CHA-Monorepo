@@ -1,4 +1,4 @@
-import { Players_Stats_V2 } from '@api/entities';
+import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import {
   StatPlayerLeaderDto,
   StatPlayerLeadersDto,
@@ -11,7 +11,9 @@ import { Repository } from 'typeorm';
 export class ApiPlayerStatsService {
   constructor(
     @InjectRepository(Players_Stats_V2)
-    private repo: Repository<Players_Stats_V2>
+    private repo: Repository<Players_Stats_V2>,
+    @InjectRepository(Teams_V2)
+    private teamInfoRepo: Repository<Teams_V2>
   ) {}
 
   teamNameSelect = {
@@ -59,29 +61,29 @@ export class ApiPlayerStatsService {
     season: string,
     seasonType: 'Regular' | 'Playoffs'
   ) {
-    return await this.repo
-      .find({
-        relations: {
-          player_id: true,
-          // team_name: true,
-        },
-        select: {
-          id: true, 
-          hits: true,
-          team_name: true,
-          // team_name: this.teamNameSelect,
-          player_id: this.playerIdSelect,
-        },
-        where: {
-          playing_year: season,
-          season_type: seasonType,
-        },
-        order: {
-          hits: 'DESC',
-        },
-        take: 10,
-      })
-      .catch((err) => console.log(err));
+    const hitsLeaders = await this.repo.find({
+      relations: {
+        player_id: true,
+      },
+      select: {
+        id: true,
+        hits: true,
+        team_name: true,
+        player_id: this.playerIdSelect,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        hits: 'DESC',
+      },
+      take: 10,
+    });
+
+    const hitsLeadersWithTeamInfo = await this.setTeamInfo(hitsLeaders);
+
+    return hitsLeadersWithTeamInfo;
   }
 
   private async getPointsLeaders(
@@ -106,5 +108,28 @@ export class ApiPlayerStatsService {
         take: 10,
       })
       .catch((err) => console.log(err));
+  }
+
+  private async setTeamInfo(array: Players_Stats_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        teamInfo: await this.getTeamInfo(item.team_name),
+      }))
+    );
+  }
+
+  private async getTeamInfo(teamName: string) {
+    return await this.teamInfoRepo.findOne({
+      select: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        nickname: true,
+      },
+      where: {
+        shortname: teamName,
+      },
+    });
   }
 }
