@@ -14,7 +14,7 @@ export class LeagueStatsGoaliesEffects {
     private goaliesStatsService: StatsGoalieLeadersService
   ) {}
 
-  getLeagueTeamStats$ = createEffect(() =>
+  getGoalieLeaderStats$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LeagueStatsGoaliesActions.getLeaders),
       withLatestFrom(this.leagueDataFacade.leagueData$),
