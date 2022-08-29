@@ -31,12 +31,13 @@ export class ApiPlayerStatsService {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
+    const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(season, seasonType);
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
       points: pointsLeaders as unknown as StatPlayerLeaderDto[],
       assists: assistLeaders as unknown as StatPlayerLeaderDto[],
-      bestPlusMinus: [],
+      bestPlusMinus: bestPlusMinusLeaders as unknown as StatPlayerLeaderDto[],
       blockedShots: [],
       currStreak: [],
       defense: [],
@@ -131,7 +132,7 @@ export class ApiPlayerStatsService {
         season_type: seasonType,
       },
       order: {
-        points: 'DESC',
+        assists: 'DESC',
       },
       take: 10,
     });
@@ -139,6 +140,33 @@ export class ApiPlayerStatsService {
     const assistLeadersWithTeamInfo = await this.setTeamInfo(assistLeaders);
 
     return assistLeadersWithTeamInfo;
+  }
+
+  private async getBestPlusMinusLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const bestPlusMinusLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        plus_minus: true,
+        player_id: this.playerIdSelect,
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        plus_minus: 'DESC',
+      },
+      take: 10,
+    });
+
+    const bestPlusMinusLeadersWithTeamInfo = await this.setTeamInfo(bestPlusMinusLeaders);
+
+    return bestPlusMinusLeadersWithTeamInfo;
   }
 
   private async setTeamInfo(array: Players_Stats_V2[]) {
