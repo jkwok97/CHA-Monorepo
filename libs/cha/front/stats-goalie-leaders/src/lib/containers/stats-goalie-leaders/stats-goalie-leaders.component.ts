@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UserTeamFacade } from '@cha/domain/core';
+import { StatGoalieLeaderDto, TeamDto } from '@cha/shared/entities';
+import { first, Observable } from 'rxjs';
+import { LeagueStatsGoaliesFacade } from '../../+state/stats-goalie-leader.facade';
 
 @Component({
   selector: 'cha-front-stats-goalie-leaders',
@@ -6,4 +10,44 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./stats-goalie-leaders.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatsGoalieLeadersComponent {}
+export class StatsGoalieLeadersComponent implements OnInit {
+  isLoading$: Observable<boolean>;
+  isLoaded$: Observable<boolean>;
+
+  winsLeaders$: Observable<StatGoalieLeaderDto[]>;
+  gaaLeaders$: Observable<StatGoalieLeaderDto[]>;
+  savePctLeaders$: Observable<StatGoalieLeaderDto[]>;
+  shotsFacedLeaders$: Observable<StatGoalieLeaderDto[]>;
+  shutoutLeaders$: Observable<StatGoalieLeaderDto[]>;
+  currentTeam$: Observable<TeamDto | undefined>;
+
+  backgroundColor!: string;
+
+  constructor(
+    private leagueStatsGoalieFacade: LeagueStatsGoaliesFacade,
+    private userTeamFacade: UserTeamFacade
+  ) {
+    this.isLoaded$ = this.leagueStatsGoalieFacade.isLoaded$;
+    this.isLoading$ = this.leagueStatsGoalieFacade.isLoading$;
+
+    this.winsLeaders$ = this.leagueStatsGoalieFacade.winsLeaders$;
+    this.gaaLeaders$ = this.leagueStatsGoalieFacade.gaaLeaders$;
+    this.savePctLeaders$ = this.leagueStatsGoalieFacade.savePctLeaders$;
+    this.shotsFacedLeaders$ = this.leagueStatsGoalieFacade.shotsFacedLeaders$;
+    this.shutoutLeaders$ = this.leagueStatsGoalieFacade.shutoutsLeaders$;
+
+    this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+
+    this.currentTeam$
+      .pipe(first())
+      .subscribe((userTeam: TeamDto | undefined) => {
+        if (userTeam) {
+          this.backgroundColor = userTeam.teamcolor;
+        }
+      });
+  }
+
+  ngOnInit(): void {
+    this.leagueStatsGoalieFacade.getLeagueTeamStats();
+  }
+}

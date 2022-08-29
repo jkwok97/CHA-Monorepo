@@ -1,4 +1,6 @@
-<blade-layout-feature-content [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null">
+<blade-layout-feature-content
+  [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
+>
   <div class="league-stats-players">
     <p-progressBar
       mode="indeterminate"
