@@ -39,6 +39,11 @@ export class ApiPlayerStatsService {
       seasonType
     );
     const minutesLeaders = await this.getMinutesLeaders(season, seasonType);
+    const penaltyLeaders = await this.getPenaltyLeaders(season, seasonType);
+    const ppGoalsLeaders = await this.getPpgoalsLeaders(season, seasonType);
+    const rookieLeaders = await this.getRookieLeaders(season, seasonType);
+    const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
+    const shotsLeaders = await this.getShotsLeaders(season, seasonType);
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
@@ -51,11 +56,11 @@ export class ApiPlayerStatsService {
       goals: goalLeaders as unknown as StatPlayerLeaderDto[],
       longStreak: longStreakLeaders as unknown as StatPlayerLeaderDto[],
       minutes: minutesLeaders as unknown as StatPlayerLeaderDto[],
-      penalties: [],
-      ppGoals: [],
-      rookies: [],
-      shGoals: [],
-      shots: [],
+      penalties: penaltyLeaders as unknown as StatPlayerLeaderDto[],
+      ppGoals: ppGoalsLeaders as unknown as StatPlayerLeaderDto[],
+      rookies: rookieLeaders as unknown as StatPlayerLeaderDto[],
+      shGoals: shGoalsLeaders as unknown as StatPlayerLeaderDto[],
+      shots: shotsLeaders as unknown as StatPlayerLeaderDto[],
     };
   }
 
@@ -401,6 +406,172 @@ export class ApiPlayerStatsService {
     const minutesLeadersWithTeamInfo = await this.setTeamInfo(minutesLeaders);
 
     return minutesLeadersWithTeamInfo;
+  }
+
+  private async getPenaltyLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const penaltyLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        penalty_minutes: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        penalty_minutes: 'DESC',
+      },
+      take: 10,
+    });
+
+    const penaltyLeadersWithTeamInfo = await this.setTeamInfo(penaltyLeaders);
+
+    return penaltyLeadersWithTeamInfo;
+  }
+
+  private async getPpgoalsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const ppGoalsLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        pp_goals: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        pp_goals: 'DESC',
+      },
+      take: 10,
+    });
+
+    const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
+
+    return ppGoalsLeadersWithTeamInfo;
+  }
+
+  private async getRookieLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const rookieLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        points: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        player_status: 'Rookie',
+      },
+      order: {
+        points: 'DESC',
+      },
+      take: 10,
+    });
+
+    const rookieLeadersWithTeamInfo = await this.setTeamInfo(rookieLeaders);
+
+    return rookieLeadersWithTeamInfo;
+  }
+
+  private async getShGoalsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const shGoalsLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        sh_goals: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        sh_goals: 'DESC',
+      },
+      take: 10,
+    });
+
+    const shGoalsLeadersWithTeamInfo = await this.setTeamInfo(shGoalsLeaders);
+
+    return shGoalsLeadersWithTeamInfo;
+  }
+
+  private async getShotsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const shotsLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        shots: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        shots: 'DESC',
+      },
+      take: 10,
+    });
+
+    const shotsLeadersWithTeamInfo = await this.setTeamInfo(shotsLeaders);
+
+    return shotsLeadersWithTeamInfo;
   }
 
   private async setTeamInfo(array: Players_Stats_V2[]) {
