@@ -33,11 +33,11 @@ export class ApiPlayerStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
-    const pointsLeaders = await this.getPointsLeaders(season, seasonType);
+    // const pointsLeaders = await this.getPointsLeaders(season, seasonType);
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
-      points: pointsLeaders as unknown as StatPlayerLeaderDto[],
+      points: [],
       assists: [],
       bestPlusMinus: [],
       blockedShots: [],

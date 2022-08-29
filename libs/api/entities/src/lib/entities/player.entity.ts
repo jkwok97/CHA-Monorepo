@@ -18,7 +18,6 @@ import { Salaries_V2 } from './salary.entity';
 @Entity()
 export class Players_V2 {
   @PrimaryGeneratedColumn()
-  @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   id!: number;
 
   @Column()
@@ -44,6 +43,9 @@ export class Players_V2 {
 
   @Column()
   is_protected!: boolean;
+
+  @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
+  playerStats!: Players_Stats_V2;
 
   @OneToOne(() => Salaries_V2, (salary) => salary.player_id)
   salary!: Salaries_V2;
