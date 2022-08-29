@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-} from 'typeorm';
-import { Conferences_V2 } from './conference.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Divisions_V2 {
@@ -15,11 +8,8 @@ export class Divisions_V2 {
   @Column()
   divisionname!: string;
 
-  @OneToOne(() => Conferences_V2, (conference) => conference.id, {
-    eager: true,
-  })
-  @JoinColumn({ name: 'conference_id' })
-  conference_id!: Conferences_V2;
+  @Column()
+  conference_id!: number;
 
   @Column()
   isactive!: boolean;

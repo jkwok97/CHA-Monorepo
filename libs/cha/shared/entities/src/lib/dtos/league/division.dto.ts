@@ -1,8 +1,8 @@
-import { ConferenceDto } from './conference.dto';
+import { ConferencesEnum } from '../../enums';
 
 export interface DivisionDto {
   id: number;
   divisionname: string;
-  conference_id: ConferenceDto;
+  conference_id: ConferencesEnum;
   isactive: boolean;
 }

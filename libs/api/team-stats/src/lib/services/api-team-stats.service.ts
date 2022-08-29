@@ -63,10 +63,7 @@ export class ApiTeamStatsService {
           divisions_id: {
             id: true,
             divisionname: true,
-            conference_id: {
-              id: true,
-              conferencename: true,
-            },
+            conference_id: true,
           },
         },
         div_loss: true,
@@ -113,7 +110,7 @@ export class ApiTeamStatsService {
       array.map(async (item) => ({
         ...item,
         conference: await this.getConferenceInfo(
-          item.team_id.divisions_id.conference_id.id
+          item.team_id.divisions_id.conference_id
         ),
       }))
     );
