@@ -30,11 +30,12 @@ export class ApiPlayerStatsService {
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
+    const assistLeaders = await this.getAssistLeaders(season, seasonType);
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
       points: pointsLeaders as unknown as StatPlayerLeaderDto[],
-      assists: [],
+      assists: assistLeaders as unknown as StatPlayerLeaderDto[],
       bestPlusMinus: [],
       blockedShots: [],
       currStreak: [],
@@ -56,9 +57,6 @@ export class ApiPlayerStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ) {
     const hitsLeaders = await this.repo.find({
-      relations: {
-        player_id: true,
-      },
       select: {
         id: true,
         hits: true,
@@ -70,6 +68,9 @@ export class ApiPlayerStatsService {
           nhl_id: true,
           isgoalie: true,
         },
+      },
+      relations: {
+        player_id: true,
       },
       where: {
         playing_year: season,
@@ -91,13 +92,13 @@ export class ApiPlayerStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ) {
     const pointsLeaders = await this.repo.find({
-      relations: ['player_id'],
       select: {
         id: true,
         team_name: true,
         points: true,
         player_id: this.playerIdSelect,
       },
+      relations: ['player_id'],
       where: {
         playing_year: season,
         season_type: seasonType,
@@ -111,6 +112,33 @@ export class ApiPlayerStatsService {
     const pointsLeadersWithTeamInfo = await this.setTeamInfo(pointsLeaders);
 
     return pointsLeadersWithTeamInfo;
+  }
+
+  private async getAssistLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const assistLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        assists: true,
+        player_id: this.playerIdSelect,
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        points: 'DESC',
+      },
+      take: 10,
+    });
+
+    const assistLeadersWithTeamInfo = await this.setTeamInfo(assistLeaders);
+
+    return assistLeadersWithTeamInfo;
   }
 
   private async setTeamInfo(array: Players_Stats_V2[]) {
