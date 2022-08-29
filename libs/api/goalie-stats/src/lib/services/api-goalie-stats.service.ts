@@ -26,20 +26,21 @@ export class ApiGoalieStatsService {
       seasonType,
       minGames
     );
-    // const gaaLeaders = await this.getPointsLeaders(season, seasonType);
-    // const savePctLeaders = await this.getAssistLeaders(season, seasonType);
-    // const shutoutsLeaders = await this.getBestPlusMinusLeaders(
-    //   season,
-    //   seasonType
-    // );
-    // const winsLeaders = await this.getblockedShotLeaders(season, seasonType);
+    const gaaLeaders = await this.getGaaLeaders(season, seasonType, minGames);
+    const savePctLeaders = await this.getSavePctLeaders(
+      season,
+      seasonType,
+      minGames
+    );
+    const shutoutsLeaders = await this.getShutoutLeaders(season, seasonType);
+    const winsLeaders = await this.getWinsLeaders(season, seasonType);
 
     return {
       shotsFaced: shotsFacedLeaders as unknown as StatGoalieLeaderDto[],
-      gaa: [],
-      savePct: [],
-      shutouts: [],
-      wins: [],
+      gaa: gaaLeaders as unknown as StatGoalieLeaderDto[],
+      savePct: savePctLeaders as unknown as StatGoalieLeaderDto[],
+      shutouts: shutoutsLeaders as unknown as StatGoalieLeaderDto[],
+      wins: winsLeaders as unknown as StatGoalieLeaderDto[],
     };
   }
 
@@ -80,6 +81,150 @@ export class ApiGoalieStatsService {
     );
 
     return shotsFacedLeadersWithTeamInfo;
+  }
+
+  private async getGaaLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    minGames: string
+  ) {
+    const gaaLeaders = await this.repo.find({
+      select: {
+        id: true,
+        goals_against_avg: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        games_played: MoreThan(Number(minGames)),
+      },
+      order: {
+        goals_against_avg: 'ASC',
+      },
+      take: 10,
+    });
+
+    const gaaLeadersWithTeamInfo = await this.setTeamInfo(gaaLeaders);
+
+    return gaaLeadersWithTeamInfo;
+  }
+
+  private async getSavePctLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    minGames: string
+  ) {
+    const savePctLeaders = await this.repo.find({
+      select: {
+        id: true,
+        save_pct: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        games_played: MoreThan(Number(minGames)),
+      },
+      order: {
+        save_pct: 'DESC',
+      },
+      take: 10,
+    });
+
+    const savePctLeadersWithTeamInfo = await this.setTeamInfo(savePctLeaders);
+
+    return savePctLeadersWithTeamInfo;
+  }
+
+  private async getShutoutLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const shutoutLeaders = await this.repo.find({
+      select: {
+        id: true,
+        shutouts: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        shutouts: 'DESC',
+      },
+      take: 10,
+    });
+
+    const shutoutLeadersWithTeamInfo = await this.setTeamInfo(shutoutLeaders);
+
+    return shutoutLeadersWithTeamInfo;
+  }
+
+  private async getWinsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const winLeaders = await this.repo.find({
+      select: {
+        id: true,
+        wins: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        wins: 'DESC',
+      },
+      take: 10,
+    });
+
+    const winLeadersWithTeamInfo = await this.setTeamInfo(winLeaders);
+
+    return winLeadersWithTeamInfo;
   }
 
   private async setTeamInfo(array: Goalies_Stats_V2[]) {

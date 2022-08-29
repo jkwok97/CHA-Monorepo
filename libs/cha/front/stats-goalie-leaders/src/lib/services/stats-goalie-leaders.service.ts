@@ -20,7 +20,7 @@ export class StatsGoalieLeadersService {
   ): Observable<StatGoalieLeadersDto> {
     return this._http
       .get(
-        `${this.apiUrl}/goalies-stats/leaders/${season}/${seasonType}/${minGames}`
+        `${this.apiUrl}/goalie-stats/leaders/${season}/${seasonType}/${minGames}`
       )
       .pipe(map((result: any) => result));
   }
