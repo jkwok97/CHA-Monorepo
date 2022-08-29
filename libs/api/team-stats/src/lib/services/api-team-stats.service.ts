@@ -1,4 +1,4 @@
-import { Team_Stats_V2 } from '@api/entities';
+import { Conferences_V2, Team_Stats_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,7 +7,9 @@ import { Repository } from 'typeorm';
 export class ApiTeamStatsService {
   constructor(
     @InjectRepository(Team_Stats_V2)
-    private repo: Repository<Team_Stats_V2>
+    private repo: Repository<Team_Stats_V2>,
+    @InjectRepository(Conferences_V2)
+    private conferencesRepo: Repository<Conferences_V2>
   ) {}
 
   async getTeamStatsBySeasonByType(
@@ -49,7 +51,7 @@ export class ApiTeamStatsService {
     season: string,
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<Team_Stats_V2[]> {
-    return await this.repo.find({
+    const teamStats = await this.repo.find({
       relations: ['team_id'],
       select: {
         team_id: {
@@ -98,6 +100,33 @@ export class ApiTeamStatsService {
       where: {
         playing_year: season,
         season_type: seasonType,
+      },
+    });
+
+    const teamStatsWithConference = await this.setConferenceInfo(teamStats);
+
+    return teamStatsWithConference;
+  }
+
+  private async setConferenceInfo(array: Team_Stats_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        conference: await this.getConferenceInfo(
+          item.team_id.divisions_id.conference_id.id
+        ),
+      }))
+    );
+  }
+
+  private async getConferenceInfo(conferenceId: number) {
+    return await this.conferencesRepo.findOne({
+      select: {
+        id: true,
+        conferencename: true,
+      },
+      where: {
+        id: conferenceId,
       },
     });
   }
