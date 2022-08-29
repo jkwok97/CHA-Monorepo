@@ -1,3 +1,4 @@
+import { NhlPlayerStatDto, NhlGoalieStatDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as NhlStatsReducer from './nhl-stats.reducer';
@@ -26,6 +27,18 @@ const selectLoading = createSelector(selectState, NhlStatsReducer.getLoading);
 
 const selectLoaded = createSelector(selectState, NhlStatsReducer.getLoaded);
 
+const selectAllLoaded = createSelector(
+  selectRookieStats,
+  selectSkaterStats,
+  selectGoalieStats,
+  (
+    rookieStats: NhlPlayerStatDto[],
+    skaterStats: NhlPlayerStatDto[],
+    goalieStats: NhlGoalieStatDto[]
+  ) =>
+    rookieStats.length > 0 && skaterStats.length > 0 && goalieStats.length > 0
+);
+
 export const NhlStatsSelectors = {
   selectRookieStats,
   selectSkaterStats,
@@ -33,4 +46,5 @@ export const NhlStatsSelectors = {
   selectTotal,
   selectLoaded,
   selectLoading,
+  selectAllLoaded,
 };

@@ -23,7 +23,7 @@ export class NhlStatsComponent {
   showRookies = false;
 
   constructor(private nhlStatsFacade: NhlStatsFacade) {
-    this.isLoaded$ = this.nhlStatsFacade.isLoaded$;
+    this.isLoaded$ = this.nhlStatsFacade.isAllStatsLoaded$;
     this.isLoading$ = this.nhlStatsFacade.isLoading$;
     this.nhlStatsFacade.getSportsnetStats('2021', 'reg');
     this.nhlStatsFacade.getRookieStats('skater', 'points', 'DESC', 0, 100);

@@ -16,6 +16,10 @@ export class NhlStatsFacade {
     NhlStatsSelectors.selectLoaded
   );
 
+  isAllStatsLoaded$: Observable<boolean> = this.store.select(
+    NhlStatsSelectors.selectAllLoaded
+  );
+
   rookieStats$: Observable<NhlPlayerStatDto[]> = this.store.select(
     NhlStatsSelectors.selectRookieStats
   );
