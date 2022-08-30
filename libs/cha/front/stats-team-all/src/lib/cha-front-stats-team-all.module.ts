@@ -22,7 +22,10 @@ import { ChaFrontStatsTeamAllRoutingModule } from './cha-front-stats-team-all-ro
 import { StatsTeamAllService } from './services';
 
 import { StatsTeamAllComponent } from './containers';
-import { StatsTeamAllTableComponent } from './components';
+import {
+  StatsTeamAllTableComponent,
+  StatsTeamAllConferenceComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -39,7 +42,11 @@ import { StatsTeamAllTableComponent } from './components';
     StoreModule.forFeature('stats-team-all', reducer),
     EffectsModule.forFeature([StatsTeamAllEffects]),
   ],
-  declarations: [StatsTeamAllComponent, StatsTeamAllTableComponent],
+  declarations: [
+    StatsTeamAllComponent,
+    StatsTeamAllTableComponent,
+    StatsTeamAllConferenceComponent,
+  ],
   providers: [StatsTeamAllService, StatsTeamAllFacade, StatsTeamAllEffects],
 })
 export class ChaFrontStatsTeamAllModule {}

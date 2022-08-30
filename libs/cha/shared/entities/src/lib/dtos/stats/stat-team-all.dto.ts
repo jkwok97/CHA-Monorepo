@@ -1,4 +1,4 @@
-import { DivisionsEnum, TeamsEnum } from '../../enums';
+import { ConferencesEnum, TeamsEnum } from '../../enums';
 import { DivisionDto } from '../league/division.dto';
 
 export interface StatTeamAllDto {
@@ -10,6 +10,10 @@ export interface StatTeamAllDto {
     teamlogo: string;
     nickname: string;
     divisions_id: DivisionDto;
+  };
+  conference: {
+    id: ConferencesEnum;
+    conferencename: string;
   };
   div_loss: string;
   div_tie: string;

@@ -1,0 +1,19 @@
+<div class="flex flex-wrap row-gap-5">
+  <div class="w-full">
+    <div class="p-2 text-lg" style="font-weight: 100">Western Conference</div>
+    <ng-container *ngIf="westernStats$ | async as teamStats">
+      <cha-front-stats-team-all-table
+        [stats]="teamStats"
+      ></cha-front-stats-team-all-table>
+    </ng-container>
+  </div>
+
+  <div class="w-full text-lg" style="font-weight: 100">
+    <div class="p-2">Eastern Conference</div>
+    <ng-container *ngIf="easternStats$ | async as teamStats">
+      <cha-front-stats-team-all-table
+        [stats]="teamStats"
+      ></cha-front-stats-team-all-table>
+    </ng-container>
+  </div>
+</div>

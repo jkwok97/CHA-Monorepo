@@ -20,6 +20,14 @@ export class StatsTeamAllFacade {
     StatsTeamAllSelectors.selectAll
   );
 
+  westernStats$: Observable<StatTeamAllDto[]> = this.store.select(
+    StatsTeamAllSelectors.selectWesternTeams
+  );
+
+  easternStats$: Observable<StatTeamAllDto[]> = this.store.select(
+    StatsTeamAllSelectors.selectEasternTeams
+  );
+
   constructor(private store: Store<State>) {}
 
   getAllTeamStats() {
