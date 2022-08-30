@@ -47,6 +47,11 @@ const selectCurrentDraftSeason = createSelector(
   }
 );
 
+const selectIsOffSeason = createSelector(
+  selectLeagueData,
+  (data: LeagueDataDto) => data.offseason
+);
+
 const selectTeams = createSelector(selectState, LeagueDataReducer.getTeams);
 
 const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
@@ -61,4 +66,5 @@ export const LeagueDataSelectors = {
   selectTeams,
   selectLoaded,
   selectLoading,
+  selectIsOffSeason,
 };

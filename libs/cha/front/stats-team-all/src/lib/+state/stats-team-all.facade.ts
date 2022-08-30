@@ -46,7 +46,7 @@ export class StatsTeamAllFacade {
 
   constructor(private store: Store<State>) {}
 
-  getAllTeamStats() {
-    this.store.dispatch(StatsTeamAllActions.getAll());
+  getAllTeamStats(season: string) {
+    this.store.dispatch(StatsTeamAllActions.getAll({ season }));
   }
 }

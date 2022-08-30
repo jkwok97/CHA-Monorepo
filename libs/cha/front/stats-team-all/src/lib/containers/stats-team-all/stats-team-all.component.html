@@ -8,13 +8,21 @@
 
     <div class="grid justify-content-center row-gap-2 pt-2">
       <div class="text-lg col-12 text-center" style="font-weight: 100">
-        NHL Detailed Stats
+        CHA Detailed Stats
       </div>
-      <blade-button-select
-        class="col-12 flex justify-content-center"
-        [options]="selectOptions"
-        (optionChanged)="onOptionChanged($event)"
-      ></blade-button-select>
+      <div>
+        <blade-button-select
+          class="col-12 flex justify-content-center"
+          [options]="selectOptions"
+          (optionChanged)="onOptionChanged($event)"
+        ></blade-button-select>
+
+        <blade-button-select
+          class="col-12 flex justify-content-center"
+          [options]="selectSeasonOptions"
+          (optionChanged)="onSeasonOptionChanged($event)"
+        ></blade-button-select>
+      </div>
     </div>
 
     <div class="overflow-x-auto">

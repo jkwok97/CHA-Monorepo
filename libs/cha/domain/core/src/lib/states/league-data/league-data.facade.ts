@@ -24,6 +24,10 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectTeams
   );
 
+  isOffSeason$: Observable<boolean> = this.store.select(
+    LeagueDataSelectors.selectIsOffSeason
+  );
+
   constructor(private store: Store<State>) {}
 
   getLeagueData() {

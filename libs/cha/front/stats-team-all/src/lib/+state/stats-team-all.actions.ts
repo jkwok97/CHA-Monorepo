@@ -3,7 +3,10 @@ import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[STATS TEAM ALL]';
 
-const getAll = createAction(`${NAMESPACE} Get All`);
+const getAll = createAction(
+  `${NAMESPACE} Get All`,
+  props<{ season: string }>()
+);
 
 const getAllSuccess = createAction(
   `${NAMESPACE} Get All Success`,

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { LeagueDataFacade } from '@cha/domain/core';
 import { StatTeamAllDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { StatsTeamAllFacade } from '../../+state/stats-team-all.facade';
 
 @Component({
@@ -25,15 +26,35 @@ export class StatsTeamAllComponent implements OnInit {
     { label: 'Divisions', value: 'divisions' },
   ];
 
-  constructor(private statsTeamAllFacade: StatsTeamAllFacade) {
+  selectSeasonOptions = [
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Playoffs', value: 'Playoffs', disabled: false },
+  ];
+
+  constructor(
+    private statsTeamAllFacade: StatsTeamAllFacade,
+    private leagueDataFacade: LeagueDataFacade
+  ) {
     this.isLoaded$ = this.statsTeamAllFacade.isLoaded$;
     this.isLoading$ = this.statsTeamAllFacade.isLoading$;
 
     this.teamStats$ = this.statsTeamAllFacade.allStats$;
+    this.leagueDataFacade.isOffSeason$
+      .pipe(first())
+      .subscribe((isOffSeason: boolean) => {
+        this.selectSeasonOptions = [
+          { label: 'Regular', value: 'Regular' },
+          { label: 'Playoffs', value: 'Playoffs', disabled: !isOffSeason },
+        ];
+      });
   }
 
   ngOnInit(): void {
-    this.statsTeamAllFacade.getAllTeamStats();
+    this.statsTeamAllFacade.getAllTeamStats('Regular');
+  }
+
+  onSeasonOptionChanged(option: string) {
+    this.statsTeamAllFacade.getAllTeamStats(option);
   }
 
   onOptionChanged(option: string) {
