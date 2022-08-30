@@ -3,13 +3,13 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { StatsTeamAllActions } from './stats-team-all.actions';
 
 export interface State {
-  stats: StatTeamAllDto[] | null;
+  stats: StatTeamAllDto[];
   loading: boolean;
   loaded: boolean;
 }
 
 const initialState: State = {
-  stats: null,
+  stats: [],
   loading: false,
   loaded: false,
 };

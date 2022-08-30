@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UserTeamFacade } from '@cha/domain/core';
-import { TeamDto } from '@cha/shared/entities';
-import { Observable, first } from 'rxjs';
+import { StatTeamAllDto } from '@cha/shared/entities';
+import { Observable } from 'rxjs';
 import { StatsTeamAllFacade } from '../../+state/stats-team-all.facade';
 
 @Component({
@@ -13,29 +12,61 @@ import { StatsTeamAllFacade } from '../../+state/stats-team-all.facade';
 export class StatsTeamAllComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
-  currentTeam$: Observable<TeamDto | undefined>;
+  teamStats$: Observable<StatTeamAllDto[]>;
 
   backgroundColor!: string;
+  showLeague = true;
+  showConference = false;
+  showDivisions = false;
 
-  constructor(
-    private statsTeamAllFacade: StatsTeamAllFacade,
-    private userTeamFacade: UserTeamFacade
-  ) {
+  selectOptions = [
+    { label: 'League', value: 'league' },
+    { label: 'Conference', value: 'conference' },
+    { label: 'Divisions', value: 'divisions' },
+  ];
+
+  constructor(private statsTeamAllFacade: StatsTeamAllFacade) {
     this.isLoaded$ = this.statsTeamAllFacade.isLoaded$;
     this.isLoading$ = this.statsTeamAllFacade.isLoading$;
 
-    this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
-
-    this.currentTeam$
-      .pipe(first())
-      .subscribe((userTeam: TeamDto | undefined) => {
-        if (userTeam) {
-          this.backgroundColor = userTeam.teamcolor;
-        }
-      });
+    this.teamStats$ = this.statsTeamAllFacade.allStats$;
   }
 
   ngOnInit(): void {
     this.statsTeamAllFacade.getAllTeamStats();
+  }
+
+  onOptionChanged(option: string) {
+    switch (option) {
+      case 'league':
+        this.setLeague();
+        break;
+      case 'conference':
+        this.setConference();
+        break;
+      case 'divisions':
+        this.setDivisions();
+        break;
+      default:
+        return;
+    }
+  }
+
+  setLeague() {
+    this.showLeague = true;
+    this.showConference = false;
+    this.showDivisions = false;
+  }
+
+  setConference() {
+    this.showLeague = false;
+    this.showDivisions = false;
+    this.showConference = true;
+  }
+
+  setDivisions() {
+    this.showDivisions = true;
+    this.showLeague = false;
+    this.showConference = false;
   }
 }

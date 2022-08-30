@@ -1,0 +1,89 @@
+<p-table
+  [responsiveLayout]="'scroll'"
+  [value]="stats"
+  [columns]="playerTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+>
+  <ng-template pTemplate="header" let-columns let-data>
+    <tr>
+      <th *ngFor="let column of playerTableColumns">
+        {{ column.header }}
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of playerTableColumns">
+        <span class="p-column-title">{{ column.header }}</span>
+        <div class="table-body-cell">
+          <ng-container *ngIf="column.field === 'team'">
+            <img [src]="data.teamLogo" height="30px" />
+            <ng-container *ngIf="!isMobile">
+              {{ data.team_id.city + ' ' + data.team_id.nickname }}
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'goals_for_per_game'">
+            {{ (data.goals_for / data.games_played).toFixed(2) }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'goals_against_per_game'">
+            {{ (data.goals_against / data.games_played).toFixed(2) }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'goal_diff'">
+            {{ data.goals_for - data.goals_against }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'win_efficiency'">
+            {{ ((data.wins / data.games_played) * 100).toFixed(1) }}%
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'pp_efficiency'">
+            {{ ((data.pp_goals / data.pp_attempts) * 100).toFixed(1) }}%
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'pk_efficiency'">
+            {{
+              (
+                ((data.pk_attempts - data.pk_goals) / data.pk_attempts) *
+                100
+              ).toFixed(1)
+            }}%
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'pim_per_game'">
+            {{ (data.penalty_minutes / data.games_played).toFixed(1) }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'div_record'">
+            {{ data.div_win }}-{{ data.div_loss }}-{{ data.div_tie }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'home_record'">
+            {{ data.home_wins }}-{{ data.home_loss }}-{{ data.home_ties }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'away_recond'">
+            {{ data.road_wins }}-{{ data.road_loss }}-{{ data.road_ties }}
+          </ng-container>
+
+          <ng-container *ngIf="column.field === 'trailing_record'">
+            {{ data.trail_after_two_wins }}-{{ data.trail_after_two_loss }}-{{
+              data.trail_after_two_ties
+            }}
+          </ng-container>
+
+          <ng-container>{{ data[column.field] }}</ng-container>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

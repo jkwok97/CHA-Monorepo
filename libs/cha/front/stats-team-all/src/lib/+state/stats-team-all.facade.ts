@@ -16,7 +16,7 @@ export class StatsTeamAllFacade {
     StatsTeamAllSelectors.selectLoaded
   );
 
-  allStats$: Observable<StatTeamAllDto[] | null> = this.store.select(
+  allStats$: Observable<StatTeamAllDto[]> = this.store.select(
     StatsTeamAllSelectors.selectAll
   );
 

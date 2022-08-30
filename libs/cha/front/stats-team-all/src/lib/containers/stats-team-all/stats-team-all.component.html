@@ -1,6 +1,4 @@
-<blade-layout-feature-content
-  [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
->
+<blade-layout-feature-content>
   <div class="stats-team-all">
     <p-progressBar
       mode="indeterminate"
@@ -8,6 +6,35 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <ng-container *ngIf="isLoaded$ | async"> </ng-container>
+    <div class="grid justify-content-center row-gap-2 pt-2">
+      <div class="text-lg col-12 text-center" style="font-weight: 100">
+        NHL Detailed Stats
+      </div>
+      <blade-button-select
+        class="col-12 flex justify-content-center"
+        [options]="selectOptions"
+        (optionChanged)="onOptionChanged($event)"
+      ></blade-button-select>
+    </div>
+
+    <div class="overflow-x-auto">
+      <blade-divider></blade-divider>
+
+      <ng-container *ngIf="isLoaded$ | async">
+        <ng-container *ngIf="showLeague">
+          <ng-container *ngIf="teamStats$ | async as teamStats">
+            <cha-front-stats-team-all-table
+              [stats]="teamStats"
+            ></cha-front-stats-team-all-table>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="showConference">
+          <!-- <cha-front-nhl-stats-goalie-table></cha-front-nhl-stats-goalie-table> -->
+        </ng-container>
+        <ng-container *ngIf="showDivisions">
+          <!-- <cha-front-nhl-stats-rookie-table></cha-front-nhl-stats-rookie-table> -->
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
 </blade-layout-feature-content>
