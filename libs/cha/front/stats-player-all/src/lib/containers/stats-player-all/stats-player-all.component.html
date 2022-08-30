@@ -1,1 +1,44 @@
-<p>stats-player-all works!</p>
+<blade-layout-feature-content>
+  <div class="stats-player-all">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="grid justify-content-center row-gap-2 pt-2">
+      <div class="text-lg col-12 text-center" style="font-weight: 100">
+        CHA Player Stats
+      </div>
+      <div
+        class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
+      >
+        <blade-button-select
+          class="flex justify-content-center"
+          [options]="selectOptions"
+          (optionChanged)="onOptionChanged($event)"
+        ></blade-button-select>
+
+        <blade-button-select
+          class="flex justify-content-center"
+          [options]="selectSeasonOptions"
+          (optionChanged)="onSeasonOptionChanged($event)"
+        ></blade-button-select>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <blade-divider></blade-divider>
+
+      <ng-container *ngIf="isLoaded$ | async">
+        <ng-container *ngIf="showAll">
+          <ng-container *ngIf="playerStats$ | async as teamStats">
+            hello
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="showForwards"> hi </ng-container>
+        <ng-container *ngIf="showDefense"> bonjour </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</blade-layout-feature-content>

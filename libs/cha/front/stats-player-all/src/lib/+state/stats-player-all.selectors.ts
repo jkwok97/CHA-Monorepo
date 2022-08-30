@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as StatsTeamAllReducer from './stats-player-all.reducer';
 
 export const selectState =
-  createFeatureSelector<StatsTeamAllReducer.State>('stats-team-all');
+  createFeatureSelector<StatsTeamAllReducer.State>('stats-player-all');
 
 const selectLoading = createSelector(
   selectState,
