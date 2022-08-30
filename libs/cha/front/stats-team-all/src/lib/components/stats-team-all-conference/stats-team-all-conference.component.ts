@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { StatTeamAllDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 import { StatsTeamAllFacade } from '../../+state/stats-team-all.facade';
@@ -9,7 +9,7 @@ import { StatsTeamAllFacade } from '../../+state/stats-team-all.facade';
   styleUrls: ['./stats-team-all-conference.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatsTeamAllConferenceComponent implements OnInit {
+export class StatsTeamAllConferenceComponent {
   westernStats$: Observable<StatTeamAllDto[]>;
   easternStats$: Observable<StatTeamAllDto[]>;
 
@@ -17,6 +17,4 @@ export class StatsTeamAllConferenceComponent implements OnInit {
     this.westernStats$ = this.statsTeamAllFacade.westernStats$;
     this.easternStats$ = this.statsTeamAllFacade.easternStats$;
   }
-
-  ngOnInit(): void {}
 }

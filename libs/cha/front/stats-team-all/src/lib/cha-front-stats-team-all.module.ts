@@ -25,6 +25,7 @@ import { StatsTeamAllComponent } from './containers';
 import {
   StatsTeamAllTableComponent,
   StatsTeamAllConferenceComponent,
+  StatsTeamAllDivisionsComponent
 } from './components';
 
 @NgModule({
@@ -46,6 +47,7 @@ import {
     StatsTeamAllComponent,
     StatsTeamAllTableComponent,
     StatsTeamAllConferenceComponent,
+    StatsTeamAllDivisionsComponent,
   ],
   providers: [StatsTeamAllService, StatsTeamAllFacade, StatsTeamAllEffects],
 })
