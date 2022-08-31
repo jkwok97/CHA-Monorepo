@@ -20,6 +20,7 @@ import { StatsPlayerAllService } from './services';
 import { ChaFrontStatsPlayerAllRoutingModule } from './cha-front-stats-player-all-routing.module';
 
 import { StatsPlayerAllComponent } from './containers';
+import { StatsPlayerAllTableComponent } from './components/stats-player-all-table/stats-player-all-table.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,7 @@ import { StatsPlayerAllComponent } from './containers';
     StoreModule.forFeature('stats-player-all', reducer),
     EffectsModule.forFeature([StatsPlayerAllEffects]),
   ],
-  declarations: [StatsPlayerAllComponent],
+  declarations: [StatsPlayerAllComponent, StatsPlayerAllTableComponent],
   providers: [
     StatsPlayerAllService,
     StatsPlayerAllFacade,

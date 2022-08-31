@@ -47,6 +47,8 @@ export class StatsPlayerAllComponent implements OnInit {
           { label: 'Playoffs', value: 'Playoffs', disabled: !isOffSeason },
         ];
       });
+
+    this.playerStats$.subscribe(console.log);
   }
 
   ngOnInit(): void {

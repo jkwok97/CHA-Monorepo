@@ -1,5 +1,6 @@
 import { StatPlayerAllDto, StatPlayerLeadersDto } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { stat } from 'fs';
 import {
   ApiPlayerLeadersStatsService,
   ApiPlayerStatsService,
@@ -35,6 +36,7 @@ export class PlayerStatsController {
     if (!stats || stats.length < 1) {
       throw new NotFoundException('Player Stats not found');
     }
+
     return stats;
   }
 }

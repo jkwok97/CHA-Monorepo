@@ -26,6 +26,7 @@ export interface StatPlayerAllDto {
   gt_goals: number;
   shots: number;
   shooting_pct: string;
+  minutes_played: number;
   minutes_per_game: string;
   fo_pct: string;
   pass_pct: string;

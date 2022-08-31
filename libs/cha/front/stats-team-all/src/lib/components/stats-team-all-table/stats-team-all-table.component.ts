@@ -41,7 +41,6 @@ export class StatsTeamAllTableComponent implements OnInit {
 
   sortField = 'points';
   isMobile = false;
-  disableSort = false;
 
   constructor(private displayFacade: DisplayFacade) {
     this.displayFacade.isMobile$

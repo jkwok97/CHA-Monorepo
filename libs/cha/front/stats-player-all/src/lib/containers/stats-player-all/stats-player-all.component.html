@@ -32,8 +32,10 @@
 
       <ng-container *ngIf="isLoaded$ | async">
         <ng-container *ngIf="showAll">
-          <ng-container *ngIf="playerStats$ | async as teamStats">
-            hello
+          <ng-container *ngIf="playerStats$ | async as playerStats">
+            <cha-front-stats-player-all-table
+              [stats]="playerStats"
+            ></cha-front-stats-player-all-table>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="showForwards"> hi </ng-container>

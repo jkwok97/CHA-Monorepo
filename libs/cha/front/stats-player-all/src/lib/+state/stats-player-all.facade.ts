@@ -20,6 +20,10 @@ export class StatsPlayerAllFacade {
     StatsPlayerAllSelectors.selectAll
   );
 
+  total$: Observable<number> = this.store.select(
+    StatsPlayerAllSelectors.selectTotal
+  );
+
   constructor(private store: Store<State>) {}
 
   getAllPlayerStats(season: string) {
