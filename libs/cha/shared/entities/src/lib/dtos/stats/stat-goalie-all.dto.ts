@@ -22,6 +22,7 @@ export interface StatGoalieAllDto {
   ties: number;
   en_goals: number;
   shutouts: number;
+  goals_against: number;
   saves: number;
   shots_for: number;
   save_pct: number;

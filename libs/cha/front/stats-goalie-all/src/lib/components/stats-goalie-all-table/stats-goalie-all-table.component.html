@@ -2,7 +2,7 @@
   #dt
   [responsiveLayout]="'scroll'"
   [value]="statsForTable"
-  [columns]="playerTableColumns"
+  [columns]="goalieTableColumns"
   styleClass="p-datatable-sm p-datatable-striped"
   class="table"
   [rows]="rows"
@@ -32,23 +32,17 @@
   <ng-template pTemplate="header" let-columns let-data>
     <tr>
       <th
-        *ngFor="let column of playerTableColumns"
+        *ngFor="let column of goalieTableColumns"
         [hidden]="!column.visible"
         [pSortableColumn]="column.field"
         [pSortableColumnDisabled]="
-          column.field === 'team' ||
-          column.field === 'full_name' ||
-          column.field === 'points_per_sixty'
+          column.field === 'team' || column.field === 'full_name'
         "
       >
         {{ column.header }}
         <p-sortIcon
           [field]="column.field"
-          *ngIf="
-            column.field !== 'team' &&
-            column.field !== 'full_name' &&
-            column.field !== 'points_per_sixty'
-          "
+          *ngIf="column.field !== 'team' && column.field !== 'full_name'"
         ></p-sortIcon>
       </th>
     </tr>
@@ -61,21 +55,15 @@
     let-rowIndex="rowIndex"
   >
     <tr>
-      <td *ngFor="let column of playerTableColumns" [hidden]="!column.visible">
+      <td *ngFor="let column of goalieTableColumns" [hidden]="!column.visible">
         <span class="p-column-title">{{ column.header }}</span>
         <div class="table-body-cell">
           <ng-container *ngIf="column.field === 'team'">
             <img [src]="data.teamLogo" height="30px" />
           </ng-container>
-          <ng-container *ngIf="column.field === 'points_per_sixty'">
-            {{ ((data.points / data.minutes_played) * 100).toFixed(2) }}
-          </ng-container>
-          <ng-container>{{
-            column.field !== 'chaTeam' ? data[column.field] : ''
-          }}</ng-container>
+          <ng-container>{{ data[column.field] }}</ng-container>
         </div>
       </td>
     </tr>
   </ng-template>
 </p-table>
-

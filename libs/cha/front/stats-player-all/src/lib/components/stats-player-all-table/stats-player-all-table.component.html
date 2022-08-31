@@ -70,9 +70,7 @@
           <ng-container *ngIf="column.field === 'points_per_sixty'">
             {{ ((data.points / data.minutes_played) * 100).toFixed(2) }}
           </ng-container>
-          <ng-container>{{
-            column.field !== 'chaTeam' ? data[column.field] : ''
-          }}</ng-container>
+          <ng-container>{{ data[column.field] }}</ng-container>
         </div>
       </td>
     </tr>
