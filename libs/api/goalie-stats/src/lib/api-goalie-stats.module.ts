@@ -3,12 +3,15 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GoalieStatsController } from './controllers';
 import { GoalieStatsMiddleware } from './middlewares';
-import { ApiGoalieStatsService } from './services';
+import {
+  ApiGoalieStatsService,
+  ApiGoalieStatsLeadersService,
+} from './services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Goalies_Stats_V2, Teams_V2])],
   controllers: [GoalieStatsController],
-  providers: [ApiGoalieStatsService, ApiGoalieStatsService],
+  providers: [ApiGoalieStatsService, ApiGoalieStatsLeadersService],
 })
 export class ApiGoalieStatsModule {
   configure(consumer: MiddlewareConsumer) {
