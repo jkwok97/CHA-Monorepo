@@ -45,7 +45,7 @@ export class StatsGoalieAllTableComponent implements OnInit {
   first = 0;
   rows = 100;
   totalRecords = 0;
-  sortField = 'points';
+  sortField = 'wins';
   statsForTable!: any;
 
   ngOnInit(): void {
