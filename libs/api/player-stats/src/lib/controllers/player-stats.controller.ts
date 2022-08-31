@@ -27,7 +27,7 @@ export class PlayerStatsController {
   }
 
   @Get('/all/:season/:seasonType')
-  async getPlayerStatsAll(@Param() param): Promise<StatPlayerAllDto[]> {
+  async getPlayerStatsAll(@Param() param): Promise<any[]> {
     const stats = await this.playerStatsService.getAllStats(
       param.season,
       param.seasonType
