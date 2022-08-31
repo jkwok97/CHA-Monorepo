@@ -37,7 +37,7 @@
         [pSortableColumn]="column.field"
         [pSortableColumnDisabled]="
           column.field === 'team' ||
-          column.field === 'name' ||
+          column.field === 'full_name' ||
           column.field === 'points_per_sixty'
         "
       >
@@ -46,7 +46,7 @@
           [field]="column.field"
           *ngIf="
             column.field !== 'team' &&
-            column.field !== 'name' &&
+            column.field !== 'full_name' &&
             column.field !== 'points_per_sixty'
           "
         ></p-sortIcon>
