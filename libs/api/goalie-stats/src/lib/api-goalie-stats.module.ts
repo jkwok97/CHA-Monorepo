@@ -8,7 +8,7 @@ import { ApiGoalieStatsService } from './services';
 @Module({
   imports: [TypeOrmModule.forFeature([Goalies_Stats_V2, Teams_V2])],
   controllers: [GoalieStatsController],
-  providers: [ApiGoalieStatsService],
+  providers: [ApiGoalieStatsService, ApiGoalieStatsService],
 })
 export class ApiGoalieStatsModule {
   configure(consumer: MiddlewareConsumer) {
