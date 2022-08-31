@@ -20,6 +20,14 @@ export class StatsPlayerAllFacade {
     StatsPlayerAllSelectors.selectAll
   );
 
+  forwardStats$: Observable<StatPlayerAllDto[]> = this.store.select(
+    StatsPlayerAllSelectors.selectAllForwards
+  );
+
+  defenseStats$: Observable<StatPlayerAllDto[]> = this.store.select(
+    StatsPlayerAllSelectors.selectAllDefense
+  );
+
   total$: Observable<number> = this.store.select(
     StatsPlayerAllSelectors.selectTotal
   );

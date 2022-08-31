@@ -5,8 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { StatPlayerAllDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
-import { StatsPlayerAllFacade } from '../../+state/stats-player-all.facade';
 
 @Component({
   selector: 'cha-front-stats-player-all-table',
@@ -16,8 +14,6 @@ import { StatsPlayerAllFacade } from '../../+state/stats-player-all.facade';
 })
 export class StatsPlayerAllTableComponent implements OnInit {
   @Input() stats!: StatPlayerAllDto[];
-
-  total$: Observable<number>;
 
   playerTableColumns = [
     { field: 'team', header: 'Team' },
@@ -50,13 +46,8 @@ export class StatsPlayerAllTableComponent implements OnInit {
   sortField = 'points';
   statsForTable!: any;
 
-  constructor(private statsPlayerAllFacade: StatsPlayerAllFacade) {
-    this.total$ = this.statsPlayerAllFacade.total$;
-  }
-
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
-    console.log(this.statsForTable);
   }
 
   mapItems(stats: StatPlayerAllDto[]) {

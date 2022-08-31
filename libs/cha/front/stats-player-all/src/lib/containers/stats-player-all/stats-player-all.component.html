@@ -38,8 +38,21 @@
             ></cha-front-stats-player-all-table>
           </ng-container>
         </ng-container>
-        <ng-container *ngIf="showForwards"> hi </ng-container>
-        <ng-container *ngIf="showDefense"> bonjour </ng-container>
+        <ng-container *ngIf="showForwards">
+            <ng-container *ngIf="forwardStats$ | async as playerStats">
+                <cha-front-stats-player-all-table
+                [stats]="playerStats"
+              ></cha-front-stats-player-all-table>
+            </ng-container>
+          
+        </ng-container>
+        <ng-container *ngIf="showDefense">
+            <ng-container *ngIf="defenseStats$ | async as playerStats">
+                <cha-front-stats-player-all-table
+                [stats]="playerStats"
+              ></cha-front-stats-player-all-table>
+            </ng-container>
+        </ng-container>
       </ng-container>
     </div>
   </div>

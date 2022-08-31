@@ -18,9 +18,21 @@
       <th
         *ngFor="let column of playerTableColumns"
         [pSortableColumn]="column.field"
+        [pSortableColumnDisabled]="
+          column.field === 'team' ||
+          column.field === 'name' ||
+          column.field === 'points_per_sixty'
+        "
       >
         {{ column.header }}
-        <p-sortIcon [field]="column.field"></p-sortIcon>
+        <p-sortIcon
+          [field]="column.field"
+          *ngIf="
+            column.field !== 'team' &&
+            column.field !== 'name' &&
+            column.field !== 'points_per_sixty'
+          "
+        ></p-sortIcon>
       </th>
     </tr>
   </ng-template>

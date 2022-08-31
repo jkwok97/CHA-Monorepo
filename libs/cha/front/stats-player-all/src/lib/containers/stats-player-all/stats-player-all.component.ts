@@ -14,6 +14,8 @@ export class StatsPlayerAllComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
   playerStats$: Observable<StatPlayerAllDto[]>;
+  forwardStats$: Observable<StatPlayerAllDto[]>;
+  defenseStats$: Observable<StatPlayerAllDto[]>;
 
   backgroundColor!: string;
   showAll = true;
@@ -39,6 +41,9 @@ export class StatsPlayerAllComponent implements OnInit {
     this.isLoading$ = this.statsPlayerAllFacade.isLoading$;
 
     this.playerStats$ = this.statsPlayerAllFacade.allStats$;
+    this.forwardStats$ = this.statsPlayerAllFacade.forwardStats$;
+    this.defenseStats$ = this.statsPlayerAllFacade.defenseStats$;
+
     this.leagueDataFacade.isOffSeason$
       .pipe(first())
       .subscribe((isOffSeason: boolean) => {
@@ -47,8 +52,6 @@ export class StatsPlayerAllComponent implements OnInit {
           { label: 'Playoffs', value: 'Playoffs', disabled: !isOffSeason },
         ];
       });
-
-    this.playerStats$.subscribe(console.log);
   }
 
   ngOnInit(): void {
