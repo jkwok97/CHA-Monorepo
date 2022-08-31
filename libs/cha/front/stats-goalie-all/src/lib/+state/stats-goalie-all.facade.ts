@@ -7,7 +7,7 @@ import { StatsGoalieAllSelectors } from './stats-goalie-all.selectors';
 import { StatGoalieAllDto } from '@cha/shared/entities';
 
 @Injectable()
-export class StatsPlayerAllFacade {
+export class StatsGoalieAllFacade {
   isLoading$: Observable<boolean> = this.store.select(
     StatsGoalieAllSelectors.selectLoading
   );
@@ -26,7 +26,7 @@ export class StatsPlayerAllFacade {
 
   constructor(private store: Store<State>) {}
 
-  getAllPlayerStats(season: string) {
+  getAllGoalieStats(season: string) {
     this.store.dispatch(StatsGoalieAllActions.getAll({ season }));
   }
 }

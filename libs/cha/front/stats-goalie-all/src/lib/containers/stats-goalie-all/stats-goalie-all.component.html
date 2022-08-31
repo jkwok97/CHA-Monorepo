@@ -1,1 +1,34 @@
-<p>stats-goalie-all works!</p>
+<blade-layout-feature-content>
+  <div class="stats-goalie-all">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="grid justify-content-center row-gap-2 pt-2">
+      <div class="text-lg col-12 text-center" style="font-weight: 100">
+        CHA Goalie Stats
+      </div>
+      <div
+        class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
+      >
+        <blade-button-select
+          class="flex justify-content-center"
+          [options]="selectSeasonOptions"
+          (optionChanged)="onSeasonOptionChanged($event)"
+        ></blade-button-select>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <blade-divider></blade-divider>
+
+      <ng-container *ngIf="isLoaded$ | async">
+        <ng-container *ngIf="goalieStats$ | async as playerStats">
+          hello
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</blade-layout-feature-content>
