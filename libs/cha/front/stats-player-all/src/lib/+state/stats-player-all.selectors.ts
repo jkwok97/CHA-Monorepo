@@ -1,19 +1,25 @@
 import { StatPlayerAllDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as StatsTeamAllReducer from './stats-player-all.reducer';
+import * as StatsPlayerAllReducer from './stats-player-all.reducer';
 
 export const selectState =
-  createFeatureSelector<StatsTeamAllReducer.State>('stats-player-all');
+  createFeatureSelector<StatsPlayerAllReducer.State>('stats-player-all');
 
 const selectLoading = createSelector(
   selectState,
-  StatsTeamAllReducer.getLoading
+  StatsPlayerAllReducer.getLoading
 );
 
-const selectLoaded = createSelector(selectState, StatsTeamAllReducer.getLoaded);
+const selectLoaded = createSelector(
+  selectState,
+  StatsPlayerAllReducer.getLoaded
+);
 
-const selectAll = createSelector(selectState, StatsTeamAllReducer.getAllStats);
+const selectAll = createSelector(
+  selectState,
+  StatsPlayerAllReducer.getAllStats
+);
 
 const selectTotal = createSelector(
   selectAll,
