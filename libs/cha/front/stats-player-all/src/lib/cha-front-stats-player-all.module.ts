@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
@@ -27,6 +28,7 @@ import { StatsPlayerAllTableComponent } from './components/stats-player-all-tabl
     CommonModule,
     ChaFrontStatsPlayerAllRoutingModule,
     ProgressBarModule,
+    InputTextModule,
     TableModule,
     AvatarModule,
     BladeAngularUiLayoutModule,

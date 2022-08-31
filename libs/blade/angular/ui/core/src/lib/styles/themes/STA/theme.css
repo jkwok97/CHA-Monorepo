@@ -3612,7 +3612,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 .p-column-filter-menu-button {
   width: 2rem;
   height: 2rem;
-  color: #6c757d;
+  color: whitesmoke;
   border: 0 none;
   background: transparent;
   border-radius: 50%;
