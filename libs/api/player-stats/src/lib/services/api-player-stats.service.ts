@@ -63,6 +63,8 @@ export class ApiPlayerStatsService {
       allStatsWithTeamInfo
     );
 
+    console.log(allStatsWithTeamInfoConverted[0]);
+
     return allStatsWithTeamInfoConverted;
   }
 
