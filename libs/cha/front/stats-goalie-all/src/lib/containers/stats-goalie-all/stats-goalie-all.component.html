@@ -25,8 +25,8 @@
       <blade-divider></blade-divider>
 
       <ng-container *ngIf="isLoaded$ | async">
-        <ng-container *ngIf="goalieStats$ | async as playerStats">
-          hello
+        <ng-container *ngIf="goalieStats$ | async as goalieStats">
+          <cha-front-stats-goalie-all-table [stats]="goalieStats"></cha-front-stats-goalie-all-table>
         </ng-container>
       </ng-container>
     </div>
