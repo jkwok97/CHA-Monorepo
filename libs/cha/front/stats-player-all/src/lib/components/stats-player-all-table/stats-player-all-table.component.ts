@@ -46,7 +46,7 @@ export class StatsPlayerAllTableComponent implements OnInit {
   ];
 
   first = 0;
-  rows = 100;
+  rows = 50;
   totalRecords = 0;
   sortField = 'points';
   statsForTable!: any;
