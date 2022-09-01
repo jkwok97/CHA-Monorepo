@@ -105,6 +105,47 @@ export class ApiTeamStatsService {
     return teamStatsWithConference;
   }
 
+  async getTeamStandingsForPlayoffs(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ): Promise<Team_Stats_V2[]> {
+    const teamStats = await this.repo.find({
+      relations: ['team_id'],
+      select: {
+        team_id: {
+          id: true,
+          city: true,
+          teamlogo: true,
+          shortname: true,
+          nickname: true,
+          divisions_id: {
+            id: true,
+            divisionname: true,
+            conference_id: true,
+          },
+        },
+        goals_against: true,
+        goals_for: true,
+        playing_year: true,
+        points: true,
+        season_type: true,
+        wins: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+    });
+
+    const teamStatsWithConference = await this.setConferenceInfo(teamStats);
+
+    const teamStatsWithConferenceSorted = await this.sortTeamStatsByStandings(
+      teamStatsWithConference
+    );
+
+    return teamStatsWithConferenceSorted;
+  }
+
   private async setConferenceInfo(array: Team_Stats_V2[]) {
     return await Promise.all(
       array.map(async (item) => ({
@@ -127,4 +168,29 @@ export class ApiTeamStatsService {
       },
     });
   }
+
+  private sortTeamStatsByStandings = (data) => {
+    return data
+      .sort((a: any, b: any) => {
+        if (b.points === a.points) {
+          if (b.wins === a.wins) {
+            if (
+              b.goals_for - b.goals_against ===
+              a.goals_for - a.goals_against
+            ) {
+              return b.goals_for - a.goals_for;
+            } else {
+              return (
+                b.goals_for - b.goals_against - (a.goals_for - a.goals_against)
+              );
+            }
+          } else {
+            return b.wins - a.wins;
+          }
+        } else {
+          return b.points - a.points;
+        }
+      })
+      .reverse();
+  };
 }

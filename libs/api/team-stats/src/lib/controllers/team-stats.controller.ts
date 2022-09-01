@@ -20,8 +20,23 @@ export class TeamStatsController {
   }
 
   @Get('/all/:season/:seasonType')
-  async getAllTeamStatsBySeasonByType(@Param() param): Promise<Team_Stats_V2[]> {
+  async getAllTeamStatsBySeasonByType(
+    @Param() param
+  ): Promise<Team_Stats_V2[]> {
     const stats = await this.teamsStatsService.getAllTeamStatsBySeasonByType(
+      param.season,
+      param.seasonType
+    );
+
+    if (!stats || stats.length < 1) {
+      throw new NotFoundException('Team Stats not found');
+    }
+    return stats;
+  }
+
+  @Get('/playoffs/:season/:seasonType')
+  async getTeamStandingsForPlayoffs(@Param() param): Promise<Team_Stats_V2[]> {
+    const stats = await this.teamsStatsService.getTeamStandingsForPlayoffs(
       param.season,
       param.seasonType
     );
