@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UserTeamFacade } from '@cha/domain/core';
+import { PlayoffStandingsModel, TeamDto } from '@cha/shared/entities';
+import { first, Observable } from 'rxjs';
+import { GamesPlayoffsFacade } from '../../+state/games-playoffs.facade';
 
 @Component({
   selector: 'cha-front-games-playoffs',
@@ -6,4 +10,31 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./games-playoffs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GamesPlayoffsComponent {}
+export class GamesPlayoffsComponent implements OnInit {
+  isLoading$: Observable<boolean>;
+  isLoaded$: Observable<boolean>;
+  currentTeam$: Observable<TeamDto | undefined>;
+
+  backgroundColor!: string;
+
+  constructor(
+    private gamesPlayoffsFacade: GamesPlayoffsFacade,
+    private userTeamFacade: UserTeamFacade
+  ) {
+    this.isLoading$ = this.gamesPlayoffsFacade.isLoading$;
+    this.isLoaded$ = this.gamesPlayoffsFacade.isLoaded$;
+    this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+
+    this.currentTeam$
+      .pipe(first())
+      .subscribe((userTeam: TeamDto | undefined) => {
+        if (userTeam) {
+          this.backgroundColor = userTeam.teamcolor;
+        }
+      });
+  }
+
+  ngOnInit(): void {
+    this.gamesPlayoffsFacade.getPlayoffStandings();
+  }
+}

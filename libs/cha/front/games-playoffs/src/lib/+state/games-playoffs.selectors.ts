@@ -1,3 +1,4 @@
+import { PlayoffStandingsModel } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as GamesPlayoffsReducer from './games-playoffs.reducer';
@@ -20,8 +21,20 @@ const selectPlayoffStandings = createSelector(
   GamesPlayoffsReducer.getPlayoffStandings
 );
 
+const selectWestTeams = createSelector(
+  selectPlayoffStandings,
+  (stand: PlayoffStandingsModel) => stand.westTeams
+);
+
+const selectEastTeams = createSelector(
+  selectPlayoffStandings,
+  (stand: PlayoffStandingsModel) => stand.eastTeams
+);
+
 export const GamesPlayoffsSelectors = {
   selectLoaded,
   selectLoading,
   selectPlayoffStandings,
+  selectWestTeams,
+  selectEastTeams,
 };

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { PlayoffStandingsModel } from '@cha/shared/entities';
+import {
+  PlayoffStandingsModel,
+  StatTeamPlayoffsDto,
+} from '@cha/shared/entities';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GamesPlayoffsActions } from './games-playoffs.actions';
@@ -18,6 +21,14 @@ export class GamesPlayoffsFacade {
 
   playoffStandings$: Observable<PlayoffStandingsModel> = this.store.select(
     GamesPlayoffsSelectors.selectPlayoffStandings
+  );
+
+  westTeams$: Observable<StatTeamPlayoffsDto[]> = this.store.select(
+    GamesPlayoffsSelectors.selectWestTeams
+  );
+
+  eastTeams$: Observable<StatTeamPlayoffsDto[]> = this.store.select(
+    GamesPlayoffsSelectors.selectEastTeams
   );
 
   constructor(private store: Store<State>) {}

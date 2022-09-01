@@ -51,19 +51,19 @@ export const getLoading = (state: State) => state.loading;
 export const getLoaded = (state: State) => state.loaded;
 
 function separateConferences(standings: StatTeamPlayoffsDto[]) {
-  const eastTeams = standings
-    .filter(
-      (team: StatTeamPlayoffsDto) =>
-        team.conference.id === ConferencesEnum.EASTERN
-    )
-    .splice(standings.length - 2, 2);
+  const eastTeams = standings.filter(
+    (team: StatTeamPlayoffsDto) =>
+      team.conference.id === ConferencesEnum.EASTERN
+  );
 
-  const westTeams = standings
-    .filter(
-      (team: StatTeamPlayoffsDto) =>
-        team.conference.id === ConferencesEnum.WESTERN
-    )
-    .splice(standings.length - 2, 2);
+  eastTeams.splice(eastTeams.length - 2, 2);
+
+  const westTeams = standings.filter(
+    (team: StatTeamPlayoffsDto) =>
+      team.conference.id === ConferencesEnum.WESTERN
+  );
+
+  westTeams.splice(westTeams.length - 2, 2);
 
   return {
     eastTeams,
