@@ -190,7 +190,6 @@ export class ApiTeamStatsService {
         } else {
           return b.points - a.points;
         }
-      })
-      .reverse();
+      });
   };
 }
