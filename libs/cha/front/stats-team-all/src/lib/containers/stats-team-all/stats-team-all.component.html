@@ -27,23 +27,21 @@
       </div>
     </div>
 
-    <div class="overflow-x-auto h-full">
+    <div class="overflow-x-auto h-full" *ngIf="isLoaded$ | async">
       <blade-divider></blade-divider>
 
-      <ng-container *ngIf="isLoaded$ | async">
-        <ng-container *ngIf="showLeague">
-          <ng-container *ngIf="teamStats$ | async as teamStats">
-            <cha-front-stats-team-all-table
-              [stats]="teamStats"
-            ></cha-front-stats-team-all-table>
-          </ng-container>
+      <ng-container *ngIf="showLeague">
+        <ng-container *ngIf="teamStats$ | async as teamStats">
+          <cha-front-stats-team-all-table
+            [stats]="teamStats"
+          ></cha-front-stats-team-all-table>
         </ng-container>
-        <ng-container *ngIf="showConference">
-          <cha-front-stats-team-all-conference></cha-front-stats-team-all-conference>
-        </ng-container>
-        <ng-container *ngIf="showDivisions">
-          <cha-front-stats-team-all-divisions></cha-front-stats-team-all-divisions>
-        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="showConference">
+        <cha-front-stats-team-all-conference></cha-front-stats-team-all-conference>
+      </ng-container>
+      <ng-container *ngIf="showDivisions">
+        <cha-front-stats-team-all-divisions></cha-front-stats-team-all-divisions>
       </ng-container>
     </div>
   </div>

@@ -21,15 +21,13 @@
       </div>
     </div>
 
-    <div class="overflow-x-auto h-full">
+    <div class="overflow-x-auto h-full" *ngIf="isLoaded$ | async">
       <blade-divider></blade-divider>
 
-      <ng-container *ngIf="isLoaded$ | async">
-        <ng-container *ngIf="goalieStats$ | async as goalieStats">
-          <cha-front-stats-goalie-all-table
-            [stats]="goalieStats"
-          ></cha-front-stats-goalie-all-table>
-        </ng-container>
+      <ng-container *ngIf="goalieStats$ | async as goalieStats">
+        <cha-front-stats-goalie-all-table
+          [stats]="goalieStats"
+        ></cha-front-stats-goalie-all-table>
       </ng-container>
     </div>
   </div>
