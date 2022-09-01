@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: 3fr 2fr 3fr;
   overflow-x: auto;
-  padding-bottom: 2rem;
+  padding: 0 0.5rem 2rem;
 
   h3,
   h2 {
@@ -30,6 +30,7 @@
 .playoff-tree-games-final-matchup img {
   width: 75%;
   min-width: 150px;
+  border-radius: 75%;
 }
 
 .playoff-tree-games-final-matchup {
@@ -50,5 +51,5 @@
   display: grid;
   grid-row-gap: 10px;
   justify-content: center;
-  align-content: center;
+  align-content: space-around;
 }
