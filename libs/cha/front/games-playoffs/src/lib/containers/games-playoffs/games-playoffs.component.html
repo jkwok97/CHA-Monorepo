@@ -9,13 +9,15 @@
     ></p-progressBar>
 
     <ng-container *ngIf="isLoaded$ | async">
-        <div class="playoff-tree-games-conference">
+      <ng-container *ngIf="westernTeams$ | async as westernTeams">
+        <ng-container *ngIf="easternTeams$ | async as easternTeams">
+          <div class="playoff-tree-games-conference">
             <h3>West</h3>
-        
+
             <div class="conference-container">
               <div class="round-container">
                 <!-- SAC / MEM -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
                   [visTeam]="westernTeams[7]"
                   [winningTeam]="westernTeams[0]"
@@ -23,10 +25,10 @@
                   [seriesTied]="false"
                   [seriesScore]="'4-2'"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
-        
+                ></cha-front-games-playoffs-matchup-card>
+
                 <!-- OAK / KEL -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[3]"
                   [visTeam]="westernTeams[4]"
                   [winningTeam]="westernTeams[4]"
@@ -34,10 +36,10 @@
                   [seriesScore]="'4-2'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
-        
+                ></cha-front-games-playoffs-matchup-card>
+
                 <!-- WIC / VIC -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[2]"
                   [visTeam]="westernTeams[5]"
                   [winningTeam]="westernTeams[2]"
@@ -45,10 +47,10 @@
                   [seriesScore]="'4-2'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
-        
+                ></cha-front-games-playoffs-matchup-card>
+
                 <!-- CHY / SFC -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[1]"
                   [visTeam]="westernTeams[6]"
                   [winningTeam]="westernTeams[1]"
@@ -56,12 +58,12 @@
                   [seriesScore]="'4-2'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
               </div>
-        
+
               <div class="round-container">
                 <!-- KEL / SAC -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
                   [visTeam]="westernTeams[4]"
                   [winningTeam]="westernTeams[4]"
@@ -69,9 +71,9 @@
                   [seriesScore]="'4-1'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
                 <!-- WIT / CHY -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[1]"
                   [visTeam]="westernTeams[2]"
                   [winningTeam]="westernTeams[1]"
@@ -79,12 +81,12 @@
                   [seriesScore]="'4-3'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
               </div>
-        
+
               <div class="round-container">
                 <!-- KEL / CHY -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[1]"
                   [visTeam]="westernTeams[4]"
                   [seriesScore]="'4-0'"
@@ -92,18 +94,18 @@
                   [losingTeam]="westernTeams[4]"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
               </div>
             </div>
           </div>
-        
+
           <div class="playoff-tree-games-final">
             <h2>Liberty Cup</h2>
-        
+
             <div class="playoff-tree-games-final-matchup">
-              <img src="../../../assets/images/libertycup.jpg" />
-        
-              <app-playoff-matchup-final-card
+              <img src="assets/images/libertycup.jpg" />
+
+              <cha-front-games-playoffs-matchup-final-card
                 [homeTeam]="easternTeams[0]"
                 [visTeam]="westernTeams[1]"
                 [seriesScore]="'4-1'"
@@ -111,25 +113,25 @@
                 [losingTeam]="westernTeams[1]"
                 [seriesTied]="false"
                 [seriesDone]="true"
-              ></app-playoff-matchup-final-card>
+              ></cha-front-games-playoffs-matchup-final-card>
             </div>
-        
+
             <div>
-              <app-playoff-matchup-final-champion
+              <cha-front-games-playoffs-final-champion-card
                 [champion]="easternTeams[0]"
-              ></app-playoff-matchup-final-champion>
-        
+              ></cha-front-games-playoffs-final-champion-card>
+
               <h2>CHAMPION</h2>
             </div>
           </div>
-        
+
           <div class="playoff-tree-games-conference">
             <h3>East</h3>
-        
+
             <div class="conference-container">
               <div class="round-container">
                 <!-- PEO / MSG -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
                   [visTeam]="easternTeams[1]"
                   [seriesScore]="'4-0'"
@@ -137,12 +139,12 @@
                   [losingTeam]="easternTeams[1]"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
               </div>
-        
+
               <div class="round-container">
                 <!-- AUG / MSG -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
                   [visTeam]="easternTeams[4]"
                   [winningTeam]="easternTeams[0]"
@@ -150,9 +152,9 @@
                   [seriesScore]="'4-1'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
                 <!--  CIN / PEO -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
                   [visTeam]="easternTeams[2]"
                   [winningTeam]="easternTeams[1]"
@@ -160,22 +162,22 @@
                   [seriesScore]="'4-3'"
                   [seriesTied]="false"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
               </div>
-        
+
               <div class="round-container">
                 <!-- VIKINGS / NORTH STARS -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
                   [visTeam]="easternTeams[7]"
                   [winningTeam]="easternTeams[0]"
                   [losingTeam]="easternTeams[7]"
                   [seriesScore]="'4-0'"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
-        
+                ></cha-front-games-playoffs-matchup-card>
+
                 <!-- MIL / AUG -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[3]"
                   [visTeam]="easternTeams[4]"
                   [winningTeam]="easternTeams[4]"
@@ -183,20 +185,20 @@
                   [seriesScore]="'4-3'"
                   [seriesDone]="true"
                   [seriesTied]="false"
-                ></app-playoff-matchup-card>
-        
+                ></cha-front-games-playoffs-matchup-card>
+
                 <!-- ATL / CIN -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[2]"
                   [visTeam]="easternTeams[5]"
                   [winningTeam]="easternTeams[2]"
                   [losingTeam]="easternTeams[5]"
                   [seriesScore]="'4-0'"
                   [seriesDone]="true"
-                ></app-playoff-matchup-card>
-        
+                ></cha-front-games-playoffs-matchup-card>
+
                 <!-- PEO / IND -->
-                <app-playoff-matchup-card
+                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
                   [visTeam]="easternTeams[6]"
                   [winningTeam]="easternTeams[1]"
@@ -204,10 +206,12 @@
                   [seriesScore]="'4-3'"
                   [seriesDone]="true"
                   [seriesTied]="false"
-                ></app-playoff-matchup-card>
+                ></cha-front-games-playoffs-matchup-card>
               </div>
             </div>
           </div>
-         </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
 </blade-layout-feature-content>

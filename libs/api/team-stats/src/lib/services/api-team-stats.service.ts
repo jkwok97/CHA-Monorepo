@@ -116,6 +116,7 @@ export class ApiTeamStatsService {
           id: true,
           city: true,
           teamlogo: true,
+          teamcolor: true,
           shortname: true,
           nickname: true,
           divisions_id: {

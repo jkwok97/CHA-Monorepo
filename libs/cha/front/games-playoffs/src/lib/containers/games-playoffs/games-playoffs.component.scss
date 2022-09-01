@@ -1,0 +1,54 @@
+.games-playoffs {
+  color: white;
+  display: grid;
+  grid-template-columns: 3fr 2fr 3fr;
+  overflow-x: auto;
+  padding-bottom: 2rem;
+
+  h3,
+  h2 {
+    font-weight: 100;
+  }
+}
+
+.playoff-tree-games-conference {
+  display: grid;
+  grid-row-gap: 10px;
+  text-align: center;
+}
+
+.playoff-tree-games-final {
+  text-align: center;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: min-content min-content min-content;
+  grid-row-gap: 10px;
+  justify-items: center;
+  align-content: center;
+}
+
+.playoff-tree-games-final-matchup img {
+  width: 75%;
+  min-width: 150px;
+}
+
+.playoff-tree-games-final-matchup {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  grid-template-rows: min-content min-content;
+  grid-row-gap: 20px;
+}
+
+.conference-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5px;
+}
+
+.round-container {
+  display: grid;
+  grid-row-gap: 10px;
+  justify-content: center;
+  align-content: center;
+}

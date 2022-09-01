@@ -10,6 +10,7 @@ export interface StatTeamPlayoffsDto {
     teamlogo: string;
     nickname: string;
     divisions_id: DivisionDto;
+    teamcolor: string;
   };
   conference: {
     id: ConferencesEnum;
@@ -21,4 +22,5 @@ export interface StatTeamPlayoffsDto {
   points: string;
   season_type: 'Regular' | 'Playoffs';
   wins: string;
+  conferenceStanding: number;
 }

@@ -1,0 +1,40 @@
+.playoff-team-avatar {
+  height: 75px;
+}
+
+.playoff-team-avatar-image img {
+  width: 100%;
+}
+
+.playoff-team-avatar-image {
+  width: 75px;
+  height: 75px;
+  display: grid;
+  place-content: center;
+  border-radius: 37px;
+}
+
+.playoff-team-avatar-image-no-team {
+  width: 75px;
+  height: 75px;
+  display: grid;
+  place-content: center;
+  border-radius: 37px;
+  background-color: darkgrey;
+}
+
+.playoff-team-avatar-standing {
+  color: black;
+  border: 1px solid white;
+  background-color: white;
+  border-radius: 7px;
+  width: 14px;
+  height: 14px;
+  font-size: small;
+  text-align: center;
+  display: grid;
+  align-content: center;
+  position: relative;
+  top: -10px;
+  left: 15px;
+}

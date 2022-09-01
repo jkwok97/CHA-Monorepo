@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { UserTeamFacade } from '@cha/domain/core';
-import { PlayoffStandingsModel, TeamDto } from '@cha/shared/entities';
+import {
+  PlayoffStandingsModel,
+  StatTeamPlayoffsDto,
+  TeamDto,
+} from '@cha/shared/entities';
 import { first, Observable } from 'rxjs';
 import { GamesPlayoffsFacade } from '../../+state/games-playoffs.facade';
 
@@ -14,6 +18,8 @@ export class GamesPlayoffsComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
   currentTeam$: Observable<TeamDto | undefined>;
+  westernTeams$: Observable<StatTeamPlayoffsDto[]>;
+  easternTeams$: Observable<StatTeamPlayoffsDto[]>;
 
   backgroundColor!: string;
 
@@ -23,6 +29,8 @@ export class GamesPlayoffsComponent implements OnInit {
   ) {
     this.isLoading$ = this.gamesPlayoffsFacade.isLoading$;
     this.isLoaded$ = this.gamesPlayoffsFacade.isLoaded$;
+    this.westernTeams$ = this.gamesPlayoffsFacade.westTeams$;
+    this.easternTeams$ = this.gamesPlayoffsFacade.eastTeams$;
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
 
     this.currentTeam$

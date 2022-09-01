@@ -1,0 +1,16 @@
+<div class="playoff-team-avatar" *ngIf="team">
+  <div
+    class="playoff-team-avatar-image"
+    [style.background-color]="team.team_id.teamcolor"
+  >
+    <img src="{{ getString(team.team_id.teamlogo) }}" />
+  </div>
+
+  <div class="playoff-team-avatar-standing">
+    {{ team.conferenceStanding }}
+  </div>
+</div>
+
+<div class="playoff-team-avatar" *ngIf="!team">
+  <div class="playoff-team-avatar-image-no-team"></div>
+</div>
