@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto h-full">
       <blade-divider></blade-divider>
 
       <ng-container *ngIf="isLoaded$ | async">
@@ -39,19 +39,18 @@
           </ng-container>
         </ng-container>
         <ng-container *ngIf="showForwards">
-            <ng-container *ngIf="forwardStats$ | async as playerStats">
-                <cha-front-stats-player-all-table
-                [stats]="playerStats"
-              ></cha-front-stats-player-all-table>
-            </ng-container>
-          
+          <ng-container *ngIf="forwardStats$ | async as playerStats">
+            <cha-front-stats-player-all-table
+              [stats]="playerStats"
+            ></cha-front-stats-player-all-table>
+          </ng-container>
         </ng-container>
         <ng-container *ngIf="showDefense">
-            <ng-container *ngIf="defenseStats$ | async as playerStats">
-                <cha-front-stats-player-all-table
-                [stats]="playerStats"
-              ></cha-front-stats-player-all-table>
-            </ng-container>
+          <ng-container *ngIf="defenseStats$ | async as playerStats">
+            <cha-front-stats-player-all-table
+              [stats]="playerStats"
+            ></cha-front-stats-player-all-table>
+          </ng-container>
         </ng-container>
       </ng-container>
     </div>
