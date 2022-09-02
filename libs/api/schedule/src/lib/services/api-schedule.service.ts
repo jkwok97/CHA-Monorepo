@@ -178,20 +178,21 @@ export class ApiScheduleService {
   ) {
     const versus = await this.repo
       .createQueryBuilder('schedule')
+      .where('schedule.playing_year = :year', { year: season })
       .where(
         new Brackets((qb) => {
-          qb.where('schedule.vis_team_id = :teamId', { teamId: teamOneId })
-            .andWhere('schedule.home_team_id = :teamId', { teamId: teamTwoId })
-            .andWhere('schedule.playing_year = :year', { year: season })
-            .andWhere('schedule.vis_team_score is not null');
+          qb.where('schedule.vis_team_id = :teamOneId', { teamOneId })
+            .andWhere('schedule.home_team_id = :teamTwoId', { teamTwoId })
+            .andWhere('schedule.playing_year = :year', { year: season });
+          // .andWhere('schedule.vis_team_score is not null');
         })
       )
       .orWhere(
         new Brackets((qb) => {
-          qb.where('schedule.vis_team_id = :teamId', { teamId: teamTwoId })
-            .andWhere('schedule.home_team_id = :teamId', { teamId: teamOneId })
-            .andWhere('schedule.playing_year = :year', { year: season })
-            .andWhere('schedule.vis_team_score is not null');
+          qb.where('schedule.vis_team_id = :teamTwoId', { teamTwoId })
+            .andWhere('schedule.home_team_id = :teamOneId', { teamOneId })
+            .andWhere('schedule.playing_year = :year', { year: season });
+          // .andWhere('schedule.vis_team_score is not null');
         })
       )
       .getMany();
