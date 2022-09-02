@@ -174,15 +174,15 @@ export class ApiScheduleService {
       .createQueryBuilder('schedule')
       .where(
         new Brackets((qb) => {
-          qb.where('schedule.home_team_id = :teamId', { teamTwoId })
-            .andWhere('schedule.vis_team_id = :teamId', { teamOneId })
+          qb.where('schedule.home_team_id = :teamId', { teamId: teamTwoId })
+            .andWhere('schedule.vis_team_id = :teamId', { teamId: teamOneId })
             .andWhere('schedule.playing_year = :year', { year: season });
         })
       )
       .orWhere(
         new Brackets((qb) => {
-          qb.where('schedule.home_team_id = :teamId', { teamOneId })
-            .andWhere('schedule.vis_team_id = :teamId', { teamTwoId })
+          qb.where('schedule.home_team_id = :teamId', { teamId: teamOneId })
+            .andWhere('schedule.vis_team_id = :teamId', { teamId: teamTwoId })
             .andWhere('schedule.playing_year = :year', { year: season });
         })
       )
