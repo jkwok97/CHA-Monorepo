@@ -180,19 +180,20 @@ export class ApiScheduleService {
       .createQueryBuilder('schedule')
       .where(
         new Brackets((qb) => {
-          qb.where('schedule.home_team_id = :teamId', { teamId: teamTwoId })
-            .andWhere('schedule.vis_team_id = :teamId', { teamId: teamOneId })
-            .andWhere('schedule.playing_year = :year', { year: season });
+          qb.where('schedule.vis_team_id = :teamId', { teamId: teamOneId })
+            .andWhere('schedule.home_team_id = :teamId', { teamId: teamTwoId })
+            .andWhere('schedule.playing_year = :year', { year: season })
+            .andWhere('schedule.vis_team_score is not null');
         })
       )
       .orWhere(
         new Brackets((qb) => {
-          qb.where('schedule.home_team_id = :teamId', { teamId: teamOneId })
-            .andWhere('schedule.vis_team_id = :teamId', { teamId: teamTwoId })
-            .andWhere('schedule.playing_year = :year', { year: season });
+          qb.where('schedule.vis_team_id = :teamId', { teamId: teamTwoId })
+            .andWhere('schedule.home_team_id = :teamId', { teamId: teamOneId })
+            .andWhere('schedule.playing_year = :year', { year: season })
+            .andWhere('schedule.vis_team_score is not null');
         })
       )
-      .andWhere('schedule.vis_team_score is not null')
       .getMany();
 
     return await this.getVersusRecord(versus, teamOneId);
@@ -210,7 +211,7 @@ export class ApiScheduleService {
           id: teamId,
         },
         playing_year: season,
-        season_type: 'Regular'
+        season_type: 'Regular',
       },
     });
   }
