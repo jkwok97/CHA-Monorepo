@@ -96,10 +96,7 @@ export class ApiScheduleService {
     let loss = 0;
     let ties = 0;
 
-    console.log(data);
-
     await data.forEach((game: Schedule_V2) => {
-      console.log('in here');
       if (game.vis_team_id === teamId) {
         game.vis_team_score > game.home_team_score
           ? wins++
@@ -113,7 +110,6 @@ export class ApiScheduleService {
           ? ties++
           : loss++;
       }
-      console.log('wins:', wins);
     });
 
     return {
@@ -183,16 +179,16 @@ export class ApiScheduleService {
         new Brackets((qb) => {
           qb.where('schedule.vis_team_id = :teamOneId', { teamOneId })
             .andWhere('schedule.home_team_id = :teamTwoId', { teamTwoId })
-            .andWhere('schedule.playing_year = :year', { year: season });
-          // .andWhere('schedule.vis_team_score is not null');
+            .andWhere('schedule.playing_year = :year', { year: season })
+            .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
         })
       )
       .orWhere(
         new Brackets((qb) => {
           qb.where('schedule.vis_team_id = :teamTwoId', { teamTwoId })
             .andWhere('schedule.home_team_id = :teamOneId', { teamOneId })
-            .andWhere('schedule.playing_year = :year', { year: season });
-          // .andWhere('schedule.vis_team_score is not null');
+            .andWhere('schedule.playing_year = :year', { year: season })
+            .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
         })
       )
       .getMany();
