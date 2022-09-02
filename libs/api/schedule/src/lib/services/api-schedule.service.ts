@@ -68,14 +68,22 @@ export class ApiScheduleService {
       });
     }
 
-    return await this.getRecord(lastFive, type);
+    return await this.getRecord(lastFive, teamId);
   }
 
-  private async getRecord(lastFive: Schedule_V2[], type: 'visitors' | 'home') {
+  private async getRecord(lastFive: Schedule_V2[], teamId: number) {
     const lastFiveRecord = [];
 
     await lastFive.forEach((record: Schedule_V2) => {
-      if (type === 'visitors') {
+      if (record.home_team_id === teamId) {
+        if (record.home_team_score > record.vis_team_score) {
+          lastFiveRecord.push('W');
+        } else if (record.home_team_score < record.vis_team_score) {
+          lastFiveRecord.push('L');
+        } else {
+          lastFiveRecord.push('T');
+        }
+      } else {
         if (record.vis_team_score > record.home_team_score) {
           lastFiveRecord.push('W');
         } else if (record.vis_team_score < record.home_team_score) {
