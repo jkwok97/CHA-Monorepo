@@ -92,27 +92,24 @@ export class ApiScheduleService {
   }
 
   private async getVersusRecord(data: Schedule_V2[], teamId: number) {
+    console.log('im in here');
     let wins = 0;
     let loss = 0;
     let ties = 0;
 
     await data.forEach((game) => {
       if (game.vis_team_id === teamId) {
-        if (game.vis_team_score !== null && game.home_team_score !== null) {
-          game.vis_team_score > game.home_team_score
-            ? wins++
-            : game.vis_team_score === game.home_team_score
-            ? ties++
-            : loss++;
-        }
+        game.vis_team_score > game.home_team_score
+          ? wins++
+          : game.vis_team_score === game.home_team_score
+          ? ties++
+          : loss++;
       } else if (game.home_team_id === teamId) {
-        if (game.vis_team_score !== null && game.home_team_score !== null) {
-          game.home_team_score > game.vis_team_score
-            ? wins++
-            : game.home_team_score === game.vis_team_score
-            ? ties++
-            : loss++;
-        }
+        game.home_team_score > game.vis_team_score
+          ? wins++
+          : game.home_team_score === game.vis_team_score
+          ? ties++
+          : loss++;
       }
       console.log('wins:', wins);
     });
@@ -137,7 +134,7 @@ export class ApiScheduleService {
         visTeamRecord: await this.getTeamSeasonRecord(
           item.vis_team_id,
           item.playing_year
-        )[0],
+        ),
         visTeamVersus: await this.getTeamRecordVersus(
           item.vis_team_id,
           item.home_team_id,
@@ -152,7 +149,7 @@ export class ApiScheduleService {
         homeTeamRecord: await this.getTeamSeasonRecord(
           item.home_team_id,
           item.playing_year
-        )[0],
+        ),
         homeTeamVersus: await this.getTeamRecordVersus(
           item.home_team_id,
           item.vis_team_id,
@@ -177,6 +174,7 @@ export class ApiScheduleService {
     teamTwoId: number,
     season: string
   ) {
+    console.log('in here');
     const versus = await this.repo
       .createQueryBuilder('schedule')
       .where(
@@ -201,7 +199,7 @@ export class ApiScheduleService {
   }
 
   private async getTeamSeasonRecord(teamId: number, season: string) {
-    return await this.teamStatsRepo.find({
+    return await this.teamStatsRepo.findOne({
       select: {
         wins: true,
         loss: true,
