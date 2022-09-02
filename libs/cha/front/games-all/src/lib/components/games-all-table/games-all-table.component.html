@@ -1,0 +1,59 @@
+<p-table
+  [value]="schedule"
+  sortField="game_day"
+  sortMode="single"
+  dataKey="game_day"
+  rowGroupMode="subheader"
+  groupRowsBy="game_day"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Day</th>
+      <th>Visitor</th>
+      <th>Score</th>
+      <th>Versus</th>
+      <th>Score</th>
+      <th>Home</th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="groupheader"
+    let-day
+    let-rowIndex="rowIndex"
+    let-expanded="expanded"
+  >
+    <tr>
+      <td colspan="6">
+        <button
+          type="button"
+          pButton
+          pRipple
+          [pRowToggler]="day"
+          class="p-button-text p-button-rounded p-button-plain mr-2"
+        >
+          Expand
+        </button>
+
+        <span class="font-bold ml-2">Game Day {{ day.game_day }}</span>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="rowexpansion" let-day>
+    <tr>
+      <td>
+        {{ day.game_day }}
+      </td>
+      <td>{{ day.visTeamInfo.city }} {{ day.visTeamInfo.nickname }}</td>
+      <td>
+        {{ day.vis_team_score }}
+      </td>
+      <td>@</td>
+      <td>
+        {{ day.home_team_score }}
+      </td>
+      <td>{{ day.homeTeamInfo.city }} {{ day.homeTeamInfo.nickname }}</td>
+    </tr>
+  </ng-template>
+</p-table>

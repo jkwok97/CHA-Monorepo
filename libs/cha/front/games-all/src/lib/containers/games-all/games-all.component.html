@@ -15,7 +15,13 @@
     <blade-divider></blade-divider>
 
     <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body> </blade-card-body>
+      <blade-card-body>
+        <ng-container *ngIf="schedule$ | async as schedule">
+          <cha-front-games-all-table
+            [schedule]="schedule"
+          ></cha-front-games-all-table>
+        </ng-container>
+      </blade-card-body>
     </blade-card>
   </div>
 </blade-layout-feature-content>

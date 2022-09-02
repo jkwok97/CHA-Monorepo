@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -18,19 +19,21 @@ import { GamesAllService } from './services';
 import { ChaFrontGamesAllRoutingModule } from './cha-front-games-all-routing.module';
 
 import { GamesAllComponent } from './containers';
+import { GamesAllTableComponent } from './components';
 
 @NgModule({
   imports: [
     CommonModule,
     ChaFrontGamesAllRoutingModule,
     ProgressBarModule,
+    TableModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,
     StoreModule.forFeature('games-all', reducer),
     EffectsModule.forFeature([GamesAllEffects]),
   ],
-  declarations: [GamesAllComponent],
+  declarations: [GamesAllComponent, GamesAllTableComponent],
   providers: [GamesAllService, GamesAllFacade, GamesAllEffects],
 })
 export class ChaFrontGamesAllModule {}
