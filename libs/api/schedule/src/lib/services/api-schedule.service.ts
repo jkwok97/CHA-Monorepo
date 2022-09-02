@@ -59,6 +59,7 @@ export class ApiScheduleService {
     const lastFiveRecord = [];
 
     await lastFive.forEach((record: Schedule_V2) => {
+      console.log(lastFive);
       if (record.home_team_id === teamId) {
         if (record.home_team_score > record.vis_team_score) {
           lastFiveRecord.push('W');
@@ -88,7 +89,7 @@ export class ApiScheduleService {
         visTeamInfo: await this.getTeamInfo(item.vis_team_id),
         visTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
         homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-        homeTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
+        // homeTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
       }))
     );
   }
