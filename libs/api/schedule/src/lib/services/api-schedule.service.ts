@@ -114,6 +114,7 @@ export class ApiScheduleService {
             : loss++;
         }
       }
+      console.log('wins:', wins);
     });
 
     return {
@@ -136,7 +137,7 @@ export class ApiScheduleService {
         visTeamRecord: await this.getTeamSeasonRecord(
           item.vis_team_id,
           item.playing_year
-        ),
+        )[0],
         visTeamVersus: await this.getTeamRecordVersus(
           item.vis_team_id,
           item.home_team_id,
@@ -151,7 +152,7 @@ export class ApiScheduleService {
         homeTeamRecord: await this.getTeamSeasonRecord(
           item.home_team_id,
           item.playing_year
-        ),
+        )[0],
         homeTeamVersus: await this.getTeamRecordVersus(
           item.home_team_id,
           item.vis_team_id,
