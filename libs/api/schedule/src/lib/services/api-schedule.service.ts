@@ -201,6 +201,7 @@ export class ApiScheduleService {
   private async getTeamSeasonRecord(teamId: number, season: string) {
     return await this.teamStatsRepo.findOne({
       select: {
+        id: true,
         wins: true,
         loss: true,
         ties: true,
