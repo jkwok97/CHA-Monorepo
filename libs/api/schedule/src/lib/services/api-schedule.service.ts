@@ -17,6 +17,9 @@ export class ApiScheduleService {
       where: {
         playing_year: season,
       },
+      order: {
+        game_day: 'ASC',
+      },
     });
 
     const scheduleTeamInfo = await this.setTeamInfo(schedule);
