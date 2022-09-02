@@ -210,6 +210,7 @@ export class ApiScheduleService {
           id: teamId,
         },
         playing_year: season,
+        season_type: 'Regular'
       },
     });
   }
