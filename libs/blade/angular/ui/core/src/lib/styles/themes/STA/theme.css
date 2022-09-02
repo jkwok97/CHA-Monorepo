@@ -2177,7 +2177,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 }
 
 .p-button.p-button-text.p-button-plain {
-  color: #6c757d;
+  color: whitesmoke;
 }
 
 .p-button.p-button-text.p-button-plain:enabled:hover {

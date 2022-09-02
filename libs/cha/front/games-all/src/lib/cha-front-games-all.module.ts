@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -27,6 +28,7 @@ import { GamesAllTableComponent } from './components';
     ChaFrontGamesAllRoutingModule,
     ProgressBarModule,
     TableModule,
+    ButtonModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,

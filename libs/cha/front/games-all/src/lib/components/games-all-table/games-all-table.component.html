@@ -1,11 +1,12 @@
 <p-table
-  [value]="schedule"
+  [value]="gamesForTable"
   sortField="game_day"
   sortMode="single"
   dataKey="game_day"
   rowGroupMode="subheader"
   groupRowsBy="game_day"
   responsiveLayout="scroll"
+  styleClass="p-datatable-sm p-datatable-striped"
 >
   <ng-template pTemplate="header">
     <tr>
@@ -24,18 +25,19 @@
     let-expanded="expanded"
   >
     <tr>
-      <td colspan="6">
-        <button
-          type="button"
-          pButton
-          pRipple
-          [pRowToggler]="day"
-          class="p-button-text p-button-rounded p-button-plain mr-2"
-        >
-          Expand
-        </button>
+      <td colspan="12">
+        <div class="grid align-items-center">
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="day"
+            class="p-button-text p-button-rounded p-button-plain mr-2"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
 
-        <span class="font-bold ml-2">Game Day {{ day.game_day }}</span>
+          <span class="ml-2">Game Day {{ day.game_day }}</span>
+        </div>
       </td>
     </tr>
   </ng-template>
@@ -45,7 +47,14 @@
       <td>
         {{ day.game_day }}
       </td>
-      <td>{{ day.visTeamInfo.city }} {{ day.visTeamInfo.nickname }}</td>
+      <td>
+        <div class="flex align-items-center">
+          <img [src]="day.visTeamLogo" height="30px" />
+          <span class="ml-2" *ngIf="!isMobile"
+            >{{ day.visTeamInfo.city }} {{ day.visTeamInfo.nickname }}</span
+          >
+        </div>
+      </td>
       <td>
         {{ day.vis_team_score }}
       </td>
@@ -53,7 +62,14 @@
       <td>
         {{ day.home_team_score }}
       </td>
-      <td>{{ day.homeTeamInfo.city }} {{ day.homeTeamInfo.nickname }}</td>
+      <td>
+        <div class="flex align-items-center">
+          <img [src]="day.homeTeamLogo" height="30px" />
+          <span class="ml-2" *ngIf="!isMobile"
+            >{{ day.homeTeamInfo.city }} {{ day.homeTeamInfo.nickname }}</span
+          >
+        </div>
+      </td>
     </tr>
   </ng-template>
 </p-table>
