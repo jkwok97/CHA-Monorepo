@@ -91,7 +91,7 @@ export class ApiScheduleService {
     return lastFiveRecord;
   }
 
-  private async getVersusRecord(data, teamId) {
+  private async getVersusRecord(data: Schedule_V2[], teamId: number) {
     let wins = 0;
     let loss = 0;
     let ties = 0;
@@ -117,9 +117,9 @@ export class ApiScheduleService {
     });
 
     return {
-      wins: wins,
-      loss: loss,
-      ties: ties,
+      wins,
+      loss,
+      ties,
     };
   }
 
@@ -133,7 +133,10 @@ export class ApiScheduleService {
           item.vis_team_id,
           item.playing_year
         ),
-        visTeamRecord: await this.getTeamSeasonRecord(item.vis_team_id),
+        visTeamRecord: await this.getTeamSeasonRecord(
+          item.vis_team_id,
+          item.playing_year
+        ),
         visTeamVersus: await this.getTeamRecordVersus(
           item.vis_team_id,
           item.home_team_id,
@@ -145,7 +148,10 @@ export class ApiScheduleService {
           item.home_team_id,
           item.playing_year
         ),
-        homeTeamRecord: await this.getTeamSeasonRecord(item.home_team_id),
+        homeTeamRecord: await this.getTeamSeasonRecord(
+          item.home_team_id,
+          item.playing_year
+        ),
         homeTeamVersus: await this.getTeamRecordVersus(
           item.home_team_id,
           item.vis_team_id,
@@ -192,7 +198,7 @@ export class ApiScheduleService {
     return await this.getVersusRecord(versus, teamOneId);
   }
 
-  private async getTeamSeasonRecord(teamId: number) {
+  private async getTeamSeasonRecord(teamId: number, season: string) {
     return await this.teamStatsRepo.find({
       select: {
         wins: true,
@@ -203,6 +209,7 @@ export class ApiScheduleService {
         team_id: {
           id: teamId,
         },
+        playing_year: season,
       },
     });
   }
