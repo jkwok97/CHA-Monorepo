@@ -7,7 +7,6 @@ import { StatsGoalieAllFacade } from '../../+state/stats-goalie-all.facade';
 @Component({
   selector: 'cha-front-stats-goalie-all',
   templateUrl: './stats-goalie-all.component.html',
-  styleUrls: ['./stats-goalie-all.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatsGoalieAllComponent implements OnInit {

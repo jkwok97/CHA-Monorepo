@@ -5,7 +5,6 @@ import { NhlStatsFacade } from '../../+state/nhl-stats.facade';
 @Component({
   selector: 'cha-front-nhl-stats',
   templateUrl: './nhl-stats.component.html',
-  styleUrls: ['./nhl-stats.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NhlStatsComponent {

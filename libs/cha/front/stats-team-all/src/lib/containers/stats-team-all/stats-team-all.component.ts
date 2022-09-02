@@ -7,7 +7,6 @@ import { StatsTeamAllFacade } from '../../+state/stats-team-all.facade';
 @Component({
   selector: 'cha-front-stats-team-all',
   templateUrl: './stats-team-all.component.html',
-  styleUrls: ['./stats-team-all.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatsTeamAllComponent implements OnInit {

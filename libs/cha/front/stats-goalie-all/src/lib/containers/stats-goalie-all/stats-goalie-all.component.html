@@ -1,5 +1,5 @@
 <blade-layout-feature-content>
-  <div class="stats-goalie-all">
+  <div>
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
@@ -21,16 +21,16 @@
       </div>
     </div>
 
-    <div class="overflow-hidden h-full" *ngIf="isLoaded$ | async">
-      <blade-divider></blade-divider>
+    <blade-divider></blade-divider>
 
-      <div class="overflow-x-auto">
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
         <ng-container *ngIf="goalieStats$ | async as goalieStats">
           <cha-front-stats-goalie-all-table
             [stats]="goalieStats"
           ></cha-front-stats-goalie-all-table>
         </ng-container>
-      </div>
-    </div>
+      </blade-card-body>
+    </blade-card>
   </div>
 </blade-layout-feature-content>

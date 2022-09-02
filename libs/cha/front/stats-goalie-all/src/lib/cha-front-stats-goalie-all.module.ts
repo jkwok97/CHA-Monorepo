@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 
 import { StatsGoalieAllEffects } from './+state/stats-goalie-all.effects';
 import { reducer } from './+state/stats-goalie-all.reducer';
@@ -34,6 +35,7 @@ import { StatsGoalieAllTableComponent } from './components';
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
+    BladeAngularUiCardModule,
 
     StoreModule.forFeature('stats-goalie-all', reducer),
     EffectsModule.forFeature([StatsGoalieAllEffects]),

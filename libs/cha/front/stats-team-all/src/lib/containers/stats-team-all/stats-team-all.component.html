@@ -27,26 +27,24 @@
       </div>
     </div>
 
-    <div>
-      <blade-divider></blade-divider>
+    <blade-divider></blade-divider>
 
-      <blade-card *ngIf="isLoaded$ | async">
-        <blade-card-body>
-          <ng-container *ngIf="showLeague">
-            <ng-container *ngIf="teamStats$ | async as teamStats">
-              <cha-front-stats-team-all-table
-                [stats]="teamStats"
-              ></cha-front-stats-team-all-table>
-            </ng-container>
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="showLeague">
+          <ng-container *ngIf="teamStats$ | async as teamStats">
+            <cha-front-stats-team-all-table
+              [stats]="teamStats"
+            ></cha-front-stats-team-all-table>
           </ng-container>
-          <ng-container *ngIf="showConference">
-            <cha-front-stats-team-all-conference></cha-front-stats-team-all-conference>
-          </ng-container>
-          <ng-container *ngIf="showDivisions">
-            <cha-front-stats-team-all-divisions></cha-front-stats-team-all-divisions>
-          </ng-container>
-        </blade-card-body>
-      </blade-card>
-    </div>
+        </ng-container>
+        <ng-container *ngIf="showConference">
+          <cha-front-stats-team-all-conference></cha-front-stats-team-all-conference>
+        </ng-container>
+        <ng-container *ngIf="showDivisions">
+          <cha-front-stats-team-all-divisions></cha-front-stats-team-all-divisions>
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
   </div>
 </blade-layout-feature-content>
