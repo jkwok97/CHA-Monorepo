@@ -1,7 +1,7 @@
 import { Schedule_V2, Teams_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Repository } from 'typeorm';
+import { Between, Brackets, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiScheduleService {
@@ -47,8 +47,14 @@ export class ApiScheduleService {
     const lastFive = await this.repo
       .createQueryBuilder('schedule')
       .where('schedule.playing_year = :year', { year: season })
-      .andWhere('schedule.vis_team_id = :teamId', { teamId: teamId })
-      .orWhere('schedule.home_team_id = :teamId', { teamId: teamId })
+      .andWhere(
+        new Brackets((qb) => {
+          qb.where('schedule.home_team_id = :teamId', { teamId }).orWhere(
+            'schedule.vis_team_id = :teamId',
+            { teamId }
+          );
+        })
+      )
       .orderBy('schedule.game_day', 'DESC')
       .limit(5)
       .getMany();
