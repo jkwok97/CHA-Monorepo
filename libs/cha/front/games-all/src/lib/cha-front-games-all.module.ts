@@ -4,6 +4,12 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ProgressBarModule } from 'primeng/progressbar';
+
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { BladeDividerComponent } from '@blade/angular/ui/divider';
+
 import { GamesAllEffects } from './+state/games-all.effects';
 import { GamesAllFacade } from './+state/games-all.facade';
 import { reducer } from './+state/games-all.reducer';
@@ -17,6 +23,10 @@ import { GamesAllComponent } from './containers';
   imports: [
     CommonModule,
     ChaFrontGamesAllRoutingModule,
+    ProgressBarModule,
+    BladeAngularUiCardModule,
+    BladeAngularUiLayoutModule,
+    BladeDividerComponent,
     StoreModule.forFeature('games-all', reducer),
     EffectsModule.forFeature([GamesAllEffects]),
   ],

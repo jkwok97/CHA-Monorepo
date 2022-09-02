@@ -20,9 +20,13 @@ export class GamesAllFacade {
     GamesAllSelectors.selectSchedule
   );
 
+  season$: Observable<string> = this.store.select(
+    GamesAllSelectors.selectSeason
+  );
+
   constructor(private store: Store<State>) {}
 
-  getSchedule(season: string) {
-    this.store.dispatch(GamesAllActions.getAll({ season }));
+  getSchedule() {
+    this.store.dispatch(GamesAllActions.getAll());
   }
 }

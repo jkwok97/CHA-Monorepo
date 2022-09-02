@@ -16,7 +16,6 @@ export class StatsPlayerAllComponent implements OnInit {
   forwardStats$: Observable<StatPlayerAllDto[]>;
   defenseStats$: Observable<StatPlayerAllDto[]>;
 
-  backgroundColor!: string;
   showAll = true;
   showForwards = false;
   showDefense = false;
