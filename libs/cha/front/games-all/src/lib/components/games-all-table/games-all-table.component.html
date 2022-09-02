@@ -1,4 +1,5 @@
 <p-table
+  #dt
   [value]="gamesForTable"
   sortField="game_day"
   sortMode="single"
@@ -7,7 +8,22 @@
   groupRowsBy="game_day"
   responsiveLayout="scroll"
   styleClass="p-datatable-sm p-datatable-striped"
+  [filterDelay]="0"
+  [globalFilterFields]="['homeTeamName', 'visTeamName', 'game_day']"
 >
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Team / Day"
+        />
+      </span>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
       <th>Day</th>
@@ -50,9 +66,7 @@
       <td>
         <div class="flex align-items-center">
           <img [src]="day.visTeamLogo" height="30px" />
-          <span class="ml-2" *ngIf="!isMobile"
-            >{{ day.visTeamInfo.city }} {{ day.visTeamInfo.nickname }}</span
-          >
+          <span class="ml-2" *ngIf="!isMobile">{{ day.visTeamName }}</span>
         </div>
       </td>
       <td>
@@ -65,9 +79,7 @@
       <td>
         <div class="flex align-items-center">
           <img [src]="day.homeTeamLogo" height="30px" />
-          <span class="ml-2" *ngIf="!isMobile"
-            >{{ day.homeTeamInfo.city }} {{ day.homeTeamInfo.nickname }}</span
-          >
+          <span class="ml-2" *ngIf="!isMobile">{{ day.homeTeamName }}</span>
         </div>
       </td>
     </tr>

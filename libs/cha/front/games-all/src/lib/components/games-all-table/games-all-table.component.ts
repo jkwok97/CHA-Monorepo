@@ -3,10 +3,12 @@ import {
   Component,
   Input,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
 import { ScheduleAllDto } from '@cha/shared/entities';
 import { first } from 'rxjs';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'cha-front-games-all-table',
@@ -15,6 +17,8 @@ import { first } from 'rxjs';
 })
 export class GamesAllTableComponent implements OnInit {
   @Input() schedule!: ScheduleAllDto[];
+
+  @ViewChild('dt') dt: Table | undefined;
 
   gamesForTable!: any;
   isMobile = false;
@@ -35,7 +39,9 @@ export class GamesAllTableComponent implements OnInit {
     return games.map((game: ScheduleAllDto) => ({
       ...game,
       homeTeamLogo: this.getString(game.homeTeamInfo.teamlogo),
+      homeTeamName: `${game.homeTeamInfo.city} ${game.homeTeamInfo.nickname}`,
       visTeamLogo: this.getString(game.visTeamInfo.teamlogo),
+      visTeamName: `${game.visTeamInfo.city} ${game.visTeamInfo.nickname}`,
     }));
   }
 
@@ -43,5 +49,9 @@ export class GamesAllTableComponent implements OnInit {
   getString(urlString: string) {
     const temp = urlString.split('/');
     return `assets/${temp[temp.length - 1]}`;
+  }
+
+  applyFilterGlobal(event: any, stringVal: string) {
+    this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }
 }
