@@ -48,7 +48,7 @@ export class ApiScheduleService {
       .createQueryBuilder('schedule')
       .where('schedule.playing_year = :year', { year: season })
       .andWhere('schedule.vis_team_id = :teamId', { teamId: teamId })
-      .orWhere('schedule.home_team_id = :teamId', { teamId: 'teamId' })
+      .orWhere('schedule.home_team_id = :teamId', { teamId: teamId })
       .orderBy('schedule.game_day', 'DESC')
       .limit(5)
       .getMany();
