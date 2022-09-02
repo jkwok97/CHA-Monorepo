@@ -19,7 +19,7 @@ export class ScheduleController {
   }
 
   @Get('/next/:season/:currentDay')
-  async getNextDays(@Param() param): Promise<ScheduleAllDto[]> {
+  async getNextDays(@Param() param): Promise<any[]> {
     const stats = await this.scheduleService.getNextDays(
       param.season,
       Number(param.currentDay)

@@ -41,7 +41,7 @@ export class ApiScheduleService {
       },
     });
 
-    const scheduleTeamInfo = await this.setTeamInfo(schedule);
+    const scheduleTeamInfo = await this.setTeamNextInfo(schedule);
 
     return scheduleTeamInfo;
   }
@@ -91,24 +91,105 @@ export class ApiScheduleService {
     return lastFiveRecord;
   }
 
-  private async setTeamInfo(array: Schedule_V2[]) {
+  private async getVersusRecord(data, teamId) {
+    let wins = 0;
+    let loss = 0;
+    let ties = 0;
+
+    await data.forEach((game) => {
+      if (game.vis_team_id === teamId) {
+        if (game.vis_team_score !== null && game.home_team_score !== null) {
+          game.vis_team_score > game.home_team_score
+            ? wins++
+            : game.vis_team_score === game.home_team_score
+            ? ties++
+            : loss++;
+        }
+      } else if (game.home_team_id === teamId) {
+        if (game.vis_team_score !== null && game.home_team_score !== null) {
+          game.home_team_score > game.vis_team_score
+            ? wins++
+            : game.home_team_score === game.vis_team_score
+            ? ties++
+            : loss++;
+        }
+      }
+    });
+
+    return {
+      wins: wins,
+      loss: loss,
+      ties: ties,
+    };
+  }
+
+  private async setTeamNextInfo(array: Schedule_V2[]) {
     return await Promise.all(
       array.map(async (item) => ({
-        ...item,
+        id: item.id,
+        visTeamScore: item.vis_team_score,
         visTeamInfo: await this.getTeamInfo(item.vis_team_id),
         visTeamLastFive: await this.getTeamLastFive(
           item.vis_team_id,
           item.playing_year
         ),
         visTeamRecord: await this.getTeamSeasonRecord(item.vis_team_id),
+        visTeamVersus: await this.getTeamRecordVersus(
+          item.vis_team_id,
+          item.home_team_id,
+          item.playing_year
+        ),
+        homeTeamScore: item.home_team_score,
         homeTeamInfo: await this.getTeamInfo(item.home_team_id),
         homeTeamLastFive: await this.getTeamLastFive(
           item.home_team_id,
           item.playing_year
         ),
         homeTeamRecord: await this.getTeamSeasonRecord(item.home_team_id),
+        homeTeamVersus: await this.getTeamRecordVersus(
+          item.home_team_id,
+          item.vis_team_id,
+          item.playing_year
+        ),
       }))
     );
+  }
+
+  private async setTeamInfo(array: Schedule_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        visTeamInfo: await this.getTeamInfo(item.vis_team_id),
+        homeTeamInfo: await this.getTeamInfo(item.home_team_id),
+      }))
+    );
+  }
+
+  private async getTeamRecordVersus(
+    teamOneId: number,
+    teamTwoId: number,
+    season: string
+  ) {
+    const versus = await this.repo
+      .createQueryBuilder('schedule')
+      .where(
+        new Brackets((qb) => {
+          qb.where('schedule.home_team_id = :teamId', { teamTwoId })
+            .andWhere('schedule.vis_team_id = :teamId', { teamOneId })
+            .andWhere('schedule.playing_year = :year', { year: season });
+        })
+      )
+      .orWhere(
+        new Brackets((qb) => {
+          qb.where('schedule.home_team_id = :teamId', { teamOneId })
+            .andWhere('schedule.vis_team_id = :teamId', { teamTwoId })
+            .andWhere('schedule.playing_year = :year', { year: season });
+        })
+      )
+      .andWhere('schedule.vis_team_score is not null')
+      .getMany();
+
+    return await this.getVersusRecord(versus, teamOneId);
   }
 
   private async getTeamSeasonRecord(teamId: number) {
