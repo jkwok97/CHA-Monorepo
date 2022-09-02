@@ -92,12 +92,14 @@ export class ApiScheduleService {
   }
 
   private async getVersusRecord(data: Schedule_V2[], teamId: number) {
-    console.log('im in here');
     let wins = 0;
     let loss = 0;
     let ties = 0;
 
-    await data.forEach((game) => {
+    console.log(data);
+
+    await data.forEach((game: Schedule_V2) => {
+      console.log('in here');
       if (game.vis_team_id === teamId) {
         game.vis_team_score > game.home_team_score
           ? wins++
@@ -174,7 +176,6 @@ export class ApiScheduleService {
     teamTwoId: number,
     season: string
   ) {
-    console.log('in here');
     const versus = await this.repo
       .createQueryBuilder('schedule')
       .where(
