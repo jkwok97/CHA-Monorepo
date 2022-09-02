@@ -43,14 +43,23 @@ export class ApiScheduleService {
     return scheduleTeamInfo;
   }
 
-  private async getTeamLastFive(teamId: number) {
-    const lastFive = await this.repo.find({
-      where: [{ vis_team_id: teamId }, { home_team_id: teamId }],
-      order: {
-        game_day: 'DESC',
-      },
-      take: 5,
-    });
+  private async getTeamLastFive(teamId: number, season: string) {
+    const lastFive = await this.repo
+      .createQueryBuilder('schedule')
+      .where('schedule.playing_year = :year', { year: season })
+      .andWhere('schedule.vis_team_id = :teamId', { teamId: teamId })
+      .orWhere('schedule.home_team_id = :teamId', { teamId: 'teamId' })
+      .orderBy('schedule.game_day', 'DESC')
+      .limit(5)
+      .getMany();
+
+    // const lastFive = await this.repo.find({
+    //   where: [{ vis_team_id: teamId }, { home_team_id: teamId }],
+    //   order: {
+    //     game_day: 'DESC',
+    //   },
+    //   take: 5,
+    // });
 
     return await this.getRecord(lastFive, teamId);
   }
@@ -59,7 +68,6 @@ export class ApiScheduleService {
     const lastFiveRecord = [];
 
     await lastFive.forEach((record: Schedule_V2) => {
-      console.log(lastFive);
       if (record.home_team_id === teamId) {
         if (record.home_team_score > record.vis_team_score) {
           lastFiveRecord.push('W');
@@ -87,9 +95,15 @@ export class ApiScheduleService {
       array.map(async (item) => ({
         ...item,
         visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-        visTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
+        visTeamLastFive: await this.getTeamLastFive(
+          item.vis_team_id,
+          item.playing_year
+        ),
         homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-        // homeTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
+        homeTeamLastFive: await this.getTeamLastFive(
+          item.vis_team_id,
+          item.playing_year
+        ),
       }))
     );
   }
