@@ -6,3 +6,4 @@ export * from './player';
 export * from './drafts';
 export * from './nhl';
 export * from './stats';
+export * from './schedule';
