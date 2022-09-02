@@ -43,30 +43,14 @@ export class ApiScheduleService {
     return scheduleTeamInfo;
   }
 
-  private async getTeamLastFive(teamId: number, type: 'visitors' | 'home') {
-    let lastFive: Schedule_V2[];
-
-    if (type === 'visitors') {
-      lastFive = await this.repo.find({
-        where: {
-          vis_team_id: teamId,
-        },
-        order: {
-          game_day: 'DESC',
-        },
-        take: 5,
-      });
-    } else {
-      lastFive = await this.repo.find({
-        where: {
-          home_team_id: teamId,
-        },
-        order: {
-          game_day: 'DESC',
-        },
-        take: 5,
-      });
-    }
+  private async getTeamLastFive(teamId: number) {
+    const lastFive = await this.repo.find({
+      where: [{ vis_team_id: teamId }, { home_team_id: teamId }],
+      order: {
+        game_day: 'DESC',
+      },
+      take: 5,
+    });
 
     return await this.getRecord(lastFive, teamId);
   }
@@ -102,12 +86,9 @@ export class ApiScheduleService {
       array.map(async (item) => ({
         ...item,
         visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-        visTeamLastFive: await this.getTeamLastFive(
-          item.vis_team_id,
-          'visitors'
-        ),
+        visTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
         homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-        homeTeamLastFive: await this.getTeamLastFive(item.vis_team_id, 'home'),
+        homeTeamLastFive: await this.getTeamLastFive(item.vis_team_id),
       }))
     );
   }
