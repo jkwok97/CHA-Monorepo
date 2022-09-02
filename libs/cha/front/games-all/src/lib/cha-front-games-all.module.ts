@@ -1,12 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
+import { GamesAllEffects } from './+state/games-all.effects';
+import { GamesAllFacade } from './+state/games-all.facade';
+import { reducer } from './+state/games-all.reducer';
+import { GamesAllService } from './services';
+
 import { ChaFrontGamesAllRoutingModule } from './cha-front-games-all-routing.module';
 
 import { GamesAllComponent } from './containers';
 
 @NgModule({
-  imports: [CommonModule, ChaFrontGamesAllRoutingModule],
+  imports: [
+    CommonModule,
+    ChaFrontGamesAllRoutingModule,
+    StoreModule.forFeature('games-all', reducer),
+    EffectsModule.forFeature([GamesAllEffects]),
+  ],
   declarations: [GamesAllComponent],
+  providers: [GamesAllService, GamesAllFacade, GamesAllEffects],
 })
 export class ChaFrontGamesAllModule {}
