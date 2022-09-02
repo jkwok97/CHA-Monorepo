@@ -1,7 +1,7 @@
 import { Schedule_V2, Teams_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiScheduleService {
@@ -16,6 +16,22 @@ export class ApiScheduleService {
     const schedule = await this.repo.find({
       where: {
         playing_year: season,
+      },
+      order: {
+        game_day: 'ASC',
+      },
+    });
+
+    const scheduleTeamInfo = await this.setTeamInfo(schedule);
+
+    return scheduleTeamInfo;
+  }
+
+  async getNextDays(season: string, currentDay: number) {
+    const schedule = await this.repo.find({
+      where: {
+        playing_year: season,
+        game_day: Between(currentDay, currentDay + 5),
       },
       order: {
         game_day: 'ASC',

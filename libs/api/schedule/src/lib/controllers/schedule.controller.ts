@@ -17,4 +17,17 @@ export class ScheduleController {
     }
     return stats;
   }
+
+  @Get('/next/:season/:currentDay')
+  async getNextDays(@Param() param): Promise<ScheduleAllDto[]> {
+    const stats = await this.scheduleService.getNextDays(
+      param.season,
+      Number(param.currentDay)
+    );
+
+    if (!stats || stats.length < 1) {
+      throw new NotFoundException('Player Leader Stats not found');
+    }
+    return stats;
+  }
 }
