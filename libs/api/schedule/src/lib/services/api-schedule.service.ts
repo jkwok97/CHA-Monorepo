@@ -107,7 +107,7 @@ export class ApiScheduleService {
         ),
         homeTeamInfo: await this.getTeamInfo(item.home_team_id),
         homeTeamLastFive: await this.getTeamLastFive(
-          item.vis_team_id,
+          item.home_team_id,
           item.playing_year
         ),
       }))
