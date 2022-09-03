@@ -65,6 +65,9 @@
         "libs/blade/angular/ui/leader-card/src/index.ts"
       ],
       "@blade/angular/ui/menu": ["libs/blade/angular/ui/menu/src/index.ts"],
+      "@blade/angular/ui/schedule-card": [
+        "libs/blade/angular/ui/schedule-card/src/index.ts"
+      ],
       "@blade/angular/ui/table": ["libs/blade/angular/ui/table/src/index.ts"],
       "@cha/admin/draft-mgmt-entry": [
         "libs/cha/admin/draft-mgmt-entry/src/index.ts"
