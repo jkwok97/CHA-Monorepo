@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { AvatarModule } from 'primeng/avatar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -28,6 +29,7 @@ import { GamesCurrentDayComponent } from './components/games-current-day/games-c
     CommonModule,
     ChaFrontGamesCurrentRoutingModule,
     ProgressBarModule,
+    AvatarModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeButtonSelectComponent,

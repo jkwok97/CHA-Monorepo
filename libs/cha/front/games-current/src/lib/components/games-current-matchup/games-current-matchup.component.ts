@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { GamesDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-front-games-current-matchup',
@@ -6,8 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./games-current-matchup.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GamesCurrentMatchupComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class GamesCurrentMatchupComponent {
+  @Input() game!: GamesDto;
 }

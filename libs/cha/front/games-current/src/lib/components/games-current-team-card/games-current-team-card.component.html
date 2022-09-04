@@ -1,1 +1,58 @@
-<p>games-current-team-card works!</p>
+<div class="award-card" [style.background-color]="getColor(teamInfo.teamcolor)">
+  <div class="award-card-header">
+    <div class="award-card-header-avatar">
+      <ng-container>
+        <p-avatar
+          [image]="getString(teamInfo.teamlogo)"
+          shape="square"
+        ></p-avatar>
+      </ng-container>
+    </div>
+
+    <div class="award-card-header-content">
+      <div class="award-card-header-content-title">
+        <ng-container>
+          {{ teamInfo.city }} - {{ teamInfo.nickname }}
+        </ng-container>
+      </div>
+
+      <blade-divider></blade-divider>
+
+      <div class="award-card-header-content-description">
+        <p>
+          Record:
+          <span class="award-card-header-content-description-stat">
+            {{ teamRecord.wins }}-{{ teamRecord.loss }}-{{ teamRecord.ties }}
+          </span>
+        </p>
+      </div>
+
+      <div class="award-card-header-content-description">
+        <p>
+          Versus Opponent:
+          <span class="award-card-header-content-description-stat">
+            {{ teamVersus.wins }}-{{ teamVersus.loss }}-{{ teamVersus.ties }}
+          </span>
+        </p>
+      </div>
+
+      <div class="award-card-header-content-description">
+        <p>
+          Last 5:
+          <span class="award-card-header-content-description-stat">
+            <ng-container *ngFor="let record of teamLastFive">
+              <i
+                class="pi pi-star-fill"
+                [ngClass]="{
+                  'win': record === 'W',
+                  'loss': record === 'L',
+                  'tie': record === 'T'
+                }"
+              ></i>
+            </ng-container>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

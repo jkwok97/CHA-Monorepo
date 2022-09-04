@@ -1,1 +1,20 @@
-<p>games-current-matchup works!</p>
+<div>
+  <cha-front-games-current-team-card
+    [teamInfo]="game.visTeamInfo"
+    [teamLastFive]="game.visTeamLastFive"
+    [teamRecord]="game.visTeamRecord"
+    [teamVersus]="game.visTeamVersus"
+  ></cha-front-games-current-team-card>
+
+  <div>
+    <div>Results:</div>
+    <div>{{ game.visTeamScore }} @ {{ game.homeTeamScore }}</div>
+  </div>
+
+  <cha-front-games-current-team-card
+    [teamInfo]="game.homeTeamInfo"
+    [teamLastFive]="game.homeTeamLastFive"
+    [teamRecord]="game.homeTeamRecord"
+    [teamVersus]="game.homeTeamVersus"
+  ></cha-front-games-current-team-card>
+</div>

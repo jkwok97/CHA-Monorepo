@@ -122,6 +122,7 @@ export class ApiScheduleService {
     return await Promise.all(
       array.map(async (item) => ({
         id: item.id,
+        gameDay: item.game_day,
         visTeamScore: item.vis_team_score,
         visTeamInfo: await this.getTeamInfo(item.vis_team_id),
         visTeamLastFive: await this.getTeamLastFive(
