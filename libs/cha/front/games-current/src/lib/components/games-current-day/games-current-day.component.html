@@ -1,1 +1,9 @@
-<p>games-current-day works!</p>
+<div>
+  <div>Day - {{ dayGames[0].gameDay }}</div>
+
+  <ng-container *ngFor="let game of dayGames">
+    <cha-front-games-current-matchup
+      [game]="game"
+    ></cha-front-games-current-matchup>
+  </ng-container>
+</div>

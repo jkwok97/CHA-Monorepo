@@ -27,8 +27,10 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="games$ | async as days">
-          <ng-container *ngFor="let day of days">
-            <cha-front-games-current-day></cha-front-games-current-day>
+          <ng-container *ngFor="let games of groupGames">
+            <cha-front-games-current-day
+              [dayGames]="games"
+            ></cha-front-games-current-day>
           </ng-container>
         </ng-container>
       </blade-card-body>
