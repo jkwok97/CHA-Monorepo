@@ -20,6 +20,10 @@ export class GamesCurrentFacade {
     GamesCurrentSelectors.selectGames
   );
 
+  gamesGrouped$: Observable<GamesDto[]> = this.store.select(
+    GamesCurrentSelectors.selectGamesGrouped
+  );
+
   constructor(private store: Store<State>) {}
 
   getGames() {

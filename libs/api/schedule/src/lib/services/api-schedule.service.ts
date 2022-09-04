@@ -33,7 +33,7 @@ export class ApiScheduleService {
     const schedule = await this.repo.find({
       where: {
         playing_year: season,
-        game_day: Between(currentDay, currentDay + 5),
+        game_day: Between(currentDay, currentDay + 4),
       },
       order: {
         game_day: 'ASC',

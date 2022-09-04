@@ -2,6 +2,7 @@ import { TeamDto } from '../teams';
 
 export interface GamesDto {
   id: number;
+  gameDay: string;
   visTeamScore: number;
   visTeamInfo: TeamDto;
   visTeamLastFive: string[];

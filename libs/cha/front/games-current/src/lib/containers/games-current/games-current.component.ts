@@ -23,7 +23,9 @@ export class GamesCurrentComponent {
   constructor(private gamesCurrentFacade: GamesCurrentFacade) {
     this.isLoaded$ = this.gamesCurrentFacade.isLoaded$;
     this.isLoading$ = this.gamesCurrentFacade.isLoading$;
-    this.games$ = this.gamesCurrentFacade.games$;
+    this.games$ = this.gamesCurrentFacade.gamesGrouped$;
+
+    this.games$.subscribe(console.log);
   }
 
   onOptionChanged(option: string) {
