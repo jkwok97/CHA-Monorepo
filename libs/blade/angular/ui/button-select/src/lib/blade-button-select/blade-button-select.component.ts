@@ -25,6 +25,7 @@ import { distinctUntilChanged } from 'rxjs';
 })
 export class BladeButtonSelectComponent implements OnInit, AfterViewInit {
   @Input() options!: any[];
+  @Input() index!: number;
 
   @Output() optionChanged = new EventEmitter<string>();
 
@@ -43,6 +44,8 @@ export class BladeButtonSelectComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.optionSelected.setValue(this.options[0].value);
+    this.optionSelected.setValue(
+      this.index ? this.options[this.index].value : this.options[0].value
+    );
   }
 }

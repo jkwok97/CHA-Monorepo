@@ -140,9 +140,6 @@
       "@cha/front/games-playoffs": [
         "libs/cha/front/games-playoffs/src/index.ts"
       ],
-      "@cha/front/games-upcoming": [
-        "libs/cha/front/games-upcoming/src/index.ts"
-      ],
       "@cha/front/history-goalies": [
         "libs/cha/front/history-goalies/src/index.ts"
       ],

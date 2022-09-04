@@ -126,7 +126,6 @@
     "cha-front-games-all": "libs/cha/front/games-all",
     "cha-front-games-current": "libs/cha/front/games-current",
     "cha-front-games-playoffs": "libs/cha/front/games-playoffs",
-    "cha-front-games-upcoming": "libs/cha/front/games-upcoming",
     "cha-front-history-goalies": "libs/cha/front/history-goalies",
     "cha-front-history-players": "libs/cha/front/history-players",
     "cha-front-history-teams": "libs/cha/front/history-teams",

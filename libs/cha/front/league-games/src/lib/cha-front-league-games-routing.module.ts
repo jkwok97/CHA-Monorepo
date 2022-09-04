@@ -20,13 +20,6 @@ const ROUTES: Route[] = [
           ),
       },
       {
-        path: 'upcoming',
-        loadChildren: () =>
-          import('@cha/front/games-upcoming').then(
-            (mod) => mod.ChaFrontGamesUpcomingModule
-          ),
-      },
-      {
         path: 'all',
         loadChildren: () =>
           import('@cha/front/games-all').then(

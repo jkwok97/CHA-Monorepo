@@ -73,10 +73,6 @@ export const mainMenuItems: MenuItem[] = [
             routerLink: ['/league/games/current'],
           },
           {
-            label: 'Upcoming Days',
-            routerLink: ['/league/games/upcoming'],
-          },
-          {
             label: 'All Days',
             routerLink: ['/league/games/all'],
           },
