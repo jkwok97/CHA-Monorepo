@@ -35,8 +35,8 @@ export class ApiScheduleService {
       .where('schedule.playing_year = :year', { year: season })
       .andWhere(
         new Brackets((qb) => {
-          qb.where('schedule.game_day = :day', { day: currentDay }).andWhere(
-            'schedule.game_day = :next',
+          qb.where('schedule.game_day >= :day', { day: currentDay }).andWhere(
+            'schedule.game_day <= :next',
             { next: currentDay + 4 }
           );
         })
