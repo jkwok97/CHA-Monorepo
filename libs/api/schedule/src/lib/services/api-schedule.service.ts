@@ -30,15 +30,29 @@ export class ApiScheduleService {
   }
 
   async getNextDays(season: string, currentDay: number) {
-    const schedule = await this.repo.find({
-      where: {
-        playing_year: season,
-        game_day: Between(currentDay, currentDay + 4),
-      },
-      order: {
-        game_day: 'ASC',
-      },
-    });
+    const schedule = await this.repo
+      .createQueryBuilder('schedule')
+      .where('schedule.playing_year = :year', { year: season })
+      .andWhere(
+        new Brackets((qb) => {
+          qb.where('schedule.game_day = :day', { day: currentDay }).andWhere(
+            'schedule.game_day = :next',
+            { next: currentDay + 4 }
+          );
+        })
+      )
+      .orderBy('schedule.game_day', 'DESC')
+      .groupBy('schedule.game_day')
+      .getMany();
+    // const schedule = await this.repo.find({
+    //   where: {
+    //     playing_year: season,
+    //     game_day: Between(currentDay, currentDay + 4),
+    //   },
+    //   order: {
+    //     game_day: 'ASC',
+    //   },
+    // });
 
     const scheduleTeamInfo = await this.setTeamNextInfo(schedule);
 

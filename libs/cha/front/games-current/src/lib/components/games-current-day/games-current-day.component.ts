@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { GamesDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-front-games-current-day',
@@ -6,8 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./games-current-day.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GamesCurrentDayComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class GamesCurrentDayComponent {
+  @Input() dayGames!: any[];
 }
