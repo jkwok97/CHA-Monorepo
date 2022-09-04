@@ -19,6 +19,9 @@ import { GamesCurrentService } from '../services';
 import { ChaFrontGamesCurrentRoutingModule } from './cha-front-games-current-routing.module';
 
 import { GamesCurrentComponent } from './containers';
+import { GamesCurrentTeamCardComponent } from './components/games-current-team-card/games-current-team-card.component';
+import { GamesCurrentMatchupComponent } from './components/games-current-matchup/games-current-matchup.component';
+import { GamesCurrentDayComponent } from './components/games-current-day/games-current-day.component';
 
 @NgModule({
   imports: [
@@ -33,7 +36,12 @@ import { GamesCurrentComponent } from './containers';
     StoreModule.forFeature('games-current', reducer),
     EffectsModule.forFeature([GamesCurrentEffects]),
   ],
-  declarations: [GamesCurrentComponent],
+  declarations: [
+    GamesCurrentComponent,
+    GamesCurrentTeamCardComponent,
+    GamesCurrentMatchupComponent,
+    GamesCurrentDayComponent,
+  ],
   providers: [GamesCurrentService, GamesCurrentFacade, GamesCurrentEffects],
 })
 export class ChaFrontGamesCurrentModule {}
