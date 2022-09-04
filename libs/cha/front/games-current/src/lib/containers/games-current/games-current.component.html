@@ -8,7 +8,7 @@
 
     <div class="grid justify-content-center row-gap-2 pt-2">
       <div class="text-lg col-12 text-center" style="font-weight: 100">
-        CHA Goalie Stats
+        CHA Games
       </div>
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
@@ -26,9 +26,7 @@
 
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
-        <!-- <ng-container *ngIf="goalieStats$ | async as goalieStats">
-          
-        </ng-container> -->
+        <ng-container *ngIf="games$ | async as games"> </ng-container>
       </blade-card-body>
     </blade-card>
   </div>

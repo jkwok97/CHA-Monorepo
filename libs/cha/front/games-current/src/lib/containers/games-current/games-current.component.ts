@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { GamesDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 import { GamesCurrentFacade } from '../../../+state/games-current.facade';
 
@@ -11,6 +12,7 @@ import { GamesCurrentFacade } from '../../../+state/games-current.facade';
 export class GamesCurrentComponent {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
+  games$: Observable<GamesDto[]>;
 
   selectSeasonOptions = [
     { label: '<< Previous', value: 'prev' },
@@ -21,6 +23,7 @@ export class GamesCurrentComponent {
   constructor(private gamesCurrentFacade: GamesCurrentFacade) {
     this.isLoaded$ = this.gamesCurrentFacade.isLoaded$;
     this.isLoading$ = this.gamesCurrentFacade.isLoading$;
+    this.games$ = this.gamesCurrentFacade.games$;
   }
 
   onOptionChanged(option: string) {
