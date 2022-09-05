@@ -18,6 +18,7 @@ export class GamesCurrentComponent {
   games$: Observable<GamesDto[]>;
 
   groupGames!: GamesDto[][];
+  gamesSet: 'curr' | 'prev' | 'next' = 'curr';
 
   selectSeasonOptions = [
     { label: '<< Previous', value: 'prev' },
@@ -39,19 +40,34 @@ export class GamesCurrentComponent {
         untilDestroyed(this)
       )
       .subscribe(([games, data]) => {
-        this.groupGames = this.filterGames(games, Number(data.current_day));
+        if (this.gamesSet === 'curr') {
+          this.groupGames = this.filterGames(games, Number(data.current_day));
+        } else if (this.gamesSet === 'next') {
+          this.groupGames = this.filterGames(
+            games,
+            Number(data.current_day) + 5
+          );
+        } else {
+          this.groupGames = this.filterGames(
+            games,
+            Number(data.current_day) - 5
+          );
+        }
       });
   }
 
   onOptionChanged(option: string) {
     switch (option) {
       case 'prev':
+        this.gamesSet = option;
         this.gamesCurrentFacade.getPreviousGames();
         break;
       case 'curr':
+        this.gamesSet = option;
         this.gamesCurrentFacade.getGames();
         break;
       case 'next':
+        this.gamesSet = option;
         this.gamesCurrentFacade.getNextGames();
         break;
       default:

@@ -39,7 +39,7 @@ export class GamesCurrentEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.gamesCurrentService
-          .getGames(data.current_year, data.current_day + 5)
+          .getGames(data.current_year, Number(data.current_day) + 5)
           .pipe(
             map((games: GamesDto[]) =>
               GamesCurrentActions.getNextSuccess({
@@ -58,7 +58,7 @@ export class GamesCurrentEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.gamesCurrentService
-          .getGames(data.current_year, data.current_day - 5)
+          .getGames(data.current_year, Number(data.current_day) - 5)
           .pipe(
             map((games: GamesDto[]) =>
               GamesCurrentActions.getPreviousSuccess({
