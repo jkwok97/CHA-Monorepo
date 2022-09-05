@@ -234,6 +234,9 @@
   --red-700: #b32b23;
   --red-800: #8c221c;
   --red-900: #661814;
+
+  --team-100: #d28507;
+  --background-100: #393d47;
 }
 
 .p-autocomplete .p-autocomplete-loader {

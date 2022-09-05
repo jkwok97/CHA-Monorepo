@@ -1,19 +1,19 @@
-<div class="award-card" [style.background-color]="getColor(teamInfo.teamcolor)">
-  <div class="award-card-header">
-    <div class="award-card-header-avatar">
-      <ng-container>
-        <p-avatar
-          [image]="getString(teamInfo.teamlogo)"
-          shape="square"
-        ></p-avatar>
-      </ng-container>
+<div
+  class="max-w-30rem"
+  [style.background-color]="getColor(teamInfo.teamcolor)"
+>
+  <div class="grid">
+    <div class="col-4">
+      <p-avatar
+        [image]="getString(teamInfo.teamlogo)"
+        [size]="'xlarge'"
+        shape="square"
+      ></p-avatar>
     </div>
 
-    <div class="award-card-header-content">
-      <div class="award-card-header-content-title">
-        <ng-container>
-          {{ teamInfo.city }} - {{ teamInfo.nickname }}
-        </ng-container>
+    <div class="col-8">
+      <div class="text-lg" style="font-weight: 100">
+        {{ teamInfo.city }} - {{ teamInfo.nickname }}
       </div>
 
       <blade-divider></blade-divider>
@@ -44,9 +44,9 @@
               <i
                 class="pi pi-star-fill"
                 [ngClass]="{
-                  'win': record === 'W',
-                  'loss': record === 'L',
-                  'tie': record === 'T'
+                  win: record === 'W',
+                  loss: record === 'L',
+                  tie: record === 'T'
                 }"
               ></i>
             </ng-container>

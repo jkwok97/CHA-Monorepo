@@ -221,6 +221,7 @@ export class ApiScheduleService {
         city: true,
         teamlogo: true,
         nickname: true,
+        teamcolor: true,
       },
       where: {
         id: teamId,

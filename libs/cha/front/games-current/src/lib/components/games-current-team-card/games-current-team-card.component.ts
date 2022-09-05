@@ -24,6 +24,8 @@ export class GamesCurrentTeamCardComponent {
   }
 
   getColor(color: string) {
+    console.log(color);
+    console.log(this.teamInfo);
     return `${color}95`;
   }
 }

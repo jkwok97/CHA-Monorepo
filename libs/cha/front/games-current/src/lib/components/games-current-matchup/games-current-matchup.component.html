@@ -1,12 +1,16 @@
-<div>
+<div
+  class="grid border-round-lg mb-4"
+  style="background-color: var(--background-100)"
+>
   <cha-front-games-current-team-card
     [teamInfo]="game.visTeamInfo"
     [teamLastFive]="game.visTeamLastFive"
     [teamRecord]="game.visTeamRecord"
     [teamVersus]="game.visTeamVersus"
+    class="col-5"
   ></cha-front-games-current-team-card>
 
-  <div>
+  <div class="col-2">
     <div>Results:</div>
     <div>{{ game.visTeamScore }} @ {{ game.homeTeamScore }}</div>
   </div>
@@ -16,5 +20,6 @@
     [teamLastFive]="game.homeTeamLastFive"
     [teamRecord]="game.homeTeamRecord"
     [teamVersus]="game.homeTeamVersus"
+    class="col-5"
   ></cha-front-games-current-team-card>
 </div>
