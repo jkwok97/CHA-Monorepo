@@ -1,7 +1,4 @@
-<div
-  class="bg-secondary p-4 mb-3 border-round-lg"
-  style="background-color: var(--team-100)"
->
+<div class="p-3 mb-3 border-round-lg" style="background-color: var(--team-100)">
   <div class="text-xl pb-4" style="font-weight: 100">
     Day - {{ dayGames[0].gameDay }}
   </div>
@@ -9,7 +6,6 @@
   <ng-container *ngFor="let game of dayGames">
     <cha-front-games-current-matchup
       [game]="game"
-      
     ></cha-front-games-current-matchup>
   </ng-container>
 </div>

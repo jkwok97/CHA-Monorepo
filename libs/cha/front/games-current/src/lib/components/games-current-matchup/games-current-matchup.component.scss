@@ -1,0 +1,14 @@
+.team-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  justify-content: space-between;
+  align-items: center;
+  grid-row-gap: 10px;
+}
+
+.result {
+  justify-self: center;
+  text-align: center;
+  font-weight: 200;
+  font-size: medium;
+}
