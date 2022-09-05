@@ -10,7 +10,7 @@
 
     <div class="award-card-header-content">
       <div class="text-lg" style="font-weight: 100">
-        {{ teamInfo.city }} - {{ teamInfo.nickname }}
+        {{ teamInfo.city }} {{ teamInfo.nickname }}
       </div>
 
       <div class="award-card-header-content-description">
@@ -38,14 +38,12 @@
           Last 5:
           <span class="award-card-header-content-description-stat">
             <ng-container *ngFor="let record of teamLastFive">
+              <i class="pi pi-check-circle mr-1 win" *ngIf="record === 'W'"></i>
               <i
-                class="pi pi-star-fill mr-1"
-                [ngClass]="{
-                  win: record === 'W',
-                  loss: record === 'L',
-                  tie: record === 'T'
-                }"
+                class="pi pi-times-circle mr-1 loss"
+                *ngIf="record === 'L'"
               ></i>
+              <i class="pi pi-minus-circle mr-1 tie" *ngIf="record === 'T'"></i>
             </ng-container>
           </span>
         </p>
