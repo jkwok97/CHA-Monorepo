@@ -20,6 +20,7 @@ import { reducer } from './+state/league-trades.reducer';
 import { ChaFrontLeagueTradesRoutingModule } from './cha-front-league-trades-routing.module';
 
 import { LeagueTradesComponent } from './containers';
+import { LeagueTradesTeamCardComponent } from './components';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { LeagueTradesComponent } from './containers';
     StoreModule.forFeature('league-trades', reducer),
     EffectsModule.forFeature([LeagueTradesEffects]),
   ],
-  declarations: [LeagueTradesComponent],
+  declarations: [LeagueTradesComponent, LeagueTradesTeamCardComponent],
   providers: [LeagueTradesService, LeagueTradesFacade, LeagueTradesEffects],
 })
 export class ChaFrontLeagueTradesModule {}
