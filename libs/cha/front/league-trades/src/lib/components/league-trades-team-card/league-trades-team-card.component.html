@@ -1,1 +1,49 @@
-<p>league-trades-team-card works!</p>
+<blade-card [style.background-color]="teamInfo.teamcolor">
+  <blade-card-header>
+    <div
+      class="flex align-items-center column-gap-2 text-xl"
+      [style.fontWeight]="100"
+    >
+      <p-avatar
+        [image]="getString(teamInfo.teamlogo)"
+        size="xlarge"
+        shape="square"
+      ></p-avatar>
+
+      <div [style.color]="teamInfo.teamtextcolor">
+        {{ teamInfo.city }} {{ teamInfo.nickname }}
+      </div>
+    </div>
+  </blade-card-header>
+
+  <blade-card-body class="league-trades-team-card-content">
+    <div *ngIf="teamPlayers.length > 0">
+      <div [style.fontWeight]="100" class="p-2">Players</div>
+      <div
+        *ngFor="let player of teamPlayers"
+        [style.color]="teamInfo.teamtextcolor"
+        [style.fontWeight]="100"
+        class="flex align-items-center column-gap-2"
+      >
+        <p-avatar
+          [image]="getPlayerPicture(player.player.nhl_id)"
+          size="large"
+          shape="circle"
+        ></p-avatar>
+
+        {{ player.player.firstname }} {{ player.player.lastname }}
+      </div>
+    </div>
+
+    <div *ngIf="teamPicks.length > 0">
+      <div [style.fontWeight]="100" class="p-2">Picks</div>
+      <div
+        *ngFor="let pick of teamPicks"
+        [style.color]="teamInfo.teamtextcolor"
+        [style.fontWeight]="100"
+      >
+        {{ pick }}
+      </div>
+    </div>
+  </blade-card-body>
+</blade-card>

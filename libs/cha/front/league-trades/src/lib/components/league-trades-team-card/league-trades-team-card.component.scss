@@ -1,0 +1,6 @@
+.league-trades-team-card-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-row-gap: 10px;
+  grid-column-gap: 20px;
+}

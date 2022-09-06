@@ -62,6 +62,7 @@ export class ApiTransactionsService {
         teamlogo: true,
         nickname: true,
         teamcolor: true,
+        teamtextcolor: true,
       },
       where: {
         id: teamId,

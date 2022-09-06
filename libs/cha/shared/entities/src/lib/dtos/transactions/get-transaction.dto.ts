@@ -6,7 +6,7 @@ export interface GetTransactionDto {
   teamOnePicks: string[];
   teamTwoInfo: TeamInfoTransactionDto;
   teamTwoPlayers: PlayerInfoTransactionDto[];
-  teamTwoPicks: string;
+  teamTwoPicks: string[];
 }
 
 export interface TeamInfoTransactionDto {
@@ -15,11 +15,14 @@ export interface TeamInfoTransactionDto {
   teamlogo: string;
   nickname: string;
   teamcolor: string;
+  teamtextcolor: string;
 }
 
 export interface PlayerInfoTransactionDto {
-  id: number;
-  firstname: string;
-  lastname: string;
-  nhl_id: string;
+  player: {
+    id: number;
+    firstname: string;
+    lastname: string;
+    nhl_id: string;
+  };
 }

@@ -25,19 +25,39 @@
     <blade-divider></blade-divider>
 
     <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
+      <blade-card-body *ngIf="transactions$ | async as transactions">
         <blade-card
-          *ngFor="let transaction of transactions$ | async"
+          *ngFor="let transaction of transactions"
           class="mb-3"
-          style="background-color: var(--team-100)"
+          style="background-color: var(--background-100)"
         >
           <blade-card-header>
             {{ transaction.transactionDate | date }}
           </blade-card-header>
 
-          <blade-card-body> </blade-card-body>
+          <blade-card-body>
+            <div class="league-trades-content">
+              <cha-front-league-trades-team-card
+                [teamInfo]="transaction.teamOneInfo"
+                [teamPicks]="transaction.teamOnePicks"
+                [teamPlayers]="transaction.teamOnePlayers"
+              ></cha-front-league-trades-team-card>
+
+              <cha-front-league-trades-team-card
+                [teamInfo]="transaction.teamTwoInfo"
+                [teamPicks]="transaction.teamTwoPicks"
+                [teamPlayers]="transaction.teamTwoPlayers"
+              ></cha-front-league-trades-team-card>
+            </div>
+          </blade-card-body>
         </blade-card>
       </blade-card-body>
     </blade-card>
+
+    <ng-container *ngIf="(isLoaded$ | async) === false">
+      <div class="p-6 text-xl text-center" [style.fontWeight]="100">
+        No Data To Display
+      </div>
+    </ng-container>
   </div>
 </blade-layout-feature-content>
