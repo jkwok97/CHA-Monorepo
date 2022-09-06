@@ -1,4 +1,3 @@
-import { GetTransactionDto } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiTransactionsService } from '../services';
 
