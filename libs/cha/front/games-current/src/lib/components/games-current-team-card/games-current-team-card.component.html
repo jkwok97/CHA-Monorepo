@@ -1,6 +1,6 @@
-<div [style.background-color]="getColor(teamInfo.teamcolor)" class="award-card">
-  <div class="award-card-header">
-    <div class="award-card-header-avatar">
+<div [style.background-color]="getColor(teamInfo.teamcolor)" class="games-current-team-card">
+  <div class="games-current-team-card-header">
+    <div class="games-current-team-card-header-avatar">
       <p-avatar
         [image]="getString(teamInfo.teamlogo)"
         [size]="'xlarge'"
@@ -8,35 +8,35 @@
       ></p-avatar>
     </div>
 
-    <div class="award-card-header-content">
+    <div class="games-current-team-card-header-content">
       <div class="text-lg" style="font-weight: 100">
         {{ teamInfo.city }} {{ teamInfo.nickname }}
       </div>
 
-      <div class="award-card-header-content-description">
+      <div class="games-current-team-card-header-content-description">
         <p>
           Record:
-          <span class="award-card-header-content-description-stat">
+          <span class="games-current-team-card-header-content-description-stat">
             {{ teamRecord.wins }} - {{ teamRecord.loss }} -
             {{ teamRecord.ties }}
           </span>
         </p>
       </div>
 
-      <div class="award-card-header-content-description">
+      <div class="games-current-team-card-header-content-description">
         <p>
           Versus Opponent:
-          <span class="award-card-header-content-description-stat">
+          <span class="games-current-team-card-header-content-description-stat">
             {{ teamVersus.wins }} - {{ teamVersus.loss }} -
             {{ teamVersus.ties }}
           </span>
         </p>
       </div>
 
-      <div class="award-card-header-content-description">
+      <div class="games-current-team-card-header-content-description">
         <p>
           Last 5:
-          <span class="award-card-header-content-description-stat">
+          <span class="games-current-team-card-header-content-description-stat">
             <ng-container *ngFor="let record of teamLastFive">
               <i class="pi pi-check-circle mr-1 win" *ngIf="record === 'W'"></i>
               <i
