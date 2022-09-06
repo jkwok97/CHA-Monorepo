@@ -26,12 +26,12 @@
         class="flex align-items-center column-gap-2"
       >
         <p-avatar
-          [image]="getPlayerPicture(player.player.nhl_id)"
+          [image]="getPlayerPicture(player?.player?.nhl_id)"
           size="large"
           shape="circle"
         ></p-avatar>
 
-        {{ player.player.firstname }} {{ player.player.lastname }}
+        {{ player?.player?.firstname }} {{ player?.player?.lastname }}
       </div>
     </div>
 

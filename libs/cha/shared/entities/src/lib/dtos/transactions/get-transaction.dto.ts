@@ -23,6 +23,6 @@ export interface PlayerInfoTransactionDto {
     id: number;
     firstname: string;
     lastname: string;
-    nhl_id: string;
+    nhl_id?: string;
   };
 }
