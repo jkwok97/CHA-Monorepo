@@ -17,12 +17,16 @@ export class LeagueTradesFacade {
   );
 
   transactions$: Observable<GetTransactionDto[]> = this.store.select(
-    LeagueTradesSelectors.selectTransactions
+    LeagueTradesSelectors.selectFilteredTrades
   );
 
   constructor(private store: Store<State>) {}
 
   getTransactions(season: string) {
     this.store.dispatch(LeagueTradesActions.getTrades({ season }));
+  }
+
+  updateFilter(filter: string) {
+    this.store.dispatch(LeagueTradesActions.filterTrades({ filter }));
   }
 }

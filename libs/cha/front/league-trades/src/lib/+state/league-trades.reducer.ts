@@ -4,12 +4,14 @@ import { LeagueTradesActions } from './league-trades.actions';
 
 export interface State {
   transactions: GetTransactionDto[];
+  filter: string;
   loading: boolean;
   loaded: boolean;
 }
 
 const initialState: State = {
   transactions: [],
+  filter: '',
   loading: false,
   loaded: false,
 };
@@ -30,6 +32,11 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(LeagueTradesActions.filterTrades, (state, action) => ({
+    ...state,
+    filter: action.filter,
+  })),
+
   on(LeagueTradesActions.error, (state) => initialState)
 );
 
@@ -38,6 +45,8 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getTransactions = (state: State) => state.transactions;
+
+export const getFilter = (state: State) => state.filter;
 
 export const getLoading = (state: State) => state.loading;
 

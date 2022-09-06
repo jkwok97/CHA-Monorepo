@@ -18,6 +18,7 @@ export class LeagueTradesComponent implements OnInit {
   transactions$: Observable<GetTransactionDto[]>;
 
   transactionsYear!: FormControl;
+  search!: FormControl;
 
   constructor(
     private leagueTradesFacade: LeagueTradesFacade,
@@ -30,6 +31,7 @@ export class LeagueTradesComponent implements OnInit {
 
   ngOnInit(): void {
     this.transactionsYear = this.fb.control(new Date('01-01-2023'));
+    this.search = this.fb.control('');
 
     this.transactionsYear.valueChanges
       .pipe(startWith(this.transactionsYear.value), untilDestroyed(this))
@@ -37,5 +39,9 @@ export class LeagueTradesComponent implements OnInit {
         const year = new Date(value).getFullYear().toString().substring(2);
         this.leagueTradesFacade.getTransactions(year);
       });
+
+    this.search.valueChanges.pipe(untilDestroyed(this)).subscribe((value) => {
+      this.leagueTradesFacade.updateFilter(value);
+    });
   }
 }

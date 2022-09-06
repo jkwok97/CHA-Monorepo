@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CalendarModule } from 'primeng/calendar';
 import { AvatarModule } from 'primeng/avatar';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -31,6 +32,7 @@ import { LeagueTradesTeamCardComponent } from './components';
     ProgressBarModule,
     CalendarModule,
     AvatarModule,
+    InputTextModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,

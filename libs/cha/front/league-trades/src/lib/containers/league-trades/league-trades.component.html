@@ -13,6 +13,16 @@
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
       >
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            pInputText
+            [formControl]="search"
+            placeholder="Team / Player"
+          />
+        </span>
+
         <p-calendar
           [formControl]="transactionsYear"
           dateFormat="yy"

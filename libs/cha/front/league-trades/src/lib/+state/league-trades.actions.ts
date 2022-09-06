@@ -13,10 +13,16 @@ const getTradesSuccess = createAction(
   props<{ transactions: GetTransactionDto[] }>()
 );
 
+const filterTrades = createAction(
+  `${NAMESPACE} Filter Trades`,
+  props<{ filter: string }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const LeagueTradesActions = {
   getTrades,
   getTradesSuccess,
+  filterTrades,
   error,
 };
