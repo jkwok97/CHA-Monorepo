@@ -22,7 +22,7 @@ export class ApiTransactionsService {
         transaction_date: Between(new Date(season.start), new Date(season.end)),
       },
       order: {
-        transaction_date: 'ASC',
+        transaction_date: 'DESC',
       },
     });
 
