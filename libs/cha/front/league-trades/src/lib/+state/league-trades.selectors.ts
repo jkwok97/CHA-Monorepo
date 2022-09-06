@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as LeagueTradesReducer from './league-trades.reducer';
 
 export const selectState =
-  createFeatureSelector<LeagueTradesReducer.State>('games-current');
+  createFeatureSelector<LeagueTradesReducer.State>('league-trades');
 
 const selectLoading = createSelector(
   selectState,

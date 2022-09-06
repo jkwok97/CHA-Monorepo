@@ -6,7 +6,7 @@ import { LeagueTradesService } from '../services';
 import { LeagueTradesActions } from './league-trades.actions';
 
 @Injectable()
-export class GamesCurrentEffects {
+export class LeagueTradesEffects {
   constructor(
     private actions$: Actions,
     private leagueTradesService: LeagueTradesService
