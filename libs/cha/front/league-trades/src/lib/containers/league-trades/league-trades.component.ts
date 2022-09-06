@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { GetTransactionDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, startWith } from 'rxjs';
 import { LeagueTradesFacade } from '../../+state/league-trades.facade';
@@ -14,6 +15,7 @@ import { LeagueTradesFacade } from '../../+state/league-trades.facade';
 export class LeagueTradesComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
+  transactions$: Observable<GetTransactionDto[]>;
 
   transactionsYear!: FormControl;
 
@@ -23,6 +25,7 @@ export class LeagueTradesComponent implements OnInit {
   ) {
     this.isLoaded$ = this.leagueTradesFacade.isLoaded$;
     this.isLoading$ = this.leagueTradesFacade.isLoading$;
+    this.transactions$ = this.leagueTradesFacade.transactions$;
   }
 
   ngOnInit(): void {

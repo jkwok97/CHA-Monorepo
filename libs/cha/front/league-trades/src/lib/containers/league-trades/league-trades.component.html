@@ -25,7 +25,19 @@
     <blade-divider></blade-divider>
 
     <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body> hello </blade-card-body>
+      <blade-card-body>
+        <blade-card
+          *ngFor="let transaction of transactions$ | async"
+          class="mb-3"
+          style="background-color: var(--team-100)"
+        >
+          <blade-card-header>
+            {{ transaction.transactionDate | date }}
+          </blade-card-header>
+
+          <blade-card-body> </blade-card-body>
+        </blade-card>
+      </blade-card-body>
     </blade-card>
   </div>
 </blade-layout-feature-content>
