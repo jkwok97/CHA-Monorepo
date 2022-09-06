@@ -2,7 +2,7 @@
   <blade-card-header>
     <div
       class="flex align-items-center column-gap-2 text-xl"
-      [style.fontWeight]="100"
+      [style.fontWeight]="300"
     >
       <p-avatar
         [image]="getString(teamInfo.teamlogo)"
@@ -17,12 +17,15 @@
   </blade-card-header>
 
   <blade-card-body class="league-trades-team-card-content">
-    <div *ngIf="teamPlayers.length > 0">
-      <div [style.fontWeight]="100" class="p-2">Players</div>
+    <div
+      *ngIf="teamPlayers.length > 0"
+      [style.fontWeight]="300"
+      [style.color]="teamInfo.teamtextcolor"
+    >
+      <div class="p-2">Players</div>
       <div
         *ngFor="let player of teamPlayers"
         [style.color]="teamInfo.teamtextcolor"
-        [style.fontWeight]="100"
         class="flex align-items-center column-gap-2"
       >
         <p-avatar
@@ -35,13 +38,13 @@
       </div>
     </div>
 
-    <div *ngIf="teamPicks.length > 0">
-      <div [style.fontWeight]="100" class="p-2">Picks</div>
-      <div
-        *ngFor="let pick of teamPicks"
-        [style.color]="teamInfo.teamtextcolor"
-        [style.fontWeight]="100"
-      >
+    <div
+      *ngIf="teamPicks.length > 0"
+      [style.color]="teamInfo.teamtextcolor"
+      [style.fontWeight]="300"
+    >
+      <div class="p-2">Picks</div>
+      <div *ngFor="let pick of teamPicks">
         {{ pick }}
       </div>
     </div>
