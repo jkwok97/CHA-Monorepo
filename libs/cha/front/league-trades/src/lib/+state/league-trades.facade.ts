@@ -22,7 +22,7 @@ export class LeagueTradesFacade {
 
   constructor(private store: Store<State>) {}
 
-  getGames(season: string) {
+  getTransactions(season: string) {
     this.store.dispatch(LeagueTradesActions.getTrades({ season }));
   }
 }

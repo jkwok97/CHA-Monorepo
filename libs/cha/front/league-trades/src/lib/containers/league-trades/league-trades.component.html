@@ -1,1 +1,28 @@
-<p>league-trades works!</p>
+<blade-layout-feature-content>
+    <div>
+      <p-progressBar
+        mode="indeterminate"
+        [style]="{ height: '6px' }"
+        *ngIf="isLoading$ | async"
+      ></p-progressBar>
+  
+      <div class="grid justify-content-center row-gap-2 pt-2">
+        <div class="text-lg col-12 text-center" style="font-weight: 100">
+          CHA Trades
+        </div>
+        <div
+          class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
+        >
+          
+        </div>
+      </div>
+  
+      <blade-divider></blade-divider>
+  
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body>
+          hello
+        </blade-card-body>
+      </blade-card>
+    </div>
+  </blade-layout-feature-content>
