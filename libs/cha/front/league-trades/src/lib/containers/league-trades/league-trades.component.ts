@@ -19,6 +19,8 @@ export class LeagueTradesComponent implements OnInit {
 
   transactionsYear!: FormControl;
   search!: FormControl;
+  link =
+    'https://docs.google.com/spreadsheets/d/1U792Obtd6ve99PSeHQVykHwfAlxZBW1VoVZ3FlA7gKw/';
 
   constructor(
     private leagueTradesFacade: LeagueTradesFacade,
