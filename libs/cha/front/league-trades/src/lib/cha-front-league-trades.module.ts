@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { CalendarModule } from 'primeng/calendar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -23,7 +25,9 @@ import { LeagueTradesComponent } from './containers';
   imports: [
     CommonModule,
     ChaFrontLeagueTradesRoutingModule,
+    ReactiveFormsModule,
     ProgressBarModule,
+    CalendarModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,
