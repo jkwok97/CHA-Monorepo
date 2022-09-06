@@ -1,15 +1,15 @@
-import { GamesDto } from '@cha/shared/entities';
+import { GetTransactionDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { GamesCurrentActions } from './league-trades.actions';
+import { LeagueTradesActions } from './league-trades.actions';
 
 export interface State {
-  games: GamesDto[];
+  transactions: GetTransactionDto[];
   loading: boolean;
   loaded: boolean;
 }
 
 const initialState: State = {
-  games: [],
+  transactions: [],
   loading: false,
   loaded: false,
 };
@@ -17,37 +17,27 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(
-    GamesCurrentActions.getCurrent,
-    GamesCurrentActions.getNext,
-    GamesCurrentActions.getPrevious,
-    (state) => ({
-      ...state,
-      loading: true,
-      loaded: false,
-    })
-  ),
+  on(LeagueTradesActions.getTrades, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+  })),
 
-  on(
-    GamesCurrentActions.getCurrentSuccess,
-    GamesCurrentActions.getNextSuccess,
-    GamesCurrentActions.getPreviousSuccess,
-    (state, action) => ({
-      ...state,
-      games: action.games,
-      loading: false,
-      loaded: true,
-    })
-  ),
+  on(LeagueTradesActions.getTradesSuccess, (state, action) => ({
+    ...state,
+    transactions: action.transactions,
+    loading: false,
+    loaded: true,
+  })),
 
-  on(GamesCurrentActions.error, (state) => initialState)
+  on(LeagueTradesActions.error, (state) => initialState)
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return r(state, action);
 }
 
-export const getGames = (state: State) => state.games;
+export const getTransactions = (state: State) => state.transactions;
 
 export const getLoading = (state: State) => state.loading;
 

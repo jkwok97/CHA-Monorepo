@@ -3,7 +3,7 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { GamesDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, withLatestFrom } from 'rxjs';
-import { GamesCurrentFacade } from '../../../+state/games-current.facade';
+import { GamesCurrentFacade } from '../../+state/games-current.facade';
 
 @UntilDestroy()
 @Component({

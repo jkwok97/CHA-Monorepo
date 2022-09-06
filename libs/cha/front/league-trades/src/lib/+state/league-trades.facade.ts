@@ -1,40 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from './league-trades.reducer';
-import { GamesCurrentActions } from './league-trades.actions';
+import { LeagueTradesActions } from './league-trades.actions';
 import { Observable } from 'rxjs';
-import { GamesCurrentSelectors } from './league-trades.selectors';
-import { GamesDto } from '@cha/shared/entities';
+import { LeagueTradesSelectors } from './league-trades.selectors';
+import { GetTransactionDto } from '@cha/shared/entities';
 
 @Injectable()
-export class GamesCurrentFacade {
+export class LeagueTradesFacade {
   isLoading$: Observable<boolean> = this.store.select(
-    GamesCurrentSelectors.selectLoading
+    LeagueTradesSelectors.selectLoading
   );
 
   isLoaded$: Observable<boolean> = this.store.select(
-    GamesCurrentSelectors.selectLoaded
+    LeagueTradesSelectors.selectLoaded
   );
 
-  games$: Observable<GamesDto[]> = this.store.select(
-    GamesCurrentSelectors.selectGames
-  );
-
-  gamesGrouped$: Observable<GamesDto[]> = this.store.select(
-    GamesCurrentSelectors.selectGames
+  transactions$: Observable<GetTransactionDto[]> = this.store.select(
+    LeagueTradesSelectors.selectTransactions
   );
 
   constructor(private store: Store<State>) {}
 
-  getGames() {
-    this.store.dispatch(GamesCurrentActions.getCurrent());
-  }
-
-  getNextGames() {
-    this.store.dispatch(GamesCurrentActions.getNext());
-  }
-
-  getPreviousGames() {
-    this.store.dispatch(GamesCurrentActions.getPrevious());
+  getGames(season: string) {
+    this.store.dispatch(LeagueTradesActions.getTrades({ season }));
   }
 }

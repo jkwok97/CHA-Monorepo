@@ -1,21 +1,24 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as GamesCurrentReducer from './league-trades.reducer';
+import * as LeagueTradesReducer from './league-trades.reducer';
 
 export const selectState =
-  createFeatureSelector<GamesCurrentReducer.State>('games-current');
+  createFeatureSelector<LeagueTradesReducer.State>('games-current');
 
 const selectLoading = createSelector(
   selectState,
-  GamesCurrentReducer.getLoading
+  LeagueTradesReducer.getLoading
 );
 
-const selectLoaded = createSelector(selectState, GamesCurrentReducer.getLoaded);
+const selectLoaded = createSelector(selectState, LeagueTradesReducer.getLoaded);
 
-const selectGames = createSelector(selectState, GamesCurrentReducer.getGames);
+const selectTransactions = createSelector(
+  selectState,
+  LeagueTradesReducer.getTransactions
+);
 
-export const GamesCurrentSelectors = {
+export const LeagueTradesSelectors = {
   selectLoaded,
   selectLoading,
-  selectGames,
+  selectTransactions,
 };
