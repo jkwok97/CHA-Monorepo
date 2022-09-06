@@ -14,8 +14,44 @@ export class ApiTransactionsService {
     private playersRepo: Repository<Players_V2>
   ) {}
 
-  async getTransactionsBySeason(season: number) {
-    return;
+  async getTransactionsBySeason(year: string) {
+    const season = this.findSeasonDates(year);
+
+    const transactions = await this.repo.find({
+      where: {
+        transaction_date: Between(new Date(season.start), new Date(season.end)),
+      },
+      order: {
+        transaction_date: 'ASC',
+      },
+    });
+
+    const transactionsTeamInfo = await this.setTransactionInfo(transactions);
+
+    return transactionsTeamInfo;
+  }
+
+  private async setTransactionInfo(transactions: Transactions_V2[]) {
+    return await Promise.all(
+      transactions.map(async (transaction: Transactions_V2) => ({
+        id: transaction.id,
+        transactionDate: transaction.transaction_date,
+        teamOneInfo: await this.getTeamInfo(transaction.team_one_id),
+        teamOnePlayers: await this.setPlayersInfo(transaction.team_one_players),
+        teamOnePicks: transaction.team_one_picks,
+        teamTwoInfo: await this.getTeamInfo(transaction.team_two_id),
+        teamTwoPlayers: await this.setPlayersInfo(transaction.team_two_players),
+        teamTwoPicks: transaction.team_two_picks,
+      }))
+    );
+  }
+
+  private async setPlayersInfo(array: number[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        player: await this.getPlayerInfo(item),
+      }))
+    );
   }
 
   private async getTeamInfo(teamId: number) {
@@ -31,5 +67,29 @@ export class ApiTransactionsService {
         id: teamId,
       },
     });
+  }
+
+  private async getPlayerInfo(playerId: number) {
+    return await this.playersRepo.findOne({
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+      },
+      where: {
+        id: playerId,
+      },
+    });
+  }
+
+  private findSeasonDates(year: string) {
+    const seasons = [
+      { year: '23', start: '2022-06-02', end: '2023-06-01' },
+      { year: '22', start: '2021-07-15', end: '2022-06-01' },
+      { year: '21', start: '2020-04-27', end: '2021-07-15' },
+    ];
+
+    return seasons.find((season) => season.year === year);
   }
 }

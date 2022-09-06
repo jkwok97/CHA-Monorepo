@@ -1,4 +1,4 @@
-import { Transactions_V2 } from '@api/entities';
+import { GetTransactionDto } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiTransactionsService } from '../services';
 
@@ -7,7 +7,7 @@ export class TransactionsController {
   constructor(private transactionsService: ApiTransactionsService) {}
 
   @Get('/:season')
-  async getTransactionsBySeason(@Param() param): Promise<Transactions_V2[]> {
+  async getTransactionsBySeason(@Param() param): Promise<any[]> {
     const stats = await this.transactionsService.getTransactionsBySeason(
       param.season
     );
