@@ -41,17 +41,10 @@ const ROUTES: Route[] = [
           ),
       },
       {
-        path: 'salaries',
+        path: 'salaries-ratings',
         loadChildren: () =>
           import('@cha/front/league-salaries').then(
             (mod) => mod.ChaFrontLeagueSalariesModule
-          ),
-      },
-      {
-        path: 'ratings',
-        loadChildren: () =>
-          import('@cha/front/league-ratings').then(
-            (mod) => mod.ChaFrontLeagueRatingsModule
           ),
       },
       {

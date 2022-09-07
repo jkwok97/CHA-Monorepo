@@ -157,9 +157,6 @@
       "@cha/front/league-history": [
         "libs/cha/front/league-history/src/index.ts"
       ],
-      "@cha/front/league-ratings": [
-        "libs/cha/front/league-ratings/src/index.ts"
-      ],
       "@cha/front/league-salaries": [
         "libs/cha/front/league-salaries/src/index.ts"
       ],
