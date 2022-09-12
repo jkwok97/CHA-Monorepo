@@ -49,14 +49,20 @@ export class ApiSalariesService {
       season
     );
 
+    console.log(allSalariesWithTeam[0]);
+
     const allSalariesWithTeamAndInfo = await this.setTeamInfo(
       allSalariesWithTeam
     );
+
+    console.log(allSalariesWithTeamAndInfo[0]);
 
     const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
       allSalariesWithTeamAndInfo,
       season
     );
+
+    console.log(allSalariesWithTeamAndInfoAndRatings[0]);
 
     return allSalariesWithTeamAndInfoAndRatings;
   }
