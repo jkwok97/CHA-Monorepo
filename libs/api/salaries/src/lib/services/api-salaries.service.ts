@@ -48,19 +48,9 @@ export class ApiSalariesService {
       },
     });
 
-    // const allSalaries = await this.repo.find({
-    //   select: {
-    //     id: true,
-    //     season_2022: true,
-    //     season_2023: true,
-    //     season_2024: true,
-    //     season_2025: true,
-    //     player_id: true,
-    //   },
-    //   where: {
-    //     player_id: Not('1'),
-    //   },
-    // });
+    const allSalariesForPlayersInSeason = await this.setPlayersSalaries(
+      allPlayersInSeason
+    );
 
     // const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
 
@@ -80,11 +70,11 @@ export class ApiSalariesService {
     //   season
     // );
 
-    return allPlayersInSeason;
+    return allSalariesForPlayersInSeason;
   }
 
   async getAllGoaliesSalaries(season: string) {
-    const allPlayersInSeason = await this.goaliesStatsRepo.find({
+    const allGoaliesInSeason = await this.goaliesStatsRepo.find({
       select: {
         id: true,
         team_name: true,
@@ -94,14 +84,43 @@ export class ApiSalariesService {
       },
       where: {
         player_id: {
-          isgoalie: false,
+          isgoalie: true,
         },
         season_type: 'Regular',
         playing_year: season,
       },
     });
 
-    return allPlayersInSeason;
+    const allSalariesForGoaliesInSeason = await this.setPlayersSalaries(
+      allGoaliesInSeason
+    );
+
+    return allSalariesForGoaliesInSeason;
+  }
+
+  private async setPlayersSalaries(array: any[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        salaries: await this.getSalary(item.player_id.id),
+      }))
+    );
+  }
+
+  private async getSalary(playerId: number) {
+    return await this.repo.findOne({
+      select: {
+        id: true,
+        player_id: true,
+        season_2022: true,
+        season_2023: true,
+        season_2024: true,
+        season_2025: true,
+      },
+      where: {
+        player_id: playerId.toString(),
+      },
+    });
   }
 
   private async setPlayerRating(array: any[], season: string) {
