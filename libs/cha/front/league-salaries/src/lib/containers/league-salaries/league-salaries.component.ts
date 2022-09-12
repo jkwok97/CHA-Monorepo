@@ -21,6 +21,8 @@ export class LeagueSalariesComponent implements OnInit {
     { label: 'Goalies', value: 'goalies' },
   ];
 
+  optionType = 'players';
+
   constructor(
     private leagueSalariesRatingsFacade: LeagueSalariesAndRatingsFacade,
     private leagueDataFacade: LeagueDataFacade
@@ -39,9 +41,11 @@ export class LeagueSalariesComponent implements OnInit {
     switch (option) {
       case 'players':
         this.leagueSalariesRatingsFacade.getPlayerSalaries();
+        this.optionType = option;
         break;
       case 'goalies':
         this.leagueSalariesRatingsFacade.getGoaliesSalaries();
+        this.optionType = option;
         break;
       default:
         return;

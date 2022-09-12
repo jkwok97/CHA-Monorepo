@@ -7552,7 +7552,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
   background: #0333cf;
   color: #fff;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 300;
   min-width: 1.5rem;
   height: 1.5rem;
   line-height: 1.5rem;
@@ -7569,7 +7569,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 }
 
 .p-badge.p-badge-info {
-  background-color: #3b82f6;
+  background-color: #393d47;
   color: #fff;
 }
 

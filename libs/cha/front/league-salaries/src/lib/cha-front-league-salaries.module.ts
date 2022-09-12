@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { BadgeModule } from 'primeng/badge';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
@@ -22,6 +24,10 @@ import { LeagueSalariesAndRatingsEffects } from './+state/league-salaries-rating
 import { ChaFrontLeagueSalariesRoutingModule } from './cha-front-league-salaries-routing.module';
 
 import { LeagueSalariesComponent } from './containers';
+import {
+  LeagueSalariesRatingsTableComponent,
+  LeagueSalariesRatingsBadgeComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -31,6 +37,8 @@ import { LeagueSalariesComponent } from './containers';
     TableModule,
     ButtonModule,
     InputTextModule,
+    DropdownModule,
+    BadgeModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,
@@ -38,7 +46,11 @@ import { LeagueSalariesComponent } from './containers';
     StoreModule.forFeature('league-salaries-ratings', reducer),
     EffectsModule.forFeature([LeagueSalariesAndRatingsEffects]),
   ],
-  declarations: [LeagueSalariesComponent],
+  declarations: [
+    LeagueSalariesComponent,
+    LeagueSalariesRatingsTableComponent,
+    LeagueSalariesRatingsBadgeComponent,
+  ],
   providers: [
     LeagueSalariesAndRatingsService,
     LeagueSalariesAndRatingsFacade,

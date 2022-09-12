@@ -8,7 +8,7 @@
 
     <div class="pt-2" *ngIf="season$ | async">
       <div class="text-lg text-center" style="font-weight: 100">
-        {{ season$ | async }} Season
+        {{ season$ | async }} Salaries & Ratings
       </div>
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
@@ -18,7 +18,6 @@
           [options]="selectOptions"
           (optionChanged)="onOptionChanged($event)"
         ></blade-button-select>
-
       </div>
     </div>
 
@@ -27,7 +26,10 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="salaries$ | async as salaries">
-          hello
+          <cha-front-league-salaries-ratings-table
+            [salaries]="salaries"
+            [type]="optionType"
+          ></cha-front-league-salaries-ratings-table>
         </ng-container>
       </blade-card-body>
     </blade-card>
