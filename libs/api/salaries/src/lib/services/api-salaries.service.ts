@@ -56,12 +56,12 @@ export class ApiSalariesService {
       allSalariesWithTeam
     );
 
-    const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
-      allSalariesWithTeamAndInfo,
-      season
-    );
+    // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
+    //   allSalariesWithTeamAndInfo,
+    //   season
+    // );
 
-    return allSalariesWithTeamAndInfoAndRatings;
+    return allSalariesWithTeamAndInfo;
   }
 
   private async setPlayerRating(array: any[], season: string) {
