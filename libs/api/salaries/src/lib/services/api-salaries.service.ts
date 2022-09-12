@@ -47,21 +47,21 @@ export class ApiSalariesService {
 
     const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
 
-    const allSalariesWithTeam = await this.setTeam(
-      allSalariesWithPlayerInfo,
-      season
-    );
+    // const allSalariesWithTeam = await this.setTeam(
+    //   allSalariesWithPlayerInfo,
+    //   season
+    // );
 
-    const allSalariesWithTeamAndInfo = await this.setTeamInfo(
-      allSalariesWithTeam
-    );
+    // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
+    //   allSalariesWithTeam
+    // );
 
-    const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
-      allSalariesWithTeamAndInfo,
-      season
-    );
+    // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
+    //   allSalariesWithTeamAndInfo,
+    //   season
+    // );
 
-    return allSalariesWithTeamAndInfoAndRatings;
+    return allSalariesWithPlayerInfo;
   }
 
   private async setPlayerRating(array: any[], season: string) {
@@ -209,21 +209,17 @@ export class ApiSalariesService {
   }
 
   private async getPlayerInfo(playerId: number) {
-    if (playerId) {
-      return await this.playersRepo.findOne({
-        select: {
-          id: true,
-          firstname: true,
-          lastname: true,
-          nhl_id: true,
-          isgoalie: true,
-        },
-        where: {
-          id: playerId,
-        },
-      });
-    } else {
-      return {};
-    }
+    return await this.playersRepo.findOne({
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isgoalie: true,
+      },
+      where: {
+        id: playerId,
+      },
+    });
   }
 }
