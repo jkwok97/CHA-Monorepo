@@ -8,3 +8,4 @@ export * from './nhl';
 export * from './stats';
 export * from './schedule';
 export * from './transactions';
+export * from './salaries';
