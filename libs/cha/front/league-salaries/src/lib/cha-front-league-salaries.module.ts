@@ -4,6 +4,15 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { BladeDividerComponent } from '@blade/angular/ui/divider';
+import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+
 import { reducer } from './+state/league-salaries-ratings.reducer';
 import { LeagueSalariesAndRatingsService } from './services';
 import { LeagueSalariesAndRatingsFacade } from './+state/league-salaries-ratings.facade';
@@ -17,6 +26,13 @@ import { LeagueSalariesComponent } from './containers';
   imports: [
     CommonModule,
     ChaFrontLeagueSalariesRoutingModule,
+    ProgressBarModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    BladeAngularUiCardModule,
+    BladeAngularUiLayoutModule,
+    BladeDividerComponent,
     StoreModule.forFeature('league-salaries-ratings', reducer),
     EffectsModule.forFeature([LeagueSalariesAndRatingsEffects]),
   ],
