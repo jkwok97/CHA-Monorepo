@@ -52,6 +52,11 @@ export class ApiSalariesService {
       allPlayersInSeason
     );
 
+    const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(
+      allSalariesForPlayersInSeason,
+      season
+    );
+
     // const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
 
     // console.log(allSalariesWithPlayerInfo[0]);
@@ -70,7 +75,7 @@ export class ApiSalariesService {
     //   season
     // );
 
-    return allSalariesForPlayersInSeason;
+    return allSalariesAndRatingsForPlayersInSeason;
   }
 
   async getAllGoaliesSalaries(season: string) {
@@ -93,6 +98,11 @@ export class ApiSalariesService {
 
     const allSalariesForGoaliesInSeason = await this.setPlayersSalaries(
       allGoaliesInSeason
+    );
+
+    const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(
+      allSalariesForGoaliesInSeason,
+      season
     );
 
     return allSalariesForGoaliesInSeason;
@@ -127,63 +137,65 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerRating: await this.getPlayerRating(
-          item.player?.player_id,
-          item.player?.isgoalie,
-          season
-        ),
+        playerRating: await this.getPlayerRating(item.player_id.id, season),
       }))
     );
   }
 
-  private async getPlayerRating(
-    playerId: string,
-    isGoalie: boolean,
-    season: string
-  ) {
-    if (isGoalie === true && playerId) {
-      return await this.goalieRatingsRepo.findOne({
-        select: {
-          id: true,
-          passing: true,
-          speed: true,
-          skating: true,
-        },
-        where: {
-          player_id: Number(playerId),
-        },
-      });
-    } else if (isGoalie === false && playerId) {
-      return await this.playerRatingsRepo.findOne({
-        select: {
-          id: true,
-          c_rate: true,
-          l_rate: true,
-          r_rate: true,
-          ld_rate: true,
-          rd_rate: true,
-          skating: true,
-          speed: true,
-          passing: true,
-          shooting: true,
-          face_off: true,
-          forecheck: true,
-          assist_rating: true,
-          clear_crease: true,
-          shot_block: true,
-          pk: true,
-          physical: true,
-          rock: true,
-          intimidation: true,
-          game_fatigue: true,
-          shift_fatigue: true,
-        },
-        where: {
-          player_id: Number(playerId),
-          playing_year: season,
-        },
-      });
-    }
+  private async setGoalieRating(array: any[], season: string) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        playerRating: await this.getGoalieRating(item.player_id.id, season),
+      }))
+    );
+  }
+
+  private async getGoalieRating(playerId: number, season: string) {
+    return await this.goalieRatingsRepo.findOne({
+      select: {
+        id: true,
+        passing: true,
+        speed: true,
+        skating: true,
+      },
+      where: {
+        player_id: playerId,
+        playing_year: season,
+      },
+    });
+  }
+
+  private async getPlayerRating(playerId: number, season: string) {
+    return await this.playerRatingsRepo.findOne({
+      select: {
+        id: true,
+        c_rate: true,
+        l_rate: true,
+        r_rate: true,
+        ld_rate: true,
+        rd_rate: true,
+        skating: true,
+        speed: true,
+        passing: true,
+        shooting: true,
+        face_off: true,
+        forecheck: true,
+        assist_rating: true,
+        clear_crease: true,
+        shot_block: true,
+        pk: true,
+        physical: true,
+        rock: true,
+        intimidation: true,
+        game_fatigue: true,
+        shift_fatigue: true,
+      },
+      where: {
+        player_id: playerId,
+        playing_year: season,
+      },
+    });
   }
 
   private async setTeamInfo(array: any[]) {
