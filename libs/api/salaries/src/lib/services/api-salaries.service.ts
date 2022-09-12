@@ -30,27 +30,46 @@ export class ApiSalariesService {
     private goalieRatingsRepo: Repository<Goalie_Ratings_V2>
   ) {}
 
-  async getAllSalaries(season: string) {
-    const allSalaries = await this.repo.find({
+  async getAllPlayerSalaries(season: string) {
+    const allPlayersInSeason = await this.playersStatsRepo.find({
       select: {
         id: true,
-        season_2022: true,
-        season_2023: true,
-        season_2024: true,
-        season_2025: true,
-        player_id: true,
+        team_name: true,
+        player_id: {
+          id: true,
+        },
       },
       where: {
-        player_id: Not('1'),
+        player_id: {
+          isgoalie: false,
+        },
+        season_type: 'Regular',
+        playing_year: season,
       },
     });
 
-    const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
+    // const allSalaries = await this.repo.find({
+    //   select: {
+    //     id: true,
+    //     season_2022: true,
+    //     season_2023: true,
+    //     season_2024: true,
+    //     season_2025: true,
+    //     player_id: true,
+    //   },
+    //   where: {
+    //     player_id: Not('1'),
+    //   },
+    // });
 
-    const allSalariesWithTeam = await this.setTeam(
-      allSalariesWithPlayerInfo,
-      season
-    );
+    // const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
+
+    // console.log(allSalariesWithPlayerInfo[0]);
+
+    // const allSalariesWithTeam = await this.setTeam(
+    //   allSalariesWithPlayerInfo,
+    //   season
+    // );
 
     // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
     //   allSalariesWithTeam
@@ -61,7 +80,28 @@ export class ApiSalariesService {
     //   season
     // );
 
-    return allSalariesWithTeam;
+    return allPlayersInSeason;
+  }
+
+  async getAllGoaliesSalaries(season: string) {
+    const allPlayersInSeason = await this.goaliesStatsRepo.find({
+      select: {
+        id: true,
+        team_name: true,
+        player_id: {
+          id: true,
+        },
+      },
+      where: {
+        player_id: {
+          isgoalie: false,
+        },
+        season_type: 'Regular',
+        playing_year: season,
+      },
+    });
+
+    return allPlayersInSeason;
   }
 
   private async setPlayerRating(array: any[], season: string) {
