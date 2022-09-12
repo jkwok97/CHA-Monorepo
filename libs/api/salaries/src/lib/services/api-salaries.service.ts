@@ -46,27 +46,27 @@ export class ApiSalariesService {
 
     console.log(allSalariesWithPlayerInfo[0]);
 
-    // const allSalariesWithTeam = await this.setTeam(
-    //   allSalariesWithPlayerInfo,
-    //   season
-    // );
+    const allSalariesWithTeam = await this.setTeam(
+      allSalariesWithPlayerInfo,
+      season
+    );
 
-    // console.log(allSalariesWithTeam[0]);
+    console.log(allSalariesWithTeam[0]);
 
-    // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
-    //   allSalariesWithTeam
-    // );
+    const allSalariesWithTeamAndInfo = await this.setTeamInfo(
+      allSalariesWithTeam
+    );
 
-    // console.log(allSalariesWithTeamAndInfo[0]);
+    console.log(allSalariesWithTeamAndInfo[0]);
 
-    // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
-    //   allSalariesWithTeamAndInfo,
-    //   season
-    // );
+    const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
+      allSalariesWithTeamAndInfo,
+      season
+    );
 
-    // console.log(allSalariesWithTeamAndInfoAndRatings[0]);
+    console.log(allSalariesWithTeamAndInfoAndRatings[0]);
 
-    return allSalariesWithPlayerInfo;
+    return allSalariesWithTeamAndInfoAndRatings;
   }
 
   private async setPlayerRating(array: any[], season: string) {
@@ -74,8 +74,8 @@ export class ApiSalariesService {
       array.map(async (item) => ({
         ...item,
         playerRating: await this.getPlayerRating(
-          item.player.player_id,
-          item.player.isgoalie,
+          item.player?.player_id,
+          item.player?.isgoalie,
           season
         ),
       }))
@@ -207,6 +207,7 @@ export class ApiSalariesService {
   private async setPlayersInfo(array: Salaries_V2[]) {
     return await Promise.all(
       array.map(async (item: Salaries_V2) => ({
+        ...item,
         player: await this.getPlayerInfo(Number(item.player_id)),
       }))
     );
