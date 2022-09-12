@@ -9,7 +9,7 @@ import {
 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Not } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ApiSalariesService {
