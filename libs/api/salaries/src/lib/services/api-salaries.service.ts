@@ -105,7 +105,7 @@ export class ApiSalariesService {
       season
     );
 
-    return allSalariesForGoaliesInSeason;
+    return allSalariesAndRatingsForGoaliesInSeason;
   }
 
   private async setPlayersSalaries(array: any[]) {
@@ -137,7 +137,7 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerRating: await this.getPlayerRating(item.player_id.id, season),
+        ratings: await this.getPlayerRating(item.player_id.id, season),
       }))
     );
   }
@@ -146,7 +146,7 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerRating: await this.getGoalieRating(item.player_id.id, season),
+        ratings: await this.getGoalieRating(item.player_id.id, season),
       }))
     );
   }
