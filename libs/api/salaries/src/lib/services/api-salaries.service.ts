@@ -44,27 +44,29 @@ export class ApiSalariesService {
 
     const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
 
-    const allSalariesWithTeam = await this.setTeam(
-      allSalariesWithPlayerInfo,
-      season
-    );
+    console.log(allSalariesWithPlayerInfo[0]);
 
-    console.log(allSalariesWithTeam[0]);
+    // const allSalariesWithTeam = await this.setTeam(
+    //   allSalariesWithPlayerInfo,
+    //   season
+    // );
 
-    const allSalariesWithTeamAndInfo = await this.setTeamInfo(
-      allSalariesWithTeam
-    );
+    // console.log(allSalariesWithTeam[0]);
 
-    console.log(allSalariesWithTeamAndInfo[0]);
+    // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
+    //   allSalariesWithTeam
+    // );
 
-    const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
-      allSalariesWithTeamAndInfo,
-      season
-    );
+    // console.log(allSalariesWithTeamAndInfo[0]);
 
-    console.log(allSalariesWithTeamAndInfoAndRatings[0]);
+    // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
+    //   allSalariesWithTeamAndInfo,
+    //   season
+    // );
 
-    return allSalariesWithTeamAndInfoAndRatings;
+    // console.log(allSalariesWithTeamAndInfoAndRatings[0]);
+
+    return allSalariesWithPlayerInfo;
   }
 
   private async setPlayerRating(array: any[], season: string) {
