@@ -57,25 +57,10 @@ export class ApiSalariesService {
       season
     );
 
-    // const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
+    const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo =
+      await this.setTeamInfo(allSalariesAndRatingsForPlayersInSeason);
 
-    // console.log(allSalariesWithPlayerInfo[0]);
-
-    // const allSalariesWithTeam = await this.setTeam(
-    //   allSalariesWithPlayerInfo,
-    //   season
-    // );
-
-    // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
-    //   allSalariesWithTeam
-    // );
-
-    // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
-    //   allSalariesWithTeamAndInfo,
-    //   season
-    // );
-
-    return allSalariesAndRatingsForPlayersInSeason;
+    return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
   }
 
   async getAllGoaliesSalaries(season: string) {
@@ -105,7 +90,10 @@ export class ApiSalariesService {
       season
     );
 
-    return allSalariesAndRatingsForGoaliesInSeason;
+    const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo =
+      await this.setTeamInfo(allSalariesAndRatingsForGoaliesInSeason);
+
+    return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
   }
 
   private async setPlayersSalaries(array: any[]) {
@@ -202,7 +190,7 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        teamInfo: await this.getTeamInfo(item.team?.team_name),
+        teamInfo: await this.getTeamInfo(item.team_name),
       }))
     );
   }
@@ -223,78 +211,5 @@ export class ApiSalariesService {
     } else {
       return {};
     }
-  }
-
-  private async setTeam(array: any[], playingYear: string) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        team: await this.getTeam(
-          item.player_id,
-          playingYear,
-          item.player?.isgoalie
-        ),
-      }))
-    );
-  }
-
-  private async getTeam(
-    playerId: string,
-    playingYear: string,
-    isGoalie: boolean
-  ) {
-    if (isGoalie === true) {
-      return await this.goaliesStatsRepo.findOne({
-        select: {
-          id: true,
-          team_name: true,
-        },
-        where: {
-          player_id: {
-            id: Number(playerId),
-          },
-          season_type: 'Regular',
-          playing_year: playingYear,
-        },
-      });
-    } else if (isGoalie === false) {
-      return await this.playersStatsRepo.findOne({
-        select: {
-          id: true,
-          team_name: true,
-        },
-        where: {
-          player_id: {
-            id: Number(playerId),
-          },
-          season_type: 'Regular',
-          playing_year: playingYear,
-        },
-      });
-    }
-  }
-
-  private async setPlayersInfo(array: Salaries_V2[]) {
-    return await Promise.all(
-      array.map(async (item: Salaries_V2) => ({
-        ...item,
-        player: await this.getPlayerInfo(Number(item.player_id)),
-      }))
-    );
-  }
-
-  private async getPlayerInfo(playerId: number) {
-    return await this.playersRepo.findOne({
-      select: {
-        id: true,
-        firstname: true,
-        lastname: true,
-        nhl_id: true,
-        isgoalie: true,
-      },
-      where: {
-        id: playerId,
-      },
-    });
   }
 }
