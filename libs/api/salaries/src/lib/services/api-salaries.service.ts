@@ -44,27 +44,19 @@ export class ApiSalariesService {
 
     const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
 
-    console.log(allSalariesWithPlayerInfo[0]);
-
     const allSalariesWithTeam = await this.setTeam(
       allSalariesWithPlayerInfo,
       season
     );
 
-    console.log(allSalariesWithTeam[0]);
-
     const allSalariesWithTeamAndInfo = await this.setTeamInfo(
       allSalariesWithTeam
     );
-
-    console.log(allSalariesWithTeamAndInfo[0]);
 
     const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
       allSalariesWithTeamAndInfo,
       season
     );
-
-    console.log(allSalariesWithTeamAndInfoAndRatings[0]);
 
     return allSalariesWithTeamAndInfoAndRatings;
   }
@@ -214,17 +206,21 @@ export class ApiSalariesService {
   }
 
   private async getPlayerInfo(playerId: number) {
-    return await this.playersRepo.findOne({
-      select: {
-        id: true,
-        firstname: true,
-        lastname: true,
-        nhl_id: true,
-        isgoalie: true,
-      },
-      where: {
-        id: playerId,
-      },
-    });
+    if (playerId) {
+      return await this.playersRepo.findOne({
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+        where: {
+          id: playerId,
+        },
+      });
+    } else {
+      return {};
+    }
   }
 }
