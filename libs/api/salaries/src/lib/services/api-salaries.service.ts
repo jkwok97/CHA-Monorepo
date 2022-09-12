@@ -9,7 +9,7 @@ import {
 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Not } from 'typeorm';
 
 @Injectable()
 export class ApiSalariesService {
@@ -39,6 +39,9 @@ export class ApiSalariesService {
         season_2024: true,
         season_2025: true,
         player_id: true,
+      },
+      where: {
+        player_id: Not('1'),
       },
     });
 
