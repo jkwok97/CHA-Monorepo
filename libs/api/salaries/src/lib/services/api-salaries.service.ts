@@ -79,7 +79,7 @@ export class ApiSalariesService {
     isGoalie: boolean,
     season: string
   ) {
-    if (isGoalie) {
+    if (isGoalie === true && playerId) {
       return await this.goalieRatingsRepo.findOne({
         select: {
           id: true,
@@ -91,7 +91,7 @@ export class ApiSalariesService {
           player_id: Number(playerId),
         },
       });
-    } else {
+    } else if (isGoalie === false && playerId) {
       return await this.playerRatingsRepo.findOne({
         select: {
           id: true,
@@ -154,7 +154,7 @@ export class ApiSalariesService {
         team: await this.getTeam(
           item.player_id,
           playingYear,
-          item.player.isgoalie
+          item.player?.isgoalie
         ),
       }))
     );
@@ -165,7 +165,7 @@ export class ApiSalariesService {
     playingYear: string,
     isGoalie: boolean
   ) {
-    if (isGoalie) {
+    if (isGoalie === true) {
       return await this.goaliesStatsRepo.findOne({
         select: {
           id: true,
@@ -179,7 +179,7 @@ export class ApiSalariesService {
           playing_year: playingYear,
         },
       });
-    } else {
+    } else if (isGoalie === false) {
       return await this.playersStatsRepo.findOne({
         select: {
           id: true,
