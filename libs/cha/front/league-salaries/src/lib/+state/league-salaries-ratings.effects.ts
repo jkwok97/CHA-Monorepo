@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { LeagueDataFacade } from '@cha/domain/core';
 import { SalariesAndRatingsDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, catchError, of } from 'rxjs';
+import { withLatestFrom, exhaustMap, map, catchError, of } from 'rxjs';
 import { LeagueSalariesAndRatingsService } from '../services';
 import { LeagueSalariesAndRatingActions } from './league-salaries-ratings.actions';
 
@@ -9,15 +10,17 @@ import { LeagueSalariesAndRatingActions } from './league-salaries-ratings.action
 export class LeagueSalariesAndRatingsEffects {
   constructor(
     private actions$: Actions,
-    private leagueSalariesAndRatingsService: LeagueSalariesAndRatingsService
+    private leagueSalariesAndRatingsService: LeagueSalariesAndRatingsService,
+    private leagueDataFacade: LeagueDataFacade
   ) {}
 
   getPlayerSalaries$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LeagueSalariesAndRatingActions.getPlayerSalaries),
-      exhaustMap((action) =>
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
         this.leagueSalariesAndRatingsService
-          .getPlayerSalaries(action.season)
+          .getPlayerSalaries(data.current_year)
           .pipe(
             map((salaries: SalariesAndRatingsDto[]) =>
               LeagueSalariesAndRatingActions.getPlayerSalariesSuccess({
@@ -33,9 +36,10 @@ export class LeagueSalariesAndRatingsEffects {
   getGoalieSalaries$ = createEffect(() =>
     this.actions$.pipe(
       ofType(LeagueSalariesAndRatingActions.getGoaliesalaries),
-      exhaustMap((action) =>
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
         this.leagueSalariesAndRatingsService
-          .getGoaliesSalaries(action.season)
+          .getGoaliesSalaries(data.current_year)
           .pipe(
             map((salaries: SalariesAndRatingsDto[]) =>
               LeagueSalariesAndRatingActions.getGoaliesalariesSuccess({

@@ -7,7 +7,7 @@ import { LeagueSalariesAndRatingsSelectors } from './league-salaries-ratings.sel
 import { SalariesAndRatingsDto } from '@cha/shared/entities';
 
 @Injectable()
-export class LeagueTradesFacade {
+export class LeagueSalariesAndRatingsFacade {
   isLoading$: Observable<boolean> = this.store.select(
     LeagueSalariesAndRatingsSelectors.selectLoading
   );
@@ -22,15 +22,11 @@ export class LeagueTradesFacade {
 
   constructor(private store: Store<State>) {}
 
-  getPlayerSalaries(season: string) {
-    this.store.dispatch(
-      LeagueSalariesAndRatingActions.getPlayerSalaries({ season })
-    );
+  getPlayerSalaries() {
+    this.store.dispatch(LeagueSalariesAndRatingActions.getPlayerSalaries());
   }
 
-  getGoaliesSalaries(season: string) {
-    this.store.dispatch(
-      LeagueSalariesAndRatingActions.getGoaliesalaries({ season })
-    );
+  getGoaliesSalaries() {
+    this.store.dispatch(LeagueSalariesAndRatingActions.getGoaliesalaries());
   }
 }
