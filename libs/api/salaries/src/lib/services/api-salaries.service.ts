@@ -52,16 +52,16 @@ export class ApiSalariesService {
       season
     );
 
-    const allSalariesWithTeamAndInfo = await this.setTeamInfo(
-      allSalariesWithTeam
-    );
+    // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
+    //   allSalariesWithTeam
+    // );
 
     // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
     //   allSalariesWithTeamAndInfo,
     //   season
     // );
 
-    return allSalariesWithTeamAndInfo;
+    return allSalariesWithTeam;
   }
 
   private async setPlayerRating(array: any[], season: string) {
