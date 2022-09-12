@@ -47,21 +47,21 @@ export class ApiSalariesService {
 
     const allSalariesWithPlayerInfo = await this.setPlayersInfo(allSalaries);
 
-    // const allSalariesWithTeam = await this.setTeam(
-    //   allSalariesWithPlayerInfo,
-    //   season
-    // );
+    const allSalariesWithTeam = await this.setTeam(
+      allSalariesWithPlayerInfo,
+      season
+    );
 
-    // const allSalariesWithTeamAndInfo = await this.setTeamInfo(
-    //   allSalariesWithTeam
-    // );
+    const allSalariesWithTeamAndInfo = await this.setTeamInfo(
+      allSalariesWithTeam
+    );
 
-    // const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
-    //   allSalariesWithTeamAndInfo,
-    //   season
-    // );
+    const allSalariesWithTeamAndInfoAndRatings = await this.setPlayerRating(
+      allSalariesWithTeamAndInfo,
+      season
+    );
 
-    return allSalariesWithPlayerInfo;
+    return allSalariesWithTeamAndInfoAndRatings;
   }
 
   private async setPlayerRating(array: any[], season: string) {
@@ -131,23 +131,27 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        teamInfo: await this.getTeamInfo(item.team.team_name),
+        teamInfo: await this.getTeamInfo(item.team?.team_name),
       }))
     );
   }
 
   private async getTeamInfo(teamName: string) {
-    return await this.teamsRepo.findOne({
-      select: {
-        id: true,
-        city: true,
-        teamlogo: true,
-        nickname: true,
-      },
-      where: {
-        shortname: teamName,
-      },
-    });
+    if (teamName) {
+      return await this.teamsRepo.findOne({
+        select: {
+          id: true,
+          city: true,
+          teamlogo: true,
+          nickname: true,
+        },
+        where: {
+          shortname: teamName,
+        },
+      });
+    } else {
+      return {};
+    }
   }
 
   private async setTeam(array: any[], playingYear: string) {
