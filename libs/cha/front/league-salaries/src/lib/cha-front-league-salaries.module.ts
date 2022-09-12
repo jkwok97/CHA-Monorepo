@@ -12,6 +12,7 @@ import { TableModule } from 'primeng/table';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 
 import { reducer } from './+state/league-salaries-ratings.reducer';
 import { LeagueSalariesAndRatingsService } from './services';
@@ -33,6 +34,7 @@ import { LeagueSalariesComponent } from './containers';
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,
+    BladeButtonSelectComponent,
     StoreModule.forFeature('league-salaries-ratings', reducer),
     EffectsModule.forFeature([LeagueSalariesAndRatingsEffects]),
   ],

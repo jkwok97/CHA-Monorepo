@@ -16,6 +16,11 @@ export class LeagueSalariesComponent implements OnInit {
   season$: Observable<string | undefined>;
   salaries$: Observable<SalariesAndRatingsDto[]>;
 
+  selectOptions = [
+    { label: 'Players', value: 'players' },
+    { label: 'Goalies', value: 'goalies' },
+  ];
+
   constructor(
     private leagueSalariesRatingsFacade: LeagueSalariesAndRatingsFacade,
     private leagueDataFacade: LeagueDataFacade
@@ -28,5 +33,18 @@ export class LeagueSalariesComponent implements OnInit {
 
   ngOnInit(): void {
     this.leagueSalariesRatingsFacade.getPlayerSalaries();
+  }
+
+  onOptionChanged(option: string) {
+    switch (option) {
+      case 'players':
+        this.leagueSalariesRatingsFacade.getPlayerSalaries();
+        break;
+      case 'goalies':
+        this.leagueSalariesRatingsFacade.getGoaliesSalaries();
+        break;
+      default:
+        return;
+    }
   }
 }

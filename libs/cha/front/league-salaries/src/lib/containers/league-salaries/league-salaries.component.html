@@ -10,6 +10,16 @@
       <div class="text-lg text-center" style="font-weight: 100">
         {{ season$ | async }} Season
       </div>
+      <div
+        class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
+      >
+        <blade-button-select
+          class="flex justify-content-center"
+          [options]="selectOptions"
+          (optionChanged)="onOptionChanged($event)"
+        ></blade-button-select>
+
+      </div>
     </div>
 
     <blade-divider></blade-divider>
