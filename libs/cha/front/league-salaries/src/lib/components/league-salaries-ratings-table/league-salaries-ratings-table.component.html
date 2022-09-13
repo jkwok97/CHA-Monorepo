@@ -28,7 +28,7 @@
       </span>
     </div>
   </ng-template>
-  <ng-template pTemplate="header" let-salary>
+  <ng-template pTemplate="header">
     <tr>
       <th style="width: 3rem"></th>
       <th pSortableColumn="teamName">
@@ -36,6 +36,12 @@
       </th>
       <th pSortableColumn="player_id.lastname">
         Player <p-sortIcon field="player_id.lastname"></p-sortIcon>
+      </th>
+      <th pSortableColumn="player_id.isdefense" *ngIf="type !== 'goalies'">
+        Defense <p-sortIcon field="player_id.isdefense"></p-sortIcon>
+      </th>
+      <th pSortableColumn="player_id.isforward" *ngIf="type !== 'goalies'">
+        Forward <p-sortIcon field="player_id.isforward"></p-sortIcon>
       </th>
       <th pSortableColumn="salaries.season_2022">
         21-22 <p-sortIcon field="salaries.season_2022"></p-sortIcon>
@@ -72,6 +78,26 @@
         </div>
       </td>
       <td>{{ salary.playerName }}</td>
+      <td *ngIf="type !== 'goalies'">
+        <i
+          class="pi pi-check-circle text-green-500"
+          *ngIf="salary.player_id.isdefense"
+        ></i>
+        <i
+          class="pi pi-times-circle text-red-500"
+          *ngIf="!salary.player_id.isdefense"
+        ></i>
+      </td>
+      <td *ngIf="type !== 'goalies'">
+        <i
+          class="pi pi-check-circle text-green-500"
+          *ngIf="salary.player_id.isforward"
+        ></i>
+        <i
+          class="pi pi-times-circle text-red-500"
+          *ngIf="!salary.player_id.isforward"
+        ></i>
+      </td>
       <td>{{ salary.salaries?.season_2022 }}</td>
       <td>{{ salary.salaries?.season_2023 }}</td>
       <td>{{ salary.salaries?.season_2024 }}</td>
@@ -94,7 +120,9 @@
             *ngIf="type === 'players'; then playerBody; else goalieBody"
           ></ng-container>
           <ng-template #playerBody>
-            <div class="flex column-gap-2 h-full justify-content-evenly p-3 flex-wrap row-gap-3">
+            <div
+              class="flex column-gap-2 h-full justify-content-evenly p-3 flex-wrap row-gap-3"
+            >
               <cha-front-league-salaries-ratings-badge
                 [title]="'C'"
                 [rating]="salary.ratings.c_rate"
