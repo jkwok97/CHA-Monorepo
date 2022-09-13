@@ -13,7 +13,6 @@ export class ApiAllTimeTeamStatsService {
   async getAllTimeTeamStatsBySeasonByType(
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<Team_Stats_V2[]> {
-    console.log(seasonType);
     return await this.repo.find({
       relations: ['team_id'],
       select: {

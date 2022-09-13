@@ -50,11 +50,10 @@ export class TeamStatsController {
     return stats;
   }
 
-  @Get('/all-time/:seasonType')
+  @Get('/all/history/:seasonType')
   async getAllTimeTeamStatsBySeasonByType(
     @Param() param
   ): Promise<Team_Stats_V2[]> {
-    console.log(param.seasonType);
     const stats =
       await this.allTimeTeamsStatsService.getAllTimeTeamStatsBySeasonByType(
         param.seasonType
