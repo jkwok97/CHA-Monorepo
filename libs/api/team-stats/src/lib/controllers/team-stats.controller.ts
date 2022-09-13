@@ -50,7 +50,7 @@ export class TeamStatsController {
     return stats;
   }
 
-  @Get('/all/history/:seasonType')
+  @Get('/history/season/:seasonType')
   async getAllTimeTeamStatsBySeasonByType(
     @Param() param
   ): Promise<Team_Stats_V2[]> {
