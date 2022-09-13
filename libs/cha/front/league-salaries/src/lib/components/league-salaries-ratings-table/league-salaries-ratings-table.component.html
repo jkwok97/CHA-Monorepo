@@ -1,5 +1,6 @@
 <p-table
-  [value]="salaries"
+  #dt
+  [value]="salariesForTable"
   dataKey="id"
   responsiveLayout="scroll"
   [rows]="rows"
@@ -8,27 +9,45 @@
   [paginator]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [totalRecords]="totalRecords"
+  styleClass="p-datatable-sm p-datatable-striped"
+  sortField="player_id.lastname"
+  sortMode="single"
+  [filterDelay]="0"
+  [globalFilterFields]="['teamName', 'playerName']"
 >
-  <ng-template pTemplate="header">
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Team / Player"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-salary>
     <tr>
       <th style="width: 3rem"></th>
-      <th pSortableColumn="team">
-        Team <p-sortIcon field="team"></p-sortIcon>
+      <th pSortableColumn="teamName">
+        Team <p-sortIcon field="teamName"></p-sortIcon>
       </th>
-      <th pSortableColumn="player">
-        Player <p-sortIcon field="player"></p-sortIcon>
+      <th pSortableColumn="player_id.lastname">
+        Player <p-sortIcon field="player_id.lastname"></p-sortIcon>
       </th>
-      <th pSortableColumn="21-22">
-        21-22 <p-sortIcon field="21-22"></p-sortIcon>
+      <th pSortableColumn="salaries.season_2022">
+        21-22 <p-sortIcon field="salaries.season_2022"></p-sortIcon>
       </th>
-      <th pSortableColumn="22-23">
-        22-23 <p-sortIcon field="22-23"></p-sortIcon>
+      <th pSortableColumn="salaries.season_2023">
+        22-23 <p-sortIcon field="salaries.season_2023"></p-sortIcon>
       </th>
-      <th pSortableColumn="23-24">
-        23-24 <p-sortIcon field="23-24"></p-sortIcon>
+      <th pSortableColumn="salaries.season_2024">
+        23-24 <p-sortIcon field="salaries.season_2024"></p-sortIcon>
       </th>
-      <th pSortableColumn="24-25">
-        24-25 <p-sortIcon field="24-25"></p-sortIcon>
+      <th pSortableColumn="salaries.season_2025">
+        24-25 <p-sortIcon field="salaries.season_2025"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
@@ -46,13 +65,13 @@
       </td>
       <td>
         <div class="flex align-items-center column-gap-2">
-          <img [src]="getString(salary.teamInfo.teamlogo)" height="30px" />
+          <img [src]="getString(salary.teamLogo)" height="30px" />
           <div *ngIf="!isMobile">
-            {{ salary.teamInfo.city }} {{ salary.teamInfo.nickname }}
+            {{ salary.teamName }}
           </div>
         </div>
       </td>
-      <td>{{ salary.player_id.firstname }} {{ salary.player_id.lastname }}</td>
+      <td>{{ salary.playerName }}</td>
       <td>{{ salary.salaries?.season_2022 }}</td>
       <td>{{ salary.salaries?.season_2023 }}</td>
       <td>{{ salary.salaries?.season_2024 }}</td>
@@ -63,34 +82,117 @@
     <tr>
       <td colspan="12" class="pl-3 pt-0 pb-0 pr-3">
         <ng-container
-          *ngIf="type === 'players'; then playerBody; else goalieBody"
+          *ngIf="!salary.ratings; then emptyMessage; else showRatings"
         ></ng-container>
-        <ng-template #playerBody>
-          <div class="flex column-gap-2 h-full">
-            <cha-front-league-salaries-ratings-badge
-              [title]="'C'"
-              [rating]="salary.ratings.c_rate"
-            ></cha-front-league-salaries-ratings-badge>
-            <cha-front-league-salaries-ratings-badge
-              [title]="'LW'"
-              [rating]="salary.ratings.l_rate"
-            ></cha-front-league-salaries-ratings-badge>
-            <cha-front-league-salaries-ratings-badge
-              [title]="'RW'"
-              [rating]="salary.ratings.r_rate"
-            ></cha-front-league-salaries-ratings-badge>
-            <cha-front-league-salaries-ratings-badge
-              [title]="'LD'"
-              [rating]="salary.ratings.ld_rate"
-            ></cha-front-league-salaries-ratings-badge>
-            <cha-front-league-salaries-ratings-badge
-              [title]="'RD'"
-              [rating]="salary.ratings.rd_rate"
-            ></cha-front-league-salaries-ratings-badge>
+        <ng-template #emptyMessage>
+          <div class="p-3 text-lg text-center font-light">
+            There are no ratings for this player.
           </div>
         </ng-template>
-        <ng-template #goalieBody>
-          <div class="p-1"></div>
+        <ng-template #showRatings>
+          <ng-container
+            *ngIf="type === 'players'; then playerBody; else goalieBody"
+          ></ng-container>
+          <ng-template #playerBody>
+            <div class="flex column-gap-2 h-full justify-content-evenly p-3 flex-wrap row-gap-3">
+              <cha-front-league-salaries-ratings-badge
+                [title]="'C'"
+                [rating]="salary.ratings.c_rate"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'LW'"
+                [rating]="salary.ratings.l_rate"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'RW'"
+                [rating]="salary.ratings.r_rate"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'LD'"
+                [rating]="salary.ratings.ld_rate"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'RD'"
+                [rating]="salary.ratings.rd_rate"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Skating'"
+                [rating]="salary.ratings.skating"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Speed'"
+                [rating]="salary.ratings.speed"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Passing'"
+                [rating]="salary.ratings.passing"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Shooting'"
+                [rating]="salary.ratings.shooting"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'FO'"
+                [rating]="salary.ratings.face_off"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Forecheck'"
+                [rating]="salary.ratings.forecheck"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Assist'"
+                [rating]="salary.ratings.assist_rating"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Clear Crease'"
+                [rating]="salary.ratings.clear_crease"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Shot Block'"
+                [rating]="salary.ratings.shot_block"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'PK'"
+                [rating]="salary.ratings.pk"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Physical'"
+                [rating]="salary.ratings.physical"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Rock'"
+                [rating]="salary.ratings.rock"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Intimidation'"
+                [rating]="salary.ratings.intimidation"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'GF'"
+                [rating]="salary.ratings.game_fatigue"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'SF'"
+                [rating]="salary.ratings.shift_fatigue"
+              ></cha-front-league-salaries-ratings-badge>
+            </div>
+          </ng-template>
+          <ng-template #goalieBody>
+            <div class="flex column-gap-2 h-full justify-content-evenly p-3">
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Passing'"
+                [rating]="salary.ratings.passing"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Skating'"
+                [rating]="salary.ratings.skating"
+              ></cha-front-league-salaries-ratings-badge>
+              <cha-front-league-salaries-ratings-badge
+                [title]="'Speed'"
+                [rating]="salary.ratings.speed"
+              ></cha-front-league-salaries-ratings-badge>
+            </div>
+          </ng-template>
         </ng-template>
       </td>
     </tr>
