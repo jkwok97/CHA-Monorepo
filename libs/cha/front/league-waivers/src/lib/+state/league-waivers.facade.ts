@@ -7,7 +7,7 @@ import { LeagueWaiversSelectors } from './league-waivers.selectors';
 import { WaiversDto } from '@cha/shared/entities';
 
 @Injectable()
-export class LeagueSalariesAndRatingsFacade {
+export class LeagueWaiversFacade {
   isLoading$: Observable<boolean> = this.store.select(
     LeagueWaiversSelectors.selectLoading
   );
