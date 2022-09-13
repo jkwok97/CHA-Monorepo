@@ -59,6 +59,8 @@ export class TeamStatsController {
         param.seasonType
       );
 
+    console.log(param.seasonType);
+
     if (!stats || stats.length < 1) {
       throw new NotFoundException('Team Stats not found');
     }
