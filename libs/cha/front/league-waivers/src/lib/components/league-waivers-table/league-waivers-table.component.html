@@ -1,0 +1,28 @@
+<p-table
+  #dt
+  [value]="waiversForTable"
+  dataKey="id"
+  responsiveLayout="scroll"
+  styleClass="p-datatable-sm p-datatable-striped w-max"
+  sortField="waiver.priority_number"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Priority No.</th>
+      <th>Team</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-waiver let-expanded="expanded">
+    <tr>
+      <td>{{ waiver.priority_number }}</td>
+      <td>
+        <div class="flex align-items-center column-gap-2">
+          <img [src]="getString(waiver.teamLogo)" height="30px" />
+          <div>
+            {{ waiver.teamName }}
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
