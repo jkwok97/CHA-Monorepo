@@ -1,7 +1,7 @@
 import { Team_Stats_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, MoreThan } from 'typeorm';
 
 @Injectable()
 export class ApiAllTimeTeamStatsService {
@@ -13,8 +13,7 @@ export class ApiAllTimeTeamStatsService {
   async getAllTimeTeamStatsBySeasonByType(
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<Team_Stats_V2[]> {
-    console.log(seasonType)
-    return await this.repo.find({
+    const allTimeStats = await this.repo.find({
       relations: ['team_id'],
       select: {
         team_id: {
@@ -49,19 +48,56 @@ export class ApiAllTimeTeamStatsService {
         div_loss: true,
         div_tie: true,
         div_win: true,
-        shots_for: true,
-        shots_against: true,
         sh_goals: true,
         playing_year: true,
         season_type: true,
         shut_outs: true,
+        face_off_won: true,
+        face_off_lost: true,
+        corner_won: true,
+        corner_lost: true,
+        pass_complete: true,
+        pass_incomplete: true,
       },
       where: {
         season_type: seasonType,
+        games_played: MoreThan(0),
       },
       order: {
         points: 'DESC',
       },
     });
+
+    const allTimeStatsConverted = await this.convertStats(allTimeStats);
+
+    return allTimeStatsConverted;
+  }
+
+  private async convertStats(array: Team_Stats_V2[]) {
+    return await Promise.all(
+      array.map((stat: Team_Stats_V2) => ({
+        ...stat,
+        games_played: Number(stat.games_played),
+        wins: Number(stat.wins),
+        loss: Number(stat.loss),
+        ties: Number(stat.ties),
+        points: Number(stat.points),
+        goals_for: Number(stat.goals_for),
+        goals_against: Number(stat.goals_against),
+        pp_goals: Number(stat.pp_goals),
+        pp_attempts: Number(stat.pp_attempts),
+        pk_goals: Number(stat.pk_goals),
+        pk_attempts: Number(stat.pk_attempts),
+        sh_goals: Number(stat.sh_goals),
+        penalty_minutes: Number(stat.penalty_minutes),
+        face_off_won: Number(stat.face_off_won),
+        face_off_lost: Number(stat.face_off_lost),
+        corner_won: Number(stat.corner_won),
+        corner_lost: Number(stat.corner_lost),
+        pass_complete: Number(stat.pass_complete),
+        pass_incomplete: Number(stat.pass_incomplete),
+        shut_outs: Number(stat.shut_outs),
+      }))
+    );
   }
 }
