@@ -1,10 +1,13 @@
 import { Team_Stats_V2 } from '@api/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { ApiTeamStatsService } from '../services';
+import { ApiAllTimeTeamStatsService, ApiTeamStatsService } from '../services';
 
 @Controller('team-stats')
 export class TeamStatsController {
-  constructor(private teamsStatsService: ApiTeamStatsService) {}
+  constructor(
+    private teamsStatsService: ApiTeamStatsService,
+    private allTimeTeamsStatsService: ApiAllTimeTeamStatsService
+  ) {}
 
   @Get('/:season/:seasonType')
   async getTeamStatsBySeasonByType(@Param() param): Promise<Team_Stats_V2[]> {
@@ -40,6 +43,21 @@ export class TeamStatsController {
       param.season,
       param.seasonType
     );
+
+    if (!stats || stats.length < 1) {
+      throw new NotFoundException('Team Stats not found');
+    }
+    return stats;
+  }
+
+  @Get('/all-time/:seasonType')
+  async getAllTimeTeamStatsBySeasonByType(
+    @Param() param
+  ): Promise<Team_Stats_V2[]> {
+    const stats =
+      await this.allTimeTeamsStatsService.getAllTimeTeamStatsBySeasonByType(
+        param.seasonType
+      );
 
     if (!stats || stats.length < 1) {
       throw new NotFoundException('Team Stats not found');
