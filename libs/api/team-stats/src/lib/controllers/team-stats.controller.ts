@@ -54,6 +54,7 @@ export class TeamStatsController {
   async getAllTimeTeamStatsBySeasonByType(
     @Param() param
   ): Promise<Team_Stats_V2[]> {
+    console.log(param.seasonType);
     const stats =
       await this.allTimeTeamsStatsService.getAllTimeTeamStatsBySeasonByType(
         param.seasonType
