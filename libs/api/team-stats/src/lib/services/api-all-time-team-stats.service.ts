@@ -1,8 +1,5 @@
 import { Team_Stats_V2 } from '@api/entities';
-import {
-  StatTeamsHistoryDto,
-  StatTeamsHistoryRawDto,
-} from '@cha/shared/entities';
+import { StatTeamsHistoryDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThan, DataSource } from 'typeorm';
@@ -60,14 +57,14 @@ export class ApiAllTimeTeamStatsService {
       },
     });
 
-    const allTimeStatsConverted = await this.convertStats(allTimeStats);
+    const allTimeStatsConverted = await this.convertStats(allTimeStats, false);
 
     return allTimeStatsConverted;
   }
 
   async getAllTimeTeamStatsSummedBySeasonByType(
     seasonType: 'Regular' | 'Playoffs'
-  ): Promise<StatTeamsHistoryRawDto[]> {
+  ): Promise<StatTeamsHistoryDto[]> {
     const result = await this.dataSource.query(
       ` select
       a.team_id as team_id,
@@ -108,15 +105,14 @@ export class ApiAllTimeTeamStatsService {
       order by points DESC`
     );
 
-    const allTimeStatsConverted = await this.convertStats(result);
+    const allTimeStatsConverted = await this.convertStats(result, true);
 
     return allTimeStatsConverted;
   }
 
-  private async convertStats(array: any[]) {
+  private async convertStats(array: any[], raw: boolean) {
     return await Promise.all(
       array.map((stat: any) => ({
-        ...stat,
         goalsForPerGame: Number(
           (stat.goals_for / stat.games_played).toFixed(2)
         ),
@@ -147,7 +143,18 @@ export class ApiAllTimeTeamStatsService {
         pimPerGame: Number(
           (stat.penalty_minutes / stat.games_played).toFixed(1)
         ),
-        team_name: `${stat.team_id.city} ${stat.team_id.nickname}`,
+        team_name: raw
+          ? `${stat.city} ${stat.nickname}`
+          : `${stat.team_id.city} ${stat.team_id.nickname}`,
+        team_id: !raw
+          ? stat.team_id
+          : {
+              id: stat.team_id,
+              city: stat.city,
+              teamlogo: stat.teamlogo,
+              shortname: stat.shortname,
+              nickname: stat.nickname,
+            },
         games_played: Number(stat.games_played),
         wins: Number(stat.wins),
         loss: Number(stat.loss),
@@ -170,6 +177,8 @@ export class ApiAllTimeTeamStatsService {
         pass_complete: Number(stat.pass_complete),
         pass_incomplete: Number(stat.pass_incomplete),
         shut_outs: Number(stat.shut_outs),
+        season_type: stat.season_type,
+        playing_year: stat.playing_year,
       }))
     );
   }
