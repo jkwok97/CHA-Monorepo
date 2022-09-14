@@ -1,5 +1,8 @@
 import { Team_Stats_V2 } from '@api/entities';
-import { StatTeamsHistoryDto } from '@cha/shared/entities';
+import {
+  StatTeamsHistoryDto,
+  StatTeamsHistoryRawDto,
+} from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiAllTimeTeamStatsService, ApiTeamStatsService } from '../services';
 
@@ -69,7 +72,7 @@ export class TeamStatsController {
   @Get('/history/all-time/:seasonType')
   async getAllTimeTeamStatsSummedBySeasonByType(
     @Param() param
-  ): Promise<StatTeamsHistoryDto[]> {
+  ): Promise<StatTeamsHistoryRawDto[]> {
     const stats =
       await this.allTimeTeamsStatsService.getAllTimeTeamStatsSummedBySeasonByType(
         param.seasonType

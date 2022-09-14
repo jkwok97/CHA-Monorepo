@@ -1,5 +1,8 @@
 import { Team_Stats_V2 } from '@api/entities';
-import { StatTeamsHistoryDto } from '@cha/shared/entities';
+import {
+  StatTeamsHistoryDto,
+  StatTeamsHistoryRawDto,
+} from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThan, DataSource } from 'typeorm';
@@ -64,7 +67,7 @@ export class ApiAllTimeTeamStatsService {
 
   async getAllTimeTeamStatsSummedBySeasonByType(
     seasonType: 'Regular' | 'Playoffs'
-  ): Promise<StatTeamsHistoryDto[]> {
+  ): Promise<StatTeamsHistoryRawDto[]> {
     const result = await this.dataSource.query(
       ` select
       a.team_id as team_id,
@@ -110,9 +113,9 @@ export class ApiAllTimeTeamStatsService {
     return allTimeStatsConverted;
   }
 
-  private async convertStats(array: Team_Stats_V2[]) {
+  private async convertStats(array: any[]) {
     return await Promise.all(
-      array.map((stat: Team_Stats_V2) => ({
+      array.map((stat: any) => ({
         ...stat,
         goalsForPerGame: Number(
           (stat.goals_for / stat.games_played).toFixed(2)
@@ -131,24 +134,19 @@ export class ApiAllTimeTeamStatsService {
         ),
         foPct: Number(
           (
-            ((stat.face_off_won + stat.face_off_lost - stat.face_off_lost) /
-              (stat.face_off_won + stat.face_off_lost)) *
+            (stat.face_off_won / (stat.face_off_won + stat.face_off_lost)) *
             100
           ).toFixed(1)
         ),
         passPct: Number(
           (
-            ((stat.pass_complete +
-              stat.pass_incomplete -
-              stat.pass_incomplete) /
-              (stat.pass_complete + stat.pass_incomplete)) *
+            (stat.pass_complete / (stat.pass_complete + stat.pass_incomplete)) *
             100
           ).toFixed(1)
         ),
         cornerPct: Number(
           (
-            ((stat.corner_lost + stat.corner_won - stat.corner_lost) /
-              (stat.corner_lost + stat.corner_won)) *
+            (stat.corner_won / (stat.corner_lost + stat.corner_won)) *
             100
           ).toFixed(1)
         ),
