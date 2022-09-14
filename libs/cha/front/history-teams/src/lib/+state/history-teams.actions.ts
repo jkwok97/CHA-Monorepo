@@ -13,10 +13,23 @@ const getTeamsStatsBySeasonSuccess = createAction(
   props<{ stats: StatTeamsHistoryDto[] }>()
 );
 
+const getTeamsStatsBySeasonSummed = createAction(
+  `${NAMESPACE} Get Teams Stats By Season Summed`,
+  props<{ seasonType: string }>()
+);
+
+const getTeamsStatsBySeasonSummedSuccess = createAction(
+  `${NAMESPACE} Get Teams Stats By Season Summed Success`,
+  props<{ stats: StatTeamsHistoryDto[] }>()
+);
+
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const HistoryTeamsActions = {
   getTeamsStatsBySeason,
   getTeamsStatsBySeasonSuccess,
+  getTeamsStatsBySeasonSummed,
+  getTeamsStatsBySeasonSummedSuccess,
   error,
 };

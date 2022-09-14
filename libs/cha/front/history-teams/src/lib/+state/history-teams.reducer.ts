@@ -17,18 +17,26 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(HistoryTeamsActions.getTeamsStatsBySeason, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-  })),
+  on(
+    HistoryTeamsActions.getTeamsStatsBySeason,
+    HistoryTeamsActions.getTeamsStatsBySeasonSummed,
+    (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+    })
+  ),
 
-  on(HistoryTeamsActions.getTeamsStatsBySeasonSuccess, (state, action) => ({
-    ...state,
-    stats: action.stats,
-    loading: false,
-    loaded: true,
-  })),
+  on(
+    HistoryTeamsActions.getTeamsStatsBySeasonSuccess,
+    HistoryTeamsActions.getTeamsStatsBySeasonSummedSuccess,
+    (state, action) => ({
+      ...state,
+      stats: action.stats,
+      loading: false,
+      loaded: true,
+    })
+  ),
 
   on(HistoryTeamsActions.error, (state) => initialState)
 );

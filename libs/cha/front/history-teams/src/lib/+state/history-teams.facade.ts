@@ -27,4 +27,10 @@ export class HistoryTeamsFacade {
       HistoryTeamsActions.getTeamsStatsBySeason({ seasonType })
     );
   }
+
+  getAllTimeTeamsStatSummedBySeason(seasonType: string) {
+    this.store.dispatch(
+      HistoryTeamsActions.getTeamsStatsBySeasonSummed({ seasonType })
+    );
+  }
 }

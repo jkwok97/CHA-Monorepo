@@ -34,6 +34,7 @@
         <ng-container *ngIf="allStats$ | async as allStats">
           <cha-front-history-teams-table
             [stats]="allStats"
+            [statType]="statType"
           ></cha-front-history-teams-table>
         </ng-container>
       </blade-card-body>

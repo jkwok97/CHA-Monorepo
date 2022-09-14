@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { StatTeamsHistoryDto } from '@cha/shared/entities';
@@ -14,8 +16,9 @@ import { Table } from 'primeng/table';
   styleUrls: ['./history-teams-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HistoryTeamsTableComponent implements OnInit {
+export class HistoryTeamsTableComponent implements OnInit, OnChanges {
   @Input() stats!: StatTeamsHistoryDto[];
+  @Input() statType!: string;
 
   @ViewChild('dt') dt: Table | undefined;
 
@@ -52,6 +55,11 @@ export class HistoryTeamsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.playerTableColumns[0].visible =
+      changes['statType'].currentValue === 'season';
   }
 
   mapItems(stats: StatTeamsHistoryDto[]) {

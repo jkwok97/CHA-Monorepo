@@ -16,4 +16,10 @@ export class HistoryTeamsService {
       .get(`${this.apiUrl}/team-stats/history/season/${seasonType}`)
       .pipe(map((result: any) => result));
   }
+
+  getAllTimeTeamsStatsBySeasonTypeSummed(seasonType: string) {
+    return this._http
+      .get(`${this.apiUrl}/team-stats/history/all-time/${seasonType}`)
+      .pipe(map((result: any) => result));
+  }
 }

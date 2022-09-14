@@ -15,13 +15,30 @@ export class HistoryTeamsEffects {
   getAllTimeTeamsStats$ = createEffect(() =>
     this.actions$.pipe(
       ofType(HistoryTeamsActions.getTeamsStatsBySeason),
-
       exhaustMap((action) =>
         this.historyTeamsService
           .getAllTimeTeamsStatsBySeasonType(action.seasonType)
           .pipe(
             map((stats: StatTeamsHistoryDto[]) =>
               HistoryTeamsActions.getTeamsStatsBySeasonSuccess({
+                stats,
+              })
+            ),
+            catchError(() => of(HistoryTeamsActions.error()))
+          )
+      )
+    )
+  );
+
+  getAllTimeTeamsStatsSummed$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HistoryTeamsActions.getTeamsStatsBySeasonSummed),
+      exhaustMap((action) =>
+        this.historyTeamsService
+          .getAllTimeTeamsStatsBySeasonTypeSummed(action.seasonType)
+          .pipe(
+            map((stats: StatTeamsHistoryDto[]) =>
+              HistoryTeamsActions.getTeamsStatsBySeasonSummedSuccess({
                 stats,
               })
             ),

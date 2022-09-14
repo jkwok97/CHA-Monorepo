@@ -16,6 +16,7 @@ export class HistoryTeamsComponent implements OnInit {
   allStats$: Observable<StatTeamsHistoryDto[]>;
 
   seasonOption = 'Regular';
+  statType = 'season';
 
   selectOptions = [
     { label: 'Per Season', value: 'season' },
@@ -56,9 +57,17 @@ export class HistoryTeamsComponent implements OnInit {
   }
 
   onOptionChanged(option: string) {
+    console.log(option);
     switch (option) {
       case 'season':
+        this.statType = option;
         this.historyTeamsFacade.getAllTimeTeamsStatBySeason(this.seasonOption);
+        break;
+      case 'all':
+        this.statType = option;
+        this.historyTeamsFacade.getAllTimeTeamsStatSummedBySeason(
+          this.seasonOption
+        );
         break;
       default:
         return;
