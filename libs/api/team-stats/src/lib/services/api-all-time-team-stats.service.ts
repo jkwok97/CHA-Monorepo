@@ -102,7 +102,7 @@ export class ApiAllTimeTeamStatsService {
       on c.id = a.team_id
       where a.season_type = '${seasonType}'
       group by a.team_id, a.season_type, c.city, c.nickname, c.shortname, c.teamlogo, c.isactive
-      order by points`
+      order by points DESC`
     );
 
     return result;
