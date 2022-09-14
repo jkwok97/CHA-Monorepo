@@ -112,41 +112,45 @@ export class ApiAllTimeTeamStatsService {
 
   private async convertStats(array: any[], raw: boolean) {
     return await Promise.all(
-      array.map((stat: any) => ({
-        goalsForPerGame: Number(
+      array.map(async (stat: any) => ({
+        goalsForPerGame: await Number(
           (stat.goals_for / stat.games_played).toFixed(2)
         ),
-        goalsAgainstPerGame: Number(
+        goalsAgainstPerGame: await Number(
           (stat.goals_against / stat.games_played).toFixed(2)
         ),
-        goalDiff: stat.goals_for - stat.goals_against,
-        winPct: Number(((stat.wins / stat.games_played) * 100).toFixed(1)),
-        ppPct: Number(((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1)),
-        pkPct: Number(
+        goalDiff: (await stat.goals_for) - stat.goals_against,
+        winPct: await Number(
+          ((stat.wins / stat.games_played) * 100).toFixed(1)
+        ),
+        ppPct: await Number(
+          ((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1)
+        ),
+        pkPct: await Number(
           (
             ((stat.pk_attempts - stat.pk_goals) / stat.pk_attempts) *
             100
           ).toFixed(1)
         ),
-        foPct: Number(
+        foPct: await Number(
           (
             (stat.face_off_won / (stat.face_off_won + stat.face_off_lost)) *
             100
           ).toFixed(1)
         ),
-        passPct: Number(
+        passPct: await Number(
           (
             (stat.pass_complete / (stat.pass_complete + stat.pass_incomplete)) *
             100
           ).toFixed(1)
         ),
-        cornerPct: Number(
+        cornerPct: await Number(
           (
             (stat.corner_won / (stat.corner_lost + stat.corner_won)) *
             100
           ).toFixed(1)
         ),
-        pimPerGame: Number(
+        pimPerGame: await Number(
           (stat.penalty_minutes / stat.games_played).toFixed(1)
         ),
         team_name: raw
