@@ -7,3 +7,4 @@ export * from './stat-team-all.dto';
 export * from './stat-player-all.dto';
 export * from './stat-goalie-all.dto';
 export * from './stat-team-playoffs.dto';
+export * from './stat-teams-history';

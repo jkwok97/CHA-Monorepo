@@ -28,7 +28,6 @@ export class ApiAllTimeTeamStatsService {
         wins: true,
         loss: true,
         ties: true,
-        long_win_streak: true,
         penalty_minutes: true,
         goals_for: true,
         goals_against: true,
