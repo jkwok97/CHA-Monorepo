@@ -112,45 +112,32 @@ export class ApiAllTimeTeamStatsService {
 
   private async convertStats(array: any[], raw: boolean) {
     return await Promise.all(
-      array.map(async (stat: any) => ({
-        goalsForPerGame: await Number(
+      array.map((stat: any) => ({
+        goalsForPerGame: Number(
           (stat.goals_for / stat.games_played).toFixed(2)
         ),
-        goalsAgainstPerGame: await Number(
+        goalsAgainstPerGame: Number(
           (stat.goals_against / stat.games_played).toFixed(2)
         ),
-        goalDiff: (await stat.goals_for) - stat.goals_against,
-        winPct: await Number(
-          ((stat.wins / stat.games_played) * 100).toFixed(1)
-        ),
-        ppPct: await Number(
-          ((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1)
-        ),
-        pkPct: await Number(
+        goalDiff: stat.goals_for - stat.goals_against,
+        winPct: Number(((stat.wins / stat.games_played) * 100).toFixed(1)),
+        ppPct: Number(((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1)),
+        pkPct: Number(
           (
             ((stat.pk_attempts - stat.pk_goals) / stat.pk_attempts) *
             100
           ).toFixed(1)
         ),
-        foPct: await Number(
-          (
-            (stat.face_off_won / (stat.face_off_won + stat.face_off_lost)) *
-            100
-          ).toFixed(1)
+        foPct: Number(
+          this.getPct(stat.face_off_won, stat.face_off_lost).toFixed(1)
         ),
-        passPct: await Number(
-          (
-            (stat.pass_complete / (stat.pass_complete + stat.pass_incomplete)) *
-            100
-          ).toFixed(1)
+        passPct: Number(
+          this.getPct(stat.pass_complete, stat.pass_incomplete).toFixed(1)
         ),
-        cornerPct: await Number(
-          (
-            (stat.corner_won / (stat.corner_lost + stat.corner_won)) *
-            100
-          ).toFixed(1)
+        cornerPct: Number(
+          this.getPct(stat.corner_won, stat.corner_lost).toFixed(1)
         ),
-        pimPerGame: await Number(
+        pimPerGame: Number(
           (stat.penalty_minutes / stat.games_played).toFixed(1)
         ),
         team_name: raw
@@ -191,5 +178,10 @@ export class ApiAllTimeTeamStatsService {
         playing_year: stat.playing_year,
       }))
     );
+  }
+
+  private getPct(high: number, low: number): number {
+    const total = high + low;
+    return (high / total) * 100;
   }
 }
