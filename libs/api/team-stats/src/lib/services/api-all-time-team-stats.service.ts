@@ -101,7 +101,8 @@ export class ApiAllTimeTeamStatsService {
       left join teams_v2 as c
       on c.id = a.team_id
       where a.season_type = '${seasonType}'
-      group by a.team_id, a.season_type, c.city, c.nickname, c.shortname, c.teamlogo, c.isactive`
+      group by a.team_id, a.season_type, c.city, c.nickname, c.shortname, c.teamlogo, c.isactive
+      order by points`
     );
 
     return result;
