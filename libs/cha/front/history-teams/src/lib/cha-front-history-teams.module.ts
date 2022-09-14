@@ -5,6 +5,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
@@ -26,6 +28,8 @@ import { HistoryTeamsTableComponent } from './components';
     CommonModule,
     ChaFrontHistoryTeamsRoutingModule,
     ProgressBarModule,
+    TableModule,
+    InputTextModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
