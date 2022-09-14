@@ -14,18 +14,6 @@ export interface StatTeamsHistoryDto {
   pk_goals: number;
   penalty_minutes: number;
   sh_goals: number;
-  home_wins: string;
-  home_loss: string;
-  home_ties: string;
-  road_wins: string;
-  road_loss: string;
-  road_ties: string;
-  div_win: string;
-  div_loss: string;
-  div_tie: string;
-  trail_after_two_wins: string;
-  trail_after_two_loss: string;
-  trail_after_two_ties: string;
   face_off_won: number;
   face_off_lost: number;
   corner_won: number;
