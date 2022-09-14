@@ -57,7 +57,7 @@
         <span class="p-column-title">{{ column.header }}</span>
         <div class="table-body-cell">
           <ng-container *ngIf="column.field === 'team'">
-            <img [src]="data.teamLogo" height="30px" />
+            <img [src]="data.teamLogo" height="30px" [pTooltip]="data.team_name" tooltipPosition="right"/>
           </ng-container>
           <ng-container>{{ data[column.field] }}</ng-container>
         </div>

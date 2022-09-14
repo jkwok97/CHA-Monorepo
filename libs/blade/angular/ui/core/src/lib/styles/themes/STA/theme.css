@@ -5600,9 +5600,10 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 .p-tooltip .p-tooltip-text {
   background: #495057;
   color: #fff;
-  padding: 0.75rem 0.75rem;
+  padding: 0.5rem 0.5rem;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   border-radius: 6px;
+  font-size: small;
 }
 
 .p-tooltip.p-tooltip-right .p-tooltip-arrow {

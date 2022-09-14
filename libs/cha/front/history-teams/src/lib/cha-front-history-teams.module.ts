@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
@@ -30,6 +31,7 @@ import { HistoryTeamsTableComponent } from './components';
     ProgressBarModule,
     TableModule,
     InputTextModule,
+    TooltipModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
