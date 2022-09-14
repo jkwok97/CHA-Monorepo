@@ -16,9 +16,9 @@ export interface StatTeamsHistoryDto {
   pkPct: number;
   pimPerGame: number;
   sh_goals: number;
-  foPct: string;
-  cornerPct: string;
-  passPct: string;
+  foPct: number;
+  cornerPct: number;
+  passPct: number;
   shut_outs: number;
   playing_year: string;
   season_type: string;

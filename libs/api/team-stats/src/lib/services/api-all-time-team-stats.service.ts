@@ -59,17 +59,6 @@ export class ApiAllTimeTeamStatsService {
 
     const allTimeStatsConverted = await this.convertStats(allTimeStats, false);
 
-    console.log(allTimeStatsConverted[0].face_off_won);
-    console.log(allTimeStatsConverted[0].face_off_lost);
-    console.log(
-      (
-        (allTimeStatsConverted[0].face_off_won /
-          (allTimeStatsConverted[0].face_off_won +
-            allTimeStatsConverted[0].face_off_lost)) *
-        100
-      ).toFixed(1)
-    );
-
     return allTimeStatsConverted;
   }
 
@@ -139,18 +128,24 @@ export class ApiAllTimeTeamStatsService {
             100
           ).toFixed(1)
         ),
-        foPct: (
-          (stat.face_off_won / (stat.face_off_won + stat.face_off_lost)) *
-          100
-        ).toFixed(1),
-        passPct: (
-          (stat.pass_complete / (stat.pass_complete + stat.pass_incomplete)) *
-          100
-        ).toFixed(1),
-        cornerPct: (
-          (stat.corner_won / (stat.corner_lost + stat.corner_won)) *
-          100
-        ).toFixed(1),
+        foPct: Number(
+          (
+            (stat.face_off_won / (stat.face_off_won + stat.face_off_lost)) *
+            100
+          ).toFixed(1)
+        ),
+        passPct: Number(
+          (
+            (stat.pass_complete / (stat.pass_complete + stat.pass_incomplete)) *
+            100
+          ).toFixed(1)
+        ),
+        cornerPct: Number(
+          (
+            (stat.corner_won / (stat.corner_lost + stat.corner_won)) *
+            100
+          ).toFixed(1)
+        ),
         pimPerGame: Number(
           (stat.penalty_minutes / stat.games_played).toFixed(1)
         ),
