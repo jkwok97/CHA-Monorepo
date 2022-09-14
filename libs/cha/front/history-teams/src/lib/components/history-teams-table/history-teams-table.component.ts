@@ -57,33 +57,7 @@ export class HistoryTeamsTableComponent implements OnInit {
   mapItems(stats: StatTeamsHistoryDto[]) {
     return stats.map((stat: StatTeamsHistoryDto) => ({
       ...stat,
-      goalsForPerGame: (stat.goals_for / stat.games_played).toFixed(2),
-      goalsAgainstPerGame: (stat.goals_against / stat.games_played).toFixed(2),
-      goalDiff: stat.goals_for - stat.goals_against,
-      winPct: ((stat.wins / stat.games_played) * 100).toFixed(1),
-      ppPct: ((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1),
-      pkPct: (
-        ((stat.pk_attempts - stat.pk_goals) / stat.pk_attempts) *
-        100
-      ).toFixed(1),
-      foPct: (
-        ((stat.face_off_won + stat.face_off_lost - stat.face_off_lost) /
-          (stat.face_off_won + stat.face_off_lost)) *
-        100
-      ).toFixed(1),
-      passPct: (
-        ((stat.pass_complete + stat.pass_incomplete - stat.pass_incomplete) /
-          (stat.pass_complete + stat.pass_incomplete)) *
-        100
-      ).toFixed(1),
-      cornerPct: (
-        ((stat.corner_lost + stat.corner_won - stat.corner_lost) /
-          (stat.corner_lost + stat.corner_won)) *
-        100
-      ).toFixed(1),
-      pimPerGame: (stat.penalty_minutes / stat.games_played).toFixed(1),
       teamLogo: this.getString(stat.team_id.teamlogo),
-      team_name: `${stat.team_id.city} ${stat.team_id.nickname}`,
     }));
   }
 
