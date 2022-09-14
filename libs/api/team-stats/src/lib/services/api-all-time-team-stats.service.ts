@@ -182,6 +182,8 @@ export class ApiAllTimeTeamStatsService {
 
   private getPct(high: number, low: number): number {
     const total = high + low;
+    console.log(total);
+    console.log((high / total) * 100);
     return (high / total) * 100;
   }
 }
