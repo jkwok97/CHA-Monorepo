@@ -95,7 +95,7 @@ export class ApiAllTimeTeamStatsService {
       sum(corner_won) as corner_won,
       sum(corner_lost) as corner_lost,
       sum(pass_complete) as pass_complete,
-      sum(pass_incomplete) as pass_complete
+      sum(pass_incomplete) as pass_incomplete
       from
       team_stats_v2 as a
       left join teams_v2 as c
