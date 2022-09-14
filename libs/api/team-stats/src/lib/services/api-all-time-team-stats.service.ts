@@ -1,4 +1,5 @@
 import { Team_Stats_V2 } from '@api/entities';
+import { StatTeamsHistoryDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, MoreThan } from 'typeorm';
@@ -12,7 +13,7 @@ export class ApiAllTimeTeamStatsService {
 
   async getAllTimeTeamStatsBySeasonByType(
     seasonType: 'Regular' | 'Playoffs'
-  ): Promise<Team_Stats_V2[]> {
+  ): Promise<StatTeamsHistoryDto[]> {
     const allTimeStats = await this.repo.find({
       relations: ['team_id'],
       select: {

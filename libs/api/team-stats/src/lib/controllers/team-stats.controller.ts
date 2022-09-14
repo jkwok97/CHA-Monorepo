@@ -1,4 +1,5 @@
 import { Team_Stats_V2 } from '@api/entities';
+import { StatTeamsHistoryDto } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiAllTimeTeamStatsService, ApiTeamStatsService } from '../services';
 
@@ -53,7 +54,7 @@ export class TeamStatsController {
   @Get('/history/season/:seasonType')
   async getAllTimeTeamStatsBySeasonByType(
     @Param() param
-  ): Promise<Team_Stats_V2[]> {
+  ): Promise<StatTeamsHistoryDto[]> {
     const stats =
       await this.allTimeTeamsStatsService.getAllTimeTeamStatsBySeasonByType(
         param.seasonType
