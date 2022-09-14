@@ -59,6 +59,17 @@ export class ApiAllTimeTeamStatsService {
 
     const allTimeStatsConverted = await this.convertStats(allTimeStats, false);
 
+    console.log(allTimeStatsConverted[0].face_off_won);
+    console.log(allTimeStatsConverted[0].face_off_lost);
+    console.log(
+      (
+        (allTimeStatsConverted[0].face_off_won /
+          (allTimeStatsConverted[0].face_off_won +
+            allTimeStatsConverted[0].face_off_lost)) *
+        100
+      ).toFixed(1)
+    );
+
     return allTimeStatsConverted;
   }
 
