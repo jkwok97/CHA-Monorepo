@@ -19,6 +19,7 @@ import { HistoryTeamsService } from './services';
 import { ChaFrontHistoryTeamsRoutingModule } from './cha-front-history-teams-routing.module';
 
 import { HistoryTeamsComponent } from './containers';
+import { HistoryTeamsTableComponent } from './components';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import { HistoryTeamsComponent } from './containers';
     StoreModule.forFeature('history-teams', reducer),
     EffectsModule.forFeature([HistoryTeamsEffects]),
   ],
-  declarations: [HistoryTeamsComponent],
+  declarations: [HistoryTeamsComponent, HistoryTeamsTableComponent],
   providers: [HistoryTeamsService, HistoryTeamsFacade, HistoryTeamsEffects],
 })
 export class ChaFrontHistoryTeamsModule {}
