@@ -57,7 +57,6 @@ export class HistoryTeamsComponent implements OnInit {
   }
 
   onOptionChanged(option: string) {
-    console.log(option);
     switch (option) {
       case 'season':
         this.statType = option;
