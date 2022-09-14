@@ -105,7 +105,9 @@ export class ApiAllTimeTeamStatsService {
       order by points DESC`
     );
 
-    return result;
+    const allTimeStatsConverted = await this.convertStats(result);
+
+    return allTimeStatsConverted;
   }
 
   private async convertStats(array: Team_Stats_V2[]) {
