@@ -121,6 +121,8 @@ export class ApiAllTimeTeamStatsService {
         points: Number(stat.points),
         goals_for: Number(stat.goals_for),
         goals_against: Number(stat.goals_against),
+        shots_against: Number(stat.shots_against),
+        shots_for: Number(stat.shots_for),
         pp_goals: Number(stat.pp_goals),
         pp_attempts: Number(stat.pp_attempts),
         pk_goals: Number(stat.pk_goals),
