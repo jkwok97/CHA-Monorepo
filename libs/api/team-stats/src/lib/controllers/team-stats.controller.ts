@@ -65,4 +65,19 @@ export class TeamStatsController {
     }
     return stats;
   }
+
+  @Get('/history/all-time/:seasonType')
+  async getAllTimeTeamStatsSummedBySeasonByType(
+    @Param() param
+  ): Promise<StatTeamsHistoryDto[]> {
+    const stats =
+      await this.allTimeTeamsStatsService.getAllTimeTeamStatsSummedBySeasonByType(
+        param.seasonType
+      );
+
+    if (!stats || stats.length < 1) {
+      throw new NotFoundException('Team Stats not found');
+    }
+    return stats;
+  }
 }
