@@ -68,7 +68,7 @@
             <img [src]="data.teamLogo" height="30px" />
           </ng-container>
           <ng-container *ngIf="column.field === 'points_per_sixty'">
-            {{ ((data.points / data.minutes_played) * 100).toFixed(2) }}
+            {{ ((data.points / data.minutes_played) * 60).toFixed(2) }}
           </ng-container>
           <ng-container>{{ data[column.field] }}</ng-container>
         </div>

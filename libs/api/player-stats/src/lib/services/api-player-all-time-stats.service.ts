@@ -159,7 +159,7 @@ export class ApiPlayerAllTimeStatsService {
         assists: Number(stat.assists),
         points: Number(stat.points),
         pointsPerSixty: Number(
-          ((Number(stat.points) / Number(stat.minutes_played)) * 100).toFixed(2)
+          ((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)
         ),
         plus_minus: Number(stat.plus_minus),
         penalty_minutes: Number(stat.penalty_minutes),
@@ -169,10 +169,10 @@ export class ApiPlayerAllTimeStatsService {
         shots: Number(stat.shots),
         shooting_pct: !raw
           ? Number(stat.shooting_pct)
-          : Number(Number(stat.goals) / Number(stat.shots)),
+          : Number(Number(stat.goals) / Number(stat.shots) * 100),
         minutes_per_game: !raw
           ? Number(stat.minutes_per_game)
-          : Number(Number(stat.minutes_played) / Number(stat.games_played)),
+          : Number((Number(stat.minutes_played) / Number(stat.games_played)).toFixed(1)),
         fo_pct: !raw ? Number(stat.fo_pct) : null,
         pass_pct: !raw ? Number(stat.pass_pct) : null,
         corner_pct: !raw ? Number(stat.corner_pct) : null,
