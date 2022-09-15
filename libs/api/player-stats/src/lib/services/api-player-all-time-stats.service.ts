@@ -2,7 +2,7 @@ import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { StatPlayersHistoryDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, MoreThan, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiPlayerAllTimeStatsService {
@@ -53,6 +53,7 @@ export class ApiPlayerAllTimeStatsService {
       where: {
         season_type: seasonType,
       },
+      take: 1500,
       order: {
         points: 'DESC',
       },
@@ -68,7 +69,7 @@ export class ApiPlayerAllTimeStatsService {
     return allStatsWithTeamInfoConverted;
   }
 
-  async getAllTimeTeamStatsSummedBySeasonByType(
+  async getAllTimePlayerStatsSummedBySeasonByType(
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatPlayersHistoryDto[]> {
     const result = await this.dataSource.query(

@@ -60,7 +60,7 @@ export class PlayerStatsController {
     @Param() param
   ): Promise<StatPlayersHistoryDto[]> {
     const stats =
-      await this.playerAllTimeStatsService.getAllTimePlayerStatsBySeasonByType(
+      await this.playerAllTimeStatsService.getAllTimePlayerStatsSummedBySeasonByType(
         param.seasonType
       );
 
