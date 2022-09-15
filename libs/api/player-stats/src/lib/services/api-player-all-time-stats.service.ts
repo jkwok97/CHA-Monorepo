@@ -102,7 +102,8 @@ export class ApiPlayerAllTimeStatsService {
       a.points > '0'
       and
       a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.position`
+      group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.position
+      order by points DESC`
     );
 
     const allTimeStatsConverted = await this.convertStats(result, true);
