@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlayerStatsController } from './controllers';
 import { PlayerStatsMiddleware } from './middlewares';
 import {
+  ApiPlayerAllTimeStatsService,
   ApiPlayerLeadersStatsService,
   ApiPlayerStatsService,
 } from './services';
@@ -11,7 +12,7 @@ import {
 @Module({
   imports: [TypeOrmModule.forFeature([Players_Stats_V2, Teams_V2])],
   controllers: [PlayerStatsController],
-  providers: [ApiPlayerStatsService, ApiPlayerLeadersStatsService],
+  providers: [ApiPlayerStatsService, ApiPlayerLeadersStatsService, ApiPlayerAllTimeStatsService],
 })
 export class ApiPlayerStatsModule {
   configure(consumer: MiddlewareConsumer) {
