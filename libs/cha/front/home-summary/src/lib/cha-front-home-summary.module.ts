@@ -10,8 +10,10 @@ import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { ChaFrontHomeRoutingModule } from './cha-front-home-summary-routing.module';
 
 import { HomeSummaryComponent } from './containers';
-import { HomeSummaryTeamBannerComponent } from './components';
-
+import {
+  HomeSummaryTeamBannerComponent,
+  HomeSummaryDepthChartComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -22,6 +24,10 @@ import { HomeSummaryTeamBannerComponent } from './components';
     BladeAngularUiCardModule,
     BladeDividerComponent,
   ],
-  declarations: [HomeSummaryComponent, HomeSummaryTeamBannerComponent],
+  declarations: [
+    HomeSummaryComponent,
+    HomeSummaryTeamBannerComponent,
+    HomeSummaryDepthChartComponent,
+  ],
 })
 export class ChaFrontHomeSummaryModule {}
