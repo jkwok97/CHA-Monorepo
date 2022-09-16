@@ -44,7 +44,7 @@ export class HistoryPlayersTableComponent implements OnInit, OnChanges {
     { field: 'minutes_per_game', header: 'Min/G', visible: true },
     { field: 'fo_pct', header: 'FO%', visible: true },
     { field: 'pass_pct', header: 'Pass%', visible: true },
-    { field: 'corner_pct', header: 'Pass%', visible: true },
+    { field: 'corner_pct', header: 'CB%', visible: true },
     { field: 'hit_per_game', header: 'Hits/G', visible: true },
     { field: 'blocked_shots', header: 'BS', visible: true },
   ];
@@ -61,6 +61,14 @@ export class HistoryPlayersTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.playerTableColumns[0].visible =
+      changes['statType'].currentValue === 'season';
+    this.playerTableColumns[2].visible =
+      changes['statType'].currentValue === 'season';
+    this.playerTableColumns[19].visible =
+      changes['statType'].currentValue === 'season';
+    this.playerTableColumns[20].visible =
+      changes['statType'].currentValue === 'season';
+    this.playerTableColumns[21].visible =
       changes['statType'].currentValue === 'season';
   }
 

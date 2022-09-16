@@ -77,6 +77,8 @@ export class ApiPlayerAllTimeStatsService {
       `select
       b.firstname as firstname,
       b.lastname as lastname,
+      b.isdefense as isdefense,
+      b.isforward as isforward,
       b.isgoalie as isgoalie,
       a.player_id as player_id,
       a.season_type as season_type, 
@@ -150,8 +152,8 @@ export class ApiPlayerAllTimeStatsService {
               nhl_id: null,
               isactive: null,
               isgoalie: null,
-              isdefense: null,
-              isforward: null,
+              isdefense: stat['isdefense'],
+              isforward: stat['isforward'],
               is_protected: null,
             },
         position: stat.position,
@@ -170,14 +172,22 @@ export class ApiPlayerAllTimeStatsService {
         shots: Number(stat.shots),
         shooting_pct: !raw
           ? Number(stat.shooting_pct)
-          : Number((Number(stat.goals) / Number(stat.shots) * 100).toFixed(1)),
+          : Number(
+              ((Number(stat.goals) / Number(stat.shots)) * 100).toFixed(1)
+            ),
         minutes_per_game: !raw
           ? Number(stat.minutes_per_game)
-          : Number((Number(stat.minutes_played) / Number(stat.games_played)).toFixed(1)),
+          : Number(
+              (Number(stat.minutes_played) / Number(stat.games_played)).toFixed(
+                1
+              )
+            ),
         fo_pct: !raw ? Number(stat.fo_pct) : null,
         pass_pct: !raw ? Number(stat.pass_pct) : null,
         corner_pct: !raw ? Number(stat.corner_pct) : null,
-        hit_per_game: !raw ? Number(stat.hit_per_game) : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
+        hit_per_game: !raw
+          ? Number(stat.hit_per_game)
+          : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
         blocked_shots: Number(stat.blocked_shots),
       }))
     );
