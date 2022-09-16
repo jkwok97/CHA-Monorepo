@@ -6,12 +6,17 @@ import { GoalieStatsMiddleware } from './middlewares';
 import {
   ApiGoalieStatsService,
   ApiGoalieStatsLeadersService,
+  ApiGoalieAllTimeStatsService,
 } from './services';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Goalies_Stats_V2, Teams_V2])],
   controllers: [GoalieStatsController],
-  providers: [ApiGoalieStatsService, ApiGoalieStatsLeadersService],
+  providers: [
+    ApiGoalieStatsService,
+    ApiGoalieStatsLeadersService,
+    ApiGoalieAllTimeStatsService,
+  ],
 })
 export class ApiGoalieStatsModule {
   configure(consumer: MiddlewareConsumer) {

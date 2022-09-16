@@ -9,3 +9,4 @@ export * from './stat-goalie-all.dto';
 export * from './stat-team-playoffs.dto';
 export * from './stat-teams-history';
 export * from './stat-players-history.dto';
+export * from './stat-goalies-history.dto';
