@@ -16,6 +16,7 @@ export interface StatPlayersHistoryDto {
   penalty_minutes: number;
   pp_goals: number;
   sh_goals: number;
+  gw_goals: number;
   shots: number;
   shooting_pct: number;
   minutes_per_game: number;
