@@ -96,6 +96,74 @@ export class ApiSalariesService {
     return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
   }
 
+  async getUserTeamPlayerSalaries(teamName: string, season: string) {
+    const allPlayersInSeason = await this.playersStatsRepo.find({
+      select: {
+        id: true,
+        team_name: true,
+        player_id: {
+          id: true,
+        },
+      },
+      where: {
+        player_id: {
+          isgoalie: false,
+        },
+        team_name: teamName,
+        season_type: 'Regular',
+        playing_year: season,
+      },
+    });
+
+    const allSalariesForPlayersInSeason = await this.setPlayersSalaries(
+      allPlayersInSeason
+    );
+
+    const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(
+      allSalariesForPlayersInSeason,
+      season
+    );
+
+    const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo =
+      await this.setTeamInfo(allSalariesAndRatingsForPlayersInSeason);
+
+    return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
+  }
+
+  async getUserTeamGoaliesSalaries(teamName: string, season: string) {
+    const allGoaliesInSeason = await this.goaliesStatsRepo.find({
+      select: {
+        id: true,
+        team_name: true,
+        player_id: {
+          id: true,
+        },
+      },
+      where: {
+        player_id: {
+          isgoalie: true,
+        },
+        team_name: teamName,
+        season_type: 'Regular',
+        playing_year: season,
+      },
+    });
+
+    const allSalariesForGoaliesInSeason = await this.setPlayersSalaries(
+      allGoaliesInSeason
+    );
+
+    const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(
+      allSalariesForGoaliesInSeason,
+      season
+    );
+
+    const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo =
+      await this.setTeamInfo(allSalariesAndRatingsForGoaliesInSeason);
+
+    return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
+  }
+
   private async setPlayersSalaries(array: any[]) {
     return await Promise.all(
       array.map(async (item) => ({
