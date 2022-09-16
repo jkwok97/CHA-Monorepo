@@ -5,12 +5,15 @@ import * as HomeSummaryReducer from './home-summary.reducer';
 export const selectState =
   createFeatureSelector<HomeSummaryReducer.State>('home-summary');
 
-const selectLoading = createSelector(
+const selectTeamRecordLoading = createSelector(
   selectState,
-  HomeSummaryReducer.getLoading
+  HomeSummaryReducer.getTeamRecordLoading
 );
 
-const selectLoaded = createSelector(selectState, HomeSummaryReducer.getLoaded);
+const selectTeamRecordLoaded = createSelector(
+  selectState,
+  HomeSummaryReducer.getTeamRecordLoaded
+);
 
 const selectTeamRecord = createSelector(
   selectState,
@@ -18,7 +21,7 @@ const selectTeamRecord = createSelector(
 );
 
 export const HomeSummarySelectors = {
-  selectLoaded,
-  selectLoading,
+  selectTeamRecordLoading,
+  selectTeamRecordLoaded,
   selectTeamRecord,
 };

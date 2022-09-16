@@ -4,37 +4,32 @@ import { HomeSummaryActions } from './home-summary.actions';
 
 export interface State {
   teamRecord: StatUserTeamRecordDto | null;
-  loading: boolean;
-  loaded: boolean;
+  teamRecordloading: boolean;
+  teamRecordLoaded: boolean;
 }
 
 const initialState: State = {
   teamRecord: null,
-  loading: false,
-  loaded: false,
+  teamRecordloading: false,
+  teamRecordLoaded: false,
 };
 
 const r = createReducer(
   initialState,
 
-  on(
-    HomeSummaryActions.getUserTeamRecordBySeasonAndSeasonType,
-
-    (state) => ({
-      ...state,
-      loading: true,
-      loaded: false,
-    })
-  ),
+  on(HomeSummaryActions.getUserTeamRecordBySeasonAndSeasonType, (state) => ({
+    ...state,
+    teamRecordloading: true,
+    teamRecordLoaded: false,
+  })),
 
   on(
     HomeSummaryActions.getUserTeamRecordBySeasonAndSeasonTypeSuccess,
-
     (state, action) => ({
       ...state,
       teamRecord: action.record,
-      loading: false,
-      loaded: true,
+      teamRecordloading: false,
+      teamRecordLoaded: true,
     })
   ),
 
@@ -47,6 +42,6 @@ export function reducer(state: State | undefined, action: Action) {
 
 export const getTeamRecord = (state: State) => state.teamRecord;
 
-export const getLoading = (state: State) => state.loading;
+export const getTeamRecordLoading = (state: State) => state.teamRecordloading;
 
-export const getLoaded = (state: State) => state.loaded;
+export const getTeamRecordLoaded = (state: State) => state.teamRecordLoaded;

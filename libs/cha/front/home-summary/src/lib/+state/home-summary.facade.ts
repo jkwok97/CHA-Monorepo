@@ -8,12 +8,12 @@ import { StatUserTeamRecordDto } from '@cha/shared/entities';
 
 @Injectable()
 export class HomeSummaryFacade {
-  isLoading$: Observable<boolean> = this.store.select(
-    HomeSummarySelectors.selectLoading
+  teamRecordLoading$: Observable<boolean> = this.store.select(
+    HomeSummarySelectors.selectTeamRecordLoading
   );
 
-  isLoaded$: Observable<boolean> = this.store.select(
-    HomeSummarySelectors.selectLoaded
+  teamRecordLoaded$: Observable<boolean> = this.store.select(
+    HomeSummarySelectors.selectTeamRecordLoaded
   );
 
   teamRecord$: Observable<StatUserTeamRecordDto | null> = this.store.select(
