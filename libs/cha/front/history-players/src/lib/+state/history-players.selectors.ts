@@ -1,3 +1,4 @@
+import { StatPlayersHistoryDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as HistoryPlayersReducer from './history-players.reducer';
@@ -20,8 +21,26 @@ const selectAll = createSelector(
   HistoryPlayersReducer.getAllStats
 );
 
+const selectForwards = createSelector(
+  selectAll,
+  (allStats: StatPlayersHistoryDto[]) =>
+    allStats.filter(
+      (stat: StatPlayersHistoryDto) => stat.player_id.isforward === true
+    )
+);
+
+const selectDefense = createSelector(
+  selectAll,
+  (allStats: StatPlayersHistoryDto[]) =>
+    allStats.filter(
+      (stat: StatPlayersHistoryDto) => stat.player_id.isdefense === true
+    )
+);
+
 export const HistoryPlayersSelectors = {
   selectLoaded,
   selectLoading,
   selectAll,
+  selectForwards,
+  selectDefense
 };

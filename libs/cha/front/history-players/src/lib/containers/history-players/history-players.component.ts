@@ -13,9 +13,12 @@ export class HistoryPlayersComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
   allStats$: Observable<StatPlayersHistoryDto[]>;
+  forwardStats$!: Observable<StatPlayersHistoryDto[]>;
+  defenseStats$!: Observable<StatPlayersHistoryDto[]>;
 
   seasonOption = 'Regular';
   statType = 'season';
+  positionOption = 'all';
 
   selectOptions = [
     { label: 'Per Season', value: 'season' },
@@ -25,6 +28,12 @@ export class HistoryPlayersComponent implements OnInit {
   selectSeasonOptions = [
     { label: 'Regular', value: 'Regular' },
     { label: 'Playoffs', value: 'Playoffs', disabled: false },
+  ];
+
+  selectPositionOptions = [
+    { label: 'All', value: 'all' },
+    { label: 'Forwards', value: 'forwards' },
+    { label: 'Defense', value: 'defense' },
   ];
 
   constructor(
@@ -68,6 +77,25 @@ export class HistoryPlayersComponent implements OnInit {
         this.historyPlayersFacade.getAllTimePlayersStatSummedBySeason(
           this.seasonOption
         );
+        break;
+      default:
+        return;
+    }
+  }
+
+  selectPositionOptionChanged(option: string) {
+    switch (option) {
+      case 'all':
+        this.positionOption = option;
+        this.allStats$ = this.historyPlayersFacade.allStats$;
+        break;
+      case 'forwards':
+        this.positionOption = option;
+        this.forwardStats$ = this.historyPlayersFacade.forwardStats$;
+        break;
+      case 'defense':
+        this.positionOption = option;
+        this.defenseStats$ = this.historyPlayersFacade.defenseStats$;
         break;
       default:
         return;

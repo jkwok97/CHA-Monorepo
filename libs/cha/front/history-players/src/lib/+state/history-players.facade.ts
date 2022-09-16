@@ -20,6 +20,14 @@ export class HistoryPlayersFacade {
     HistoryPlayersSelectors.selectAll
   );
 
+  forwardStats$: Observable<StatPlayersHistoryDto[]> = this.store.select(
+    HistoryPlayersSelectors.selectForwards
+  );
+
+  defenseStats$: Observable<StatPlayersHistoryDto[]> = this.store.select(
+    HistoryPlayersSelectors.selectDefense
+  );
+
   constructor(private store: Store<State>) {}
 
   getAllTimePlayersStatBySeason(seasonType: string) {
