@@ -32,11 +32,10 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="allStats$ | async as allStats">
-          hello
-          <!-- <cha-front-history-players-table
-              [stats]="allStats"
-              [statType]="statType"
-            ></cha-front-history-players-table> -->
+          <cha-front-history-goalies-table
+            [stats]="allStats"
+            [statType]="statType"
+          ></cha-front-history-goalies-table>
         </ng-container>
       </blade-card-body>
     </blade-card>

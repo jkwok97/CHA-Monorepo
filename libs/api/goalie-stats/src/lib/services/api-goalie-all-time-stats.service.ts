@@ -154,7 +154,7 @@ export class ApiGoalieAllTimeStatsService {
         games_played: Number(stat.games_played),
         minutes_played: Number(stat.minutes_played),
         goals_against_avg: !raw
-          ? Number(stat.goals_against_avg)
+          ? Number(Number(stat.goals_against_avg).toFixed(2))
           : Number(
               (
                 (Number(stat.goals_against) * 60) /
@@ -169,7 +169,7 @@ export class ApiGoalieAllTimeStatsService {
         saves: Number(stat.saves),
         shots_for: Number(stat.shots_for),
         save_pct: !raw
-          ? Number(stat.save_pct)
+          ? Number(Number(stat.save_pct).toFixed(3))
           : Number((Number(stat.saves) / Number(stat.shots_for)).toFixed(3)),
         goals: Number(stat.goals),
         assists: Number(stat.assists),

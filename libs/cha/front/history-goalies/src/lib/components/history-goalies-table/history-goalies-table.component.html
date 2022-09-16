@@ -1,1 +1,73 @@
-<p>history-goales-table works!</p>
+<p-table
+  #dt
+  [responsiveLayout]="'scroll'"
+  [value]="statsForTable"
+  [columns]="playerTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [sortField]="sortField"
+  [sortOrder]="-1"
+  [filterDelay]="0"
+  [globalFilterFields]="['team_name', 'full_name']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Team / Player"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns let-data>
+    <tr>
+      <th
+        *ngFor="let column of playerTableColumns"
+        [hidden]="!column.visible"
+        [pSortableColumn]="column.field"
+        [pSortableColumnDisabled]="column.field === 'team'"
+      >
+        {{ column.header }}
+        <p-sortIcon
+          [field]="column.field"
+          *ngIf="column.field !== 'team'"
+        ></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of playerTableColumns" [hidden]="!column.visible">
+        <span class="p-column-title">{{ column.header }}</span>
+        <div class="table-body-cell">
+          <ng-container *ngIf="column.field === 'team'">
+            <img
+              [src]="data.teamLogo"
+              height="30px"
+              [pTooltip]="data.team_name"
+              tooltipPosition="right"
+            />
+          </ng-container>
+          <ng-container>{{ data[column.field] }}</ng-container>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
