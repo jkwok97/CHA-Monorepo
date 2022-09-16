@@ -169,7 +169,7 @@ export class ApiPlayerAllTimeStatsService {
         shots: Number(stat.shots),
         shooting_pct: !raw
           ? Number(stat.shooting_pct)
-          : Number(Number(stat.goals) / Number(stat.shots) * 100),
+          : Number((Number(stat.goals) / Number(stat.shots) * 100).toFixed(1)),
         minutes_per_game: !raw
           ? Number(stat.minutes_per_game)
           : Number((Number(stat.minutes_played) / Number(stat.games_played)).toFixed(1)),
