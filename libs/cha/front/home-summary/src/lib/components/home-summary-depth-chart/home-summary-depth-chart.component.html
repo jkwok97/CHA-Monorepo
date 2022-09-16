@@ -1,1 +1,10 @@
-<p>home-summary-depth-chart works!</p>
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  [ngStyle]="{ 'background-color': userTeam.teamcolor, 'font-weight': 100 }"
+  class="w-full"
+>
+  <blade-card-header>
+    <div class="text-xl text-center">Depth Chart</div>
+  </blade-card-header>
+  <blade-card-body> </blade-card-body>
+</blade-card>

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@cha/domain/auth';
-import { UserTeamFacade } from '@cha/domain/core';
+import { DisplayFacade, UserTeamFacade } from '@cha/domain/core';
 import { TeamDto, UserDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 
 @Component({
   selector: 'cha-front-home-summary-team-banner',
@@ -14,12 +14,21 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
   userTeam$: Observable<TeamDto | undefined>;
   user$: Observable<UserDto | null>;
 
+  isMobile = false;
+
   constructor(
     private userTeamFacade: UserTeamFacade,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private displayFacade: DisplayFacade
   ) {
     this.userTeam$ = this.userTeamFacade.currentUserTeam$;
     this.user$ = this.authFacade.user$;
+
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
   }
 
   ngOnInit(): void {}

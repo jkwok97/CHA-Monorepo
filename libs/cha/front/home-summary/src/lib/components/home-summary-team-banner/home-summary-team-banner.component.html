@@ -5,9 +5,9 @@
 >
   <blade-card-body>
     <div
-      class="flex column-gap-2 align-items-center justify-content-between w-full"
+      class="flex flex-wrap column-gap-2 row-gap-2 align-items-center justify-content-between w-full"
     >
-      <div class="flex align-items-center column-gap-2">
+      <div class="flex align-items-center column-gap-2" *ngIf="!isMobile">
         <div>
           <img [src]="getString(userTeam.teamlogo)" style="width: 75px" />
         </div>

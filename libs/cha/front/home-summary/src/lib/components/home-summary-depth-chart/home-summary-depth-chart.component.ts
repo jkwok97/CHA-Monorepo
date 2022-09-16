@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UserTeamFacade } from '@cha/domain/core';
+import { TeamDto } from '@cha/shared/entities';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cha-front-home-summary-depth-chart',
@@ -7,7 +10,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeSummaryDepthChartComponent implements OnInit {
-  constructor() {}
+  userTeam$: Observable<TeamDto | undefined>;
+
+  constructor(private userTeamFacade: UserTeamFacade) {
+    this.userTeam$ = this.userTeamFacade.currentUserTeam$;
+  }
 
   ngOnInit(): void {}
 }
