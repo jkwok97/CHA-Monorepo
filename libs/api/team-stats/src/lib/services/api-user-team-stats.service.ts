@@ -12,6 +12,7 @@ export class ApiUserTeamStatsService {
   ) {}
 
   async getUserTeamRecordBySeasonBySeasonType(
+    teamId: number,
     season: string,
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatUserTeamRecordDto> {
@@ -41,6 +42,9 @@ export class ApiUserTeamStatsService {
         div_tie: true,
       },
       where: {
+        team_id: {
+          id: teamId,
+        },
         playing_year: season,
         season_type: seasonType,
       },

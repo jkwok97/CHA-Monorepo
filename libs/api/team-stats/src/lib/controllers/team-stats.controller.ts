@@ -89,12 +89,13 @@ export class TeamStatsController {
     return stats;
   }
 
-  @Get('/user/team/record/:season/:seasonType')
+  @Get('/user/:teamId/record/:season/:seasonType/')
   async getUserTeamRecordBySeasonBySeasonType(
     @Param() param
   ): Promise<StatUserTeamRecordDto> {
     const record =
       await this.userTeamStatsService.getUserTeamRecordBySeasonBySeasonType(
+        param.teamId,
         param.season,
         param.seasonType
       );
