@@ -10,3 +10,4 @@ export * from './stat-team-playoffs.dto';
 export * from './stat-teams-history';
 export * from './stat-players-history.dto';
 export * from './stat-goalies-history.dto';
+export * from './stat-user-team-record.dto';

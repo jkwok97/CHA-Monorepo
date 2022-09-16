@@ -1,13 +1,21 @@
 import { Team_Stats_V2 } from '@api/entities';
-import { StatTeamsHistoryDto } from '@cha/shared/entities';
+import {
+  StatTeamsHistoryDto,
+  StatUserTeamRecordDto,
+} from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { ApiAllTimeTeamStatsService, ApiTeamStatsService } from '../services';
+import {
+  ApiAllTimeTeamStatsService,
+  ApiTeamStatsService,
+  ApiUserTeamStatsService,
+} from '../services';
 
 @Controller('team-stats')
 export class TeamStatsController {
   constructor(
     private teamsStatsService: ApiTeamStatsService,
-    private allTimeTeamsStatsService: ApiAllTimeTeamStatsService
+    private allTimeTeamsStatsService: ApiAllTimeTeamStatsService,
+    private userTeamStatsService: ApiUserTeamStatsService
   ) {}
 
   @Get('/:season/:seasonType')
@@ -79,5 +87,21 @@ export class TeamStatsController {
       throw new NotFoundException('Team Stats not found');
     }
     return stats;
+  }
+
+  @Get('/user/team/record/:season/:seasonType')
+  async getUserTeamRecordBySeasonBySeasonType(
+    @Param() param
+  ): Promise<StatUserTeamRecordDto> {
+    const record =
+      await this.userTeamStatsService.getUserTeamRecordBySeasonBySeasonType(
+        param.season,
+        param.seasonType
+      );
+
+    if (!record) {
+      throw new NotFoundException('User Team Stats not found');
+    }
+    return record;
   }
 }
