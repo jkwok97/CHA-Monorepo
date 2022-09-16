@@ -1,1 +1,18 @@
-<p>home-summary-team-record works!</p>
+<div class="flex flex-wrap">
+  <span class="w-full text-sm md:text-md md:text-center">
+    Overall: {{ teamRecord.wins }} - {{ teamRecord.loss }} -
+    {{ teamRecord.ties }}
+  </span>
+  <span class="w-full text-sm md:text-md md:text-center">
+    Home: {{ teamRecord.home_wins }} - {{ teamRecord.home_loss }} -
+    {{ teamRecord.home_ties }}
+  </span>
+  <span class="w-full text-sm md:text-md md:text-center">
+    Road: {{ teamRecord.road_wins }} - {{ teamRecord.road_loss }} -
+    {{ teamRecord.road_ties }}
+  </span>
+  <span class="w-full text-sm md:text-md md:text-center">
+    Division: {{ teamRecord.div_win }} - {{ teamRecord.div_loss }} -
+    {{ teamRecord.div_tie }}
+  </span>
+</div>

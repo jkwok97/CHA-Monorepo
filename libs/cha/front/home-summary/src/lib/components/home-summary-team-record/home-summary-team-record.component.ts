@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { StatUserTeamRecordDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-front-home-summary-team-record',
@@ -6,8 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./home-summary-team-record.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeSummaryTeamRecordComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class HomeSummaryTeamRecordComponent {
+  @Input() teamRecord!: StatUserTeamRecordDto;
 }

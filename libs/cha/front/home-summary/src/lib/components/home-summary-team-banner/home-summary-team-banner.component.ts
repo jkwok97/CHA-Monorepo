@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@cha/domain/auth';
 import { DisplayFacade, UserTeamFacade } from '@cha/domain/core';
-import { TeamDto, UserDto } from '@cha/shared/entities';
+import { StatUserTeamRecordDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { first, Observable } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
@@ -16,6 +16,7 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
   user$: Observable<UserDto | null>;
   isTeamRecordLoading$: Observable<boolean>;
   isTeamRecordLoaded$: Observable<boolean>;
+  teamRecord$: Observable<StatUserTeamRecordDto | null>;
 
   isMobile = false;
 
@@ -29,6 +30,7 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
     this.user$ = this.authFacade.user$;
     this.isTeamRecordLoaded$ = this.homeSummaryFacade.teamRecordLoaded$;
     this.isTeamRecordLoading$ = this.homeSummaryFacade.teamRecordLoading$;
+    this.teamRecord$ = this.homeSummaryFacade.teamRecord$;
 
     this.displayFacade.isMobile$
       .pipe(first())

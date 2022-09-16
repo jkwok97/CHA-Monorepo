@@ -21,7 +21,11 @@
         </div>
       </div>
       <div *ngIf="isTeamRecordLoaded$ | async">
-        This is where Team Record Goes
+        <ng-container *ngIf="teamRecord$ | async as teamRecord">
+          <cha-front-home-summary-team-record
+            [teamRecord]="teamRecord"
+          ></cha-front-home-summary-team-record>
+        </ng-container>
       </div>
       <div>This is where Team Cap goes</div>
     </div>
