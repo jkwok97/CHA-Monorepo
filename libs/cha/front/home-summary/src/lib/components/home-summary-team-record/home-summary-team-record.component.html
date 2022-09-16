@@ -1,18 +1,23 @@
-<div class="flex flex-wrap">
-  <span class="w-full text-sm md:text-md md:text-center">
+<div
+  class="flex flex-wrap w-full text-sm md:text-md md:text-center column-gap-3"
+>
+  <span>
     Overall: {{ teamRecord.wins }} - {{ teamRecord.loss }} -
     {{ teamRecord.ties }}
   </span>
-  <span class="w-full text-sm md:text-md md:text-center">
+  <span>|</span>
+  <span>
+    Division: {{ teamRecord.div_win }} - {{ teamRecord.div_loss }} -
+    {{ teamRecord.div_tie }}
+  </span>
+  <span *ngIf="!isMobile">|</span>
+  <span>
     Home: {{ teamRecord.home_wins }} - {{ teamRecord.home_loss }} -
     {{ teamRecord.home_ties }}
   </span>
-  <span class="w-full text-sm md:text-md md:text-center">
+  <span>|</span>
+  <span>
     Road: {{ teamRecord.road_wins }} - {{ teamRecord.road_loss }} -
     {{ teamRecord.road_ties }}
-  </span>
-  <span class="w-full text-sm md:text-md md:text-center">
-    Division: {{ teamRecord.div_win }} - {{ teamRecord.div_loss }} -
-    {{ teamRecord.div_tie }}
   </span>
 </div>

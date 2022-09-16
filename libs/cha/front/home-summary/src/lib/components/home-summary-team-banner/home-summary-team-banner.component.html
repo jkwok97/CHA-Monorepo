@@ -24,6 +24,7 @@
         <ng-container *ngIf="teamRecord$ | async as teamRecord">
           <cha-front-home-summary-team-record
             [teamRecord]="teamRecord"
+            [isMobile]="isMobile"
           ></cha-front-home-summary-team-record>
         </ng-container>
       </div>

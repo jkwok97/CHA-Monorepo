@@ -9,4 +9,5 @@ import { StatUserTeamRecordDto } from '@cha/shared/entities';
 })
 export class HomeSummaryTeamRecordComponent {
   @Input() teamRecord!: StatUserTeamRecordDto;
+  @Input() isMobile!: boolean;
 }
