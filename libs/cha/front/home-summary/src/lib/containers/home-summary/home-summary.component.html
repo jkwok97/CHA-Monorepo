@@ -1,1 +1,18 @@
-<p>home-summary works!</p>
+<blade-layout-feature-content>
+  <div class="flex justify-content-center row-gap-2 pl-2 pr-2 w-full flex-wrap">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <cha-front-home-summary-team-banner
+      class="w-full pt-3"
+      *ngIf="!isMobile"
+    ></cha-front-home-summary-team-banner>
+
+    <blade-card *ngIf="isLoaded$ | async" class="w-full pb-3">
+      <blade-card-body> this is where the depth chart goes </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>
