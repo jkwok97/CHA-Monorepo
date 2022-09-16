@@ -17,6 +17,7 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
   isTeamRecordLoading$: Observable<boolean>;
   isTeamRecordLoaded$: Observable<boolean>;
   teamRecord$: Observable<StatUserTeamRecordDto | null>;
+  totalSalary$: Observable<number>;
 
   isMobile = false;
 
@@ -31,6 +32,7 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
     this.isTeamRecordLoaded$ = this.homeSummaryFacade.teamRecordLoaded$;
     this.isTeamRecordLoading$ = this.homeSummaryFacade.teamRecordLoading$;
     this.teamRecord$ = this.homeSummaryFacade.teamRecord$;
+    this.totalSalary$ = this.homeSummaryFacade.totalTeamSalary$;
 
     this.displayFacade.isMobile$
       .pipe(first())
@@ -43,6 +45,8 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
     this.userTeam$.pipe(first()).subscribe((userTeam: TeamDto | undefined) => {
       if (userTeam) {
         this.homeSummaryFacade.getUserTeamRecord(userTeam.id);
+        this.homeSummaryFacade.getPlayerSalaries(userTeam.shortname);
+        this.homeSummaryFacade.getGoalieSalaries(userTeam.shortname);
       }
     });
   }

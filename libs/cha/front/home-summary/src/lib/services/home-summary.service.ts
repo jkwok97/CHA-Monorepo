@@ -22,4 +22,16 @@ export class HomeSummaryService {
       )
       .pipe(map((result: any) => result));
   }
+
+  getUserTeamPlayersSalariesBySeason(teamName: string, season: string) {
+    return this._http
+      .get(`${this.apiUrl}/salaries/user/${teamName}/players/${season}`)
+      .pipe(map((result: any) => result));
+  }
+
+  getUserTeamGoaliesSalariesBySeason(teamName: string, season: string) {
+    return this._http
+      .get(`${this.apiUrl}/salaries/user/${teamName}/goalies/${season}`)
+      .pipe(map((result: any) => result));
+  }
 }

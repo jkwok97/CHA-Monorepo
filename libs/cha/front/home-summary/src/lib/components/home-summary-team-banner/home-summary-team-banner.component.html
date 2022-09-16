@@ -28,7 +28,11 @@
           ></cha-front-home-summary-team-record>
         </ng-container>
       </div>
-      <div>This is where Team Cap goes</div>
+      <div>
+        <ng-container *ngIf="totalSalary$ | async as totalSalary">
+          {{ totalSalary }}
+        </ng-container>
+      </div>
     </div>
   </blade-card-body>
 </blade-card>

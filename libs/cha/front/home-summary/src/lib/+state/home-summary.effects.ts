@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import {
-  StatPlayersHistoryDto,
+  SalariesAndRatingsDto,
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -32,6 +32,50 @@ export class HomeSummaryEffects {
             map((record: StatUserTeamRecordDto) =>
               HomeSummaryActions.getUserTeamRecordBySeasonAndSeasonTypeSuccess({
                 record,
+              })
+            ),
+            catchError(() => of(HomeSummaryActions.error()))
+          )
+      )
+    )
+  );
+
+  getUserTeamPlayerSalaries$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeSummaryActions.getUserTeamPlayerSalaries),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.homeSummaryService
+          .getUserTeamPlayersSalariesBySeason(
+            action.teamName,
+            data.current_year
+          )
+          .pipe(
+            map((playerSalaries: SalariesAndRatingsDto[]) =>
+              HomeSummaryActions.getUserTeamPlayerSalariesSuccess({
+                playerSalaries,
+              })
+            ),
+            catchError(() => of(HomeSummaryActions.error()))
+          )
+      )
+    )
+  );
+
+  getUserTeamGoaliesSalaries$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeSummaryActions.getUserTeamGoaliesSalaries),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.homeSummaryService
+          .getUserTeamGoaliesSalariesBySeason(
+            action.teamName,
+            data.current_year
+          )
+          .pipe(
+            map((goalieSalaries: SalariesAndRatingsDto[]) =>
+              HomeSummaryActions.getUserTeamGoaliesSalariesSuccess({
+                goalieSalaries,
               })
             ),
             catchError(() => of(HomeSummaryActions.error()))

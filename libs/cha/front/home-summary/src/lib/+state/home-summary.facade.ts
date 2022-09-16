@@ -20,11 +20,39 @@ export class HomeSummaryFacade {
     HomeSummarySelectors.selectTeamRecord
   );
 
+  playerSalaryLoaded$: Observable<boolean> = this.store.select(
+    HomeSummarySelectors.selectPlayerSalaryLoaded
+  );
+
+  goalieSalaryLoaded$: Observable<boolean> = this.store.select(
+    HomeSummarySelectors.selectGoaliesSalaryLoaded
+  );
+
+  totalTeamSalary$: Observable<number> = this.store.select(
+    HomeSummarySelectors.selectTotal
+  );
+
+  totalPlayerCount$: Observable<number> = this.store.select(
+    HomeSummarySelectors.selectPlayersCount
+  );
+
   constructor(private store: Store<State>) {}
 
   getUserTeamRecord(teamId: number) {
     this.store.dispatch(
       HomeSummaryActions.getUserTeamRecordBySeasonAndSeasonType({ teamId })
+    );
+  }
+
+  getPlayerSalaries(teamName: string) {
+    this.store.dispatch(
+      HomeSummaryActions.getUserTeamPlayerSalaries({ teamName })
+    );
+  }
+
+  getGoalieSalaries(teamName: string) {
+    this.store.dispatch(
+      HomeSummaryActions.getUserTeamGoaliesSalaries({ teamName })
     );
   }
 }
