@@ -7,7 +7,6 @@ import { HistoryTeamsFacade } from '../../+state/history-teams.facade';
 @Component({
   selector: 'cha-front-history-teams',
   templateUrl: './history-teams.component.html',
-  styleUrls: ['./history-teams.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryTeamsComponent implements OnInit {
