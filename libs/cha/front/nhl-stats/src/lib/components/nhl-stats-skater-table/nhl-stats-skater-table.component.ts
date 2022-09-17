@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LeagueDataFacade } from '@cha/domain/core';
+import { DisplayFacade, LeagueDataFacade } from '@cha/domain/core';
 import {
   NhlGoalieStatDto,
   NhlPlayerStatDto,
@@ -38,20 +38,38 @@ export class NhlStatsSkaterTableComponent {
     { field: 'shooting_pct', header: 'Sh%' },
   ];
 
+  mobilePlayerTableColumns = [
+    { field: 'skaterFullName', header: 'Name' },
+    { field: 'goals', header: 'G' },
+    { field: 'assists', header: 'A' },
+    { field: 'points', header: 'Pts' },
+    { field: 'action', header: 'More' },
+  ];
+
   first = 0;
   rows = 100;
   totalRecords = 0;
   sortField = 'points';
   stats!: NhlPlayerStatDto[] | NhlGoalieStatDto[];
+  isMobile = false;
+  display = false;
+  playerStats!: any;
 
   constructor(
     private leagueDataFacade: LeagueDataFacade,
-    private nhlStatsFacade: NhlStatsFacade
+    private nhlStatsFacade: NhlStatsFacade,
+    private displayFacade: DisplayFacade
   ) {
     this.teams$ = this.leagueDataFacade.leagueTeams$;
     this.total$ = this.nhlStatsFacade.total$;
     this.isLoading$ = this.nhlStatsFacade.isLoading$;
     this.skaterStats$ = this.nhlStatsFacade.skaterStats$;
+
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
 
     this.skaterStats$
       .pipe(
@@ -77,5 +95,10 @@ export class NhlStatsSkaterTableComponent {
     } else {
       return;
     }
+  }
+
+  onPlayerClick(stat: NhlPlayerStatDto | NhlGoalieStatDto) {
+    this.playerStats = stat;
+    this.display = true;
   }
 }
