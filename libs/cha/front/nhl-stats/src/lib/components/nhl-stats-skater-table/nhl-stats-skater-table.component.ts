@@ -40,8 +40,6 @@ export class NhlStatsSkaterTableComponent {
 
   mobilePlayerTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
-    { field: 'goals', header: 'G' },
-    { field: 'assists', header: 'A' },
     { field: 'points', header: 'Pts' },
     { field: 'action', header: 'More' },
   ];

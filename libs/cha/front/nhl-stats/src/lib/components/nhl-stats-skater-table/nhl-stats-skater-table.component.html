@@ -70,8 +70,8 @@
               <button
                 pButton
                 type="button"
-                icon="pi pi-info-circle"
-                class="p-button-rounded p-button-info p-button-text p-button-sm"
+                icon="pi pi-window-maximize"
+                class="p-button-rounded p-button-info"
                 (click)="onPlayerClick(data)"
               ></button>
             </ng-container>
@@ -104,7 +104,107 @@
 
 <p-sidebar [(visible)]="display" [fullScreen]="true">
   <ng-container *ngIf="playerStats as playerStats">
-    {{ playerStats | json }}
-    <p-avatar [image]="playerStats['playerImg']" shape="circle"></p-avatar>
+    <div class="flex align-items-center column-gap-3">
+      <p-avatar
+        [image]="playerStats['playerImg']"
+        shape="circle"
+        size="xlarge"
+      ></p-avatar>
+      <div>
+        <div class="text-xl font-light">
+          {{ playerStats.first_name }} {{ playerStats.last_name }}
+        </div>
+        <div class="text-md" style="font-weight: 100">
+          <i>{{ playerStats.team_name_formatted }}</i>
+        </div>
+      </div>
+    </div>
+    <blade-divider></blade-divider>
+    <div class="text-md font-light">
+      <div>
+        Games Played:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.games_played }}</i>
+        </span>
+      </div>
+      <div>
+        Goals:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.goals }}</i>
+        </span>
+      </div>
+      <div>
+        Assists:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.assists }}</i>
+        </span>
+      </div>
+      <div>
+        Points:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.points }}</i>
+        </span>
+      </div>
+      <div>
+        P/gp:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.points_per_game }}</i>
+        </span>
+      </div>
+      <div>
+        +/-:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.plus_minus }}</i>
+        </span>
+      </div>
+      <div>
+        PPG:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.power_play_goals }}</i>
+        </span>
+      </div>
+      <div>
+        PPP:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.power_play_points }}</i>
+        </span>
+      </div>
+      <div>
+        SHP:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.short_handed_points }}</i>
+        </span>
+      </div>
+      <div>
+        GWG:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.game_winning_goals }}</i>
+        </span>
+      </div>
+      <div>
+        PIM:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.penalty_minutes }}</i>
+        </span>
+      </div>
+      <div>
+        SOG:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.shots_on_goal }}</i>
+        </span>
+      </div>
+      <div>
+        SH%:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.shooting_pct }}</i>
+        </span>
+      </div>
+      <div>
+        TOI:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.atoi }}</i>
+        </span>
+      </div>
+    </div>
   </ng-container>
 </p-sidebar>
