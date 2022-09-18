@@ -1,7 +1,7 @@
 <p-table
-  [responsiveLayout]="'scroll'"
+  [responsiveLayout]="'stack'"
   [value]="stats"
-  [columns]="playerTableColumns"
+  [columns]="!isMobile ? playerTableColumns : mobilePlayerTableColumns"
   styleClass="p-datatable-sm p-datatable-striped"
   class="table"
   [rows]="rows"
@@ -14,15 +14,31 @@
   [sortOrder]="-1"
 >
   <ng-template pTemplate="header" let-columns let-data>
-    <tr>
-      <th
-        *ngFor="let column of playerTableColumns"
-        [pSortableColumn]="column.field"
-      >
-        {{ column.header }}
-        <p-sortIcon [field]="column.field"></p-sortIcon>
-      </th>
-    </tr>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th
+          *ngFor="let column of mobilePlayerTableColumns"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of playerTableColumns"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
   </ng-template>
 
   <ng-template
@@ -31,34 +47,182 @@
     let-columns="columns"
     let-rowIndex="rowIndex"
   >
-    <tr>
-      <td *ngFor="let column of playerTableColumns">
-        <span class="p-column-title">{{ column.header }}</span>
-        <div class="table-body-cell">
-          <p-avatar
-            [image]="data.playerImg"
-            shape="circle"
-            *ngIf="column.field.includes('Name') && data.playerImg"
-          ></p-avatar>
-          <ng-container *ngIf="column.field === 'pointsPerGame'"
-            >{{ data[column.field].toFixed(2) }}
-          </ng-container>
-          <ng-container
-            *ngIf="
-              column.field === 'shootingPct' || column.field === 'faceoffWinPct'
-            "
-            >{{ (data[column.field] * 100).toFixed(1) }}
-          </ng-container>
-          <ng-container>{{
-            column.field !== 'chaTeam' &&
-            column.field !== 'shootingPct' &&
-            column.field !== 'faceoffWinPct' &&
-            column.field !== 'pointsPerGame'
-              ? data[column.field]
-              : ''
-          }}</ng-container>
-        </div>
-      </td>
-    </tr>
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td *ngFor="let column of mobilePlayerTableColumns">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <p-avatar
+              [image]="data.playerImg"
+              shape="circle"
+              *ngIf="column.field.includes('Name') && data.playerImg"
+            ></p-avatar>
+            <ng-container *ngIf="column.field === 'pointsPerGame'"
+              >{{ data[column.field].toFixed(2) }}
+            </ng-container>
+            <ng-container
+              *ngIf="
+                column.field === 'shootingPct' ||
+                column.field === 'faceoffWinPct'
+              "
+              >{{ (data[column.field] * 100).toFixed(1) }}
+            </ng-container>
+            <ng-container>{{
+              column.field !== 'chaTeam' &&
+              column.field !== 'shootingPct' &&
+              column.field !== 'faceoffWinPct' &&
+              column.field !== 'pointsPerGame'
+                ? data[column.field]
+                : ''
+            }}</ng-container>
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-window-maximize"
+                class="p-button-rounded p-button-info"
+                (click)="onPlayerClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td *ngFor="let column of playerTableColumns">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <p-avatar
+              [image]="data.playerImg"
+              shape="circle"
+              *ngIf="column.field.includes('Name') && data.playerImg"
+            ></p-avatar>
+            <ng-container *ngIf="column.field === 'pointsPerGame'"
+              >{{ data[column.field].toFixed(2) }}
+            </ng-container>
+            <ng-container
+              *ngIf="
+                column.field === 'shootingPct' ||
+                column.field === 'faceoffWinPct'
+              "
+              >{{ (data[column.field] * 100).toFixed(1) }}
+            </ng-container>
+            <ng-container>{{
+              column.field !== 'chaTeam' &&
+              column.field !== 'shootingPct' &&
+              column.field !== 'faceoffWinPct' &&
+              column.field !== 'pointsPerGame'
+                ? data[column.field]
+                : ''
+            }}</ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
   </ng-template>
 </p-table>
+
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="playerStats as playerStats">
+    <div class="flex align-items-center column-gap-3">
+      <p-avatar
+        [image]="playerStats['playerImg']"
+        shape="circle"
+        size="xlarge"
+      ></p-avatar>
+      <div>
+        <div class="text-xl font-light">
+          {{ playerStats.skaterFullName }}
+        </div>
+        <div class="text-md" style="font-weight: 100">
+          <i>{{ playerStats.team_name_formatted }}</i>
+        </div>
+      </div>
+    </div>
+    <blade-divider></blade-divider>
+    <div class="text-md font-light">
+      <div>
+        Games Played:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.gamesPlayed }}</i>
+        </span>
+      </div>
+      <div>
+        Goals:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.goals }}</i>
+        </span>
+      </div>
+      <div>
+        Assists:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.assists }}</i>
+        </span>
+      </div>
+      <div>
+        Points:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.points }}</i>
+        </span>
+      </div>
+      <div>
+        Points Per Game:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.pointsPerGame.toFixed(2) }}</i>
+        </span>
+      </div>
+      <div>
+        Even Strength Goals:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.evGoals }}</i>
+        </span>
+      </div>
+      <div>
+        Even Strength Points:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.evPoints }}</i>
+        </span>
+      </div>
+      <div>
+        PPG:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.ppGoals }}</i>
+        </span>
+      </div>
+      <div>
+        PPP:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.ppPoints }}</i>
+        </span>
+      </div>
+      <div>
+        SHP:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.shPoints }}</i>
+        </span>
+      </div>
+      <div>
+        GWG:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.gameWinningGoals }}</i>
+        </span>
+      </div>
+      <div>
+        PIM:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.penaltyMinutes }}</i>
+        </span>
+      </div>
+      <div>
+        SH%:
+        <span style="font-weight: 100">
+          <i>{{ playerStats.shootingPct }}</i>
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</p-sidebar>
