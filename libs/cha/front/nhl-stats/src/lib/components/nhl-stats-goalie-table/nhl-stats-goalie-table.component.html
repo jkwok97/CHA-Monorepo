@@ -1,7 +1,7 @@
 <p-table
-  [responsiveLayout]="'scroll'"
+  [responsiveLayout]="'stack'"
   [value]="stats"
-  [columns]="goalieTableColumns"
+  [columns]="!isMobile ? goalieTableColumns : mobileGoalieTableColumns"
   styleClass="p-datatable-sm p-datatable-striped"
   class="table"
   [rows]="rows"
@@ -14,15 +14,31 @@
   [sortOrder]="-1"
 >
   <ng-template pTemplate="header" let-columns let-data>
-    <tr>
-      <th
-        *ngFor="let column of goalieTableColumns"
-        [pSortableColumn]="column.field"
-      >
-        {{ column.header }}
-        <p-sortIcon [field]="column.field"></p-sortIcon>
-      </th>
-    </tr>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th
+          *ngFor="let column of mobileGoalieTableColumns"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of goalieTableColumns"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
   </ng-template>
 
   <ng-template
@@ -31,22 +47,130 @@
     let-columns="columns"
     let-rowIndex="rowIndex"
   >
-    <tr>
-      <td *ngFor="let column of goalieTableColumns">
-        <span class="p-column-title">{{ column.header }}</span>
-        <div class="table-body-cell">
-          <p-avatar
-            [image]="data.playerImg"
-            shape="circle"
-            *ngIf="column.field.includes('Name') && data.playerImg"
-          ></p-avatar>
-          <ng-container *ngIf="column.field === 'skaterFullName'"
-            >{{ data.first_name + ' ' + data.last_name }}
-          </ng-container>
-          {{ data[column.field] }}
-        </div>
-      </td>
-    </tr>
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td *ngFor="let column of mobileGoalieTableColumns">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <p-avatar
+              [image]="data.playerImg"
+              shape="circle"
+              *ngIf="column.field.includes('Name') && data.playerImg"
+            ></p-avatar>
+            <ng-container *ngIf="column.field === 'skaterFullName'"
+              >{{ data.first_name + ' ' + data.last_name }}
+            </ng-container>
+            {{ data[column.field] }}
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-window-maximize"
+                class="p-button-rounded p-button-info"
+                (click)="onPlayerClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td *ngFor="let column of goalieTableColumns">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <p-avatar
+              [image]="data.playerImg"
+              shape="circle"
+              *ngIf="column.field.includes('Name') && data.playerImg"
+            ></p-avatar>
+            <ng-container *ngIf="column.field === 'skaterFullName'"
+              >{{ data.first_name + ' ' + data.last_name }}
+            </ng-container>
+            {{ data[column.field] }}
+          </div>
+        </td>
+      </tr>
+    </ng-template>
   </ng-template>
 </p-table>
 
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="goalieStats as goalieStats">
+    <div class="flex align-items-center column-gap-3">
+      <p-avatar
+        [image]="goalieStats['playerImg']"
+        shape="circle"
+        size="xlarge"
+      ></p-avatar>
+      <div>
+        <div class="text-xl font-light">
+          {{ goalieStats.first_name }} {{ goalieStats.last_name }}
+        </div>
+        <div class="text-md" style="font-weight: 100">
+          <i>{{ goalieStats.team_name_formatted }}</i>
+        </div>
+      </div>
+    </div>
+    <blade-divider></blade-divider>
+    <div class="text-md font-light">
+      <div>
+        Games Played:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.games_played }}</i>
+        </span>
+      </div>
+      <div>
+        Wins:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.wins }}</i>
+        </span>
+      </div>
+      <div>
+        Losses:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.losses }}</i>
+        </span>
+      </div>
+      <div>
+        GA:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.goals_against }}</i>
+        </span>
+      </div>
+      <div>
+        GAA:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.goals_against_avg }}</i>
+        </span>
+      </div>
+      <div>
+        Shots Faced:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.shots_against }}</i>
+        </span>
+      </div>
+      <div>
+        Sv:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.saves }}</i>
+        </span>
+      </div>
+      <div>
+        Sv%:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.save_pct }}</i>
+        </span>
+      </div>
+      <div>
+        SO:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.shutouts }}</i>
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</p-sidebar>

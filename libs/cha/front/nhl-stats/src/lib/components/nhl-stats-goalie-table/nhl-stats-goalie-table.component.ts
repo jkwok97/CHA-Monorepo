@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LeagueDataFacade } from '@cha/domain/core';
+import { DisplayFacade, LeagueDataFacade } from '@cha/domain/core';
 import {
   NhlGoalieStatDto,
   NhlPlayerStatDto,
@@ -21,6 +21,10 @@ export class NhlStatsGoalieTableComponent {
 
   goalieStats$: Observable<NhlGoalieStatDto[]>;
 
+  isMobile = false;
+  display = false;
+  goalieStats!: any;
+
   goalieTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
     { field: 'games_played', header: 'GP' },
@@ -34,6 +38,12 @@ export class NhlStatsGoalieTableComponent {
     { field: 'save_pct', header: 'Sv%' },
   ];
 
+  mobileGoalieTableColumns = [
+    { field: 'skaterFullName', header: 'Name' },
+    { field: 'wins', header: 'W' },
+    { field: 'action', header: 'More' },
+  ];
+
   first = 0;
   rows = 50;
   totalRecords = 0;
@@ -42,12 +52,19 @@ export class NhlStatsGoalieTableComponent {
 
   constructor(
     private leagueDataFacade: LeagueDataFacade,
-    private nhlStatsFacade: NhlStatsFacade
+    private nhlStatsFacade: NhlStatsFacade,
+    private displayFacade: DisplayFacade
   ) {
     this.teams$ = this.leagueDataFacade.leagueTeams$;
     this.total$ = this.nhlStatsFacade.total$;
     this.isLoading$ = this.nhlStatsFacade.isLoading$;
     this.goalieStats$ = this.nhlStatsFacade.goalieStats$;
+
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
 
     this.goalieStats$
       .pipe(
@@ -73,5 +90,10 @@ export class NhlStatsGoalieTableComponent {
     } else {
       return;
     }
+  }
+
+  onPlayerClick(stat: NhlPlayerStatDto | NhlGoalieStatDto) {
+    this.goalieStats = stat;
+    this.display = true;
   }
 }
