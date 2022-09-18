@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { DisplayFacade, LeagueDataFacade } from '@cha/domain/core';
 import { NhlPlayerStatDto, TeamDto } from '@cha/shared/entities';
 import { Observable, filter, first } from 'rxjs';
 import { NhlStatsFacade } from '../../+state/nhl-stats.facade';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'cha-front-nhl-stats-rookie-table',
@@ -11,6 +12,8 @@ import { NhlStatsFacade } from '../../+state/nhl-stats.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NhlStatsRookieTableComponent {
+  @ViewChild('dt') dt: Table | undefined;
+
   teams$: Observable<TeamDto[]>;
   total$: Observable<number>;
   isLoading$: Observable<boolean>;
@@ -38,7 +41,7 @@ export class NhlStatsRookieTableComponent {
   mobilePlayerTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
     { field: 'points', header: 'Pts' },
-    { field: 'action', header: 'More' },
+    { field: 'action', header: '...More' },
   ];
 
   first = 0;
@@ -95,5 +98,9 @@ export class NhlStatsRookieTableComponent {
   onPlayerClick(stat: NhlPlayerStatDto) {
     this.playerStats = stat;
     this.display = true;
+  }
+
+  applyFilterGlobal(event: any, stringVal: string) {
+    this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }
 }

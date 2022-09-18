@@ -1,4 +1,5 @@
 <p-table
+  #dt
   [responsiveLayout]="'stack'"
   [value]="stats"
   [columns]="!isMobile ? playerTableColumns : mobilePlayerTableColumns"
@@ -12,7 +13,22 @@
   [totalRecords]="totalRecords"
   [sortField]="sortField"
   [sortOrder]="-1"
+  [filterDelay]="0"
+  [globalFilterFields]="['skaterFullName']"
 >
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Player"
+        />
+      </span>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header" let-columns let-data>
     <ng-container
       *ngIf="isMobile; then showMobile; else showDesktop"
