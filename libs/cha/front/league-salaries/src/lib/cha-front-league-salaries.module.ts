@@ -29,6 +29,9 @@ import { LeagueSalariesComponent } from './containers';
 import {
   LeagueSalariesRatingsTableComponent,
   LeagueSalariesRatingsBadgeComponent,
+  LeagueSalariesRatingsMobileSalaryComponent,
+  LeagueSalariesRatingsSidebarComponent,
+  LeagueSalariesRatingsExpansionComponent,
 } from './components';
 
 @NgModule({
@@ -54,6 +57,9 @@ import {
     LeagueSalariesComponent,
     LeagueSalariesRatingsTableComponent,
     LeagueSalariesRatingsBadgeComponent,
+    LeagueSalariesRatingsMobileSalaryComponent,
+    LeagueSalariesRatingsSidebarComponent,
+    LeagueSalariesRatingsExpansionComponent,
   ],
   providers: [
     LeagueSalariesAndRatingsService,

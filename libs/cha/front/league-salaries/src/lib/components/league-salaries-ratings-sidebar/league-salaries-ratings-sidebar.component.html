@@ -1,0 +1,20 @@
+<div class="flex align-items-center column-gap-3">
+  <p-avatar
+    [image]="getPlayerPicture(data.player_id.nhl_id)"
+    shape="circle"
+    size="xlarge"
+  ></p-avatar>
+  <div>
+    <div class="text-xl font-light">
+      {{ data.player_id.firstname }} {{ data.player_id.lastname }}
+    </div>
+    <div class="text-md" style="font-weight: 100">
+      <i>{{ data.teamInfo.city }} {{ data.teamInfo.nickname }}</i>
+    </div>
+  </div>
+</div>
+<blade-divider></blade-divider>
+<div class="text-md font-light">
+  <cha-front-league-salaries-ratings-mobile-salary [salaries]="data.salaries">
+  </cha-front-league-salaries-ratings-mobile-salary>
+</div>

@@ -57,13 +57,7 @@ export class LeagueSalariesRatingsTableComponent implements OnInit {
     return `assets/${temp[temp.length - 1]}`;
   }
 
-  getPlayerPicture(id: string | undefined) {
-    if (id) {
-      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
-    } else {
-      return '';
-    }
-  }
+  
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
