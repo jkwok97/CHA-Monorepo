@@ -22,7 +22,10 @@ import { HistoryPlayersService } from './services';
 import { ChaFrontHistoryPlayersRoutingModule } from './cha-front-history-players-routing.module';
 
 import { HistoryPlayersComponent } from './containers';
-import { HistoryPlayersTableComponent } from './components';
+import {
+  HistoryPlayersTableComponent,
+  HistoryPlayersAllSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -39,7 +42,11 @@ import { HistoryPlayersTableComponent } from './components';
     StoreModule.forFeature('history-players', reducer),
     EffectsModule.forFeature([HistoryPlayersEffects]),
   ],
-  declarations: [HistoryPlayersComponent, HistoryPlayersTableComponent],
+  declarations: [
+    HistoryPlayersComponent,
+    HistoryPlayersTableComponent,
+    HistoryPlayersAllSidebarComponent,
+  ],
   providers: [
     HistoryPlayersService,
     HistoryPlayersFacade,
