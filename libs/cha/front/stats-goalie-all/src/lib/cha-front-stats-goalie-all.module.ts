@@ -22,7 +22,10 @@ import { StatsGoalieAllFacade } from './+state/stats-goalie-all.facade';
 import { ChaFrontStatsGoalieAllRoutingModule } from './cha-front-stats-goalie-all-routing.module';
 
 import { StatsGoalieAllComponent } from './containers';
-import { StatsGoalieAllTableComponent } from './components';
+import {
+  StatsGoalieAllTableComponent,
+  StatsGoalieAllSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -40,7 +43,11 @@ import { StatsGoalieAllTableComponent } from './components';
     StoreModule.forFeature('stats-goalie-all', reducer),
     EffectsModule.forFeature([StatsGoalieAllEffects]),
   ],
-  declarations: [StatsGoalieAllComponent, StatsGoalieAllTableComponent],
+  declarations: [
+    StatsGoalieAllComponent,
+    StatsGoalieAllTableComponent,
+    StatsGoalieAllSidebarComponent,
+  ],
   providers: [
     StatsGoalieAllService,
     StatsGoalieAllFacade,
