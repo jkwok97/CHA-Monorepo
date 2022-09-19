@@ -4,7 +4,6 @@ import { SalariesAndRatingsDto } from '@cha/shared/entities';
 @Component({
   selector: 'cha-front-league-salaries-ratings-sidebar',
   templateUrl: './league-salaries-ratings-sidebar.component.html',
-  styleUrls: ['./league-salaries-ratings-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueSalariesRatingsSidebarComponent {

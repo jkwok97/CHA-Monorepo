@@ -13,7 +13,6 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'cha-front-league-salaries-ratings-table',
   templateUrl: './league-salaries-ratings-table.component.html',
-  styleUrls: ['./league-salaries-ratings-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueSalariesRatingsTableComponent implements OnInit {

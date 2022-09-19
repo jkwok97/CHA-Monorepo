@@ -2,82 +2,102 @@
   class="flex column-gap-2 h-full justify-content-evenly p-3 flex-wrap row-gap-3"
 >
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.c_rate"
     [title]="'C'"
     [rating]="ratings.c_rate"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.l_rate"
     [title]="'LW'"
     [rating]="ratings.l_rate"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.r_rate"
     [title]="'RW'"
     [rating]="ratings.r_rate"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.ld_rate"
     [title]="'LD'"
     [rating]="ratings.ld_rate"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.rd_rate"
     [title]="'RD'"
     [rating]="ratings.rd_rate"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.skating"
     [title]="'Skating'"
     [rating]="ratings.skating"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.speed"
     [title]="'Speed'"
     [rating]="ratings.speed"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.passing"
     [title]="'Passing'"
     [rating]="ratings.passing"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.shooting"
     [title]="'Shooting'"
     [rating]="ratings.shooting"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.face_off"
     [title]="'FO'"
     [rating]="ratings.face_off"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.forecheck"
     [title]="'Forecheck'"
     [rating]="ratings.forecheck"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.assist_rating"
     [title]="'Assist'"
     [rating]="ratings.assist_rating"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.clear_crease"
     [title]="'Clear Crease'"
     [rating]="ratings.clear_crease"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.shot_block"
     [title]="'Shot Block'"
     [rating]="ratings.shot_block"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.pk"
     [title]="'PK'"
     [rating]="ratings.pk"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.physical"
     [title]="'Physical'"
     [rating]="ratings.physical"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.rock"
     [title]="'Rock'"
     [rating]="ratings.rock"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.intimidation"
     [title]="'Intimidation'"
     [rating]="ratings.intimidation"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.game_fatigue"
     [title]="'GF'"
     [rating]="ratings.game_fatigue"
   ></cha-front-league-salaries-ratings-badge>
   <cha-front-league-salaries-ratings-badge
+    *ngIf="ratings.shift_fatigue"
     [title]="'SF'"
     [rating]="ratings.shift_fatigue"
   ></cha-front-league-salaries-ratings-badge>

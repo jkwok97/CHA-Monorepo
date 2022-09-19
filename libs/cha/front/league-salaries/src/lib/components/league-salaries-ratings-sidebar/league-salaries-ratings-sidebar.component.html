@@ -14,7 +14,10 @@
   </div>
 </div>
 <blade-divider></blade-divider>
-<div class="text-md font-light">
+<div class="text-md font-light flex justify-content-between">
   <cha-front-league-salaries-ratings-mobile-salary [salaries]="data.salaries">
   </cha-front-league-salaries-ratings-mobile-salary>
+  <cha-front-league-salaries-ratings-mobile-ratings
+    [ratings]="data.ratings"
+  ></cha-front-league-salaries-ratings-mobile-ratings>
 </div>

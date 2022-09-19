@@ -187,30 +187,9 @@
           </div>
         </ng-template>
         <ng-template #showRatings>
-          <ng-container
-            *ngIf="type === 'players'; then playerBody; else goalieBody"
-          ></ng-container>
-          <ng-template #playerBody>
-            <cha-front-league-salaries-ratings-expansion
-              [ratings]="salary.ratings"
-            ></cha-front-league-salaries-ratings-expansion>
-          </ng-template>
-          <ng-template #goalieBody>
-            <div class="flex column-gap-2 h-full justify-content-evenly p-3">
-              <cha-front-league-salaries-ratings-badge
-                [title]="'Passing'"
-                [rating]="salary.ratings.passing"
-              ></cha-front-league-salaries-ratings-badge>
-              <cha-front-league-salaries-ratings-badge
-                [title]="'Skating'"
-                [rating]="salary.ratings.skating"
-              ></cha-front-league-salaries-ratings-badge>
-              <cha-front-league-salaries-ratings-badge
-                [title]="'Speed'"
-                [rating]="salary.ratings.speed"
-              ></cha-front-league-salaries-ratings-badge>
-            </div>
-          </ng-template>
+          <cha-front-league-salaries-ratings-expansion
+            [ratings]="salary.ratings"
+          ></cha-front-league-salaries-ratings-expansion>
         </ng-template>
       </td>
     </tr>

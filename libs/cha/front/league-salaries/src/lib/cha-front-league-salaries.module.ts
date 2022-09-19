@@ -32,6 +32,7 @@ import {
   LeagueSalariesRatingsMobileSalaryComponent,
   LeagueSalariesRatingsSidebarComponent,
   LeagueSalariesRatingsExpansionComponent,
+  LeagueSalariesRatingsMobileRatingsComponent,
 } from './components';
 
 @NgModule({
@@ -60,6 +61,7 @@ import {
     LeagueSalariesRatingsMobileSalaryComponent,
     LeagueSalariesRatingsSidebarComponent,
     LeagueSalariesRatingsExpansionComponent,
+    LeagueSalariesRatingsMobileRatingsComponent,
   ],
   providers: [
     LeagueSalariesAndRatingsService,
