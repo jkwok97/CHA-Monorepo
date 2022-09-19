@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
@@ -25,7 +27,8 @@ import { StatsTeamAllComponent } from './containers';
 import {
   StatsTeamAllTableComponent,
   StatsTeamAllConferenceComponent,
-  StatsTeamAllDivisionsComponent
+  StatsTeamAllDivisionsComponent,
+  StatsTeamAllSidebarComponent,
 } from './components';
 
 @NgModule({
@@ -35,6 +38,8 @@ import {
     ProgressBarModule,
     TableModule,
     AvatarModule,
+    SidebarModule,
+    ButtonModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
@@ -48,6 +53,7 @@ import {
     StatsTeamAllTableComponent,
     StatsTeamAllConferenceComponent,
     StatsTeamAllDivisionsComponent,
+    StatsTeamAllSidebarComponent,
   ],
   providers: [StatsTeamAllService, StatsTeamAllFacade, StatsTeamAllEffects],
 })

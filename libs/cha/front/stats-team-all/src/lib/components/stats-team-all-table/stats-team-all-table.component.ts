@@ -17,6 +17,9 @@ import { first } from 'rxjs';
 export class StatsTeamAllTableComponent implements OnInit {
   @Input() stats!: StatTeamAllDto[];
 
+  display = false;
+  teamStats!: any;
+
   playerTableColumns = [
     { field: 'team', header: 'Team' },
     { field: 'games_played', header: 'GP' },
@@ -37,6 +40,12 @@ export class StatsTeamAllTableComponent implements OnInit {
     { field: 'home_record', header: 'Home' },
     { field: 'away_recond', header: 'Away' },
     { field: 'trailing_record', header: 'Trailing After 2' },
+  ];
+
+  mobilePlayerTableColumns = [
+    { field: 'team', header: 'Team' },
+    { field: 'points', header: 'Pts' },
+    { field: 'action', header: '...More' },
   ];
 
   sortField = 'points';
@@ -67,5 +76,10 @@ export class StatsTeamAllTableComponent implements OnInit {
       ...stat,
       teamLogo: this.getString(stat.team_id.teamlogo),
     }));
+  }
+
+  onPlayerClick(stat: StatTeamAllDto) {
+    this.teamStats = stat;
+    this.display = true;
   }
 }

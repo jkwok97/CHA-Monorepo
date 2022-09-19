@@ -1,0 +1,123 @@
+<div class="flex align-items-center column-gap-3">
+  <p-avatar
+    [image]="teamStats['teamLogo']"
+    shape="circle"
+    size="xlarge"
+  ></p-avatar>
+  <div>
+    <div class="text-xl font-light">
+      {{ teamStats.team_id.city }}
+    </div>
+    <div class="text-md" style="font-weight: 100">
+      <i>{{ teamStats.team_id.nickname }}</i>
+    </div>
+  </div>
+</div>
+
+<blade-divider></blade-divider>
+
+<div class="text-md font-light flex justify-content-between">
+  <div>
+    <div>Games Played:</div>
+    <div>Wins:</div>
+    <div>Loss:</div>
+    <div>Ties:</div>
+    <div>Points:</div>
+    <div>Goals For:</div>
+    <div>Goals For Per Game:</div>
+    <div>Goals Against:</div>
+    <div>Goals Against Per Game:</div>
+    <div>Goal Differential:</div>
+    <div>Win Pct:</div>
+    <div>Power Play Pct:</div>
+    <div>Penalty Kill Pct:</div>
+    <div>Penalty Minutes Per Game:</div>
+    <div>Division Record:</div>
+    <div>Home Record:</div>
+    <div>Away Record:</div>
+    <div>Trailing After 2nd Period Record:</div>
+  </div>
+  <div style="font-weight: 100" class="text-right">
+    <div>
+      <i>{{ teamStats.games_played }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.wins }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.loss }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.ties }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.points }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goals_for }}</i>
+    </div>
+    <div>
+      <i>{{ (teamStats.goals_for / teamStats.games_played).toFixed(2) }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goals_against }}</i>
+    </div>
+    <div>
+      <i>{{ (teamStats.goals_against / teamStats.games_played).toFixed(2) }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goals_for - teamStats.goals_against }}</i>
+    </div>
+    <div>
+      <i>{{ ((teamStats.wins / teamStats.games_played) * 100).toFixed(1) }}%</i>
+    </div>
+    <div>
+      <i
+        >{{
+          ((teamStats.pp_goals / teamStats.pp_attempts) * 100).toFixed(1)
+        }}%</i
+      >
+    </div>
+    <div>
+      <i
+        >{{
+          (
+            ((teamStats.pk_attempts - teamStats.pk_goals) /
+              teamStats.pk_attempts) *
+            100
+          ).toFixed(1)
+        }}%</i
+      >
+    </div>
+    <div>
+      <i>{{
+        (teamStats.penalty_minutes / teamStats.games_played).toFixed(1)
+      }}</i>
+    </div>
+    <div>
+      <i
+        >{{ teamStats.div_win }} - {{ teamStats.div_loss }} -
+        {{ teamStats.div_tie }}</i
+      >
+    </div>
+    <div>
+      <i
+        >{{ teamStats.home_wins }} - {{ teamStats.home_loss }} -
+        {{ teamStats.home_ties }}</i
+      >
+    </div>
+    <div>
+      <i
+        >{{ teamStats.road_wins }} - {{ teamStats.road_loss }} -
+        {{ teamStats.road_ties }}</i
+      >
+    </div>
+    <div>
+      <i
+        >{{ teamStats.trail_after_two_wins }} -
+        {{ teamStats.trail_after_two_loss }} -
+        {{ teamStats.trail_after_two_ties }}</i
+      >
+    </div>
+  </div>
+</div>
