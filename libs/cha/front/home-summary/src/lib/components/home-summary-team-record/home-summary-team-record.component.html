@@ -1,23 +1,23 @@
 <div
-  class="flex flex-wrap w-full text-sm md:text-md md:text-center column-gap-3"
+  class="flex flex-wrap w-full text-sm md:text-md md:text-center column-gap-3 md:row-gap-2"
 >
-  <span>
+  <div class="w-full md:w-max">
     Overall: {{ teamRecord.wins }} - {{ teamRecord.loss }} -
     {{ teamRecord.ties }}
-  </span>
-  <span>|</span>
-  <span>
+  </div>
+  <div *ngIf="!isMobile">|</div>
+  <div class="w-full md:w-max">
     Division: {{ teamRecord.div_win }} - {{ teamRecord.div_loss }} -
     {{ teamRecord.div_tie }}
-  </span>
-  <span *ngIf="!isMobile">|</span>
-  <span>
+  </div>
+  <div *ngIf="!isMobile">|</div>
+  <div class="w-full md:w-max">
     Home: {{ teamRecord.home_wins }} - {{ teamRecord.home_loss }} -
     {{ teamRecord.home_ties }}
-  </span>
-  <span>|</span>
-  <span>
+  </div>
+  <div *ngIf="!isMobile">|</div>
+  <div class="w-full md:w-max">
     Road: {{ teamRecord.road_wins }} - {{ teamRecord.road_loss }} -
     {{ teamRecord.road_ties }}
-  </span>
+  </div>
 </div>
