@@ -1,7 +1,7 @@
 <p-table
   [responsiveLayout]="'stack'"
   [value]="stats"
-  [columns]="!isMobile ? playerTableColumns : mobilePlayerTableColumns"
+  [columns]="!isMobile ? teamsTableColumns : mobileTeamsTableColumns"
   styleClass="p-datatable-sm p-datatable-striped"
   class="table"
 >
@@ -11,14 +11,14 @@
     ></ng-container>
     <ng-template #showMobile>
       <tr>
-        <th *ngFor="let column of mobilePlayerTableColumns">
+        <th *ngFor="let column of mobileTeamsTableColumns">
           {{ column.header }}
         </th>
       </tr>
     </ng-template>
     <ng-template #showDesktop>
       <tr>
-        <th *ngFor="let column of playerTableColumns">
+        <th *ngFor="let column of teamsTableColumns">
           {{ column.header }}
         </th>
       </tr>
@@ -36,7 +36,7 @@
     ></ng-container>
     <ng-template #showMobileBody>
       <tr>
-        <td *ngFor="let column of mobilePlayerTableColumns">
+        <td *ngFor="let column of mobileTeamsTableColumns">
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container *ngIf="column.field === 'team'">
@@ -61,7 +61,7 @@
     </ng-template>
     <ng-template #showDesktopBody>
       <tr>
-        <td *ngFor="let column of playerTableColumns">
+        <td *ngFor="let column of teamsTableColumns">
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container *ngIf="column.field === 'team'">

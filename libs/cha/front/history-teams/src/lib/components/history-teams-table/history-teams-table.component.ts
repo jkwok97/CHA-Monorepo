@@ -7,8 +7,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { StatTeamsHistoryDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-front-history-teams-table',
@@ -22,7 +24,7 @@ export class HistoryTeamsTableComponent implements OnInit, OnChanges {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  playerTableColumns = [
+  teamsTableColumns = [
     { field: 'playing_year', header: 'Year', visible: true },
     { field: 'season_type', header: 'Season', visible: false },
     { field: 'team', header: 'Team', visible: true },
@@ -47,18 +49,34 @@ export class HistoryTeamsTableComponent implements OnInit, OnChanges {
     { field: 'cornerPct', header: 'CB%', visible: true },
   ];
 
+  mobileTeamsTableColumns = [
+    { field: 'team', header: 'Team', visible: true },
+    { field: 'points', header: 'Pts', visible: true },
+    { field: 'action', header: '...More', visible: true },
+  ];
+
   first = 0;
   rows = 50;
   totalRecords = 0;
   sortField = 'points';
   statsForTable!: any;
+  isMobile = false;
+  display = false;
+  teamStats!: any;
 
+  constructor(private displayFacade: DisplayFacade) {
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+  }
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.playerTableColumns[0].visible =
+    this.teamsTableColumns[0].visible =
       changes['statType'].currentValue === 'season';
   }
 

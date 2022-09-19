@@ -1,8 +1,8 @@
 <p-table
   #dt
-  [responsiveLayout]="'scroll'"
+  [responsiveLayout]="'stack'"
   [value]="statsForTable"
-  [columns]="playerTableColumns"
+  [columns]="!isMobile ? teamsTableColumns : mobileTeamsTableColumns"
   styleClass="p-datatable-sm p-datatable-striped"
   class="table"
   [rows]="rows"
@@ -32,7 +32,7 @@
   <ng-template pTemplate="header" let-columns let-data>
     <tr>
       <th
-        *ngFor="let column of playerTableColumns"
+        *ngFor="let column of teamsTableColumns"
         [hidden]="!column.visible"
         [pSortableColumn]="column.field"
         [pSortableColumnDisabled]="column.field === 'team'"
@@ -53,11 +53,16 @@
     let-rowIndex="rowIndex"
   >
     <tr>
-      <td *ngFor="let column of playerTableColumns" [hidden]="!column.visible">
+      <td *ngFor="let column of teamsTableColumns" [hidden]="!column.visible">
         <span class="p-column-title">{{ column.header }}</span>
         <div class="table-body-cell">
           <ng-container *ngIf="column.field === 'team'">
-            <img [src]="data.teamLogo" height="30px" [pTooltip]="data.team_name" tooltipPosition="right"/>
+            <img
+              [src]="data.teamLogo"
+              height="30px"
+              [pTooltip]="data.team_name"
+              tooltipPosition="right"
+            />
           </ng-container>
           <ng-container>{{ data[column.field] }}</ng-container>
         </div>
