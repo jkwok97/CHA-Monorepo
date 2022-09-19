@@ -22,6 +22,7 @@ import {
   HomeSummaryTeamBannerComponent,
   HomeSummaryDepthChartComponent,
   HomeSummaryTeamRecordComponent,
+  HomeSummaryTeamCapComponent,
 } from './components';
 
 @NgModule({
@@ -41,6 +42,7 @@ import {
     HomeSummaryTeamBannerComponent,
     HomeSummaryDepthChartComponent,
     HomeSummaryTeamRecordComponent,
+    HomeSummaryTeamCapComponent,
   ],
   providers: [HomeSummaryService, HomeSummaryFacade, HomeSummaryEffects],
 })
