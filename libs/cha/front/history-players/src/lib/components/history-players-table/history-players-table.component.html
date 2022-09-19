@@ -139,7 +139,6 @@
 
 <p-sidebar [(visible)]="display" [fullScreen]="true">
   <ng-container *ngIf="playerStats as playerStats">
-    {{ playerStats | json }}
     <cha-front-history-players-all-sidebar
       [playerStats]="playerStats"
       [statType]="statType"
