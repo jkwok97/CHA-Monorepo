@@ -2,7 +2,7 @@
   #dt
   [value]="salariesForTable"
   dataKey="id"
-  responsiveLayout="scroll"
+  responsiveLayout="stack"
   [rows]="rows"
   [showCurrentPageReport]="true"
   [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
@@ -29,80 +29,151 @@
     </div>
   </ng-template>
   <ng-template pTemplate="header">
-    <tr>
-      <th style="width: 3rem"></th>
-      <th pSortableColumn="teamName">
-        Team <p-sortIcon field="teamName"></p-sortIcon>
-      </th>
-      <th pSortableColumn="player_id.lastname">
-        Player <p-sortIcon field="player_id.lastname"></p-sortIcon>
-      </th>
-      <th pSortableColumn="player_id.isdefense" *ngIf="type !== 'goalies'">
-        Defense <p-sortIcon field="player_id.isdefense"></p-sortIcon>
-      </th>
-      <th pSortableColumn="player_id.isforward" *ngIf="type !== 'goalies'">
-        Forward <p-sortIcon field="player_id.isforward"></p-sortIcon>
-      </th>
-      <th pSortableColumn="salaries.season_2022">
-        21-22 <p-sortIcon field="salaries.season_2022"></p-sortIcon>
-      </th>
-      <th pSortableColumn="salaries.season_2023">
-        22-23 <p-sortIcon field="salaries.season_2023"></p-sortIcon>
-      </th>
-      <th pSortableColumn="salaries.season_2024">
-        23-24 <p-sortIcon field="salaries.season_2024"></p-sortIcon>
-      </th>
-      <th pSortableColumn="salaries.season_2025">
-        24-25 <p-sortIcon field="salaries.season_2025"></p-sortIcon>
-      </th>
-    </tr>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th pSortableColumn="teamName">
+          Team <p-sortIcon field="teamName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="player_id.lastname">
+          Player <p-sortIcon field="player_id.lastname"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2023">
+          22-23 <p-sortIcon field="salaries.season_2023"></p-sortIcon>
+        </th>
+        <th>...More</th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th style="width: 3rem"></th>
+        <th pSortableColumn="teamName">
+          Team <p-sortIcon field="teamName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="player_id.lastname">
+          Player <p-sortIcon field="player_id.lastname"></p-sortIcon>
+        </th>
+        <th pSortableColumn="player_id.isdefense" *ngIf="type !== 'goalies'">
+          Defense <p-sortIcon field="player_id.isdefense"></p-sortIcon>
+        </th>
+        <th pSortableColumn="player_id.isforward" *ngIf="type !== 'goalies'">
+          Forward <p-sortIcon field="player_id.isforward"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2022">
+          21-22 <p-sortIcon field="salaries.season_2022"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2023">
+          22-23 <p-sortIcon field="salaries.season_2023"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2024">
+          23-24 <p-sortIcon field="salaries.season_2024"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2025">
+          24-25 <p-sortIcon field="salaries.season_2025"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
   </ng-template>
   <ng-template pTemplate="body" let-salary let-expanded="expanded">
-    <tr>
-      <td>
-        <button
-          type="button"
-          pButton
-          pRipple
-          [pRowToggler]="salary"
-          class="p-button-text p-button-rounded p-button-plain"
-          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
-        ></button>
-      </td>
-      <td>
-        <div class="flex align-items-center column-gap-2">
-          <img [src]="getString(salary.teamLogo)" height="30px" />
-          <div *ngIf="!isMobile">
-            {{ salary.teamName }}
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td>
+          <span class="p-column-title">Team</span>
+          <div class="flex align-items-center column-gap-2">
+            <img [src]="getString(salary.teamLogo)" height="30px" />
+            <div *ngIf="!isMobile">
+              {{ salary.teamName }}
+            </div>
           </div>
-        </div>
-      </td>
-      <td>{{ salary.playerName }}</td>
-      <td *ngIf="type !== 'goalies'">
-        <i
-          class="pi pi-check-circle text-green-500"
-          *ngIf="salary.player_id.isdefense"
-        ></i>
-        <i
-          class="pi pi-times-circle text-red-500"
-          *ngIf="!salary.player_id.isdefense"
-        ></i>
-      </td>
-      <td *ngIf="type !== 'goalies'">
-        <i
-          class="pi pi-check-circle text-green-500"
-          *ngIf="salary.player_id.isforward"
-        ></i>
-        <i
-          class="pi pi-times-circle text-red-500"
-          *ngIf="!salary.player_id.isforward"
-        ></i>
-      </td>
-      <td>{{ salary.salaries?.season_2022 }}</td>
-      <td>{{ salary.salaries?.season_2023 }}</td>
-      <td>{{ salary.salaries?.season_2024 }}</td>
-      <td>{{ salary.salaries?.season_2025 }}</td>
-    </tr>
+        </td>
+        <td>
+          <span class="p-column-title">Player</span>{{ salary.playerName }}
+        </td>
+        <td>
+          <span class="p-column-title">22-23</span
+          >{{ salary.salaries?.season_2023 }}
+        </td>
+        <td>
+          <ng-container>
+            <span class="p-column-title">...More</span>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-window-maximize"
+              class="p-button-rounded p-button-info"
+              (click)="onClick(salary)"
+            ></button>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td>
+          <button
+            type="button"
+            pButton
+            pRipple
+            [pRowToggler]="salary"
+            class="p-button-text p-button-rounded p-button-plain"
+            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+          ></button>
+        </td>
+        <td>
+          <span class="p-column-title">Team</span>
+          <div class="flex align-items-center column-gap-2">
+            <img [src]="getString(salary.teamLogo)" height="30px" />
+            <div *ngIf="!isMobile">
+              {{ salary.teamName }}
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="p-column-title">Player</span>{{ salary.playerName }}
+        </td>
+        <td *ngIf="type !== 'goalies'">
+          <i
+            class="pi pi-check-circle text-green-500"
+            *ngIf="salary.player_id.isdefense"
+          ></i>
+          <i
+            class="pi pi-times-circle text-red-500"
+            *ngIf="!salary.player_id.isdefense"
+          ></i>
+        </td>
+        <td *ngIf="type !== 'goalies'">
+          <i
+            class="pi pi-check-circle text-green-500"
+            *ngIf="salary.player_id.isforward"
+          ></i>
+          <i
+            class="pi pi-times-circle text-red-500"
+            *ngIf="!salary.player_id.isforward"
+          ></i>
+        </td>
+        <td>
+          <span class="p-column-title">21-22</span
+          >{{ salary.salaries?.season_2022 }}
+        </td>
+        <td>
+          <span class="p-column-title">22-23</span
+          >{{ salary.salaries?.season_2023 }}
+        </td>
+        <td>
+          <span class="p-column-title">23-24</span
+          >{{ salary.salaries?.season_2024 }}
+        </td>
+        <td>
+          <span class="p-column-title">24-25</span
+          >{{ salary.salaries?.season_2025 }}
+        </td>
+      </tr>
+    </ng-template>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-salary>
     <tr>
@@ -226,3 +297,33 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="salariesData as data">
+    {{ data | json }}
+    <div class="flex align-items-center column-gap-3">
+      <!-- <p-avatar
+        [image]="data['playerImg']"
+        shape="circle"
+        size="xlarge"
+      ></p-avatar> -->
+      <div>
+        <!-- <div class="text-xl font-light">
+          {{ goalieStats.first_name }} {{ goalieStats.last_name }}
+        </div>
+        <div class="text-md" style="font-weight: 100">
+          <i>{{ goalieStats.team_name_formatted }}</i>
+        </div> -->
+      </div>
+    </div>
+    <blade-divider></blade-divider>
+    <div class="text-md font-light">
+      <div>
+        <!-- Games Played:
+        <span style="font-weight: 100">
+          <i>{{ goalieStats.games_played }}</i>
+        </span> -->
+      </div>
+    </div>
+  </ng-container>
+</p-sidebar>

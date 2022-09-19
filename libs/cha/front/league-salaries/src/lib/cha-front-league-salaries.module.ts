@@ -10,6 +10,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { BadgeModule } from 'primeng/badge';
+import { SidebarModule } from 'primeng/sidebar';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
@@ -39,6 +40,7 @@ import {
     InputTextModule,
     DropdownModule,
     BadgeModule,
+    SidebarModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,

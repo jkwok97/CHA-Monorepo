@@ -27,6 +27,8 @@ export class LeagueSalariesRatingsTableComponent implements OnInit {
   rows = 50;
   totalRecords = 0;
   salariesForTable!: any;
+  display = false;
+  salariesData!: any;
 
   constructor(private displayFacade: DisplayFacade) {
     this.displayFacade.isMobile$
@@ -38,6 +40,8 @@ export class LeagueSalariesRatingsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.salariesForTable = this.mapItems(this.salaries);
+
+    console.log(this.salariesForTable);
   }
 
   mapItems(salaries: SalariesAndRatingsDto[]) {
@@ -57,5 +61,10 @@ export class LeagueSalariesRatingsTableComponent implements OnInit {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  onClick(data: SalariesAndRatingsDto) {
+    this.salariesData = data;
+    this.display = true;
   }
 }
