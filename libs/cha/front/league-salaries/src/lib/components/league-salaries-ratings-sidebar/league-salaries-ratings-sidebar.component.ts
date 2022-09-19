@@ -16,4 +16,10 @@ export class LeagueSalariesRatingsSidebarComponent {
       return '';
     }
   }
+
+  // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
+  getString(urlString: string) {
+    const temp = urlString.split('/');
+    return `assets/${temp[temp.length - 1]}`;
+  }
 }

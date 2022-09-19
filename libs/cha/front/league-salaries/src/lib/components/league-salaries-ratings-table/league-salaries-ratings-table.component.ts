@@ -56,8 +56,6 @@ export class LeagueSalariesRatingsTableComponent implements OnInit {
     return `assets/${temp[temp.length - 1]}`;
   }
 
-  
-
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }

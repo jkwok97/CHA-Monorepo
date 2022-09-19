@@ -198,7 +198,6 @@
 
 <p-sidebar [(visible)]="display" [fullScreen]="true">
   <ng-container *ngIf="salariesData as data">
-    {{ data | json }}
     <cha-front-league-salaries-ratings-sidebar
       [data]="data"
     ></cha-front-league-salaries-ratings-sidebar>
