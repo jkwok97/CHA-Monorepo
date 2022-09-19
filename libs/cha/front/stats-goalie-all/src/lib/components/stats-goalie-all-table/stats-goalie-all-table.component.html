@@ -117,7 +117,19 @@
             <ng-container *ngIf="column.field === 'team'">
               <img [src]="data.teamLogo" height="30px" />
             </ng-container>
-            <ng-container>{{ data[column.field] }}</ng-container>
+            <ng-container
+              *ngIf="
+                column.field !== 'goals_against_avg' &&
+                column.field !== 'save_pct'
+              "
+              >{{ data[column.field] }}</ng-container
+            >
+            <ng-container *ngIf="column.field === 'goals_against_avg'">
+              {{ data[column.field].toFixed(2) }}
+            </ng-container>
+            <ng-container *ngIf="column.field === 'save_pct'">
+              {{ data[column.field].toFixed(3) }}
+            </ng-container>
           </div>
         </td>
       </tr>

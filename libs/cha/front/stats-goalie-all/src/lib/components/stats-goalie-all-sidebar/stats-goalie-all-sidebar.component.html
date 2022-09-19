@@ -48,7 +48,7 @@
       <i>{{ goalieStats.minutes_played }}</i>
     </div>
     <div>
-      <i>{{ goalieStats.goals_against_avg }}</i>
+      <i>{{ goalieStats.goals_against_avg.toFixed(2) }}</i>
     </div>
     <div>
       <i>{{ goalieStats.wins }}</i>
@@ -75,7 +75,7 @@
       <i>{{ goalieStats.shots_for }}</i>
     </div>
     <div>
-      <i>{{ goalieStats.save_pct }}%</i>
+      <i>{{ goalieStats.save_pct.toFixed(3) }}%</i>
     </div>
     <div>
       <i>{{ goalieStats.goals }}</i>
