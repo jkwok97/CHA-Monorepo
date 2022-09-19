@@ -137,10 +137,10 @@ function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
   let total = 0;
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2023 &&
-      !isNaN(Number(salary.salaries.season_2023))
+      salary.salaries.season_2022 &&
+      !isNaN(Number(salary.salaries.season_2022))
     ) {
-      total += Number(salary.salaries.season_2023);
+      total += Number(salary.salaries.season_2022);
     }
   });
 
@@ -151,10 +151,10 @@ function getNextTotal(salaries: SalariesAndRatingsDto[]) {
   let total = 0;
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2024 &&
-      !isNaN(Number(salary.salaries.season_2024))
+      salary.salaries.season_2023 &&
+      !isNaN(Number(salary.salaries.season_2023))
     ) {
-      total += Number(salary.salaries.season_2024);
+      total += Number(salary.salaries.season_2023);
     }
   });
 

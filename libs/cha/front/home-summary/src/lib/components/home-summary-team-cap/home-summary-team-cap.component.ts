@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import { Observable } from 'rxjs';
 
@@ -13,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home-summary-team-cap.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeSummaryTeamCapComponent implements OnInit {
+export class HomeSummaryTeamCapComponent {
   @Input() totalSalary!: number;
   @Input() nextTotalSalary!: number;
   @Input() totalPlayers!: number;
@@ -25,6 +20,4 @@ export class HomeSummaryTeamCapComponent implements OnInit {
     this.currentCapHit$ = this.leagueDataFacade.currentCapHit$;
     this.nextCapHit$ = this.leagueDataFacade.nextCapHit$;
   }
-
-  ngOnInit(): void {}
 }
