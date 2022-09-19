@@ -75,6 +75,7 @@ export class ApiGoalieAllTimeStatsService {
       b.firstname as firstname,
       b.lastname as lastname,
       b.isgoalie as isgoalie,
+      b.nhl_id as nhl_id,
       a.player_id as player_id,
       a.season_type as season_type, 
       sum(games_played) as games_played, 
@@ -100,7 +101,7 @@ export class ApiGoalieAllTimeStatsService {
       a.games_played > '0'
       and
       a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type
+      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
       order by wins DESC`
     );
 
@@ -144,7 +145,7 @@ export class ApiGoalieAllTimeStatsService {
               id: stat['player_id'],
               firstname: stat['firstname'],
               lastname: stat['lastname'],
-              nhl_id: null,
+              nhl_id: stat['nhl_id'],
               isactive: null,
               isgoalie: stat['isgoalie'],
               isdefense: null,

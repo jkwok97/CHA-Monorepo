@@ -80,6 +80,7 @@ export class ApiPlayerAllTimeStatsService {
       b.isdefense as isdefense,
       b.isforward as isforward,
       b.isgoalie as isgoalie,
+      b.nhl_id as nhl_id,
       a.player_id as player_id,
       a.season_type as season_type, 
       a.position as position,
@@ -105,7 +106,7 @@ export class ApiPlayerAllTimeStatsService {
       a.points > '0'
       and
       a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, a.player_id, a.season_type, a.position
+      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
       order by points DESC`
     );
 
@@ -149,7 +150,7 @@ export class ApiPlayerAllTimeStatsService {
               id: stat['player_id'],
               firstname: stat['firstname'],
               lastname: stat['lastname'],
-              nhl_id: null,
+              nhl_id: stat['nhl_id'],
               isactive: null,
               isgoalie: null,
               isdefense: stat['isdefense'],

@@ -7,8 +7,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { StatPlayersHistoryDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-front-history-players-table',
@@ -49,11 +51,29 @@ export class HistoryPlayersTableComponent implements OnInit, OnChanges {
     { field: 'blocked_shots', header: 'BS', visible: true },
   ];
 
+  mobilePlayerTableColumns = [
+    { field: 'team', header: 'Team', visible: true },
+    { field: 'full_name', header: 'Name', visible: true },
+    { field: 'points', header: 'Pts', visible: true },
+    { field: 'action', header: '...More', visible: true },
+  ];
+
   first = 0;
   rows = 50;
   totalRecords = 0;
   sortField = 'points';
   statsForTable!: any;
+  display = false;
+  playerStats!: any;
+  isMobile = false;
+
+  constructor(private displayFacade: DisplayFacade) {
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+  }
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
@@ -93,5 +113,18 @@ export class HistoryPlayersTableComponent implements OnInit, OnChanges {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  onPlayerClick(stat: StatPlayersHistoryDto) {
+    this.playerStats = stat;
+    this.display = true;
+  }
+
+  getPlayerPicture(id: string | undefined) {
+    if (id) {
+      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
+    } else {
+      return '';
+    }
   }
 }
