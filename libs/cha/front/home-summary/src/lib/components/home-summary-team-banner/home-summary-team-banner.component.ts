@@ -8,7 +8,6 @@ import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 @Component({
   selector: 'cha-front-home-summary-team-banner',
   templateUrl: './home-summary-team-banner.component.html',
-  styleUrls: ['./home-summary-team-banner.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeSummaryTeamBannerComponent implements OnInit {
@@ -18,6 +17,8 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
   isTeamRecordLoaded$: Observable<boolean>;
   teamRecord$: Observable<StatUserTeamRecordDto | null>;
   totalSalary$: Observable<number>;
+  nextTotalSalary$: Observable<number>;
+  totalPlayers$: Observable<number>;
 
   isMobile = false;
 
@@ -33,6 +34,8 @@ export class HomeSummaryTeamBannerComponent implements OnInit {
     this.isTeamRecordLoading$ = this.homeSummaryFacade.teamRecordLoading$;
     this.teamRecord$ = this.homeSummaryFacade.teamRecord$;
     this.totalSalary$ = this.homeSummaryFacade.totalTeamSalary$;
+    this.nextTotalSalary$ = this.homeSummaryFacade.totalNextTeamSalary$;
+    this.totalPlayers$ = this.homeSummaryFacade.totalPlayerCount$;
 
     this.displayFacade.isMobile$
       .pipe(first())

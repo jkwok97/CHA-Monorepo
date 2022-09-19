@@ -52,6 +52,16 @@ const selectIsOffSeason = createSelector(
   (data: LeagueDataDto) => data.offseason
 );
 
+const selectCurrentCapHit = createSelector(
+  selectLeagueData,
+  (data: LeagueDataDto) => data.current_cap
+)
+
+const selectNextYearCapHit = createSelector(
+  selectLeagueData,
+  (data: LeagueDataDto) => data.next_cap
+)
+
 const selectTeams = createSelector(selectState, LeagueDataReducer.getTeams);
 
 const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
@@ -67,4 +77,6 @@ export const LeagueDataSelectors = {
   selectLoaded,
   selectLoading,
   selectIsOffSeason,
+  selectCurrentCapHit,
+  selectNextYearCapHit
 };

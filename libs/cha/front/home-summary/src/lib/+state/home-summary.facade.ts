@@ -32,6 +32,10 @@ export class HomeSummaryFacade {
     HomeSummarySelectors.selectTotal
   );
 
+  totalNextTeamSalary$: Observable<number> = this.store.select(
+    HomeSummarySelectors.selectNextTotal
+  );
+
   totalPlayerCount$: Observable<number> = this.store.select(
     HomeSummarySelectors.selectPlayersCount
   );

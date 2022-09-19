@@ -88,8 +88,21 @@ const selectTotal = createSelector(
     playerSalaries: SalariesAndRatingsDto[],
     goalieSalaries: SalariesAndRatingsDto[]
   ) => {
-    const playerTotals = getTotal(playerSalaries);
-    const goalieTotals = getTotal(goalieSalaries);
+    const playerTotals = getCurrentTotal(playerSalaries);
+    const goalieTotals = getCurrentTotal(goalieSalaries);
+    return playerTotals + goalieTotals;
+  }
+);
+
+const selectNextTotal = createSelector(
+  selectPlayerSalaries,
+  selectGoalieSalaries,
+  (
+    playerSalaries: SalariesAndRatingsDto[],
+    goalieSalaries: SalariesAndRatingsDto[]
+  ) => {
+    const playerTotals = getNextTotal(playerSalaries);
+    const goalieTotals = getNextTotal(goalieSalaries);
     return playerTotals + goalieTotals;
   }
 );
@@ -114,16 +127,34 @@ export const HomeSummarySelectors = {
   selectRightDefenseSalaries,
   selectGoalieSalaries,
   selectTotal,
+  selectNextTotal,
   selectPlayersCount,
   selectGoaliesSalaryLoaded,
   selectPlayerSalaryLoaded,
 };
 
-function getTotal(salaries: SalariesAndRatingsDto[]) {
+function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
   let total = 0;
   salaries.forEach((salary: SalariesAndRatingsDto) => {
-    if (salary.salaries.season_2022) {
-      total += Number(salary.salaries.season_2022);
+    if (
+      salary.salaries.season_2023 &&
+      !isNaN(Number(salary.salaries.season_2023))
+    ) {
+      total += Number(salary.salaries.season_2023);
+    }
+  });
+
+  return total;
+}
+
+function getNextTotal(salaries: SalariesAndRatingsDto[]) {
+  let total = 0;
+  salaries.forEach((salary: SalariesAndRatingsDto) => {
+    if (
+      salary.salaries.season_2024 &&
+      !isNaN(Number(salary.salaries.season_2024))
+    ) {
+      total += Number(salary.salaries.season_2024);
     }
   });
 

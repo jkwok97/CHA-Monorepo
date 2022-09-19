@@ -32,6 +32,14 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectCurrentSeason
   );
 
+  currentCapHit$: Observable<number> = this.store.select(
+    LeagueDataSelectors.selectCurrentCapHit
+  );
+
+  nextCapHit$: Observable<number> = this.store.select(
+    LeagueDataSelectors.selectNextYearCapHit
+  );
+
   constructor(private store: Store<State>) {}
 
   getLeagueData() {

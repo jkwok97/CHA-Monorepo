@@ -30,7 +30,15 @@
       </div>
       <div>
         <ng-container *ngIf="totalSalary$ | async as totalSalary">
-          {{ totalSalary }}
+          <ng-container *ngIf="nextTotalSalary$ | async as nextTotalSalary">
+            <ng-container *ngIf="totalPlayers$ | async as totalPlayers">
+              <cha-front-home-summary-team-cap
+                [totalSalary]="totalSalary"
+                [nextTotalSalary]="nextTotalSalary"
+                [totalPlayers]="totalPlayers"
+              ></cha-front-home-summary-team-cap>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </div>
     </div>
