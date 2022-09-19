@@ -45,11 +45,19 @@ export class StatsPlayerAllTableComponent implements OnInit {
     { field: 'blocked_shots', header: 'BS', visible: true },
   ];
 
+  mobilePlayerTableColumns = [
+    { field: 'team', header: 'Team' },
+    { field: 'points', header: 'Pts' },
+    { field: 'action', header: '...More' },
+  ];
+
   first = 0;
   rows = 50;
   totalRecords = 0;
   sortField = 'points';
   statsForTable!: any;
+  display = false;
+  playerStats!: any;
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
@@ -72,5 +80,10 @@ export class StatsPlayerAllTableComponent implements OnInit {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  onPlayerClick(stat: StatPlayerAllDto) {
+    this.playerStats = stat;
+    this.display = true;
   }
 }

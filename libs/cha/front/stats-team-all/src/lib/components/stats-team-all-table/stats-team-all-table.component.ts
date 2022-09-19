@@ -78,7 +78,7 @@ export class StatsTeamAllTableComponent implements OnInit {
     }));
   }
 
-  onPlayerClick(stat: StatTeamAllDto) {
+  onTeamClick(stat: StatTeamAllDto) {
     this.teamStats = stat;
     this.display = true;
   }

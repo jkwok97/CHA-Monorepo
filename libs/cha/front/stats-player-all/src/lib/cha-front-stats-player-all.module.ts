@@ -8,6 +8,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { AvatarModule } from 'primeng/avatar';
 import { InputTextModule } from 'primeng/inputtext';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
@@ -22,7 +24,10 @@ import { StatsPlayerAllService } from './services';
 import { ChaFrontStatsPlayerAllRoutingModule } from './cha-front-stats-player-all-routing.module';
 
 import { StatsPlayerAllComponent } from './containers';
-import { StatsPlayerAllTableComponent } from './components';
+import {
+  StatsPlayerAllTableComponent,
+  StatsPlayerAllSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -32,6 +37,8 @@ import { StatsPlayerAllTableComponent } from './components';
     InputTextModule,
     TableModule,
     AvatarModule,
+    SidebarModule,
+    ButtonModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
@@ -40,7 +47,11 @@ import { StatsPlayerAllTableComponent } from './components';
     StoreModule.forFeature('stats-player-all', reducer),
     EffectsModule.forFeature([StatsPlayerAllEffects]),
   ],
-  declarations: [StatsPlayerAllComponent, StatsPlayerAllTableComponent],
+  declarations: [
+    StatsPlayerAllComponent,
+    StatsPlayerAllTableComponent,
+    StatsPlayerAllSidebarComponent,
+  ],
   providers: [
     StatsPlayerAllService,
     StatsPlayerAllFacade,
