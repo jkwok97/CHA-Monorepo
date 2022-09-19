@@ -1,1 +1,96 @@
-<p>history-teams-table-sidebar works!</p>
+<div class="flex align-items-center column-gap-3">
+  <p-avatar
+    [image]="teamStats['teamLogo']"
+    shape="circle"
+    size="xlarge"
+  ></p-avatar>
+  <div>
+    <div class="text-xl font-light">
+      {{ teamStats.team_id.city }}
+    </div>
+    <div class="text-md" style="font-weight: 100">
+      <i>{{ teamStats.team_id.nickname }}</i>
+    </div>
+  </div>
+</div>
+
+<blade-divider></blade-divider>
+
+<div class="text-md font-light flex justify-content-between">
+  <div>
+    <div>Games Played:</div>
+    <div>Wins:</div>
+    <div>Loss:</div>
+    <div>Ties:</div>
+    <div>Points:</div>
+    <div>Goals For:</div>
+    <div>Goals For Per Game:</div>
+    <div>Goals Against:</div>
+    <div>Goals Against Per Game:</div>
+    <div>Goal Differential:</div>
+    <div>Win Pct:</div>
+    <div>Power Play Pct:</div>
+    <div>Penalty Kill Pct:</div>
+    <div>Short Handed Goals:</div>
+    <div>Penalty Minutes Per Game:</div>
+    <div>Face Off Pct:</div>
+    <div>Passing Pct:</div>
+    <div>Corner Battle Pct:</div>
+  </div>
+  <div style="font-weight: 100" class="text-right">
+    <div>
+      <i>{{ teamStats.games_played }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.wins }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.loss }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.ties }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.points }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goals_for }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goalsForPerGame }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goals_against }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goalsAgainstPerGame }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.goalDiff }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.winPct }}%</i>
+    </div>
+    <div>
+      <i>{{ teamStats.ppPct }}%</i>
+    </div>
+    <div>
+      <i>{{ teamStats.pkPct }}%</i>
+    </div>
+    <div>
+      <i>{{ teamStats.sh_goals }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.pimPerGame }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.foPct }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.passPct }}</i>
+    </div>
+    <div>
+      <i>{{ teamStats.cornerPct }}</i>
+    </div>
+  </div>
+</div>

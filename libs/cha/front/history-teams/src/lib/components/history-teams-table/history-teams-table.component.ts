@@ -96,4 +96,9 @@ export class HistoryTeamsTableComponent implements OnInit, OnChanges {
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }
+
+  onTeamClick(stat: StatTeamsHistoryDto) {
+    this.teamStats = stat;
+    this.display = true;
+  }
 }
