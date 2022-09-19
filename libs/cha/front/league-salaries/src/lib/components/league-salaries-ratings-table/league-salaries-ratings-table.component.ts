@@ -40,8 +40,6 @@ export class LeagueSalariesRatingsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.salariesForTable = this.mapItems(this.salaries);
-
-    console.log(this.salariesForTable);
   }
 
   mapItems(salaries: SalariesAndRatingsDto[]) {
