@@ -7,8 +7,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { StatGoaliesHistoryDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-front-history-goalies-table',
@@ -22,7 +24,7 @@ export class HistoryGoaliesTableComponent implements OnInit, OnChanges {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  playerTableColumns = [
+  goalieTableColumns = [
     { field: 'playing_year', header: 'Year', visible: true },
     { field: 'season_type', header: 'Season', visible: false },
     { field: 'team', header: 'Team', visible: true },
@@ -46,11 +48,29 @@ export class HistoryGoaliesTableComponent implements OnInit, OnChanges {
     { field: 'penalty_minutes', header: 'PIM', visible: true },
   ];
 
+  mobileGoalieTableColumns = [
+    { field: 'team', header: 'Team', visible: true },
+    { field: 'full_name', header: 'Name', visible: true },
+    { field: 'wins', header: 'Wins', visible: true },
+    { field: 'action', header: '...More', visible: true },
+  ];
+
   first = 0;
   rows = 50;
   totalRecords = 0;
   sortField = 'wins';
   statsForTable!: any;
+  display = false;
+  goalieStats!: any;
+  isMobile = false;
+
+  constructor(private displayFacade: DisplayFacade) {
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+  }
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
@@ -58,10 +78,13 @@ export class HistoryGoaliesTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['statType']) {
-      this.playerTableColumns[0].visible =
+      this.goalieTableColumns[0].visible =
         changes['statType'].currentValue === 'season';
-      this.playerTableColumns[2].visible =
+      this.goalieTableColumns[2].visible =
         changes['statType'].currentValue === 'season';
+      this.mobileGoalieTableColumns[0].visible =
+        changes['statType'].currentValue === 'season';
+      console.log(this.mobileGoalieTableColumns[0].visible);
     }
   }
 
@@ -84,5 +107,10 @@ export class HistoryGoaliesTableComponent implements OnInit, OnChanges {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  onPlayerClick(stat: StatGoaliesHistoryDto) {
+    this.goalieStats = stat;
+    this.display = true;
   }
 }
