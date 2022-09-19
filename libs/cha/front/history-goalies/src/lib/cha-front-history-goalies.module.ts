@@ -22,7 +22,10 @@ import { HistoryGoaliesService } from './services';
 import { ChaFrontHistoryGoaliesRoutingModule } from './cha-front-history-goalies-routing.module';
 
 import { HistoryGoaliesComponent } from './containers';
-import { HistoryGoaliesTableComponent } from './components';
+import {
+  HistoryGoaliesTableComponent,
+  HistoryGoalieSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -39,7 +42,11 @@ import { HistoryGoaliesTableComponent } from './components';
     StoreModule.forFeature('history-goalies', reducer),
     EffectsModule.forFeature([HistoryGoaliesEffects]),
   ],
-  declarations: [HistoryGoaliesComponent, HistoryGoaliesTableComponent],
+  declarations: [
+    HistoryGoaliesComponent,
+    HistoryGoaliesTableComponent,
+    HistoryGoalieSidebarComponent,
+  ],
   providers: [
     HistoryGoaliesService,
     HistoryGoaliesFacade,
