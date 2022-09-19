@@ -8,6 +8,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { AvatarModule } from 'primeng/avatar';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -35,6 +38,9 @@ import {
     TableModule,
     InputTextModule,
     TooltipModule,
+    AvatarModule,
+    SidebarModule,
+    ButtonModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
