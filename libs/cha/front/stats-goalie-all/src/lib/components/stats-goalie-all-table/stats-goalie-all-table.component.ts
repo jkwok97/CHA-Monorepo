@@ -5,8 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { StatGoalieAllDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-front-stats-goalie-all-table',
@@ -42,11 +44,29 @@ export class StatsGoalieAllTableComponent implements OnInit {
     { field: 'pass_pct', header: 'Pass%', visible: true },
   ];
 
+  mobileGoalieTableColumns = [
+    { field: 'team', header: 'Team', visible: true },
+    { field: 'full_name', header: 'Name', visible: true },
+    { field: 'wins', header: 'W', visible: true },
+    { field: 'action', header: '...More', visible: true },
+  ];
+
   first = 0;
   rows = 50;
   totalRecords = 0;
   sortField = 'wins';
   statsForTable!: any;
+  display = false;
+  goalieStats!: any;
+  isMobile = false;
+
+  constructor(private displayFacade: DisplayFacade) {
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+  }
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
@@ -69,5 +89,10 @@ export class StatsGoalieAllTableComponent implements OnInit {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  onPlayerClick(stat: StatGoalieAllDto) {
+    this.goalieStats = stat;
+    this.display = true;
   }
 }
