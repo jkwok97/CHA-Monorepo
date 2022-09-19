@@ -38,14 +38,8 @@
         <th
           *ngFor="let column of mobileGoalieTableColumns"
           [hidden]="!column.visible"
-          [pSortableColumn]="column.field"
-          [pSortableColumnDisabled]="column.field === 'team'"
         >
           {{ column.header }}
-          <p-sortIcon
-            [field]="column.field"
-            *ngIf="column.field !== 'team'"
-          ></p-sortIcon>
         </th>
       </tr>
     </ng-template>

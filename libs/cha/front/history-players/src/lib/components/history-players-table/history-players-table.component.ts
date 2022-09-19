@@ -81,6 +81,8 @@ export class HistoryPlayersTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['statType']) {
+      this.mobilePlayerTableColumns[0].visible =
+        changes['statType'].currentValue === 'season';
       this.playerTableColumns[0].visible =
         changes['statType'].currentValue === 'season';
       this.playerTableColumns[2].visible =

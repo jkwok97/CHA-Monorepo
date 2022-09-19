@@ -84,7 +84,6 @@ export class HistoryGoaliesTableComponent implements OnInit, OnChanges {
         changes['statType'].currentValue === 'season';
       this.mobileGoalieTableColumns[0].visible =
         changes['statType'].currentValue === 'season';
-      console.log(this.mobileGoalieTableColumns[0].visible);
     }
   }
 
