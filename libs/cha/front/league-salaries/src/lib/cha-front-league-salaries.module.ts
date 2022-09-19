@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { BadgeModule } from 'primeng/badge';
 import { SidebarModule } from 'primeng/sidebar';
+import { AvatarModule } from 'primeng/avatar';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
@@ -41,6 +42,7 @@ import {
     DropdownModule,
     BadgeModule,
     SidebarModule,
+    AvatarModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,

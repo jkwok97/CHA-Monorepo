@@ -302,27 +302,40 @@
   <ng-container *ngIf="salariesData as data">
     {{ data | json }}
     <div class="flex align-items-center column-gap-3">
-      <!-- <p-avatar
-        [image]="data['playerImg']"
+      <p-avatar
+        [image]="getPlayerPicture(data.player_id.nhl_id)"
         shape="circle"
         size="xlarge"
-      ></p-avatar> -->
+      ></p-avatar>
       <div>
-        <!-- <div class="text-xl font-light">
-          {{ goalieStats.first_name }} {{ goalieStats.last_name }}
+        <div class="text-xl font-light">
+          {{ data.player_id.firstname }} {{ data.player_id.lastname }}
         </div>
         <div class="text-md" style="font-weight: 100">
-          <i>{{ goalieStats.team_name_formatted }}</i>
-        </div> -->
+          <i>{{ data.teamInfo.city }} {{ data.teamInfo.nickname }}</i>
+        </div>
       </div>
     </div>
     <blade-divider></blade-divider>
     <div class="text-md font-light">
+      <span class="text-lg">Salary</span>
       <div>
-        <!-- Games Played:
+        2022-23:
         <span style="font-weight: 100">
-          <i>{{ goalieStats.games_played }}</i>
-        </span> -->
+          <i>{{ data.salaries.season_2023 }}</i>
+        </span>
+      </div>
+      <div>
+        2023-24:
+        <span style="font-weight: 100">
+          <i>{{ data.salaries.season_2024 }}</i>
+        </span>
+      </div>
+      <div>
+        2024-25:
+        <span style="font-weight: 100">
+          <i>{{ data.salaries.season_2024 }}</i>
+        </span>
       </div>
     </div>
   </ng-container>
