@@ -13,6 +13,8 @@ import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 import { StatsGoalieAllEffects } from './+state/stats-goalie-all.effects';
 import { reducer } from './+state/stats-goalie-all.reducer';
@@ -35,6 +37,8 @@ import {
     InputTextModule,
     TableModule,
     AvatarModule,
+    SidebarModule,
+    ButtonModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,
     BladeDividerComponent,
