@@ -5,6 +5,7 @@ import {
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
+import { stat } from 'fs';
 import { HomeSummaryActions } from './home-summary.actions';
 
 export interface State {
@@ -118,3 +119,9 @@ export const getGoalieSalaryLoading = (state: State) =>
 
 export const getGoalieSalaryLoaded = (state: State) =>
   state.goalieSalaryLoading;
+
+export const getCurrentPlayerStat = (state: State) =>
+  state.currentPlayerStat[0];
+
+  export const getCurrentGoalieStat = (state: State) =>
+  state.currentGoalieStat[0];

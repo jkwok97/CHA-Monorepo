@@ -46,4 +46,16 @@ export class HomeSummaryService {
       )
       .pipe(map((result: any) => result));
   }
+
+  getCHACurrentGoalieStatsByPlayerId(
+    season: string,
+    seasonType: string,
+    playerId: number
+  ) {
+    return this._http
+      .get(
+        `${this.apiUrl}/goalie-stats/current/${season}/${seasonType}/${playerId}`
+      )
+      .pipe(map((result: any) => result));
+  }
 }

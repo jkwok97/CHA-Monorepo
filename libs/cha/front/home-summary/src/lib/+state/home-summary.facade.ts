@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { HomeSummarySelectors } from './home-summary.selectors';
 import {
   SalariesAndRatingsDto,
+  StatGoalieAllDto,
+  StatPlayerAllDto,
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 
@@ -65,6 +67,14 @@ export class HomeSummaryFacade {
 
   goalies$: Observable<SalariesAndRatingsDto[]> = this.store.select(
     HomeSummarySelectors.selectGoalieSalaries
+  );
+
+  currentPlayerCHAStats$: Observable<StatPlayerAllDto> = this.store.select(
+    HomeSummarySelectors.selectCurrentPlayerStat
+  );
+
+  currentGoalieCHAStats$: Observable<StatGoalieAllDto> = this.store.select(
+    HomeSummarySelectors.selectCurrentGoalieStat
   );
 
   constructor(private store: Store<State>) {}

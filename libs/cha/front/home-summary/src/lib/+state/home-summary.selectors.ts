@@ -26,6 +26,16 @@ const selectPlayerSalaryLoaded = createSelector(
   HomeSummaryReducer.getPlayerSalaryLoaded
 );
 
+const selectCurrentPlayerStat = createSelector(
+  selectState,
+  HomeSummaryReducer.getCurrentPlayerStat
+);
+
+const selectCurrentGoalieStat = createSelector(
+  selectState,
+  HomeSummaryReducer.getCurrentGoalieStat
+);
+
 const selectPlayerSalaries = createSelector(
   selectState,
   HomeSummaryReducer.getPlayerSalaries
@@ -141,6 +151,8 @@ export const HomeSummarySelectors = {
   selectPlayersCount,
   selectGoaliesSalaryLoaded,
   selectPlayerSalaryLoaded,
+  selectCurrentPlayerStat,
+  selectCurrentGoalieStat,
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
