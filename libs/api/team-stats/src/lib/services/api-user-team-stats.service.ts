@@ -129,6 +129,8 @@ export class ApiUserTeamStatsService {
         corner_lost: true,
         pass_complete: true,
         pass_incomplete: true,
+        shots_against: true,
+        shots_for: true
       },
       where: {
         team_id: {
