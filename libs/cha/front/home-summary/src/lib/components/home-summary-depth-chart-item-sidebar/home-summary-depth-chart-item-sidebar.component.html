@@ -1,1 +1,40 @@
-<p>home-summary-depth-chart-item-sidebar works!</p>
+<!-- {{ playerStats | json }} -->
+
+<div class="flex align-items-center column-gap-3">
+  <p-avatar
+    [image]="getPlayerPicture(playerStats.player_id?.nhl_id)"
+    shape="circle"
+    size="xlarge"
+  ></p-avatar>
+  <div>
+    <div class="text-xl font-light">
+      {{ playerStats.player_id.firstname }} {{ playerStats.player_id.lastname }}
+    </div>
+
+    <div
+      class="text-md flex column-gap-2 align-items-center"
+      style="font-weight: 100"
+    >
+      <div>
+        <div>
+          <i
+            >{{ playerStats.teamInfo.city }}
+            {{ playerStats.teamInfo.nickname }}</i
+          >
+        </div>
+        <div class="text-sm">
+          Current Salary: <i>{{ playerStats.salaries.season_2022 }}</i>
+        </div>
+        <div class="text-sm">
+          Next Salary: <i>{{ playerStats.salaries.season_2023 }}</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<blade-divider></blade-divider>
+
+<cha-front-home-summary-depth-chart-item-sidebar-ratings
+  [ratings]="playerStats.ratings"
+></cha-front-home-summary-depth-chart-item-sidebar-ratings>

@@ -1,24 +1,40 @@
 <blade-card
   style="min-width: 300px; background-color: var(--background-100)"
-  class="h-full"
+  class="h-auto md:h-full"
 >
   <blade-card-body>
     <div class="w-full flex flex-column justify-content-center">
       <div class="w-full text-center text-xl pb-2">{{ title }}</div>
       <ng-container *ngFor="let player of players">
-        <div class="w-full flex align-items-center column-gap-2">
-          <p-avatar
-            [image]="getPlayerPicture(player.player_id.nhl_id)"
-            shape="circle"
-          ></p-avatar>
-          {{ player.player_id.firstname }} {{ player.player_id.lastname }}
-          <button
-            pButton
-            type="button"
-            icon="pi pi-window-maximize"
-            class="p-button-rounded p-button-info p-button-sm"
-            (click)="onPlayerClick(player)"
-          ></button>
+        <div class="w-full flex justify-content-between p-2 align-items-center">
+          <div class="flex column-gap-3 align-items-center">
+            <p-avatar
+              [image]="getPlayerPicture(player.player_id.nhl_id)"
+              shape="circle"
+              size="xlarge"
+            ></p-avatar>
+            <div class="flex flex-wrap align-items-center justify-content-left">
+              <div class="w-full">
+                {{ player.player_id.firstname }} {{ player.player_id.lastname }}
+              </div>
+              <div class="w-full flex column-gap-2">
+                <div class="text-sm">Pts: {{ player.ratings.points }}</div>
+                <div class="text-sm">
+                  Salary: {{ player.salaries.season_2022 }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-window-maximize"
+              class="p-button-rounded p-button-info p-button-sm"
+              (click)="onPlayerClick(player)"
+            ></button>
+          </div>
         </div>
       </ng-container>
     </div>
@@ -27,6 +43,8 @@
 
 <p-sidebar [(visible)]="display" [fullScreen]="true">
   <ng-container *ngIf="playerStats as playerStats">
-    {{ playerStats | json }}
+    <cha-front-home-summary-depth-chart-item-sidebar
+      [playerStats]="playerStats"
+    ></cha-front-home-summary-depth-chart-item-sidebar>
   </ng-container>
 </p-sidebar>

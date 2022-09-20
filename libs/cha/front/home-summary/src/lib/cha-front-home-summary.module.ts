@@ -30,6 +30,7 @@ import {
   HomeSummaryDepthChartPositionComponent,
 } from './components';
 import { HomeSummaryDepthChartItemSidebarComponent } from './components/home-summary-depth-chart-item-sidebar/home-summary-depth-chart-item-sidebar.component';
+import { HomeSummaryDepthChartItemSidebarRatingsComponent } from './components/home-summary-depth-chart-item-sidebar-ratings/home-summary-depth-chart-item-sidebar-ratings.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { HomeSummaryDepthChartItemSidebarComponent } from './components/home-sum
     HomeSummaryTeamCapComponent,
     HomeSummaryDepthChartPositionComponent,
     HomeSummaryDepthChartItemSidebarComponent,
+    HomeSummaryDepthChartItemSidebarRatingsComponent,
   ],
   providers: [HomeSummaryService, HomeSummaryFacade, HomeSummaryEffects],
 })

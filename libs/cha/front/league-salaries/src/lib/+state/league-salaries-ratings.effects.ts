@@ -20,7 +20,9 @@ export class LeagueSalariesAndRatingsEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.leagueSalariesAndRatingsService
-          .getPlayerSalaries(data.current_year)
+          .getPlayerSalaries(
+            data.offseason ? data.prev_year : data.current_year
+          )
           .pipe(
             map((salaries: SalariesAndRatingsDto[]) =>
               LeagueSalariesAndRatingActions.getPlayerSalariesSuccess({
@@ -39,7 +41,9 @@ export class LeagueSalariesAndRatingsEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.leagueSalariesAndRatingsService
-          .getGoaliesSalaries(data.current_year)
+          .getGoaliesSalaries(
+            data.offseason ? data.prev_year : data.current_year
+          )
           .pipe(
             map((salaries: SalariesAndRatingsDto[]) =>
               LeagueSalariesAndRatingActions.getGoaliesalariesSuccess({
