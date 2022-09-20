@@ -138,6 +138,9 @@ export class ApiUserTeamStatsService {
         },
         season_type: seasonType,
       },
+      order: {
+        playing_year: 'DESC'
+      }
     });
   }
 
