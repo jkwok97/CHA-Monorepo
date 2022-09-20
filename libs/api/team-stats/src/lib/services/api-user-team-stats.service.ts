@@ -83,7 +83,7 @@ export class ApiUserTeamStatsService {
     teamId: number,
     seasonType: 'Regular' | 'Playoffs'
   ) {
-    return await this.repo.findOne({
+    return await this.repo.find({
       relations: ['team_id'],
       select: {
         team_id: {
