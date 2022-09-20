@@ -45,7 +45,7 @@ export class PlayerStatsController {
     const stats = await this.playerStatsService.getPlayerStatsByPlayerId(
       param.season,
       param.seasonType,
-      param.player_id
+      param.playerId
     );
 
     if (!stats || stats.length < 1) {

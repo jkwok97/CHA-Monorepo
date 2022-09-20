@@ -45,7 +45,7 @@ const getCHACurrentPlayerStats = createAction(
 
 const getCHACurrentPlayerStatsSuccess = createAction(
   `${NAMESPACE} Get Current CHA stats for Player Success`,
-  props<{ stats: StatPlayerAllDto }>()
+  props<{ stats: StatPlayerAllDto[] }>()
 );
 
 const getCHACurrentGoalieStats = createAction(
@@ -55,7 +55,7 @@ const getCHACurrentGoalieStats = createAction(
 
 const getCHACurrentGoalieStatsSuccess = createAction(
   `${NAMESPACE} Get Current CHA stats for Goalie Success`,
-  props<{ stats: StatGoalieAllDto }>()
+  props<{ stats: StatGoalieAllDto[] }>()
 );
 
 const error = createAction(`${NAMESPACE} Error`);

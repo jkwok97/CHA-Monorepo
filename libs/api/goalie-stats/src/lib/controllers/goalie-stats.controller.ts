@@ -1,4 +1,7 @@
-import { StatGoalieLeadersDto, StatGoaliesHistoryDto } from '@cha/shared/entities';
+import {
+  StatGoalieLeadersDto,
+  StatGoaliesHistoryDto,
+} from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { stat } from 'fs';
 import {
@@ -42,13 +45,12 @@ export class GoalieStatsController {
     return stats;
   }
 
-  
   @Get('/current/:season/:seasonType/:playerId')
   async getGoalieStatsByPlayerId(@Param() param): Promise<any[]> {
     const stats = await this.goalieStatsService.getGoalieStatsByPlayerId(
       param.season,
       param.seasonType,
-      param.player_id
+      param.playerId
     );
 
     if (!stats || stats.length < 1) {
@@ -57,7 +59,6 @@ export class GoalieStatsController {
     return stats;
   }
 
-  
   @Get('/history/season/:seasonType')
   async getAllTimePlayerStatsBySeasonByType(
     @Param() param

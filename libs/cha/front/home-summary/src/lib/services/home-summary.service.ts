@@ -34,4 +34,16 @@ export class HomeSummaryService {
       .get(`${this.apiUrl}/salaries/user/${teamName}/goalies/${season}`)
       .pipe(map((result: any) => result));
   }
+
+  getCHACurrentPlayerStatsByPlayerId(
+    season: string,
+    seasonType: string,
+    playerId: number
+  ) {
+    return this._http
+      .get(
+        `${this.apiUrl}/player-stats/current/${season}/${seasonType}/${playerId}`
+      )
+      .pipe(map((result: any) => result));
+  }
 }

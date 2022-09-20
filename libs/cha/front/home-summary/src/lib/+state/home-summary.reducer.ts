@@ -17,8 +17,8 @@ export interface State {
   goalieSalaries: SalariesAndRatingsDto[];
   goalieSalaryLoading: boolean;
   goalieSalaryLoaded: boolean;
-  currentPlayerStat: StatPlayerAllDto | null;
-  currentGoalieStat: StatGoalieAllDto | null;
+  currentPlayerStat: StatPlayerAllDto[];
+  currentGoalieStat: StatGoalieAllDto[];
 }
 
 const initialState: State = {
@@ -31,8 +31,8 @@ const initialState: State = {
   goalieSalaries: [],
   goalieSalaryLoading: false,
   goalieSalaryLoaded: false,
-  currentPlayerStat: null,
-  currentGoalieStat: null,
+  currentPlayerStat: [],
+  currentGoalieStat: [],
 };
 
 const r = createReducer(
@@ -89,7 +89,6 @@ const r = createReducer(
     ...state,
     currentGoalieStat: action.stats,
   })),
-
 
   on(HomeSummaryActions.error, (state) => initialState)
 );
