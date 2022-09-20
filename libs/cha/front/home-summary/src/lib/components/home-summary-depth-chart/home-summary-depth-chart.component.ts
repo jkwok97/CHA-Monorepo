@@ -1,16 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UserTeamFacade } from '@cha/domain/core';
 import { SalariesAndRatingsDto, TeamDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
 @Component({
   selector: 'cha-front-home-summary-depth-chart',
   templateUrl: './home-summary-depth-chart.component.html',
-  styleUrls: ['./home-summary-depth-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeSummaryDepthChartComponent implements OnInit {
+export class HomeSummaryDepthChartComponent {
   userTeam$: Observable<TeamDto | undefined>;
   leftWingers$: Observable<SalariesAndRatingsDto[]>;
   centers$: Observable<SalariesAndRatingsDto[]>;
@@ -18,6 +17,7 @@ export class HomeSummaryDepthChartComponent implements OnInit {
   leftDefense$: Observable<SalariesAndRatingsDto[]>;
   rightDefense$: Observable<SalariesAndRatingsDto[]>;
   goalies$: Observable<SalariesAndRatingsDto[]>;
+  loadedSalaries$: Observable<boolean>;
 
   constructor(
     private userTeamFacade: UserTeamFacade,
@@ -30,23 +30,31 @@ export class HomeSummaryDepthChartComponent implements OnInit {
     this.leftDefense$ = this.homeSummaryFacade.leftDefenseman$;
     this.rightDefense$ = this.homeSummaryFacade.rightDefenseman$;
     this.goalies$ = this.homeSummaryFacade.goalies$;
-  }
 
-  ngOnInit(): void {
-    this.leftWingers$.subscribe((v) => {
-      console.log('LW:', v);
-    });
-    // this.centers$.subscribe((v) => {
-    //   console.log('C:', v);
-    // });
-    // this.rightWingers$.subscribe((v) => {
-    //   console.log('RW:', v);
-    // });
-    // this.leftDefense$.subscribe((v) => {
-    //   console.log('LD:', v);
-    // });
-    // this.rightDefense$.subscribe((v) => {
-    //   console.log('RD:', v);
-    // });
+    this.loadedSalaries$ = combineLatest([
+      this.leftWingers$,
+      this.centers$,
+      this.rightWingers$,
+      this.leftDefense$,
+      this.rightDefense$,
+      this.goalies$,
+    ]).pipe(
+      map(
+        ([lw, c, rw, ld, rd, g]: [
+          SalariesAndRatingsDto[],
+          SalariesAndRatingsDto[],
+          SalariesAndRatingsDto[],
+          SalariesAndRatingsDto[],
+          SalariesAndRatingsDto[],
+          SalariesAndRatingsDto[]
+        ]) =>
+          lw.length > 0 &&
+          c.length > 0 &&
+          rw.length > 0 &&
+          ld.length > 0 &&
+          rd.length > 0 &&
+          g.length > 0
+      )
+    );
   }
 }

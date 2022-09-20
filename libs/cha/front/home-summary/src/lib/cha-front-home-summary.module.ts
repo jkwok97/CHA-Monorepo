@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -34,6 +35,7 @@ import {
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,
+    PerfectScrollbarModule,
 
     StoreModule.forFeature('home-summary', reducer),
     EffectsModule.forFeature([HomeSummaryEffects]),

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
-import { first, Observable, of } from 'rxjs';
+import { combineLatest, first, map, Observable, of } from 'rxjs';
+import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
 @Component({
   selector: 'cha-front-home-summary',
@@ -8,15 +9,53 @@ import { first, Observable, of } from 'rxjs';
   styleUrls: ['./home-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeSummaryComponent implements OnInit {
-  isLoading$: Observable<boolean>;
+export class HomeSummaryComponent {
   isLoaded$: Observable<boolean>;
+  isLoading$: Observable<boolean>;
 
   isMobile = false;
 
-  constructor(private displayFacade: DisplayFacade) {
-    this.isLoaded$ = of(true);
-    this.isLoading$ = of(false);
+  panelStyleMobile = {
+    width: '100%',
+    height: '77vh',
+  };
+
+  panelStyleDesktop = {
+    width: '100%',
+    height: '83vh',
+  };
+
+  constructor(
+    private displayFacade: DisplayFacade,
+    private homeSummaryFacade: HomeSummaryFacade
+  ) {
+    this.isLoaded$ = combineLatest([
+      this.homeSummaryFacade.goalieSalaryLoaded$,
+      this.homeSummaryFacade.playerSalaryLoaded$,
+      this.homeSummaryFacade.teamRecordLoaded$,
+    ]).pipe(
+      map(
+        ([goalieLoaded, playerLoaded, recordLoaded]: [
+          boolean,
+          boolean,
+          boolean
+        ]) => goalieLoaded && playerLoaded && recordLoaded
+      )
+    );
+
+    this.isLoading$ = combineLatest([
+      this.homeSummaryFacade.goalieSalaryLoaded$,
+      this.homeSummaryFacade.playerSalaryLoaded$,
+      this.homeSummaryFacade.teamRecordLoaded$,
+    ]).pipe(
+      map(
+        ([goalieLoaded, playerLoaded, recordLoaded]: [
+          boolean,
+          boolean,
+          boolean
+        ]) => !goalieLoaded && !playerLoaded && !recordLoaded
+      )
+    );
 
     this.displayFacade.isMobile$
       .pipe(first())
@@ -24,6 +63,4 @@ export class HomeSummaryComponent implements OnInit {
         this.isMobile = isMobile;
       });
   }
-
-  ngOnInit(): void {}
 }

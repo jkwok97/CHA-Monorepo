@@ -1,47 +1,66 @@
 <blade-card
   *ngIf="userTeam$ | async as userTeam"
-  [ngStyle]="{ 'background-color': userTeam.teamcolor, 'font-weight': 100 }"
+  [ngStyle]="{
+    'background-color': userTeam.teamcolor,
+    'font-weight': 100
+  }"
   class="w-full"
 >
   <blade-card-header>
     <div class="text-xl text-center">Depth Chart</div>
   </blade-card-header>
   <blade-card-body>
-    <ng-container *ngIf="leftWingers$ | async as leftWingers">
-      <cha-front-home-summary-depth-chart-position
-        [title]="'LW'"
-        [players]="leftWingers"
-      ></cha-front-home-summary-depth-chart-position>
-    </ng-container>
-    <ng-container *ngIf="centers$ | async as centers">
-      <cha-front-home-summary-depth-chart-position
-        [title]="'C'"
-        [players]="centers"
-      ></cha-front-home-summary-depth-chart-position>
-    </ng-container>
-    <ng-container *ngIf="rightWingers$ | async as rightWingers">
-      <cha-front-home-summary-depth-chart-position
-        [title]="'RW'"
-        [players]="rightWingers"
-      ></cha-front-home-summary-depth-chart-position>
-    </ng-container>
-    <ng-container *ngIf="leftDefense$ | async as leftDefense">
-      <cha-front-home-summary-depth-chart-position
-        [title]="'LD'"
-        [players]="leftDefense"
-      ></cha-front-home-summary-depth-chart-position>
-    </ng-container>
-    <ng-container *ngIf="rightDefense$ | async as rightDefense">
-      <cha-front-home-summary-depth-chart-position
-        [title]="'RD'"
-        [players]="rightDefense"
-      ></cha-front-home-summary-depth-chart-position>
-    </ng-container>
-    <ng-container *ngIf="goalies$ | async as goalies">
-      <cha-front-home-summary-depth-chart-position
-        [title]="'G'"
-        [players]="goalies"
-      ></cha-front-home-summary-depth-chart-position>
+    <ng-container *ngIf="loadedSalaries$ | async">
+      <div class="flex flex-wrap row-gap-3 column-gap-3">
+        <div class="w-full flex flex-wrap row-gap-3 justify-content-between">
+          <ng-container *ngIf="leftWingers$ | async as leftWingers">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'LW'"
+              [players]="leftWingers"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+          <ng-container *ngIf="centers$ | async as centers">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'C'"
+              [players]="centers"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+          <ng-container *ngIf="rightWingers$ | async as rightWingers">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'RW'"
+              [players]="rightWingers"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+        </div>
+        <div class="w-full flex flex-wrap row-gap-3 justify-content-evenly">
+          <ng-container *ngIf="leftDefense$ | async as leftDefense">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'LD'"
+              [players]="leftDefense"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+          <ng-container *ngIf="rightDefense$ | async as rightDefense">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'RD'"
+              [players]="rightDefense"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+        </div>
+        <div class="w-full flex justify-content-center">
+          <ng-container *ngIf="goalies$ | async as goalies">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'G'"
+              [players]="goalies"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+        </div>
+      </div>
     </ng-container>
   </blade-card-body>
 </blade-card>

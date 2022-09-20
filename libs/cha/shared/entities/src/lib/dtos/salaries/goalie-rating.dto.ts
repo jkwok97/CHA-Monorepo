@@ -5,4 +5,5 @@ export interface GoalieRatingDto extends PlayerRatingDto {
   skating: string;
   speed: string;
   passing: string;
+  wins?: string;
 }

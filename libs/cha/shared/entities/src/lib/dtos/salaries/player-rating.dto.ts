@@ -20,4 +20,6 @@ export interface PlayerRatingDto {
   shot_block: string;
   face_off: string;
   assist_rating: string;
+  points?: string;
+  wins?: string;
 }
