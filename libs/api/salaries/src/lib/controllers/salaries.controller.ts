@@ -29,11 +29,12 @@ export class SalariesController {
     return salaries;
   }
 
-  @Get('/user/:teamName/players/:season')
+  @Get('/user/:teamName/players/:season/:ratingsSeason')
   async getUserTeamPlayerSalaries(@Param() param): Promise<any[]> {
     const salaries = await this.salariesService.getUserTeamPlayerSalaries(
       param.teamName,
-      param.season
+      param.season,
+      param.ratingsSeason
     );
 
     if (!salaries) {
@@ -42,11 +43,12 @@ export class SalariesController {
     return salaries;
   }
 
-  @Get('/user/:teamName/goalies/:season')
+  @Get('/user/:teamName/goalies/:season/:ratingsSeason')
   async getUserTeamGoaliesSalaries(@Param() param): Promise<any[]> {
     const salaries = await this.salariesService.getUserTeamGoaliesSalaries(
       param.teamName,
-      param.season
+      param.season,
+      param.ratingsSeason
     );
 
     if (!salaries) {

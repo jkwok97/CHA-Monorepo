@@ -96,7 +96,11 @@ export class ApiSalariesService {
     return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
   }
 
-  async getUserTeamPlayerSalaries(teamName: string, season: string) {
+  async getUserTeamPlayerSalaries(
+    teamName: string,
+    season: string,
+    ratingsSeason: string
+  ) {
     const allPlayersInSeason = await this.playersStatsRepo.find({
       select: {
         id: true,
@@ -121,7 +125,7 @@ export class ApiSalariesService {
 
     const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(
       allSalariesForPlayersInSeason,
-      season
+      ratingsSeason
     );
 
     const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo =
@@ -130,7 +134,11 @@ export class ApiSalariesService {
     return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
   }
 
-  async getUserTeamGoaliesSalaries(teamName: string, season: string) {
+  async getUserTeamGoaliesSalaries(
+    teamName: string,
+    season: string,
+    ratingsSeason: string
+  ) {
     const allGoaliesInSeason = await this.goaliesStatsRepo.find({
       select: {
         id: true,
@@ -155,7 +163,7 @@ export class ApiSalariesService {
 
     const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(
       allSalariesForGoaliesInSeason,
-      season
+      ratingsSeason
     );
 
     const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo =
@@ -217,7 +225,7 @@ export class ApiSalariesService {
         wins: true,
         goals_against_avg: true,
         save_pct: true,
-        games_played: true
+        games_played: true,
       },
       where: {
         player_id: playerId,
@@ -255,7 +263,7 @@ export class ApiSalariesService {
         assists: true,
         shots: true,
         shooting_pct: true,
-        games_played: true
+        games_played: true,
       },
       where: {
         player_id: playerId,
