@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class Current_Season_V2 {
@@ -10,6 +10,9 @@ export class Current_Season_V2 {
 
   @Column()
   next_year!: string;
+
+  @Column()
+  prev_year!: string;
 
   @Column()
   nhl_year!: string;
