@@ -105,4 +105,20 @@ export class TeamStatsController {
     }
     return record;
   }
+
+  @Get('/user/:userId/history/:seasonType')
+  async getUserTeamStatsBySeasonType(
+    @Param() param
+  ): Promise<StatUserTeamRecordDto> {
+    const record =
+      await this.userTeamStatsService.getUserTeamStatsBySeasonType(
+        param.userId,
+        param.seasonType
+      );
+
+    if (!record) {
+      throw new NotFoundException('User Team Stats not found');
+    }
+    return record;
+  }
 }
