@@ -36,10 +36,12 @@
 <blade-divider></blade-divider>
 
 <ng-container *ngIf="currentStat$ | async as currentStat">
+  <div>Current Stats</div>
   {{ currentStat | json }}
 </ng-container>
 
 <ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
+  <div>NHL Stats</div>
   {{ currentNHLStat | json }}
 </ng-container>
 
