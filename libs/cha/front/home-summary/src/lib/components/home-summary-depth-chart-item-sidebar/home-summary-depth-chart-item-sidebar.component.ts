@@ -4,7 +4,12 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { StatGoalieAllDto, StatPlayerAllDto } from '@cha/shared/entities';
+import {
+  NhlGoalieStatDto,
+  NhlPlayerStatDto,
+  StatGoalieAllDto,
+  StatPlayerAllDto,
+} from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
@@ -18,6 +23,7 @@ export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
   @Input() playerStats: any;
 
   currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
+  currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;
 
   constructor(private homeSummaryFacade: HomeSummaryFacade) {}
 
@@ -34,7 +40,11 @@ export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
       this.currentStat$ = this.homeSummaryFacade.currentPlayerCHAStats$;
     }
 
-    this.homeSummaryFacade.getNHLCurrentStats(this.playerStats.player_id.nhl_id);
+    this.homeSummaryFacade.getNHLCurrentStats(
+      this.playerStats.player_id.nhl_id
+    );
+
+    this.currentNhlStat$ = this.homeSummaryFacade.currentNHLStats$;
   }
 
   getPlayerPicture(id: string | undefined) {

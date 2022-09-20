@@ -39,6 +39,10 @@
   {{ currentStat | json }}
 </ng-container>
 
+<ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
+  {{ currentNHLStat | json }}
+</ng-container>
+
 <cha-front-home-summary-depth-chart-item-sidebar-ratings
   [ratings]="playerStats.ratings"
 ></cha-front-home-summary-depth-chart-item-sidebar-ratings>
