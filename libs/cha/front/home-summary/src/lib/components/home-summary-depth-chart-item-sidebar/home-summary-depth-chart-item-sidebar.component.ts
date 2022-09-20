@@ -4,6 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { StatGoalieAllDto, StatPlayerAllDto } from '@cha/shared/entities';
+import { Observable } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
 @Component({
@@ -15,18 +17,23 @@ import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
   @Input() playerStats: any;
 
-  constructor(private homeSummaryFacade: HomeSummaryFacade) {
-    console.log(this.playerStats);
-  }
+  currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
+
+  constructor(private homeSummaryFacade: HomeSummaryFacade) {}
 
   ngOnInit(): void {
-    console.log(this.playerStats);
     if (this.playerStats.player_id.isgoalie) {
-      this.homeSummaryFacade.getCHACurrentGoalieStats(this.playerStats.player_id.id);
+      this.homeSummaryFacade.getCHACurrentGoalieStats(
+        this.playerStats.player_id.id
+      );
+      this.currentStat$ = this.homeSummaryFacade.currentGoalieCHAStats$;
     } else {
-      this.homeSummaryFacade.getCHACurrentPlayerStats(this.playerStats.player_id.id);
+      this.homeSummaryFacade.getCHACurrentPlayerStats(
+        this.playerStats.player_id.id
+      );
+      this.currentStat$ = this.homeSummaryFacade.currentPlayerCHAStats$;
     }
-    
+
     // this.homeSummaryFacade.getNHLCurrentStats(this.playerStats.player_id.id);
   }
 

@@ -10,7 +10,11 @@
     <div class="text-xl text-center">Depth Chart</div>
     <div *ngIf="isOffseason$ | async" class="text-sm text-center">
       ** It is currently the offseason, depth chart is based on previous
-      season's stats & ratings **
+      season's NHL stats & CHA ratings **
+    </div>
+    <div *ngIf="(isOffseason$ | async) === false" class="text-sm text-center">
+      ** Depth chart is based on current season CHA ratings and previous NHL season
+      stats **
     </div>
   </blade-card-header>
   <blade-card-body>

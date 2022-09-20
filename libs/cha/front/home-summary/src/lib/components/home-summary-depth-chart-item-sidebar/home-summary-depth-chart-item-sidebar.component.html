@@ -35,6 +35,10 @@
 
 <blade-divider></blade-divider>
 
+<ng-container *ngIf="currentStat$ | async as currentStat">
+  {{ currentStat | json }}
+</ng-container>
+
 <cha-front-home-summary-depth-chart-item-sidebar-ratings
   [ratings]="playerStats.ratings"
 ></cha-front-home-summary-depth-chart-item-sidebar-ratings>

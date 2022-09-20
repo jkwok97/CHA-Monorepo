@@ -91,4 +91,17 @@ export class NhlController {
     }
     return nhlLeaders;
   }
+
+  @Get('/player/stats/:playerId/:season')
+  async getNhlPlayerStatsByPlayerId(@Param() param) {
+    const stats = await this.nhlService.getNhlPlayerStatsByPlayerId(
+      param.playerId,
+      param.season
+    );
+
+    if (!stats) {
+      throw new NotFoundException('Nhl Player Stat not found');
+    }
+    return stats;
+  }
 }
