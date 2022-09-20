@@ -8,6 +8,10 @@
 >
   <blade-card-header>
     <div class="text-xl text-center">Depth Chart</div>
+    <div *ngIf="isOffseason$ | async" class="text-sm text-center">
+      ** It is currently the offseason, depth chart is based on previous
+      season's stats & ratings **
+    </div>
   </blade-card-header>
   <blade-card-body>
     <ng-container *ngIf="loadedSalaries$ | async">

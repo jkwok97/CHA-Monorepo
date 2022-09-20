@@ -1,5 +1,7 @@
 import {
   SalariesAndRatingsDto,
+  StatGoalieAllDto,
+  StatPlayerAllDto,
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
@@ -36,6 +38,26 @@ const getUserTeamGoaliesSalariesSuccess = createAction(
   props<{ goalieSalaries: SalariesAndRatingsDto[] }>()
 );
 
+const getCHACurrentPlayerStats = createAction(
+  `${NAMESPACE} Get Current CHA stats for Player`,
+  props<{ playerId: number }>()
+);
+
+const getCHACurrentPlayerStatsSuccess = createAction(
+  `${NAMESPACE} Get Current CHA stats for Player Success`,
+  props<{ stats: StatPlayerAllDto }>()
+);
+
+const getCHACurrentGoalieStats = createAction(
+  `${NAMESPACE} Get Current CHA stats for Goalie`,
+  props<{ playerId: number }>()
+);
+
+const getCHACurrentGoalieStatsSuccess = createAction(
+  `${NAMESPACE} Get Current CHA stats for Goalie Success`,
+  props<{ stats: StatGoalieAllDto }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const HomeSummaryActions = {
@@ -45,5 +67,9 @@ export const HomeSummaryActions = {
   getUserTeamPlayerSalariesSuccess,
   getUserTeamGoaliesSalaries,
   getUserTeamGoaliesSalariesSuccess,
+  getCHACurrentPlayerStats,
+  getCHACurrentPlayerStatsSuccess,
+  getCHACurrentGoalieStats,
+  getCHACurrentGoalieStatsSuccess,
   error,
 };

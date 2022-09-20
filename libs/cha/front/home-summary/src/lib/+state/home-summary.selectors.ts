@@ -35,10 +35,7 @@ const selectCenterSalaries = createSelector(
   selectPlayerSalaries,
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
     playerSalariesRating
-      .filter(
-        (rating: SalariesAndRatingsDto) =>
-          rating.ratings.c_rate !== '0'
-      )
+      .filter((rating: SalariesAndRatingsDto) => rating.ratings.c_rate !== '0')
       .sort((a, b) => Number(b.ratings.points) - Number(a.ratings.points))
 );
 
@@ -81,7 +78,7 @@ const selectRightDefenseSalaries = createSelector(
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
     playerSalariesRating
       .filter((rating: SalariesAndRatingsDto) => rating.ratings.rd_rate !== '0')
-      .sort((a, b) => Number(a.ratings.points) - Number(b.ratings.points))
+      .sort((a, b) => Number(b.ratings.points) - Number(a.ratings.points))
 );
 
 const selectGoaliesSalaryLoaded = createSelector(

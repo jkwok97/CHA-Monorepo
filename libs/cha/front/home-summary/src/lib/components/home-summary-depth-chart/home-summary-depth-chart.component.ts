@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UserTeamFacade } from '@cha/domain/core';
+import { LeagueDataFacade, UserTeamFacade } from '@cha/domain/core';
 import { SalariesAndRatingsDto, TeamDto } from '@cha/shared/entities';
 import { combineLatest, map, Observable } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
@@ -18,9 +18,11 @@ export class HomeSummaryDepthChartComponent {
   rightDefense$: Observable<SalariesAndRatingsDto[]>;
   goalies$: Observable<SalariesAndRatingsDto[]>;
   loadedSalaries$: Observable<boolean>;
+  isOffseason$: Observable<boolean>;
 
   constructor(
     private userTeamFacade: UserTeamFacade,
+    private leagueDataFacade: LeagueDataFacade,
     private homeSummaryFacade: HomeSummaryFacade
   ) {
     this.userTeam$ = this.userTeamFacade.currentUserTeam$;
@@ -30,6 +32,7 @@ export class HomeSummaryDepthChartComponent {
     this.leftDefense$ = this.homeSummaryFacade.leftDefenseman$;
     this.rightDefense$ = this.homeSummaryFacade.rightDefenseman$;
     this.goalies$ = this.homeSummaryFacade.goalies$;
+    this.isOffseason$ = this.leagueDataFacade.isOffSeason$;
 
     this.loadedSalaries$ = combineLatest([
       this.leftWingers$,

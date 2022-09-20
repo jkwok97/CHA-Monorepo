@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
 @Component({
   selector: 'cha-front-home-summary-depth-chart-item-sidebar',
@@ -8,9 +14,21 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 })
 export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
   @Input() playerStats: any;
-  constructor() {}
 
-  ngOnInit(): void {}
+  constructor(private homeSummaryFacade: HomeSummaryFacade) {
+    console.log(this.playerStats);
+  }
+
+  ngOnInit(): void {
+    console.log(this.playerStats);
+    if (this.playerStats.player_id.isgoalie) {
+      this.homeSummaryFacade.getCHACurrentGoalieStats(this.playerStats.player_id.id);
+    } else {
+      this.homeSummaryFacade.getCHACurrentPlayerStats(this.playerStats.player_id.id);
+    }
+    
+    // this.homeSummaryFacade.getNHLCurrentStats(this.playerStats.player_id.id);
+  }
 
   getPlayerPicture(id: string | undefined) {
     if (id) {

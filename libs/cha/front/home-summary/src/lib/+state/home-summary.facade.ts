@@ -86,4 +86,16 @@ export class HomeSummaryFacade {
       HomeSummaryActions.getUserTeamGoaliesSalaries({ teamName })
     );
   }
+
+  getCHACurrentPlayerStats(playerId: number) {
+    this.store.dispatch(
+      HomeSummaryActions.getCHACurrentPlayerStats({ playerId })
+    );
+  }
+
+  getCHACurrentGoalieStats(playerId: number) {
+    this.store.dispatch(
+      HomeSummaryActions.getCHACurrentGoalieStats({ playerId })
+    );
+  }
 }

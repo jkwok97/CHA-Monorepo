@@ -1,5 +1,7 @@
 import {
   SalariesAndRatingsDto,
+  StatGoalieAllDto,
+  StatPlayerAllDto,
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
@@ -15,6 +17,8 @@ export interface State {
   goalieSalaries: SalariesAndRatingsDto[];
   goalieSalaryLoading: boolean;
   goalieSalaryLoaded: boolean;
+  currentPlayerStat: StatPlayerAllDto | null;
+  currentGoalieStat: StatGoalieAllDto | null;
 }
 
 const initialState: State = {
@@ -27,6 +31,8 @@ const initialState: State = {
   goalieSalaries: [],
   goalieSalaryLoading: false,
   goalieSalaryLoaded: false,
+  currentPlayerStat: null,
+  currentGoalieStat: null,
 };
 
 const r = createReducer(
@@ -73,6 +79,17 @@ const r = createReducer(
     playerSalaryLoading: false,
     playerSalaryLoaded: true,
   })),
+
+  on(HomeSummaryActions.getCHACurrentPlayerStatsSuccess, (state, action) => ({
+    ...state,
+    currentPlayerStat: action.stats,
+  })),
+
+  on(HomeSummaryActions.getCHACurrentGoalieStatsSuccess, (state, action) => ({
+    ...state,
+    currentGoalieStat: action.stats,
+  })),
+
 
   on(HomeSummaryActions.error, (state) => initialState)
 );
