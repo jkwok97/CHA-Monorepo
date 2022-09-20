@@ -1,6 +1,19 @@
-<div class="w-full">
-  <div>{{ title }}</div>
-  <ng-container *ngFor="let player of players">
-    <div>{{ player.player_id.firstname }} {{ player.player_id.lastname }}</div>
-  </ng-container>
-</div>
+<blade-card
+  style="min-width: 300px; background-color: var(--background-100)"
+  class="h-full"
+>
+  <blade-card-body>
+    <div class="w-full flex flex-column justify-content-center">
+      <div class="w-full text-center text-xl pb-2">{{ title }}</div>
+      <ng-container *ngFor="let player of players">
+        <div class="w-full flex align-items-center column-gap-2">
+          <p-avatar
+            [image]="getPlayerPicture(player.player_id.nhl_id)"
+            shape="circle"
+          ></p-avatar>
+          {{ player.player_id.firstname }} {{ player.player_id.lastname }}
+        </div>
+      </ng-container>
+    </div>
+  </blade-card-body>
+</blade-card>

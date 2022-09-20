@@ -17,21 +17,21 @@
             <cha-front-home-summary-depth-chart-position
               [title]="'LW'"
               [players]="leftWingers"
-              class="w-full sm:w-max"
+              class="w-full sm:w-max h-full"
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
           <ng-container *ngIf="centers$ | async as centers">
             <cha-front-home-summary-depth-chart-position
               [title]="'C'"
               [players]="centers"
-              class="w-full sm:w-max"
+              class="w-full sm:w-max h-full"
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
           <ng-container *ngIf="rightWingers$ | async as rightWingers">
             <cha-front-home-summary-depth-chart-position
               [title]="'RW'"
               [players]="rightWingers"
-              class="w-full sm:w-max"
+              class="w-full sm:w-max h-full"
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
         </div>
