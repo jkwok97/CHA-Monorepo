@@ -68,7 +68,7 @@ export class HomeSummaryFacade {
   );
 
   goalies$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    HomeSummarySelectors.selectGoalieSalaries
+    HomeSummarySelectors.selectGoalieSalariesSorted
   );
 
   currentPlayerCHAStats$: Observable<StatPlayerAllDto> = this.store.select(

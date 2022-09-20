@@ -66,7 +66,7 @@ const selectLeftWingSalaries = createSelector(
       .filter(
         (rating: SalariesAndRatingsDto) =>
           rating.ratings.l_rate !== '0' &&
-          rating.ratings.l_rate > rating.ratings.c_rate &&
+          rating.ratings.l_rate >= rating.ratings.c_rate &&
           rating.ratings.l_rate >= rating.ratings.r_rate
       )
       .sort((a, b) => Number(b.ratings.points) - Number(a.ratings.points))
@@ -79,7 +79,7 @@ const selectRightWingSalaries = createSelector(
       .filter(
         (rating: SalariesAndRatingsDto) =>
           rating.ratings.r_rate !== '0' &&
-          rating.ratings.r_rate > rating.ratings.c_rate &&
+          rating.ratings.r_rate >= rating.ratings.c_rate &&
           rating.ratings.r_rate >= rating.ratings.l_rate
       )
       .sort((a, b) => Number(b.ratings.points) - Number(a.ratings.points))
@@ -109,6 +109,14 @@ const selectGoaliesSalaryLoaded = createSelector(
 const selectGoalieSalaries = createSelector(
   selectState,
   HomeSummaryReducer.getGoalieSalaries
+);
+
+const selectGoalieSalariesSorted = createSelector(
+  selectGoalieSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter((rating: SalariesAndRatingsDto) => rating.ratings.rd_rate !== '0')
+      .sort((a, b) => Number(b.ratings.wins) - Number(a.ratings.wins))
 );
 
 const selectTotal = createSelector(
@@ -164,7 +172,8 @@ export const HomeSummarySelectors = {
   selectCurrentPlayerStat,
   selectCurrentGoalieStat,
   selectCurrentNHLStat,
-  selectStatsLoading
+  selectStatsLoading,
+  selectGoalieSalariesSorted
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {

@@ -23,15 +23,27 @@ export class HomeSummaryService {
       .pipe(map((result: any) => result));
   }
 
-  getUserTeamPlayersSalariesBySeason(teamName: string, season: string) {
+  getUserTeamPlayersSalariesBySeason(
+    teamName: string,
+    season: string,
+    ratingsSeason: string
+  ) {
     return this._http
-      .get(`${this.apiUrl}/salaries/user/${teamName}/players/${season}`)
+      .get(
+        `${this.apiUrl}/salaries/user/${teamName}/players/${season}/${ratingsSeason}`
+      )
       .pipe(map((result: any) => result));
   }
 
-  getUserTeamGoaliesSalariesBySeason(teamName: string, season: string) {
+  getUserTeamGoaliesSalariesBySeason(
+    teamName: string,
+    season: string,
+    ratingsSeason: string
+  ) {
     return this._http
-      .get(`${this.apiUrl}/salaries/user/${teamName}/goalies/${season}`)
+      .get(
+        `${this.apiUrl}/salaries/user/${teamName}/goalies/${season}/${ratingsSeason}`
+      )
       .pipe(map((result: any) => result));
   }
 
