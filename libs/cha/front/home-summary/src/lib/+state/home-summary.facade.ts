@@ -4,7 +4,10 @@ import { State } from './home-summary.reducer';
 import { HomeSummaryActions } from './home-summary.actions';
 import { Observable } from 'rxjs';
 import { HomeSummarySelectors } from './home-summary.selectors';
-import { StatUserTeamRecordDto } from '@cha/shared/entities';
+import {
+  SalariesAndRatingsDto,
+  StatUserTeamRecordDto,
+} from '@cha/shared/entities';
 
 @Injectable()
 export class HomeSummaryFacade {
@@ -39,6 +42,30 @@ export class HomeSummaryFacade {
   totalPlayerCount$: Observable<number> = this.store.select(
     HomeSummarySelectors.selectPlayersCount
   );
+
+  leftWingers$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    HomeSummarySelectors.selectLeftWingSalaries
+  );
+
+  centers$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    HomeSummarySelectors.selectCenterSalaries
+  );
+
+  rightWingers$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    HomeSummarySelectors.selectRightWingSalaries
+  );
+
+  leftDefenseman$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    HomeSummarySelectors.selectLeftDefenseSalaries
+  );
+
+  rightDefenseman$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    HomeSummarySelectors.selectRightDefenseSalaries
+  );
+
+  goalies$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    HomeSummarySelectors.selectGoalieSalaries
+  )
 
   constructor(private store: Store<State>) {}
 

@@ -6,5 +6,42 @@
   <blade-card-header>
     <div class="text-xl text-center">Depth Chart</div>
   </blade-card-header>
-  <blade-card-body> </blade-card-body>
+  <blade-card-body>
+    <ng-container *ngIf="leftWingers$ | async as leftWingers">
+      <cha-front-home-summary-depth-chart-position
+        [title]="'LW'"
+        [players]="leftWingers"
+      ></cha-front-home-summary-depth-chart-position>
+    </ng-container>
+    <ng-container *ngIf="centers$ | async as centers">
+      <cha-front-home-summary-depth-chart-position
+        [title]="'C'"
+        [players]="centers"
+      ></cha-front-home-summary-depth-chart-position>
+    </ng-container>
+    <ng-container *ngIf="rightWingers$ | async as rightWingers">
+      <cha-front-home-summary-depth-chart-position
+        [title]="'RW'"
+        [players]="rightWingers"
+      ></cha-front-home-summary-depth-chart-position>
+    </ng-container>
+    <ng-container *ngIf="leftDefense$ | async as leftDefense">
+      <cha-front-home-summary-depth-chart-position
+        [title]="'LD'"
+        [players]="leftDefense"
+      ></cha-front-home-summary-depth-chart-position>
+    </ng-container>
+    <ng-container *ngIf="rightDefense$ | async as rightDefense">
+      <cha-front-home-summary-depth-chart-position
+        [title]="'RD'"
+        [players]="rightDefense"
+      ></cha-front-home-summary-depth-chart-position>
+    </ng-container>
+    <ng-container *ngIf="goalies$ | async as goalies">
+      <cha-front-home-summary-depth-chart-position
+        [title]="'G'"
+        [players]="goalies"
+      ></cha-front-home-summary-depth-chart-position>
+    </ng-container>
+  </blade-card-body>
 </blade-card>

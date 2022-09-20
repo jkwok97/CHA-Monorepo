@@ -214,6 +214,7 @@ export class ApiSalariesService {
         passing: true,
         speed: true,
         skating: true,
+        wins: true,
       },
       where: {
         player_id: playerId,
@@ -246,6 +247,7 @@ export class ApiSalariesService {
         intimidation: true,
         game_fatigue: true,
         shift_fatigue: true,
+        points: true,
       },
       where: {
         player_id: playerId,

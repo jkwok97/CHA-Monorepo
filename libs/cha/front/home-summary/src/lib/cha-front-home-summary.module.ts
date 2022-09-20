@@ -23,6 +23,7 @@ import {
   HomeSummaryDepthChartComponent,
   HomeSummaryTeamRecordComponent,
   HomeSummaryTeamCapComponent,
+  HomeSummaryDepthChartPositionComponent,
 } from './components';
 
 @NgModule({
@@ -43,6 +44,7 @@ import {
     HomeSummaryDepthChartComponent,
     HomeSummaryTeamRecordComponent,
     HomeSummaryTeamCapComponent,
+    HomeSummaryDepthChartPositionComponent,
   ],
   providers: [HomeSummaryService, HomeSummaryFacade, HomeSummaryEffects],
 })
