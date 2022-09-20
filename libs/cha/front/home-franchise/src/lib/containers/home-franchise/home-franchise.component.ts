@@ -6,4 +6,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./home-franchise.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeFranchiseComponent {}
+export class HomeFranchiseComponent {
+  isMobile = false;
+
+  panelStyleMobile = {
+    width: '100%',
+    height: '77vh',
+  };
+
+  panelStyleDesktop = {
+    width: '100%',
+    height: '83vh',
+  };
+}
