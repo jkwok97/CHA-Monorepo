@@ -17,6 +17,12 @@
         [style]="{ 'font-weight': '100' }"
       >
         Order Based On Regular Season Standings
+
+        <blade-button-select
+          class="flex justify-content-center pt-3"
+          [options]="selectOptions"
+          (optionChanged)="onOptionChanged($event)"
+        ></blade-button-select>
       </div>
     </div>
 

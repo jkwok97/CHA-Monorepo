@@ -46,10 +46,7 @@ export class HomeSummaryEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.homeSummaryService
-          .getUserTeamPlayersSalariesBySeason(
-            action.teamName,
-            data.current_year
-          )
+          .getUserTeamPlayersSalariesBySeason(action.teamName, '2021-22')
           .pipe(
             map((playerSalaries: SalariesAndRatingsDto[]) =>
               HomeSummaryActions.getUserTeamPlayerSalariesSuccess({
@@ -68,10 +65,7 @@ export class HomeSummaryEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.homeSummaryService
-          .getUserTeamGoaliesSalariesBySeason(
-            action.teamName,
-            data.current_year
-          )
+          .getUserTeamGoaliesSalariesBySeason(action.teamName, '2021-22')
           .pipe(
             map((goalieSalaries: SalariesAndRatingsDto[]) =>
               HomeSummaryActions.getUserTeamGoaliesSalariesSuccess({

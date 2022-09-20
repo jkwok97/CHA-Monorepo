@@ -13,6 +13,7 @@ const initialState: State = {
   currentData: {
     current_year: '',
     next_year: '',
+    prev_year: '',
     nhl_year: '',
     current_season_type: '',
     current_day: 1,

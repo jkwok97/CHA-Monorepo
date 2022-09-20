@@ -15,21 +15,31 @@
             [goalieLeaders]="winsLeaders$ | async"
             [type]="'wins'"
           ></blade-cha-leader-card>
-          <blade-cha-leader-card
-            [goalieLeaders]="gaaLeaders$ | async"
-            [type]="'Goals Against Avg'"
-          ></blade-cha-leader-card>
-          <blade-cha-leader-card
-            [goalieLeaders]="savePctLeaders$ | async"
-            [type]="'Save Pct'"
-          ></blade-cha-leader-card>
+          <ng-container *ngIf="gaaLeaders$ | async as gaaLeaders">
+            <blade-cha-leader-card
+              *ngIf="gaaLeaders.length > 0"
+              [goalieLeaders]="gaaLeaders"
+              [type]="'Goals Against Avg'"
+            ></blade-cha-leader-card>
+          </ng-container>
+          <ng-container *ngIf="savePctLeaders$ | async as savePctLeaders">
+            <blade-cha-leader-card
+              *ngIf="savePctLeaders.length > 0"
+              [goalieLeaders]="savePctLeaders"
+              [type]="'Save Pct'"
+            ></blade-cha-leader-card>
+          </ng-container>
         </div>
 
         <div class="league-stats-goalies-section-body">
-          <blade-cha-leader-card
-            [goalieLeaders]="shotsFacedLeaders$ | async"
-            [type]="'shots faced'"
-          ></blade-cha-leader-card>
+          <ng-container *ngIf="shotsFacedLeaders$ | async as shotsFacedLeaders">
+            <blade-cha-leader-card
+              *ngIf="shotsFacedLeaders.length > 0"
+              [goalieLeaders]="shotsFacedLeaders"
+              [type]="'shots faced'"
+            ></blade-cha-leader-card>
+          </ng-container>
+
           <blade-cha-leader-card
             [goalieLeaders]="shutoutLeaders$ | async"
             [type]="'shutouts'"

@@ -20,7 +20,10 @@ export class GamesPlayoffsEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.gamesPlayoffsService
-          .getPlayoffStandings(data.current_year, 'Regular')
+          .getPlayoffStandings(
+            data.offseason ? data.prev_year : data.current_year,
+            'Regular'
+          )
           .pipe(
             map((playoffStandings: StatTeamPlayoffsDto[]) =>
               GamesPlayoffsActions.getStandingsSuccess({

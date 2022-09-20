@@ -22,7 +22,7 @@ export class DraftCurrentFacade {
 
   constructor(private store: Store<State>) {}
 
-  getDraftTable() {
-    this.store.dispatch(DraftCurrentActions.getDraftTable());
+  getDraftTable(season: number) {
+    this.store.dispatch(DraftCurrentActions.getDraftTable({ season }));
   }
 }

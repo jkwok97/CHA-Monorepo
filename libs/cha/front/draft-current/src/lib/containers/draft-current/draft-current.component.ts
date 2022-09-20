@@ -17,6 +17,11 @@ export class DraftCurrentComponent implements OnInit {
 
   teams!: TeamDto[];
 
+  selectOptions = [
+    { label: '2022', value: '2022' },
+    { label: '2023', value: '2023' },
+  ];
+
   tableColumns = [
     { field: 'pickNumber', header: 'Pick #' },
     { field: 'team', header: 'Team' },
@@ -47,7 +52,7 @@ export class DraftCurrentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.draftCurrentFacade.getDraftTable();
+    this.draftCurrentFacade.getDraftTable(2022);
 
     this.teams$
       .pipe(first())
@@ -80,6 +85,19 @@ export class DraftCurrentComponent implements OnInit {
       return `${found.city} ${found.nickname}`;
     } else {
       return ``;
+    }
+  }
+
+  onOptionChanged(option: string) {
+    switch (option) {
+      case '2022':
+        this.draftCurrentFacade.getDraftTable(Number(option));
+        break;
+      case '2023':
+        this.draftCurrentFacade.getDraftTable(Number(option));
+        break;
+      default:
+        return;
     }
   }
 }

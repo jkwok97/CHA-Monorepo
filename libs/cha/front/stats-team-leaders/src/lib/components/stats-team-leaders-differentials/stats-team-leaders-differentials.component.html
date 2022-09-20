@@ -1,7 +1,10 @@
 <p-accordion>
   <p-accordionTab
     header="Goal Differentials"
-    [selected]="(isMobile$ | async) === false"
+    [selected]="
+      stats ? stats.length > 0 && (isMobile$ | async) === false : false
+    "
+    [disabled]="stats ? stats.length < 1 : false"
   >
     <cha-front-stats-team-leaders-table
       [tableColumns]="tableColumns"
