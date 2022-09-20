@@ -43,6 +43,21 @@ export class GoalieStatsController {
   }
 
   
+  @Get('/current/:season/:seasonType/:playerId')
+  async getGoalieStatsByPlayerId(@Param() param): Promise<any[]> {
+    const stats = await this.goalieStatsService.getGoalieStatsByPlayerId(
+      param.season,
+      param.seasonType,
+      param.player_id
+    );
+
+    if (!stats || stats.length < 1) {
+      throw new NotFoundException('Player Stats not found');
+    }
+    return stats;
+  }
+
+  
   @Get('/history/season/:seasonType')
   async getAllTimePlayerStatsBySeasonByType(
     @Param() param

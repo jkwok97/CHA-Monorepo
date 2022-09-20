@@ -63,6 +63,64 @@ export class ApiGoalieStatsService {
     return goalieStatsWithTeamInfoConverted;
   }
 
+  async getGoalieStatsByPlayerId(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    playerId: number
+  ) {
+    const allGoalieStats = await this.repo.find({
+      select: {
+        id: true,
+        games_played: true,
+        minutes_played: true,
+        goals_against_avg: true,
+        wins: true,
+        loss: true,
+        ties: true,
+        en_goals: true,
+        shutouts: true,
+        goals_against: true,
+        saves: true,
+        shots_for: true,
+        save_pct: true,
+        goals: true,
+        assists: true,
+        points: true,
+        penalty_minutes: true,
+        pass_pct: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        player_id: {
+          id: playerId,
+        },
+      },
+      order: {
+        wins: 'DESC',
+      },
+    });
+
+    const goalieStatsWithTeamInfo = await this.setTeamInfo(allGoalieStats);
+
+    const goalieStatsWithTeamInfoConverted = await this.convertStats(
+      goalieStatsWithTeamInfo
+    );
+
+    return goalieStatsWithTeamInfoConverted;
+  }
+
   private async setTeamInfo(array: Goalies_Stats_V2[]) {
     return await Promise.all(
       array.map(async (item) => ({
