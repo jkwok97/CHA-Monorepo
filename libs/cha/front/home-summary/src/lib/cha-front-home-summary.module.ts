@@ -6,6 +6,8 @@ import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { AvatarModule } from 'primeng/avatar';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -34,6 +36,8 @@ import {
     ChaFrontHomeRoutingModule,
     ProgressBarModule,
     AvatarModule,
+    SidebarModule,
+    ButtonModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,

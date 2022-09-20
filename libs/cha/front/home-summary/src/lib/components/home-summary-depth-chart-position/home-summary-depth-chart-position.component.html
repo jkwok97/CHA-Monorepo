@@ -12,8 +12,21 @@
             shape="circle"
           ></p-avatar>
           {{ player.player_id.firstname }} {{ player.player_id.lastname }}
+          <button
+            pButton
+            type="button"
+            icon="pi pi-window-maximize"
+            class="p-button-rounded p-button-info p-button-sm"
+            (click)="onPlayerClick(player)"
+          ></button>
         </div>
       </ng-container>
     </div>
   </blade-card-body>
 </blade-card>
+
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="playerStats as playerStats">
+    {{ playerStats | json }}
+  </ng-container>
+</p-sidebar>

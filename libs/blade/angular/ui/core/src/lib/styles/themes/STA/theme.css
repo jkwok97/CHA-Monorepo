@@ -2379,9 +2379,9 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 .p-button.p-button-info:enabled:hover,
 .p-buttonset.p-button-info > .p-button:enabled:hover,
 .p-splitbutton.p-button-info > .p-button:enabled:hover {
-  background: #2563eb;
+  background: #d28507;
   color: #fff;
-  border-color: #2563eb;
+  border-color: #d28507;
 }
 
 .p-button.p-button-info:enabled:focus,
