@@ -7,7 +7,6 @@ import {
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { stat } from 'fs';
 import { HomeSummaryActions } from './home-summary.actions';
 
 export interface State {
@@ -23,6 +22,7 @@ export interface State {
   currentPlayerStat: StatPlayerAllDto[];
   currentGoalieStat: StatGoalieAllDto[];
   currentNhlStat: NhlGoalieStatDto[] | NhlPlayerStatDto[];
+  statsLoading: boolean;
 }
 
 const initialState: State = {
@@ -38,6 +38,7 @@ const initialState: State = {
   currentPlayerStat: [],
   currentGoalieStat: [],
   currentNhlStat: [],
+  statsLoading: false,
 };
 
 const r = createReducer(
@@ -85,19 +86,32 @@ const r = createReducer(
     playerSalaryLoaded: true,
   })),
 
+  on(
+    HomeSummaryActions.getCHACurrentGoalieStats,
+    HomeSummaryActions.getCHACurrentPlayerStats,
+    HomeSummaryActions.getNHLCurrentStats,
+    (state, action) => ({
+      ...state,
+      statsLoading: true,
+    })
+  ),
+
   on(HomeSummaryActions.getCHACurrentPlayerStatsSuccess, (state, action) => ({
     ...state,
     currentPlayerStat: action.stats,
+    statsLoading: false,
   })),
 
   on(HomeSummaryActions.getCHACurrentGoalieStatsSuccess, (state, action) => ({
     ...state,
     currentGoalieStat: action.stats,
+    statsLoading: false,
   })),
 
   on(HomeSummaryActions.getNHLCurrentStatsSuccess, (state, action) => ({
     ...state,
     currentNhlStat: action.stats,
+    statsLoading: false,
   })),
 
   on(HomeSummaryActions.error, (state) => initialState)
@@ -136,3 +150,5 @@ export const getCurrentGoalieStat = (state: State) =>
   state.currentGoalieStat[0];
 
 export const getCurrentNHLStat = (state: State) => state.currentNhlStat[0];
+
+export const getStatsLoading = (state: State) => state.statsLoading;

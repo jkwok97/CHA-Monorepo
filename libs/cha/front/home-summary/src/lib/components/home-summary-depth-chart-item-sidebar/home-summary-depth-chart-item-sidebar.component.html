@@ -1,5 +1,3 @@
-<!-- {{ playerStats | json }} -->
-
 <div class="flex align-items-center column-gap-3">
   <p-avatar
     [image]="getPlayerPicture(playerStats.player_id?.nhl_id)"
@@ -35,16 +33,29 @@
 
 <blade-divider></blade-divider>
 
-<ng-container *ngIf="currentStat$ | async as currentStat">
-  <div>Current Stats</div>
-  {{ currentStat | json }}
-</ng-container>
+<div
+  class="flex flex-column justify-content-evenly column-gap-3 md:flex-row row-gap-2"
+>
+  <ng-container>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="statsLoading$ | async"
+    ></p-progressBar>
 
-<ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
-  <div>NHL Stats</div>
-  {{ currentNHLStat | json }}
-</ng-container>
+    <ng-container *ngIf="currentStat$ | async as currentStat">
+      <ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
+        <cha-front-home-summary-depth-chart-item-sidebar-stats
+          [currentStat]="currentStat"
+          [nhlStat]="currentNHLStat"
+          class="w-full"
+        ></cha-front-home-summary-depth-chart-item-sidebar-stats>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 
-<cha-front-home-summary-depth-chart-item-sidebar-ratings
-  [ratings]="playerStats.ratings"
-></cha-front-home-summary-depth-chart-item-sidebar-ratings>
+  <cha-front-home-summary-depth-chart-item-sidebar-ratings
+    [ratings]="playerStats.ratings"
+    class="w-full"
+  ></cha-front-home-summary-depth-chart-item-sidebar-ratings>
+</div>

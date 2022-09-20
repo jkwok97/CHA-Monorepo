@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import {
   NhlGoalieStatDto,
@@ -16,18 +18,27 @@ import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 @Component({
   selector: 'cha-front-home-summary-depth-chart-item-sidebar',
   templateUrl: './home-summary-depth-chart-item-sidebar.component.html',
-  styleUrls: ['./home-summary-depth-chart-item-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
+export class HomeSummaryDepthChartItemSidebarComponent
+  implements OnInit, OnChanges
+{
   @Input() playerStats: any;
 
   currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
   currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;
+  statsLoading$: Observable<boolean>;
 
-  constructor(private homeSummaryFacade: HomeSummaryFacade) {}
+  constructor(private homeSummaryFacade: HomeSummaryFacade) {
+    this.statsLoading$ = this.homeSummaryFacade.statsLoading$;
+  }
 
   ngOnInit(): void {
+    this.setSidebarInfo();
+    this.currentNhlStat$ = this.homeSummaryFacade.currentNHLStats$;
+  }
+
+  setSidebarInfo() {
     if (this.playerStats.player_id.isgoalie) {
       this.homeSummaryFacade.getCHACurrentGoalieStats(
         this.playerStats.player_id.id
@@ -43,8 +54,10 @@ export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
     this.homeSummaryFacade.getNHLCurrentStats(
       this.playerStats.player_id.nhl_id
     );
+  }
 
-    this.currentNhlStat$ = this.homeSummaryFacade.currentNHLStats$;
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setSidebarInfo();
   }
 
   getPlayerPicture(id: string | undefined) {

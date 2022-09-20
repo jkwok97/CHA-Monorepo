@@ -82,6 +82,10 @@ export class HomeSummaryFacade {
   currentNHLStats$: Observable<NhlGoalieStatDto | NhlPlayerStatDto> =
     this.store.select(HomeSummarySelectors.selectCurrentNHLStat);
 
+  statsLoading$: Observable<boolean> = this.store.select(
+    HomeSummarySelectors.selectStatsLoading
+  );
+
   constructor(private store: Store<State>) {}
 
   getUserTeamRecord(teamId: number) {

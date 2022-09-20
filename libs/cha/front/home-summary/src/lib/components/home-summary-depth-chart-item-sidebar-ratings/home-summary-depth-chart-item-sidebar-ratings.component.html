@@ -1,193 +1,203 @@
-<div class="flex md:column-gap-3 flex-column md:flex-row">
+<div class="flex md:column-gap-3 flex-column md:flex-row row-gap-2 w-full">
   <div class="w-full">
-    <div class="text-lg pb-3 text-center">Past NHL Season Stats</div>
-
-    <div
-      class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
-    >
-      <div *ngIf="ratings.games_played">
-        Games Played:
-        <span style="font-weight: 100">
-          <i>{{ ratings.games_played }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.goals">
-        Goals:
-        <span style="font-weight: 100">
-          <i>{{ ratings.goals }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.assists">
-        Assists:
-        <span style="font-weight: 100">
-          <i>{{ ratings.assists }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.points">
-        Points:
-        <span style="font-weight: 100">
-          <i>{{ ratings.points }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.shots">
-        Shots:
-        <span style="font-weight: 100">
-          <i>{{ ratings.shots }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.shooting_pct">
-        Shooting Pct:
-        <span style="font-weight: 100">
-          <i>{{ ratings.shooting_pct }}%</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.wins">
-        Wins:
-        <span style="font-weight: 100">
-          <i>{{ ratings.wins }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.goals_against_avg">
-        GAA:
-        <span style="font-weight: 100">
-          <i>{{ ratings.goals_against_avg }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.save_pct">
-        Save Pct:
-        <span style="font-weight: 100">
-          <i>{{ ratings.save_pct }}%</i>
-        </span>
-      </div>
-    </div>
+    <blade-card style="background-color: var(--team-100)">
+      <blade-card-header>
+        <div class="text-lg text-center">Past NHL Season Stats</div>
+      </blade-card-header>
+      <blade-card-body>
+        <div
+          class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
+        >
+          <div *ngIf="ratings.games_played">
+            Games Played:
+            <span style="font-weight: 100">
+              <i>{{ ratings.games_played }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.goals">
+            Goals:
+            <span style="font-weight: 100">
+              <i>{{ ratings.goals }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.assists">
+            Assists:
+            <span style="font-weight: 100">
+              <i>{{ ratings.assists }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.points">
+            Points:
+            <span style="font-weight: 100">
+              <i>{{ ratings.points }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.shots">
+            Shots:
+            <span style="font-weight: 100">
+              <i>{{ ratings.shots }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.shooting_pct">
+            Shooting Pct:
+            <span style="font-weight: 100">
+              <i>{{ ratings.shooting_pct }}%</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.wins">
+            Wins:
+            <span style="font-weight: 100">
+              <i>{{ ratings.wins }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.goals_against_avg">
+            GAA:
+            <span style="font-weight: 100">
+              <i>{{ ratings.goals_against_avg }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.save_pct">
+            Save Pct:
+            <span style="font-weight: 100">
+              <i>{{ ratings.save_pct }}%</i>
+            </span>
+          </div>
+        </div>
+      </blade-card-body>
+    </blade-card>
   </div>
 
   <div class="w-full">
-    <div class="text-lg pb-3 text-center pt-3 md:pt-0">Ratings</div>
-
-    <div
-      class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
-    >
-      <div *ngIf="ratings.c_rate && ratings.c_rate !== '0'">
-        C:
-        <span style="font-weight: 100">
-          <i>{{ ratings.c_rate }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.l_rate && ratings.l_rate !== '0'">
-        LW:
-        <span style="font-weight: 100">
-          <i>{{ ratings.l_rate }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.r_rate && ratings.r_rate !== '0'">
-        RW:
-        <span style="font-weight: 100">
-          <i>{{ ratings.r_rate }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.ld_rate && ratings.ld_rate !== '0'">
-        LD:
-        <span style="font-weight: 100">
-          <i>{{ ratings.ld_rate }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.rd_rate && ratings.rd_rate !== '0'">
-        RD:
-        <span style="font-weight: 100">
-          <i>{{ ratings.rd_rate }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.skating && ratings.skating !== '0'">
-        Skating:
-        <span style="font-weight: 100">
-          <i>{{ ratings.skating }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.speed && ratings.speed !== '0'">
-        Speed:
-        <span style="font-weight: 100">
-          <i>{{ ratings.speed }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.passing && ratings.passing !== '0'">
-        Passing:
-        <span style="font-weight: 100">
-          <i>{{ ratings.passing }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.shooting && ratings.shooting !== '0'">
-        Shooting:
-        <span style="font-weight: 100">
-          <i>{{ ratings.shooting }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.face_off && ratings.face_off !== '0'">
-        Face Off:
-        <span style="font-weight: 100">
-          <i>{{ ratings.face_off }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.forecheck && ratings.forecheck !== '0'">
-        Forecheck:
-        <span style="font-weight: 100">
-          <i>{{ ratings.forecheck }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.assist_rating && ratings.assist_rating !== '0'">
-        Assist:
-        <span style="font-weight: 100">
-          <i>{{ ratings.assist_rating }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.clear_crease && ratings.clear_crease !== '0'">
-        Clear Crease:
-        <span style="font-weight: 100">
-          <i>{{ ratings.clear_crease }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.shot_block && ratings.shot_block !== '0'">
-        Shot Block:
-        <span style="font-weight: 100">
-          <i>{{ ratings.shot_block }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.pk && ratings.pk !== '0'">
-        Penalty Kill:
-        <span style="font-weight: 100">
-          <i>{{ ratings.pk }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.physical && ratings.physical !== '0'">
-        Physical:
-        <span style="font-weight: 100">
-          <i>{{ ratings.physical }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.rock && ratings.rock !== '0'">
-        Rock:
-        <span style="font-weight: 100">
-          <i>{{ ratings.rock }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.intimidation && ratings.intimidation !== '0'">
-        Intimidation:
-        <span style="font-weight: 100">
-          <i>{{ ratings.intimidation }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.game_fatigue && ratings.game_fatigue !== '0'">
-        Game Fatigue:
-        <span style="font-weight: 100">
-          <i>{{ ratings.game_fatigue }}</i>
-        </span>
-      </div>
-      <div *ngIf="ratings.shift_fatigue && ratings.shift_fatigue !== '0'">
-        Shift Fatigue:
-        <span style="font-weight: 100">
-          <i>{{ ratings.shift_fatigue }}</i>
-        </span>
-      </div>
-    </div>
+    <blade-card style="background-color: var(--team-100)">
+      <blade-card-header>
+        <div class="text-lg text-center">Ratings</div>
+      </blade-card-header>
+      <blade-card-body>
+        <div
+          class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
+        >
+          <div *ngIf="ratings.c_rate && ratings.c_rate !== '0'">
+            C:
+            <span style="font-weight: 100">
+              <i>{{ ratings.c_rate }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.l_rate && ratings.l_rate !== '0'">
+            LW:
+            <span style="font-weight: 100">
+              <i>{{ ratings.l_rate }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.r_rate && ratings.r_rate !== '0'">
+            RW:
+            <span style="font-weight: 100">
+              <i>{{ ratings.r_rate }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.ld_rate && ratings.ld_rate !== '0'">
+            LD:
+            <span style="font-weight: 100">
+              <i>{{ ratings.ld_rate }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.rd_rate && ratings.rd_rate !== '0'">
+            RD:
+            <span style="font-weight: 100">
+              <i>{{ ratings.rd_rate }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.skating && ratings.skating !== '0'">
+            Skating:
+            <span style="font-weight: 100">
+              <i>{{ ratings.skating }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.speed && ratings.speed !== '0'">
+            Speed:
+            <span style="font-weight: 100">
+              <i>{{ ratings.speed }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.passing && ratings.passing !== '0'">
+            Passing:
+            <span style="font-weight: 100">
+              <i>{{ ratings.passing }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.shooting && ratings.shooting !== '0'">
+            Shooting:
+            <span style="font-weight: 100">
+              <i>{{ ratings.shooting }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.face_off && ratings.face_off !== '0'">
+            Face Off:
+            <span style="font-weight: 100">
+              <i>{{ ratings.face_off }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.forecheck && ratings.forecheck !== '0'">
+            Forecheck:
+            <span style="font-weight: 100">
+              <i>{{ ratings.forecheck }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.assist_rating && ratings.assist_rating !== '0'">
+            Assist:
+            <span style="font-weight: 100">
+              <i>{{ ratings.assist_rating }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.clear_crease && ratings.clear_crease !== '0'">
+            Clear Crease:
+            <span style="font-weight: 100">
+              <i>{{ ratings.clear_crease }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.shot_block && ratings.shot_block !== '0'">
+            Shot Block:
+            <span style="font-weight: 100">
+              <i>{{ ratings.shot_block }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.pk && ratings.pk !== '0'">
+            Penalty Kill:
+            <span style="font-weight: 100">
+              <i>{{ ratings.pk }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.physical && ratings.physical !== '0'">
+            Physical:
+            <span style="font-weight: 100">
+              <i>{{ ratings.physical }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.rock && ratings.rock !== '0'">
+            Rock:
+            <span style="font-weight: 100">
+              <i>{{ ratings.rock }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.intimidation && ratings.intimidation !== '0'">
+            Intimidation:
+            <span style="font-weight: 100">
+              <i>{{ ratings.intimidation }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.game_fatigue && ratings.game_fatigue !== '0'">
+            Game Fatigue:
+            <span style="font-weight: 100">
+              <i>{{ ratings.game_fatigue }}</i>
+            </span>
+          </div>
+          <div *ngIf="ratings.shift_fatigue && ratings.shift_fatigue !== '0'">
+            Shift Fatigue:
+            <span style="font-weight: 100">
+              <i>{{ ratings.shift_fatigue }}</i>
+            </span>
+          </div>
+        </div>
+      </blade-card-body>
+    </blade-card>
   </div>
 </div>
