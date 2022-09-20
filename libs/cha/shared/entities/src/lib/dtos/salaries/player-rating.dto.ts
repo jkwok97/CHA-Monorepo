@@ -22,4 +22,11 @@ export interface PlayerRatingDto {
   assist_rating: string;
   points?: string;
   wins?: string;
+  goals_against_avg?: string;
+  save_pct?: string;
+  games_played?: string;
+  goals?: string;
+  assists?: string;
+  shots?: string;
+  shooting_pct?: string;
 }

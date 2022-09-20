@@ -5,5 +5,13 @@ export interface GoalieRatingDto extends PlayerRatingDto {
   skating: string;
   speed: string;
   passing: string;
+  points?: string;
   wins?: string;
+  goals_against_avg?: string;
+  save_pct?: string;
+  games_played?: string;
+  goals?: string;
+  assists?: string;
+  shots?: string;
+  shooting_pct?: string;
 }
