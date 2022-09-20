@@ -5,6 +5,8 @@ import { HomeSummaryActions } from './home-summary.actions';
 import { Observable } from 'rxjs';
 import { HomeSummarySelectors } from './home-summary.selectors';
 import {
+  NhlGoalieStatDto,
+  NhlPlayerStatDto,
   SalariesAndRatingsDto,
   StatGoalieAllDto,
   StatPlayerAllDto,
@@ -77,6 +79,9 @@ export class HomeSummaryFacade {
     HomeSummarySelectors.selectCurrentGoalieStat
   );
 
+  currentNHLStats$: Observable<NhlGoalieStatDto | NhlPlayerStatDto> =
+    this.store.select(HomeSummarySelectors.selectCurrentNHLStat);
+
   constructor(private store: Store<State>) {}
 
   getUserTeamRecord(teamId: number) {
@@ -107,5 +112,9 @@ export class HomeSummaryFacade {
     this.store.dispatch(
       HomeSummaryActions.getCHACurrentGoalieStats({ playerId })
     );
+  }
+
+  getNHLCurrentStats(playerId: number) {
+    this.store.dispatch(HomeSummaryActions.getNHLCurrentStats({ playerId }));
   }
 }

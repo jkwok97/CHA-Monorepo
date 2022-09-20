@@ -1,4 +1,6 @@
 import {
+  NhlGoalieStatDto,
+  NhlPlayerStatDto,
   SalariesAndRatingsDto,
   StatGoalieAllDto,
   StatPlayerAllDto,
@@ -58,6 +60,16 @@ const getCHACurrentGoalieStatsSuccess = createAction(
   props<{ stats: StatGoalieAllDto[] }>()
 );
 
+const getNHLCurrentStats = createAction(
+  `${NAMESPACE} Get Current NHL stats`,
+  props<{ playerId: number }>()
+);
+
+const getNHLCurrentStatsSuccess = createAction(
+  `${NAMESPACE} Get Current NHL stats Success`,
+  props<{ stats: NhlGoalieStatDto[] | NhlPlayerStatDto[] }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const HomeSummaryActions = {
@@ -71,5 +83,7 @@ export const HomeSummaryActions = {
   getCHACurrentPlayerStatsSuccess,
   getCHACurrentGoalieStats,
   getCHACurrentGoalieStatsSuccess,
+  getNHLCurrentStats,
+  getNHLCurrentStatsSuccess,
   error,
 };

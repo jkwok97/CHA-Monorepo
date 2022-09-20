@@ -34,7 +34,7 @@ export class HomeSummaryDepthChartItemSidebarComponent implements OnInit {
       this.currentStat$ = this.homeSummaryFacade.currentPlayerCHAStats$;
     }
 
-    // this.homeSummaryFacade.getNHLCurrentStats(this.playerStats.player_id.id);
+    this.homeSummaryFacade.getNHLCurrentStats(this.playerStats.player_id.nhl_id);
   }
 
   getPlayerPicture(id: string | undefined) {

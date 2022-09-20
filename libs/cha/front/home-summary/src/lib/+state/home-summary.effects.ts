@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import {
+  NhlGoalieStatDto,
+  NhlPlayerStatDto,
   SalariesAndRatingsDto,
   StatGoalieAllDto,
   StatPlayerAllDto,
@@ -123,6 +125,25 @@ export class HomeSummaryEffects {
           .pipe(
             map((stats: StatGoalieAllDto[]) =>
               HomeSummaryActions.getCHACurrentGoalieStatsSuccess({
+                stats,
+              })
+            ),
+            catchError(() => of(HomeSummaryActions.error()))
+          )
+      )
+    )
+  );
+
+  getNHLCurrentStats$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeSummaryActions.getNHLCurrentStats),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.homeSummaryService
+          .getNHLCurrentStatsByPlayerId(action.playerId, data.nhl_year)
+          .pipe(
+            map((stats: NhlGoalieStatDto[] | NhlPlayerStatDto[]) =>
+              HomeSummaryActions.getNHLCurrentStatsSuccess({
                 stats,
               })
             ),

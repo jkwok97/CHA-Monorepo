@@ -1,4 +1,6 @@
 import {
+  NhlGoalieStatDto,
+  NhlPlayerStatDto,
   SalariesAndRatingsDto,
   StatGoalieAllDto,
   StatPlayerAllDto,
@@ -20,6 +22,7 @@ export interface State {
   goalieSalaryLoaded: boolean;
   currentPlayerStat: StatPlayerAllDto[];
   currentGoalieStat: StatGoalieAllDto[];
+  currentNhlStat: NhlGoalieStatDto[] | NhlPlayerStatDto[];
 }
 
 const initialState: State = {
@@ -34,6 +37,7 @@ const initialState: State = {
   goalieSalaryLoaded: false,
   currentPlayerStat: [],
   currentGoalieStat: [],
+  currentNhlStat: [],
 };
 
 const r = createReducer(
@@ -91,6 +95,11 @@ const r = createReducer(
     currentGoalieStat: action.stats,
   })),
 
+  on(HomeSummaryActions.getNHLCurrentStatsSuccess, (state, action) => ({
+    ...state,
+    currentNhlStat: action.stats,
+  })),
+
   on(HomeSummaryActions.error, (state) => initialState)
 );
 
@@ -123,5 +132,7 @@ export const getGoalieSalaryLoaded = (state: State) =>
 export const getCurrentPlayerStat = (state: State) =>
   state.currentPlayerStat[0];
 
-  export const getCurrentGoalieStat = (state: State) =>
+export const getCurrentGoalieStat = (state: State) =>
   state.currentGoalieStat[0];
+
+export const getCurrentNHLStat = (state: State) => state.currentNhlStat[0];

@@ -58,4 +58,10 @@ export class HomeSummaryService {
       )
       .pipe(map((result: any) => result));
   }
+
+  getNHLCurrentStatsByPlayerId(playerId: number, season: string) {
+    return this._http
+      .get(`${this.apiUrl}/nhl/player/stats/${playerId}/${season}`)
+      .pipe(map((result: any) => result));
+  }
 }
