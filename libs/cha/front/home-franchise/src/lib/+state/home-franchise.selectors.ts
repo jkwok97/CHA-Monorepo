@@ -1,3 +1,7 @@
+import {
+  StatTeamsHistoryDto,
+  StatUserTeamHistoryDto,
+} from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as HomeFranchiseReducer from './home-franchise.reducer';
@@ -17,8 +21,22 @@ const selectLoaded = createSelector(
 
 const selectAll = createSelector(selectState, HomeFranchiseReducer.getAllStats);
 
+const selectTeamStats = createSelector(
+  selectAll,
+  (allTeamStats: StatUserTeamHistoryDto[]) => {
+    const teamStats: StatTeamsHistoryDto[] = [];
+    allTeamStats.forEach((team: StatUserTeamHistoryDto) => {
+      team.teamStats.forEach((stat: StatTeamsHistoryDto) =>
+        teamStats.push(stat)
+      );
+    });
+    return teamStats;
+  }
+);
+
 export const HomeFranchiseSelectors = {
   selectLoaded,
   selectLoading,
   selectAll,
+  selectTeamStats
 };

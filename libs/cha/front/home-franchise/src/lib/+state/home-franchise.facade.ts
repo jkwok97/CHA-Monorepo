@@ -4,7 +4,10 @@ import { State } from './home-franchise.reducer';
 import { HomeFranchiseActions } from './home-franchise.actions';
 import { Observable } from 'rxjs';
 import { HomeFranchiseSelectors } from './home-franchise.selectors';
-import { StatUserTeamHistoryDto } from '@cha/shared/entities';
+import {
+  StatTeamsHistoryDto,
+  StatUserTeamHistoryDto,
+} from '@cha/shared/entities';
 
 @Injectable()
 export class HomeFranchiseFacade {
@@ -18,6 +21,10 @@ export class HomeFranchiseFacade {
 
   allStats$: Observable<StatUserTeamHistoryDto[]> = this.store.select(
     HomeFranchiseSelectors.selectAll
+  );
+
+  teamStats$: Observable<StatTeamsHistoryDto[]> = this.store.select(
+    HomeFranchiseSelectors.selectTeamStats
   );
 
   constructor(private store: Store<State>) {}

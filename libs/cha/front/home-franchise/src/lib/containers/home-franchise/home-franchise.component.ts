@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { StatUserTeamHistoryDto } from '@cha/shared/entities';
+import { StatTeamsHistoryDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 import { HomeFranchiseFacade } from '../../+state/home-franchise.facade';
 
@@ -12,7 +12,7 @@ import { HomeFranchiseFacade } from '../../+state/home-franchise.facade';
 export class HomeFranchiseComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
-  allStats$: Observable<StatUserTeamHistoryDto[]>;
+  allStats$: Observable<StatTeamsHistoryDto[]>;
 
   seasonOption = 'Regular';
 
@@ -37,7 +37,7 @@ export class HomeFranchiseComponent implements OnInit {
     this.isLoaded$ = this.homeFranchiseFacade.isLoaded$;
     this.isLoading$ = this.homeFranchiseFacade.isLoading$;
 
-    this.allStats$ = this.homeFranchiseFacade.allStats$;
+    this.allStats$ = this.homeFranchiseFacade.teamStats$;
   }
 
   ngOnInit(): void {
