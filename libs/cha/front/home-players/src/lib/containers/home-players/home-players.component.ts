@@ -51,16 +51,18 @@ export class HomePlayersComponent implements OnInit {
 
   onSeasonOptionChanged(option: string) {
     this.seasonOption = option;
-    this.homePlayersFacade.getUserPlayerStatsBySeason(option);
+    if (this.statType === 'all') {
+      this.homePlayersFacade.getUserPlayerAllTimeStatsBySeason(option);
+    } else {
+      this.homePlayersFacade.getUserPlayerStatsBySeason(option);
+    }
   }
 
   onOptionChanged(option: string) {
     switch (option) {
       case 'season':
         this.statType = option;
-        this.homePlayersFacade.getUserPlayerStatsBySeason(
-          this.seasonOption
-        );
+        this.homePlayersFacade.getUserPlayerStatsBySeason(this.seasonOption);
         break;
       case 'all':
         this.statType = option;
