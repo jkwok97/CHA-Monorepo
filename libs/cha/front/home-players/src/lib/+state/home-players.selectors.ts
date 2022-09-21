@@ -23,7 +23,7 @@ const selectPlayersStats = createSelector(
   (allPlayersStats: StatUserPlayersHistoryDto[]) => {
     const playersStats: StatPlayersHistoryDto[] = [];
     allPlayersStats.forEach((player: StatUserPlayersHistoryDto) => {
-      player.playersStats.forEach((stat: StatPlayersHistoryDto) =>
+      player.playerStats.forEach((stat: StatPlayersHistoryDto) =>
         playersStats.push(stat)
       );
     });

@@ -23,7 +23,7 @@ export class HomePlayersFacade {
     HomePlayersSelectors.selectAll
   );
 
-  teamStats$: Observable<StatPlayersHistoryDto[]> = this.store.select(
+  playersStats$: Observable<StatPlayersHistoryDto[]> = this.store.select(
     HomePlayersSelectors.selectPlayersStats
   );
 
