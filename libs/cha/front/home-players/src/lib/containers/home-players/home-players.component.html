@@ -17,6 +17,12 @@
           >
             <blade-button-select
               class="flex justify-content-center"
+              [options]="selectOptions"
+              (optionChanged)="onOptionChanged($event)"
+            ></blade-button-select>
+
+            <blade-button-select
+              class="flex justify-content-center"
               [options]="selectSeasonOptions"
               (optionChanged)="onSeasonOptionChanged($event)"
             ></blade-button-select>

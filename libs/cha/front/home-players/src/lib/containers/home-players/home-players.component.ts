@@ -14,14 +14,19 @@ export class HomePlayersComponent implements OnInit {
   isLoaded$: Observable<boolean>;
   allStats$: Observable<StatPlayersHistoryDto[]>;
 
+  isMobile = false;
   seasonOption = 'Regular';
+  statType = 'season';
+
+  selectOptions = [
+    { label: 'Per Season', value: 'season' },
+    { label: 'All-time', value: 'all' },
+  ];
 
   selectSeasonOptions = [
     { label: 'Regular', value: 'Regular' },
     { label: 'Playoffs', value: 'Playoffs' },
   ];
-
-  isMobile = false;
 
   panelStyleMobile = {
     width: '100%',
@@ -45,6 +50,26 @@ export class HomePlayersComponent implements OnInit {
   }
 
   onSeasonOptionChanged(option: string) {
+    this.seasonOption = option;
     this.homePlayersFacade.getUserPlayerStatsBySeason(option);
+  }
+
+  onOptionChanged(option: string) {
+    switch (option) {
+      case 'season':
+        this.statType = option;
+        this.homePlayersFacade.getUserPlayerStatsBySeason(
+          this.seasonOption
+        );
+        break;
+      case 'all':
+        this.statType = option;
+        this.homePlayersFacade.getUserPlayerAllTimeStatsBySeason(
+          this.seasonOption
+        );
+        break;
+      default:
+        return;
+    }
   }
 }
