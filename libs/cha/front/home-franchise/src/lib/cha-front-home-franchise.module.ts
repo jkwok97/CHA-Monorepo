@@ -20,6 +20,10 @@ import { HomeFranchiseService } from './services';
 import { ChaFrontHomeFranchiseRoutingModule } from './cha-front-home-franchise-routing.module';
 
 import { HomeFranchiseComponent } from './containers';
+import {
+  HomeFranchiseTableComponent,
+  HomeFranchiseTableSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -35,7 +39,11 @@ import { HomeFranchiseComponent } from './containers';
     StoreModule.forFeature('home-franchise', reducer),
     EffectsModule.forFeature([HomeFranchiseEffects]),
   ],
-  declarations: [HomeFranchiseComponent],
+  declarations: [
+    HomeFranchiseComponent,
+    HomeFranchiseTableComponent,
+    HomeFranchiseTableSidebarComponent,
+  ],
   providers: [HomeFranchiseService, HomeFranchiseFacade, HomeFranchiseEffects],
 })
 export class ChaFrontHomeFranchiseModule {}
