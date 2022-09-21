@@ -38,7 +38,7 @@ export class ApiPlayerAllTimeStatsService {
         fo_pct: true,
         pass_pct: true,
         corner_pct: true,
-        hit_per_game: true,
+        hits: true,
         blocked_shots: true,
         playing_year: true,
         player_id: {
