@@ -1,5 +1,38 @@
 <perfect-scrollbar [style]="isMobile ? panelStyleMobile : panelStyleDesktop">
   <blade-layout-feature>
-    <blade-layout-feature-content> HELLO </blade-layout-feature-content>
+    <blade-layout-feature-content>
+      <div>
+        <p-progressBar
+          mode="indeterminate"
+          [style]="{ height: '6px' }"
+          *ngIf="isLoading$ | async"
+        ></p-progressBar>
+
+        <div class="grid justify-content-center row-gap-2 pt-2">
+          <div class="text-lg col-12 text-center" style="font-weight: 100">
+            CHA History Teams Stats
+          </div>
+          <div
+            class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
+          >
+            <blade-button-select
+              class="flex justify-content-center"
+              [options]="selectSeasonOptions"
+              (optionChanged)="onSeasonOptionChanged($event)"
+            ></blade-button-select>
+          </div>
+        </div>
+
+        <blade-divider></blade-divider>
+
+        <blade-card *ngIf="isLoaded$ | async">
+          <blade-card-body>
+            <ng-container *ngIf="allStats$ | async as allStats">
+              Hello
+            </ng-container>
+          </blade-card-body>
+        </blade-card>
+      </div>
+    </blade-layout-feature-content>
   </blade-layout-feature>
 </perfect-scrollbar>
