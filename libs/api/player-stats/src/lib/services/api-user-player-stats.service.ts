@@ -225,9 +225,7 @@ export class ApiUserPlayerStatsService {
         pointsPerSixty: Number(
           ((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)
         ),
-        hit_per_game: !raw
-          ? Number(stat.hit_per_game)
-          : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
+        hit_per_game: Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
         player_id: !raw
           ? stat.player_id
           : {
