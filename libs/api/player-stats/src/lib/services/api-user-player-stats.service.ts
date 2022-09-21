@@ -54,11 +54,7 @@ export class ApiUserPlayerStatsService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerStats: await this.getPlayerStats(
-          item.shortname,
-          seasonType,
-          item
-        ),
+        playerStats: await this.getPlayerStats(item.shortname, seasonType),
       }))
     );
   }
@@ -72,8 +68,7 @@ export class ApiUserPlayerStatsService {
         ...item,
         playerStats: await this.getPlayerAllTimeStats(
           item.shortname,
-          seasonType,
-          item
+          seasonType
         ),
       }))
     );
@@ -81,10 +76,9 @@ export class ApiUserPlayerStatsService {
 
   private async getPlayerAllTimeStats(
     teamShortName: string,
-    seasonType: 'Regular' | 'Playoffs',
-    teamInfo: any
+    seasonType: 'Regular' | 'Playoffs'
   ) {
-    const stats = await this.dataSource.query(
+    return await this.dataSource.query(
       `select
       b.firstname as firstname,
       b.lastname as lastname,
@@ -122,16 +116,13 @@ export class ApiUserPlayerStatsService {
       group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
       order by points DESC`
     );
-
-    return { teamInfo, stats };
   }
 
   private async getPlayerStats(
     teamShortName: string,
-    seasonType: 'Regular' | 'Playoffs',
-    teamInfo: any
+    seasonType: 'Regular' | 'Playoffs'
   ) {
-    const stats = await this.repo.find({
+    return await this.repo.find({
       select: {
         id: true,
         team_name: true,
@@ -174,23 +165,33 @@ export class ApiUserPlayerStatsService {
         points: 'DESC',
       },
     });
-
-    return { teamInfo, stats };
   }
 
   private async setConvertedPlayersStats(array: any[], raw: boolean) {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerStats: await this.convertStats(item.playerStats, raw),
+        playerStats: await this.convertStats(item.playerStats, raw, item),
       }))
     );
   }
 
-  private async convertStats(array: Players_Stats_V2[], raw: boolean) {
+  private async convertStats(
+    array: Players_Stats_V2[],
+    raw: boolean,
+    teamInfo: any
+  ) {
     return await Promise.all(
       array.map((stat: Players_Stats_V2) => ({
         ...stat,
+        teamInfo: !raw
+          ? {
+              id: teamInfo.id,
+              city: teamInfo.city,
+              nickname: teamInfo.nickname,
+              teamlogo: teamInfo.teamlogo,
+            }
+          : null,
         games_played: Number(stat.games_played),
         goals: Number(stat.goals),
         assists: Number(stat.assists),
