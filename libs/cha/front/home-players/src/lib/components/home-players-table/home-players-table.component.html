@@ -1,1 +1,145 @@
-<p>home-players-table works!</p>
+<p-table
+  #dt
+  [responsiveLayout]="'stack'"
+  [value]="statsForTable"
+  [columns]="!isMobile ? playerTableColumns : mobilePlayerTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [sortField]="sortField"
+  [sortOrder]="-1"
+  [filterDelay]="0"
+  [globalFilterFields]="['team_name', 'full_name']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Team / Player"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns let-data>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th
+          *ngFor="let column of mobilePlayerTableColumns"
+          [hidden]="!column.visible"
+        >
+          {{ column.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of playerTableColumns"
+          [hidden]="!column.visible"
+          [pSortableColumn]="column.field"
+          [pSortableColumnDisabled]="column.field === 'team'"
+        >
+          {{ column.header }}
+          <p-sortIcon
+            [field]="column.field"
+            *ngIf="column.field !== 'team'"
+          ></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td
+          *ngFor="let column of mobilePlayerTableColumns"
+          [hidden]="!column.visible"
+        >
+          <span
+            class="p-column-title"
+            *ngIf="statType === 'season' || column.header !== 'Team'"
+            >{{ column.header }}</span
+          >
+          <div class="table-body-cell">
+            <ng-container
+              *ngIf="column.field === 'team' && statType === 'season'"
+            >
+              <img
+                [src]="data.teamLogo"
+                height="30px"
+                [pTooltip]="data.team_name"
+                tooltipPosition="right"
+              />
+            </ng-container>
+            <p-avatar
+              [image]="getPlayerPicture(data.player_id?.nhl_id)"
+              shape="circle"
+              *ngIf="
+                column.field.includes('full_name') && data.player_id.nhl_id
+              "
+            ></p-avatar>
+            <ng-container>{{ data[column.field] }}</ng-container>
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-window-maximize"
+                class="p-button-rounded p-button-info"
+                (click)="onPlayerClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td
+          *ngFor="let column of playerTableColumns"
+          [hidden]="!column.visible"
+        >
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container *ngIf="column.field === 'team'">
+              <img
+                [src]="data.teamLogo"
+                height="30px"
+                [pTooltip]="data.team_name"
+                tooltipPosition="right"
+              />
+            </ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </ng-template>
+</p-table>
+
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="playerStats as playerStats">
+    {{playerStats | json}}
+  </ng-container>
+</p-sidebar>
+
