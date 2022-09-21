@@ -81,18 +81,18 @@ export class HomePlayersTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['statType']) {
-      // this.mobilePlayerTableColumns[0].visible =
-      //   changes['statType'].currentValue === 'season';
-      // this.playerTableColumns[0].visible =
-      //   changes['statType'].currentValue === 'season';
-      // this.playerTableColumns[2].visible =
-      //   changes['statType'].currentValue === 'season';
-      // this.playerTableColumns[19].visible =
-      //   changes['statType'].currentValue === 'season';
-      // this.playerTableColumns[20].visible =
-      //   changes['statType'].currentValue === 'season';
-      // this.playerTableColumns[21].visible =
-      //   changes['statType'].currentValue === 'season';
+      this.mobilePlayerTableColumns[0].visible =
+        changes['statType'].currentValue === 'season';
+      this.playerTableColumns[0].visible =
+        changes['statType'].currentValue === 'season';
+      this.playerTableColumns[2].visible =
+        changes['statType'].currentValue === 'season';
+      this.playerTableColumns[19].visible =
+        changes['statType'].currentValue === 'season';
+      this.playerTableColumns[20].visible =
+        changes['statType'].currentValue === 'season';
+      this.playerTableColumns[21].visible =
+        changes['statType'].currentValue === 'season';
     }
   }
 

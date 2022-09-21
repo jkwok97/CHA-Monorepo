@@ -11,6 +11,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { AvatarModule } from 'primeng/avatar';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -35,6 +36,7 @@ import {
     CommonModule,
     ChaFrontHomePlayersRoutingModule,
     PerfectScrollbarModule,
+    InputTextModule,
     ProgressBarModule,
     TooltipModule,
     SidebarModule,

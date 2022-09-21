@@ -25,7 +25,7 @@ export class ApiUserPlayerStatsService {
     );
 
     const userTeamsWithPlayersStatsConverted =
-      await this.setConvertedPlayersStats(userTeamsWithPlayerStats);
+      await this.setConvertedPlayersStats(userTeamsWithPlayerStats, false);
 
     return userTeamsWithPlayersStatsConverted;
   }
@@ -42,7 +42,7 @@ export class ApiUserPlayerStatsService {
     );
 
     const userTeamsWithPlayersStatsConverted =
-      await this.setConvertedPlayersStats(userTeamsWithPlayerStats);
+      await this.setConvertedPlayersStats(userTeamsWithPlayerStats, true);
 
     return userTeamsWithPlayersStatsConverted;
   }
@@ -54,7 +54,11 @@ export class ApiUserPlayerStatsService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerStats: await this.getPlayerStats(item.shortname, seasonType),
+        playerStats: await this.getPlayerStats(
+          item.shortname,
+          seasonType,
+          item
+        ),
       }))
     );
   }
@@ -68,7 +72,8 @@ export class ApiUserPlayerStatsService {
         ...item,
         playerStats: await this.getPlayerAllTimeStats(
           item.shortname,
-          seasonType
+          seasonType,
+          item
         ),
       }))
     );
@@ -76,9 +81,10 @@ export class ApiUserPlayerStatsService {
 
   private async getPlayerAllTimeStats(
     teamShortName: string,
-    seasonType: 'Regular' | 'Playoffs'
+    seasonType: 'Regular' | 'Playoffs',
+    teamInfo: any
   ) {
-    return await this.dataSource.query(
+    const stats = await this.dataSource.query(
       `select
       b.firstname as firstname,
       b.lastname as lastname,
@@ -116,13 +122,16 @@ export class ApiUserPlayerStatsService {
       group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
       order by points DESC`
     );
+
+    return { teamInfo, stats };
   }
 
   private async getPlayerStats(
     teamShortName: string,
-    seasonType: 'Regular' | 'Playoffs'
+    seasonType: 'Regular' | 'Playoffs',
+    teamInfo: any
   ) {
-    return await this.repo.find({
+    const stats = await this.repo.find({
       select: {
         id: true,
         team_name: true,
@@ -146,6 +155,7 @@ export class ApiUserPlayerStatsService {
         corner_pct: true,
         hits: true,
         blocked_shots: true,
+        playing_year: true,
         player_id: {
           id: true,
           firstname: true,
@@ -164,18 +174,20 @@ export class ApiUserPlayerStatsService {
         points: 'DESC',
       },
     });
+
+    return { teamInfo, stats };
   }
 
-  private async setConvertedPlayersStats(array: any[]) {
+  private async setConvertedPlayersStats(array: any[], raw: boolean) {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        playerStats: await this.convertStats(item.playerStats),
+        playerStats: await this.convertStats(item.playerStats, raw),
       }))
     );
   }
 
-  private async convertStats(array: Players_Stats_V2[]) {
+  private async convertStats(array: Players_Stats_V2[], raw: boolean) {
     return await Promise.all(
       array.map((stat: Players_Stats_V2) => ({
         ...stat,
@@ -190,14 +202,43 @@ export class ApiUserPlayerStatsService {
         gw_goals: Number(stat.gw_goals),
         gt_goals: Number(stat.gt_goals),
         shots: Number(stat.shots),
-        shooting_pct: Number(stat.shooting_pct),
+        shooting_pct: !raw
+          ? Number(stat.shooting_pct)
+          : Number(
+              ((Number(stat.goals) / Number(stat.shots)) * 100).toFixed(1)
+            ),
+        minutes_per_game: !raw
+          ? Number(stat.minutes_per_game)
+          : Number(
+              (Number(stat.minutes_played) / Number(stat.games_played)).toFixed(
+                1
+              )
+            ),
+        fo_pct: !raw ? Number(stat.fo_pct) : null,
+        pass_pct: !raw ? Number(stat.pass_pct) : null,
+        corner_pct: !raw ? Number(stat.corner_pct) : null,
         minutes_played: Number(stat.minutes_played),
-        minutes_per_game: Number(stat.minutes_per_game),
-        fo_pct: Number(stat.fo_pct),
-        pass_pct: Number(stat.pass_pct),
-        corner_pct: Number(stat.corner_pct),
         hits: Number(stat.hits),
         blocked_shots: Number(stat.blocked_shots),
+        pointsPerSixty: Number(
+          ((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)
+        ),
+        hit_per_game: !raw
+          ? Number(stat.hit_per_game)
+          : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
+        player_id: !raw
+          ? stat.player_id
+          : {
+              id: stat['player_id'],
+              firstname: stat['firstname'],
+              lastname: stat['lastname'],
+              nhl_id: stat['nhl_id'],
+              isactive: null,
+              isgoalie: null,
+              isdefense: stat['isdefense'],
+              isforward: stat['isforward'],
+              is_protected: null,
+            },
       }))
     );
   }
