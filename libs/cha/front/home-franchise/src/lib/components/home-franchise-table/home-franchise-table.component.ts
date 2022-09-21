@@ -19,6 +19,19 @@ import { first } from 'rxjs';
 export class HomeFranchiseTableComponent implements OnInit {
   @Input() stats!: StatTeamsHistoryDto[];
 
+  gamesPlayedTotal!: number;
+  winsTotal!: number;
+  lossTotal!: number;
+  tiesTotal!: number;
+  pointsTotal!: number;
+  goalsForTotal!: number;
+  goalsForPerGameTotal!: number;
+  goalsAgainstTotal!: number;
+  goalsAgainstPerGameTotal!: number;
+  goalDiffTotal!: number;
+  winPctTotal!: number;
+  shGoalsTotal!: number;
+
   teamsTableColumns = [
     { field: 'playing_year', header: 'Year', visible: true },
     { field: 'season_type', header: 'Season', visible: false },
@@ -65,6 +78,34 @@ export class HomeFranchiseTableComponent implements OnInit {
   }
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
+
+    this.gamesPlayedTotal = this.calculateTotal(
+      this.statsForTable,
+      'games_played'
+    );
+    this.winsTotal = this.calculateTotal(this.statsForTable, 'wins');
+    this.lossTotal = this.calculateTotal(this.statsForTable, 'loss');
+    this.tiesTotal = this.calculateTotal(this.statsForTable, 'ties');
+    this.pointsTotal = this.calculateTotal(this.statsForTable, 'points');
+    this.goalsForTotal = this.calculateTotal(this.statsForTable, 'goals_for');
+    this.goalsAgainstTotal = this.calculateTotal(
+      this.statsForTable,
+      'goals_against'
+    );
+    this.shGoalsTotal = this.calculateTotal(this.statsForTable, 'sh_goals');
+    this.goalsForPerGameTotal = Number(
+      (this.goalsForTotal / this.gamesPlayedTotal).toFixed(2)
+    );
+    this.goalsAgainstPerGameTotal = Number(
+      (this.goalsAgainstTotal / this.gamesPlayedTotal).toFixed(2)
+    );
+    this.goalDiffTotal = this.goalsForTotal - this.goalsAgainstTotal;
+    this.winPctTotal = Number(
+      (
+        ((2 * this.winsTotal + this.tiesTotal) / (2 * this.gamesPlayedTotal)) *
+        100
+      ).toFixed(1)
+    );
   }
 
   mapItems(stats: StatTeamsHistoryDto[]) {
@@ -83,5 +124,13 @@ export class HomeFranchiseTableComponent implements OnInit {
   onTeamClick(stat: StatTeamsHistoryDto) {
     this.teamStats = stat;
     this.display = true;
+  }
+
+  private calculateTotal(stats: any[], type: string) {
+    let total = 0;
+    stats.forEach((stat) => {
+      total += stat[type];
+    });
+    return total;
   }
 }
