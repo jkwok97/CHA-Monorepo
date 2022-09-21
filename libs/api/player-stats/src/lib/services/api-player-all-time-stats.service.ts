@@ -186,9 +186,7 @@ export class ApiPlayerAllTimeStatsService {
         fo_pct: !raw ? Number(stat.fo_pct) : null,
         pass_pct: !raw ? Number(stat.pass_pct) : null,
         corner_pct: !raw ? Number(stat.corner_pct) : null,
-        hit_per_game: !raw
-          ? Number(stat.hit_per_game)
-          : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
+        hit_per_game: Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
         blocked_shots: Number(stat.blocked_shots),
       }))
     );

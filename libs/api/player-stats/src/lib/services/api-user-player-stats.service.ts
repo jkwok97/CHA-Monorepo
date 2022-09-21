@@ -183,7 +183,8 @@ export class ApiUserPlayerStatsService {
   ) {
     return await Promise.all(
       array.map((stat: Players_Stats_V2) => ({
-        ...stat,
+        playing_year: stat.playing_year,
+        season_type: stat.season_type,
         teamInfo: !raw
           ? {
               id: teamInfo.id,
