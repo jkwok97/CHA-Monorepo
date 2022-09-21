@@ -98,6 +98,7 @@ export class ApiUserPlayerStatsService {
       sum(a.sh_goals) as sh_goals, 
       sum(a.pp_goals) as pp_goals, 
       sum(a.gw_goals) as gw_goals, 
+      sum(a.gt_goals) as gt_goals, 
       sum(a.shots) as shots, 
       sum(a.minutes_played) as minutes_played, 
       sum(a.hits) as hits, 
