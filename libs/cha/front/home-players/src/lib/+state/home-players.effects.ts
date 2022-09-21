@@ -12,7 +12,7 @@ import { HomePlayersService } from '../services';
 import { HomePlayersActions } from './home-players.actions';
 
 @Injectable()
-export class HomeFranchiseEffects {
+export class HomePlayersEffects {
   constructor(
     private actions$: Actions,
     private homePlayersService: HomePlayersService,
