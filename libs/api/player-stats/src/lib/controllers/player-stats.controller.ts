@@ -1,9 +1,14 @@
-import { StatPlayerLeadersDto, StatPlayersHistoryDto } from '@cha/shared/entities';
+import {
+  StatPlayerLeadersDto,
+  StatPlayersHistoryDto,
+  StatUserPlayersHistoryDto,
+} from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import {
   ApiPlayerAllTimeStatsService,
   ApiPlayerLeadersStatsService,
   ApiPlayerStatsService,
+  ApiUserPlayerStatsService,
 } from '../services';
 
 @Controller('player-stats')
@@ -11,7 +16,8 @@ export class PlayerStatsController {
   constructor(
     private playerLeaderStatsService: ApiPlayerLeadersStatsService,
     private playerStatsService: ApiPlayerStatsService,
-    private playerAllTimeStatsService: ApiPlayerAllTimeStatsService
+    private playerAllTimeStatsService: ApiPlayerAllTimeStatsService,
+    private userPlayersStatsService: ApiUserPlayerStatsService
   ) {}
 
   @Get('/leaders/:season/:seasonType')
@@ -82,5 +88,37 @@ export class PlayerStatsController {
       throw new NotFoundException('Player Stats not found');
     }
     return stats;
+  }
+
+  @Get('/user/:userId/history/:seasonType')
+  async getTeamPlayerStatsBySeasonType(
+    @Param() param
+  ): Promise<StatUserPlayersHistoryDto[]> {
+    const record =
+      await this.userPlayersStatsService.getUserPlayerStatsBySeasonType(
+        param.userId,
+        param.seasonType
+      );
+
+    if (!record) {
+      throw new NotFoundException('Team Players Stats not found');
+    }
+    return record;
+  }
+
+  @Get('/user/:userId/history/all/:seasonType')
+  async getTeamPlayerStatsAllTimeBySeasonType(
+    @Param() param
+  ): Promise<StatUserPlayersHistoryDto[]> {
+    const record =
+      await this.userPlayersStatsService.getUserPlayerStatsAllTimeBySeasonType(
+        param.userId,
+        param.seasonType
+      );
+
+    if (!record) {
+      throw new NotFoundException('Team Players Stats not found');
+    }
+    return record;
   }
 }
