@@ -2,7 +2,7 @@ import { Teams_V2, Team_Stats_V2 } from '@api/entities';
 import { StatUserTeamRecordDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiUserTeamStatsService {
@@ -136,6 +136,7 @@ export class ApiUserTeamStatsService {
         team_id: {
           id: teamId,
         },
+        games_played: MoreThan(0),
         season_type: seasonType,
       },
       order: {

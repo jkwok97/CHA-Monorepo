@@ -6,6 +6,11 @@ import { StoreModule } from '@ngrx/store';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { TooltipModule } from 'primeng/tooltip';
+import { SidebarModule } from 'primeng/sidebar';
+import { AvatarModule } from 'primeng/avatar';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -31,6 +36,11 @@ import {
     ChaFrontHomeFranchiseRoutingModule,
     PerfectScrollbarModule,
     ProgressBarModule,
+    TooltipModule,
+    SidebarModule,
+    AvatarModule,
+    TableModule,
+    ButtonModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeButtonSelectComponent,

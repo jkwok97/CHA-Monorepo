@@ -1,1 +1,116 @@
-<p>home-franchise-table works!</p>
+<p-table
+  [responsiveLayout]="'stack'"
+  [value]="statsForTable"
+  [columns]="!isMobile ? teamsTableColumns : mobileTeamsTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [sortField]="sortField"
+  [sortOrder]="-1"
+>
+  <ng-template pTemplate="header" let-columns let-data>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th
+          *ngFor="let column of mobileTeamsTableColumns"
+          [hidden]="!column.visible"
+          [pSortableColumn]="column.field"
+          [pSortableColumnDisabled]="column.field === 'team'"
+        >
+          {{ column.header }}
+          <p-sortIcon
+            [field]="column.field"
+            *ngIf="column.field !== 'team'"
+          ></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of teamsTableColumns"
+          [hidden]="!column.visible"
+          [pSortableColumn]="column.field"
+          [pSortableColumnDisabled]="column.field === 'team'"
+        >
+          {{ column.header }}
+          <p-sortIcon
+            [field]="column.field"
+            *ngIf="column.field !== 'team'"
+          ></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td
+          *ngFor="let column of mobileTeamsTableColumns"
+          [hidden]="!column.visible"
+        >
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container *ngIf="column.field === 'team'">
+              <img
+                [src]="data.teamLogo"
+                height="30px"
+                [pTooltip]="data.team_name"
+                tooltipPosition="right"
+              />
+              {{ data.team_id.city + ' ' + data.team_id.nickname }}
+            </ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-window-maximize"
+                class="p-button-rounded p-button-info"
+                (click)="onTeamClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td *ngFor="let column of teamsTableColumns" [hidden]="!column.visible">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container *ngIf="column.field === 'team'">
+              <img
+                [src]="data.teamLogo"
+                height="30px"
+                [pTooltip]="data.team_name"
+                tooltipPosition="right"
+              />
+            </ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </ng-template>
+</p-table>
+
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="teamStats as teamStats">
+    <cha-front-home-franchise-table-sidebar
+      [teamStats]="teamStats"
+    ></cha-front-home-franchise-table-sidebar>
+  </ng-container>
+</p-sidebar>
+
