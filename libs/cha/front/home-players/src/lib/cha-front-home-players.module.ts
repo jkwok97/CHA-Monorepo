@@ -25,6 +25,10 @@ import { HomePlayersEffects } from './+state/home-players.effects';
 import { ChaFrontHomePlayersRoutingModule } from './cha-front-home-players-routing.module';
 
 import { HomePlayersComponent } from './containers';
+import {
+  HomePlayersTableComponent,
+  HomePlayersTableSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -45,7 +49,11 @@ import { HomePlayersComponent } from './containers';
     StoreModule.forFeature('home-players', reducer),
     EffectsModule.forFeature([HomePlayersEffects]),
   ],
-  declarations: [HomePlayersComponent],
+  declarations: [
+    HomePlayersComponent,
+    HomePlayersTableComponent,
+    HomePlayersTableSidebarComponent,
+  ],
   providers: [HomePlayersService, HomePlayersFacade, HomePlayersEffects],
 })
 export class ChaFrontHomePlayersModule {}
