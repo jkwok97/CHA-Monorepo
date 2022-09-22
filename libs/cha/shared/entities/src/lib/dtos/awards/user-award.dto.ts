@@ -19,5 +19,7 @@ export interface UserAwardDto {
   team_id: {
     id: number;
     teamlogo: string;
+    teamcolor: string;
+    teamtextcolor: string;
   };
 }

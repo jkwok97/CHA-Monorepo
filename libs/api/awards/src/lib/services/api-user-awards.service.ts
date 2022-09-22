@@ -33,6 +33,8 @@ export class ApiUserAwardsService {
         team_id: {
           id: true,
           teamlogo: true,
+          teamcolor: true,
+          teamtextcolor: true,
         },
       },
       relations: ['users_id', 'player_id', 'award_type'],
