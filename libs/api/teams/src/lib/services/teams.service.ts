@@ -18,6 +18,7 @@ export class TeamsService {
   async getUserIdByTeamId(teamId: number): Promise<any> {
     return await this.repo.findOne({
       select: {
+        id: true,
         users_id: true,
       },
       where: {

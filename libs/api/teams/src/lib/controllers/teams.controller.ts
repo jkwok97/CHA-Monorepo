@@ -27,7 +27,7 @@ export class TeamsController {
   }
 
   @Get('/:teamId')
-  async getUserIdByTeamId(@Param() param): Promise<number> {
+  async getUserIdByTeamId(@Param() param): Promise<{id: number, userId: number}> {
     const userId = await this.teamsService.getUserIdByTeamId(param.teamId);
 
     if (!userId) {

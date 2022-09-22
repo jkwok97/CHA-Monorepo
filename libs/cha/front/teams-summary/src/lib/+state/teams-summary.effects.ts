@@ -19,7 +19,7 @@ export class TeamsSummaryEffects {
       ofType(TeamsSummaryActions.getUserIdByTeamId),
       exhaustMap((action) =>
         this.teamsSummaryFranchiseService.getUserIdByTeamId(action.teamId).pipe(
-          map((userId: number) =>
+          map(({ id, userId }) =>
             TeamsSummaryActions.getUserIdByTeamIdSuccess({
               userId,
             })
