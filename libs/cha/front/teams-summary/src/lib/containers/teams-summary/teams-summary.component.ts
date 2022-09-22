@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DisplayFacade } from '@cha/domain/core';
-import { first } from 'rxjs';
+import { first, map } from 'rxjs';
+import { TeamsSummaryFacade } from '../../+state/teams-summary.facade';
 
 @Component({
   selector: 'cha-front-teams-summary',
@@ -30,11 +32,24 @@ export class TeamsSummaryComponent {
     { index: 5, name: 'awards' },
   ];
 
-  constructor(private displayFacade: DisplayFacade) {
+  constructor(
+    private displayFacade: DisplayFacade,
+    private teamsSummaryFacade: TeamsSummaryFacade,
+    private route: ActivatedRoute
+  ) {
     this.displayFacade.isMobile$
       .pipe(first())
       .subscribe((isMobile: boolean) => {
         this.isMobile = isMobile;
       });
+
+    this.route.params
+      .pipe(
+        first(),
+        map((params) =>
+          this.teamsSummaryFacade.getUserIdByTeamId(params['teamId'])
+        )
+      )
+      .subscribe();
   }
 }
