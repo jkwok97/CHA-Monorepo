@@ -3,10 +3,10 @@
 >
   <div class="w-full">
     <blade-card style="background-color: var(--team-100)">
-      <blade-card-header>
+      <blade-card-header [ngStyle]="{ 'padding-top': '10px' }">
         <div class="text-lg text-center">Current NHL Season Stats</div>
       </blade-card-header>
-      <blade-card-body>
+      <blade-card-body [ngStyle]="{ padding: '10px' }">
         <div
           class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
         >
@@ -107,10 +107,10 @@
 
   <div class="w-full">
     <blade-card style="background-color: var(--team-100)">
-      <blade-card-header>
+      <blade-card-header [ngStyle]="{ 'padding-top': '10px' }">
         <div class="text-lg text-center">Current CHA Stats</div>
       </blade-card-header>
-      <blade-card-body>
+      <blade-card-body [ngStyle]="{ padding: '10px' }">
         <div
           class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
         >
