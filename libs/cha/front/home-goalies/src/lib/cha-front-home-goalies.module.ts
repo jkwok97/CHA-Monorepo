@@ -26,6 +26,10 @@ import { HomeGoaliesService } from './services';
 import { ChaFrontHomeGoaliesRoutingModule } from './cha-front-home-goalies-routing.module';
 
 import { HomeGoaliesComponent } from './containers';
+import {
+  HomeGoaliesTableComponent,
+  HomeGoaliesTableSidebarComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -47,7 +51,11 @@ import { HomeGoaliesComponent } from './containers';
     StoreModule.forFeature('home-goalies', reducer),
     EffectsModule.forFeature([HomeGoaliesEffects]),
   ],
-  declarations: [HomeGoaliesComponent],
+  declarations: [
+    HomeGoaliesComponent,
+    HomeGoaliesTableComponent,
+    HomeGoaliesTableSidebarComponent,
+  ],
   providers: [HomeGoaliesService, HomeGoaliesFacade, HomeGoaliesEffects],
 })
 export class ChaFrontHomeGoaliesModule {}
