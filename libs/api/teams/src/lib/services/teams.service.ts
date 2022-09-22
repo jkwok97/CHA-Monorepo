@@ -14,4 +14,15 @@ export class TeamsService {
   async getCurrentTeams(): Promise<Teams_V2[]> {
     return await this.repo.findBy({ isactive: true });
   }
+
+  async getUserIdByTeamId(teamId: number): Promise<any> {
+    return await this.repo.findOne({
+      select: {
+        users_id: true,
+      },
+      where: {
+        id: teamId,
+      },
+    });
+  }
 }
