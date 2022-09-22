@@ -7,6 +7,7 @@ import {
   ApiGoalieStatsService,
   ApiGoalieStatsLeadersService,
   ApiGoalieAllTimeStatsService,
+  ApiUserGoalieStatsService,
 } from './services';
 
 @Module({
@@ -16,6 +17,7 @@ import {
     ApiGoalieStatsService,
     ApiGoalieStatsLeadersService,
     ApiGoalieAllTimeStatsService,
+    ApiUserGoalieStatsService,
   ],
 })
 export class ApiGoalieStatsModule {
