@@ -140,6 +140,7 @@ export class ApiUserGoalieStatsService {
         penalty_minutes: true,
         pass_pct: true,
         team_name: true,
+        playing_year: true,
         player_id: {
           id: true,
           firstname: true,
