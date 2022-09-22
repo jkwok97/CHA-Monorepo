@@ -35,7 +35,7 @@ export class HomeGoaliesFacade {
     );
   }
 
-  getUserPlayerAllTimeStatsBySeason(seasonType: string) {
+  getUserGoaliesAllTimeStatsBySeason(seasonType: string) {
     this.store.dispatch(
       HomeGoaliesActions.getUserGoaliesAllTimeStatsBySeason({ seasonType })
     );

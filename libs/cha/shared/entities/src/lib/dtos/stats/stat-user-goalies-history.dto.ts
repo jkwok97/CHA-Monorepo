@@ -17,5 +17,5 @@ export interface StatUserGoaliesHistoryDto {
     conference_id: number;
     isactive: boolean;
   };
-  goaliestats: StatGoaliesHistoryDto[];
+  goalieStats: StatGoaliesHistoryDto[];
 }

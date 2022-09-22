@@ -6,7 +6,6 @@ import { HomePlayersFacade } from '../../+state/home-players.facade';
 @Component({
   selector: 'cha-front-home-players',
   templateUrl: './home-players.component.html',
-  styleUrls: ['./home-players.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePlayersComponent implements OnInit {

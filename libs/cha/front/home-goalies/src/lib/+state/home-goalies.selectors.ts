@@ -22,8 +22,8 @@ const selectGoaliesStats = createSelector(
   selectAll,
   (allGoaliesStats: StatUserGoaliesHistoryDto[]) => {
     const goaliesStats: StatGoaliesHistoryDto[] = [];
-    allGoaliesStats.forEach((player: StatUserGoaliesHistoryDto) => {
-      player.goaliestats.forEach((stat: StatGoaliesHistoryDto) =>
+    allGoaliesStats.forEach((goalie: StatUserGoaliesHistoryDto) => {
+      goalie.goalieStats.forEach((stat: StatGoaliesHistoryDto) =>
         goaliesStats.push(stat)
       );
     });
