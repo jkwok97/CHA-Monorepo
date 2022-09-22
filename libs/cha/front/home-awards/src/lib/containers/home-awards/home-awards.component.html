@@ -1,1 +1,25 @@
-<p>home-awards works!</p>
+<perfect-scrollbar [style]="isMobile ? panelStyleMobile : panelStyleDesktop">
+  <blade-layout-feature>
+    <blade-layout-feature-content>
+      <div>
+        <p-progressBar
+          mode="indeterminate"
+          [style]="{ height: '6px' }"
+          *ngIf="isLoading$ | async"
+        ></p-progressBar>
+
+        <div class="grid justify-content-center row-gap-2 pt-2">
+          <div class="text-lg col-12 text-center" style="font-weight: 100">
+            CHA Franchise Awards
+          </div>
+        </div>
+
+        <blade-divider></blade-divider>
+
+        <blade-card *ngIf="isLoaded$ | async">
+          <blade-card-body> </blade-card-body>
+        </blade-card>
+      </div>
+    </blade-layout-feature-content>
+  </blade-layout-feature>
+</perfect-scrollbar>

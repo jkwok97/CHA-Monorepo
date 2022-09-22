@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { StatPlayersHistoryDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { HomePlayersFacade } from '../../+state/home-players.facade';
 
 @Component({
@@ -37,11 +38,20 @@ export class HomePlayersComponent implements OnInit {
     height: '83vh',
   };
 
-  constructor(private homePlayersFacade: HomePlayersFacade) {
+  constructor(
+    private homePlayersFacade: HomePlayersFacade,
+    private displayFacade: DisplayFacade
+  ) {
     this.isLoaded$ = this.homePlayersFacade.isLoaded$;
     this.isLoading$ = this.homePlayersFacade.isLoading$;
 
     this.allStats$ = this.homePlayersFacade.playersStats$;
+
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
   }
 
   ngOnInit(): void {

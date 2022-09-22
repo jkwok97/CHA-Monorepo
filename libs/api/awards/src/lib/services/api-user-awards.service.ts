@@ -43,6 +43,9 @@ export class ApiUserAwardsService {
           id: userId,
         },
       },
+      order: {
+        display_season: 'DESC',
+      },
     });
   }
 }

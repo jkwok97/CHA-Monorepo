@@ -15,7 +15,7 @@ export class HomeAwardsService {
   getUserAwards(userId: number | undefined) {
     if (userId) {
       return this._http
-        .get(`${this.apiUrl}awards/user/${userId}`)
+        .get(`${this.apiUrl}/awards/user/${userId}`)
         .pipe(map((result: any) => result));
     } else {
       return of([]);
