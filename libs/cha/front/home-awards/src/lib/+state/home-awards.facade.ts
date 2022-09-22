@@ -16,7 +16,7 @@ export class HomeAwardsFacade {
     HomeAwardsSelectors.selectLoaded
   );
 
-  allStats$: Observable<UserAwardDto[]> = this.store.select(
+  awards$: Observable<UserAwardDto[]> = this.store.select(
     HomeAwardsSelectors.selectAll
   );
 

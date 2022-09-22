@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
+import { UserAwardDto } from '@cha/shared/entities';
 import { Observable, first } from 'rxjs';
 import { HomeAwardsFacade } from '../../+state/home-awards.facade';
 
@@ -12,6 +13,7 @@ import { HomeAwardsFacade } from '../../+state/home-awards.facade';
 export class HomeAwardsComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
+  awards$: Observable<UserAwardDto[]>;
 
   isMobile = false;
   panelStyleMobile = {
@@ -30,6 +32,7 @@ export class HomeAwardsComponent implements OnInit {
   ) {
     this.isLoaded$ = this.homeAwardsFacade.isLoaded$;
     this.isLoading$ = this.homeAwardsFacade.isLoading$;
+    this.awards$ = this.homeAwardsFacade.awards$;
 
     this.displayFacade.isMobile$
       .pipe(first())

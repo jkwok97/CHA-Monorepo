@@ -17,7 +17,13 @@
         <blade-divider></blade-divider>
 
         <blade-card *ngIf="isLoaded$ | async">
-          <blade-card-body> </blade-card-body>
+          <blade-card-body>
+            <div>
+              <ng-container *ngFor="let award of awards$ | async">
+                <blade-user-award-card [award]="award"></blade-user-award-card>
+              </ng-container>
+            </div>
+          </blade-card-body>
         </blade-card>
       </div>
     </blade-layout-feature-content>

@@ -37,7 +37,7 @@ export class ApiUserAwardsService {
           teamtextcolor: true,
         },
       },
-      relations: ['users_id', 'player_id', 'award_type'],
+      relations: ['users_id', 'player_id', 'award_type', 'team_id'],
       where: {
         users_id: {
           id: userId,
