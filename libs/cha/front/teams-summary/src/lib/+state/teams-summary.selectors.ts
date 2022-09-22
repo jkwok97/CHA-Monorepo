@@ -4,22 +4,19 @@ import {
 } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as HomeFranchiseReducer from './teams-summary.reducer';
+import * as TeamsSummaryReducer from './teams-summary.reducer';
 
 export const selectState =
-  createFeatureSelector<HomeFranchiseReducer.State>('home-franchise');
+  createFeatureSelector<TeamsSummaryReducer.State>('teams-summary');
 
 const selectLoading = createSelector(
   selectState,
-  HomeFranchiseReducer.getLoading
+  TeamsSummaryReducer.getLoading
 );
 
-const selectLoaded = createSelector(
-  selectState,
-  HomeFranchiseReducer.getLoaded
-);
+const selectLoaded = createSelector(selectState, TeamsSummaryReducer.getLoaded);
 
-const selectAll = createSelector(selectState, HomeFranchiseReducer.getAllStats);
+const selectAll = createSelector(selectState, TeamsSummaryReducer.getAllStats);
 
 const selectTeamStats = createSelector(
   selectAll,
@@ -34,10 +31,7 @@ const selectTeamStats = createSelector(
   }
 );
 
-const selectUserId = createSelector(
-  selectState,
-  HomeFranchiseReducer.getUserId
-);
+const selectUserId = createSelector(selectState, TeamsSummaryReducer.getUserId);
 
 export const TeamsSummarySelectors = {
   selectLoaded,
