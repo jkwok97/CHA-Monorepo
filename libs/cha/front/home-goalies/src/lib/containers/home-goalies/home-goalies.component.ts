@@ -6,7 +6,6 @@ import { HomeGoaliesFacade } from '../../+state/home-goalies.facade';
 @Component({
   selector: 'cha-front-home-goalies',
   templateUrl: './home-goalies.component.html',
-  styleUrls: ['./home-goalies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeGoaliesComponent implements OnInit {
