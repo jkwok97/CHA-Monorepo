@@ -1,1 +1,36 @@
-<p>teams-summary works!</p>
+<perfect-scrollbar [style]="isMobile ? panelStyleMobile : panelStyleDesktop">
+  <blade-layout-feature>
+    <blade-layout-feature-content>
+      <div class="flex flex-column row-gap-2">
+        <div class="p-2">THIS IS FOR THE TEAM BANNER</div>
+        <div class="p-2">
+          <p-carousel
+            [value]="pages"
+            [numVisible]="1"
+            [numScroll]="1"
+            [page]="pages.indexOf(selectedEntity)"
+            (onPage)="selectedEntity = pages[$event.name]"
+          >
+            <ng-template let-page pTemplate="item">
+              <ng-container *ngIf="page.name === 'depth'">
+                <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'team'">
+                <cha-front-teams-summary-team></cha-front-teams-summary-team>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'players'">
+                <cha-front-teams-summary-players></cha-front-teams-summary-players>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'goalie'">
+                <cha-front-teams-summary-goalies></cha-front-teams-summary-goalies>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'awards'">
+                <cha-front-teams-summary-awards></cha-front-teams-summary-awards>
+              </ng-container>
+            </ng-template>
+          </p-carousel>
+        </div>
+      </div>
+    </blade-layout-feature-content>
+  </blade-layout-feature>
+</perfect-scrollbar>
