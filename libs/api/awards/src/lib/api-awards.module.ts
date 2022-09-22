@@ -8,7 +8,7 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AwardsController } from './controllers';
 import { AwardsMiddleware } from './middlewares';
-import { ApiAwardsService } from './services';
+import { ApiAwardsService, ApiUserAwardsService } from './services';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { ApiAwardsService } from './services';
     ]),
   ],
   controllers: [AwardsController],
-  providers: [ApiAwardsService],
+  providers: [ApiAwardsService, ApiUserAwardsService],
 })
 export class ApiAwardsModule {
   configure(consumer: MiddlewareConsumer) {

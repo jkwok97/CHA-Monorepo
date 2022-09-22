@@ -1,19 +1,15 @@
 import { Awards_V2 } from '@api/entities';
-import { Controller, Get, NotFoundException } from '@nestjs/common';
+import { UserAwardDto } from '@cha/shared/entities';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { ApiUserAwardsService } from '../services';
 import { ApiAwardsService } from '../services/api-awards.service';
 
 @Controller('awards')
 export class AwardsController {
-  constructor(private awardsService: ApiAwardsService) {}
-
-  @Get()
-  getAllAwardWinners() {
-    console.log('in awards controller');
-    return 'awards';
-  }
-
-  // @Get('/winners/:id')
-  // getAwardWinnersById() {}
+  constructor(
+    private awardsService: ApiAwardsService,
+    private userAwardsService: ApiUserAwardsService
+  ) {}
 
   @Get('/champions')
   async getChampions(): Promise<Awards_V2[]> {
@@ -85,14 +81,23 @@ export class AwardsController {
     return season;
   }
 
+  @Get('/user/:userId')
+  async getTeamAwardsByUserId(@Param() param): Promise<UserAwardDto[]> {
+    const awardsByUser = await this.userAwardsService.getAwardsByUserId(
+      param.userId
+    );
+
+    if (!awardsByUser || awardsByUser.length < 1) {
+      throw new NotFoundException('Player Stats not found');
+    }
+    return awardsByUser;
+  }
+
   // @Get('/player/:id')
   // getPlayerAwardsByPlayerId() {}
 
   // @Get('/goalie/:id')
   // getGoalieAwardsByPlayerId() {}
-
-  // @Get('/user/:id')
-  // getTeamAwardsByUserId() {}
 
   // @Get('/award-types')
   // getAwardTypes() {}
