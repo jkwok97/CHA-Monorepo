@@ -4,7 +4,6 @@ import {
   StatUserGoaliesHistoryDto,
 } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { stat } from 'fs';
 import {
   ApiGoalieAllTimeStatsService,
   ApiGoalieStatsLeadersService,
@@ -42,7 +41,7 @@ export class GoalieStatsController {
       param.seasonType
     );
 
-    if (!stats || stat.length < 1) {
+    if (!stats || stats.length < 1) {
       throw new NotFoundException('Player Stats not found');
     }
     return stats;
