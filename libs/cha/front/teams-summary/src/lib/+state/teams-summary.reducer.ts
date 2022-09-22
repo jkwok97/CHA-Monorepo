@@ -3,14 +3,14 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { TeamsSummaryActions } from './teams-summary.actions';
 
 export interface State {
-  stats: StatUserTeamHistoryDto[];
+  teamStats: StatUserTeamHistoryDto[];
   userId: number | undefined;
   loading: boolean;
   loaded: boolean;
 }
 
 const initialState: State = {
-  stats: [],
+  teamStats: [],
   userId: undefined,
   loading: false,
   loaded: false,
@@ -27,7 +27,7 @@ const r = createReducer(
 
   on(TeamsSummaryActions.getUserTeamStatsBySeasonSuccess, (state, action) => ({
     ...state,
-    stats: action.stats,
+    teamStats: action.stats,
     loading: false,
     loaded: true,
   })),
@@ -44,7 +44,7 @@ export function reducer(state: State | undefined, action: Action) {
   return r(state, action);
 }
 
-export const getAllStats = (state: State) => state.stats;
+export const getTeamStats = (state: State) => state.teamStats;
 
 export const getLoading = (state: State) => state.loading;
 

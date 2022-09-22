@@ -19,17 +19,13 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectLoaded
   );
 
-  allStats$: Observable<StatUserTeamHistoryDto[]> = this.store.select(
-    TeamsSummarySelectors.selectAll
-  );
-
   teamStats$: Observable<StatTeamsHistoryDto[]> = this.store.select(
     TeamsSummarySelectors.selectTeamStats
   );
 
   userId$: Observable<number | undefined> = this.store.select(
     TeamsSummarySelectors.selectUserId
-  )
+  );
 
   constructor(private store: Store<State>) {}
 

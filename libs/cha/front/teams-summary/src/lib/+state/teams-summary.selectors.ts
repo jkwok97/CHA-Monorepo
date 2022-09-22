@@ -16,10 +16,13 @@ const selectLoading = createSelector(
 
 const selectLoaded = createSelector(selectState, TeamsSummaryReducer.getLoaded);
 
-const selectAll = createSelector(selectState, TeamsSummaryReducer.getAllStats);
+const selectTeamStatRaw = createSelector(
+  selectState,
+  TeamsSummaryReducer.getTeamStats
+);
 
 const selectTeamStats = createSelector(
-  selectAll,
+  selectTeamStatRaw,
   (allTeamStats: StatUserTeamHistoryDto[]) => {
     const teamStats: StatTeamsHistoryDto[] = [];
     allTeamStats.forEach((team: StatUserTeamHistoryDto) => {
@@ -36,7 +39,6 @@ const selectUserId = createSelector(selectState, TeamsSummaryReducer.getUserId);
 export const TeamsSummarySelectors = {
   selectLoaded,
   selectLoading,
-  selectAll,
   selectTeamStats,
   selectUserId,
 };

@@ -37,6 +37,5 @@ const selectTeamStats = createSelector(
 export const HomeFranchiseSelectors = {
   selectLoaded,
   selectLoading,
-  selectAll,
-  selectTeamStats
+  selectTeamStats,
 };
