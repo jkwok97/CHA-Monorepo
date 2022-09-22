@@ -108,7 +108,8 @@ export class ApiUserGoalieStatsService {
       and
       a.games_played > '0'
       and
-      a.season_type = '${seasonType} and a.team_name = '${teamShortName}')
+      a.season_type = '${seasonType}'
+      and a.team_name = '${teamShortName}')
       group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
       order by wins DESC`
     );
