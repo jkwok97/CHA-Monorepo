@@ -44,6 +44,11 @@ import {
   SummaryTeamBannerComponent,
   SummaryTeamBannerCapComponent,
   SummaryTeamBannerRecordComponent,
+  DepthChartComponent,
+  DepthChartPositionComponent,
+  DepthChartItemSidebarComponent,
+  DepthChartItemSidebarRatingsComponent,
+  DepthChartItemSidebarStatsComponent,
 } from './components';
 
 @NgModule({
@@ -74,6 +79,11 @@ import {
     SummaryTeamBannerComponent,
     SummaryTeamBannerCapComponent,
     SummaryTeamBannerRecordComponent,
+    DepthChartComponent,
+    DepthChartPositionComponent,
+    DepthChartItemSidebarComponent,
+    DepthChartItemSidebarRatingsComponent,
+    DepthChartItemSidebarStatsComponent,
   ],
   providers: [
     TeamsSummaryService,
