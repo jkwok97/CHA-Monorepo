@@ -5,19 +5,31 @@ import {
   StatGoalieAllDto,
   NhlGoalieStatDto,
   NhlPlayerStatDto,
+  TeamDto,
+  UserDto,
 } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[TEAMS SUMMARY]';
 
-const getUserIdByTeamId = createAction(
-  `${NAMESPACE} Get User Id By Team Id`,
+const getUserByTeamId = createAction(
+  `${NAMESPACE} Get User By Team Id`,
   props<{ teamId: number }>()
 );
 
-const getUserIdByTeamIdSuccess = createAction(
-  `${NAMESPACE} Get User Id By Team Id Success`,
+const getUserByTeamIdSuccess = createAction(
+  `${NAMESPACE} Get User By Team Id Success`,
+  props<{ user: UserDto }>()
+);
+
+const getUserTeam = createAction(
+  `${NAMESPACE} Get User Team`,
   props<{ userId: number }>()
+);
+
+const getUserTeamSuccess = createAction(
+  `${NAMESPACE} Get User Team Success`,
+  props<{ team: TeamDto }>()
 );
 
 const getUserTeamRecordBySeasonAndSeasonType = createAction(
@@ -83,8 +95,8 @@ const getNHLCurrentStatsSuccess = createAction(
 const error = createAction(`${NAMESPACE} Error`);
 
 export const TeamsSummaryActions = {
-  getUserIdByTeamId,
-  getUserIdByTeamIdSuccess,
+  getUserByTeamId,
+  getUserByTeamIdSuccess,
   getUserTeamRecordBySeasonAndSeasonType,
   getUserTeamRecordBySeasonAndSeasonTypeSuccess,
   getUserTeamPlayerSalaries,
@@ -97,5 +109,7 @@ export const TeamsSummaryActions = {
   getCHACurrentGoalieStatsSuccess,
   getNHLCurrentStats,
   getNHLCurrentStatsSuccess,
+  getUserTeam,
+  getUserTeamSuccess,
   error,
 };

@@ -1,8 +1,4 @@
-import {
-  SalariesAndRatingsDto,
-  StatTeamsHistoryDto,
-  StatUserTeamHistoryDto,
-} from '@cha/shared/entities';
+import { SalariesAndRatingsDto, UserDto } from '@cha/shared/entities';
 import { selectFeatureState, State } from '../index';
 import { createSelector } from '@ngrx/store';
 
@@ -20,7 +16,14 @@ const selectLoading = createSelector(
 
 const selectLoaded = createSelector(selectState, TeamsSummaryReducer.getLoaded);
 
-const selectUserId = createSelector(selectState, TeamsSummaryReducer.getUserId);
+const selectUser = createSelector(selectState, TeamsSummaryReducer.getUser);
+
+const selectUserId = createSelector(
+  selectUser,
+  (user: UserDto | undefined) => user?.id
+);
+
+const selectTeam = createSelector(selectState, TeamsSummaryReducer.getTeam);
 
 const selectTeamRecordLoading = createSelector(
   selectState,
@@ -173,7 +176,9 @@ const selectPlayersCount = createSelector(
 export const TeamsSummarySelectors = {
   selectLoaded,
   selectLoading,
+  selectUser,
   selectUserId,
+  selectTeam,
   selectTeamRecordLoading,
   selectTeamRecordLoaded,
   selectTeamRecord,

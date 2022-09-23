@@ -11,6 +11,8 @@ import {
   StatGoalieAllDto,
   StatPlayerAllDto,
   StatUserTeamRecordDto,
+  TeamDto,
+  UserDto,
 } from '@cha/shared/entities';
 
 @Injectable()
@@ -23,8 +25,16 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectLoaded
   );
 
+  user$: Observable<UserDto | undefined> = this.store.select(
+    TeamsSummarySelectors.selectUser
+  );
+
   userId$: Observable<number | undefined> = this.store.select(
     TeamsSummarySelectors.selectUserId
+  );
+
+  userTeam$: Observable<TeamDto | undefined> = this.store.select(
+    TeamsSummarySelectors.selectTeam
   );
 
   teamRecordLoading$: Observable<boolean> = this.store.select(
@@ -100,8 +110,12 @@ export class TeamsSummaryFacade {
 
   constructor(private store: Store<State>) {}
 
-  getUserIdByTeamId(teamId: number) {
-    this.store.dispatch(TeamsSummaryActions.getUserIdByTeamId({ teamId }));
+  getUserByTeamId(teamId: number) {
+    this.store.dispatch(TeamsSummaryActions.getUserByTeamId({ teamId }));
+  }
+
+  getUserTeam(userId: number) {
+    this.store.dispatch(TeamsSummaryActions.getUserTeam({ userId }));
   }
 
   getUserTeamRecord(teamId: number) {

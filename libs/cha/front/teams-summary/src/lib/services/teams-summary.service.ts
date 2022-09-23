@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { TeamDto } from '@cha/shared/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,23 @@ export class TeamsSummaryService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getUserIdByTeamId(teamId: number) {
+  getUserByTeamId(teamId: number) {
     if (teamId) {
       return this._http
         .get(`${this.apiUrl}/teams/${teamId}`)
-        .pipe(map((result: any) => result.users_id));
+        .pipe(map((result: any) => result));
+    } else {
+      return of(null);
+    }
+  }
+
+  getTeamByUserId(userId: number) {
+    if (userId) {
+      return this._http
+        .get(`${this.apiUrl}/teams/user/${userId}`)
+        .pipe(
+          map((result: any) => result.filter((item: TeamDto) => item.isactive))
+        );
     } else {
       return of(null);
     }

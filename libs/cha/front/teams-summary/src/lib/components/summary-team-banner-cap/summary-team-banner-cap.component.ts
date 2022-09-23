@@ -1,13 +1,22 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { LeagueDataFacade } from '@cha/domain/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cha-front-summary-team-banner-cap',
   templateUrl: './summary-team-banner-cap.component.html',
-  styleUrls: ['./summary-team-banner-cap.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SummaryTeamBannerCapComponent implements OnInit {
-  constructor() {}
+export class SummaryTeamBannerCapComponent {
+  @Input() totalSalary!: number;
+  @Input() nextTotalSalary!: number;
+  @Input() totalPlayers!: number;
 
-  ngOnInit(): void {}
+  currentCapHit$: Observable<number>;
+  nextCapHit$: Observable<number>;
+
+  constructor(private leagueDataFacade: LeagueDataFacade) {
+    this.currentCapHit$ = this.leagueDataFacade.currentCapHit$;
+    this.nextCapHit$ = this.leagueDataFacade.nextCapHit$;
+  }
 }

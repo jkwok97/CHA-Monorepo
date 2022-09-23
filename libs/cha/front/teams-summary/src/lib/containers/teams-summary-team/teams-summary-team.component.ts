@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UserDto } from '@cha/shared/entities';
 import { Observable, skip, filter } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 import { TeamStatsFacade } from '../../+state/team-stats/team-stats.facade';
@@ -10,7 +11,7 @@ import { TeamStatsFacade } from '../../+state/team-stats/team-stats.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamsSummaryTeamComponent implements OnInit {
-  userId$: Observable<number | undefined>;
+  user$: Observable<UserDto | undefined>;
 
   seasonOption = 'Regular';
 
@@ -18,15 +19,15 @@ export class TeamsSummaryTeamComponent implements OnInit {
     private teamsSummaryFacade: TeamsSummaryFacade,
     private teamStatsFacade: TeamStatsFacade
   ) {
-    this.userId$ = this.teamsSummaryFacade.userId$;
+    this.user$ = this.teamsSummaryFacade.user$;
 
-    this.userId$
+    this.user$
       .pipe(
         skip(1),
         filter((v) => v !== undefined)
       )
-      .subscribe((userId) => {
-        if (userId) {
+      .subscribe((user: UserDto | undefined) => {
+        if (user) {
           this.teamStatsFacade.getUserTeamStatsBySeason(this.seasonOption);
         }
       });

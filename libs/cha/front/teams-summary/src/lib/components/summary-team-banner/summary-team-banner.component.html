@@ -1,1 +1,46 @@
-<p>summary-team-banner works!</p>
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  [ngStyle]="{ 'background-color': userTeam.teamcolor, 'font-weight': 100 }"
+  class="w-full"
+>
+  <blade-card-body>
+    <div
+      class="flex flex-wrap column-gap-2 row-gap-2 align-items-center justify-content-between w-full"
+    >
+      <div class="flex align-items-center column-gap-2" *ngIf="!isMobile">
+        <div>
+          <img [src]="getString(userTeam.teamlogo)" style="width: 75px" />
+        </div>
+        <div>
+          <div class="text-xl">{{ userTeam.city }} {{ userTeam.nickname }}</div>
+          <div class="text-md">
+            <ng-container *ngIf="user$ | async as user">
+              owner: {{ user.firstname }} {{ user.lastname }}
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isTeamRecordLoaded$ | async">
+        <ng-container *ngIf="teamRecord$ | async as teamRecord">
+          <cha-front-summary-team-banner-record
+            [teamRecord]="teamRecord"
+            [isMobile]="isMobile"
+          ></cha-front-summary-team-banner-record>
+        </ng-container>
+      </div>
+      <div>
+        <ng-container *ngIf="totalSalary$ | async as totalSalary">
+          <ng-container *ngIf="nextTotalSalary$ | async as nextTotalSalary">
+            <ng-container *ngIf="totalPlayers$ | async as totalPlayers">
+              <cha-front-summary-team-banner-cap
+                [totalSalary]="totalSalary"
+                [nextTotalSalary]="nextTotalSalary"
+                [totalPlayers]="totalPlayers"
+              ></cha-front-summary-team-banner-cap>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </blade-card-body>
+</blade-card>

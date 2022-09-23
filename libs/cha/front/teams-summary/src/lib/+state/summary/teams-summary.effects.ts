@@ -7,6 +7,8 @@ import {
   StatGoalieAllDto,
   NhlGoalieStatDto,
   NhlPlayerStatDto,
+  TeamDto,
+  UserDto,
 } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, map, catchError, of, withLatestFrom } from 'rxjs';
@@ -23,12 +25,28 @@ export class TeamsSummaryEffects {
 
   getUserIdByTeamId$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TeamsSummaryActions.getUserIdByTeamId),
+      ofType(TeamsSummaryActions.getUserByTeamId),
       exhaustMap((action) =>
-        this.teamsSummaryService.getUserIdByTeamId(action.teamId).pipe(
-          map((userId) =>
-            TeamsSummaryActions.getUserIdByTeamIdSuccess({
-              userId,
+        this.teamsSummaryService.getUserByTeamId(action.teamId).pipe(
+          map((user: UserDto) =>
+            TeamsSummaryActions.getUserByTeamIdSuccess({
+              user,
+            })
+          ),
+          catchError(() => of(TeamsSummaryActions.error()))
+        )
+      )
+    )
+  );
+
+  getUserTeam$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TeamsSummaryActions.getUserTeam),
+      exhaustMap((action) =>
+        this.teamsSummaryService.getTeamByUserId(action.userId).pipe(
+          map((team: TeamDto) =>
+            TeamsSummaryActions.getUserTeamSuccess({
+              team,
             })
           ),
           catchError(() => of(TeamsSummaryActions.error()))

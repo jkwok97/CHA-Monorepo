@@ -5,12 +5,15 @@ import {
   StatGoalieAllDto,
   NhlGoalieStatDto,
   NhlPlayerStatDto,
+  TeamDto,
+  UserDto,
 } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { TeamsSummaryActions } from './teams-summary.actions';
 
 export interface State {
-  userId: number | undefined;
+  user: UserDto | undefined;
+  team: TeamDto | undefined;
   loading: boolean;
   loaded: boolean;
   teamRecord: StatUserTeamRecordDto | null;
@@ -29,7 +32,8 @@ export interface State {
 }
 
 const initialState: State = {
-  userId: undefined,
+  user: undefined,
+  team: undefined,
   loading: false,
   loaded: false,
   teamRecord: null,
@@ -50,9 +54,14 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(TeamsSummaryActions.getUserIdByTeamIdSuccess, (state, action) => ({
+  on(TeamsSummaryActions.getUserByTeamIdSuccess, (state, action) => ({
     ...state,
-    userId: action.userId,
+    user: action.user,
+  })),
+
+  on(TeamsSummaryActions.getUserTeamSuccess, (state, action) => ({
+    ...state,
+    team: action.team,
   })),
 
   on(TeamsSummaryActions.getUserTeamRecordBySeasonAndSeasonType, (state) => ({
@@ -139,7 +148,9 @@ export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
 
-export const getUserId = (state: State) => state.userId;
+export const getUser = (state: State) => state.user;
+
+export const getTeam = (state: State) => state.team;
 
 export const getTeamRecord = (state: State) => state.teamRecord;
 

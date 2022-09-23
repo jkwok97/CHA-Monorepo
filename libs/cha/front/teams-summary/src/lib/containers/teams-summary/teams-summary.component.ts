@@ -47,7 +47,7 @@ export class TeamsSummaryComponent {
       .pipe(
         first(),
         map((params) =>
-          this.teamsSummaryFacade.getUserIdByTeamId(params['teamId'])
+          this.teamsSummaryFacade.getUserByTeamId(params['teamId'])
         )
       )
       .subscribe();

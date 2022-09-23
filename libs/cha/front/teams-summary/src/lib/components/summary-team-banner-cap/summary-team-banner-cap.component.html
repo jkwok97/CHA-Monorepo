@@ -1,1 +1,37 @@
-<p>summary-team-banner-cap works!</p>
+<div *ngIf="currentCapHit$ | async as currentCap" class="text-sm md:text-md">
+    <ng-container *ngIf="nextCapHit$ | async as nextCapHit">
+      <div class="flex flex-wrap column-gap-2">
+        Current Cap Overage:
+        <span>{{ (totalSalary - currentCap).toFixed(3) }}</span>
+        <div
+          class="text-red-600 font-semibold"
+          *ngIf="totalSalary - currentCap > 0"
+        >
+          Over Cap Limit
+        </div>
+      </div>
+      <div class="flex flex-wrap column-gap-2">
+        Next Cap Overage:
+        <span>{{ (nextTotalSalary - nextCapHit).toFixed(3) }}</span>
+        <div
+          class="text-red-600 font-semibold"
+          *ngIf="nextTotalSalary - nextCapHit > 0"
+        >
+          Over Cap Limit
+        </div>
+      </div>
+      <div class="flex flex-wrap column-gap-2">
+        Total Players:
+        <span>
+          {{ totalPlayers }}
+        </span>
+        <div *ngIf="totalPlayers > 30" class="text-red-600 font-semibold">
+          Over Player Limit
+        </div>
+        <div *ngIf="totalPlayers < 24" class="text-red-600 font-semibold">
+          Under Player Limit
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  

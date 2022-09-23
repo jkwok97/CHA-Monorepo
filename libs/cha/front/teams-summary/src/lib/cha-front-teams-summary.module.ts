@@ -8,6 +8,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { CarouselModule } from 'primeng/carousel';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 
 import { reducer } from './+state/index';
 import { TeamsSummaryEffects } from './+state/summary/teams-summary.effects';
@@ -52,6 +53,7 @@ import {
     PerfectScrollbarModule,
     CarouselModule,
     BladeAngularUiLayoutModule,
+    BladeAngularUiCardModule,
 
     StoreModule.forFeature('teams-summary', reducer),
     EffectsModule.forFeature([
