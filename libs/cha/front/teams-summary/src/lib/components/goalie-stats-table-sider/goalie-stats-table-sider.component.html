@@ -1,1 +1,95 @@
-<p>goalie-stats-table-sider works!</p>
+<div class="flex align-items-center column-gap-3">
+    <p-avatar
+      [image]="getPlayerPicture(goalieStats.player_id?.nhl_id)"
+      shape="circle"
+      size="xlarge"
+    ></p-avatar>
+    <div>
+      <div class="text-xl font-light">
+        {{ goalieStats.full_name }}
+      </div>
+  
+      <div
+        class="text-md flex column-gap-2 align-items-center"
+        style="font-weight: 100"
+        *ngIf="statType === 'season'"
+      >
+        <i>{{ goalieStats.team_name }}</i>
+      </div>
+    </div>
+  </div>
+  
+  <blade-divider></blade-divider>
+  
+  <div class="text-md font-light flex justify-content-between">
+    <div>
+      <div>Games Played:</div>
+      <div>Minutes:</div>
+      <div>Goals Against Avg:</div>
+      <div>Wins:</div>
+      <div>Loss:</div>
+      <div>Ties:</div>
+      <div>Shutouts:</div>
+      <div>Goals Against:</div>
+      <div>Saves:</div>
+      <div>Shots Against:</div>
+      <div>Save Pct:</div>
+      <div>Goals:</div>
+      <div>Assists:</div>
+      <div>Points:</div>
+      <div>Penalty Minutes:</div>
+    </div>
+    <div style="font-weight: 100" class="text-right">
+      <div>
+        <i>{{ goalieStats.games_played }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.minutes_played }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.goals_against_avg.toFixed(2) }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.wins }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.loss }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.ties }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.en_goals }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.shutouts }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.goals_against }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.saves }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.shots_for }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.save_pct.toFixed(3) }}%</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.goals }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.assists }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.points }}</i>
+      </div>
+      <div>
+        <i>{{ goalieStats.penalty_minutes }}</i>
+      </div>
+    </div>
+  </div>
+  
+
+

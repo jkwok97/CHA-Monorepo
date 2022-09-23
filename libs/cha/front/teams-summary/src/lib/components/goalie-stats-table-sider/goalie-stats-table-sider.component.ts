@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'cha-front-goalie-stats-table-sider',
@@ -6,8 +6,15 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./goalie-stats-table-sider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoalieStatsTableSiderComponent implements OnInit {
-  constructor() {}
+export class GoalieStatsTableSiderComponent {
+  @Input() goalieStats!: any;
+  @Input() statType!: string;
 
-  ngOnInit(): void {}
+  getPlayerPicture(id: string | undefined) {
+    if (id) {
+      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
+    } else {
+      return '';
+    }
+  }
 }
