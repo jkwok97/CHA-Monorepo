@@ -1,5 +1,5 @@
 <div
-  class="flex md:column-gap-3 row-gap-2 flex-column md:flex-row-reverse w-full"
+  class="flex md:column-gap-3 row-gap-2 flex-column md:flex-row-reverse w-full font-light"
   *ngIf="userTeam$ | async as userTeam"
 >
   <div class="w-full">
@@ -10,7 +10,9 @@
       }"
     >
       <blade-card-header [ngStyle]="{ 'padding-top': '10px' }">
-        <div class="text-lg text-center">Current NHL Season Stats</div>
+        <div class="text-md lg:text-lg text-center">
+          Current NHL Season Stats
+        </div>
       </blade-card-header>
       <blade-card-body [ngStyle]="{ padding: '10px' }">
         <div
@@ -119,7 +121,7 @@
       }"
     >
       <blade-card-header [ngStyle]="{ 'padding-top': '10px' }">
-        <div class="text-lg text-center">Current CHA Stats</div>
+        <div class="text-md lg:text-lg text-center">Current CHA Stats</div>
       </blade-card-header>
       <blade-card-body [ngStyle]="{ padding: '10px' }">
         <div

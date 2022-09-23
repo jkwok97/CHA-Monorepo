@@ -5,7 +5,10 @@
         <div class="p-2">
           <cha-front-summary-team-banner></cha-front-summary-team-banner>
         </div>
-        <div class="p-2 w-full">
+        <div
+          class="p-2 w-full"
+          [ngClass]="{ 'flex flex-column row-gap-3': isMobile }"
+        >
           <p-carousel
             [value]="pages"
             [numVisible]="1"
@@ -14,19 +17,19 @@
             *ngIf="!isMobile"
           >
             <ng-template let-page pTemplate="item">
-              <ng-container *ngIf="page.name === 'depth'">
+              <ng-container *ngIf="page.name === 'Depth Chart'">
                 <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
               </ng-container>
-              <ng-container *ngIf="page.name === 'team'">
+              <ng-container *ngIf="page.name === 'Team Stats'">
                 <cha-front-teams-summary-team></cha-front-teams-summary-team>
               </ng-container>
-              <ng-container *ngIf="page.name === 'players'">
+              <ng-container *ngIf="page.name === 'Player Stats'">
                 <cha-front-teams-summary-players></cha-front-teams-summary-players>
               </ng-container>
-              <ng-container *ngIf="page.name === 'goalie'">
+              <ng-container *ngIf="page.name === 'Goalie Stats'">
                 <cha-front-teams-summary-goalies></cha-front-teams-summary-goalies>
               </ng-container>
-              <ng-container *ngIf="page.name === 'awards'">
+              <ng-container *ngIf="page.name === 'Awards'">
                 <cha-front-teams-summary-awards></cha-front-teams-summary-awards>
               </ng-container>
             </ng-template>
@@ -39,6 +42,22 @@
             class="w-full"
             *ngIf="isMobile"
           ></p-dropdown>
+
+          <ng-container *ngIf="selectedEntity.name === 'Depth Chart'">
+            <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
+          </ng-container>
+          <ng-container *ngIf="selectedEntity.name === 'Team Stats'">
+            <cha-front-teams-summary-team></cha-front-teams-summary-team>
+          </ng-container>
+          <ng-container *ngIf="selectedEntity.name === 'Player Stats'">
+            <cha-front-teams-summary-players></cha-front-teams-summary-players>
+          </ng-container>
+          <ng-container *ngIf="selectedEntity.name === 'Goalie Stats'">
+            <cha-front-teams-summary-goalies></cha-front-teams-summary-goalies>
+          </ng-container>
+          <ng-container *ngIf="selectedEntity.name === 'Awards'">
+            <cha-front-teams-summary-awards></cha-front-teams-summary-awards>
+          </ng-container>
         </div>
       </div>
     </blade-layout-feature-content>
