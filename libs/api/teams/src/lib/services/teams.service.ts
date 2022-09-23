@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class TeamsService {
   constructor(
     @InjectRepository(Teams_V2) private repo: Repository<Teams_V2>,
-    @InjectRepository(Teams_V2) private userRepo: Repository<Users_V2>
+    @InjectRepository(Users_V2) private userRepo: Repository<Users_V2>
   ) {}
 
   async getUserTeams(id: number): Promise<Teams_V2[]> {
@@ -28,8 +28,6 @@ export class TeamsService {
         id: teamId,
       },
     });
-
-    console.log('THIS IS THE USERID: ', userId.users_id);
 
     const user = await this.userRepo.findOne({
       where: {
