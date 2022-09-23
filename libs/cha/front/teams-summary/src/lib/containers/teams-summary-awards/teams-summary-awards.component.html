@@ -1,1 +1,28 @@
-<p>teams-summary-awards works!</p>
+<div>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="grid justify-content-center row-gap-2 pt-2">
+      <div class="text-lg col-12 text-center" style="font-weight: 100">
+        CHA Franchise Awards
+      </div>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <div class="flex flex-wrap column-gap-2 row-gap-2">
+          <ng-container *ngFor="let award of awards$ | async">
+            <blade-user-award-card
+              [award]="award"
+              [ngStyle]="{ width: '350px' }"
+            ></blade-user-award-card>
+          </ng-container>
+        </div>
+      </blade-card-body>
+    </blade-card>
+  </div>

@@ -55,7 +55,7 @@ export class GoalieStatsTableComponent implements OnInit {
   ];
 
   first = 0;
-  rows = 50;
+  rows = 25;
   totalRecords = 0;
   sortField = 'wins';
   statsForTable!: any;
