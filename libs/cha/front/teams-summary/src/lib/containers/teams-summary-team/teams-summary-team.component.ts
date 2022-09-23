@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { StatTeamsHistoryDto, UserDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, skip, filter } from 'rxjs';
+import { Observable, skip, filter, first } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 import { TeamStatsFacade } from '../../+state/team-stats/team-stats.facade';
 
@@ -28,7 +29,8 @@ export class TeamsSummaryTeamComponent implements OnInit {
 
   constructor(
     private teamsSummaryFacade: TeamsSummaryFacade,
-    private teamStatsFacade: TeamStatsFacade
+    private teamStatsFacade: TeamStatsFacade,
+    private displayFacade: DisplayFacade
   ) {
     this.user$ = this.teamsSummaryFacade.user$;
     this.isLoaded$ = this.teamStatsFacade.isLoaded$;
@@ -45,6 +47,12 @@ export class TeamsSummaryTeamComponent implements OnInit {
         if (user) {
           this.teamStatsFacade.getUserTeamStatsBySeason(this.seasonOption);
         }
+      });
+
+      this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
       });
   }
 

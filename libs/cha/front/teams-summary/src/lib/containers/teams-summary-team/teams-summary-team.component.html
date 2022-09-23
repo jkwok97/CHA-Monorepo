@@ -6,7 +6,11 @@
   ></p-progressBar>
 
   <div class="grid justify-content-center row-gap-2 pt-2">
-    <div class="text-lg col-12 text-center" style="font-weight: 100">
+    <div
+      class="text-lg col-12 text-center"
+      style="font-weight: 100"
+      *ngIf="!isMobile"
+    >
       Team Stats
     </div>
     <div
