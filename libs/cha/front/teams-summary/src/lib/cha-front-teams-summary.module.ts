@@ -39,6 +39,12 @@ import {
   TeamsSummaryAwardsComponent,
 } from './containers';
 
+import {
+  SummaryTeamBannerComponent,
+  SummaryTeamBannerCapComponent,
+  SummaryTeamBannerRecordComponent,
+} from './components';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -63,6 +69,9 @@ import {
     TeamsSummaryPlayersComponent,
     TeamsSummaryGoaliesComponent,
     TeamsSummaryAwardsComponent,
+    SummaryTeamBannerComponent,
+    SummaryTeamBannerCapComponent,
+    SummaryTeamBannerRecordComponent,
   ],
   providers: [
     TeamsSummaryService,
