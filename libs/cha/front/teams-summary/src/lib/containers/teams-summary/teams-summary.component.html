@@ -5,12 +5,13 @@
         <div class="p-2">
           <cha-front-summary-team-banner></cha-front-summary-team-banner>
         </div>
-        <div class="p-2">
+        <div class="p-2 w-full">
           <p-carousel
             [value]="pages"
             [numVisible]="1"
             [numScroll]="1"
             [page]="pages.indexOf(selectedEntity)"
+            *ngIf="!isMobile"
           >
             <ng-template let-page pTemplate="item">
               <ng-container *ngIf="page.name === 'depth'">
@@ -30,6 +31,14 @@
               </ng-container>
             </ng-template>
           </p-carousel>
+
+          <p-dropdown
+            [options]="pages"
+            [(ngModel)]="selectedEntity"
+            optionLabel="name"
+            class="w-full"
+            *ngIf="isMobile"
+          ></p-dropdown>
         </div>
       </div>
     </blade-layout-feature-content>
