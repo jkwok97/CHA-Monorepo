@@ -64,6 +64,8 @@ import {
   TeamsStatsTableSiderComponent,
   PlayersStatsTableComponent,
   PlayersStatsTableSiderComponent,
+  GoalieStatsTableComponent,
+  GoalieStatsTableSiderComponent,
 } from './components';
 
 @NgModule({
@@ -114,6 +116,8 @@ import {
     TeamsStatsTableSiderComponent,
     PlayersStatsTableComponent,
     PlayersStatsTableSiderComponent,
+    GoalieStatsTableComponent,
+    GoalieStatsTableSiderComponent,
   ],
   providers: [
     TeamsSummaryService,

@@ -10,3 +10,5 @@ export * from './teams-stats-table';
 export * from './teams-stats-table-sider';
 export * from './players-stats-table';
 export * from './players-stats-table-sider';
+export * from './goalie-stats-table';
+export * from './goalie-stats-table-sider';
