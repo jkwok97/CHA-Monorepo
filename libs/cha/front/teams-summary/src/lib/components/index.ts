@@ -8,3 +8,5 @@ export * from './depth-chart-item-sidebar-stats';
 export * from './depth-chart-position';
 export * from './teams-stats-table';
 export * from './teams-stats-table-sider';
+export * from './players-stats-table';
+export * from './players-stats-table-sider';
