@@ -1,1 +1,141 @@
-<p>teams-stats-table works!</p>
+<p-table
+  [responsiveLayout]="'stack'"
+  [value]="statsForTable"
+  [columns]="!isMobile ? teamsTableColumns : mobileTeamsTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [sortField]="sortField"
+  [sortOrder]="-1"
+>
+  <ng-template pTemplate="header" let-columns let-data>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th
+          *ngFor="let column of mobileTeamsTableColumns"
+          [hidden]="!column.visible"
+          [pSortableColumn]="column.field"
+          [pSortableColumnDisabled]="column.field === 'team'"
+        >
+          {{ column.header }}
+          <p-sortIcon
+            [field]="column.field"
+            *ngIf="column.field !== 'team'"
+          ></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of teamsTableColumns"
+          [hidden]="!column.visible"
+          [pSortableColumn]="column.field"
+          [pSortableColumnDisabled]="column.field === 'team'"
+        >
+          {{ column.header }}
+          <p-sortIcon
+            [field]="column.field"
+            *ngIf="column.field !== 'team'"
+          ></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td
+          *ngFor="let column of mobileTeamsTableColumns"
+          [hidden]="!column.visible"
+        >
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container *ngIf="column.field === 'team'">
+              <img
+                [src]="data.teamLogo"
+                height="30px"
+                [pTooltip]="data.team_name"
+                tooltipPosition="right"
+              />
+              {{ data.team_id.city + ' ' + data.team_id.nickname }}
+            </ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-window-maximize"
+                class="p-button-rounded p-button-info"
+                (click)="onTeamClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td *ngFor="let column of teamsTableColumns" [hidden]="!column.visible">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container *ngIf="column.field === 'team'">
+              <img
+                [src]="data.teamLogo"
+                height="30px"
+                [pTooltip]="data.team_name"
+                tooltipPosition="right"
+              />
+            </ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </ng-template>
+
+  <ng-template pTemplate="footer" let-statsForTable let-data>
+    <ng-container *ngIf="!isMobile">
+      <tr>
+        <td colspan="2" class="text-right">Totals</td>
+        <td>{{ gamesPlayedTotal }}</td>
+        <td>{{ winsTotal }}</td>
+        <td>{{ lossTotal }}</td>
+        <td>{{ tiesTotal }}</td>
+        <td>{{ pointsTotal }}</td>
+        <td>{{ goalsForTotal }}</td>
+        <td>{{ goalsForPerGameTotal }}</td>
+        <td>{{ goalsAgainstTotal }}</td>
+        <td>{{ goalsAgainstPerGameTotal }}</td>
+        <td>{{ goalDiffTotal }}</td>
+        <td>{{ winPctTotal }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ shGoalsTotal }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>N/A</td>
+      </tr>
+    </ng-container>
+  </ng-template>
+</p-table>
+
+<p-sidebar [(visible)]="display" [fullScreen]="true">
+  <ng-container *ngIf="teamStats as teamStats">
+    <cha-front-teams-stats-table-sider
+      [teamStats]="teamStats"
+    ></cha-front-teams-stats-table-sider>
+  </ng-container>
+</p-sidebar>

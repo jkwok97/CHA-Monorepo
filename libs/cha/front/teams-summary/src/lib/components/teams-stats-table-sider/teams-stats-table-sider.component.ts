@@ -1,13 +1,16 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'cha-front-teams-stats-table-sider',
   templateUrl: './teams-stats-table-sider.component.html',
-  styleUrls: ['./teams-stats-table-sider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeamsStatsTableSiderComponent implements OnInit {
-  constructor() {}
+export class TeamsStatsTableSiderComponent {
+  @Input() teamStats!: any;
 
-  ngOnInit(): void {}
+  // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
+  getString(urlString: string) {
+    const temp = urlString.split('/');
+    return `assets/${temp[temp.length - 1]}`;
+  }
 }

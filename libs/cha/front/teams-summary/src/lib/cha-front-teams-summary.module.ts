@@ -12,10 +12,13 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
+import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 
 import { reducer } from './+state/index';
 import { TeamsSummaryEffects } from './+state/summary/teams-summary.effects';
@@ -69,12 +72,15 @@ import {
     CarouselModule,
     AvatarModule,
     SidebarModule,
+    TooltipModule,
+    TableModule,
     ProgressBarModule,
     ButtonModule,
     DropdownModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,
+    BladeButtonSelectComponent,
 
     StoreModule.forFeature('teams-summary', reducer),
     EffectsModule.forFeature([

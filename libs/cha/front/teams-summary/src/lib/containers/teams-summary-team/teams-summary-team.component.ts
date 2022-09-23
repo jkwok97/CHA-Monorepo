@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UserDto } from '@cha/shared/entities';
+import { StatTeamsHistoryDto, UserDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, skip, filter } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
@@ -14,14 +14,26 @@ import { TeamStatsFacade } from '../../+state/team-stats/team-stats.facade';
 })
 export class TeamsSummaryTeamComponent implements OnInit {
   user$: Observable<UserDto | undefined>;
+  isLoading$: Observable<boolean>;
+  isLoaded$: Observable<boolean>;
+  allStats$: Observable<StatTeamsHistoryDto[]>;
 
   seasonOption = 'Regular';
+  isMobile = false;
+
+  selectSeasonOptions = [
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Playoffs', value: 'Playoffs' },
+  ];
 
   constructor(
     private teamsSummaryFacade: TeamsSummaryFacade,
     private teamStatsFacade: TeamStatsFacade
   ) {
     this.user$ = this.teamsSummaryFacade.user$;
+    this.isLoaded$ = this.teamStatsFacade.isLoaded$;
+    this.isLoading$ = this.teamStatsFacade.isLoading$;
+    this.allStats$ = this.teamStatsFacade.teamStats$;
 
     this.user$
       .pipe(
@@ -36,5 +48,11 @@ export class TeamsSummaryTeamComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.teamStatsFacade.getUserTeamStatsBySeason('Regular');
+  }
+
+  onSeasonOptionChanged(option: string) {
+    this.teamStatsFacade.getUserTeamStatsBySeason(option);
+  }
 }
