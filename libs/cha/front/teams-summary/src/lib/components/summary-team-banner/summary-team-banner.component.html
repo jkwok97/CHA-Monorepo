@@ -1,6 +1,10 @@
 <blade-card
   *ngIf="userTeam$ | async as userTeam"
-  [ngStyle]="{ 'background-color': userTeam.teamcolor, 'font-weight': 100 }"
+  [ngStyle]="{
+    'background-color': userTeam.teamcolor,
+    'font-weight': 300,
+    color: userTeam.teamtextcolor
+  }"
   class="w-full"
 >
   <blade-card-body>

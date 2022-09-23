@@ -53,6 +53,10 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectPlayerSalaryLoaded
   );
 
+  playerSalaryLoading$: Observable<boolean> = this.store.select(
+    TeamsSummarySelectors.selectPlayerSalaryLoading
+  )
+
   goalieSalaryLoaded$: Observable<boolean> = this.store.select(
     TeamsSummarySelectors.selectGoaliesSalaryLoaded
   );

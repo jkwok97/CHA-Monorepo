@@ -1,1 +1,61 @@
-<p>depth-chart-item-sidebar works!</p>
+<div class="flex align-items-center column-gap-3">
+  <p-avatar
+    [image]="getPlayerPicture(playerStats.player_id?.nhl_id)"
+    shape="circle"
+    size="xlarge"
+  ></p-avatar>
+  <div>
+    <div class="text-xl font-light">
+      {{ playerStats.player_id.firstname }} {{ playerStats.player_id.lastname }}
+    </div>
+
+    <div
+      class="text-md flex column-gap-2 align-items-center"
+      style="font-weight: 100"
+    >
+      <div>
+        <div>
+          <i
+            >{{ playerStats.teamInfo.city }}
+            {{ playerStats.teamInfo.nickname }}</i
+          >
+        </div>
+        <div class="text-sm">
+          Current Salary: <i>{{ playerStats.salaries.season_2022 }}</i>
+        </div>
+        <div class="text-sm">
+          Next Salary: <i>{{ playerStats.salaries.season_2023 }}</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<blade-divider></blade-divider>
+
+<div
+  class="flex flex-column justify-content-evenly column-gap-3 md:flex-row row-gap-2"
+>
+  <ng-container>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="statsLoading$ | async"
+    ></p-progressBar>
+
+    <ng-container *ngIf="currentStat$ | async as currentStat">
+      <ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
+        <cha-front-depth-chart-item-sidebar-stats
+          [currentStat]="currentStat"
+          [nhlStat]="currentNHLStat"
+          class="w-full"
+        ></cha-front-depth-chart-item-sidebar-stats>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+  <cha-front-depth-chart-item-sidebar-ratings
+    [ratings]="playerStats.ratings"
+    class="w-full"
+  ></cha-front-depth-chart-item-sidebar-ratings>
+</div>

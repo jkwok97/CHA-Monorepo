@@ -1,13 +1,19 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { PlayerRatingDto, GoalieRatingDto, TeamDto } from '@cha/shared/entities';
+import { Observable } from 'rxjs';
+import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 
 @Component({
   selector: 'cha-front-depth-chart-item-sidebar-ratings',
   templateUrl: './depth-chart-item-sidebar-ratings.component.html',
-  styleUrls: ['./depth-chart-item-sidebar-ratings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DepthChartItemSidebarRatingsComponent implements OnInit {
-  constructor() {}
+export class DepthChartItemSidebarRatingsComponent {
+  @Input() ratings!: PlayerRatingDto | GoalieRatingDto;
 
-  ngOnInit(): void {}
+  userTeam$: Observable<TeamDto | undefined>;
+
+  constructor(private teamsSummaryFacade: TeamsSummaryFacade) {
+    this.userTeam$ = this.teamsSummaryFacade.userTeam$;
+  }
 }
