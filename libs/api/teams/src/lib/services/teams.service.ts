@@ -29,7 +29,7 @@ export class TeamsService {
       },
     });
 
-    console.log('THIS IS THE USERID: ', userId);
+    console.log('THIS IS THE USERID: ', userId.users_id);
 
     const user = await this.userRepo.findOne({
       where: {
