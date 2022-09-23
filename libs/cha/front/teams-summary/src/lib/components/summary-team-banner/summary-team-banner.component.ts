@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AuthFacade } from '@cha/domain/auth';
 import { DisplayFacade } from '@cha/domain/core';
 import { TeamDto, StatUserTeamRecordDto, UserDto } from '@cha/shared/entities';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, first, filter, skip } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-front-summary-team-banner',
   templateUrl: './summary-team-banner.component.html',
@@ -24,7 +25,6 @@ export class SummaryTeamBannerComponent implements OnInit {
   isMobile = false;
 
   constructor(
-    private authFacade: AuthFacade,
     private displayFacade: DisplayFacade,
     private teamsSummaryFacade: TeamsSummaryFacade
   ) {
@@ -56,13 +56,15 @@ export class SummaryTeamBannerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userTeam$.pipe(first()).subscribe((userTeam: TeamDto | undefined) => {
-      if (userTeam) {
-        this.teamsSummaryFacade.getUserTeamRecord(userTeam.id);
-        this.teamsSummaryFacade.getPlayerSalaries(userTeam.shortname);
-        this.teamsSummaryFacade.getGoalieSalaries(userTeam.shortname);
-      }
-    });
+    this.userTeam$
+      .pipe(untilDestroyed(this))
+      .subscribe((userTeam: TeamDto | undefined) => {
+        if (userTeam) {
+          this.teamsSummaryFacade.getUserTeamRecord(userTeam.id);
+          this.teamsSummaryFacade.getPlayerSalaries(userTeam.shortname);
+          this.teamsSummaryFacade.getGoalieSalaries(userTeam.shortname);
+        }
+      });
   }
 
   // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY

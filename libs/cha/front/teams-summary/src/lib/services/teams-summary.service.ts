@@ -14,7 +14,6 @@ export class TeamsSummaryService {
   ) {}
 
   getUserByTeamId(teamId: number) {
-    console.log(teamId);
     if (teamId) {
       return this._http
         .get(`${this.apiUrl}/teams/${teamId}`)
@@ -29,7 +28,9 @@ export class TeamsSummaryService {
       return this._http
         .get(`${this.apiUrl}/teams/user/${userId}`)
         .pipe(
-          map((result: any) => result.filter((item: TeamDto) => item.isactive))
+          map(
+            (result: any) => result.filter((item: TeamDto) => item.isactive)[0]
+          )
         );
     } else {
       return of(null);
