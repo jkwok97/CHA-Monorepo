@@ -37,6 +37,6 @@ export class TeamsService {
       },
     });
 
-    return userId;
+    return user;
   }
 }
