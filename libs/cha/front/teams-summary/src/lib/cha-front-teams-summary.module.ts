@@ -9,10 +9,24 @@ import { CarouselModule } from 'primeng/carousel';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
-import { TeamsSummaryEffects } from './+state/teams-summary.effects';
-import { TeamsSummaryFacade } from './+state/teams-summary.facade';
-import { reducer } from './+state/teams-summary.reducer';
-import { TeamsSummaryFranchiseService } from './services';
+import { reducer } from './+state/index';
+import { TeamsSummaryEffects } from './+state/summary/teams-summary.effects';
+import { TeamsSummaryFacade } from './+state/summary/teams-summary.facade';
+import { TeamStatsEffects } from './+state/team-stats/team-stats.effects';
+import { TeamStatsFacade } from './+state/team-stats/team-stats.facade';
+import { PlayerStatsEffects } from './+state/player-stats/player-stats.effects';
+import { PlayerStatsFacade } from './+state/player-stats/player-stats.facade';
+import { AwardsEffects } from './+state/awards/awards.effects';
+import { AwardsFacade } from './+state/awards/awards.facade';
+import { GoalieStatsEffects } from './+state/goalie-stats/goalie-stats.effects';
+import { GoalieStatsFacade } from './+state/goalie-stats/goalie-stats.facade';
+import {
+  TeamsSummaryAwardsService,
+  TeamsSummaryGoalieStatsService,
+  TeamsSummaryPlayerStatsService,
+  TeamsSummaryService,
+  TeamsSummaryTeamStatsService,
+} from './services';
 
 import { ChaFrontTeamsSummaryRoutingModule } from './cha-front-teams-summary-routing.module';
 
@@ -34,7 +48,13 @@ import {
     BladeAngularUiLayoutModule,
 
     StoreModule.forFeature('teams-summary', reducer),
-    EffectsModule.forFeature([TeamsSummaryEffects]),
+    EffectsModule.forFeature([
+      TeamsSummaryEffects,
+      TeamStatsEffects,
+      PlayerStatsEffects,
+      GoalieStatsEffects,
+      AwardsEffects,
+    ]),
   ],
   declarations: [
     TeamsSummaryComponent,
@@ -45,9 +65,21 @@ import {
     TeamsSummaryAwardsComponent,
   ],
   providers: [
-    TeamsSummaryFranchiseService,
+    TeamsSummaryService,
+    TeamsSummaryAwardsService,
+    TeamsSummaryGoalieStatsService,
+    TeamsSummaryPlayerStatsService,
+    TeamsSummaryTeamStatsService,
     TeamsSummaryFacade,
     TeamsSummaryEffects,
+    TeamStatsFacade,
+    TeamStatsEffects,
+    PlayerStatsFacade,
+    PlayerStatsEffects,
+    GoalieStatsFacade,
+    GoalieStatsEffects,
+    AwardsFacade,
+    AwardsEffects,
   ],
 })
 export class ChaFrontTeamsSummaryModule {}

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DisplayFacade } from '@cha/domain/core';
 import { first, map } from 'rxjs';
-import { TeamsSummaryFacade } from '../../+state/teams-summary.facade';
+import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 
 @Component({
   selector: 'cha-front-teams-summary',
@@ -22,15 +22,15 @@ export class TeamsSummaryComponent {
     height: '83vh',
   };
 
-  selectedEntity!: any;
-
   pages = [
-    { index: 1, name: 'depth' },
-    { index: 2, name: 'team' },
-    { index: 3, name: 'players' },
-    { index: 4, name: 'goalie' },
-    { index: 5, name: 'awards' },
+    { page: 1, name: 'depth' },
+    { page: 2, name: 'team' },
+    { page: 3, name: 'players' },
+    { page: 4, name: 'goalie' },
+    { page: 5, name: 'awards' },
   ];
+
+  selectedEntity = this.pages[0];
 
   constructor(
     private displayFacade: DisplayFacade,

@@ -19,10 +19,6 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectLoaded
   );
 
-  teamStats$: Observable<StatTeamsHistoryDto[]> = this.store.select(
-    TeamsSummarySelectors.selectTeamStats
-  );
-
   userId$: Observable<number | undefined> = this.store.select(
     TeamsSummarySelectors.selectUserId
   );
@@ -31,11 +27,5 @@ export class TeamsSummaryFacade {
 
   getUserIdByTeamId(teamId: number) {
     this.store.dispatch(TeamsSummaryActions.getUserIdByTeamId({ teamId }));
-  }
-
-  getUserTeamStatsBySeason(seasonType: string) {
-    this.store.dispatch(
-      TeamsSummaryActions.getUserTeamStatsBySeason({ seasonType })
-    );
   }
 }

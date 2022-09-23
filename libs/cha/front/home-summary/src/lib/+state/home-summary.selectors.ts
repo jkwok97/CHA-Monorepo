@@ -173,7 +173,7 @@ export const HomeSummarySelectors = {
   selectCurrentGoalieStat,
   selectCurrentNHLStat,
   selectStatsLoading,
-  selectGoalieSalariesSorted
+  selectGoalieSalariesSorted,
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {

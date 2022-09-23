@@ -6,7 +6,7 @@ import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TeamsSummaryFranchiseService {
+export class TeamsSummaryService {
   constructor(
     private _http: HttpClient,
     @Inject('apiUrl') private apiUrl: string
@@ -23,8 +23,6 @@ export class TeamsSummaryFranchiseService {
   }
 
   getUserTeamStatsBySeasonType(userId: number | undefined, seasonType: string) {
-    console.log(userId);
-    console.log(seasonType);
     if (userId) {
       return this._http
         .get(`${this.apiUrl}/team-stats/user/${userId}/history/${seasonType}`)

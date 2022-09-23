@@ -9,7 +9,6 @@
             [numVisible]="1"
             [numScroll]="1"
             [page]="pages.indexOf(selectedEntity)"
-            (onPage)="selectedEntity = pages[$event.name]"
           >
             <ng-template let-page pTemplate="item">
               <ng-container *ngIf="page.name === 'depth'">
