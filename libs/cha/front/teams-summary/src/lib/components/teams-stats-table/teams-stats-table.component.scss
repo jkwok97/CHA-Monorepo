@@ -1,0 +1,16 @@
+.table {
+  height: 100%;
+
+  &-body {
+    &-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+}

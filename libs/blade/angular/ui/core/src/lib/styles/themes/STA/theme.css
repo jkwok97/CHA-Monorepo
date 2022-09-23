@@ -923,7 +923,7 @@ p-chips.ng-dirty.ng-invalid > .p-chips > .p-inputtext {
 
 .p-dropdown .p-dropdown-trigger {
   background: transparent;
-  color: whitesmoke;
+  color: #6c757d;
   width: 3rem;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -1341,10 +1341,10 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 1rem;
-  color: whitesmoke;
-  background: #d28507;
+  color: #495057;
+  background: #fff;
   padding: 0.75rem 0.75rem;
-  border: 1px solid #d28507;
+  border: 1px solid #ced4da;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s,
     box-shadow 0.2s;
   appearance: none;

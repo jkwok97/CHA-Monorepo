@@ -14,6 +14,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -77,6 +78,7 @@ import {
     TooltipModule,
     TableModule,
     ProgressBarModule,
+    InputTextModule,
     ButtonModule,
     DropdownModule,
     BladeAngularUiLayoutModule,
