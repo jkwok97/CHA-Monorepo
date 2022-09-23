@@ -28,11 +28,11 @@ export class TeamsController {
 
   @Get('/:teamId')
   async getUserByTeamId(@Param() param): Promise<{ user }> {
-    const userId = await this.teamsService.getUserByTeamId(param.teamId);
+    const user = await this.teamsService.getUserByTeamId(param.teamId);
 
-    if (!userId) {
+    if (!user) {
       throw new NotFoundException('No User Found');
     }
-    return userId;
+    return user;
   }
 }

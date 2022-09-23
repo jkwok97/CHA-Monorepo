@@ -14,6 +14,7 @@ export class TeamsSummaryService {
   ) {}
 
   getUserByTeamId(teamId: number) {
+    console.log(teamId);
     if (teamId) {
       return this._http
         .get(`${this.apiUrl}/teams/${teamId}`)

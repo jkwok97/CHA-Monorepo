@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DisplayFacade } from '@cha/domain/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { first, map } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-front-teams-summary',
   templateUrl: './teams-summary.component.html',
@@ -45,7 +47,7 @@ export class TeamsSummaryComponent {
 
     this.route.params
       .pipe(
-        first(),
+        untilDestroyed(this),
         map((params) =>
           this.teamsSummaryFacade.getUserByTeamId(params['teamId'])
         )
