@@ -45,3 +45,7 @@ Colors
 .cha-color-danger {
   color: $cha-warning-color;
 }
+
+.p-carousel-content {
+  flex-direction: column-reverse !important;
+}
