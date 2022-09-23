@@ -56,6 +56,8 @@ import {
   DepthChartItemSidebarComponent,
   DepthChartItemSidebarRatingsComponent,
   DepthChartItemSidebarStatsComponent,
+  TeamsStatsTableComponent,
+  TeamsStatsTableSiderComponent,
 } from './components';
 
 @NgModule({
@@ -98,6 +100,8 @@ import {
     DepthChartItemSidebarComponent,
     DepthChartItemSidebarRatingsComponent,
     DepthChartItemSidebarStatsComponent,
+    TeamsStatsTableComponent,
+    TeamsStatsTableSiderComponent,
   ],
   providers: [
     TeamsSummaryService,
