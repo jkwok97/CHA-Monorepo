@@ -8,4 +8,5 @@ export interface PlayerDto {
   isdefense: boolean;
   isforward: boolean;
   is_protected: boolean;
+  primary_position: string;
 }
