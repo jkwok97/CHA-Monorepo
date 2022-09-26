@@ -317,21 +317,20 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        nhlStats: await this.getNhlPlayerStatsByPlayerId(
-          item.player_id.nhl_id
-        ).pipe(map((resp) => resp)),
+        nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id),
       }))
     );
   }
 
-  getNhlPlayerStatsByPlayerId(
+  private async getNhlPlayerStatsByPlayerId(
     playerId: number
-  ): Observable<AxiosResponse<any[]>> {
+  ): Promise<Observable<AxiosResponse<any[]>>> {
     const stats = this.httpService
       .get(
         `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`
       )
       .pipe(map((response) => response.data.stats[0].splits));
-    return stats.pipe(map((resp) => resp));
+
+    return stats;
   }
 }
