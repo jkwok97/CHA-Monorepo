@@ -10,7 +10,7 @@
   ></cha-front-games-current-team-card>
 
   <div class="result">
-    <div>Results:</div>
+    <div *ngIf="game.visTeamScore && game.homeTeamScore">Results:</div>
     <div>{{ game.visTeamScore }} @ {{ game.homeTeamScore }}</div>
   </div>
 
