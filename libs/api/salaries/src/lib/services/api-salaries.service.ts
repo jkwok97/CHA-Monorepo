@@ -12,7 +12,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
-import { lastValueFrom, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class ApiSalariesService {
@@ -317,9 +317,9 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        nhlStats: await lastValueFrom(
+        nhlStats: await (
           await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id)
-        ),
+        ).pipe(map((resp) => resp.data)),
       }))
     );
   }
