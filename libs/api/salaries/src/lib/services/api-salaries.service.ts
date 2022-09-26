@@ -332,6 +332,6 @@ export class ApiSalariesService {
         `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`
       )
       .pipe(map((response) => response.data.stats[0].splits));
-    return stats;
+    return stats.pipe(map((resp) => resp));
   }
 }
