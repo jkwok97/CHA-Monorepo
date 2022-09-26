@@ -44,6 +44,9 @@ export class Players_V2 {
   @Column()
   is_protected!: boolean;
 
+  @Column()
+  primary_position!: string;
+
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   playerStats!: Players_Stats_V2;
 
