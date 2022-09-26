@@ -314,6 +314,7 @@ export class ApiSalariesService {
   }
 
   private async setNHLStats(array: any[]) {
+    console.log('I WAS CALLED SET NHL STATS');
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
@@ -325,11 +326,14 @@ export class ApiSalariesService {
   getNhlPlayerStatsByPlayerId(
     playerId: number
   ): Observable<AxiosResponse<any[]>> {
+    console.log('I WAS CALLED GET NHL STATS');
     const stats = this.httpService
       .get(
         `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`
       )
-      .pipe(map((response) => response.data));
+      .pipe(map((response) => response.data.stats[0].splits));
+
+    console.log(stats);
 
     return stats;
   }
