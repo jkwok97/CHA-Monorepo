@@ -1,17 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
 import { TeamDto, StatUserTeamRecordDto, UserDto } from '@cha/shared/entities';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Observable, first, filter, skip } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 
-@UntilDestroy()
 @Component({
   selector: 'cha-front-summary-team-banner',
   templateUrl: './summary-team-banner.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SummaryTeamBannerComponent implements OnInit {
+export class SummaryTeamBannerComponent {
   isTeamRecordLoading$: Observable<boolean>;
   isTeamRecordLoaded$: Observable<boolean>;
   teamRecord$: Observable<StatUserTeamRecordDto | null>;
@@ -50,18 +48,6 @@ export class SummaryTeamBannerComponent implements OnInit {
       .subscribe((user: UserDto | undefined) => {
         if (user) {
           this.teamsSummaryFacade.getUserTeam(user.id);
-        }
-      });
-  }
-
-  ngOnInit(): void {
-    this.userTeam$
-      .pipe(untilDestroyed(this))
-      .subscribe((userTeam: TeamDto | undefined) => {
-        if (userTeam) {
-          this.teamsSummaryFacade.getUserTeamRecord(userTeam.id);
-          this.teamsSummaryFacade.getPlayerSalaries(userTeam.shortname);
-          this.teamsSummaryFacade.getGoalieSalaries(userTeam.shortname);
         }
       });
   }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'cha-front-teams-summary-depth',
@@ -6,6 +6,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./teams-summary-depth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeamsSummaryDepthComponent implements OnInit {
-  ngOnInit(): void {}
-}
+export class TeamsSummaryDepthComponent {}

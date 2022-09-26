@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DisplayFacade } from '@cha/domain/core';
+import { TeamDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { first, map } from 'rxjs';
+import { combineLatest, first, map, Observable } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 
 @UntilDestroy()
@@ -13,7 +14,11 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TeamsSummaryComponent {
+  isLoading$: Observable<boolean>;
+  userTeam$: Observable<TeamDto | undefined>;
+  
   isMobile = false;
+
   panelStyleMobile = {
     width: '100%',
     height: '77vh',
@@ -39,6 +44,17 @@ export class TeamsSummaryComponent {
     private teamsSummaryFacade: TeamsSummaryFacade,
     private route: ActivatedRoute
   ) {
+    this.userTeam$ = this.teamsSummaryFacade.userTeam$;
+    this.isLoading$ = combineLatest([
+      this.teamsSummaryFacade.teamRecordLoading$,
+      this.teamsSummaryFacade.playerSalaryLoading$,
+    ]).pipe(
+      map(
+        ([teamLoading, playerLoading]: [boolean, boolean]) =>
+          teamLoading && playerLoading
+      )
+    );
+
     this.displayFacade.isMobile$
       .pipe(first())
       .subscribe((isMobile: boolean) => {
@@ -53,5 +69,15 @@ export class TeamsSummaryComponent {
         )
       )
       .subscribe();
+
+      this.userTeam$
+      .pipe(untilDestroyed(this))
+      .subscribe((userTeam: TeamDto | undefined) => {
+        if (userTeam) {
+          this.teamsSummaryFacade.getUserTeamRecord(userTeam.id);
+          this.teamsSummaryFacade.getPlayerSalaries(userTeam.shortname);
+          this.teamsSummaryFacade.getGoalieSalaries(userTeam.shortname);
+        }
+      });
   }
 }
