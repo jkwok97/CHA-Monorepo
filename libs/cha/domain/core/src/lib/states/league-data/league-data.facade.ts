@@ -24,6 +24,10 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectTeams
   );
 
+  sortedLeagueTeams$: Observable<TeamDto[]> = this.store.select(
+    LeagueDataSelectors.selectSortedTeams
+  );
+
   isOffSeason$: Observable<boolean> = this.store.select(
     LeagueDataSelectors.selectIsOffSeason
   );

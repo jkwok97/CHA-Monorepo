@@ -6,6 +6,22 @@
         [style]="{ height: '6px' }"
         *ngIf="isLoading$ | async"
       ></p-progressBar>
+
+      <button
+        pButton
+        type="button"
+        icon="pi pi-chevron-left"
+        class="p-button-rounded p-button-lg button-back"
+        (click)="selectBackTeam()"
+      ></button>
+
+      <button
+        pButton
+        type="button"
+        icon="pi pi-chevron-right"
+        class="p-button-rounded p-button-lg button-forward"
+        (click)="selectForwardTeam()"
+      ></button>
       <div
         class="flex flex-column row-gap-2"
         *ngIf="(isLoading$ | async) === false"

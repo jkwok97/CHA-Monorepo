@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import * as LeagueDataReducer from './league-data.reducer';
 import { AppState, selectFeatureState } from '../index';
-import { LeagueDataDto } from '@cha/shared/entities';
+import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
 
 const selectState = createSelector(
   selectFeatureState,
@@ -55,14 +55,20 @@ const selectIsOffSeason = createSelector(
 const selectCurrentCapHit = createSelector(
   selectLeagueData,
   (data: LeagueDataDto) => data.current_cap
-)
+);
 
 const selectNextYearCapHit = createSelector(
   selectLeagueData,
   (data: LeagueDataDto) => data.next_cap
-)
+);
 
 const selectTeams = createSelector(selectState, LeagueDataReducer.getTeams);
+
+const selectSortedTeams = createSelector(selectTeams, (teams: TeamDto[]) =>
+  teams
+    .filter((team: TeamDto) => team.shortname !== 'FA')
+    .sort((a: TeamDto, b: TeamDto) => a.city.localeCompare(b.city))
+);
 
 const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
 
@@ -78,5 +84,6 @@ export const LeagueDataSelectors = {
   selectLoading,
   selectIsOffSeason,
   selectCurrentCapHit,
-  selectNextYearCapHit
+  selectNextYearCapHit,
+  selectSortedTeams
 };

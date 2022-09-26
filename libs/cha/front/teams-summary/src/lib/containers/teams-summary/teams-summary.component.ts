@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DisplayFacade } from '@cha/domain/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DisplayFacade, LeagueDataFacade } from '@cha/domain/core';
 import { TeamDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, first, map, Observable } from 'rxjs';
@@ -16,9 +16,11 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 export class TeamsSummaryComponent {
   isLoading$: Observable<boolean>;
   userTeam$: Observable<TeamDto | undefined>;
-  
-  isMobile = false;
+  teams$: Observable<TeamDto[]>;
 
+  isMobile = false;
+  teams!: TeamDto[];
+  currentTeamId!: number;
   panelStyleMobile = {
     width: '100%',
     height: '77vh',
@@ -42,9 +44,13 @@ export class TeamsSummaryComponent {
   constructor(
     private displayFacade: DisplayFacade,
     private teamsSummaryFacade: TeamsSummaryFacade,
-    private route: ActivatedRoute
+    private leagueDataFacade: LeagueDataFacade,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.userTeam$ = this.teamsSummaryFacade.userTeam$;
+    this.teams$ = this.leagueDataFacade.sortedLeagueTeams$;
+
     this.isLoading$ = combineLatest([
       this.teamsSummaryFacade.teamRecordLoading$,
       this.teamsSummaryFacade.playerSalaryLoading$,
@@ -55,22 +61,22 @@ export class TeamsSummaryComponent {
       )
     );
 
+    this.teams$.pipe(first()).subscribe((teams: TeamDto[]) => {
+      this.teams = teams;
+    });
+
     this.displayFacade.isMobile$
       .pipe(first())
       .subscribe((isMobile: boolean) => {
         this.isMobile = isMobile;
       });
 
-    this.route.params
-      .pipe(
-        untilDestroyed(this),
-        map((params) =>
-          this.teamsSummaryFacade.getUserByTeamId(params['teamId'])
-        )
-      )
-      .subscribe();
+    this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {
+      this.currentTeamId = params['teamId'];
+      this.teamsSummaryFacade.getUserByTeamId(params['teamId']);
+    });
 
-      this.userTeam$
+    this.userTeam$
       .pipe(untilDestroyed(this))
       .subscribe((userTeam: TeamDto | undefined) => {
         if (userTeam) {
@@ -79,5 +85,31 @@ export class TeamsSummaryComponent {
           this.teamsSummaryFacade.getGoalieSalaries(userTeam.shortname);
         }
       });
+  }
+
+  selectBackTeam() {
+    const index = this.teams.findIndex(
+      (team: TeamDto) => team.id === Number(this.currentTeamId)
+    );
+
+    if (index === 0) {
+      this.router.navigate([
+        `league/teams/${this.teams[this.teams.length - 1].id}`,
+      ]);
+    } else {
+      this.router.navigate([`league/teams/${this.teams[index - 1].id}`]);
+    }
+  }
+
+  selectForwardTeam() {
+    const index = this.teams.findIndex(
+      (team: TeamDto) => team.id === Number(this.currentTeamId)
+    );
+
+    if (index + 1 === this.teams.length) {
+      this.router.navigate([`league/teams/${this.teams[0].id}`]);
+    } else {
+      this.router.navigate([`league/teams/${this.teams[index + 1].id}`]);
+    }
   }
 }

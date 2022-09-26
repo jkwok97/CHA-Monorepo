@@ -1,3 +1,19 @@
 .p-dropdown.p-component {
   width: 100%;
 }
+
+.button-back {
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 25px;
+  z-index: 99999;
+}
+
+.button-forward {
+  color: white;
+  position: fixed;
+  top: 50%;
+  right: 25px;
+  z-index: 99999;
+}
