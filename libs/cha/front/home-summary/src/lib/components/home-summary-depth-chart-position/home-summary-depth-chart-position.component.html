@@ -16,6 +16,11 @@
             <div class="flex flex-wrap align-items-center justify-content-left">
               <div class="w-full">
                 {{ player.player_id.firstname }} {{ player.player_id.lastname }}
+                <span
+                  *ngIf="player.player_id.is_protected"
+                  class="text-sm text-red-500"
+                  >*Protected</span
+                >
               </div>
               <div class="w-full flex column-gap-2">
                 <div class="text-sm">Pts: {{ player.ratings?.points }}</div>
