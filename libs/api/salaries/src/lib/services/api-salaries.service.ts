@@ -139,7 +139,7 @@ export class ApiSalariesService {
     );
 
     const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo =
-      await this.setTeamInfo(allSalariesAndRatingsForPlayersInSeason);
+      await this.setTeamInfo(allSalariesRatingsNHLStatsForPlayersInSeason);
 
     return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
   }
@@ -176,8 +176,12 @@ export class ApiSalariesService {
       ratingsSeason
     );
 
+    const allSalariesRatingsNHLStatsForPlayersInSeason = await this.setNHLStats(
+      allSalariesAndRatingsForGoaliesInSeason
+    );
+
     const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo =
-      await this.setTeamInfo(allSalariesAndRatingsForGoaliesInSeason);
+      await this.setTeamInfo(allSalariesRatingsNHLStatsForPlayersInSeason);
 
     return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
   }
