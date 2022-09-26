@@ -106,7 +106,7 @@ export class TeamsSummaryComponent {
       (team: TeamDto) => team.id === Number(this.currentTeamId)
     );
 
-    if (index + 1 === this.teams.length) {
+    if (this.teams[index].id === this.teams[this.teams.length - 1].id) {
       this.router.navigate([`league/teams/${this.teams[0].id}`]);
     } else {
       this.router.navigate([`league/teams/${this.teams[index + 1].id}`]);
