@@ -105,7 +105,7 @@ const selectRightWingSalaries = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'RW'
       )
-      .sort((a, b) => Number(b.ratings.points) - Number(a.ratings.points))
+      .sort((a, b) => Number(b.ratings?.points) - Number(a.ratings?.points))
 );
 
 const selectLeftDefenseSalaries = createSelector(
