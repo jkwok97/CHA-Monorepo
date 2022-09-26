@@ -12,7 +12,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
 import { AxiosResponse } from 'axios';
-import { map, Observable } from 'rxjs';
+import { lastValueFrom, map, Observable } from 'rxjs';
 
 @Injectable()
 export class ApiSalariesService {
@@ -317,7 +317,9 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id),
+        nhlStats: await lastValueFrom(
+          await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id)
+        ),
       }))
     );
   }
@@ -327,7 +329,7 @@ export class ApiSalariesService {
   ): Promise<Observable<AxiosResponse<any[]>>> {
     const stats = this.httpService
       .get(
-        `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`
+        `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=202122}`
       )
       .pipe(map((response) => response.data.stats[0].splits));
 
