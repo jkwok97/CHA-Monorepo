@@ -12,6 +12,10 @@
         type="button"
         icon="pi pi-chevron-left"
         class="p-button-rounded p-button-lg button-back"
+        [ngStyle]="{
+          'background-color': 'var(--team-100)',
+          'border-color': 'var(--team-100)'
+        }"
         (click)="selectBackTeam()"
       ></button>
 
@@ -20,6 +24,10 @@
         type="button"
         icon="pi pi-chevron-right"
         class="p-button-rounded p-button-lg button-forward"
+        [ngStyle]="{
+          'background-color': 'var(--team-100)',
+          'border-color': 'var(--team-100)'
+        }"
         (click)="selectForwardTeam()"
       ></button>
       <div

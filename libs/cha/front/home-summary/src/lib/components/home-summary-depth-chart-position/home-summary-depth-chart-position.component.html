@@ -18,7 +18,7 @@
                 {{ player.player_id.firstname }} {{ player.player_id.lastname }}
               </div>
               <div class="w-full flex column-gap-2">
-                <div class="text-sm">Pts: {{ player.ratings.points }}</div>
+                <div class="text-sm">Pts: {{ player.ratings?.points }}</div>
                 <div class="text-sm">
                   Salary: {{ player.salaries.season_2022 }}
                 </div>

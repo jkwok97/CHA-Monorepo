@@ -35,10 +35,7 @@ export class AppComponent implements OnInit {
         if (currentTeam) {
           const linkElement = document.getElementById('theme-link');
 
-          // TODO REPLACE LATER WITH ALL TEAM THEMES
-          if (currentTeam.shortname === 'STA') {
-            this.setLink(linkElement, currentTeam.shortname);
-          }
+          this.setLink(linkElement, currentTeam.shortname);
         }
       });
   }
