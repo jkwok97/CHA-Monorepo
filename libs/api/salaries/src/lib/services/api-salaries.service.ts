@@ -10,9 +10,14 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { HttpService } from '@nestjs/axios';
+import { AxiosResponse } from 'axios';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class ApiSalariesService {
+  nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
+
   constructor(
     @InjectRepository(Salaries_V2)
     private repo: Repository<Salaries_V2>,
@@ -27,7 +32,8 @@ export class ApiSalariesService {
     @InjectRepository(Goalies_Stats_V2)
     private goaliesStatsRepo: Repository<Goalies_Stats_V2>,
     @InjectRepository(Goalie_Ratings_V2)
-    private goalieRatingsRepo: Repository<Goalie_Ratings_V2>
+    private goalieRatingsRepo: Repository<Goalie_Ratings_V2>,
+    private httpService: HttpService
   ) {}
 
   async getAllPlayerSalaries(season: string) {
@@ -126,6 +132,10 @@ export class ApiSalariesService {
     const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(
       allSalariesForPlayersInSeason,
       ratingsSeason
+    );
+
+    const allSalariesRatingsNHLStatsForPlayersInSeason = await this.setNHLStats(
+      allSalariesAndRatingsForPlayersInSeason
     );
 
     const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo =
@@ -297,5 +307,26 @@ export class ApiSalariesService {
     } else {
       return {};
     }
+  }
+
+  private async setNHLStats(array: any[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id),
+      }))
+    );
+  }
+
+  getNhlPlayerStatsByPlayerId(
+    playerId: number
+  ): Observable<AxiosResponse<any[]>> {
+    const stats = this.httpService
+      .get(
+        `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`
+      )
+      .pipe(map((response) => response.data.stats[0].splits));
+
+    return stats;
   }
 }
