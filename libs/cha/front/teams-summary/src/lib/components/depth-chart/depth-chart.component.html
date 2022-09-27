@@ -10,11 +10,11 @@
   <ng-container *ngIf="(isLoading$ | async) === false">
     <blade-card-header>
       <div class="text-xl text-center">Depth Chart</div>
-      <div *ngIf="isOffseason$ | async" class="text-sm text-center">
+      <div *ngIf="isOffSeason" class="text-sm text-center">
         ** It is currently the offseason, depth chart is based on previous
         season's NHL stats **
       </div>
-      <div *ngIf="(isOffseason$ | async) === false" class="text-sm text-center">
+      <div *ngIf="isOffSeason === false" class="text-sm text-center">
         ** Depth chart is based on previous NHL season stats **
       </div>
     </blade-card-header>
@@ -26,6 +26,7 @@
               <cha-front-depth-chart-position
                 [title]="'LW'"
                 [players]="leftWingers"
+                [isOffSeason]="isOffSeason"
                 class="w-full sm:w-max h-auto md:h-full"
               ></cha-front-depth-chart-position>
             </ng-container>
@@ -33,6 +34,7 @@
               <cha-front-depth-chart-position
                 [title]="'C'"
                 [players]="centers"
+                [isOffSeason]="isOffSeason"
                 class="w-full sm:w-max h-auto md:h-full"
               ></cha-front-depth-chart-position>
             </ng-container>
@@ -40,6 +42,7 @@
               <cha-front-depth-chart-position
                 [title]="'RW'"
                 [players]="rightWingers"
+                [isOffSeason]="isOffSeason"
                 class="w-full sm:w-max h-auto md:h-full"
               ></cha-front-depth-chart-position>
             </ng-container>
@@ -49,6 +52,7 @@
               <cha-front-depth-chart-position
                 [title]="'LD'"
                 [players]="leftDefense"
+                [isOffSeason]="isOffSeason"
                 class="w-full sm:w-max"
               ></cha-front-depth-chart-position>
             </ng-container>
@@ -56,6 +60,7 @@
               <cha-front-depth-chart-position
                 [title]="'RD'"
                 [players]="rightDefense"
+                [isOffSeason]="isOffSeason"
                 class="w-full sm:w-max"
               ></cha-front-depth-chart-position>
             </ng-container>
@@ -65,6 +70,7 @@
               <cha-front-depth-chart-position
                 [title]="'G'"
                 [players]="goalies"
+                [isOffSeason]="isOffSeason"
                 class="w-full sm:w-max"
               ></cha-front-depth-chart-position>
             </ng-container>

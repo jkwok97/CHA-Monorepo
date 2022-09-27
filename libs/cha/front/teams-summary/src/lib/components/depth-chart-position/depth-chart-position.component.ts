@@ -9,6 +9,7 @@ import { SalariesAndRatingsDto } from '@cha/shared/entities';
 export class DepthChartPositionComponent {
   @Input() title!: string;
   @Input() players!: SalariesAndRatingsDto[];
+  @Input() isOffSeason!: boolean;
 
   display = false;
   playerStats!: any;

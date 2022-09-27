@@ -24,10 +24,18 @@
               </div>
               <div class="w-full flex column-gap-2">
                 <div class="text-sm" *ngIf="!player.player_id.isgoalie">
-                  Pts: {{ player.ratings?.points }}
+                  Pts:
+                  {{
+                    isOffSeason
+                      ? player.nhlStats?.points
+                      : player.ratings?.points
+                  }}
                 </div>
                 <div class="text-sm" *ngIf="player.player_id.isgoalie">
-                  Wins: {{ player.ratings?.wins }}
+                  Wins:
+                  {{
+                    isOffSeason ? player.nhlStats?.wins : player.ratings?.wins
+                  }}
                 </div>
                 <div class="text-sm">
                   Salary: {{ player.salaries.season_2022 }}

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { DisplayFacade } from '@cha/domain/core';
+import { DisplayFacade, LeagueDataFacade } from '@cha/domain/core';
 import { combineLatest, first, map, Observable, of } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 
@@ -12,6 +12,7 @@ import { HomeSummaryFacade } from '../../+state/home-summary.facade';
 export class HomeSummaryComponent {
   isLoaded$: Observable<boolean>;
   isLoading$: Observable<boolean>;
+  isOffSeason$: Observable<boolean>;
 
   isMobile = false;
 
@@ -27,8 +28,11 @@ export class HomeSummaryComponent {
 
   constructor(
     private displayFacade: DisplayFacade,
-    private homeSummaryFacade: HomeSummaryFacade
+    private homeSummaryFacade: HomeSummaryFacade,
+    private leagueDataFacade: LeagueDataFacade
   ) {
+    this.isOffSeason$ = this.leagueDataFacade.isOffSeason$;
+    
     this.isLoaded$ = combineLatest([
       this.homeSummaryFacade.goalieSalaryLoaded$,
       this.homeSummaryFacade.playerSalaryLoaded$,

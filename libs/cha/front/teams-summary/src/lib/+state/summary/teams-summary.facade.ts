@@ -55,7 +55,7 @@ export class TeamsSummaryFacade {
 
   playerSalaryLoading$: Observable<boolean> = this.store.select(
     TeamsSummarySelectors.selectPlayerSalaryLoading
-  )
+  );
 
   goalieSalaryLoaded$: Observable<boolean> = this.store.select(
     TeamsSummarySelectors.selectGoaliesSalaryLoaded
@@ -73,28 +73,49 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectPlayersCount
   );
 
-  leftWingers$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    TeamsSummarySelectors.selectLeftWingSalaries
+  leftWingersByRating$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    TeamsSummarySelectors.selectLeftWingSalariesByRating
   );
 
-  centers$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    TeamsSummarySelectors.selectCenterSalaries
+  centersByRating$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    TeamsSummarySelectors.selectCenterSalariesByRating
   );
 
-  rightWingers$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    TeamsSummarySelectors.selectRightWingSalaries
+  rightWingersByRating$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(TeamsSummarySelectors.selectRightWingSalariesByRating);
+
+  leftDefensemanByRating$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(TeamsSummarySelectors.selectLeftDefenseSalariesByRating);
+
+  rightDefensemanByRating$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(TeamsSummarySelectors.selectRightDefenseSalariesByRating);
+
+  goaliesByRating$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    TeamsSummarySelectors.selectGoalieSalariesSortedByRating
   );
 
-  leftDefenseman$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    TeamsSummarySelectors.selectLeftDefenseSalaries
+  leftWingersByNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(TeamsSummarySelectors.selectLeftWingSalariesByNhlStats);
+
+  centersByNhlStats$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    TeamsSummarySelectors.selectCenterSalariesByNhlStats
   );
 
-  rightDefenseman$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    TeamsSummarySelectors.selectRightDefenseSalaries
-  );
+  rightWingersByNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(TeamsSummarySelectors.selectRightWingSalariesByNhlStats);
 
-  goalies$: Observable<SalariesAndRatingsDto[]> = this.store.select(
-    TeamsSummarySelectors.selectGoalieSalariesSorted
+  leftDefensemanByNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectLeftDefenseSalariesByNhlStats
+    );
+
+  rightDefensemanByNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectRightDefenseSalariesByNhlStats
+    );
+
+  goaliesByNhlStats$: Observable<SalariesAndRatingsDto[]> = this.store.select(
+    TeamsSummarySelectors.selectGoalieSalariesSortedByNhlStats
   );
 
   currentPlayerCHAStats$: Observable<StatPlayerAllDto> = this.store.select(

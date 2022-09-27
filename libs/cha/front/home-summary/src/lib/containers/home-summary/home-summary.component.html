@@ -15,7 +15,11 @@
         ></cha-front-home-summary-team-banner>
 
         <div class="w-full pb-3" *ngIf="(isLoading$ | async) === false">
-          <cha-front-home-summary-depth-chart></cha-front-home-summary-depth-chart>
+          <ng-container *ngIf="isOffSeason$ | async as isOffSeason">
+            <cha-front-home-summary-depth-chart
+              [isOffSeason]="isOffSeason"
+            ></cha-front-home-summary-depth-chart>
+          </ng-container>
         </div>
       </div>
     </blade-layout-feature-content>
