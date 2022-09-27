@@ -331,6 +331,8 @@ export class ApiSalariesService {
 
     const response = await firstValueFrom(stats);
 
+    console.log(response.data.stats[0]);
+
     return response.data.stats[0].splits[0].stat;
   }
 }
