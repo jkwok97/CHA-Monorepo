@@ -47,6 +47,9 @@ export class Players_V2 {
   @Column()
   primary_position!: string;
 
+  @Column()
+  alt_position!: string;
+
   @OneToMany(() => Players_Stats_V2, (playerStats) => playerStats.player_id)
   playerStats!: Players_Stats_V2;
 
