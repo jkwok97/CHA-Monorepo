@@ -28,45 +28,12 @@
               </div>
               <div
                 class="w-full flex flex-wrap text-xs column-gap-1"
-                *ngIf="!player.player_id.isgoalie"
+                *ngIf="
+                  !player.player_id.isgoalie && player.player_id.alt_position
+                "
               >
                 Alt Pos:
-                <span *ngIf="title === 'LW'">{{
-                  player.ratings?.c_rate !== '0' &&
-                  player.ratings?.r_rate !== '0'
-                    ? 'C RW'
-                    : player.ratings?.c_rate !== '0'
-                    ? 'C'
-                    : player.ratings?.r_rate !== '0'
-                    ? 'RW'
-                    : 'None'
-                }}</span>
-                <span *ngIf="title === 'RW'">{{
-                  player.ratings?.c_rate !== '0' &&
-                  player.ratings?.l_rate !== '0'
-                    ? 'C LW'
-                    : player.ratings?.c_rate !== '0'
-                    ? 'C'
-                    : player.ratings?.l_rate !== '0'
-                    ? 'LW'
-                    : 'None'
-                }}</span>
-                <span *ngIf="title === 'C'">{{
-                  player.ratings?.r_rate !== '0' &&
-                  player.ratings?.l_rate !== '0'
-                    ? 'RW LW'
-                    : player.ratings?.r_rate !== '0'
-                    ? 'RW'
-                    : player.ratings?.l_rate !== '0'
-                    ? 'LW'
-                    : 'None'
-                }}</span>
-                <span *ngIf="title === 'LD'">{{
-                  player.ratings?.rd_rate !== '0' ? 'RD' : 'None'
-                }}</span>
-                <span *ngIf="title === 'RD'">{{
-                  player.ratings?.ld_rate !== '0' ? 'LD' : 'None'
-                }}</span>
+                <span>{{ player.player_id.alt_position }}</span>
               </div>
               <div class="w-full flex column-gap-2 flex-wrap">
                 <div class="text-xs" *ngIf="!player.player_id.isgoalie">

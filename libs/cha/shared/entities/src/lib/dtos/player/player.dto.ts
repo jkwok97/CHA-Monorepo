@@ -9,4 +9,5 @@ export interface PlayerDto {
   isforward: boolean;
   is_protected: boolean;
   primary_position: string;
+  alt_position: string;
 }
