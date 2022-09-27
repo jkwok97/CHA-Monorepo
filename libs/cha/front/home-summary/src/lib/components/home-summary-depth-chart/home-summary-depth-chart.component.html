@@ -19,7 +19,7 @@
   <blade-card-body>
     <ng-container *ngIf="loadedSalaries$ | async">
       <div class="flex flex-wrap row-gap-3 column-gap-3">
-        <div class="w-full flex flex-wrap row-gap-3 justify-content-between">
+        <div class="w-full flex flex-wrap row-gap-3 justify-content-around">
           <ng-container *ngIf="leftWingers$ | async as leftWingers">
             <cha-front-home-summary-depth-chart-position
               [title]="'LW'"
