@@ -26,8 +26,56 @@
                   >*Protected</span
                 >
               </div>
-              <div class="w-full flex column-gap-2">
-                <div class="text-sm" *ngIf="!player.player_id.isgoalie">
+              <div
+                class="w-full flex flex-wrap text-xs column-gap-1"
+                *ngIf="!player.player_id.isgoalie"
+              >
+                Alt Pos:
+                <span *ngIf="title === 'LW'">{{
+                  player.ratings?.c_rate !== '0' &&
+                  player.ratings?.r_rate !== '0'
+                    ? 'C RW'
+                    : player.ratings?.c_rate !== '0'
+                    ? 'C'
+                    : player.ratings?.r_rate !== '0'
+                    ? 'RW'
+                    : 'None'
+                }}</span>
+                <span *ngIf="title === 'RW'">{{
+                  player.ratings?.c_rate !== '0' &&
+                  player.ratings?.l_rate !== '0'
+                    ? 'C LW'
+                    : player.ratings?.c_rate !== '0'
+                    ? 'C'
+                    : player.ratings?.l_rate !== '0'
+                    ? 'LW'
+                    : 'None'
+                }}</span>
+                <span *ngIf="title === 'C'">{{
+                  player.ratings?.r_rate !== '0' &&
+                  player.ratings?.l_rate !== '0'
+                    ? 'RW LW'
+                    : player.ratings?.r_rate !== '0'
+                    ? 'RW'
+                    : player.ratings?.l_rate !== '0'
+                    ? 'LW'
+                    : 'None'
+                }}</span>
+                <span *ngIf="title === 'LD'">{{
+                  player.ratings?.rd_rate !== '0' ? 'RD' : 'None'
+                }}</span>
+                <span *ngIf="title === 'RD'">{{
+                  player.ratings?.ld_rate !== '0' ? 'LD' : 'None'
+                }}</span>
+              </div>
+              <div class="w-full flex column-gap-2 flex-wrap">
+                <div class="text-xs" *ngIf="!player.player_id.isgoalie">
+                  G:
+                  {{
+                    isOffSeason ? player.nhlStats?.goals : player.ratings?.goals
+                  }}
+                </div>
+                <div class="text-xs" *ngIf="!player.player_id.isgoalie">
                   Pts:
                   {{
                     isOffSeason
@@ -35,13 +83,21 @@
                       : player.ratings?.points
                   }}
                 </div>
-                <div class="text-sm" *ngIf="player.player_id.isgoalie">
+                <div class="text-xs" *ngIf="player.player_id.isgoalie">
                   Wins:
                   {{
                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins
                   }}
                 </div>
-                <div class="text-sm">
+                <div class="text-xs" *ngIf="player.player_id.isgoalie">
+                  Sv%:
+                  {{
+                    isOffSeason
+                      ? player.nhlStats?.savePercentage
+                      : player.ratings?.save_pct
+                  }}
+                </div>
+                <div class="text-xs">
                   Salary: {{ player.salaries.season_2022 }}
                 </div>
               </div>
