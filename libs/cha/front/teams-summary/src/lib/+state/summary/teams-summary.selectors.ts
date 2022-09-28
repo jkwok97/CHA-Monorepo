@@ -75,6 +75,42 @@ const selectStatsLoading = createSelector(
   TeamsSummaryReducer.getStatsLoading
 );
 
+const selectForwardSalaries = createSelector(
+  selectPlayerSalaries,
+  (playerSalaries: SalariesAndRatingsDto[]) =>
+    playerSalaries
+      .filter(
+        (playerSalary: SalariesAndRatingsDto) =>
+          playerSalary.player_id.isforward
+      )
+      .sort(
+        (a, b) =>
+          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+      )
+      .map((playerSalary: SalariesAndRatingsDto) => ({
+        player_id: playerSalary.player_id,
+        salaries: playerSalary.salaries,
+      }))
+);
+
+const selectDefenseSalaries = createSelector(
+  selectPlayerSalaries,
+  (playerSalaries: SalariesAndRatingsDto[]) =>
+    playerSalaries
+      .filter(
+        (playerSalary: SalariesAndRatingsDto) =>
+          playerSalary.player_id.isdefense
+      )
+      .sort(
+        (a, b) =>
+          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+      )
+      .map((playerSalary: SalariesAndRatingsDto) => ({
+        player_id: playerSalary.player_id,
+        salaries: playerSalary.salaries,
+      }))
+);
+
 const selectCenterSalariesByRating = createSelector(
   selectPlayerSalaries,
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
@@ -195,6 +231,23 @@ const selectGoalieSalaries = createSelector(
   TeamsSummaryReducer.getGoalieSalaries
 );
 
+const selectGoalieSalariesFiltered = createSelector(
+  selectGoalieSalaries,
+  (goalieSalaries: SalariesAndRatingsDto[]) =>
+    goalieSalaries
+      .filter(
+        (playerSalary: SalariesAndRatingsDto) => playerSalary.player_id.isgoalie
+      )
+      .sort(
+        (a, b) =>
+          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+      )
+      .map((goalieSalary: SalariesAndRatingsDto) => ({
+        player_id: goalieSalary.player_id,
+        salaries: goalieSalary.salaries,
+      }))
+);
+
 const selectGoalieSalariesSortedByRating = createSelector(
   selectGoalieSalaries,
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
@@ -283,8 +336,10 @@ export const TeamsSummarySelectors = {
   selectCurrentGoalieStat,
   selectCurrentNHLStat,
   selectStatsLoading,
-
   selectPlayerSalaryLoading,
+  selectForwardSalaries,
+  selectDefenseSalaries,
+  selectGoalieSalariesFiltered,
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,8 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./blade-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BladeListComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class BladeListComponent {
+  @Input() headers!: any[];
+  @Input() data!: any[];
+  @Input() backgroundColor!: string | null;
+  @Input() title!: string;
 }

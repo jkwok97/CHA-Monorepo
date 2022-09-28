@@ -133,6 +133,18 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectStatsLoading
   );
 
+  forwardSalaries$: Observable<any[]> = this.store.select(
+    TeamsSummarySelectors.selectForwardSalaries
+  );
+
+  defenseSalaries$: Observable<any[]> = this.store.select(
+    TeamsSummarySelectors.selectDefenseSalaries
+  );
+
+  goalieSalaries$: Observable<any[]> = this.store.select(
+    TeamsSummarySelectors.selectGoalieSalariesFiltered
+  );
+
   constructor(private store: Store<State>) {}
 
   getUserByTeamId(teamId: number) {

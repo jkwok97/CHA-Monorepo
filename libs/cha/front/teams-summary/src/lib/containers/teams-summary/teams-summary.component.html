@@ -54,7 +54,9 @@
                 <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
               </ng-container>
               <ng-container *ngIf="page.name === 'Salaries'">
-                <cha-front-teams-summary-salaries></cha-front-teams-summary-salaries>
+                <cha-front-teams-summary-salaries
+                  [isMobile]="isMobile"
+                ></cha-front-teams-summary-salaries>
               </ng-container>
               <ng-container *ngIf="page.name === 'Team Stats'">
                 <cha-front-teams-summary-team></cha-front-teams-summary-team>
@@ -77,6 +79,7 @@
             optionLabel="name"
             class="w-full"
             *ngIf="isMobile"
+            scrollHeight="500px"
           ></p-dropdown>
 
           <ng-container *ngIf="isMobile">
@@ -84,7 +87,9 @@
               <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
             </ng-container>
             <ng-container *ngIf="selectedEntity.name === 'Salaries'">
-              <cha-front-teams-summary-salaries></cha-front-teams-summary-salaries>
+              <cha-front-teams-summary-salaries
+                [isMobile]="isMobile"
+              ></cha-front-teams-summary-salaries>
             </ng-container>
             <ng-container *ngIf="selectedEntity.name === 'Team Stats'">
               <cha-front-teams-summary-team></cha-front-teams-summary-team>

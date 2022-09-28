@@ -21,6 +21,7 @@ import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 import { BladeUserAwardCardComponent } from '@blade/angular/ui/award-card';
+import { BladeListComponent } from '@blade/angular/ui/list';
 
 import { reducer } from './+state/index';
 import { TeamsSummaryEffects } from './+state/summary/teams-summary.effects';
@@ -91,6 +92,7 @@ import {
     BladeDividerComponent,
     BladeButtonSelectComponent,
     BladeUserAwardCardComponent,
+    BladeListComponent,
 
     StoreModule.forFeature('teams-summary', reducer),
     EffectsModule.forFeature([

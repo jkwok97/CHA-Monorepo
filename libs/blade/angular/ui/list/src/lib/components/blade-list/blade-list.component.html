@@ -1,1 +1,28 @@
-<p>blade-list works!</p>
+<div
+  class="w-full p-3 border-round text-sm font-light"
+  [ngStyle]="{ background: backgroundColor ? backgroundColor : '#393D47' }"
+>
+  <header class="text-center text-lg">{{ title }}</header>
+  <table>
+    <thead>
+      <tr>
+        <th
+          *ngFor="let header of headers; let i = index"
+          [ngClass]="{
+            'text-center p-1': !header[0],
+            'text-left p-1': header[0]
+          }"
+        >
+          {{ header.key }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let h of headers" class="text-left p-2">
+          {{ row[h.key] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
