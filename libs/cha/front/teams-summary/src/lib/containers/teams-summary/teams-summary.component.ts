@@ -33,10 +33,11 @@ export class TeamsSummaryComponent {
 
   pages = [
     { page: 1, name: 'Depth Chart' },
-    { page: 2, name: 'Team Stats' },
-    { page: 3, name: 'Player Stats' },
-    { page: 4, name: 'Goalie Stats' },
-    { page: 5, name: 'Awards' },
+    { page: 2, name: 'Salaries' },
+    { page: 3, name: 'Team Stats' },
+    { page: 4, name: 'Player Stats' },
+    { page: 5, name: 'Goalie Stats' },
+    { page: 6, name: 'Awards' },
   ];
 
   selectedEntity = this.pages[0];

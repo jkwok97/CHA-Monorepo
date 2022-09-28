@@ -50,6 +50,7 @@ import {
   TeamsSummaryPlayersComponent,
   TeamsSummaryGoaliesComponent,
   TeamsSummaryAwardsComponent,
+  TeamsSummarySalariesComponent
 } from './containers';
 
 import {
@@ -120,6 +121,7 @@ import {
     PlayersStatsTableSiderComponent,
     GoalieStatsTableComponent,
     GoalieStatsTableSiderComponent,
+    TeamsSummarySalariesComponent,
   ],
   providers: [
     TeamsSummaryService,
