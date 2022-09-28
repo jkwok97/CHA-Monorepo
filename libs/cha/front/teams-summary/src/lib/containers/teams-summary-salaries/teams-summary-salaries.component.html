@@ -1,1 +1,20 @@
-<p>teams-summary-salaries works!</p>
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  [ngStyle]="{
+    'background-color': userTeam.teamcolor,
+    'font-weight': 300,
+    color: userTeam.teamtextcolor
+  }"
+  class="w-full"
+>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <blade-card-header>
+      <div class="text-xl text-center">Team Salaries</div>
+    </blade-card-header>
+    <blade-card-body>
+        <div>
+            
+        </div>
+    </blade-card-body>
+  </ng-container>
+</blade-card>

@@ -55,6 +55,32 @@
     "blade-angular-ui-dropdown-multi": "libs/blade/angular/ui/dropdown-multi",
     "blade-angular-ui-layout": "libs/blade/angular/ui/layout",
     "blade-angular-ui-leader-card": "libs/blade/angular/ui/leader-card",
+    "blade-angular-ui-list": {
+      "projectType": "library",
+      "root": "libs/blade/angular/ui/list",
+      "sourceRoot": "libs/blade/angular/ui/list/src",
+      "prefix": "blade",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blade/angular/ui/list"],
+          "options": {
+            "jestConfig": "libs/blade/angular/ui/list/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/blade/angular/ui/list/**/*.ts",
+              "libs/blade/angular/ui/list/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["angular:ui"]
+    },
     "blade-angular-ui-menu": "libs/blade/angular/ui/menu",
     "blade-angular-ui-table": "libs/blade/angular/ui/table",
     "cha-admin": "apps/cha-admin",

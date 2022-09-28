@@ -50,7 +50,7 @@ import {
   TeamsSummaryPlayersComponent,
   TeamsSummaryGoaliesComponent,
   TeamsSummaryAwardsComponent,
-  TeamsSummarySalariesComponent
+  TeamsSummarySalariesComponent,
 } from './containers';
 
 import {
@@ -68,6 +68,7 @@ import {
   PlayersStatsTableSiderComponent,
   GoalieStatsTableComponent,
   GoalieStatsTableSiderComponent,
+  SalariesTableComponent,
 } from './components';
 
 @NgModule({
@@ -122,6 +123,7 @@ import {
     GoalieStatsTableComponent,
     GoalieStatsTableSiderComponent,
     TeamsSummarySalariesComponent,
+    SalariesTableComponent,
   ],
   providers: [
     TeamsSummaryService,
