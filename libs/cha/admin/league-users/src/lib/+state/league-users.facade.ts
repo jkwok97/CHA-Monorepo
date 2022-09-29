@@ -7,7 +7,7 @@ import { LeagueUsersSelectors } from './league-users.selectors';
 import { UserDto } from '@cha/shared/entities';
 
 @Injectable()
-export class LeagueSalariesAndRatingsFacade {
+export class LeagueUsersFacade {
   isLoading$: Observable<boolean> = this.store.select(
     LeagueUsersSelectors.selectLoading
   );
