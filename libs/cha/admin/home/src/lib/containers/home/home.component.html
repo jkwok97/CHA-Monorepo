@@ -1,1 +1,21 @@
-<p>Home Works!</p>
+<perfect-scrollbar [style]="isMobile ? panelStyleMobile : panelStyleDesktop">
+  <blade-layout-feature>
+    <blade-layout-feature-content>
+      <div
+        class="p-2 flex flex-column row-gap-4 justify-content-start align-items-center"
+        [ngStyle]="{
+          height: isMobile
+            ? panelStyleMobile.divHeight
+            : panelStyleDesktop.divHeight
+        }"
+      >
+        <div class="p-3 text-xl font-light">WELCOME ADMINISTRATOR</div>
+        <cha-logo
+          [logo]="ChaLogo.LEAGUE"
+          [width]="500"
+          [height]="450"
+        ></cha-logo>
+      </div>
+    </blade-layout-feature-content>
+  </blade-layout-feature>
+</perfect-scrollbar>
