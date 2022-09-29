@@ -43,6 +43,58 @@
     "api-users": "libs/api/users",
     "api-waivers": "libs/api/waivers",
     "blade-angular-formly-types-email-input": "libs/blade/angular/formly/types/email-input",
+    "blade-angular-formly-types-radio": {
+      "projectType": "library",
+      "root": "libs/blade/angular/formly/types/radio",
+      "sourceRoot": "libs/blade/angular/formly/types/radio/src",
+      "prefix": "blade",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blade/angular/formly/types/radio"],
+          "options": {
+            "jestConfig": "libs/blade/angular/formly/types/radio/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/blade/angular/formly/types/radio/**/*.ts",
+              "libs/blade/angular/formly/types/radio/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["angular:forms"]
+    },
+    "blade-angular-formly-types-text-input": {
+      "projectType": "library",
+      "root": "libs/blade/angular/formly/types/text-input",
+      "sourceRoot": "libs/blade/angular/formly/types/text-input/src",
+      "prefix": "blade",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/blade/angular/formly/types/text-input"],
+          "options": {
+            "jestConfig": "libs/blade/angular/formly/types/text-input/jest.config.ts",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/blade/angular/formly/types/text-input/**/*.ts",
+              "libs/blade/angular/formly/types/text-input/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["angular:forms"]
+    },
     "blade-angular-formly-wrappers-default": "libs/blade/angular/formly/wrappers/default",
     "blade-angular-ui-award-card": "libs/blade/angular/ui/award-card",
     "blade-angular-ui-button": "libs/blade/angular/ui/button",

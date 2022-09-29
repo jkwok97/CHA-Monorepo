@@ -36,6 +36,12 @@
       "@blade/angular/formly/types/email-input": [
         "libs/blade/angular/formly/types/email-input/src/index.ts"
       ],
+      "@blade/angular/formly/types/radio": [
+        "libs/blade/angular/formly/types/radio/src/index.ts"
+      ],
+      "@blade/angular/formly/types/text-input": [
+        "libs/blade/angular/formly/types/text-input/src/index.ts"
+      ],
       "@blade/angular/formly/wrappers/default": [
         "libs/blade/angular/formly/wrappers/default/src/index.ts"
       ],
