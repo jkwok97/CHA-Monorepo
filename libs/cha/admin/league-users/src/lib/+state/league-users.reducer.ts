@@ -27,7 +27,7 @@ const r = createReducer(
     loaded: false,
   })),
 
-  on(LeagueUsersActions.addUser, (state) => ({
+  on(LeagueUsersActions.addUser, LeagueUsersActions.editUser, (state) => ({
     ...state,
     saving: true,
     saved: false,
@@ -40,7 +40,7 @@ const r = createReducer(
     loaded: true,
   })),
 
-  on(LeagueUsersActions.addUserSuccess, (state, action) => ({
+  on(LeagueUsersActions.addUserSuccess, LeagueUsersActions.editUserSuccess,(state, action) => ({
     ...state,
     saving: false,
     saved: true,

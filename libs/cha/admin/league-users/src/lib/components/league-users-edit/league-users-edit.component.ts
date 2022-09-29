@@ -39,11 +39,10 @@ export class LeagueUsersEditComponent implements OnInit {
 
   onSave() {
     const user = this.userFormRef?.form.value;
-    if (!this.editMode) {
-      this.leagueUsersFacade.addUser(user);
-    }
-
-    // this.closeSidebar.emit(true);
+    this.editMode
+      ? this.leagueUsersFacade.editUser(user)
+      : this.leagueUsersFacade.addUser(user);
+    this.closeSidebar.emit(true);
   }
 
   onDelete() {

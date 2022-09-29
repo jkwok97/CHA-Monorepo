@@ -30,4 +30,16 @@ export class LeagueUsersService {
       isactive: true,
     } as UserDto);
   }
+
+  editUser(user: UserCreateDto): Observable<UserDto> {
+    console.log(user);
+    return of({
+      id: 10000,
+      firstname: 'test',
+      lastname: 'last',
+      email: 'testlast@email.com',
+      isadmin: true,
+      isactive: true,
+    } as UserDto);
+  }
 }

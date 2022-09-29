@@ -27,6 +27,10 @@ export class LeagueUsersFacade {
   }
 
   addUser(user: UserCreateDto) {
-    this.store.dispatch(LeagueUsersActions.addUser({user}))
+    this.store.dispatch(LeagueUsersActions.addUser({ user }));
+  }
+
+  editUser(user: UserDto) {
+    this.store.dispatch(LeagueUsersActions.editUser({ user }));
   }
 }

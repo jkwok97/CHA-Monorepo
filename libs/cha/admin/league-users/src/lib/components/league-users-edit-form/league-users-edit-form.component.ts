@@ -62,6 +62,12 @@ export class LeagueUsersEditFormComponent implements OnInit {
       templateOptions: {
         label: 'First Name',
         placeholder: 'Enter First Name',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'First Name is required',
+        },
       },
     };
   }
@@ -74,6 +80,12 @@ export class LeagueUsersEditFormComponent implements OnInit {
       templateOptions: {
         label: 'Last Name',
         placeholder: 'Enter Last Name',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'Last Name is required',
+        },
       },
     };
   }
@@ -86,6 +98,12 @@ export class LeagueUsersEditFormComponent implements OnInit {
       templateOptions: {
         label: 'Email',
         placeholder: 'Enter Email',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'Email is required',
+        },
       },
     };
   }

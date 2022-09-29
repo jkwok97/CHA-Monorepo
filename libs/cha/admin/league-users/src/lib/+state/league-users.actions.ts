@@ -20,6 +20,16 @@ const addUserSuccess = createAction(
   props<{ user: UserDto }>()
 );
 
+const editUser = createAction(
+  `${NAMESPACE} Edit User`,
+  props<{ user: UserDto }>()
+);
+
+const editUserSuccess = createAction(
+  `${NAMESPACE} Edit User Success`,
+  props<{ user: UserDto }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const LeagueUsersActions = {
@@ -27,5 +37,7 @@ export const LeagueUsersActions = {
   getUsersSuccess,
   addUser,
   addUserSuccess,
+  editUser,
+  editUserSuccess,
   error,
 };

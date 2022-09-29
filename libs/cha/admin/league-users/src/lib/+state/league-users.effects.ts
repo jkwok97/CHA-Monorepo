@@ -54,4 +54,29 @@ export class LeagueUsersEffects {
       ),
     { dispatch: false }
   );
+
+  editUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LeagueUsersActions.editUser),
+      exhaustMap((action) =>
+        this.leagueUsersService.editUser(action.user).pipe(
+          map((user: UserDto) =>
+            LeagueUsersActions.editUserSuccess({
+              user,
+            })
+          ),
+          catchError(() => of(LeagueUsersActions.error()))
+        )
+      )
+    )
+  );
+
+  editUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(LeagueUsersActions.editUserSuccess),
+        tap(() => this.leagueUsersFacade.getUsers())
+      ),
+    { dispatch: false }
+  );
 }

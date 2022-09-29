@@ -18,6 +18,7 @@
           type="button"
           [label]="editMode ? 'Save User' : 'Add User'"
           class="p-button-raised"
+          [disabled]="userFormRef?.form?.invalid || !userFormRef?.form?.dirty"
           (click)="onSave()"
         ></button>
         <button
@@ -36,6 +37,7 @@
         type="button"
         label="Delete"
         class="p-button-raised p-button-danger"
+        *ngIf="editMode"
         (click)="onDelete()"
       ></button>
     </div>
