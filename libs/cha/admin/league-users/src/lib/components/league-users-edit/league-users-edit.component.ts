@@ -41,10 +41,21 @@ export class LeagueUsersEditComponent implements OnInit {
   }
 
   onSave() {
-    const user = this.userFormRef?.form.value;
-    this.editMode
-      ? this.leagueUsersFacade.editUser(user)
-      : this.leagueUsersFacade.addUser(user);
+    const user = {
+      ...this.userFormRef?.form.value,
+      isadmin: this.userFormRef?.form.value.isadmin
+        ? this.userFormRef?.form.value.isadmin
+        : false,
+      isactive: this.userFormRef?.form.value.isactive
+        ? this.userFormRef?.form.value.isactive
+        : false,
+    };
+
+    !this.editMode
+      ? this.leagueUsersFacade.addUser(user)
+      : this.user
+      ? this.leagueUsersFacade.editUser(user, this.user.id)
+      : null;
 
     this.leagueUsersFacade.isSaving$
       .pipe(

@@ -20,38 +20,21 @@ export class LeagueUsersService {
   }
 
   addUser(user: UserCreateDto): Observable<UserDto> {
-    console.log(user);
-    return of({
-      id: 10000,
-      firstname: 'test',
-      lastname: 'last',
-      email: 'testlast@email.com',
-      isadmin: true,
-      isactive: true,
-    } as UserDto);
+    const body = user;
+    return this._http
+      .post(`${this.apiUrl}/users/add`, body)
+      .pipe(map((result: any) => result));
   }
 
-  editUser(user: UserCreateDto): Observable<UserDto> {
-    console.log(user);
-    return of({
-      id: 10000,
-      firstname: 'test',
-      lastname: 'last',
-      email: 'testlast@email.com',
-      isadmin: true,
-      isactive: true,
-    } as UserDto);
+  editUser(user: UserCreateDto, userId: number): Observable<UserDto> {
+    return this._http
+      .put(`${this.apiUrl}/users/userId/${userId}`, user)
+      .pipe(map((result: any) => result));
   }
 
   deleteUser(userId: number): Observable<UserDto> {
-    console.log(userId);
-    return of({
-      id: 10000,
-      firstname: 'test',
-      lastname: 'last',
-      email: 'testlast@email.com',
-      isadmin: true,
-      isactive: true,
-    } as UserDto);
+    return this._http
+      .delete(`${this.apiUrl}/users/delete/${userId}`)
+      .pipe(map((result: any) => result));
   }
 }

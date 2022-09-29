@@ -22,7 +22,7 @@ const addUserSuccess = createAction(
 
 const editUser = createAction(
   `${NAMESPACE} Edit User`,
-  props<{ user: UserDto }>()
+  props<{ user: UserCreateDto; userId: number }>()
 );
 
 const editUserSuccess = createAction(

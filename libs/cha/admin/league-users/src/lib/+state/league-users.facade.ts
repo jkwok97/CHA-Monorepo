@@ -38,8 +38,8 @@ export class LeagueUsersFacade {
     this.store.dispatch(LeagueUsersActions.addUser({ user }));
   }
 
-  editUser(user: UserDto) {
-    this.store.dispatch(LeagueUsersActions.editUser({ user }));
+  editUser(user: UserCreateDto, userId: number) {
+    this.store.dispatch(LeagueUsersActions.editUser({ user, userId }));
   }
 
   deleteUser(userId: number) {

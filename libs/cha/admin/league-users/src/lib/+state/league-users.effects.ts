@@ -68,7 +68,7 @@ export class LeagueUsersEffects {
     this.actions$.pipe(
       ofType(LeagueUsersActions.editUser),
       exhaustMap((action) =>
-        this.leagueUsersService.editUser(action.user).pipe(
+        this.leagueUsersService.editUser(action.user, action.userId).pipe(
           map((user: UserDto) =>
             LeagueUsersActions.editUserSuccess({
               user,

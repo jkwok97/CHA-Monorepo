@@ -35,10 +35,7 @@ export class LeagueUsersEditFormComponent implements OnInit {
     },
   ];
 
-  constructor() {}
-
   ngOnInit(): void {
-    console.log(this.user);
     if (this.user) {
       this.patchForm();
     }
