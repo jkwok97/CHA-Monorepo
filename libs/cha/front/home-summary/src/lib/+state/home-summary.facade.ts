@@ -105,6 +105,22 @@ export class HomeSummaryFacade {
     HomeSummarySelectors.selectStatsLoading
   );
 
+  forwardSalaries$: Observable<any[]> = this.store.select(
+    HomeSummarySelectors.selectForwardSalaries
+  );
+
+  defenseSalaries$: Observable<any[]> = this.store.select(
+    HomeSummarySelectors.selectDefenseSalaries
+  );
+
+  goalieSalaries$: Observable<any[]> = this.store.select(
+    HomeSummarySelectors.selectGoalieSalariesFiltered
+  );
+
+  playerSalaryLoading$: Observable<boolean> = this.store.select(
+    HomeSummarySelectors.selectPlayerSalaryLoading
+  );
+
   constructor(private store: Store<State>) {}
 
   getUserTeamRecord(teamId: number) {

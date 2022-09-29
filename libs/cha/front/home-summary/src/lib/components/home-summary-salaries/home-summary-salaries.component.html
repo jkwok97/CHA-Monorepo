@@ -1,1 +1,49 @@
-<p>home-summary-salaries works!</p>
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  [ngStyle]="{
+    'background-color': userTeam.teamcolor,
+    'font-weight': 300,
+    color: userTeam.teamtextcolor
+  }"
+  class="w-full"
+>
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <blade-card-header>
+      <div class="text-xl text-center">Team Salaries</div>
+    </blade-card-header>
+    <blade-card-body>
+      <div
+        class="flex flex-wrap column-gap-2 row-gap-2 w-full justify-content-evenly"
+      >
+        <blade-list
+          [headers]="isMobile ? mobileSalaryHeaders : salaryHeaders"
+          [data]="forwardSalaries"
+          [title]="'Forwards'"
+          [ngStyle]="{
+            width: !isMobile ? '400px' : '325px'
+          }"
+        ></blade-list>
+
+        <div class="flex flex-column flex-wrap justify-content-start row-gap-2">
+          <blade-list
+            [headers]="isMobile ? mobileSalaryHeaders : salaryHeaders"
+            [data]="defenseSalaries"
+            [title]="'Defense'"
+            [ngStyle]="{
+              width: !isMobile ? '400px' : '325px'
+            }"
+          ></blade-list>
+
+          <blade-list
+            [headers]="isMobile ? mobileSalaryHeaders : salaryHeaders"
+            [data]="goalieSalaries"
+            [title]="'Goalies'"
+            [ngStyle]="{
+              width: !isMobile ? '400px' : '325px'
+            }"
+          ></blade-list>
+        </div>
+      </div>
+    </blade-card-body>
+  </ng-container>
+</blade-card>

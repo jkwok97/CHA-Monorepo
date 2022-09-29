@@ -228,6 +228,64 @@ const selectPlayersCount = createSelector(
   ) => playerSalaries.length + goalieSalaries.length
 );
 
+const selectForwardSalaries = createSelector(
+  selectPlayerSalaries,
+  (playerSalaries: SalariesAndRatingsDto[]) =>
+    playerSalaries
+      .filter(
+        (playerSalary: SalariesAndRatingsDto) =>
+          playerSalary.player_id.isforward
+      )
+      .sort(
+        (a, b) =>
+          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+      )
+      .map((playerSalary: SalariesAndRatingsDto) => ({
+        player_id: playerSalary.player_id,
+        salaries: playerSalary.salaries,
+      }))
+);
+
+const selectDefenseSalaries = createSelector(
+  selectPlayerSalaries,
+  (playerSalaries: SalariesAndRatingsDto[]) =>
+    playerSalaries
+      .filter(
+        (playerSalary: SalariesAndRatingsDto) =>
+          playerSalary.player_id.isdefense
+      )
+      .sort(
+        (a, b) =>
+          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+      )
+      .map((playerSalary: SalariesAndRatingsDto) => ({
+        player_id: playerSalary.player_id,
+        salaries: playerSalary.salaries,
+      }))
+);
+
+const selectGoalieSalariesFiltered = createSelector(
+  selectGoalieSalaries,
+  (goalieSalaries: SalariesAndRatingsDto[]) =>
+    goalieSalaries
+      .filter(
+        (playerSalary: SalariesAndRatingsDto) => playerSalary.player_id.isgoalie
+      )
+      .sort(
+        (a, b) =>
+          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+      )
+      .map((goalieSalary: SalariesAndRatingsDto) => ({
+        player_id: goalieSalary.player_id,
+        salaries: goalieSalary.salaries,
+      }))
+);
+
+const selectPlayerSalaryLoading = createSelector(
+  selectState,
+  HomeSummaryReducer.getPlayerSalaryLoading
+);
+
 export const HomeSummarySelectors = {
   selectTeamRecordLoading,
   selectTeamRecordLoaded,
@@ -254,6 +312,10 @@ export const HomeSummarySelectors = {
   selectStatsLoading,
   selectGoalieSalariesSortedByRating,
   selectGoalieSalariesSortedByNhlStats,
+  selectDefenseSalaries,
+  selectForwardSalaries,
+  selectGoalieSalariesFiltered,
+  selectPlayerSalaryLoading
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {

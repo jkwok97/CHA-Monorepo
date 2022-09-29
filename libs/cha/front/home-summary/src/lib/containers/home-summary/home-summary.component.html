@@ -14,7 +14,11 @@
           class="w-full pt-3"
         ></cha-front-home-summary-team-banner>
 
-        <div class="w-full pb-3" *ngIf="(isLoading$ | async) === false">
+        <div
+          class="w-full pb-3"
+          [ngClass]="{ 'flex flex-column row-gap-3': isMobile }"
+          *ngIf="(isLoading$ | async) === false"
+        >
           <p-carousel
             [value]="pages"
             [numVisible]="1"
@@ -30,10 +34,9 @@
                 ></cha-front-home-summary-depth-chart>
               </ng-container>
               <ng-container *ngIf="page.name === 'Salaries'">
-                SALARIES
-                <!-- <cha-front-teams-summary-salaries
+                <cha-front-home-summary-salaries
                   [isMobile]="isMobile"
-                ></cha-front-teams-summary-salaries> -->
+                ></cha-front-home-summary-salaries>
               </ng-container>
             </ng-template>
           </p-carousel>
@@ -54,10 +57,9 @@
               ></cha-front-home-summary-depth-chart>
             </ng-container>
             <ng-container *ngIf="selectedEntity.name === 'Salaries'">
-              SALARIES
-              <!-- <cha-front-teams-summary-salaries
+              <cha-front-home-summary-salaries
                 [isMobile]="isMobile"
-              ></cha-front-teams-summary-salaries> -->
+              ></cha-front-home-summary-salaries>
             </ng-container>
           </ng-container>
         </div>
