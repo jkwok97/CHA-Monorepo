@@ -12,4 +12,10 @@ import { CheckboxModule } from 'primeng/checkbox';
   templateUrl: './checkbox-type.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckboxTypeComponent extends FieldType<FieldTypeConfig> {}
+export class CheckboxTypeComponent extends FieldType<FieldTypeConfig> {
+  override defaultOptions = {
+    templateOptions: {
+      label: '',
+    },
+  };
+}

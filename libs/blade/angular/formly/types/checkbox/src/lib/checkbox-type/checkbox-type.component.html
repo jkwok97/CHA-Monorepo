@@ -1,8 +1,8 @@
 <p-checkbox
-  [attr.data-ele]='key'
-  [formControl]='formControl'
-  [formlyAttributes]='field'
-  [value]='to.value'
-  [binary]='true'
+  [attr.data-ele]="key"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [value]="to['value']"
+  [binary]="true"
+  [label]="to.label ? to.label : ''"
 ></p-checkbox>
-<label>{{to.label}}</label>

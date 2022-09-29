@@ -20,7 +20,7 @@ import { LeagueUsersEffects } from './+state/league-users.effects';
 import { reducer } from './+state/league-users.reducer';
 
 import { TextInputTypeComponent } from 'libs/blade/angular/formly/types/text-input/src';
-import { RadioTypeComponent } from 'libs/blade/angular/formly/types/radio/src';
+import { CheckboxTypeComponent } from 'libs/blade/angular/formly/types/checkbox/src';
 import { EmailInputComponent } from '@blade/angular/formly/types/email-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
 import { FormlyModule } from '@ngx-formly/core';
@@ -68,8 +68,8 @@ import {
           wrappers: ['control-wrapper'],
         },
         {
-          name: 'radio',
-          component: RadioTypeComponent,
+          name: 'checkbox',
+          component: CheckboxTypeComponent,
           wrappers: ['control-wrapper'],
         },
       ],
