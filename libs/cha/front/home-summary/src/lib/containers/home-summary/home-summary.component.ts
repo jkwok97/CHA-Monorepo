@@ -15,6 +15,7 @@ export class HomeSummaryComponent {
   isOffSeason$: Observable<boolean>;
 
   isMobile = false;
+  isOffSeason = false;
 
   panelStyleMobile = {
     width: '100%',
@@ -26,12 +27,25 @@ export class HomeSummaryComponent {
     height: '83vh',
   };
 
+  pages = [
+    { page: 1, name: 'Depth Chart' },
+    { page: 2, name: 'Salaries' },
+  ];
+
+  selectedEntity = this.pages[0];
+
   constructor(
     private displayFacade: DisplayFacade,
     private homeSummaryFacade: HomeSummaryFacade,
     private leagueDataFacade: LeagueDataFacade
   ) {
     this.isOffSeason$ = this.leagueDataFacade.isOffSeason$;
+
+    this.leagueDataFacade.isOffSeason$
+      .pipe(first())
+      .subscribe((isOffSeason: boolean) => {
+        this.isOffSeason = isOffSeason;
+      });
     
     this.isLoaded$ = combineLatest([
       this.homeSummaryFacade.goalieSalaryLoaded$,

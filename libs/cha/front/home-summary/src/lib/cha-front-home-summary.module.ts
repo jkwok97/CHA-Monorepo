@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -8,6 +9,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { AvatarModule } from 'primeng/avatar';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
+import { DropdownModule } from 'primeng/dropdown';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -36,11 +39,14 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ChaFrontHomeRoutingModule,
     ProgressBarModule,
     AvatarModule,
     SidebarModule,
     ButtonModule,
+    CarouselModule,
+    DropdownModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,

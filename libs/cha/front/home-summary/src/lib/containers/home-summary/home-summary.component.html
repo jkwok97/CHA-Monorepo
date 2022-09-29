@@ -15,10 +15,50 @@
         ></cha-front-home-summary-team-banner>
 
         <div class="w-full pb-3" *ngIf="(isLoading$ | async) === false">
-          <ng-container *ngIf="isOffSeason$ | async as isOffSeason">
-            <cha-front-home-summary-depth-chart
-              [isOffSeason]="isOffSeason"
-            ></cha-front-home-summary-depth-chart>
+          <p-carousel
+            [value]="pages"
+            [numVisible]="1"
+            [numScroll]="1"
+            [page]="pages.indexOf(selectedEntity)"
+            [showNavigators]="false"
+            *ngIf="!isMobile"
+          >
+            <ng-template let-page pTemplate="item">
+              <ng-container *ngIf="page.name === 'Depth Chart'">
+                <cha-front-home-summary-depth-chart
+                  [isOffSeason]="isOffSeason"
+                ></cha-front-home-summary-depth-chart>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Salaries'">
+                SALARIES
+                <!-- <cha-front-teams-summary-salaries
+                  [isMobile]="isMobile"
+                ></cha-front-teams-summary-salaries> -->
+              </ng-container>
+            </ng-template>
+          </p-carousel>
+
+          <p-dropdown
+            [options]="pages"
+            [(ngModel)]="selectedEntity"
+            optionLabel="name"
+            class="w-full"
+            *ngIf="isMobile"
+            scrollHeight="500px"
+          ></p-dropdown>
+
+          <ng-container *ngIf="isMobile">
+            <ng-container *ngIf="selectedEntity.name === 'Depth Chart'">
+              <cha-front-home-summary-depth-chart
+                [isOffSeason]="isOffSeason"
+              ></cha-front-home-summary-depth-chart>
+            </ng-container>
+            <ng-container *ngIf="selectedEntity.name === 'Salaries'">
+              SALARIES
+              <!-- <cha-front-teams-summary-salaries
+                [isMobile]="isMobile"
+              ></cha-front-teams-summary-salaries> -->
+            </ng-container>
           </ng-container>
         </div>
       </div>
