@@ -1,1 +1,1 @@
-export * from './lib/blade-angular-formly-types-text-input.module';
+export * from './lib/text-input-type';
