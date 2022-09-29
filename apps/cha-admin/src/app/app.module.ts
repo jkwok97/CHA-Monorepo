@@ -70,7 +70,7 @@ const getApiUrl = (appConfig: AppConfigService) => {
     ),
     StoreDevtoolsModule.instrument({
       maxAge: 10,
-      name: 'Continental Hockey Association',
+      name: 'Continental Hockey Association Administration',
       logOnly: environment.production,
     }),
   ],
