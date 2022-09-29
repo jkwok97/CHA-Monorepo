@@ -1,1 +1,17 @@
-<p>radio-type works!</p>
+<div
+  class="p-field-radiobutton"
+  *ngFor="
+    let option of to.options | formlySelectOptions: field | async;
+    let i = index
+  "
+>
+  <p-radioButton
+    [attr.data-index-num-ele]="i"
+    [name]="field.name || id"
+    [formControl]="formControl"
+    [label]="option.label"
+    [value]="option.value"
+    [disabled]="option.disabled"
+  >
+  </p-radioButton>
+</div>
