@@ -30,6 +30,10 @@ export class LeagueUsersEditFormComponent implements OnInit {
         this.emailField(),
       ],
     },
+    {
+      fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
+      fieldGroup: [this.isAdminField(), this.isActiveField()],
+    },
   ];
 
   constructor() {}
@@ -46,6 +50,8 @@ export class LeagueUsersEditFormComponent implements OnInit {
       firstname: this.user?.firstname,
       lastname: this.user?.lastname,
       email: this.user?.email,
+      isadmin: this.user?.isadmin,
+      isactive: this.user?.isactive,
     };
   }
 
@@ -81,6 +87,28 @@ export class LeagueUsersEditFormComponent implements OnInit {
       templateOptions: {
         label: 'Email',
         placeholder: 'Enter Email',
+      },
+    };
+  }
+
+  isAdminField(): FormlyFieldConfig {
+    return {
+      key: 'isadmin',
+      className: 'w-5',
+      type: 'checkbox',
+      templateOptions: {
+        label: 'Administrator',
+      },
+    };
+  }
+
+  isActiveField(): FormlyFieldConfig {
+    return {
+      key: 'isactive',
+      className: 'w-5',
+      type: 'checkbox',
+      templateOptions: {
+        label: 'Active User',
       },
     };
   }

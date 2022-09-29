@@ -70,7 +70,6 @@ import {
         {
           name: 'checkbox',
           component: CheckboxTypeComponent,
-          wrappers: ['control-wrapper'],
         },
       ],
     }),
