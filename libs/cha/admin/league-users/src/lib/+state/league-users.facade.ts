@@ -4,7 +4,7 @@ import { State } from './league-users.reducer';
 import { LeagueUsersActions } from './league-users.actions';
 import { Observable } from 'rxjs';
 import { LeagueUsersSelectors } from './league-users.selectors';
-import { UserDto } from '@cha/shared/entities';
+import { UserCreateDto, UserDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueUsersFacade {
@@ -24,5 +24,9 @@ export class LeagueUsersFacade {
 
   getUsers() {
     this.store.dispatch(LeagueUsersActions.getUsers());
+  }
+
+  addUser(user: UserCreateDto) {
+    this.store.dispatch(LeagueUsersActions.addUser({user}))
   }
 }

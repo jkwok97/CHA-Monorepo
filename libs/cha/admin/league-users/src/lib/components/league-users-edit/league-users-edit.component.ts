@@ -5,8 +5,11 @@ import {
   Input,
   OnInit,
   Output,
+  ViewChild,
 } from '@angular/core';
 import { UserDto } from '@cha/shared/entities';
+import { LeagueUsersFacade } from '../../+state/league-users.facade';
+import { LeagueUsersEditFormComponent } from '../league-users-edit-form';
 
 @Component({
   selector: 'cha-admin-league-users-edit',
@@ -19,9 +22,12 @@ export class LeagueUsersEditComponent implements OnInit {
 
   @Output() closeSidebar = new EventEmitter<boolean>();
 
+  @ViewChild(LeagueUsersEditFormComponent, { static: false })
+  userFormRef?: LeagueUsersEditFormComponent;
+
   editMode = false;
 
-  constructor() {}
+  constructor(private leagueUsersFacade: LeagueUsersFacade) {}
 
   ngOnInit(): void {
     this.user ? (this.editMode = true) : (this.editMode = false);
@@ -32,7 +38,11 @@ export class LeagueUsersEditComponent implements OnInit {
   }
 
   onSave() {
-    console.log('clicked');
+    const user = this.userFormRef?.form.value;
+    if (!this.editMode) {
+      this.leagueUsersFacade.addUser(user);
+    }
+
     // this.closeSidebar.emit(true);
   }
 

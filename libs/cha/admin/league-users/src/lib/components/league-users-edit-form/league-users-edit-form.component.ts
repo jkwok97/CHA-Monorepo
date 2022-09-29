@@ -4,8 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { Form, UntypedFormGroup } from '@angular/forms';
-import { EmailValidatorMessage } from '@blade/angular/formly/types/email-input';
+import { UntypedFormGroup } from '@angular/forms';
 import { UserDto } from '@cha/shared/entities';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 

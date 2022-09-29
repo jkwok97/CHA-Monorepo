@@ -6,12 +6,16 @@ export interface State {
   users: UserDto[];
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
 }
 
 const initialState: State = {
   users: [],
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
 };
 
 const r = createReducer(
@@ -23,11 +27,23 @@ const r = createReducer(
     loaded: false,
   })),
 
+  on(LeagueUsersActions.addUser, (state) => ({
+    ...state,
+    saving: true,
+    saved: false,
+  })),
+
   on(LeagueUsersActions.getUsersSuccess, (state, action) => ({
     ...state,
     users: action.users,
     loading: false,
     loaded: true,
+  })),
+
+  on(LeagueUsersActions.addUserSuccess, (state, action) => ({
+    ...state,
+    saving: false,
+    saved: true,
   })),
 
   on(LeagueUsersActions.error, (state) => initialState)
