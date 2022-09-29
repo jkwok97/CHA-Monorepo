@@ -1,1 +1,10 @@
 {{ user | json }}
+
+<form [formGroup]="form" class="w-full">
+  <formly-form
+    [model]="model"
+    [fields]="fields"
+    [options]="options"
+    [form]="form"
+  ></formly-form>
+</form>
