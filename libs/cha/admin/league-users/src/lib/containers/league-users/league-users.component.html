@@ -1,1 +1,23 @@
-<p>league-users works!</p>
+<blade-layout-feature-content>
+  <div>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="pt-2">
+      <div class="text-lg text-center" style="font-weight: 100">
+        League Users
+      </div>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <cha-admin-league-users-table></cha-admin-league-users-table>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>
