@@ -33,6 +33,9 @@
       "@api/transactions": ["libs/api/transactions/src/index.ts"],
       "@api/users": ["libs/api/users/src/index.ts"],
       "@api/waivers": ["libs/api/waivers/src/index.ts"],
+      "@blade/angular/formly/types/checkbox": [
+        "libs/blade/angular/formly/types/checkbox/src/index.ts"
+      ],
       "@blade/angular/formly/types/email-input": [
         "libs/blade/angular/formly/types/email-input/src/index.ts"
       ],
