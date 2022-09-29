@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
 import { LeagueUsersService } from '../services';
 import { LeagueUsersActions } from './league-users.actions';
@@ -11,7 +12,8 @@ export class LeagueUsersEffects {
   constructor(
     private actions$: Actions,
     private leagueUsersService: LeagueUsersService,
-    private leagueUsersFacade: LeagueUsersFacade
+    private leagueUsersFacade: LeagueUsersFacade,
+    private messageService: MessageService
   ) {}
 
   getUsers$ = createEffect(() =>
@@ -50,7 +52,14 @@ export class LeagueUsersEffects {
     () =>
       this.actions$.pipe(
         ofType(LeagueUsersActions.addUserSuccess),
-        tap(() => this.leagueUsersFacade.getUsers())
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Add User',
+            detail: 'User has been added',
+          });
+          this.leagueUsersFacade.getUsers();
+        })
       ),
     { dispatch: false }
   );
@@ -75,7 +84,46 @@ export class LeagueUsersEffects {
     () =>
       this.actions$.pipe(
         ofType(LeagueUsersActions.editUserSuccess),
-        tap(() => this.leagueUsersFacade.getUsers())
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Edit User',
+            detail: 'User has been updated',
+          });
+          this.leagueUsersFacade.getUsers();
+        })
+      ),
+    { dispatch: false }
+  );
+
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LeagueUsersActions.deleteUser),
+      exhaustMap((action) =>
+        this.leagueUsersService.deleteUser(action.userId).pipe(
+          map((user: UserDto) =>
+            LeagueUsersActions.deleteUserSuccess({
+              user,
+            })
+          ),
+          catchError(() => of(LeagueUsersActions.error()))
+        )
+      )
+    )
+  );
+
+  deleteUserSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(LeagueUsersActions.deleteUserSuccess),
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Delete User',
+            detail: 'User has been removed',
+          });
+          this.leagueUsersFacade.getUsers();
+        })
       ),
     { dispatch: false }
   );

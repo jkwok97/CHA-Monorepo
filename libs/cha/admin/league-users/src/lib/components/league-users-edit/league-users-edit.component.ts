@@ -8,9 +8,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { UserDto } from '@cha/shared/entities';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter } from 'rxjs';
 import { LeagueUsersFacade } from '../../+state/league-users.facade';
 import { LeagueUsersEditFormComponent } from '../league-users-edit-form';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-league-users-edit',
   templateUrl: './league-users-edit.component.html',
@@ -42,11 +45,25 @@ export class LeagueUsersEditComponent implements OnInit {
     this.editMode
       ? this.leagueUsersFacade.editUser(user)
       : this.leagueUsersFacade.addUser(user);
-    this.closeSidebar.emit(true);
+
+    this.leagueUsersFacade.isSaving$
+      .pipe(
+        untilDestroyed(this),
+        filter((isSaving: boolean) => !isSaving)
+      )
+      .subscribe(() => this.closeSidebar.emit(true));
   }
 
   onDelete() {
-    console.log('clicked');
-    // this.closeSidebar.emit(true);
+    if (this.user) {
+      this.leagueUsersFacade.deleteUser(this.user.id);
+
+      this.leagueUsersFacade.isSaving$
+        .pipe(
+          untilDestroyed(this),
+          filter((isSaving: boolean) => !isSaving)
+        )
+        .subscribe(() => this.closeSidebar.emit(true));
+    }
   }
 }

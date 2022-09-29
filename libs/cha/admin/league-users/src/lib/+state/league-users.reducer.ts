@@ -27,11 +27,16 @@ const r = createReducer(
     loaded: false,
   })),
 
-  on(LeagueUsersActions.addUser, LeagueUsersActions.editUser, (state) => ({
-    ...state,
-    saving: true,
-    saved: false,
-  })),
+  on(
+    LeagueUsersActions.addUser,
+    LeagueUsersActions.editUser,
+    LeagueUsersActions.deleteUser,
+    (state) => ({
+      ...state,
+      saving: true,
+      saved: false,
+    })
+  ),
 
   on(LeagueUsersActions.getUsersSuccess, (state, action) => ({
     ...state,
@@ -40,11 +45,16 @@ const r = createReducer(
     loaded: true,
   })),
 
-  on(LeagueUsersActions.addUserSuccess, LeagueUsersActions.editUserSuccess,(state, action) => ({
-    ...state,
-    saving: false,
-    saved: true,
-  })),
+  on(
+    LeagueUsersActions.addUserSuccess,
+    LeagueUsersActions.editUserSuccess,
+    LeagueUsersActions.deleteUserSuccess,
+    (state, action) => ({
+      ...state,
+      saving: false,
+      saved: true,
+    })
+  ),
 
   on(LeagueUsersActions.error, (state) => initialState)
 );
@@ -58,3 +68,7 @@ export const getUsers = (state: State) => state.users;
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
+
+export const getSaving = (state: State) => state.saving;
+
+export const getSaved = (state: State) => state.saved;

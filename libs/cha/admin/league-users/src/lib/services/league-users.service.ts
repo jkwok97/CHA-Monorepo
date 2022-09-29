@@ -42,4 +42,16 @@ export class LeagueUsersService {
       isactive: true,
     } as UserDto);
   }
+
+  deleteUser(userId: number): Observable<UserDto> {
+    console.log(userId);
+    return of({
+      id: 10000,
+      firstname: 'test',
+      lastname: 'last',
+      email: 'testlast@email.com',
+      isadmin: true,
+      isactive: true,
+    } as UserDto);
+  }
 }

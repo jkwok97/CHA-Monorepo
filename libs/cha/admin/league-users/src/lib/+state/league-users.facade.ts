@@ -16,6 +16,14 @@ export class LeagueUsersFacade {
     LeagueUsersSelectors.selectLoaded
   );
 
+  isSaving$: Observable<boolean> = this.store.select(
+    LeagueUsersSelectors.selectSaving
+  )
+
+  isSaved$: Observable<boolean> = this.store.select(
+    LeagueUsersSelectors.selectSaved
+  )
+
   users$: Observable<UserDto[]> = this.store.select(
     LeagueUsersSelectors.selectUsers
   );
@@ -32,5 +40,9 @@ export class LeagueUsersFacade {
 
   editUser(user: UserDto) {
     this.store.dispatch(LeagueUsersActions.editUser({ user }));
+  }
+
+  deleteUser(userId: number) {
+    this.store.dispatch(LeagueUsersActions.deleteUser({ userId }));
   }
 }

@@ -12,10 +12,16 @@ const selectLoading = createSelector(
 
 const selectLoaded = createSelector(selectState, LeagueUsersReducer.getLoaded);
 
+const selectSaving = createSelector(selectState, LeagueUsersReducer.getSaving);
+
+const selectSaved = createSelector(selectState, LeagueUsersReducer.getSaved);
+
 const selectUsers = createSelector(selectState, LeagueUsersReducer.getUsers);
 
 export const LeagueUsersSelectors = {
   selectLoaded,
   selectLoading,
+  selectSaving,
+  selectSaved,
   selectUsers,
 };
