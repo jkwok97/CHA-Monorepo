@@ -17,7 +17,7 @@
   [globalFilterFields]="['full_name']"
 >
   <ng-template pTemplate="caption">
-    <div class="flex">
+    <div class="flex flex-wrap justify-content-between">
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input
@@ -27,6 +27,14 @@
           placeholder="Search User"
         />
       </span>
+
+      <button
+        pButton
+        type="button"
+        icon="pi pi-user-plus"
+        class="p-button-rounded p-button-primary"
+        (click)="onAddClick()"
+      ></button>
     </div>
   </ng-template>
   <ng-template pTemplate="header" let-columns let-data>
@@ -135,4 +143,6 @@
   </ng-template>
 </p-table>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true"> HELLO </p-sidebar>
+<p-sidebar [(visible)]="display" [fullScreen]="true" [showCloseIcon]="true">
+  HELLO
+</p-sidebar>

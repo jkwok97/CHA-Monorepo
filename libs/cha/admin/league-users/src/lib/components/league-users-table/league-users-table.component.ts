@@ -66,4 +66,9 @@ export class LeagueUsersTableComponent implements OnInit {
     console.log(user);
     this.display = true;
   }
+
+  onAddClick() {
+    console.log('clicked');
+    this.display = true;
+  }
 }
