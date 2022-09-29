@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import { UserDto } from '@cha/shared/entities';
 
@@ -15,12 +17,27 @@ import { UserDto } from '@cha/shared/entities';
 export class LeagueUsersEditComponent implements OnInit {
   @Input() user!: UserDto | null;
 
+  @Output() closeSidebar = new EventEmitter<boolean>();
+
   editMode = false;
 
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.user);
+    this.user ? (this.editMode = true) : (this.editMode = false);
   }
 
+  onCancel() {
+    this.closeSidebar.emit(true);
+  }
+
+  onSave() {
+    console.log('clicked');
+    // this.closeSidebar.emit(true);
+  }
+
+  onDelete() {
+    console.log('clicked');
+    // this.closeSidebar.emit(true);
+  }
 }

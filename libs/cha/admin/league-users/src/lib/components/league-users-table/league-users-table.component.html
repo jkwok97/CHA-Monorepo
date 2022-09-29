@@ -146,8 +146,11 @@
 <p-sidebar
   [(visible)]="display"
   [fullScreen]="true"
-  [showCloseIcon]="true"
+  [showCloseIcon]="false"
   *ngIf="display"
 >
-  <cha-admin-league-users-edit [user]="user"></cha-admin-league-users-edit>
+  <cha-admin-league-users-edit
+    [user]="user"
+    (closeSidebar)="onClose()"
+  ></cha-admin-league-users-edit>
 </p-sidebar>

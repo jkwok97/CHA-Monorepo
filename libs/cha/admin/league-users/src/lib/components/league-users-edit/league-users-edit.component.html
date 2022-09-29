@@ -1,3 +1,41 @@
-<cha-admin-league-users-edit-form
-  [user]="user"
-></cha-admin-league-users-edit-form>
+<blade-card style="background-color: var(--background-100)">
+  <blade-card-header class="text-lg font-light text-center">{{
+    editMode ? 'Edit User' : 'Add User'
+  }}</blade-card-header>
+  <blade-card-body>
+    <cha-admin-league-users-edit-form
+      [user]="user"
+    ></cha-admin-league-users-edit-form>
+  </blade-card-body>
+  <blade-card-footer>
+    <div class="flex justify-content-between">
+      <div class="flex column-gap-1">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="editMode ? 'Save User' : 'Add User'"
+          class="p-button-raised"
+          (click)="onSave()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-raised p-button-warning"
+          (click)="onCancel()"
+        ></button>
+      </div>
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Delete"
+        class="p-button-raised p-button-danger"
+        (click)="onDelete()"
+      ></button>
+    </div>
+  </blade-card-footer>
+</blade-card>

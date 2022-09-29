@@ -11,7 +11,6 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'cha-admin-league-users-table',
   templateUrl: './league-users-table.component.html',
-  styleUrls: ['./league-users-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueUsersTableComponent implements OnInit {
@@ -46,8 +45,6 @@ export class LeagueUsersTableComponent implements OnInit {
   usersForTable!: any;
   user!: UserDto | null;
 
-  constructor() {}
-
   ngOnInit(): void {
     this.usersForTable = this.mapItems(this.users);
   }
@@ -64,14 +61,17 @@ export class LeagueUsersTableComponent implements OnInit {
   }
 
   onUserClick(user: UserDto) {
-    console.log(user);
     this.user = user;
     this.display = true;
   }
 
   onAddClick() {
     this.user = null;
-    console.log('clicked');
     this.display = true;
+  }
+
+  onClose() {
+    this.display = false;
+    this.user = null;
   }
 }
