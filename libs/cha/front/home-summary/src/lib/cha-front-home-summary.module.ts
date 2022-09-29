@@ -34,6 +34,7 @@ import {
   HomeSummaryDepthChartItemSidebarComponent,
   HomeSummaryDepthChartItemSidebarRatingsComponent,
   HomeSummaryDepthChartItemSidebarStatsComponent,
+  HomeSummarySalariesComponent,
 } from './components';
 
 @NgModule({
@@ -65,6 +66,7 @@ import {
     HomeSummaryDepthChartItemSidebarComponent,
     HomeSummaryDepthChartItemSidebarRatingsComponent,
     HomeSummaryDepthChartItemSidebarStatsComponent,
+    HomeSummarySalariesComponent,
   ],
   providers: [HomeSummaryService, HomeSummaryFacade, HomeSummaryEffects],
 })
