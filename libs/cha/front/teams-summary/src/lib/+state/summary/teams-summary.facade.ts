@@ -188,4 +188,8 @@ export class TeamsSummaryFacade {
   getNHLCurrentStats(playerId: number) {
     this.store.dispatch(TeamsSummaryActions.getNHLCurrentStats({ playerId }));
   }
+
+  reset() {
+    this.store.dispatch(TeamsSummaryActions.reset());
+  }
 }

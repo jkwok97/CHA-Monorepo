@@ -94,6 +94,8 @@ const getNHLCurrentStatsSuccess = createAction(
 
 const error = createAction(`${NAMESPACE} Error`);
 
+const reset = createAction(`${NAMESPACE} Reset`)
+
 export const TeamsSummaryActions = {
   getUserByTeamId,
   getUserByTeamIdSuccess,
@@ -112,4 +114,5 @@ export const TeamsSummaryActions = {
   getUserTeam,
   getUserTeamSuccess,
   error,
+  reset
 };

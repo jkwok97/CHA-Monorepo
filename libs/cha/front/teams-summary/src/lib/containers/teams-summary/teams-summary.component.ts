@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DisplayFacade, LeagueDataFacade } from '@cha/domain/core';
 import { TeamDto } from '@cha/shared/entities';
@@ -13,7 +13,7 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
   styleUrls: ['./teams-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TeamsSummaryComponent {
+export class TeamsSummaryComponent implements OnDestroy {
   isLoading$: Observable<boolean>;
   userTeam$: Observable<TeamDto | undefined>;
   teams$: Observable<TeamDto[]>;
@@ -112,5 +112,9 @@ export class TeamsSummaryComponent {
     } else {
       this.router.navigate([`league/teams/${this.teams[index + 1].id}`]);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.teamsSummaryFacade.reset();
   }
 }

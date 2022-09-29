@@ -137,7 +137,11 @@ const r = createReducer(
     statsLoading: false,
   })),
 
-  on(TeamsSummaryActions.error, (state) => initialState)
+  on(
+    TeamsSummaryActions.reset,
+    TeamsSummaryActions.error,
+    (state) => initialState
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {
