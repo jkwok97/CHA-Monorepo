@@ -21,7 +21,11 @@ import { reducer } from './+state/league-users.reducer';
 import { ChaAdminLeagueUsersRoutingModule } from './cha-admin-league-users-routing.module';
 
 import { LeagueUsersComponent } from './containers';
-import { LeagueUsersTableComponent } from './components';
+import {
+  LeagueUsersTableComponent,
+  LeagueUsersEditComponent,
+  LeagueUsersEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -38,7 +42,12 @@ import { LeagueUsersTableComponent } from './components';
     StoreModule.forFeature('league-users', reducer),
     EffectsModule.forFeature([LeagueUsersEffects]),
   ],
-  declarations: [LeagueUsersComponent, LeagueUsersTableComponent],
+  declarations: [
+    LeagueUsersComponent,
+    LeagueUsersTableComponent,
+    LeagueUsersEditComponent,
+    LeagueUsersEditFormComponent,
+  ],
   providers: [LeagueUsersEffects, LeagueUsersFacade],
 })
 export class ChaAdminLeagueUsersModule {}

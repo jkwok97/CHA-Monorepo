@@ -143,6 +143,11 @@
   </ng-template>
 </p-table>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true" [showCloseIcon]="true">
-  HELLO
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [showCloseIcon]="true"
+  *ngIf="display"
+>
+  <cha-admin-league-users-edit [user]="user"></cha-admin-league-users-edit>
 </p-sidebar>

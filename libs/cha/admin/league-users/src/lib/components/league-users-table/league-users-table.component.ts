@@ -44,6 +44,7 @@ export class LeagueUsersTableComponent implements OnInit {
   statsForTable!: any;
   display = false;
   usersForTable!: any;
+  user!: UserDto | null;
 
   constructor() {}
 
@@ -64,10 +65,12 @@ export class LeagueUsersTableComponent implements OnInit {
 
   onUserClick(user: UserDto) {
     console.log(user);
+    this.user = user;
     this.display = true;
   }
 
   onAddClick() {
+    this.user = null;
     console.log('clicked');
     this.display = true;
   }
