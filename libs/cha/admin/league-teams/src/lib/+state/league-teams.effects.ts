@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TeamDto } from '@cha/shared/entities';
+import { TeamDto, UserDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -126,5 +126,21 @@ export class LeagueTeamsEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  getUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LeagueTeamsActions.getUsers),
+      exhaustMap((action) =>
+        this.leagueTeamsService.getUsers().pipe(
+          map((users: UserDto[]) =>
+            LeagueTeamsActions.getUsersSuccess({
+              users,
+            })
+          ),
+          catchError(() => of(LeagueTeamsActions.error()))
+        )
+      )
+    )
   );
 }

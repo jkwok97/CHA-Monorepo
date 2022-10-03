@@ -47,6 +47,11 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(LeagueTeamsActions.getUsersSuccess, (state, action) => ({
+    ...state,
+    users: action.users,
+  })),
+
   on(
     LeagueTeamsActions.addTeamSuccess,
     LeagueTeamsActions.editTeamSuccess,
@@ -66,6 +71,8 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getTeams = (state: State) => state.teams;
+
+export const getUsers = (state: State) => state.users;
 
 export const getLoading = (state: State) => state.loading;
 

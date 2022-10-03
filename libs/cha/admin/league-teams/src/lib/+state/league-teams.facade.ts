@@ -4,7 +4,7 @@ import { State } from './league-teams.reducer';
 import { LeagueTeamsActions } from './league-teams.actions';
 import { Observable } from 'rxjs';
 import { LeagueTeamsSelectors } from './league-teams.selectors';
-import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
+import { TeamCreateDto, TeamDto, UserDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueTeamsFacade {
@@ -28,10 +28,18 @@ export class LeagueTeamsFacade {
     LeagueTeamsSelectors.selectTeams
   );
 
+  users$: Observable<any[]> = this.store.select(
+    LeagueTeamsSelectors.selectUsersOptions
+  );
+
   constructor(private store: Store<State>) {}
 
   getTeams() {
     this.store.dispatch(LeagueTeamsActions.getTeams());
+  }
+
+  getUsers() {
+    this.store.dispatch(LeagueTeamsActions.getUsers());
   }
 
   addTeam(team: TeamCreateDto) {

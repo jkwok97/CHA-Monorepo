@@ -1,10 +1,12 @@
 <p-dropdown
   [attr.data-ele]="key"
-  [placeholder]="to.placeholder ?? ''"
-  [options]="(to.options | formlySelectOptions: field | async) ?? []"
+  [placeholder]="props.placeholder ?? ''"
+  [options]="(props.options | formlySelectOptions: field | async) ?? []"
   [formControl]="formControl"
   [formlyAttributes]="field"
-  [showClear]="to['showClear']"
-  (onChange)="to.change && to.change(field, $event)"
+  [showClear]="props['showClear']"
+  [optionValue]="props['valueProp']"
+  [optionLabel]="props['labelProp']"
+  (onChange)="props.change && props.change(field, $event)"
   class="w-full inputfield"
 ></p-dropdown>
