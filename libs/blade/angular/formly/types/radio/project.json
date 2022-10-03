@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/blade/angular/formly/types/radio",
+  "sourceRoot": "libs/blade/angular/formly/types/radio/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/formly/types/radio"],
+      "options": {
+        "jestConfig": "libs/blade/angular/formly/types/radio/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/formly/types/radio/**/*.ts",
+          "libs/blade/angular/formly/types/radio/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:forms"]
+}

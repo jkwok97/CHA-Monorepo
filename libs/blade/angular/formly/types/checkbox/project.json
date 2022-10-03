@@ -1,0 +1,26 @@
+{
+    "projectType": "library",
+    "root": "libs/blade/angular/formly/types/checkbox",
+    "sourceRoot": "libs/blade/angular/formly/types/checkbox/src",
+    "prefix": "blade",
+    "targets": {
+      "test": {
+        "executor": "@nrwl/jest:jest",
+        "outputs": ["coverage/libs/blade/angular/formly/types/checkbox"],
+        "options": {
+          "jestConfig": "libs/blade/angular/formly/types/checkbox/jest.config.ts",
+          "passWithNoTests": true
+        }
+      },
+      "lint": {
+        "executor": "@nrwl/linter:eslint",
+        "options": {
+          "lintFilePatterns": [
+            "libs/blade/angular/formly/types/checkbox/**/*.ts",
+            "libs/blade/angular/formly/types/checkbox/**/*.html"
+          ]
+        }
+      }
+    },
+    "tags": ["angular:forms"]
+  }

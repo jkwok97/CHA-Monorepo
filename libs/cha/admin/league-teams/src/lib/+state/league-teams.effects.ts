@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TeamDto, UserDto } from '@cha/shared/entities';
+import { TeamDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -8,7 +8,7 @@ import { LeagueTeamsActions } from './league-teams.actions';
 import { LeagueTeamsFacade } from './league-teams.facade';
 
 @Injectable()
-export class LeagueUsersEffects {
+export class LeagueTeamsEffects {
   constructor(
     private actions$: Actions,
     private leagueTeamsService: LeagueTeamsService,
