@@ -36,7 +36,7 @@ export class TeamsController {
     return user;
   }
 
-  @Get('/all/teams/yay')
+  @Get()
   async getTeams(): Promise<TeamDto[]> {
     const teams = await this.teamsService.getAll();
 
