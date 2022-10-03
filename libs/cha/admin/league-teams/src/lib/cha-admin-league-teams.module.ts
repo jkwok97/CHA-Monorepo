@@ -27,6 +27,9 @@ import { reducer } from './+state/league-teams.reducer';
 import { ChaAdminLeagueTeamsRoutingModule } from './cha-admin-league-teams-routing.module';
 
 import { LeagueTeamsComponent } from './containers';
+import { LeagueTeamsEditComponent } from './components/league-teams-edit/league-teams-edit.component';
+import { LeagueTeamsEditFormComponent } from './components/league-teams-edit-form/league-teams-edit-form.component';
+import { LeagueTeamsTableComponent } from './components/league-teams-table/league-teams-table.component';
 
 @NgModule({
   imports: [
@@ -68,7 +71,12 @@ import { LeagueTeamsComponent } from './containers';
       ],
     }),
   ],
-  declarations: [LeagueTeamsComponent],
+  declarations: [
+    LeagueTeamsComponent,
+    LeagueTeamsEditComponent,
+    LeagueTeamsEditFormComponent,
+    LeagueTeamsTableComponent,
+  ],
   providers: [LeagueTeamsEffects, LeagueTeamsFacade],
 })
 export class ChaAdminLeagueTeamsModule {}
