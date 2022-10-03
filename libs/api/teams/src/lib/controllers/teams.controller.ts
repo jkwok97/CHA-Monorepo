@@ -35,4 +35,14 @@ export class TeamsController {
     }
     return user;
   }
+
+  @Get()
+  async getTeams(): Promise<TeamDto[]> {
+    const teams = await this.teamsService.getAll();
+
+    if (!teams || teams.length < 1) {
+      throw new NotFoundException('Teams not found');
+    }
+    return teams;
+  }
 }
