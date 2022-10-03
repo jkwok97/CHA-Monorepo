@@ -4,9 +4,11 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "target": "node",
+        "compiler": "tsc",
         "outputPath": "dist/apps/cha-server",
         "main": "apps/cha-server/src/main.ts",
         "tsConfig": "apps/cha-server/tsconfig.app.json",
