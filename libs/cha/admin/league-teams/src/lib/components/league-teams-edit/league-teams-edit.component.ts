@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { TeamDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-admin-league-teams-edit',
@@ -7,6 +15,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueTeamsEditComponent implements OnInit {
+  @Input() team!: TeamDto | null;
+
+  @Output() closeSidebar = new EventEmitter<boolean>();
+
   constructor() {}
 
   ngOnInit(): void {}

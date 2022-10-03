@@ -1,7 +1,4 @@
-import {
-  TeamCreateDto,
-  TeamDto,
-} from '@cha/shared/entities';
+import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
 import {
   Body,
   Controller,
@@ -48,28 +45,28 @@ export class TeamsController {
     return user;
   }
 
-  @Get()
-  async getTeams(): Promise<TeamDto[]> {
-    const users = await this.teamsService.getAll();
+  // @Get()
+  // async getTeams(): Promise<TeamDto[]> {
+  //   const users = await this.teamsService.getAll();
 
-    if (!users || users.length < 1) {
-      throw new NotFoundException('Teams not found');
-    }
-    return users;
-  }
+  //   if (!users || users.length < 1) {
+  //     throw new NotFoundException('Teams not found');
+  //   }
+  //   return users;
+  // }
 
-  @Put('/:id')
-  updateTeamById(@Param() param, @Body() body): Promise<TeamDto> {
-    return this.teamsService.updateTeamById(parseInt(param.id), body);
-  }
+  // @Put('/:id')
+  // updateTeamById(@Param() param, @Body() body): Promise<TeamDto> {
+  //   return this.teamsService.updateTeamById(parseInt(param.id), body);
+  // }
 
-  @Post('/add')
-  addTeam(@Body() body: TeamCreateDto) {
-    return this.teamsService.addTeam(body);
-  }
+  // @Post('/add')
+  // addTeam(@Body() body: TeamCreateDto) {
+  //   return this.teamsService.addTeam(body);
+  // }
 
-  @Delete('/delete/:id')
-  deleteTeamById(@Param() param) {
-    return this.teamsService.deleteTeam(parseInt(param.id));
-  }
+  // @Delete('/delete/:id')
+  // deleteTeamById(@Param() param) {
+  //   return this.teamsService.deleteTeam(parseInt(param.id));
+  // }
 }

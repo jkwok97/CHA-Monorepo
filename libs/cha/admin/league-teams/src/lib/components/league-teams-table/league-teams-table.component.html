@@ -1,1 +1,166 @@
-<p>league-teams-table works!</p>
+<p-table
+  #dt
+  [responsiveLayout]="'stack'"
+  [value]="teamsForTable"
+  [columns]="!isMobile ? teamTableColumns : mobileTeamTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [sortField]="sortField"
+  [sortOrder]="-1"
+  [filterDelay]="0"
+  [globalFilterFields]="['full_name']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex flex-wrap justify-content-between">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search User"
+        />
+      </span>
+
+      <button
+        pButton
+        type="button"
+        icon="pi pi-user-plus"
+        class="p-button-rounded p-button-primary"
+        (click)="onAddClick()"
+      ></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns let-data>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th
+          *ngFor="let column of mobileTeamTableColumns"
+          [hidden]="!column.visible"
+        >
+          {{ column.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of teamTableColumns"
+          [hidden]="!column.visible"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td
+          *ngFor="let column of mobileTeamTableColumns"
+          [hidden]="!column.visible"
+        >
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container
+              *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
+              >{{ data[column.field] }}</ng-container
+            >
+            <ng-container
+              *ngIf="column.field === 'isadmin' || column.field === 'isactive'"
+            >
+              <div>
+                <i
+                  class="pi pi-ban text-red-600"
+                  *ngIf="data[column.field] === false"
+                ></i>
+                <i
+                  class="pi pi-check-circle text-green-600"
+                  *ngIf="data[column.field] === true"
+                ></i>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-user-edit"
+                class="p-button-rounded p-button-primary"
+                (click)="onTeamClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td *ngFor="let column of teamTableColumns" [hidden]="!column.visible">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container
+              *ngIf="column.field === 'isadmin' || column.field === 'isactive'"
+            >
+              <div>
+                <i
+                  class="pi pi-ban text-red-600"
+                  *ngIf="data[column.field] === false"
+                ></i>
+                <i
+                  class="pi pi-check-circle text-green-600"
+                  *ngIf="data[column.field] === true"
+                ></i>
+              </div>
+            </ng-container>
+            <ng-container
+              *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
+              >{{ data[column.field] }}</ng-container
+            >
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-user-edit"
+                class="p-button-rounded p-button-primary"
+                (click)="onTeamClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </ng-template>
+</p-table>
+
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [showCloseIcon]="false"
+  [dismissible]="false"
+  *ngIf="display"
+>
+  <cha-admin-league-teams-edit
+    [team]="team"
+    (closeSidebar)="onClose()"
+  ></cha-admin-league-teams-edit>
+</p-sidebar>
