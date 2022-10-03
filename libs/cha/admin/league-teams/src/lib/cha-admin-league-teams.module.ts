@@ -18,6 +18,7 @@ import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { CheckboxTypeComponent } from '@blade/angular/formly/types/checkbox';
 import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
+import { SingleSelectTypeComponent } from '@blade/angular/formly/types/single-select';
 
 import { LeagueTeamsEffects } from './+state/league-teams.effects';
 import { LeagueTeamsFacade } from './+state/league-teams.facade';
@@ -58,6 +59,11 @@ import { LeagueTeamsComponent } from './containers';
         {
           name: 'checkbox',
           component: CheckboxTypeComponent,
+        },
+        {
+          name: 'single-select',
+          component: SingleSelectTypeComponent,
+          wrappers: ['control-wrapper'],
         },
       ],
     }),

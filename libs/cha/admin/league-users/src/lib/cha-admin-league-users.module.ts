@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { FormlyModule } from '@ngx-formly/core';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -14,16 +15,14 @@ import { ButtonModule } from 'primeng/button';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
-
-import { LeagueUsersFacade } from './+state/league-users.facade';
-import { LeagueUsersEffects } from './+state/league-users.effects';
-import { reducer } from './+state/league-users.reducer';
-
 import { CheckboxTypeComponent } from '@blade/angular/formly/types/checkbox';
 import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
 import { EmailInputComponent } from '@blade/angular/formly/types/email-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
-import { FormlyModule } from '@ngx-formly/core';
+
+import { LeagueUsersFacade } from './+state/league-users.facade';
+import { LeagueUsersEffects } from './+state/league-users.effects';
+import { reducer } from './+state/league-users.reducer';
 
 import { ChaAdminLeagueUsersRoutingModule } from './cha-admin-league-users-routing.module';
 
