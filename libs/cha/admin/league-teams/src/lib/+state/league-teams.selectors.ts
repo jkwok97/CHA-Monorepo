@@ -1,6 +1,5 @@
-import { UserDto } from '@cha/shared/entities';
+import { DivisionDto, UserDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 
 import * as LeagueTeamsReducer from './league-teams.reducer';
 

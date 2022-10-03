@@ -1,6 +1,5 @@
-import { TeamCreateDto, TeamDto, UserDto } from '@cha/shared/entities';
+import { DivisionDto, TeamCreateDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
-import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 
 const NAMESPACE = '[LEAGUE TEAMS]';
 

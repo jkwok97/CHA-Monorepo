@@ -1,4 +1,4 @@
-import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
+import { DivisionDto, TeamCreateDto, TeamDto } from '@cha/shared/entities';
 import {
   Body,
   Controller,
@@ -9,7 +9,6 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 import { TeamsService } from '../services';
 
 @Controller('teams')

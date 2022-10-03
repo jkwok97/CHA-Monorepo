@@ -7,7 +7,7 @@ import {
 import { UntypedFormGroup } from '@angular/forms';
 import { TeamDto, UserDto } from '@cha/shared/entities';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LeagueTeamsFacade } from '../../+state/league-teams.facade';
 
 @Component({

@@ -1,6 +1,5 @@
-import { TeamDto, UserDto } from '@cha/shared/entities';
+import { DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 import { LeagueTeamsActions } from './league-teams.actions';
 
 export interface State {

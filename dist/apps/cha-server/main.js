@@ -8308,6 +8308,24 @@ tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dto
 
 /***/ }),
 
+/***/ "./libs/cha/shared/entities/src/lib/dtos/league/conference.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
+/***/ "./libs/cha/shared/entities/src/lib/dtos/league/division.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
 /***/ "./libs/cha/shared/entities/src/lib/dtos/league/index.ts":
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -8315,6 +8333,8 @@ tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dto
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__("tslib");
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/league/leagueData.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/league/conference.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/league/division.dto.ts"), exports);
 
 
 /***/ }),

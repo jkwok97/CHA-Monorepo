@@ -4,7 +4,7 @@ import { State } from './league-teams.reducer';
 import { LeagueTeamsActions } from './league-teams.actions';
 import { Observable } from 'rxjs';
 import { LeagueTeamsSelectors } from './league-teams.selectors';
-import { TeamCreateDto, TeamDto, UserDto } from '@cha/shared/entities';
+import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueTeamsFacade {

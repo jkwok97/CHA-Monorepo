@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TeamDto, UserDto } from '@cha/shared/entities';
+import { DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
 import { LeagueTeamsService } from '../services';
