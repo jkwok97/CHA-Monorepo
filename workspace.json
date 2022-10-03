@@ -4,6 +4,7 @@
   "projects": {
     "api-awards": "libs/api/awards",
     "api-core": "libs/api/core",
+    "api-divisions": "libs/api/divisions",
     "api-draft-table": "libs/api/draft-table",
     "api-entities": {
       "root": "libs/api/entities",
