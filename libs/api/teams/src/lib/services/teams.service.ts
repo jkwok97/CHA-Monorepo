@@ -37,4 +37,8 @@ export class TeamsService {
 
     return user;
   }
+
+  async getAll(): Promise<Teams_V2[]> {
+    return await this.repo.find();
+  }
 }
