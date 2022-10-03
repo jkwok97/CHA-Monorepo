@@ -1,4 +1,4 @@
-import { Teams_V2, Users_V2 } from '@api/entities';
+import { Divisions_V2, Teams_V2, Users_V2 } from '@api/entities';
 import { TeamCreateDto } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,7 +8,9 @@ import { Repository } from 'typeorm';
 export class TeamsService {
   constructor(
     @InjectRepository(Teams_V2) private repo: Repository<Teams_V2>,
-    @InjectRepository(Users_V2) private userRepo: Repository<Users_V2>
+    @InjectRepository(Users_V2) private userRepo: Repository<Users_V2>,
+    @InjectRepository(Divisions_V2)
+    private divisionsRepo: Repository<Divisions_V2>
   ) {}
 
   async getUserTeams(id: number): Promise<Teams_V2[]> {
@@ -68,5 +70,9 @@ export class TeamsService {
       throw new NotFoundException('team not found');
     }
     return this.repo.remove(team);
+  }
+
+  async getDivisions(): Promise<Divisions_V2[]> {
+    return await this.divisionsRepo.find();
   }
 }

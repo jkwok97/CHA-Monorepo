@@ -7260,7 +7260,7 @@ let ApiTeamsModule = class ApiTeamsModule {
 };
 ApiTeamsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Teams_V2, entities_1.Users_V2])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Teams_V2, entities_1.Users_V2, entities_1.Divisions_V2])],
         controllers: [controllers_1.TeamsController],
         providers: [services_1.TeamsService],
     })
@@ -7285,7 +7285,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/teams/src/lib/controllers/t
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -7324,6 +7324,13 @@ let TeamsController = class TeamsController {
         }
         return teams;
     }
+    async getDivisions() {
+        const divisions = await this.teamsService.getDivisions();
+        if (!divisions || divisions.length < 1) {
+            throw new common_1.NotFoundException('divisions not found');
+        }
+        return divisions;
+    }
     updateTeamById(param, body) {
         return this.teamsService.updateTeamById(parseInt(param.id), body);
     }
@@ -7361,18 +7368,24 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], TeamsController.prototype, "getTeams", null);
 tslib_1.__decorate([
+    (0, common_1.Get)('/divisions'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+], TeamsController.prototype, "getDivisions", null);
+tslib_1.__decorate([
     (0, common_1.Put)('/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__param(1, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], TeamsController.prototype, "updateTeamById", null);
 tslib_1.__decorate([
     (0, common_1.Post)('/add'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.TeamCreateDto !== "undefined" && entities_1.TeamCreateDto) === "function" ? _g : Object]),
+    tslib_1.__metadata("design:paramtypes", [typeof (_h = typeof entities_1.TeamCreateDto !== "undefined" && entities_1.TeamCreateDto) === "function" ? _h : Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], TeamsController.prototype, "addUser", null);
 tslib_1.__decorate([
@@ -7428,7 +7441,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/teams/src/lib/services/team
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamsService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -7437,9 +7450,10 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 let TeamsService = class TeamsService {
-    constructor(repo, userRepo) {
+    constructor(repo, userRepo, divisionsRepo) {
         this.repo = repo;
         this.userRepo = userRepo;
+        this.divisionsRepo = divisionsRepo;
     }
     async getUserTeams(id) {
         return await this.repo.findBy({ users_id: id });
@@ -7486,12 +7500,16 @@ let TeamsService = class TeamsService {
         }
         return this.repo.remove(team);
     }
+    async getDivisions() {
+        return await this.divisionsRepo.find();
+    }
 };
 TeamsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Users_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
 ], TeamsService);
 exports.TeamsService = TeamsService;
 

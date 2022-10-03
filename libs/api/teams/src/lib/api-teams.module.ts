@@ -1,4 +1,4 @@
-import { Teams_V2, Users_V2 } from '@api/entities';
+import { Divisions_V2, Teams_V2, Users_V2 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -7,7 +7,7 @@ import { TeamsMiddleware } from './middlewares/teams.middleware';
 import { TeamsService } from './services';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Teams_V2, Users_V2])],
+  imports: [TypeOrmModule.forFeature([Teams_V2, Users_V2, Divisions_V2])],
   controllers: [TeamsController],
   providers: [TeamsService],
 })

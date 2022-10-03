@@ -9,6 +9,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 import { TeamsService } from '../services';
 
 @Controller('teams')
@@ -53,6 +54,16 @@ export class TeamsController {
       throw new NotFoundException('teams not found');
     }
     return teams;
+  }
+
+  @Get('/divisions')
+  async getDivisions(): Promise<DivisionDto[]> {
+    const divisions = await this.teamsService.getDivisions();
+
+    if (!divisions || divisions.length < 1) {
+      throw new NotFoundException('divisions not found');
+    }
+    return divisions;
   }
 
   @Put('/:id')
