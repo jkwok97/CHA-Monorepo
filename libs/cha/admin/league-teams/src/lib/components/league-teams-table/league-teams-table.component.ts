@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { TeamDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-admin-league-teams-table',
@@ -7,6 +13,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueTeamsTableComponent implements OnInit {
+  @Input() isMobile!: boolean;
+  @Input() teams!: TeamDto[];
+
   constructor() {}
 
   ngOnInit(): void {}
