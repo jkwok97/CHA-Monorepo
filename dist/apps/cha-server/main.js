@@ -7285,10 +7285,11 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/teams/src/lib/controllers/t
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/teams/src/lib/services/index.ts");
 let TeamsController = class TeamsController {
@@ -7323,6 +7324,15 @@ let TeamsController = class TeamsController {
         }
         return teams;
     }
+    updateTeamById(param, body) {
+        return this.teamsService.updateTeamById(parseInt(param.id), body);
+    }
+    addUser(body) {
+        return this.teamsService.addTeam(body);
+    }
+    deleteUserById(param) {
+        return this.teamsService.deleteTeam(parseInt(param.id));
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:id'),
@@ -7350,6 +7360,28 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], TeamsController.prototype, "getTeams", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+], TeamsController.prototype, "updateTeamById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.TeamCreateDto !== "undefined" && entities_1.TeamCreateDto) === "function" ? _g : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], TeamsController.prototype, "addUser", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/delete/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], TeamsController.prototype, "deleteUserById", null);
 TeamsController = tslib_1.__decorate([
     (0, common_1.Controller)('teams'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.TeamsService !== "undefined" && services_1.TeamsService) === "function" ? _a : Object])
@@ -7434,6 +7466,25 @@ let TeamsService = class TeamsService {
     }
     async getAll() {
         return await this.repo.find();
+    }
+    async updateTeamById(id, attrs) {
+        const team = await this.repo.findOneByOrFail({ id });
+        if (!team) {
+            throw new common_1.NotFoundException('team not found');
+        }
+        Object.assign(team, attrs);
+        return this.repo.save(team);
+    }
+    async addTeam(body) {
+        const team = await this.repo.create(body);
+        return this.repo.save(team);
+    }
+    async deleteTeam(id) {
+        const team = await this.repo.findOneByOrFail({ id });
+        if (!team) {
+            throw new common_1.NotFoundException('team not found');
+        }
+        return this.repo.remove(team);
     }
 };
 TeamsService = tslib_1.__decorate([

@@ -1,5 +1,14 @@
-import { TeamDto } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { TeamsService } from '../services';
 
 @Controller('teams')
@@ -44,5 +53,20 @@ export class TeamsController {
       throw new NotFoundException('teams not found');
     }
     return teams;
+  }
+
+  @Put('/:id')
+  updateTeamById(@Param() param, @Body() body): Promise<TeamDto> {
+    return this.teamsService.updateTeamById(parseInt(param.id), body);
+  }
+
+  @Post('/add')
+  addUser(@Body() body: TeamCreateDto) {
+    return this.teamsService.addTeam(body);
+  }
+
+  @Delete('/delete/:id')
+  deleteUserById(@Param() param) {
+    return this.teamsService.deleteTeam(parseInt(param.id));
   }
 }
