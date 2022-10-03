@@ -67,7 +67,7 @@
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "9.0.0",
     "@nestjs/platform-express": "9.0.0",
-    "@nestjs/typeorm": "^9.0.0",
+    "@nestjs/typeorm": "^9.0.1",
     "@ngneat/until-destroy": "^9.2.1",
     "@ngrx/effects": "^14.0.2",
     "@ngrx/entity": "^14.0.2",
