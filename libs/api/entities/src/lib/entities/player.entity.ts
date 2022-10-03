@@ -44,8 +44,8 @@ export class Players_V2 {
   @Column()
   is_protected!: boolean;
 
-  @Column()
-  primary_position!: string;
+  // @Column()
+  // primary_position!: string;
 
   // @Column()
   // alt_position!: string;
