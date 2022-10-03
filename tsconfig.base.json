@@ -42,6 +42,9 @@
       "@blade/angular/formly/types/radio": [
         "libs/blade/angular/formly/types/radio/src/index.ts"
       ],
+      "@blade/angular/formly/types/single-select": [
+        "libs/blade/angular/formly/types/single-select/src/index.ts"
+      ],
       "@blade/angular/formly/types/text-input": [
         "libs/blade/angular/formly/types/text-input/src/index.ts"
       ],

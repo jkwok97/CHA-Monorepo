@@ -1,0 +1,10 @@
+<p-dropdown
+  [attr.data-ele]="key"
+  [placeholder]="to.placeholder ?? ''"
+  [options]="(to.options | formlySelectOptions: field | async) ?? []"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  [showClear]="to['showClear']"
+  (onChange)="to.change && to.change(field, $event)"
+  class="w-full inputfield"
+></p-dropdown>

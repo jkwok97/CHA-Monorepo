@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/blade/angular/formly/types/radio",
   "sourceRoot": "libs/blade/angular/formly/types/radio/src",
   "prefix": "blade",
   "targets": {
