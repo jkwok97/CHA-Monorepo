@@ -20,6 +20,7 @@ export class LeagueTeamsEditFormComponent implements OnInit {
   @Input() team!: TeamDto | null;
 
   users$: Observable<UserDto[]>;
+  divisions$: Observable<any[]>;
 
   form = new UntypedFormGroup({});
   model: any = {};
@@ -51,6 +52,7 @@ export class LeagueTeamsEditFormComponent implements OnInit {
 
   constructor(private leagueTeamsFacade: LeagueTeamsFacade) {
     this.users$ = this.leagueTeamsFacade.users$;
+    this.divisions$ = this.leagueTeamsFacade.divisions$;
   }
 
   ngOnInit(): void {
@@ -169,7 +171,7 @@ export class LeagueTeamsEditFormComponent implements OnInit {
         label: 'Division',
         placeholder: 'Select Division',
         required: true,
-        options: this.users$,
+        options: this.divisions$,
         valueProp: 'id',
         labelProp: 'email',
       },

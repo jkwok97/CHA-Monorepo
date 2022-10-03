@@ -1,10 +1,12 @@
 import { TeamDto, UserDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
+import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 import { LeagueTeamsActions } from './league-teams.actions';
 
 export interface State {
   teams: TeamDto[];
   users: UserDto[];
+  divisions: DivisionDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -14,6 +16,7 @@ export interface State {
 const initialState: State = {
   teams: [],
   users: [],
+  divisions: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -52,6 +55,11 @@ const r = createReducer(
     users: action.users,
   })),
 
+  on(LeagueTeamsActions.getDivisionsSuccess, (state, action) => ({
+    ...state,
+    divisions: action.divisions,
+  })),
+
   on(
     LeagueTeamsActions.addTeamSuccess,
     LeagueTeamsActions.editTeamSuccess,
@@ -73,6 +81,8 @@ export function reducer(state: State | undefined, action: Action) {
 export const getTeams = (state: State) => state.teams;
 
 export const getUsers = (state: State) => state.users;
+
+export const getDivisions = (state: State) => state.divisions;
 
 export const getLoading = (state: State) => state.loading;
 

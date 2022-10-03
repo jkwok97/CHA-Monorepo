@@ -32,6 +32,10 @@ export class LeagueTeamsFacade {
     LeagueTeamsSelectors.selectUsersOptions
   );
 
+  divisions$: Observable<any[]> = this.store.select(
+    LeagueTeamsSelectors.selectDivisionsOptions
+  )
+
   constructor(private store: Store<State>) {}
 
   getTeams() {
@@ -40,6 +44,10 @@ export class LeagueTeamsFacade {
 
   getUsers() {
     this.store.dispatch(LeagueTeamsActions.getUsers());
+  }
+
+  getDivisions() {
+    this.store.dispatch(LeagueTeamsActions.getDivisions());
   }
 
   addTeam(team: TeamCreateDto) {

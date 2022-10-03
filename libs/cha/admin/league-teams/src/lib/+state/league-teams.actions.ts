@@ -1,5 +1,6 @@
 import { TeamCreateDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
+import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 
 const NAMESPACE = '[LEAGUE TEAMS]';
 
@@ -47,6 +48,13 @@ const getUsersSuccess = createAction(
   props<{ users: UserDto[] }>()
 );
 
+const getDivisions = createAction(`${NAMESPACE} Get Divisions`);
+
+const getDivisionsSuccess = createAction(
+  `${NAMESPACE} Get Divisions Success`,
+  props<{ divisions: DivisionDto[] }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const LeagueTeamsActions = {
@@ -60,5 +68,7 @@ export const LeagueTeamsActions = {
   deleteTeamSuccess,
   getUsers,
   getUsersSuccess,
+  getDivisions,
+  getDivisionsSuccess,
   error,
 };

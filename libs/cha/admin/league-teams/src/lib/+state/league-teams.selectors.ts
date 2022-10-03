@@ -1,5 +1,6 @@
 import { UserDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { DivisionDto } from 'libs/cha/shared/entities/src/lib/dtos/league/division.dto';
 
 import * as LeagueTeamsReducer from './league-teams.reducer';
 
@@ -28,6 +29,20 @@ const selectUsersOptions = createSelector(selectUsers, (users: UserDto[]) =>
   }))
 );
 
+const selectDivisions = createSelector(
+  selectState,
+  LeagueTeamsReducer.getDivisions
+);
+
+const selectDivisionsOptions = createSelector(
+  selectDivisions,
+  (divisions: DivisionDto[]) =>
+    divisions.map((division: DivisionDto) => ({
+      id: division.id,
+      name: division.divisionname,
+    }))
+);
+
 export const LeagueTeamsSelectors = {
   selectLoaded,
   selectLoading,
@@ -36,4 +51,5 @@ export const LeagueTeamsSelectors = {
   selectTeams,
   selectUsers,
   selectUsersOptions,
+  selectDivisionsOptions,
 };

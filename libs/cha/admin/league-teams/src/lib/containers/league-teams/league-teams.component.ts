@@ -33,5 +33,6 @@ export class LeagueTeamsComponent {
 
     this.leagueTeamsFacade.getTeams();
     this.leagueTeamsFacade.getUsers();
+    this.leagueTeamsFacade.getDivisions();
   }
 }
