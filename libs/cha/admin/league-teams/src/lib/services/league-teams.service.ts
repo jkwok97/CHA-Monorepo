@@ -1,40 +1,46 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { UserCreateDto, UserDto } from '@cha/shared/entities';
+import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LeagueUsersService {
+export class LeagueTeamsService {
   constructor(
     private _http: HttpClient,
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
+  getTeams() {
+    return this._http
+      .get(`${this.apiUrl}/teams`)
+      .pipe(map((result: any) => result));
+  }
+
+  addTeam(user: TeamCreateDto): Observable<TeamDto> {
+    const body = user;
+    return this._http
+      .post(`${this.apiUrl}/teams/add`, body)
+      .pipe(map((result: any) => result));
+  }
+
+  editTeam(team: TeamDto): Observable<TeamDto> {
+    return this._http
+      .put(`${this.apiUrl}/teams/${team.id}`, team)
+      .pipe(map((result: any) => result));
+  }
+
+  deleteTeam(teamId: number): Observable<TeamDto> {
+    return this._http
+      .delete(`${this.apiUrl}/teams/delete/${teamId}`)
+      .pipe(map((result: any) => result));
+  }
+
   getUsers() {
     return this._http
       .get(`${this.apiUrl}/users`)
-      .pipe(map((result: any) => result));
-  }
-
-  addUser(user: UserCreateDto): Observable<UserDto> {
-    const body = user;
-    return this._http
-      .post(`${this.apiUrl}/users/add`, body)
-      .pipe(map((result: any) => result));
-  }
-
-  editUser(user: UserCreateDto, userId: number): Observable<UserDto> {
-    return this._http
-      .put(`${this.apiUrl}/users/userId/${userId}`, user)
-      .pipe(map((result: any) => result));
-  }
-
-  deleteUser(userId: number): Observable<UserDto> {
-    return this._http
-      .delete(`${this.apiUrl}/users/delete/${userId}`)
       .pipe(map((result: any) => result));
   }
 }

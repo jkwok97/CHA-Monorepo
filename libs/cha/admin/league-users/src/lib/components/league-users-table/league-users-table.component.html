@@ -114,7 +114,7 @@
       </tr>
     </ng-template>
     <ng-template #showDesktopBody>
-      <tr (click)="onUserClick(data)" class="cursor-pointer">
+      <tr>
         <td *ngFor="let column of userTableColumns" [hidden]="!column.visible">
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
@@ -136,6 +136,15 @@
               *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
               >{{ data[column.field] }}</ng-container
             >
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-user-edit"
+                class="p-button-rounded p-button-primary"
+                (click)="onUserClick(data)"
+              ></button>
+            </ng-container>
           </div>
         </td>
       </tr>

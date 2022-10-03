@@ -25,6 +25,7 @@ export class LeagueUsersTableComponent implements OnInit {
     { field: 'email', header: 'Email', visible: true },
     { field: 'isactive', header: 'Is Active', visible: true },
     { field: 'isadmin', header: 'Is Admin', visible: true },
+    { field: 'action', header: 'Edit', visible: true },
   ];
 
   mobileUserTableColumns = [
