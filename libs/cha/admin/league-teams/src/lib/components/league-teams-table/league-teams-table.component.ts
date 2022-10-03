@@ -21,20 +21,21 @@ export class LeagueTeamsTableComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
 
   teamTableColumns = [
-    { field: 'id', header: 'User Id', visible: true },
-    { field: 'full_name', header: 'Name', visible: true },
-    { field: 'email', header: 'Email', visible: true },
+    { field: 'id', header: 'Team Id', visible: true },
+    { field: 'teamlogo', header: 'Current Logo', visible: true },
+    { field: 'team_name', header: 'Name', visible: true },
+    { field: 'divisions_id', header: 'Division', visible: true },
     { field: 'isactive', header: 'Is Active', visible: true },
-    { field: 'isadmin', header: 'Is Admin', visible: true },
+    { field: 'users_id', header: 'User Id', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
   mobileTeamTableColumns = [
-    { field: 'id', header: 'User Id', visible: true },
-    { field: 'full_name', header: 'Name', visible: true },
-    { field: 'email', header: 'Email', visible: true },
+    { field: 'teamlogo', header: 'Current Logo', visible: true },
+    { field: 'team_name', header: 'Name', visible: true },
+    { field: 'divisions_id', header: 'Division', visible: true },
     { field: 'isactive', header: 'Is Active', visible: true },
-    { field: 'isadmin', header: 'Is Admin', visible: true },
+    { field: 'users_id', header: 'User Id', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
@@ -58,7 +59,14 @@ export class LeagueTeamsTableComponent implements OnInit {
     return teams.map((team: TeamDto) => ({
       ...team,
       team_name: `${team.city} ${team.nickname}`,
+      teamlogo: this.getString(team.teamlogo),
     }));
+  }
+
+  // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
+  getString(urlString: string) {
+    const temp = urlString.split('/');
+    return `assets/${temp[temp.length - 1]}`;
   }
 
   onTeamClick(team: TeamDto) {

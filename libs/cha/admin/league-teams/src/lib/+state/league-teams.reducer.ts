@@ -1,9 +1,10 @@
-import { TeamDto } from '@cha/shared/entities';
+import { TeamDto, UserDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { LeagueTeamsActions } from './league-teams.actions';
 
 export interface State {
   teams: TeamDto[];
+  users: UserDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -12,6 +13,7 @@ export interface State {
 
 const initialState: State = {
   teams: [],
+  users: [],
   loading: false,
   loaded: false,
   saving: false,

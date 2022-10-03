@@ -14,7 +14,7 @@
   [sortField]="sortField"
   [sortOrder]="-1"
   [filterDelay]="0"
-  [globalFilterFields]="['full_name']"
+  [globalFilterFields]="['team_name']"
 >
   <ng-template pTemplate="caption">
     <div class="flex flex-wrap justify-content-between">
@@ -24,14 +24,14 @@
           pInputText
           type="text"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search User"
+          placeholder="Search Team"
         />
       </span>
 
       <button
         pButton
         type="button"
-        icon="pi pi-user-plus"
+        icon="pi pi-plus"
         class="p-button-rounded p-button-primary"
         (click)="onAddClick()"
       ></button>
@@ -83,12 +83,12 @@
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container
-              *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
+              *ngIf="
+                column.field !== 'isactive' && column.field !== 'divisions_id'
+              "
               >{{ data[column.field] }}</ng-container
             >
-            <ng-container
-              *ngIf="column.field === 'isadmin' || column.field === 'isactive'"
-            >
+            <ng-container *ngIf="column.field === 'isactive'">
               <div>
                 <i
                   class="pi pi-ban text-red-600"
@@ -100,11 +100,17 @@
                 ></i>
               </div>
             </ng-container>
+            <ng-container *ngIf="column.field === 'teamlogo'">
+              <img [src]="data.teamlogo" height="30px" />
+            </ng-container>
+            <ng-container *ngIf="column.field === 'divisions_id'">
+              {{ data[column.field]?.divisionname }}
+            </ng-container>
             <ng-container *ngIf="column.field === 'action'">
               <button
                 pButton
                 type="button"
-                icon="pi pi-user-edit"
+                icon="pi pi-pencil"
                 class="p-button-rounded p-button-primary"
                 (click)="onTeamClick(data)"
               ></button>
@@ -118,9 +124,7 @@
         <td *ngFor="let column of teamTableColumns" [hidden]="!column.visible">
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
-            <ng-container
-              *ngIf="column.field === 'isadmin' || column.field === 'isactive'"
-            >
+            <ng-container *ngIf="column.field === 'isactive'">
               <div>
                 <i
                   class="pi pi-ban text-red-600"
@@ -132,15 +136,25 @@
                 ></i>
               </div>
             </ng-container>
+            <ng-container *ngIf="column.field === 'teamlogo'">
+              <img [src]="data.teamlogo" height="30px" />
+            </ng-container>
             <ng-container
-              *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
+              *ngIf="
+                column.field !== 'isactive' &&
+                column.field !== 'teamlogo' &&
+                column.field !== 'divisions_id'
+              "
               >{{ data[column.field] }}</ng-container
             >
+            <ng-container *ngIf="column.field === 'divisions_id'">
+              {{ data[column.field]?.divisionname }}
+            </ng-container>
             <ng-container *ngIf="column.field === 'action'">
               <button
                 pButton
                 type="button"
-                icon="pi pi-user-edit"
+                icon="pi pi-pencil"
                 class="p-button-rounded p-button-primary"
                 (click)="onTeamClick(data)"
               ></button>
@@ -155,7 +169,7 @@
 <p-sidebar
   [(visible)]="display"
   [fullScreen]="true"
-  [showCloseIcon]="false"
+  [showCloseIcon]="true"
   [dismissible]="false"
   *ngIf="display"
 >
