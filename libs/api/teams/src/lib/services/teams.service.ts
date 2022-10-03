@@ -11,10 +11,6 @@ export class TeamsService {
     @InjectRepository(Users_V2) private userRepo: Repository<Users_V2>
   ) {}
 
-  async getAll(): Promise<Teams_V2[]> {
-    return await this.repo.find();
-  }
-
   async getUserTeams(id: number): Promise<Teams_V2[]> {
     return await this.repo.findBy({ users_id: id });
   }
@@ -41,6 +37,10 @@ export class TeamsService {
     });
 
     return user;
+  }
+
+  async getAll(): Promise<Teams_V2[]> {
+    return await this.repo.find();
   }
 
   async updateTeamById(id: number, attrs: Partial<Teams_V2>) {
