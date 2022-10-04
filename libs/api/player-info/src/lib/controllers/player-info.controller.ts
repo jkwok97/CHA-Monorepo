@@ -31,12 +31,12 @@ export class PlayerInfoController {
   @Get('/player/:id')
   getPlayerForEditById(@Param('id') id: string) {}
 
-  @Put('/player/:id')
+  @Put('/:id')
   updatePlayerById(@Body() body: any, @Param('id') id: string) {}
 
-  @Post('/players/add')
+  @Post('/add')
   addPlayer(@Body() body: any) {}
 
-  @Delete('/delete/:id')
+  @Delete('/:id')
   deletePlayer(@Body() body: any, @Param('id') id: string) {}
 }
