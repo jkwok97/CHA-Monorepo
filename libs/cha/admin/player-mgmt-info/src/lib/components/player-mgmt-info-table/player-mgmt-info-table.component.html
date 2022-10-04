@@ -12,7 +12,7 @@
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   [totalRecords]="totalRecords"
   [sortField]="sortField"
-  [sortOrder]="-1"
+  [sortOrder]="1"
   [filterDelay]="0"
   [globalFilterFields]="['full_name']"
 >
@@ -24,7 +24,7 @@
           pInputText
           type="text"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search User"
+          placeholder="Search Player"
         />
       </span>
 
@@ -115,7 +115,10 @@
     </ng-template>
     <ng-template #showDesktopBody>
       <tr>
-        <td *ngFor="let column of playerTableColumns" [hidden]="!column.visible">
+        <td
+          *ngFor="let column of playerTableColumns"
+          [hidden]="!column.visible"
+        >
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container
@@ -164,4 +167,3 @@
     (closeSidebar)="onClose()"
   ></cha-admin-league-users-edit> -->
 </p-sidebar>
-

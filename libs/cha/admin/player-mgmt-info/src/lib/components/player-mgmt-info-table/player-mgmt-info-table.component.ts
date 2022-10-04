@@ -41,7 +41,7 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
   first = 0;
   rows = 20;
   totalRecords = 0;
-  sortField = 'isactive';
+  sortField = 'full_name';
   statsForTable!: any;
   display = false;
   playersForTable!: any;
