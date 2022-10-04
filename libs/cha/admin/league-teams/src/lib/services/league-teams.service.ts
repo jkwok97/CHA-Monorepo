@@ -46,7 +46,7 @@ export class LeagueTeamsService {
 
   getDivisions() {
     return this._http
-      .get(`${this.apiUrl}/teams/divisions`)
+      .get(`${this.apiUrl}/divisions`)
       .pipe(map((result: any) => result));
   }
 }
