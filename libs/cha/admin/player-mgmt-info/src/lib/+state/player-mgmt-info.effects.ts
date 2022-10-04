@@ -8,7 +8,7 @@ import { PlayerMgmtInfoActions } from './player-mgmt-info.actions';
 import { PlayerMgmtInfoFacade } from './player-mgmt-info.facade';
 
 @Injectable()
-export class LeagueUsersEffects {
+export class PlayerMgmtInfoEffects {
   constructor(
     private actions$: Actions,
     private playerMgmtInfoService: PlayerMgmtInfoService,
