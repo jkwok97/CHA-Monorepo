@@ -22,7 +22,7 @@ import { PlayerMgmtInfoEditFormComponent } from '../player-mgmt-info-edit-form';
 export class PlayerMgmtInfoEditComponent implements OnInit {
   @Input() player!: PlayerDto | null;
   @Input() isMobile!: boolean;
-  
+
   @Output() closeSidebar = new EventEmitter<boolean>();
 
   @ViewChild(PlayerMgmtInfoEditFormComponent, { static: false })
@@ -58,6 +58,9 @@ export class PlayerMgmtInfoEditComponent implements OnInit {
         : false,
       isactive: this.playerInfoFormRef?.form.value.isactive
         ? this.playerInfoFormRef?.form.value.isactive
+        : false,
+        is_protected: this.playerInfoFormRef?.form.value.is_protected
+        ? this.playerInfoFormRef?.form.value.is_protected
         : false,
       id: this.player ? this.player.id : null,
     };

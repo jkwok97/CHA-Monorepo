@@ -21,7 +21,7 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
   @ViewChild('dt') dt: Table | undefined;
 
   playerTableColumns = [
-    { field: 'id', header: 'User Id', visible: true },
+    { field: 'id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'nhl_id', header: 'NHL Id', visible: true },
     { field: 'isactive', header: 'Is Active', visible: true },
@@ -34,7 +34,7 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
   ];
 
   mobilePlayerTableColumns = [
-    { field: 'id', header: 'User Id', visible: true },
+    { field: 'id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];

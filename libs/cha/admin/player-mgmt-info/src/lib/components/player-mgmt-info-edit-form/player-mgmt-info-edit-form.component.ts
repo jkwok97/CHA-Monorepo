@@ -6,8 +6,11 @@ import {
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { PlayerDto } from '@cha/shared/entities';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { combineLatest, startWith } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-player-mgmt-info-edit-form',
   templateUrl: './player-mgmt-info-edit-form.component.html',
@@ -62,6 +65,13 @@ export class PlayerMgmtInfoEditFormComponent implements OnInit {
       firstname: this.player?.firstname,
       lastname: this.player?.lastname,
       isactive: this.player?.isactive,
+      nhl_id: this.player?.nhl_id,
+      isgoalie: this.player?.isgoalie,
+      isdefense: this.player?.isdefense,
+      isforward: this.player?.isforward,
+      primary_position: this.player?.primary_position,
+      alt_position: this.player?.alt_position,
+      is_protected: this.player?.is_protected,
     };
   }
 
@@ -78,7 +88,7 @@ export class PlayerMgmtInfoEditFormComponent implements OnInit {
 
   isProtectedField(): FormlyFieldConfig {
     return {
-      key: 'isprotected',
+      key: 'is_protected',
       className: 'w-full md:w-5',
       type: 'checkbox',
       templateOptions: {
