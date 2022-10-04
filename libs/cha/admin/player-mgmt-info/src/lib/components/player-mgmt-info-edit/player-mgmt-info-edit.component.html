@@ -4,10 +4,16 @@
   </blade-card-header>
 
   <blade-card-body>
-    {{ player | json }}
-    <cha-admin-player-mgmt-info-edit-form
-      [player]="player"
-    ></cha-admin-player-mgmt-info-edit-form>
+    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+        <cha-admin-player-mgmt-info-edit-form
+          [player]="player"
+        ></cha-admin-player-mgmt-info-edit-form>
+      </perfect-scrollbar>
+  
+      <cha-admin-player-mgmt-info-edit-form
+        [player]="player"
+        *ngIf="!isMobile"
+      ></cha-admin-player-mgmt-info-edit-form>
   </blade-card-body>
 
   <blade-card-footer>

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FormlyModule } from '@ngx-formly/core';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -18,6 +19,7 @@ import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { CheckboxTypeComponent } from '@blade/angular/formly/types/checkbox';
 import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
+import { RadioTypeComponent } from '@blade/angular/formly/types/radio';
 
 import { PlayerMgmtInfoFacade } from './+state/player-mgmt-info.facade';
 import { reducer } from './+state/player-mgmt-info.reducer';
@@ -36,6 +38,7 @@ import {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    PerfectScrollbarModule,
     ProgressBarModule,
     TableModule,
     SidebarModule,
@@ -63,6 +66,10 @@ import {
         {
           name: 'checkbox',
           component: CheckboxTypeComponent,
+        },
+        {
+          name: 'radio',
+          component: RadioTypeComponent,
         },
       ],
     }),

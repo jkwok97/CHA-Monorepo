@@ -21,13 +21,18 @@ import { PlayerMgmtInfoEditFormComponent } from '../player-mgmt-info-edit-form';
 })
 export class PlayerMgmtInfoEditComponent implements OnInit {
   @Input() player!: PlayerDto | null;
-
+  @Input() isMobile!: boolean;
+  
   @Output() closeSidebar = new EventEmitter<boolean>();
 
   @ViewChild(PlayerMgmtInfoEditFormComponent, { static: false })
   playerInfoFormRef?: PlayerMgmtInfoEditFormComponent;
 
   editMode = false;
+  panelStyle = {
+    width: '100%',
+    height: '75vh',
+  };
 
   constructor(private playerMgmtInfoFacade: PlayerMgmtInfoFacade) {}
 
