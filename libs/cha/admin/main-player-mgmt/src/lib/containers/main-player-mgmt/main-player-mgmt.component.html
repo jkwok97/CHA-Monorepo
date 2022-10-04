@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<perfect-scrollbar
+  [style]="(isMobile$ | async) ? panelStyleMobile : panelStyleDesktop"
+>
+  <blade-layout-feature>
+    <router-outlet></router-outlet>
+  </blade-layout-feature>
+</perfect-scrollbar>
