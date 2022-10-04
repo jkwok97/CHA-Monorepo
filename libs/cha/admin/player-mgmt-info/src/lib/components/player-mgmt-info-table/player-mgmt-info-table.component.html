@@ -82,24 +82,8 @@
         >
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
-            <ng-container
-              *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
-              >{{ data[column.field] }}</ng-container
-            >
-            <ng-container
-              *ngIf="column.field === 'isadmin' || column.field === 'isactive'"
-            >
-              <div>
-                <i
-                  class="pi pi-ban text-red-600"
-                  *ngIf="data[column.field] === false"
-                ></i>
-                <i
-                  class="pi pi-check-circle text-green-600"
-                  *ngIf="data[column.field] === true"
-                ></i>
-              </div>
-            </ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
+
             <ng-container *ngIf="column.field === 'action'">
               <button
                 pButton
@@ -122,7 +106,12 @@
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container
-              *ngIf="column.field === 'isadmin' || column.field === 'isactive'"
+              *ngIf="
+                column.field === 'isgoalie' ||
+                column.field === 'isdefense' ||
+                column.field === 'isforward' ||
+                column.field === 'isactive'
+              "
             >
               <div>
                 <i
@@ -136,7 +125,12 @@
               </div>
             </ng-container>
             <ng-container
-              *ngIf="column.field !== 'isadmin' && column.field !== 'isactive'"
+              *ngIf="
+                column.field !== 'isgoalie' &&
+                column.field !== 'isactive' &&
+                column.field !== 'isdefense' &&
+                column.field !== 'isforward'
+              "
               >{{ data[column.field] }}</ng-container
             >
             <ng-container *ngIf="column.field === 'action'">

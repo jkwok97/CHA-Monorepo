@@ -23,18 +23,19 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
   playerTableColumns = [
     { field: 'id', header: 'User Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'email', header: 'Email', visible: true },
+    { field: 'nhl_id', header: 'NHL Id', visible: true },
     { field: 'isactive', header: 'Is Active', visible: true },
-    { field: 'isadmin', header: 'Is Admin', visible: true },
+    { field: 'isgoalie', header: 'Is Goalie', visible: true },
+    { field: 'isdefense', header: 'Is Defense', visible: true },
+    { field: 'isforward', header: 'Is Forward', visible: true },
+    { field: 'primary_position', header: 'Primary Position', visible: true },
+    { field: 'alt_position', header: 'Alt Position', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
   mobilePlayerTableColumns = [
     { field: 'id', header: 'User Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'email', header: 'Email', visible: true },
-    { field: 'isactive', header: 'Is Active', visible: true },
-    { field: 'isadmin', header: 'Is Admin', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
