@@ -55,16 +55,6 @@ export class TeamsController {
     return teams;
   }
 
-  @Get('/divisions')
-  async getDivisions(): Promise<DivisionDto[]> {
-    const divisions = await this.teamsService.getDivisions();
-
-    if (!divisions || divisions.length < 1) {
-      throw new NotFoundException('divisions not found');
-    }
-    return divisions;
-  }
-
   @Put('/:id')
   updateTeamById(@Param() param, @Body() body): Promise<TeamDto> {
     return this.teamsService.updateTeamById(parseInt(param.id), body);
