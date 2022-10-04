@@ -23,8 +23,8 @@ const selectUsers = createSelector(selectState, LeagueTeamsReducer.getUsers);
 
 const selectUsersOptions = createSelector(selectUsers, (users: UserDto[]) =>
   users.map((user: UserDto) => ({
-    id: user.id,
-    full_name: `${user.firstname} ${user.lastname}`,
+    value: user.id,
+    label: `${user.firstname} ${user.lastname}`,
   }))
 );
 
@@ -37,8 +37,8 @@ const selectDivisionsOptions = createSelector(
   selectDivisions,
   (divisions: DivisionDto[]) =>
     divisions.map((division: DivisionDto) => ({
-      id: division.id,
-      name: division.divisionname,
+      value: division.id,
+      label: division.divisionname,
     }))
 );
 

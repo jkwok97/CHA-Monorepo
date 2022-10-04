@@ -7,6 +7,7 @@
   [showClear]="props['showClear']"
   [optionValue]="props['valueProp']"
   [optionLabel]="props['labelProp']"
+  appendTo="body"
   (onChange)="props.change && props.change(field, $event)"
   class="w-full inputfield"
 ></p-dropdown>

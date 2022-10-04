@@ -25,7 +25,7 @@
           type="button"
           [label]="editMode ? 'Save Team' : 'Add Team'"
           class="p-button-raised"
-          [disabled]="userFormRef?.form?.invalid || !userFormRef?.form?.dirty"
+          [disabled]="teamFormRef?.form?.invalid || !teamFormRef?.form?.dirty"
           (click)="onSave()"
         ></button>
         <button

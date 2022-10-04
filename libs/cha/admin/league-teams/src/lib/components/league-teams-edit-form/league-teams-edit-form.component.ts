@@ -6,10 +6,12 @@ import {
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { TeamDto, UserDto } from '@cha/shared/entities';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { LeagueTeamsFacade } from '../../+state/league-teams.facade';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-league-teams-edit-form',
   templateUrl: './league-teams-edit-form.component.html',
@@ -25,30 +27,7 @@ export class LeagueTeamsEditFormComponent implements OnInit {
   form = new UntypedFormGroup({});
   model: any = {};
   options: FormlyFormOptions = {};
-  fields: FormlyFieldConfig[] = [
-    {
-      fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
-      fieldGroup: [this.isActiveField()],
-    },
-    {
-      fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-      fieldGroup: [
-        this.teamAbbreviationField(),
-        this.cityField(),
-        this.nicknameField(),
-        this.userField(),
-      ],
-    },
-    {
-      fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-      fieldGroup: [
-        this.divisionsField(),
-        this.logoField(),
-        this.teamColorField(),
-        this.textColorField(),
-      ],
-    },
-  ];
+  fields!: FormlyFieldConfig[];
 
   constructor(private leagueTeamsFacade: LeagueTeamsFacade) {
     this.users$ = this.leagueTeamsFacade.users$;
@@ -59,6 +38,35 @@ export class LeagueTeamsEditFormComponent implements OnInit {
     if (this.team) {
       this.patchForm();
     }
+
+    this.createFields();
+  }
+
+  createFields() {
+    this.fields = [
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
+        fieldGroup: [this.isActiveField()],
+      },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [
+          this.teamAbbreviationField(),
+          this.cityField(),
+          this.nicknameField(),
+          this.userField(),
+        ],
+      },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [
+          this.divisionsField(),
+          this.logoField(),
+          this.teamColorField(),
+          this.textColorField(),
+        ],
+      },
+    ];
   }
 
   patchForm() {
@@ -141,7 +149,6 @@ export class LeagueTeamsEditFormComponent implements OnInit {
   }
 
   userField(): FormlyFieldConfig {
-    const users = [{ id: 2, full_name: 'hello' }];
     return {
       key: 'users_id',
       className: 'w-full md:w-3',
@@ -150,9 +157,9 @@ export class LeagueTeamsEditFormComponent implements OnInit {
         label: 'User',
         placeholder: 'Select User',
         required: true,
-        options: users,
-        valueProp: 'id',
-        labelProp: 'full_name',
+        options: this.users$,
+        valueProp: 'value',
+        labelProp: 'label',
       },
       validation: {
         messages: {
@@ -172,8 +179,8 @@ export class LeagueTeamsEditFormComponent implements OnInit {
         placeholder: 'Select Division',
         required: true,
         options: this.divisions$,
-        valueProp: 'id',
-        labelProp: 'email',
+        valueProp: 'value',
+        labelProp: 'label',
       },
       validation: {
         messages: {

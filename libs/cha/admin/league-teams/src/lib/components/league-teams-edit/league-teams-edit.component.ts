@@ -23,11 +23,11 @@ import { LeagueTeamsEditFormComponent } from '../league-teams-edit-form';
 export class LeagueTeamsEditComponent implements OnInit {
   @Input() team!: TeamDto | null;
   @Input() isMobile!: boolean;
-  
+
   @Output() closeSidebar = new EventEmitter<boolean>();
 
   @ViewChild(LeagueTeamsEditFormComponent, { static: false })
-  userFormRef?: LeagueTeamsEditFormComponent;
+  teamFormRef?: LeagueTeamsEditFormComponent;
 
   editMode = false;
   panelStyle = {
@@ -46,20 +46,21 @@ export class LeagueTeamsEditComponent implements OnInit {
   }
 
   onSave() {
-    const user = {
-      ...this.userFormRef?.form.value,
-      isadmin: this.userFormRef?.form.value.isadmin
-        ? this.userFormRef?.form.value.isadmin
+    const team = {
+      ...this.teamFormRef?.form.value,
+      isadmin: this.teamFormRef?.form.value.isadmin
+        ? this.teamFormRef?.form.value.isadmin
         : false,
-      isactive: this.userFormRef?.form.value.isactive
-        ? this.userFormRef?.form.value.isactive
+      isactive: this.teamFormRef?.form.value.isactive
+        ? this.teamFormRef?.form.value.isactive
         : false,
+      id: this.team ? this.team.id : null,
     };
 
     !this.editMode
-      ? this.leagueTeamsFacade.addTeam(user)
+      ? this.leagueTeamsFacade.addTeam(team)
       : this.team
-      ? this.leagueTeamsFacade.editTeam(user)
+      ? this.leagueTeamsFacade.editTeam(team)
       : null;
 
     this.leagueTeamsFacade.isSaving$
