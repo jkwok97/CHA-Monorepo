@@ -17,6 +17,11 @@ import { PlayerMgmtInfoEffects } from './+state/player-mgmt-info.effects';
 import { ChaAdminPlayerMgmtInfoRoutingModule } from './cha-admin-player-mgmt-info-routing.module';
 
 import { PlayerMgmtInfoComponent } from './containers';
+import {
+  PlayerMgmtInfoTableComponent,
+  PlayerMgmtInfoEditComponent,
+  PlayerMgmtInfoEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import { PlayerMgmtInfoComponent } from './containers';
     StoreModule.forFeature('player-mgmt-info', reducer),
     EffectsModule.forFeature([PlayerMgmtInfoEffects]),
   ],
-  declarations: [PlayerMgmtInfoComponent],
+  declarations: [
+    PlayerMgmtInfoComponent,
+    PlayerMgmtInfoTableComponent,
+    PlayerMgmtInfoEditComponent,
+    PlayerMgmtInfoEditFormComponent,
+  ],
   providers: [PlayerMgmtInfoEffects, PlayerMgmtInfoFacade],
 })
 export class ChaAdminPlayerMgmtInfoModule {}
