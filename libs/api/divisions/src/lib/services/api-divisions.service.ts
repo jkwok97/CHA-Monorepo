@@ -10,6 +10,6 @@ export class ApiDivisionsService {
   ) {}
 
   async getAll(): Promise<Divisions_V2[]> {
-    return await this.repo.find();
+    return await this.repo.findBy({ isactive: true });
   }
 }

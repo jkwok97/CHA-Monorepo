@@ -870,7 +870,7 @@ let ApiDivisionsService = class ApiDivisionsService {
         this.repo = repo;
     }
     async getAll() {
-        return await this.repo.find();
+        return await this.repo.findBy({ isactive: true });
     }
 };
 ApiDivisionsService = tslib_1.__decorate([
