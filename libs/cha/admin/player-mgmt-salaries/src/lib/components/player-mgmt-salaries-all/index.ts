@@ -1,1 +1,0 @@
-export * from './player-mgmt-salaries-all.component';
