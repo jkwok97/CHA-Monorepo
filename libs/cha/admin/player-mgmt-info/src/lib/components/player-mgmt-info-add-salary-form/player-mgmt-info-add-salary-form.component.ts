@@ -18,7 +18,29 @@ export class PlayerMgmtInfoAddSalaryFormComponent implements OnInit {
   @Input() player!: PlayerDto | null;
 
   form = new UntypedFormGroup({});
-  model: any = {};
+  model: any = {
+    season_2020: '',
+    season_2021: '',
+    season_2022: '',
+    season_2023: '',
+    season_2024: '',
+    season_2025: '',
+    season_2026: '',
+    season_2027: '',
+    season_2028: '',
+    season_2029: '',
+    season_2030: '',
+    season_2031: '',
+    season_2032: '',
+    season_2033: '',
+    season_2034: '',
+    season_2035: '',
+    season_2036: '',
+    season_2037: '',
+    season_2038: '',
+    season_2039: '',
+    season_2040: '',
+  };
   options: FormlyFormOptions = {};
   fields!: FormlyFieldConfig[];
 
@@ -72,13 +94,14 @@ export class PlayerMgmtInfoAddSalaryFormComponent implements OnInit {
 
   patchForm() {
     this.model = {
-      id: this.player?.id,
+      ...this.model,
+      player_id: this.player?.id,
     };
   }
 
   playerIdField(): FormlyFieldConfig {
     return {
-      key: 'id',
+      key: 'player_id',
       className: 'w-full md:w-3',
       type: 'text-input',
       templateOptions: {

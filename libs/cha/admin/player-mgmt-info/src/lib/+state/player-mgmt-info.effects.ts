@@ -133,7 +133,7 @@ export class PlayerMgmtInfoEffects {
       exhaustMap((action) =>
         this.playerMgmtInfoService.addSalary(action.salary).pipe(
           map((salary: SalaryAllDto) =>
-            PlayerMgmtInfoActions.addSalary({
+            PlayerMgmtInfoActions.addSalarySuccess({
               salary,
             })
           ),
