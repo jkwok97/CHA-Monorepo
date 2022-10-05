@@ -6013,16 +6013,35 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/salaries/src/lib/controller
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SalariesController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/salaries/src/lib/services/index.ts");
 let SalariesController = class SalariesController {
     constructor(salariesService) {
         this.salariesService = salariesService;
     }
+    async getSalaries() {
+        const salaries = await this.salariesService.getAll();
+        if (!salaries || salaries.length < 1) {
+            throw new common_1.NotFoundException('salaries not found');
+        }
+        return salaries;
+    }
+    // @Put('/userId/:id')
+    // updateUserById(@Param() param, @Body() body): Promise<UserDto> {
+    //   return this.salariesService.updateUserById(parseInt(param.id), body);
+    // }
+    addUser(body) {
+        return this.salariesService.addSalary(body);
+    }
+    // @Delete('/delete/:id')
+    // deleteUserById(@Param() param) {
+    //   return this.salariesService.deleteUser(parseInt(param.id));
+    // }
     async getAllPlayerSalaries(param) {
         const salaries = await this.salariesService.getAllPlayerSalaries(param.season);
         if (!salaries) {
@@ -6053,32 +6072,45 @@ let SalariesController = class SalariesController {
     }
 };
 tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], SalariesController.prototype, "getSalaries", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_c = typeof entities_1.SalaryAllDto !== "undefined" && entities_1.SalaryAllDto) === "function" ? _c : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], SalariesController.prototype, "addUser", null);
+tslib_1.__decorate([
     (0, common_1.Get)('/all/players/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], SalariesController.prototype, "getAllPlayerSalaries", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/all/goalies/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], SalariesController.prototype, "getAllGoaliesSalaries", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:teamName/players/:season/:ratingsSeason'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
 ], SalariesController.prototype, "getUserTeamPlayerSalaries", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:teamName/goalies/:season/:ratingsSeason'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], SalariesController.prototype, "getUserTeamGoaliesSalaries", null);
 SalariesController = tslib_1.__decorate([
     (0, common_1.Controller)('salaries'),
@@ -6348,6 +6380,35 @@ let ApiSalariesService = class ApiSalariesService {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
         return (_a = response.data.stats[0].splits[0]) === null || _a === void 0 ? void 0 : _a.stat;
+    }
+    async getAll() {
+        const salaries = await this.repo.find();
+        const salariesWithPlayerInfo = await this.setPlayerInfo(salaries);
+        return salariesWithPlayerInfo;
+    }
+    async setPlayerInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.player_id) }))));
+    }
+    async getPlayerInfo(playerId) {
+        if (playerId) {
+            return await this.playersRepo.findOne({
+                select: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                where: {
+                    id: playerId,
+                },
+            });
+        }
+        else {
+            return {};
+        }
+    }
+    async addSalary(body) {
+        const salary = await this.repo.create(body);
+        return this.repo.save(salary);
     }
 };
 ApiSalariesService = tslib_1.__decorate([
@@ -8654,6 +8715,7 @@ const tslib_1 = __webpack_require__("tslib");
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/salaries/goalie-rating.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/salaries/player-rating.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/salaries/salaries-and-ratings.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/salaries/salary.dto.ts"), exports);
 
 
 /***/ }),
@@ -8668,6 +8730,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 /***/ }),
 
 /***/ "./libs/cha/shared/entities/src/lib/dtos/salaries/salaries-and-ratings.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
+/***/ "./libs/cha/shared/entities/src/lib/dtos/salaries/salary.dto.ts":
 /***/ ((__unused_webpack_module, exports) => {
 
 
