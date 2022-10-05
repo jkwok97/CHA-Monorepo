@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { PlayerDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
 
@@ -48,6 +49,8 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
   playersForTable!: any;
   player!: PlayerDto | null;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.playersForTable = this.mapItems(this.players);
   }
@@ -70,7 +73,7 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
 
   onAddClick() {
     this.player = null;
-    this.display = true;
+    this.router.navigateByUrl('/players/info/add');
   }
 
   onClose() {

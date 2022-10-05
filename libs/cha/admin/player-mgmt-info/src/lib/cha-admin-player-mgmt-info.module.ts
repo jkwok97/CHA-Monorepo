@@ -12,6 +12,7 @@ import { TableModule } from 'primeng/table';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { StepsModule } from 'primeng/steps';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -32,6 +33,10 @@ import {
   PlayerMgmtInfoTableComponent,
   PlayerMgmtInfoEditComponent,
   PlayerMgmtInfoEditFormComponent,
+  PlayerMgmtInfoAllComponent,
+  PlayerMgmtInfoAddComponent,
+  PlayerMgmtInfoAddInfoComponent,
+  PlayerMgmtInfoAddSalaryComponent,
 } from './components';
 
 @NgModule({
@@ -44,6 +49,7 @@ import {
     SidebarModule,
     InputTextModule,
     ButtonModule,
+    StepsModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,
@@ -79,6 +85,10 @@ import {
     PlayerMgmtInfoTableComponent,
     PlayerMgmtInfoEditComponent,
     PlayerMgmtInfoEditFormComponent,
+    PlayerMgmtInfoAllComponent,
+    PlayerMgmtInfoAddComponent,
+    PlayerMgmtInfoAddInfoComponent,
+    PlayerMgmtInfoAddSalaryComponent,
   ],
   providers: [PlayerMgmtInfoEffects, PlayerMgmtInfoFacade],
 })

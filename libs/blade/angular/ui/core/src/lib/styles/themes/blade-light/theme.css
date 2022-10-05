@@ -6864,7 +6864,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
   background: transparent;
   transition: box-shadow 0.2s;
   border-radius: 6px;
-  background: #fff;
+  background: transparent;
 }
 
 .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
@@ -6897,7 +6897,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 
 .p-steps .p-steps-item.p-highlight .p-steps-title {
   font-weight: 700;
-  color: #495057;
+  color: whitesmoke;
 }
 
 .p-steps .p-steps-item:before {

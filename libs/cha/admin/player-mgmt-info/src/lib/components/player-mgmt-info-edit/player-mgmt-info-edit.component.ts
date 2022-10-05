@@ -7,12 +7,14 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { PlayerDto } from '@cha/shared/entities';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs';
 import { PlayerMgmtInfoFacade } from '../../+state/player-mgmt-info.facade';
 import { PlayerMgmtInfoEditFormComponent } from '../player-mgmt-info-edit-form';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-player-mgmt-info-edit',
   templateUrl: './player-mgmt-info-edit.component.html',
@@ -34,7 +36,10 @@ export class PlayerMgmtInfoEditComponent implements OnInit {
     height: '75vh',
   };
 
-  constructor(private playerMgmtInfoFacade: PlayerMgmtInfoFacade) {}
+  constructor(
+    private playerMgmtInfoFacade: PlayerMgmtInfoFacade,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.player ? (this.editMode = true) : (this.editMode = false);
@@ -59,7 +64,7 @@ export class PlayerMgmtInfoEditComponent implements OnInit {
       isactive: this.playerInfoFormRef?.form.value.isactive
         ? this.playerInfoFormRef?.form.value.isactive
         : false,
-        is_protected: this.playerInfoFormRef?.form.value.is_protected
+      is_protected: this.playerInfoFormRef?.form.value.is_protected
         ? this.playerInfoFormRef?.form.value.is_protected
         : false,
       id: this.player ? this.player.id : null,
@@ -76,7 +81,13 @@ export class PlayerMgmtInfoEditComponent implements OnInit {
         untilDestroyed(this),
         filter((isSaving: boolean) => !isSaving)
       )
-      .subscribe(() => this.closeSidebar.emit(true));
+      .subscribe(() => {
+        this.closeSidebar.emit(true);
+
+        if (!this.editMode) {
+          this.router.navigateByUrl(`/players/info/add/salary`);
+        }
+      });
   }
 
   onDelete() {
