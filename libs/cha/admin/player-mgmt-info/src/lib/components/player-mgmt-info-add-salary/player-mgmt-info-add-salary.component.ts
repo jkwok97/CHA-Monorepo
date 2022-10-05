@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayerDto } from '@cha/shared/entities';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PlayerMgmtInfoFacade } from '../../+state/player-mgmt-info.facade';
 import { PlayerMgmtInfoAddSalaryFormComponent } from '../player-mgmt-info-add-salary-form';
 
@@ -17,7 +17,7 @@ import { PlayerMgmtInfoAddSalaryFormComponent } from '../player-mgmt-info-add-sa
   styleUrls: ['./player-mgmt-info-add-salary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerMgmtInfoAddSalaryComponent implements OnInit {
+export class PlayerMgmtInfoAddSalaryComponent {
   @Input() isMobile!: boolean;
 
   @ViewChild(PlayerMgmtInfoAddSalaryFormComponent, { static: false })
@@ -25,7 +25,6 @@ export class PlayerMgmtInfoAddSalaryComponent implements OnInit {
 
   player$: Observable<PlayerDto | null>;
 
-  player!: PlayerDto;
   panelStyle = {
     width: '100%',
     height: '75vh',
@@ -36,14 +35,6 @@ export class PlayerMgmtInfoAddSalaryComponent implements OnInit {
     private router: Router
   ) {
     this.player$ = this.playerMgmtInfoFacade.player$;
-  }
-
-  ngOnInit(): void {
-    this.player$.pipe(first()).subscribe((player: PlayerDto | null) => {
-      if (player) {
-        this.player = player;
-      }
-    });
   }
 
   onSave() {
