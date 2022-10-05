@@ -4,6 +4,7 @@ import { PlayerMgmtInfoActions } from './player-mgmt-info.actions';
 
 export interface State {
   players: PlayerDto[];
+  player: PlayerDto | null;
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -12,6 +13,7 @@ export interface State {
 
 const initialState: State = {
   players: [],
+  player: null,
   loading: false,
   loaded: false,
   saving: false,
@@ -46,7 +48,6 @@ const r = createReducer(
   })),
 
   on(
-    PlayerMgmtInfoActions.addPlayerSuccess,
     PlayerMgmtInfoActions.editPlayersuccess,
     PlayerMgmtInfoActions.deletePlayersuccess,
     (state, action) => ({
@@ -56,6 +57,13 @@ const r = createReducer(
     })
   ),
 
+  on(PlayerMgmtInfoActions.addPlayerSuccess, (state, action) => ({
+    ...state,
+    player: action.player,
+    saving: false,
+    saved: true,
+  })),
+
   on(PlayerMgmtInfoActions.error, (state) => initialState)
 );
 
@@ -64,6 +72,8 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getPlayers = (state: State) => state.players;
+
+export const getPlayer = (state: State) => state.player;
 
 export const getLoading = (state: State) => state.loading;
 

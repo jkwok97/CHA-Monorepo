@@ -37,6 +37,7 @@ import {
   PlayerMgmtInfoAddComponent,
   PlayerMgmtInfoAddInfoComponent,
   PlayerMgmtInfoAddSalaryComponent,
+  PlayerMgmtInfoAddSalaryFormComponent
 } from './components';
 
 @NgModule({
@@ -89,6 +90,7 @@ import {
     PlayerMgmtInfoAddComponent,
     PlayerMgmtInfoAddInfoComponent,
     PlayerMgmtInfoAddSalaryComponent,
+    PlayerMgmtInfoAddSalaryFormComponent,
   ],
   providers: [PlayerMgmtInfoEffects, PlayerMgmtInfoFacade],
 })

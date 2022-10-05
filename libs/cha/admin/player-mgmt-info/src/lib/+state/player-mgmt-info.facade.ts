@@ -28,6 +28,10 @@ export class PlayerMgmtInfoFacade {
     PlayerMgmtInfoSelectors.selectPlayers
   );
 
+  player$: Observable<PlayerDto | null> = this.store.select(
+    PlayerMgmtInfoSelectors.selectPlayer
+  );
+
   constructor(private store: Store<State>) {}
 
   getPlayers() {

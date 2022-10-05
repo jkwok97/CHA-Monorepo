@@ -5,3 +5,4 @@ export * from './player-mgmt-info-add';
 export * from './player-mgmt-info-add-info';
 export * from './player-mgmt-info-add-salary';
 export * from './player-mgmt-info-all';
+export * from './player-mgmt-info-add-salary-form';

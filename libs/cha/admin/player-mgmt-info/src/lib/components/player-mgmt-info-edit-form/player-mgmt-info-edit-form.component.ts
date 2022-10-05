@@ -6,11 +6,8 @@ import {
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { PlayerDto } from '@cha/shared/entities';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-import { combineLatest, startWith } from 'rxjs';
 
-@UntilDestroy()
 @Component({
   selector: 'cha-admin-player-mgmt-info-edit-form',
   templateUrl: './player-mgmt-info-edit-form.component.html',

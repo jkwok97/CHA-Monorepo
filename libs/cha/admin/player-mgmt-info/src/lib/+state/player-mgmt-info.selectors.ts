@@ -27,10 +27,16 @@ const selectPlayers = createSelector(
   PlayerMgmtInfoReducer.getPlayers
 );
 
+const selectPlayer = createSelector(
+  selectState,
+  PlayerMgmtInfoReducer.getPlayer
+);
+
 export const PlayerMgmtInfoSelectors = {
   selectLoaded,
   selectLoading,
   selectSaving,
   selectSaved,
   selectPlayers,
+  selectPlayer,
 };
