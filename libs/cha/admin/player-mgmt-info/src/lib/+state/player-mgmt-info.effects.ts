@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlayerDto } from '@cha/shared/entities';
+import { PlayerDto, SalaryAllDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -58,7 +58,6 @@ export class PlayerMgmtInfoEffects {
             summary: 'Add Player',
             detail: 'Player has been added',
           });
-          this.playerMgmtInfoFacade.getPlayers();
         })
       ),
     { dispatch: false }
@@ -121,6 +120,38 @@ export class PlayerMgmtInfoEffects {
             severity: 'success',
             summary: 'Delete Player',
             detail: 'Player has been removed',
+          });
+          this.playerMgmtInfoFacade.getPlayers();
+        })
+      ),
+    { dispatch: false }
+  );
+
+  addSalary$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PlayerMgmtInfoActions.addSalary),
+      exhaustMap((action) =>
+        this.playerMgmtInfoService.addSalary(action.salary).pipe(
+          map((salary: SalaryAllDto) =>
+            PlayerMgmtInfoActions.addSalary({
+              salary,
+            })
+          ),
+          catchError(() => of(PlayerMgmtInfoActions.error()))
+        )
+      )
+    )
+  );
+
+  addSalarySuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PlayerMgmtInfoActions.addSalarySuccess),
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Add Salary',
+            detail: 'Salary has been added',
           });
           this.playerMgmtInfoFacade.getPlayers();
         })

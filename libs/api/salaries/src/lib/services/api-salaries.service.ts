@@ -12,6 +12,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, Observable } from 'rxjs';
+import { SalaryAllDto } from '@cha/shared/entities';
 
 @Injectable()
 export class ApiSalariesService {
@@ -365,5 +366,11 @@ export class ApiSalariesService {
     } else {
       return {};
     }
+  }
+
+  async addSalary(body: SalaryAllDto) {
+    const salary = await this.repo.create(body);
+
+    return this.repo.save(salary);
   }
 }

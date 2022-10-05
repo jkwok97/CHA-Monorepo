@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { PlayerCreateDto, PlayerDto } from '@cha/shared/entities';
+import { PlayerCreateDto, PlayerDto, SalaryAllDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,6 +35,13 @@ export class PlayerMgmtInfoService {
   deletePlayer(playerId: number): Observable<PlayerDto> {
     return this._http
       .delete(`${this.apiUrl}/player-info/${playerId}`)
+      .pipe(map((result: any) => result));
+  }
+
+  addSalary(salary: SalaryAllDto): Observable<SalaryAllDto> {
+    const body = salary;
+    return this._http
+      .post(`${this.apiUrl}/salaries/add`, body)
       .pipe(map((result: any) => result));
   }
 }

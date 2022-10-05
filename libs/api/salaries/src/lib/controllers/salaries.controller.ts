@@ -1,5 +1,12 @@
 import { SalaryAllDto } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { ApiSalariesService } from '../services';
 
 @Controller('salaries')
@@ -21,10 +28,10 @@ export class SalariesController {
   //   return this.salariesService.updateUserById(parseInt(param.id), body);
   // }
 
-  // @Post('/add')
-  // addUser(@Body() body: UserCreateDto) {
-  //   return this.salariesService.addUser(body);
-  // }
+  @Post('/add')
+  addUser(@Body() body: SalaryAllDto) {
+    return this.salariesService.addSalary(body);
+  }
 
   // @Delete('/delete/:id')
   // deleteUserById(@Param() param) {

@@ -1,4 +1,4 @@
-import { PlayerCreateDto, PlayerDto } from '@cha/shared/entities';
+import { PlayerCreateDto, PlayerDto, SalaryAllDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[PLAYER MGMT INFO]';
@@ -40,6 +40,16 @@ const deletePlayersuccess = createAction(
   props<{ player: PlayerDto }>()
 );
 
+const addSalary = createAction(
+  `${NAMESPACE} Add Salary`,
+  props<{ salary: SalaryAllDto }>()
+)
+
+const addSalarySuccess = createAction(
+  `${NAMESPACE} Add Salary Success`,
+  props<{ salary: SalaryAllDto }>()
+)
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const PlayerMgmtInfoActions = {
@@ -51,5 +61,7 @@ export const PlayerMgmtInfoActions = {
   editPlayersuccess,
   deletePlayer,
   deletePlayersuccess,
+  addSalary,
+  addSalarySuccess,
   error,
 };

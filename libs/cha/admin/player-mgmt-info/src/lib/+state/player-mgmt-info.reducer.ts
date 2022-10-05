@@ -33,6 +33,7 @@ const r = createReducer(
     PlayerMgmtInfoActions.addPlayer,
     PlayerMgmtInfoActions.editPlayer,
     PlayerMgmtInfoActions.deletePlayer,
+    PlayerMgmtInfoActions.addSalary,
     (state) => ({
       ...state,
       saving: true,
@@ -50,6 +51,7 @@ const r = createReducer(
   on(
     PlayerMgmtInfoActions.editPlayersuccess,
     PlayerMgmtInfoActions.deletePlayersuccess,
+    PlayerMgmtInfoActions.addSalarySuccess,
     (state, action) => ({
       ...state,
       saving: false,

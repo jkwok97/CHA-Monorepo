@@ -4,7 +4,7 @@ import { State } from './player-mgmt-info.reducer';
 import { PlayerMgmtInfoActions } from './player-mgmt-info.actions';
 import { Observable } from 'rxjs';
 import { PlayerMgmtInfoSelectors } from './player-mgmt-info.selectors';
-import { PlayerCreateDto, PlayerDto } from '@cha/shared/entities';
+import { PlayerCreateDto, PlayerDto, SalaryAllDto } from '@cha/shared/entities';
 
 @Injectable()
 export class PlayerMgmtInfoFacade {
@@ -48,5 +48,9 @@ export class PlayerMgmtInfoFacade {
 
   deletePlayer(playerId: number) {
     this.store.dispatch(PlayerMgmtInfoActions.deletePlayer({ playerId }));
+  }
+
+  addSalary(salary: SalaryAllDto) {
+    this.store.dispatch(PlayerMgmtInfoActions.addSalary({ salary }));
   }
 }
