@@ -1,0 +1,1 @@
+export * from './player-mgmt-salaries-add-form.component';

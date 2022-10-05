@@ -332,4 +332,38 @@ export class ApiSalariesService {
 
     return response.data.stats[0].splits[0]?.stat;
   }
+
+  async getAll(): Promise<Salaries_V2[]> {
+    const salaries = await this.repo.find();
+
+    const salariesWithPlayerInfo = await this.setPlayerInfo(salaries);
+
+    return salariesWithPlayerInfo;
+  }
+
+  private async setPlayerInfo(array: any[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        playerInfo: await this.getPlayerInfo(item.player_id),
+      }))
+    );
+  }
+
+  private async getPlayerInfo(playerId: number) {
+    if (playerId) {
+      return await this.playersRepo.findOne({
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+        where: {
+          id: playerId,
+        },
+      });
+    } else {
+      return {};
+    }
+  }
 }
