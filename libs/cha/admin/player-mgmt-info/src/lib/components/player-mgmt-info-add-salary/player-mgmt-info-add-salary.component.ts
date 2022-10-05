@@ -15,7 +15,6 @@ import { PlayerMgmtInfoAddSalaryFormComponent } from '../player-mgmt-info-add-sa
 @Component({
   selector: 'cha-admin-player-mgmt-info-add-salary',
   templateUrl: './player-mgmt-info-add-salary.component.html',
-  styleUrls: ['./player-mgmt-info-add-salary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtInfoAddSalaryComponent {

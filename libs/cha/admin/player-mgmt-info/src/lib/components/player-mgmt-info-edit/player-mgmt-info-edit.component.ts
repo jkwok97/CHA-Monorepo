@@ -18,7 +18,6 @@ import { PlayerMgmtInfoEditFormComponent } from '../player-mgmt-info-edit-form';
 @Component({
   selector: 'cha-admin-player-mgmt-info-edit',
   templateUrl: './player-mgmt-info-edit.component.html',
-  styleUrls: ['./player-mgmt-info-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtInfoEditComponent implements OnInit {

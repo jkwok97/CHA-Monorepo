@@ -7,7 +7,6 @@ import { PlayerMgmtInfoFacade } from '../../+state/player-mgmt-info.facade';
 @Component({
   selector: 'cha-admin-player-mgmt-info-all',
   templateUrl: './player-mgmt-info-all.component.html',
-  styleUrls: ['./player-mgmt-info-all.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtInfoAllComponent {

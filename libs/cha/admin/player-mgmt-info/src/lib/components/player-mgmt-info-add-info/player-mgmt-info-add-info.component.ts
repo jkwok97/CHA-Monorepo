@@ -5,7 +5,6 @@ import { first } from 'rxjs';
 @Component({
   selector: 'cha-admin-player-mgmt-info-add-info',
   templateUrl: './player-mgmt-info-add-info.component.html',
-  styleUrls: ['./player-mgmt-info-add-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtInfoAddInfoComponent {
