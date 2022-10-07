@@ -7,11 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { SalaryAllDto } from '@cha/shared/entities';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs';
 import { PlayerMgmtSalariesFacade } from '../../+state/player-mgmt-salaries.facade';
 import { PlayerMgmtSalariesEditFormComponent } from '../player-mgmt-salaries-edit-form';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-player-mgmt-salaries-edit',
   templateUrl: './player-mgmt-salaries-edit.component.html',
@@ -34,6 +35,7 @@ export class PlayerMgmtSalariesEditComponent {
 
   onSave() {
     const salary = {
+      id: this.salary?.id,
       ...this.salaryFormRef?.form.value,
     };
 
