@@ -6013,7 +6013,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/salaries/src/lib/controller
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SalariesController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -6031,17 +6031,12 @@ let SalariesController = class SalariesController {
         }
         return salaries;
     }
-    // @Put('/userId/:id')
-    // updateUserById(@Param() param, @Body() body): Promise<UserDto> {
-    //   return this.salariesService.updateUserById(parseInt(param.id), body);
-    // }
+    updateUserById(param, body) {
+        return this.salariesService.updateSalaryById(parseInt(param.id), body);
+    }
     addUser(body) {
         return this.salariesService.addSalary(body);
     }
-    // @Delete('/delete/:id')
-    // deleteUserById(@Param() param) {
-    //   return this.salariesService.deleteUser(parseInt(param.id));
-    // }
     async getAllPlayerSalaries(param) {
         const salaries = await this.salariesService.getAllPlayerSalaries(param.season);
         if (!salaries) {
@@ -6078,10 +6073,18 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], SalariesController.prototype, "getSalaries", null);
 tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], SalariesController.prototype, "updateUserById", null);
+tslib_1.__decorate([
     (0, common_1.Post)('/add'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_c = typeof entities_1.SalaryAllDto !== "undefined" && entities_1.SalaryAllDto) === "function" ? _c : Object]),
+    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.SalaryAllDto !== "undefined" && entities_1.SalaryAllDto) === "function" ? _d : Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], SalariesController.prototype, "addUser", null);
 tslib_1.__decorate([
@@ -6089,28 +6092,28 @@ tslib_1.__decorate([
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], SalariesController.prototype, "getAllPlayerSalaries", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/all/goalies/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
 ], SalariesController.prototype, "getAllGoaliesSalaries", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:teamName/players/:season/:ratingsSeason'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], SalariesController.prototype, "getUserTeamPlayerSalaries", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:teamName/goalies/:season/:ratingsSeason'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], SalariesController.prototype, "getUserTeamGoaliesSalaries", null);
 SalariesController = tslib_1.__decorate([
     (0, common_1.Controller)('salaries'),
@@ -6408,6 +6411,14 @@ let ApiSalariesService = class ApiSalariesService {
     }
     async addSalary(body) {
         const salary = await this.repo.create(body);
+        return this.repo.save(salary);
+    }
+    async updateSalaryById(id, attrs) {
+        const salary = await this.repo.findOneByOrFail({ id });
+        if (!salary) {
+            throw new common_1.NotFoundException('salary not found');
+        }
+        Object.assign(salary, attrs);
         return this.repo.save(salary);
     }
 };

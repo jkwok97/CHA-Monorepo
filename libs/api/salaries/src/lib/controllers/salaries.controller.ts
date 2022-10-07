@@ -6,6 +6,7 @@ import {
   NotFoundException,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ApiSalariesService } from '../services';
 
@@ -23,20 +24,15 @@ export class SalariesController {
     return salaries;
   }
 
-  // @Put('/userId/:id')
-  // updateUserById(@Param() param, @Body() body): Promise<UserDto> {
-  //   return this.salariesService.updateUserById(parseInt(param.id), body);
-  // }
+  @Put('/:id')
+  updateUserById(@Param() param, @Body() body): Promise<SalaryAllDto> {
+    return this.salariesService.updateSalaryById(parseInt(param.id), body);
+  }
 
   @Post('/add')
   addUser(@Body() body: SalaryAllDto) {
     return this.salariesService.addSalary(body);
   }
-
-  // @Delete('/delete/:id')
-  // deleteUserById(@Param() param) {
-  //   return this.salariesService.deleteUser(parseInt(param.id));
-  // }
 
   @Get('/all/players/:season')
   async getAllPlayerSalaries(@Param() param): Promise<any[]> {

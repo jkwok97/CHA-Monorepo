@@ -7,7 +7,7 @@ import {
   Salaries_V2,
   Teams_V2,
 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
@@ -370,6 +370,18 @@ export class ApiSalariesService {
 
   async addSalary(body: SalaryAllDto) {
     const salary = await this.repo.create(body);
+
+    return this.repo.save(salary);
+  }
+
+  async updateSalaryById(id: number, attrs: Partial<Salaries_V2>) {
+    const salary = await this.repo.findOneByOrFail({ id });
+
+    if (!salary) {
+      throw new NotFoundException('salary not found');
+    }
+
+    Object.assign(salary, attrs);
 
     return this.repo.save(salary);
   }
