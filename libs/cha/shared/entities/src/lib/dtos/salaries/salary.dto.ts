@@ -22,4 +22,9 @@ export interface SalaryAllDto {
   season_2038: string;
   season_2039: string;
   season_2040: string;
+  playerInfo?: {
+    id: number;
+    firstname: string;
+    lastname: string;
+  };
 }
