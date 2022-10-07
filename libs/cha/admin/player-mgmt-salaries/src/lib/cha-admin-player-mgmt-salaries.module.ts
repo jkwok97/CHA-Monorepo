@@ -17,6 +17,11 @@ import { reducer } from './+state/player-mgmt-salaries.reducer';
 import { ChaAdminPlayerMgmtSalariesRoutingModule } from './cha-admin-player-mgmt-salaries-routing.module';
 
 import { PlayerMgmtSalariesComponent } from './containers';
+import {
+  PlayerMgmtSalariesTableComponent,
+  PlayerMgmtSalariesEditComponent,
+  PlayerMgmtSalariesEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import { PlayerMgmtSalariesComponent } from './containers';
     StoreModule.forFeature('player-mgmt-salaries', reducer),
     EffectsModule.forFeature([PlayerMgmtSalariesEffects]),
   ],
-  declarations: [PlayerMgmtSalariesComponent],
+  declarations: [
+    PlayerMgmtSalariesComponent,
+    PlayerMgmtSalariesTableComponent,
+    PlayerMgmtSalariesEditComponent,
+    PlayerMgmtSalariesEditFormComponent,
+  ],
   providers: [PlayerMgmtSalariesEffects, PlayerMgmtSalariesFacade],
 })
 export class ChaAdminPlayerMgmtSalariesModule {}
