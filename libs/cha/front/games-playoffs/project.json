@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-games-playoffs",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/games-playoffs/src",
   "prefix": "cha-front",

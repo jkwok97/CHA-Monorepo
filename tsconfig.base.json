@@ -88,6 +88,12 @@
       ],
       "@cha/admin/home": ["libs/cha/admin/home/src/index.ts"],
       "@cha/admin/league-awards": ["libs/cha/admin/league-awards/src/index.ts"],
+      "@cha/admin/league-current-data": [
+        "libs/cha/admin/league-current-data/src/index.ts"
+      ],
+      "@cha/admin/league-divisions": [
+        "libs/cha/admin/league-divisions/src/index.ts"
+      ],
       "@cha/admin/league-teams": ["libs/cha/admin/league-teams/src/index.ts"],
       "@cha/admin/league-users": ["libs/cha/admin/league-users/src/index.ts"],
       "@cha/admin/main": ["libs/cha/admin/main/src/index.ts"],

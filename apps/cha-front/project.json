@@ -1,4 +1,5 @@
 {
+  "name": "cha-front",
   "projectType": "application",
   "sourceRoot": "apps/cha-front/src",
   "prefix": "cha-hockey",

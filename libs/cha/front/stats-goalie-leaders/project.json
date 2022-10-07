@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-stats-goalie-leaders",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/stats-goalie-leaders/src",
   "prefix": "cha-front",

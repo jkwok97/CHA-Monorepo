@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-league-salaries",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/league-salaries/src",
   "prefix": "cha-front",

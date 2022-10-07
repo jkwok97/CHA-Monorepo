@@ -1,4 +1,5 @@
 {
+  "name": "cha-admin-main-league",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/main-league/src",
   "prefix": "cha-admin",

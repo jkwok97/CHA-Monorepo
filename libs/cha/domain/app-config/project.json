@@ -1,4 +1,5 @@
 {
+  "name": "cha-domain-app-config",
   "projectType": "library",
   "sourceRoot": "libs/cha/domain/app-config/src",
   "prefix": "cha-domain",

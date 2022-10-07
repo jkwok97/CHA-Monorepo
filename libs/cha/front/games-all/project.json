@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-games-all",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/games-all/src",
   "prefix": "cha-front",

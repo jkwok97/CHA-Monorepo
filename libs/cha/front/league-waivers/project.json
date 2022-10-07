@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-league-waivers",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/league-waivers/src",
   "prefix": "cha-front",

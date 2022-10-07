@@ -1,4 +1,5 @@
 {
+  "name": "blade-angular-formly-types-checkbox",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/formly/types/checkbox/src",
   "prefix": "blade",

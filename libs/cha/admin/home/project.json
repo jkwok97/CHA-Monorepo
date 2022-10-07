@@ -1,4 +1,5 @@
 {
+  "name": "cha-admin-home",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/home/src",
   "prefix": "cha-admin",

@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-rules-rosters",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/rules-rosters/src",
   "prefix": "cha-front",

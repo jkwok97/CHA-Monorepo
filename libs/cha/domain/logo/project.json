@@ -1,4 +1,5 @@
 {
+  "name": "cha-domain-logo",
   "projectType": "library",
   "sourceRoot": "libs/cha/domain/logo/src",
   "prefix": "cha",

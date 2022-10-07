@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-nhl-leaders",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/nhl-leaders/src",
   "prefix": "cha-front",

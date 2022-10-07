@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-rules-lottery",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/rules-lottery/src",
   "prefix": "cha-front",

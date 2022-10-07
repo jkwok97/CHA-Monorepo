@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-main-nhl",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/main-nhl/src",
   "prefix": "cha-front",

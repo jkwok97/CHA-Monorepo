@@ -9,12 +9,20 @@ export const mainMenuItems: MenuItem[] = [
     label: 'League',
     items: [
       {
+        label: 'Current Data',
+        routerLink: ['/league/current-data'],
+      },
+      {
         label: 'Users',
         routerLink: ['/league/users'],
       },
       {
         label: 'Teams',
         routerLink: ['/league/teams'],
+      },
+      {
+        label: 'Divisions',
+        routerLink: ['/league/divisions'],
       },
       {
         label: 'Awards',

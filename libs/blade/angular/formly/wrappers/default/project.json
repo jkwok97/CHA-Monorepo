@@ -1,4 +1,5 @@
 {
+  "name": "blade-angular-formly-wrappers-default",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/formly/wrappers/default/src",
   "prefix": "blade",

@@ -1,4 +1,5 @@
 {
+  "name": "blade-angular-formly-types-text-input",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/formly/types/text-input/src",
   "prefix": "blade",

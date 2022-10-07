@@ -1,4 +1,5 @@
 {
+  "name": "api-goalie-stats",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/goalie-stats/src",
   "projectType": "library",

@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-rules-player-protection",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/rules-player-protection/src",
   "prefix": "cha-front",

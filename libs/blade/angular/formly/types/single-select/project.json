@@ -1,6 +1,6 @@
 {
+  "name": "blade-angular-formly-types-single-select",
   "projectType": "library",
-  "root": "libs/blade/angular/formly/types/single-select",
   "sourceRoot": "libs/blade/angular/formly/types/single-select/src",
   "prefix": "blade",
   "targets": {

@@ -1,4 +1,5 @@
 {
+  "name": "api-draft-table",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/draft-table/src",
   "projectType": "library",

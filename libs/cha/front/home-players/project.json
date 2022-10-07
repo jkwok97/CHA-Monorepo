@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-home-players",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/home-players/src",
   "prefix": "cha-front",

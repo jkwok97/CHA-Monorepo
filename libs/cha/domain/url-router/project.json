@@ -1,4 +1,5 @@
 {
+  "name": "cha-domain-url-router",
   "projectType": "library",
   "sourceRoot": "libs/cha/domain/url-router/src",
   "prefix": "cha",

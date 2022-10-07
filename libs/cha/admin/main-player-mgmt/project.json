@@ -1,4 +1,5 @@
 {
+  "name": "cha-admin-main-player-mgmt",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/main-player-mgmt/src",
   "prefix": "cha-admin",

@@ -1,4 +1,5 @@
 {
+  "name": "api-transactions",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/transactions/src",
   "projectType": "library",

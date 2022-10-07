@@ -1,4 +1,5 @@
 {
+  "name": "cha-domain-login",
   "projectType": "library",
   "sourceRoot": "libs/cha/domain/login/src",
   "prefix": "cha",

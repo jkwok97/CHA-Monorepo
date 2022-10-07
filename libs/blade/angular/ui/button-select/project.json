@@ -1,4 +1,5 @@
 {
+  "name": "blade-angular-ui-button-select",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/ui/button-select/src",
   "prefix": "blade",

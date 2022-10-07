@@ -1,4 +1,5 @@
 {
+  "name": "cha-admin-schedule-games",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/schedule-games/src",
   "prefix": "cha-admin",

@@ -1,4 +1,5 @@
 {
+  "name": "cha-admin-main-transactions",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/main-transactions/src",
   "prefix": "cha-admin",

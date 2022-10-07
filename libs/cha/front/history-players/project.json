@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-history-players",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/history-players/src",
   "prefix": "cha-front",

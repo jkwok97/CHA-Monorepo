@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-rules-winnings",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/rules-winnings/src",
   "prefix": "cha-front",

@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-awards-gm",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/awards-gm/src",
   "prefix": "cha-front",

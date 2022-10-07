@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-games-current",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/games-current/src",
   "prefix": "cha-front",

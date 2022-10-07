@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-stats-player-all",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/stats-player-all/src",
   "prefix": "cha-front",

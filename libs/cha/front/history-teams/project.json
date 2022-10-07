@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-history-teams",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/history-teams/src",
   "prefix": "cha-front",

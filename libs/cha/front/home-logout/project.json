@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-home-logout",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/home-logout/src",
   "prefix": "cha-front",

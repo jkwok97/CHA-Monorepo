@@ -1,4 +1,5 @@
 {
+  "name": "cha-domain-core",
   "projectType": "library",
   "sourceRoot": "libs/cha/domain/core/src",
   "prefix": "cha",

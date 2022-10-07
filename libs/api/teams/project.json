@@ -1,4 +1,5 @@
 {
+  "name": "api-teams",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/teams/src",
   "projectType": "library",

@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-teams-summary",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/teams-summary/src",
   "prefix": "cha-front",

@@ -13,6 +13,13 @@ const ROUTES: Route[] = [
         redirectTo: 'users',
       },
       {
+        path: 'current-data',
+        loadChildren: () =>
+          import('@cha/admin/league-current-data').then(
+            (mod) => mod.ChaAdminLeagueCurrentDataModule
+          ),
+      },
+      {
         path: 'users',
         loadChildren: () =>
           import('@cha/admin/league-users').then(
@@ -24,6 +31,13 @@ const ROUTES: Route[] = [
         loadChildren: () =>
           import('@cha/admin/league-teams').then(
             (mod) => mod.ChaAdminLeagueTeamsModule
+          ),
+      },
+      {
+        path: 'divisions',
+        loadChildren: () =>
+          import('@cha/admin/league-divisions').then(
+            (mod) => mod.ChaAdminLeagueDivisionsModule
           ),
       },
       {

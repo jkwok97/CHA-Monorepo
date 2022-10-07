@@ -1,4 +1,5 @@
 {
+  "name": "cha-admin-transactions-waivers",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/transactions-waivers/src",
   "prefix": "cha-admin",

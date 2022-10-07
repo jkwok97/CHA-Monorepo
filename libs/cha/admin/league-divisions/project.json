@@ -1,0 +1,26 @@
+{
+  "name": "cha-admin-league-divisions",
+  "projectType": "library",
+  "sourceRoot": "libs/cha/admin/league-divisions/src",
+  "prefix": "cha-admin",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/admin/league-divisions"],
+      "options": {
+        "jestConfig": "libs/cha/admin/league-divisions/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/admin/league-divisions/**/*.ts",
+          "libs/cha/admin/league-divisions/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "admin"]
+}

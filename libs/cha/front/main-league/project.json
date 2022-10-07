@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-main-league",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/main-league/src",
   "prefix": "cha-front",

@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-main-draft",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/main-draft/src",
   "prefix": "cha-front",

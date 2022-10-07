@@ -1,4 +1,5 @@
 {
+  "name": "api-entry-draft",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/entry-draft/src",
   "projectType": "library",

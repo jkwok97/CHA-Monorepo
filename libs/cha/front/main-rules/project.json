@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-main-rules",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/main-rules/src",
   "prefix": "cha-front",

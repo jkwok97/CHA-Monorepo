@@ -1,0 +1,26 @@
+{
+  "name": "cha-admin-league-current-data",
+  "projectType": "library",
+  "sourceRoot": "libs/cha/admin/league-current-data/src",
+  "prefix": "cha-admin",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/admin/league-current-data"],
+      "options": {
+        "jestConfig": "libs/cha/admin/league-current-data/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/admin/league-current-data/**/*.ts",
+          "libs/cha/admin/league-current-data/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "admin"]
+}

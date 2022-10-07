@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-league-games",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/league-games/src",
   "prefix": "cha-front",

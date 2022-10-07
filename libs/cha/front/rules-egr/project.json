@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-rules-egr",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/rules-egr/src",
   "prefix": "cha-front",

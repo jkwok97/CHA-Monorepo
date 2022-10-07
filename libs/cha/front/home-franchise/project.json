@@ -1,4 +1,5 @@
 {
+  "name": "cha-front-home-franchise",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/home-franchise/src",
   "prefix": "cha-front",
