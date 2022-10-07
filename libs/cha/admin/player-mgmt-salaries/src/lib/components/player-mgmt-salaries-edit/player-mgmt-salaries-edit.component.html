@@ -1,1 +1,36 @@
-<p>player-mgmt-salaries-edit works!</p>
+<blade-card style="background-color: var(--background-100)">
+  <blade-card-header class="text-lg font-light text-center">
+    Edit {{ salary?.playerInfo?.firstname }}
+    {{ salary?.playerInfo?.lastname }} Salary
+  </blade-card-header>
+
+  <blade-card-body>
+    <cha-admin-player-mgmt-salaries-edit-form
+      [salary]="salary"
+    ></cha-admin-player-mgmt-salaries-edit-form>
+  </blade-card-body>
+
+  <blade-card-footer>
+    <div class="flex justify-content-between">
+      <div class="flex column-gap-1">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="'Save Salary'"
+          class="p-button-raised"
+          [disabled]="salaryFormRef?.form?.invalid || !salaryFormRef?.form?.dirty"
+          (click)="onSave()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-raised p-button-warning"
+          (click)="onCancel()"
+        ></button>
+      </div>
+    </div>
+  </blade-card-footer>
+</blade-card>

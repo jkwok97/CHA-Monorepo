@@ -69,11 +69,6 @@ export class PlayerMgmtSalariesTableComponent implements OnInit {
     this.display = true;
   }
 
-  onAddClick() {
-    this.salary = null;
-    this.display = true;
-  }
-
   onClose() {
     this.display = false;
     this.salary = null;

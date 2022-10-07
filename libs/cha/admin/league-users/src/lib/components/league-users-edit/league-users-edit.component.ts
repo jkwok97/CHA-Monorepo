@@ -17,7 +17,6 @@ import { LeagueUsersEditFormComponent } from '../league-users-edit-form';
 @Component({
   selector: 'cha-admin-league-users-edit',
   templateUrl: './league-users-edit.component.html',
-  styleUrls: ['./league-users-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueUsersEditComponent implements OnInit {
