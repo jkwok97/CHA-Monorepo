@@ -1,1 +1,29 @@
-this works
+<blade-layout-feature-content>
+  <div>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="pt-2">
+      <div class="text-lg text-center" style="font-weight: 100">
+        Player Salaries
+      </div>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="salaries$ | async as salaries">
+          {{ salaries | json }}
+          <!-- <cha-admin-player-mgmt-info-table
+            [isMobile]="isMobile"
+            [players]="players"
+          ></cha-admin-player-mgmt-info-table> -->
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>

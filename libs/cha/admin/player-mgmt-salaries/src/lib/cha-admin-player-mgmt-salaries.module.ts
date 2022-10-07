@@ -4,6 +4,12 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ProgressBarModule } from 'primeng/progressbar';
+
+import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { BladeDividerComponent } from '@blade/angular/ui/divider';
+
 import { PlayerMgmtSalariesEffects } from './+state/player-mgmt-salaries.effects';
 import { PlayerMgmtSalariesFacade } from './+state/player-mgmt-salaries.facade';
 import { reducer } from './+state/player-mgmt-salaries.reducer';
@@ -15,6 +21,10 @@ import { PlayerMgmtSalariesComponent } from './containers';
 @NgModule({
   imports: [
     CommonModule,
+    ProgressBarModule,
+    BladeAngularUiLayoutModule,
+    BladeAngularUiCardModule,
+    BladeDividerComponent,
     ChaAdminPlayerMgmtSalariesRoutingModule,
     StoreModule.forFeature('player-mgmt-salaries', reducer),
     EffectsModule.forFeature([PlayerMgmtSalariesEffects]),
