@@ -36,7 +36,7 @@ export class ApiSalariesService {
     private httpService: HttpService
   ) {}
 
-  async getAllPlayerSalaries(season: string) {
+  async getAllPlayerSalaries(season: string, ratingSeason: string) {
     const allPlayersInSeason = await this.playersStatsRepo.find({
       select: {
         id: true,
@@ -60,7 +60,7 @@ export class ApiSalariesService {
 
     const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(
       allSalariesForPlayersInSeason,
-      season
+      ratingSeason
     );
 
     const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo =
@@ -69,7 +69,7 @@ export class ApiSalariesService {
     return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
   }
 
-  async getAllGoaliesSalaries(season: string) {
+  async getAllGoaliesSalaries(season: string, ratingSeason: string) {
     const allGoaliesInSeason = await this.goaliesStatsRepo.find({
       select: {
         id: true,
@@ -93,7 +93,7 @@ export class ApiSalariesService {
 
     const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(
       allSalariesForGoaliesInSeason,
-      season
+      ratingSeason
     );
 
     const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo =

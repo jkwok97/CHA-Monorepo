@@ -21,6 +21,7 @@ export class LeagueSalariesAndRatingsEffects {
       exhaustMap(([action, data]) =>
         this.leagueSalariesAndRatingsService
           .getPlayerSalaries(
+            data.current_year,
             data.offseason ? data.prev_year : data.current_year
           )
           .pipe(
@@ -42,6 +43,7 @@ export class LeagueSalariesAndRatingsEffects {
       exhaustMap(([action, data]) =>
         this.leagueSalariesAndRatingsService
           .getGoaliesSalaries(
+            data.current_year,
             data.offseason ? data.prev_year : data.current_year
           )
           .pipe(

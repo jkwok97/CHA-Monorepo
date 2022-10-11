@@ -6038,14 +6038,14 @@ let SalariesController = class SalariesController {
         return this.salariesService.addSalary(body);
     }
     async getAllPlayerSalaries(param) {
-        const salaries = await this.salariesService.getAllPlayerSalaries(param.season);
+        const salaries = await this.salariesService.getAllPlayerSalaries(param.season, param.ratingSeason);
         if (!salaries) {
             throw new common_1.NotFoundException('Player Salaries not found');
         }
         return salaries;
     }
     async getAllGoaliesSalaries(param) {
-        const salaries = await this.salariesService.getAllGoaliesSalaries(param.season);
+        const salaries = await this.salariesService.getAllGoaliesSalaries(param.season, param.ratingSeason);
         if (!salaries) {
             throw new common_1.NotFoundException('Goalie Salaries not found');
         }
@@ -6088,14 +6088,14 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", void 0)
 ], SalariesController.prototype, "addUser", null);
 tslib_1.__decorate([
-    (0, common_1.Get)('/all/players/:season'),
+    (0, common_1.Get)('/all/players/:season/:ratingSeason'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], SalariesController.prototype, "getAllPlayerSalaries", null);
 tslib_1.__decorate([
-    (0, common_1.Get)('/all/goalies/:season'),
+    (0, common_1.Get)('/all/goalies/:season/:ratingSeason'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
@@ -6183,7 +6183,7 @@ let ApiSalariesService = class ApiSalariesService {
         this.httpService = httpService;
         this.nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
     }
-    async getAllPlayerSalaries(season) {
+    async getAllPlayerSalaries(season, ratingSeason) {
         const allPlayersInSeason = await this.playersStatsRepo.find({
             select: {
                 id: true,
@@ -6201,11 +6201,11 @@ let ApiSalariesService = class ApiSalariesService {
             },
         });
         const allSalariesForPlayersInSeason = await this.setPlayersSalaries(allPlayersInSeason);
-        const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(allSalariesForPlayersInSeason, season);
+        const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(allSalariesForPlayersInSeason, ratingSeason);
         const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo = await this.setTeamInfo(allSalariesAndRatingsForPlayersInSeason);
         return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
     }
-    async getAllGoaliesSalaries(season) {
+    async getAllGoaliesSalaries(season, ratingSeason) {
         const allGoaliesInSeason = await this.goaliesStatsRepo.find({
             select: {
                 id: true,
@@ -6223,7 +6223,7 @@ let ApiSalariesService = class ApiSalariesService {
             },
         });
         const allSalariesForGoaliesInSeason = await this.setPlayersSalaries(allGoaliesInSeason);
-        const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(allSalariesForGoaliesInSeason, season);
+        const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(allSalariesForGoaliesInSeason, ratingSeason);
         const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo = await this.setTeamInfo(allSalariesAndRatingsForGoaliesInSeason);
         return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
     }
