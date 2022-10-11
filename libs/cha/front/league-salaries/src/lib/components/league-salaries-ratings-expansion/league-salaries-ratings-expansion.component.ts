@@ -3,7 +3,9 @@ import {
   Component,
   Input,
 } from '@angular/core';
+import { LeagueDataFacade } from '@cha/domain/core';
 import { PlayerRatingDto, GoalieRatingDto } from '@cha/shared/entities';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cha-front-league-salaries-ratings-expansion',
@@ -12,4 +14,9 @@ import { PlayerRatingDto, GoalieRatingDto } from '@cha/shared/entities';
 })
 export class LeagueSalariesRatingsExpansionComponent {
   @Input() ratings!: PlayerRatingDto | GoalieRatingDto;
+
+  isOffSeason$: Observable<boolean>;
+  constructor(private leagueDataFacade:LeagueDataFacade) {
+    this.isOffSeason$ = this.leagueDataFacade.isOffSeason$;
+  }
 }
