@@ -1,5 +1,5 @@
 import { LeagueDataDto } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Put } from '@nestjs/common';
 import { LeagueService } from '../services';
 
 @Controller('league')
@@ -14,5 +14,10 @@ export class LeagueController {
       throw new NotFoundException('League Data not found');
     }
     return data;
+  }
+
+  @Put('/current-data')
+  updateUserById(@Body() body): Promise<LeagueDataDto> {
+    return this.leagueService.updateCurrentLeagueData(body);
   }
 }

@@ -23,7 +23,7 @@ const initialState: State = {
     next_draft_year: 2021,
     current_cap: 102.7,
     next_cap: 102.7,
-    min_games: '10',
+    min_games: 10,
     offseason: false,
   },
   teams: [],
