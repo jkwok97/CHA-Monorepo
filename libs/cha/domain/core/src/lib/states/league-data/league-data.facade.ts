@@ -16,6 +16,10 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectLoaded
   );
 
+  isSaving$: Observable<boolean> = this.store.select(
+    LeagueDataSelectors.selectSaving
+  );
+
   leagueData$: Observable<LeagueDataDto> = this.store.select(
     LeagueDataSelectors.selectLeagueData
   );

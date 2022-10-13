@@ -82,3 +82,5 @@ export const getTeams = (state: State) => state.teams;
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
+
+export const getSaving = (state: State) => state.saving;

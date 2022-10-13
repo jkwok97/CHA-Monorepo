@@ -74,6 +74,8 @@ const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
 
 const selectLoaded = createSelector(selectState, LeagueDataReducer.getLoaded);
 
+const selectSaving = createSelector(selectState, LeagueDataReducer.getSaving);
+
 export const LeagueDataSelectors = {
   selectLeagueData,
   selectCurrentSeason,
@@ -85,5 +87,6 @@ export const LeagueDataSelectors = {
   selectIsOffSeason,
   selectCurrentCapHit,
   selectNextYearCapHit,
-  selectSortedTeams
+  selectSortedTeams,
+  selectSaving
 };

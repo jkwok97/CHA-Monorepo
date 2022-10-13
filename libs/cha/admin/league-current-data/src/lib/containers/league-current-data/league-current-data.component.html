@@ -17,10 +17,7 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="data$ | async as data">
-          <!-- <cha-admin-league-users-table
-              [isMobile]="isMobile"
-              [users]="users"
-            ></cha-admin-league-users-table> -->
+          <cha-admin-league-current-data-edit></cha-admin-league-current-data-edit>
         </ng-container>
       </blade-card-body>
     </blade-card>
