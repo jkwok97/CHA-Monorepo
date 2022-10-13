@@ -10,6 +10,10 @@ import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { ChaAdminLeagueCurrentDataRoutingModule } from './cha-admin-league-current-data-routing.module';
 
 import { LeagueCurrentDataComponent } from './containers';
+import {
+  LeagueCurrentDataEditComponent,
+  LeagueCurrentDataEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -20,6 +24,10 @@ import { LeagueCurrentDataComponent } from './containers';
     BladeDividerComponent,
     BladeAngularUiCardModule,
   ],
-  declarations: [LeagueCurrentDataComponent],
+  declarations: [
+    LeagueCurrentDataComponent,
+    LeagueCurrentDataEditComponent,
+    LeagueCurrentDataEditFormComponent,
+  ],
 })
 export class ChaAdminLeagueCurrentDataModule {}
