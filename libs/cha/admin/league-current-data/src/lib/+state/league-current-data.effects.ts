@@ -8,7 +8,7 @@ import { LeagueCurrentDataActions } from './league-current-data.actions';
 import { LeagueCurrentDataFacade } from './league-current-data.facade';
 
 @Injectable()
-export class LeagueUsersEffects {
+export class LeagueCurrentDataEffects {
   constructor(
     private actions$: Actions,
     private leagueCurrentDataService: LeagueCurrentDataService,
