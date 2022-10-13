@@ -30,6 +30,9 @@ export class LeagueCurrentDataEditComponent {
   onSave() {
     const data = {
       ...this.dataFormRef?.form.value,
+      offseason: this.dataFormRef?.form.value.offseason
+        ? this.dataFormRef?.form.value.offseason
+        : false,
     };
 
     this.leagueDataFacade.editData(data);
