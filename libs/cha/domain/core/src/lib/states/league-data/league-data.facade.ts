@@ -53,4 +53,8 @@ export class LeagueDataFacade {
   getLeagueTeams() {
     this.store.dispatch(LeagueDataActions.getTeams());
   }
+
+  editData(data: LeagueDataDto) {
+    this.store.dispatch(LeagueDataActions.editData({ data }));
+  }
 }

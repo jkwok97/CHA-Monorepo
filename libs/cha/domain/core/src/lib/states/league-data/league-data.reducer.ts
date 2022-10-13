@@ -7,6 +7,8 @@ export interface State {
   teams: TeamDto[];
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
 }
 
 const initialState: State = {
@@ -27,6 +29,8 @@ const initialState: State = {
   teams: [],
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false,
 };
 
 const r = createReducer(
@@ -50,6 +54,18 @@ const r = createReducer(
     teams: action.teams,
     loading: false,
     loaded: true,
+  })),
+
+  on(LeagueDataActions.editData, (state) => ({
+    ...state,
+    saving: true,
+    saved: false,
+  })),
+
+  on(LeagueDataActions.editDataSuccess, (state, action) => ({
+    ...state,
+    saving: false,
+    saved: true,
   })),
 
   on(LeagueDataActions.error, (state) => initialState)

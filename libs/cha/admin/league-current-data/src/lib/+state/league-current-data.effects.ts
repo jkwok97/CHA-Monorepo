@@ -32,35 +32,5 @@ export class LeagueCurrentDataEffects {
     )
   );
 
-  editData$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(LeagueCurrentDataActions.editData),
-      exhaustMap((action) =>
-        this.leagueCurrentDataService.editData(action.data).pipe(
-          map((data: LeagueDataDto) =>
-            LeagueCurrentDataActions.editDataSuccess({
-              data,
-            })
-          ),
-          catchError(() => of(LeagueCurrentDataActions.error()))
-        )
-      )
-    )
-  );
-
-  editUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(LeagueCurrentDataActions.editDataSuccess),
-        tap(() => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Edit Data',
-            detail: 'Data has been updated',
-          });
-          this.leagueCurrentDataFacade.getData();
-        })
-      ),
-    { dispatch: false }
-  );
+  
 }

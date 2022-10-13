@@ -17,6 +17,16 @@ const getTeamsSuccess = createAction(
   props<{ teams: TeamDto[] }>()
 );
 
+const editData = createAction(
+  `${NAMESPACE} Edit Data`,
+  props<{ data: LeagueDataDto }>()
+);
+
+const editDataSuccess = createAction(
+  `${NAMESPACE} Edit Data Success`,
+  props<{ data: LeagueDataDto }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const LeagueDataActions = {
@@ -24,5 +34,7 @@ export const LeagueDataActions = {
   getLeagueDataSuccess,
   getTeams,
   getTeamsSuccess,
+  editData,
+  editDataSuccess,
   error,
 };

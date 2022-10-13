@@ -22,4 +22,10 @@ export class LeagueDataService {
       .get(`${this.apiUrl}/teams/current`)
       .pipe(map((result: any) => result));
   }
+
+  editData(data: LeagueDataDto): Observable<LeagueDataDto> {
+    return this._http
+      .put(`${this.apiUrl}/league/current-data`, data)
+      .pipe(map((result: any) => result));
+  }
 }
