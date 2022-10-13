@@ -4055,7 +4055,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/league/src/lib/controllers/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LeagueController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -4072,6 +4072,9 @@ let LeagueController = class LeagueController {
         }
         return data;
     }
+    updateUserById(body) {
+        return this.leagueService.updateCurrentLeagueData(body);
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/current-data'),
@@ -4079,6 +4082,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], LeagueController.prototype, "getCurrentData", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/current-data'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], LeagueController.prototype, "updateUserById", null);
 LeagueController = tslib_1.__decorate([
     (0, common_1.Controller)('league'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.LeagueService !== "undefined" && services_1.LeagueService) === "function" ? _a : Object])
@@ -4139,6 +4149,14 @@ let LeagueService = class LeagueService {
     }
     async getCurrentLeagueData() {
         return (await this.repo.find());
+    }
+    async updateCurrentLeagueData(attrs) {
+        const data = await this.repo.findOneByOrFail({ id: 1 });
+        if (!data) {
+            throw new common_1.NotFoundException('data not found');
+        }
+        Object.assign(data, attrs);
+        return this.repo.save(data);
     }
 };
 LeagueService = tslib_1.__decorate([
