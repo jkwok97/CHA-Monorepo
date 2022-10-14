@@ -225,7 +225,28 @@ const selectPlayersCount = createSelector(
   (
     playerSalaries: SalariesAndRatingsDto[],
     goalieSalaries: SalariesAndRatingsDto[]
-  ) => playerSalaries.length + goalieSalaries.length
+  ) =>
+    playerSalaries.filter(
+      (player: SalariesAndRatingsDto) => !player.player_id.is_protected
+    ).length +
+    goalieSalaries.filter(
+      (goalie: SalariesAndRatingsDto) => !goalie.player_id.is_protected
+    ).length
+);
+
+const selectProtectedPlayerCount = createSelector(
+  selectPlayerSalaries,
+  selectGoalieSalaries,
+  (
+    playerSalaries: SalariesAndRatingsDto[],
+    goalieSalaries: SalariesAndRatingsDto[]
+  ) =>
+    playerSalaries.filter(
+      (player: SalariesAndRatingsDto) => player.player_id.is_protected
+    ).length +
+    goalieSalaries.filter(
+      (goalie: SalariesAndRatingsDto) => goalie.player_id.is_protected
+    ).length
 );
 
 const selectForwardSalaries = createSelector(
@@ -304,6 +325,7 @@ export const HomeSummarySelectors = {
   selectTotal,
   selectNextTotal,
   selectPlayersCount,
+  selectProtectedPlayerCount,
   selectGoaliesSalaryLoaded,
   selectPlayerSalaryLoaded,
   selectCurrentPlayerStat,
@@ -315,7 +337,7 @@ export const HomeSummarySelectors = {
   selectDefenseSalaries,
   selectForwardSalaries,
   selectGoalieSalariesFiltered,
-  selectPlayerSalaryLoading
+  selectPlayerSalaryLoading,
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {

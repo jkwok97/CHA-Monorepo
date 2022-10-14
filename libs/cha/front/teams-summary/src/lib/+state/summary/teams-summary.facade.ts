@@ -73,6 +73,10 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectPlayersCount
   );
 
+  totalProtectedPlayerCount$: Observable<number> = this.store.select(
+    TeamsSummarySelectors.selectProtectedPlayerCount
+  );
+
   leftWingersByRating$: Observable<SalariesAndRatingsDto[]> = this.store.select(
     TeamsSummarySelectors.selectLeftWingSalariesByRating
   );

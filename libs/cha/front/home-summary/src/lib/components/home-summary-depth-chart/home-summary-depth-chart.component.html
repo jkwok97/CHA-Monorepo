@@ -12,6 +12,11 @@
       ** It is currently the offseason, depth chart is based on previous
       season's NHL stats & positions based on latest CHA Ratings **
     </div>
+    <ng-container *ngIf="protectedPlayerCount$ | async as protectedPlayerCount">
+      <div class="text-sm text-center" *ngIf="protectedPlayerCount > 0">
+        ** Protected Players do not count towards player count or cap usage **
+      </div>
+    </ng-container>
   </blade-card-header>
   <blade-card-body>
     <ng-container *ngIf="loadedSalaries$ | async">

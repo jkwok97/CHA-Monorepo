@@ -25,12 +25,15 @@ export class HomeSummaryDepthChartComponent implements OnInit {
   rightDefense$!: Observable<SalariesAndRatingsDto[]>;
   goalies$!: Observable<SalariesAndRatingsDto[]>;
   loadedSalaries$!: Observable<boolean>;
+  protectedPlayerCount$: Observable<number>;
 
   constructor(
     private userTeamFacade: UserTeamFacade,
     private homeSummaryFacade: HomeSummaryFacade
   ) {
     this.userTeam$ = this.userTeamFacade.currentUserTeam$;
+    this.protectedPlayerCount$ =
+      this.homeSummaryFacade.totalProtectedPlayerCount$;
   }
 
   ngOnInit(): void {

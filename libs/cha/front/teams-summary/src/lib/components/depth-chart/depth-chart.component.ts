@@ -15,7 +15,7 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 })
 export class DepthChartComponent implements OnInit {
   @Input() isOffSeason!: boolean;
-  
+
   userTeam$: Observable<TeamDto | undefined>;
   leftWingers$!: Observable<SalariesAndRatingsDto[]>;
   centers$!: Observable<SalariesAndRatingsDto[]>;
@@ -25,10 +25,13 @@ export class DepthChartComponent implements OnInit {
   goalies$!: Observable<SalariesAndRatingsDto[]>;
   loadedSalaries$!: Observable<boolean>;
   isLoading$: Observable<boolean>;
+  protectedPlayerCount$: Observable<number>;
 
   constructor(private teamsSummaryFacade: TeamsSummaryFacade) {
     this.userTeam$ = this.teamsSummaryFacade.userTeam$;
     this.isLoading$ = this.teamsSummaryFacade.playerSalaryLoading$;
+    this.protectedPlayerCount$ =
+      this.teamsSummaryFacade.totalProtectedPlayerCount$;
   }
 
   ngOnInit(): void {

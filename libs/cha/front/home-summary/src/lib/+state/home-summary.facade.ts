@@ -47,6 +47,10 @@ export class HomeSummaryFacade {
     HomeSummarySelectors.selectPlayersCount
   );
 
+  totalProtectedPlayerCount$: Observable<number> = this.store.select(
+    HomeSummarySelectors.selectProtectedPlayerCount
+  );
+
   leftWingersByRating$: Observable<SalariesAndRatingsDto[]> = this.store.select(
     HomeSummarySelectors.selectLeftWingSalariesByRating
   );
