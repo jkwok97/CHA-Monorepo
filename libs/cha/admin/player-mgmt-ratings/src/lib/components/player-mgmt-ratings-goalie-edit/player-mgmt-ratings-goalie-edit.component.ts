@@ -16,7 +16,6 @@ import { PlayerMgmtRatingsGoalieEditFormComponent } from '../player-mgmt-ratings
 @Component({
   selector: 'cha-admin-player-mgmt-ratings-goalie-edit',
   templateUrl: './player-mgmt-ratings-goalie-edit.component.html',
-  styleUrls: ['./player-mgmt-ratings-goalie-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtRatingsGoalieEditComponent {

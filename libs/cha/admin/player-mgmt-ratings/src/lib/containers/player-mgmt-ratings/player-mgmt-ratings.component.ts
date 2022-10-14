@@ -7,7 +7,6 @@ import { PlayerMgmtRatingsFacade } from '../../+state/player-mgmt-ratings.facade
 @Component({
   selector: 'cha-admin-player-mgmt-ratings',
   templateUrl: './player-mgmt-ratings.component.html',
-  styleUrls: ['./player-mgmt-ratings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtRatingsComponent implements OnInit {

@@ -1,5 +1,6 @@
 export interface PlayerRatingDto {
   id: number;
+  player_id: string;
   game_fatigue: string;
   shift_fatigue: string;
   c_rate: string;

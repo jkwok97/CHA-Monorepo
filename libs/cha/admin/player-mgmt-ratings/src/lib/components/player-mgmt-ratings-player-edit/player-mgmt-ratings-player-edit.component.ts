@@ -15,7 +15,6 @@ import { PlayerMgmtRatingsPlayerEditFormComponent } from '../player-mgmt-ratings
 @Component({
   selector: 'cha-admin-player-mgmt-ratings-player-edit',
   templateUrl: './player-mgmt-ratings-player-edit.component.html',
-  styleUrls: ['./player-mgmt-ratings-player-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtRatingsPlayerEditComponent {
