@@ -107,10 +107,7 @@
     </ng-template>
     <ng-template #showDesktopBody>
       <tr>
-        <td
-          *ngFor="let column of tableColumns"
-          [hidden]="!column.visible"
-        >
+        <td *ngFor="let column of tableColumns" [hidden]="!column.visible">
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container
@@ -154,8 +151,8 @@
   [dismissible]="false"
   *ngIf="display"
 >
-  <!-- <cha-admin-player-mgmt-salaries-edit
-    [salary]="salary"
+  <cha-admin-player-mgmt-ratings-player-edit
+    [player]="player"
     (closeSidebar)="onClose()"
-  ></cha-admin-player-mgmt-salaries-edit> -->
+  ></cha-admin-player-mgmt-ratings-player-edit>
 </p-sidebar>

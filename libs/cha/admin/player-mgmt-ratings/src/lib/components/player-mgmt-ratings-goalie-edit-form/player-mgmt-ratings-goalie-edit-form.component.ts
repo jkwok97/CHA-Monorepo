@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
+import { GoalieRatingDto } from '@cha/shared/entities';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'cha-admin-player-mgmt-ratings-goalie-edit-form',
@@ -6,8 +9,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./player-mgmt-ratings-goalie-edit-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerMgmtRatingsGoalieEditFormComponent implements OnInit {
-  constructor() {}
+export class PlayerMgmtRatingsGoalieEditFormComponent {
+  @Input() goalie!: GoalieRatingDto | null;
 
-  ngOnInit(): void {}
+  form = new UntypedFormGroup({});
+  model: any = {};
+  options: FormlyFormOptions = {};
+  fields!: FormlyFieldConfig[];
 }

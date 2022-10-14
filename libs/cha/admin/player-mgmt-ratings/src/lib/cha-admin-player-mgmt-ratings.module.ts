@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -30,10 +31,14 @@ import {
   PlayerMgmtRatingsPlayerEditFormComponent,
   PlayerMgmtRatingsGoalieEditFormComponent,
 } from './components';
+import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
+import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
+import { FormlyModule } from '@ngx-formly/core';
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     ProgressBarModule,
     SidebarModule,
     TableModule,
@@ -46,6 +51,21 @@ import {
     ChaAdminPlayerMgmtRatingsRoutingModule,
     StoreModule.forFeature('player-mgmt-ratings', reducer),
     EffectsModule.forFeature([PlayerMgmtRatingsEffects]),
+    FormlyModule.forRoot({
+      wrappers: [
+        {
+          name: 'control-wrapper',
+          component: DefaultFormFieldWrapperComponent,
+        },
+      ],
+      types: [
+        {
+          name: 'text-input',
+          component: TextInputTypeComponent,
+          wrappers: ['control-wrapper'],
+        },
+      ],
+    }),
   ],
   declarations: [
     PlayerMgmtRatingsComponent,

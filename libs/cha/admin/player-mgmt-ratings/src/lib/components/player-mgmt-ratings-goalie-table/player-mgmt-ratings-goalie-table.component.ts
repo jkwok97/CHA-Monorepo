@@ -22,20 +22,18 @@ export class PlayerMgmtRatingsGoalieTableComponent implements OnInit {
   // TODO UPDATE COLUMNS AFTER EVERY SEASON
   tableColumns = [
     { field: 'id', header: 'Salary Id', visible: true },
+    { field: 'player_id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'season_2021', header: '2020-21', visible: true },
-    { field: 'season_2022', header: '2021-22', visible: true },
-    { field: 'season_2023', header: '2022-23', visible: true },
-    { field: 'season_2024', header: '2023-24', visible: true },
-    { field: 'season_2025', header: '2024-25', visible: true },
+    { field: 'skating', header: 'Skating', visible: true },
+    { field: 'speed', header: 'Speed', visible: true },
+    { field: 'passing', header: 'Passing', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
   mobileTableColumns = [
     { field: 'id', header: 'Salary Id', visible: true },
+    { field: 'player_id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'season_2021', header: '2020-21', visible: true },
-    { field: 'season_2022', header: '2021-22', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 

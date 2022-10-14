@@ -22,6 +22,7 @@ export class PlayerMgmtRatingsPlayerTableComponent implements OnInit {
   // TODO UPDATE COLUMNS AFTER EVERY SEASON
   tableColumns = [
     { field: 'id', header: 'Rating Id', visible: true },
+    { field: 'player_id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'c_rate', header: 'C', visible: true },
     { field: 'l_rate', header: 'LW', visible: true },
@@ -33,6 +34,7 @@ export class PlayerMgmtRatingsPlayerTableComponent implements OnInit {
 
   mobileTableColumns = [
     { field: 'id', header: 'Rating Id', visible: true },
+    { field: 'player_id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
