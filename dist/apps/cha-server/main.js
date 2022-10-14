@@ -3111,7 +3111,7 @@ let ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
 };
 ApiGoalieRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalie_Ratings_V2])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalie_Ratings_V2, entities_1.Players_V2])],
         controllers: [controllers_1.GoalieRatingsController],
         providers: [services_1.ApiGoalieRatingsService],
     })
@@ -3217,7 +3217,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/goalie-ratings/src/lib/midd
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiGoalieRatingsService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -3226,11 +3226,14 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 let ApiGoalieRatingsService = class ApiGoalieRatingsService {
-    constructor(repo) {
+    constructor(repo, playersRepo) {
         this.repo = repo;
+        this.playersRepo = playersRepo;
     }
     async getAll() {
-        return await this.repo.find();
+        const ratings = await this.repo.find();
+        const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
+        return ratingsWithPlayerInfo;
     }
     async updatePlayerById(id, attrs) {
         const player = await this.repo.findOneByOrFail({ id });
@@ -3240,11 +3243,32 @@ let ApiGoalieRatingsService = class ApiGoalieRatingsService {
         Object.assign(player, attrs);
         return this.repo.save(player);
     }
+    async setPlayerInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.player_id) }))));
+    }
+    async getPlayerInfo(playerId) {
+        if (playerId) {
+            return await this.playersRepo.findOne({
+                select: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                where: {
+                    id: playerId,
+                },
+            });
+        }
+        else {
+            return {};
+        }
+    }
 };
 ApiGoalieRatingsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalie_Ratings_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiGoalieRatingsService);
 exports.ApiGoalieRatingsService = ApiGoalieRatingsService;
 
@@ -4886,7 +4910,7 @@ let ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
 };
 ApiPlayerRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Player_Ratings_V2])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Player_Ratings_V2, entities_1.Players_V2])],
         controllers: [controllers_1.PlayerRatingsController],
         providers: [services_1.ApiPlayerRatingsService],
     })
@@ -4992,7 +5016,7 @@ exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerRatingsService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -5001,11 +5025,14 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 let ApiPlayerRatingsService = class ApiPlayerRatingsService {
-    constructor(repo) {
+    constructor(repo, playersRepo) {
         this.repo = repo;
+        this.playersRepo = playersRepo;
     }
     async getAll() {
-        return await this.repo.find();
+        const ratings = await this.repo.find();
+        const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
+        return ratingsWithPlayerInfo;
     }
     async updatePlayerById(id, attrs) {
         const player = await this.repo.findOneByOrFail({ id });
@@ -5015,11 +5042,32 @@ let ApiPlayerRatingsService = class ApiPlayerRatingsService {
         Object.assign(player, attrs);
         return this.repo.save(player);
     }
+    async setPlayerInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.player_id) }))));
+    }
+    async getPlayerInfo(playerId) {
+        if (playerId) {
+            return await this.playersRepo.findOne({
+                select: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                where: {
+                    id: playerId,
+                },
+            });
+        }
+        else {
+            return {};
+        }
+    }
 };
 ApiPlayerRatingsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Player_Ratings_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiPlayerRatingsService);
 exports.ApiPlayerRatingsService = ApiPlayerRatingsService;
 

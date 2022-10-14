@@ -1,4 +1,4 @@
-import { Goalie_Ratings_V2 } from '@api/entities';
+import { Goalie_Ratings_V2, Players_V2 } from '@api/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -7,11 +7,17 @@ import { Repository } from 'typeorm';
 export class ApiGoalieRatingsService {
   constructor(
     @InjectRepository(Goalie_Ratings_V2)
-    private repo: Repository<Goalie_Ratings_V2>
+    private repo: Repository<Goalie_Ratings_V2>,
+    @InjectRepository(Players_V2)
+    private playersRepo: Repository<Players_V2>,
   ) {}
 
   async getAll(): Promise<Goalie_Ratings_V2[]> {
-    return await this.repo.find();
+    const ratings = await this.repo.find();
+
+    const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
+
+    return ratingsWithPlayerInfo;
   }
 
   async updatePlayerById(id: number, attrs: Partial<Goalie_Ratings_V2>) {
@@ -24,5 +30,31 @@ export class ApiGoalieRatingsService {
     Object.assign(player, attrs);
 
     return this.repo.save(player);
+  }
+
+  private async setPlayerInfo(array: any[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        playerInfo: await this.getPlayerInfo(item.player_id),
+      }))
+    );
+  }
+
+  private async getPlayerInfo(playerId: number) {
+    if (playerId) {
+      return await this.playersRepo.findOne({
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+        where: {
+          id: playerId,
+        },
+      });
+    } else {
+      return {};
+    }
   }
 }
