@@ -45,6 +45,7 @@ export class PlayerMgmtRatingsComponent {
   }
 
   onOptionChanged(option: string) {
+    console.log(option);
     switch (option) {
       case 'skater':
         this.setSkaters();
@@ -65,5 +66,8 @@ export class PlayerMgmtRatingsComponent {
   setGoalies() {
     this.showSkaters = false;
     this.showGoalies = true;
+
+    console.log(this.showGoalies);
+    console.log(this.showSkaters);
   }
 }

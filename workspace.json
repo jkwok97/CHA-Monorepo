@@ -30,7 +30,7 @@
       "tags": ["api:entities"]
     },
     "api-entry-draft": "libs/api/entry-draft",
-    "api-goalie-ratings":  "libs/api/goalie-ratings",
+    "api-goalie-ratings": "libs/api/goalie-ratings",
     "api-goalie-stats": "libs/api/goalie-stats",
     "api-league": "libs/api/league",
     "api-nhl": "libs/api/nhl",

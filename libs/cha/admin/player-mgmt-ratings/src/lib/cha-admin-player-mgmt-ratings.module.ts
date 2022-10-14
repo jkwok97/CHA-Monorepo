@@ -18,6 +18,14 @@ import { PlayerMgmtRatingsEffects } from './+state/player-mgmt-ratings.effects';
 import { ChaAdminPlayerMgmtRatingsRoutingModule } from './cha-admin-player-mgmt-ratings-routing.module';
 
 import { PlayerMgmtRatingsComponent } from './containers';
+import {
+  PlayerMgmtRatingsPlayerTableComponent,
+  PlayerMgmtRatingsGoalieTableComponent,
+  PlayerMgmtRatingsGoalieEditComponent,
+  PlayerMgmtRatingsPlayerEditComponent,
+  PlayerMgmtRatingsPlayerEditFormComponent,
+  PlayerMgmtRatingsGoalieEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -31,7 +39,15 @@ import { PlayerMgmtRatingsComponent } from './containers';
     StoreModule.forFeature('player-mgmt-ratings', reducer),
     EffectsModule.forFeature([PlayerMgmtRatingsEffects]),
   ],
-  declarations: [PlayerMgmtRatingsComponent],
+  declarations: [
+    PlayerMgmtRatingsComponent,
+    PlayerMgmtRatingsPlayerTableComponent,
+    PlayerMgmtRatingsGoalieTableComponent,
+    PlayerMgmtRatingsGoalieEditComponent,
+    PlayerMgmtRatingsPlayerEditComponent,
+    PlayerMgmtRatingsPlayerEditFormComponent,
+    PlayerMgmtRatingsGoalieEditFormComponent,
+  ],
   providers: [PlayerMgmtRatingsEffects, PlayerMgmtRatingsFacade],
 })
 export class ChaAdminPlayerMgmtRatingsModule {}

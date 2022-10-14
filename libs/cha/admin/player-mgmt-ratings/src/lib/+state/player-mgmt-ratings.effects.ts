@@ -3,7 +3,15 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { GoalieRatingDto, PlayerRatingDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
-import { exhaustMap, map, catchError, of, tap, withLatestFrom } from 'rxjs';
+import {
+  exhaustMap,
+  map,
+  catchError,
+  of,
+  tap,
+  withLatestFrom,
+  delay,
+} from 'rxjs';
 import { PlayerMgmtRatingsService } from '../services';
 import { PlayerMgmtRatingsActions } from './player-mgmt-ratings.actions';
 import { PlayerMgmtRatingsFacade } from './player-mgmt-ratings.facade';
@@ -22,6 +30,7 @@ export class PlayerMgmtRatingsEffects {
     this.actions$.pipe(
       ofType(PlayerMgmtRatingsActions.getPlayers),
       withLatestFrom(this.leagueDataFacade.leagueData$),
+      delay(500),
       exhaustMap(([action, data]) =>
         this.playerMgmtRatingsService
           .getPlayers(data.offseason ? data.prev_year : data.current_year)
@@ -73,6 +82,7 @@ export class PlayerMgmtRatingsEffects {
     this.actions$.pipe(
       ofType(PlayerMgmtRatingsActions.getGoalies),
       withLatestFrom(this.leagueDataFacade.leagueData$),
+      delay(500),
       exhaustMap(([action, data]) =>
         this.playerMgmtRatingsService
           .getGoalies(data.offseason ? data.prev_year : data.current_year)

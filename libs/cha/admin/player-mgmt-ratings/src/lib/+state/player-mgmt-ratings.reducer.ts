@@ -8,7 +8,8 @@ export interface State {
   goalies: GoalieRatingDto[];
   goalie: GoalieRatingDto | null;
   loading: boolean;
-  loaded: boolean;
+  playersLoaded: boolean;
+  goaliesLoaded: boolean;
   saving: boolean;
   saved: boolean;
 }
@@ -19,7 +20,8 @@ const initialState: State = {
   goalies: [],
   goalie: null,
   loading: false,
-  loaded: false,
+  playersLoaded: false,
+  goaliesLoaded: false,
   saving: false,
   saved: false,
 };
@@ -47,14 +49,14 @@ const r = createReducer(
     ...state,
     players: action.players,
     loading: false,
-    loaded: true,
+    playersLoaded: true,
   })),
 
   on(PlayerMgmtRatingsActions.getGoaliesSuccess, (state, action) => ({
     ...state,
     goalies: action.goalies,
     loading: false,
-    loaded: true,
+    goaliesLoaded: true,
   })),
 
   on(
@@ -84,7 +86,9 @@ export const getGoalie = (state: State) => state.goalie;
 
 export const getLoading = (state: State) => state.loading;
 
-export const getLoaded = (state: State) => state.loaded;
+export const getPlayersLoaded = (state: State) => state.playersLoaded;
+
+export const getGoaliesLoaded = (state: State) => state.goaliesLoaded;
 
 export const getSaving = (state: State) => state.saving;
 

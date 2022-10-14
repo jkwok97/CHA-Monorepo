@@ -10,9 +10,20 @@ const selectLoading = createSelector(
   PlayerMgmtRatingsReducer.getLoading
 );
 
-const selectLoaded = createSelector(
+const selectPlayersLoaded = createSelector(
   selectState,
-  PlayerMgmtRatingsReducer.getLoaded
+  PlayerMgmtRatingsReducer.getPlayersLoaded
+);
+
+const selectGoaliesLoaded = createSelector(
+  selectState,
+  PlayerMgmtRatingsReducer.getGoaliesLoaded
+);
+
+const selectLoaded = createSelector(
+  selectPlayersLoaded,
+  selectGoaliesLoaded,
+  (playersLoaded, goaliesLoaded) => playersLoaded && goaliesLoaded
 );
 
 const selectSaving = createSelector(
@@ -46,6 +57,8 @@ const selectGoalie = createSelector(
 );
 
 export const PlayerMgmtRatingsSelectors = {
+  selectPlayersLoaded,
+  selectGoaliesLoaded,
   selectLoaded,
   selectLoading,
   selectSaving,
