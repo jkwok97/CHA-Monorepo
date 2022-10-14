@@ -3135,8 +3135,8 @@ let GoalieRatingsController = class GoalieRatingsController {
     constructor(goalieRatingsService) {
         this.goalieRatingsService = goalieRatingsService;
     }
-    async getAllRatings() {
-        const players = await this.goalieRatingsService.getAll();
+    async getAllRatings(param) {
+        const players = await this.goalieRatingsService.getAll(param.season);
         if (!players || players.length < 1) {
             throw new common_1.NotFoundException('ratings not found');
         }
@@ -3147,9 +3147,10 @@ let GoalieRatingsController = class GoalieRatingsController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], GoalieRatingsController.prototype, "getAllRatings", null);
 tslib_1.__decorate([
@@ -3230,8 +3231,12 @@ let ApiGoalieRatingsService = class ApiGoalieRatingsService {
         this.repo = repo;
         this.playersRepo = playersRepo;
     }
-    async getAll() {
-        const ratings = await this.repo.find();
+    async getAll(season) {
+        const ratings = await this.repo.find({
+            where: {
+                playing_year: season,
+            },
+        });
         const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
         return ratingsWithPlayerInfo;
     }
@@ -4945,8 +4950,8 @@ let PlayerRatingsController = class PlayerRatingsController {
     constructor(playerRatingsService) {
         this.playerRatingsService = playerRatingsService;
     }
-    async getAllRatings() {
-        const players = await this.playerRatingsService.getAll();
+    async getAllRatings(param) {
+        const players = await this.playerRatingsService.getAll(param.season);
         if (!players || players.length < 1) {
             throw new common_1.NotFoundException('ratings not found');
         }
@@ -4957,9 +4962,10 @@ let PlayerRatingsController = class PlayerRatingsController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], PlayerRatingsController.prototype, "getAllRatings", null);
 tslib_1.__decorate([
@@ -5029,8 +5035,12 @@ let ApiPlayerRatingsService = class ApiPlayerRatingsService {
         this.repo = repo;
         this.playersRepo = playersRepo;
     }
-    async getAll() {
-        const ratings = await this.repo.find();
+    async getAll(season) {
+        const ratings = await this.repo.find({
+            where: {
+                playing_year: season,
+            },
+        });
         const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
         return ratingsWithPlayerInfo;
     }
