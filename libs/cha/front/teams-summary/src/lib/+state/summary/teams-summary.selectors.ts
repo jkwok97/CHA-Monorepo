@@ -81,7 +81,8 @@ const selectForwardSalaries = createSelector(
     playerSalaries
       .filter(
         (playerSalary: SalariesAndRatingsDto) =>
-          playerSalary.player_id.isforward
+          playerSalary.player_id.isforward &&
+          !playerSalary.player_id.is_protected
       )
       .sort(
         (a, b) =>
@@ -99,7 +100,8 @@ const selectDefenseSalaries = createSelector(
     playerSalaries
       .filter(
         (playerSalary: SalariesAndRatingsDto) =>
-          playerSalary.player_id.isdefense
+          playerSalary.player_id.isdefense &&
+          !playerSalary.player_id.is_protected
       )
       .sort(
         (a, b) =>
@@ -236,7 +238,9 @@ const selectGoalieSalariesFiltered = createSelector(
   (goalieSalaries: SalariesAndRatingsDto[]) =>
     goalieSalaries
       .filter(
-        (playerSalary: SalariesAndRatingsDto) => playerSalary.player_id.isgoalie
+        (playerSalary: SalariesAndRatingsDto) =>
+          playerSalary.player_id.isgoalie &&
+          !playerSalary.player_id.is_protected
       )
       .sort(
         (a, b) =>
