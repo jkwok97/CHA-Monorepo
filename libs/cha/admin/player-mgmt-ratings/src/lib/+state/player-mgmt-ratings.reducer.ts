@@ -29,16 +29,18 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(
-    PlayerMgmtRatingsActions.getPlayers,
-    PlayerMgmtRatingsActions.getGoalies,
-    (state) => ({
-      ...state,
-      loading: true,
-      goaliesLoaded: false,
-      playersLoaded: false,
-    })
-  ),
+  on(PlayerMgmtRatingsActions.getPlayers, (state) => ({
+    ...state,
+    loading: true,
+
+    playersLoaded: false,
+  })),
+
+  on(PlayerMgmtRatingsActions.getGoalies, (state) => ({
+    ...state,
+    loading: true,
+    goaliesLoaded: false,
+  })),
 
   on(
     PlayerMgmtRatingsActions.editPlayer,
