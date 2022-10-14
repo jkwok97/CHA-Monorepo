@@ -83,7 +83,12 @@
   </blade-card-body>
 </blade-card>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true" [blockScroll]="true">
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [blockScroll]="true"
+  appendTo="body"
+>
   <ng-container *ngIf="playerStats as playerStats">
     <cha-front-home-summary-depth-chart-item-sidebar
       [playerStats]="playerStats"

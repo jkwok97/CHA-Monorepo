@@ -23,7 +23,7 @@ export class LeagueStatsGoaliesEffects {
           .getAllGoalieLeaders(
             data.current_year,
             data.current_season_type,
-            data.min_games
+            data.min_games.toString()
           )
           .pipe(
             map((leaders: StatGoalieLeadersDto) =>
