@@ -3098,17 +3098,166 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/goalie-ratings/src/lib/api-
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiGoalieRatingsModule = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const controllers_1 = __webpack_require__("./libs/api/goalie-ratings/src/lib/controllers/index.ts");
+const middlewares_1 = __webpack_require__("./libs/api/goalie-ratings/src/lib/middlewares/index.ts");
+const services_1 = __webpack_require__("./libs/api/goalie-ratings/src/lib/services/index.ts");
 let ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.GoalieRatingsMiddleware).forRoutes('*');
+    }
 };
 ApiGoalieRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        controllers: [],
-        providers: [],
-        exports: [],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalie_Ratings_V2])],
+        controllers: [controllers_1.GoalieRatingsController],
+        providers: [services_1.ApiGoalieRatingsService],
     })
 ], ApiGoalieRatingsModule);
 exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule;
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/controllers/goalie-ratings.controller.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GoalieRatingsController = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const services_1 = __webpack_require__("./libs/api/goalie-ratings/src/lib/services/index.ts");
+let GoalieRatingsController = class GoalieRatingsController {
+    constructor(goalieRatingsService) {
+        this.goalieRatingsService = goalieRatingsService;
+    }
+    async getAllRatings() {
+        const players = await this.goalieRatingsService.getAll();
+        if (!players || players.length < 1) {
+            throw new common_1.NotFoundException('ratings not found');
+        }
+        return players;
+    }
+    updatePlayerById(param, body) {
+        return this.goalieRatingsService.updatePlayerById(parseInt(param.id), body);
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], GoalieRatingsController.prototype, "getAllRatings", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], GoalieRatingsController.prototype, "updatePlayerById", null);
+GoalieRatingsController = tslib_1.__decorate([
+    (0, common_1.Controller)('goalie-ratings'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiGoalieRatingsService !== "undefined" && services_1.ApiGoalieRatingsService) === "function" ? _a : Object])
+], GoalieRatingsController);
+exports.GoalieRatingsController = GoalieRatingsController;
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/controllers/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/goalie-ratings/src/lib/controllers/goalie-ratings.controller.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/middlewares/goalie-ratings.middleware.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GoalieRatingsMiddleware = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+let GoalieRatingsMiddleware = class GoalieRatingsMiddleware {
+    use(req, res, next) {
+        console.log('Request Goalie Ratings...');
+        next();
+    }
+};
+GoalieRatingsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], GoalieRatingsMiddleware);
+exports.GoalieRatingsMiddleware = GoalieRatingsMiddleware;
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/middlewares/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/goalie-ratings/src/lib/middlewares/goalie-ratings.middleware.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/services/api-goalie-ratings.service.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiGoalieRatingsService = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
+const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const typeorm_2 = __webpack_require__("typeorm");
+let ApiGoalieRatingsService = class ApiGoalieRatingsService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async getAll() {
+        return await this.repo.find();
+    }
+    async updatePlayerById(id, attrs) {
+        const player = await this.repo.findOneByOrFail({ id });
+        if (!player) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(player, attrs);
+        return this.repo.save(player);
+    }
+};
+ApiGoalieRatingsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalie_Ratings_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], ApiGoalieRatingsService);
+exports.ApiGoalieRatingsService = ApiGoalieRatingsService;
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/services/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/goalie-ratings/src/lib/services/api-goalie-ratings.service.ts"), exports);
 
 
 /***/ }),
