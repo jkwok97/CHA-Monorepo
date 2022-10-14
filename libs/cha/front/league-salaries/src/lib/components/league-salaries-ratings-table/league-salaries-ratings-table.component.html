@@ -55,11 +55,20 @@
         <th pSortableColumn="player_id.lastname">
           Player <p-sortIcon field="player_id.lastname"></p-sortIcon>
         </th>
-        <th pSortableColumn="player_id.isdefense" *ngIf="type !== 'goalies'">
-          Defense <p-sortIcon field="player_id.isdefense"></p-sortIcon>
+        <th pSortableColumn="ratings.c_rate" *ngIf="type !== 'goalies'">
+          C <p-sortIcon field="ratings.c_rate"></p-sortIcon>
         </th>
-        <th pSortableColumn="player_id.isforward" *ngIf="type !== 'goalies'">
-          Forward <p-sortIcon field="player_id.isforward"></p-sortIcon>
+        <th pSortableColumn="ratings.l_rate" *ngIf="type !== 'goalies'">
+          LW <p-sortIcon field="ratings.l_rate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="ratings.r_rate" *ngIf="type !== 'goalies'">
+          RW <p-sortIcon field="ratings.r_rate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="ratings.ld_rate" *ngIf="type !== 'goalies'">
+          LD <p-sortIcon field="ratings.ld_rate"></p-sortIcon>
+        </th>
+        <th pSortableColumn="ratings.rd_rate" *ngIf="type !== 'goalies'">
+          RD <p-sortIcon field="ratings.rd_rate"></p-sortIcon>
         </th>
         <th pSortableColumn="salaries.season_2022">
           21-22 <p-sortIcon field="salaries.season_2022"></p-sortIcon>
@@ -137,24 +146,19 @@
           <span class="p-column-title">Player</span>{{ salary.playerName }}
         </td>
         <td *ngIf="type !== 'goalies'">
-          <i
-            class="pi pi-check-circle text-green-500"
-            *ngIf="salary.player_id.isdefense"
-          ></i>
-          <i
-            class="pi pi-times-circle text-red-500"
-            *ngIf="!salary.player_id.isdefense"
-          ></i>
+          {{ salary.ratings?.c_rate ? salary.ratings?.c_rate : 0 }}
         </td>
         <td *ngIf="type !== 'goalies'">
-          <i
-            class="pi pi-check-circle text-green-500"
-            *ngIf="salary.player_id.isforward"
-          ></i>
-          <i
-            class="pi pi-times-circle text-red-500"
-            *ngIf="!salary.player_id.isforward"
-          ></i>
+          {{ salary.ratings?.l_rate ? salary.ratings?.l_rate : 0 }}
+        </td>
+        <td *ngIf="type !== 'goalies'">
+          {{ salary.ratings?.r_rate ? salary.ratings?.r_rate : 0 }}
+        </td>
+        <td *ngIf="type !== 'goalies'">
+          {{ salary.ratings?.ld_rate ? salary.ratings?.ld_rate : 0 }}
+        </td>
+        <td *ngIf="type !== 'goalies'">
+          {{ salary.ratings?.rd_rate ? salary.ratings?.rd_rate : 0 }}
         </td>
         <td>
           <span class="p-column-title">21-22</span
