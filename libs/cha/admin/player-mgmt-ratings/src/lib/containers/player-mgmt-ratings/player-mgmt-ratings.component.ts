@@ -16,6 +16,13 @@ export class PlayerMgmtRatingsComponent {
   players$: Observable<PlayerRatingDto[]>;
   goalies$: Observable<GoalieRatingDto[]>;
 
+  selectOptions = [
+    { label: 'Skaters', value: 'skater' },
+    { label: 'Goalies', value: 'goalie' },
+  ];
+
+  showSkaters = true;
+  showGoalies = false;
   isMobile!: boolean;
 
   constructor(
@@ -35,5 +42,28 @@ export class PlayerMgmtRatingsComponent {
 
     this.playerMgmtRatingsFacade.getPlayers();
     this.playerMgmtRatingsFacade.getGoalies();
+  }
+
+  onOptionChanged(option: string) {
+    switch (option) {
+      case 'skater':
+        this.setSkaters();
+        break;
+      case 'goalie':
+        this.setGoalies();
+        break;
+      default:
+        return;
+    }
+  }
+
+  setSkaters() {
+    this.showSkaters = true;
+    this.showGoalies = false;
+  }
+
+  setGoalies() {
+    this.showSkaters = false;
+    this.showGoalies = true;
   }
 }

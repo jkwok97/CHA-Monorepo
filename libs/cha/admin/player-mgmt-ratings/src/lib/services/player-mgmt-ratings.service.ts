@@ -13,9 +13,9 @@ export class PlayerMgmtRatingsService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getPlayers() {
+  getPlayers(season: string) {
     return this._http
-      .get(`${this.apiUrl}/player-ratings`)
+      .get(`${this.apiUrl}/player-ratings/${season}`)
       .pipe(map((result: any) => result));
   }
 
@@ -25,9 +25,9 @@ export class PlayerMgmtRatingsService {
       .pipe(map((result: any) => result));
   }
 
-  getGoalies() {
+  getGoalies(season: string) {
     return this._http
-      .get(`${this.apiUrl}/goalie-ratings`)
+      .get(`${this.apiUrl}/goalie-ratings/${season}`)
       .pipe(map((result: any) => result));
   }
 

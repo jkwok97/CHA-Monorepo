@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { LeagueDataFacade } from '@cha/domain/core';
 import { GoalieRatingDto, PlayerRatingDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
-import { exhaustMap, map, catchError, of, tap } from 'rxjs';
+import { exhaustMap, map, catchError, of, tap, withLatestFrom } from 'rxjs';
 import { PlayerMgmtRatingsService } from '../services';
 import { PlayerMgmtRatingsActions } from './player-mgmt-ratings.actions';
 import { PlayerMgmtRatingsFacade } from './player-mgmt-ratings.facade';
@@ -13,21 +14,25 @@ export class PlayerMgmtRatingsEffects {
     private actions$: Actions,
     private playerMgmtRatingsService: PlayerMgmtRatingsService,
     private playerMgmtRatingsFacade: PlayerMgmtRatingsFacade,
+    private leagueDataFacade: LeagueDataFacade,
     private messageService: MessageService
   ) {}
 
   getPlayers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtRatingsActions.getPlayers),
-      exhaustMap((action) =>
-        this.playerMgmtRatingsService.getPlayers().pipe(
-          map((players: PlayerRatingDto[]) =>
-            PlayerMgmtRatingsActions.getPlayersSuccess({
-              players,
-            })
-          ),
-          catchError(() => of(PlayerMgmtRatingsActions.error()))
-        )
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.playerMgmtRatingsService
+          .getPlayers(data.offseason ? data.prev_year : data.current_year)
+          .pipe(
+            map((players: PlayerRatingDto[]) =>
+              PlayerMgmtRatingsActions.getPlayersSuccess({
+                players,
+              })
+            ),
+            catchError(() => of(PlayerMgmtRatingsActions.error()))
+          )
       )
     )
   );
@@ -67,15 +72,18 @@ export class PlayerMgmtRatingsEffects {
   getGoalies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtRatingsActions.getGoalies),
-      exhaustMap((action) =>
-        this.playerMgmtRatingsService.getGoalies().pipe(
-          map((goalies: GoalieRatingDto[]) =>
-            PlayerMgmtRatingsActions.getGoaliesSuccess({
-              goalies,
-            })
-          ),
-          catchError(() => of(PlayerMgmtRatingsActions.error()))
-        )
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.playerMgmtRatingsService
+          .getGoalies(data.offseason ? data.prev_year : data.current_year)
+          .pipe(
+            map((goalies: GoalieRatingDto[]) =>
+              PlayerMgmtRatingsActions.getGoaliesSuccess({
+                goalies,
+              })
+            ),
+            catchError(() => of(PlayerMgmtRatingsActions.error()))
+          )
       )
     )
   );

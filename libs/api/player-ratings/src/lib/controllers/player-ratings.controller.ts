@@ -13,9 +13,9 @@ import { ApiPlayerRatingsService } from '../services';
 export class PlayerRatingsController {
   constructor(private playerRatingsService: ApiPlayerRatingsService) {}
 
-  @Get()
-  async getAllRatings(): Promise<Player_Ratings_V2[]> {
-    const players = await this.playerRatingsService.getAll();
+  @Get('/:season')
+  async getAllRatings(@Param() param): Promise<Player_Ratings_V2[]> {
+    const players = await this.playerRatingsService.getAll(param.season);
 
     if (!players || players.length < 1) {
       throw new NotFoundException('ratings not found');

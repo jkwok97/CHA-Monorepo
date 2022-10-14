@@ -9,11 +9,15 @@ export class ApiPlayerRatingsService {
     @InjectRepository(Player_Ratings_V2)
     private repo: Repository<Player_Ratings_V2>,
     @InjectRepository(Players_V2)
-    private playersRepo: Repository<Players_V2>,
+    private playersRepo: Repository<Players_V2>
   ) {}
 
-  async getAll(): Promise<Player_Ratings_V2[]> {
-    const ratings = await this.repo.find();
+  async getAll(season: string): Promise<Player_Ratings_V2[]> {
+    const ratings = await this.repo.find({
+      where: {
+        playing_year: season,
+      },
+    });
 
     const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
 
