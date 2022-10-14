@@ -21,6 +21,7 @@
       "@api/draft-table": ["libs/api/draft-table/src/index.ts"],
       "@api/entities": ["libs/api/entities/src/index.ts"],
       "@api/entry-draft": ["libs/api/entry-draft/src/index.ts"],
+      "@api/goalie-ratings": ["libs/api/goalie-ratings/src/index.ts"],
       "@api/goalie-stats": ["libs/api/goalie-stats/src/index.ts"],
       "@api/league": ["libs/api/league/src/index.ts"],
       "@api/nhl": ["libs/api/nhl/src/index.ts"],

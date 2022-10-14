@@ -698,6 +698,7 @@ const teams_1 = __webpack_require__("./libs/api/teams/src/index.ts");
 const transactions_1 = __webpack_require__("./libs/api/transactions/src/index.ts");
 const waivers_1 = __webpack_require__("./libs/api/waivers/src/index.ts");
 const divisions_1 = __webpack_require__("./libs/api/divisions/src/index.ts");
+const goalie_ratings_1 = __webpack_require__("./libs/api/goalie-ratings/src/index.ts");
 let ApiCoreModule = class ApiCoreModule {
 };
 ApiCoreModule = tslib_1.__decorate([
@@ -720,6 +721,7 @@ ApiCoreModule = tslib_1.__decorate([
             transactions_1.ApiTransactionsModule,
             waivers_1.ApiWaiversModule,
             divisions_1.ApiDivisionsModule,
+            goalie_ratings_1.ApiGoalieRatingsModule,
         ],
         controllers: [],
         providers: [],
@@ -3078,6 +3080,39 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/entry-draft/src/lib/service
 
 /***/ }),
 
+/***/ "./libs/api/goalie-ratings/src/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/goalie-ratings/src/lib/api-goalie-ratings.module.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/goalie-ratings/src/lib/api-goalie-ratings.module.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiGoalieRatingsModule = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+let ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
+};
+ApiGoalieRatingsModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        controllers: [],
+        providers: [],
+        exports: [],
+    })
+], ApiGoalieRatingsModule);
+exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule;
+
+
+/***/ }),
+
 /***/ "./libs/api/goalie-stats/src/index.ts":
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -4689,15 +4724,22 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/player-ratings/src/lib/api-
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerRatingsModule = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const controllers_1 = __webpack_require__("./libs/api/player-ratings/src/lib/controllers/index.ts");
+const middlewares_1 = __webpack_require__("./libs/api/player-ratings/src/lib/middlewares/index.ts");
+const services_1 = __webpack_require__("./libs/api/player-ratings/src/lib/services/index.ts");
 let ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.PlayerRatingsMiddleware).forRoutes('*');
+    }
 };
 ApiPlayerRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Player_Ratings_V2])],
         controllers: [controllers_1.PlayerRatingsController],
-        providers: [],
-        exports: [],
+        providers: [services_1.ApiPlayerRatingsService],
     })
 ], ApiPlayerRatingsModule);
 exports.ApiPlayerRatingsModule = ApiPlayerRatingsModule;
@@ -4720,16 +4762,128 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/player-ratings/src/lib/cont
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerRatingsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
+const services_1 = __webpack_require__("./libs/api/player-ratings/src/lib/services/index.ts");
 let PlayerRatingsController = class PlayerRatingsController {
+    constructor(playerRatingsService) {
+        this.playerRatingsService = playerRatingsService;
+    }
+    async getAllRatings() {
+        const players = await this.playerRatingsService.getAll();
+        if (!players || players.length < 1) {
+            throw new common_1.NotFoundException('ratings not found');
+        }
+        return players;
+    }
+    updatePlayerById(param, body) {
+        return this.playerRatingsService.updatePlayerById(parseInt(param.id), body);
+    }
 };
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], PlayerRatingsController.prototype, "getAllRatings", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], PlayerRatingsController.prototype, "updatePlayerById", null);
 PlayerRatingsController = tslib_1.__decorate([
-    (0, common_1.Controller)('player-ratings')
+    (0, common_1.Controller)('player-ratings'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiPlayerRatingsService !== "undefined" && services_1.ApiPlayerRatingsService) === "function" ? _a : Object])
 ], PlayerRatingsController);
 exports.PlayerRatingsController = PlayerRatingsController;
+
+
+/***/ }),
+
+/***/ "./libs/api/player-ratings/src/lib/middlewares/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/player-ratings/src/lib/middlewares/player-ratings.middleware.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/player-ratings/src/lib/middlewares/player-ratings.middleware.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PlayerRatingsMiddleware = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+let PlayerRatingsMiddleware = class PlayerRatingsMiddleware {
+    use(req, res, next) {
+        console.log('Request Player Ratings...');
+        next();
+    }
+};
+PlayerRatingsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], PlayerRatingsMiddleware);
+exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware;
+
+
+/***/ }),
+
+/***/ "./libs/api/player-ratings/src/lib/services/api-player-ratings.service.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiPlayerRatingsService = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
+const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const typeorm_2 = __webpack_require__("typeorm");
+let ApiPlayerRatingsService = class ApiPlayerRatingsService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async getAll() {
+        return await this.repo.find();
+    }
+    async updatePlayerById(id, attrs) {
+        const player = await this.repo.findOneByOrFail({ id });
+        if (!player) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(player, attrs);
+        return this.repo.save(player);
+    }
+};
+ApiPlayerRatingsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Player_Ratings_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], ApiPlayerRatingsService);
+exports.ApiPlayerRatingsService = ApiPlayerRatingsService;
+
+
+/***/ }),
+
+/***/ "./libs/api/player-ratings/src/lib/services/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/player-ratings/src/lib/services/api-player-ratings.service.ts"), exports);
 
 
 /***/ }),
@@ -6398,7 +6552,8 @@ let ApiSalariesService = class ApiSalariesService {
     }
     async getNhlPlayerStatsByPlayerId(playerId) {
         var _a;
-        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`);
+        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022` //TODO CHANGE EVERY YEAR
+        );
         const response = await (0, rxjs_1.firstValueFrom)(stats);
         return (_a = response.data.stats[0].splits[0]) === null || _a === void 0 ? void 0 : _a.stat;
     }

@@ -1,0 +1,24 @@
+{
+  "name": "api-goalie-ratings",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/goalie-ratings/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/goalie-ratings/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/goalie-ratings"],
+      "options": {
+        "jestConfig": "libs/api/goalie-ratings/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["api:module"]
+}

@@ -1,9 +1,17 @@
-import { Module } from '@nestjs/common';
+import { Player_Ratings_V2 } from '@api/entities';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlayerRatingsController } from './controllers';
+import { PlayerRatingsMiddleware } from './middlewares';
+import { ApiPlayerRatingsService } from './services';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Player_Ratings_V2])],
   controllers: [PlayerRatingsController],
-  providers: [],
-  exports: [],
+  providers: [ApiPlayerRatingsService],
 })
-export class ApiPlayerRatingsModule {}
+export class ApiPlayerRatingsModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(PlayerRatingsMiddleware).forRoutes('*');
+  }
+}
