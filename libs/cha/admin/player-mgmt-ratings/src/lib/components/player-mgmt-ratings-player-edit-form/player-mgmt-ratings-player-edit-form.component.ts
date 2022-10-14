@@ -35,37 +35,16 @@ export class PlayerMgmtRatingsPlayerEditFormComponent implements OnInit {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
         fieldGroup: [this.playerIdField()],
       },
-      // {
-      //   fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-      //   fieldGroup: [
-      //     this.nhl2020Field(),
-      //     this.nhl2021Field(),
-      //     this.nhl2022Field(),
-      //     this.nhl2023Field(),
-      //     this.nhl2024Field(),
-      //     this.nhl2025Field(),
-      //     this.nhl2026Field(),
-      //     this.nhl2027Field(),
-      //     this.nhl2028Field(),
-      //     this.nhl2029Field(),
-      //     this.nhl2030Field(),
-      //   ],
-      // },
-      // {
-      //   fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-      //   fieldGroup: [
-      //     this.nhl2031Field(),
-      //     this.nhl2032Field(),
-      //     this.nhl2033Field(),
-      //     this.nhl2034Field(),
-      //     this.nhl2035Field(),
-      //     this.nhl2036Field(),
-      //     this.nhl2037Field(),
-      //     this.nhl2038Field(),
-      //     this.nhl2039Field(),
-      //     this.nhl2040Field(),
-      //   ],
-      // },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [
+          this.centerField(),
+          this.leftField(),
+          this.rightField(),
+          this.leftdefenseField(),
+          this.rightdefenseField(),
+        ],
+      },
     ];
   }
 
@@ -79,19 +58,6 @@ export class PlayerMgmtRatingsPlayerEditFormComponent implements OnInit {
       r_rate: this.player?.r_rate,
       ld_rate: this.player?.ld_rate,
       rd_rate: this.player?.rd_rate,
-      shooting: this.player?.shooting,
-      skating: this.player?.skating,
-      speed: this.player?.speed,
-      passing: this.player?.passing,
-      forecheck: this.player?.forecheck,
-      physical: this.player?.physical,
-      intimidation: this.player?.intimidation,
-      clear_crease: this.player?.clear_crease,
-      rock: this.player?.rock,
-      pk: this.player?.pk,
-      shot_block: this.player?.shot_block,
-      face_off: this.player?.face_off,
-      assist_rating: this.player?.assist_rating,
     };
   }
 
@@ -108,6 +74,91 @@ export class PlayerMgmtRatingsPlayerEditFormComponent implements OnInit {
       validation: {
         messages: {
           required: () => 'Player Id is required',
+        },
+      },
+    };
+  }
+
+  centerField(): FormlyFieldConfig {
+    return {
+      key: 'c_rate',
+      className: 'w-full md:w-1',
+      type: 'text-input',
+      templateOptions: {
+        label: 'C',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'required',
+        },
+      },
+    };
+  }
+
+  leftField(): FormlyFieldConfig {
+    return {
+      key: 'l_rate',
+      className: 'w-full md:w-1',
+      type: 'text-input',
+      templateOptions: {
+        label: 'LW',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'required',
+        },
+      },
+    };
+  }
+
+  rightField(): FormlyFieldConfig {
+    return {
+      key: 'r_rate',
+      className: 'w-full md:w-1',
+      type: 'text-input',
+      templateOptions: {
+        label: 'RW',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'required',
+        },
+      },
+    };
+  }
+
+  leftdefenseField(): FormlyFieldConfig {
+    return {
+      key: 'ld_rate',
+      className: 'w-full md:w-1',
+      type: 'text-input',
+      templateOptions: {
+        label: 'LD',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'required',
+        },
+      },
+    };
+  }
+
+  rightdefenseField(): FormlyFieldConfig {
+    return {
+      key: 'rd_rate',
+      className: 'w-full md:w-1',
+      type: 'text-input',
+      templateOptions: {
+        label: 'RD',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'required',
         },
       },
     };

@@ -7,7 +7,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { PlayerRatingDto } from '@cha/shared/entities';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter } from 'rxjs';
 import { PlayerMgmtRatingsFacade } from '../../+state/player-mgmt-ratings.facade';
 import { PlayerMgmtRatingsPlayerEditFormComponent } from '../player-mgmt-ratings-player-edit-form';
 
@@ -32,16 +33,16 @@ export class PlayerMgmtRatingsPlayerEditComponent {
   }
 
   onSave() {
-    // const salary = {
-    //   id: this.salary?.id,
-    //   ...this.salaryFormRef?.form.value,
-    // };
-    // this.playerMgmtSalariesFacade.editSalary(salary);
-    // this.playerMgmtSalariesFacade.isSaving$
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     filter((isSaving: boolean) => !isSaving)
-    //   )
-    //   .subscribe(() => this.closeSidebar.emit(true));
+    const player = {
+      id: this.player?.id,
+      ...this.ratingFormRef?.form.value,
+    };
+    this.playerMgmtRatingsFacade.editPlayer(player);
+    this.playerMgmtRatingsFacade.isSaving$
+      .pipe(
+        untilDestroyed(this),
+        filter((isSaving: boolean) => !isSaving)
+      )
+      .subscribe(() => this.closeSidebar.emit(true));
   }
 }
