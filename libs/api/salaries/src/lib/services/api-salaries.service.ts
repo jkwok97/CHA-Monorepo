@@ -326,7 +326,7 @@ export class ApiSalariesService {
     playerId: number
   ): Promise<Observable<any>> {
     const stats = this.httpService.get(
-      `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022`
+      `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022` //TODO CHANGE EVERY YEAR
     );
 
     const response = await firstValueFrom(stats);
