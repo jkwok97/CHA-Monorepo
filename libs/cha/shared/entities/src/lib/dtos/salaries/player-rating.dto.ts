@@ -29,4 +29,9 @@ export interface PlayerRatingDto {
   assists?: string;
   shots?: string;
   shooting_pct?: string;
+  playerInfo?: {
+    id: number;
+    firstname: string;
+    lastname: string;
+  };
 }

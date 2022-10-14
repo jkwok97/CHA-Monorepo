@@ -29,8 +29,8 @@ export class PlayerMgmtRatingsEffects {
   getPlayers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtRatingsActions.getPlayers),
-      withLatestFrom(this.leagueDataFacade.leagueData$),
       delay(500),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.playerMgmtRatingsService
           .getPlayers(data.offseason ? data.prev_year : data.current_year)
@@ -81,8 +81,8 @@ export class PlayerMgmtRatingsEffects {
   getGoalies$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtRatingsActions.getGoalies),
-      withLatestFrom(this.leagueDataFacade.leagueData$),
       delay(500),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.playerMgmtRatingsService
           .getGoalies(data.offseason ? data.prev_year : data.current_year)

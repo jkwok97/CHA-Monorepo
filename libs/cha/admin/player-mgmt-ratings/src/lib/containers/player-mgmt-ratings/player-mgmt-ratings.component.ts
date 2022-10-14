@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
 import { GoalieRatingDto, PlayerRatingDto } from '@cha/shared/entities';
 import { first, Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { PlayerMgmtRatingsFacade } from '../../+state/player-mgmt-ratings.facade
   styleUrls: ['./player-mgmt-ratings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerMgmtRatingsComponent {
+export class PlayerMgmtRatingsComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
   players$: Observable<PlayerRatingDto[]>;
@@ -39,13 +39,14 @@ export class PlayerMgmtRatingsComponent {
       .subscribe((isMobile: boolean) => {
         this.isMobile = isMobile;
       });
+  }
 
+  ngOnInit(): void {
     this.playerMgmtRatingsFacade.getPlayers();
     this.playerMgmtRatingsFacade.getGoalies();
   }
 
   onOptionChanged(option: string) {
-    console.log(option);
     switch (option) {
       case 'skater':
         this.setSkaters();
@@ -66,8 +67,5 @@ export class PlayerMgmtRatingsComponent {
   setGoalies() {
     this.showSkaters = false;
     this.showGoalies = true;
-
-    console.log(this.showGoalies);
-    console.log(this.showSkaters);
   }
 }

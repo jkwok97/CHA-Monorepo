@@ -23,20 +23,18 @@
       <blade-card-body>
         <ng-container *ngIf="showSkaters">
           <ng-container *ngIf="players$ | async as players">
-            {{ players | json }}
-            <!-- <cha-admin-player-mgmt-salaries-table
-                [isMobile]="isMobile"
-                [salaries]="salaries"
-              ></cha-admin-player-mgmt-salaries-table> -->
+            <cha-admin-player-mgmt-ratings-player-table
+              [isMobile]="isMobile"
+              [players]="players"
+            ></cha-admin-player-mgmt-ratings-player-table>
           </ng-container>
         </ng-container>
         <ng-container *ngIf="showGoalies">
           <ng-container *ngIf="goalies$ | async as goalies">
-            {{ goalies | json }}
-            <!-- <cha-admin-player-mgmt-salaries-table
-                [isMobile]="isMobile"
-                [salaries]="salaries"
-              ></cha-admin-player-mgmt-salaries-table> -->
+            <cha-admin-player-mgmt-ratings-goalie-table
+              [isMobile]="isMobile"
+              [goalies]="goalies"
+            ></cha-admin-player-mgmt-ratings-goalie-table>
           </ng-container>
         </ng-container>
       </blade-card-body>

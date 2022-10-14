@@ -1,3 +1,4 @@
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { PlayerRatingDto } from './player-rating.dto';
 
 export interface GoalieRatingDto extends PlayerRatingDto {
@@ -14,4 +15,9 @@ export interface GoalieRatingDto extends PlayerRatingDto {
   assists?: string;
   shots?: string;
   shooting_pct?: string;
+  playerInfo?: {
+    id: number,
+    firstname: string,
+    lastname: string
+  }
 }

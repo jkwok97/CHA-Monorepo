@@ -32,7 +32,6 @@ const r = createReducer(
   on(PlayerMgmtRatingsActions.getPlayers, (state) => ({
     ...state,
     loading: true,
-    loaded: false,
   })),
 
   on(

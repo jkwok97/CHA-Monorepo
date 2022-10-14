@@ -33,7 +33,7 @@ export class PlayerMgmtRatingsFacade {
   );
 
   goalies$: Observable<GoalieRatingDto[]> = this.store.select(
-    PlayerMgmtRatingsSelectors.selectPlayers
+    PlayerMgmtRatingsSelectors.selectGoalies
   );
 
   goalie$: Observable<GoalieRatingDto | null> = this.store.select(

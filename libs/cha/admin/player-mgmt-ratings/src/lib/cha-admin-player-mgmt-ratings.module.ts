@@ -5,6 +5,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { SidebarModule } from 'primeng/sidebar';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -31,6 +35,10 @@ import {
   imports: [
     CommonModule,
     ProgressBarModule,
+    SidebarModule,
+    TableModule,
+    InputTextModule,
+    ButtonModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,
