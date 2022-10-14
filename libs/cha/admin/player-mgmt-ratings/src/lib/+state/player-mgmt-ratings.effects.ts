@@ -8,7 +8,7 @@ import { PlayerMgmtRatingsActions } from './player-mgmt-ratings.actions';
 import { PlayerMgmtRatingsFacade } from './player-mgmt-ratings.facade';
 
 @Injectable()
-export class PlayerMgmtInfoEffects {
+export class PlayerMgmtRatingsEffects {
   constructor(
     private actions$: Actions,
     private playerMgmtRatingsService: PlayerMgmtRatingsService,
