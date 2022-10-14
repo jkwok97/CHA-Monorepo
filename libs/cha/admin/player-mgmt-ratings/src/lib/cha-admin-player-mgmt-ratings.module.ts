@@ -4,6 +4,12 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
+import { ProgressBarModule } from 'primeng/progressbar';
+
+import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { BladeDividerComponent } from '@blade/angular/ui/divider';
+
 import { PlayerMgmtRatingsFacade } from './+state/player-mgmt-ratings.facade';
 import { reducer } from './+state/player-mgmt-ratings.reducer';
 import { PlayerMgmtRatingsEffects } from './+state/player-mgmt-ratings.effects';
@@ -15,6 +21,10 @@ import { PlayerMgmtRatingsComponent } from './containers';
 @NgModule({
   imports: [
     CommonModule,
+    ProgressBarModule,
+    BladeAngularUiCardModule,
+    BladeAngularUiLayoutModule,
+    BladeDividerComponent,
     ChaAdminPlayerMgmtRatingsRoutingModule,
     StoreModule.forFeature('player-mgmt-ratings', reducer),
     EffectsModule.forFeature([PlayerMgmtRatingsEffects]),
