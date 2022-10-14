@@ -69,7 +69,6 @@ import {
   PlayersStatsTableSiderComponent,
   GoalieStatsTableComponent,
   GoalieStatsTableSiderComponent,
-  SalariesTableComponent,
 } from './components';
 
 @NgModule({
@@ -125,7 +124,6 @@ import {
     GoalieStatsTableComponent,
     GoalieStatsTableSiderComponent,
     TeamsSummarySalariesComponent,
-    SalariesTableComponent,
   ],
   providers: [
     TeamsSummaryService,
