@@ -12,6 +12,7 @@ export interface StatGoalieAllDto {
     teamlogo: string;
     city: string;
     nickname: string;
+    shortname?: string;
   };
   id: number;
   games_played: number;

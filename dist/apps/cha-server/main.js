@@ -4067,6 +4067,7 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
                 city: true,
                 teamlogo: true,
                 nickname: true,
+                shortname: true,
             },
             where: {
                 shortname: teamName,
