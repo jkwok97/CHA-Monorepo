@@ -70,6 +70,13 @@ const selectSortedTeams = createSelector(selectTeams, (teams: TeamDto[]) =>
     .sort((a: TeamDto, b: TeamDto) => a.city.localeCompare(b.city))
 );
 
+const selectTeamsOptions = createSelector(selectTeams, (teams: TeamDto[]) =>
+  teams.map((team: TeamDto) => ({
+    value: team.id,
+    label: `${team.city} ${team.nickname}`,
+  }))
+);
+
 const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
 
 const selectLoaded = createSelector(selectState, LeagueDataReducer.getLoaded);
@@ -88,5 +95,6 @@ export const LeagueDataSelectors = {
   selectCurrentCapHit,
   selectNextYearCapHit,
   selectSortedTeams,
-  selectSaving
+  selectSaving,
+  selectTeamsOptions,
 };

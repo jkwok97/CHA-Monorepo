@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
+import { LeagueDataFacade } from '@cha/domain/core';
 import { StatPlayerAllDto } from '@cha/shared/entities';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
@@ -19,6 +20,7 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
   @Input() player!: StatPlayerAllDto | null;
 
   playersOptions$: Observable<any[]>;
+  teamOptions$: Observable<any>;
 
   form = new UntypedFormGroup({});
   model: any = {};
@@ -26,9 +28,11 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
   fields!: FormlyFieldConfig[];
 
   constructor(
-    private playerMgmtPlayerCurrentFacade: PlayerMgmtPlayerCurrentFacade
+    private playerMgmtPlayerCurrentFacade: PlayerMgmtPlayerCurrentFacade,
+    private leagueDataFacade: LeagueDataFacade
   ) {
     this.playersOptions$ = this.playerMgmtPlayerCurrentFacade.playersOptions$;
+    this.teamOptions$ = this.leagueDataFacade.leagueTeamsOptions$;
   }
 
   ngOnInit(): void {
@@ -47,13 +51,7 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
       },
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-        fieldGroup: [
-          // this.centerField(),
-          // this.leftField(),
-          // this.rightField(),
-          // this.leftdefenseField(),
-          // this.rightdefenseField(),
-        ],
+        fieldGroup: [this.teamField(), this.statusField()],
       },
     ];
   }
@@ -64,13 +62,9 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
       player_id: {
         id: this.player?.player_id.id,
       },
-      // game_fatigue: this.player?.game_fatigue,
-      // shift_fatigue: this.player?.shift_fatigue,
-      // c_rate: this.player?.c_rate,
-      // l_rate: this.player?.l_rate,
-      // r_rate: this.player?.r_rate,
-      // ld_rate: this.player?.ld_rate,
-      // rd_rate: this.player?.rd_rate,
+      teamInfo: {
+        id: this.player?.teamInfo.id,
+      },
     };
   }
 
@@ -80,12 +74,50 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
       className: 'w-full md:w-3',
       type: 'text-input',
       templateOptions: {
-        label: 'Player Id',
+        label: 'Team',
         required: true,
       },
       validation: {
         messages: {
           required: () => 'Player Id is required',
+        },
+      },
+    };
+  }
+
+  teamField(): FormlyFieldConfig {
+    return {
+      key: 'teamInfo.id',
+      className: 'w-full md:w-3',
+      type: 'single-select',
+      templateOptions: {
+        label: 'Team',
+        placeholder: 'Select Team',
+        required: true,
+        options: this.teamOptions$,
+        valueProp: 'value',
+        labelProp: 'label',
+      },
+      validation: {
+        messages: {
+          required: () => 'Team is required',
+        },
+      },
+    };
+  }
+
+  statusField(): FormlyFieldConfig {
+    return {
+      key: 'player_status',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Player Status',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'Status is required',
         },
       },
     };
