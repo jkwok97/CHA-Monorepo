@@ -5,6 +5,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { SidebarModule } from 'primeng/sidebar';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -17,11 +21,20 @@ import { reducer } from './+state/player-mgmt-player-current.reducer';
 import { ChaAdminPlayerMgmtPlayerCurrentRoutingModule } from './cha-admin-player-mgmt-player-current-routing.module';
 
 import { PlayerMgmtPlayerCurrentComponent } from './containers';
+import {
+  PlayerMgmtPlayerCurrentTableComponent,
+  PlayerMgmtPlayerCurrentEditComponent,
+  PlayerMgmtPlayerCurrentEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
     CommonModule,
     ProgressBarModule,
+    SidebarModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,
@@ -29,7 +42,12 @@ import { PlayerMgmtPlayerCurrentComponent } from './containers';
     StoreModule.forFeature('player-mgmt-player-current', reducer),
     EffectsModule.forFeature([PlayerMgmtPlayerCurrentEffects]),
   ],
-  declarations: [PlayerMgmtPlayerCurrentComponent],
+  declarations: [
+    PlayerMgmtPlayerCurrentComponent,
+    PlayerMgmtPlayerCurrentTableComponent,
+    PlayerMgmtPlayerCurrentEditComponent,
+    PlayerMgmtPlayerCurrentEditFormComponent,
+  ],
   providers: [PlayerMgmtPlayerCurrentEffects, PlayerMgmtPlayerCurrentFacade],
 })
 export class ChaAdminPlayerMgmtPlayerCurrentModule {}

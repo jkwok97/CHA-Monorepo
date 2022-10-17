@@ -3,7 +3,15 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { StatPlayerAllDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
-import { exhaustMap, map, catchError, of, tap, withLatestFrom } from 'rxjs';
+import {
+  exhaustMap,
+  map,
+  catchError,
+  of,
+  tap,
+  withLatestFrom,
+  delay,
+} from 'rxjs';
 import { PlayerMgmtPlayerCurrentService } from '../services';
 import { PlayerMgmtPlayerCurrentActions } from './player-mgmt-player-current.actions';
 import { PlayerMgmtPlayerCurrentFacade } from './player-mgmt-player-current.facade';
@@ -21,6 +29,7 @@ export class PlayerMgmtPlayerCurrentEffects {
   getPlayers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtPlayerCurrentActions.getPlayers),
+      delay(500),
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.playerMgmtPlayerCurrentService.getPlayers(data.current_year).pipe(
