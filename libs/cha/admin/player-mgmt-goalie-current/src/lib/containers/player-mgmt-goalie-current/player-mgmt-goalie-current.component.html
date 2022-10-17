@@ -17,10 +17,10 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="goalies$ | async as goalies">
-          <!-- <cha-admin-player-mgmt-player-current-table
-              [isMobile]="isMobile"
-              [players]="players"
-            ></cha-admin-player-mgmt-player-current-table> -->
+          <cha-admin-player-mgmt-goalie-current-table
+            [isMobile]="isMobile"
+            [goalies]="goalies"
+          ></cha-admin-player-mgmt-goalie-current-table>
         </ng-container>
       </blade-card-body>
     </blade-card>

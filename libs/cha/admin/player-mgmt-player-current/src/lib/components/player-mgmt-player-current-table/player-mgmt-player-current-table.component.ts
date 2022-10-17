@@ -19,7 +19,6 @@ export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  // TODO UPDATE COLUMNS AFTER EVERY SEASON
   tableColumns = [
     { field: 'id', header: 'Player Stats Id', visible: true },
     { field: 'playerId', header: 'Player Id', visible: true },
