@@ -26,6 +26,11 @@ import { PlayerMgmtGoalieCurrentFacade } from './+state/player-mgmt-goalie-curre
 import { reducer } from './+state/player-mgmt-goalie-current.reducer';
 
 import { PlayerMgmtGoalieCurrentComponent } from './containers';
+import {
+  PlayerMgmtGoalieCurrentTableComponent,
+  PlayerMgmtGoalieCurrentEditComponent,
+  PlayerMgmtGoalieCurrentEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -63,7 +68,12 @@ import { PlayerMgmtGoalieCurrentComponent } from './containers';
       ],
     }),
   ],
-  declarations: [PlayerMgmtGoalieCurrentComponent],
+  declarations: [
+    PlayerMgmtGoalieCurrentComponent,
+    PlayerMgmtGoalieCurrentTableComponent,
+    PlayerMgmtGoalieCurrentEditComponent,
+    PlayerMgmtGoalieCurrentEditFormComponent,
+  ],
   providers: [PlayerMgmtGoalieCurrentEffects, PlayerMgmtGoalieCurrentFacade],
 })
 export class ChaAdminPlayerMgmtGoalieCurrentModule {}
