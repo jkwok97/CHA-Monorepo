@@ -63,7 +63,7 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
       player_id: {
         id: this.player?.player_id.id,
       },
-      team_name: this.player?.team_name,
+      team_name: this.player?.teamInfo.shortname,
     };
   }
 

@@ -42,14 +42,14 @@ export class PlayerMgmtPlayerCurrentEditComponent {
 
     console.log(player);
 
-    // this.playerMgmtPlayerCurrentFacade.editPlayer(player);
+    this.playerMgmtPlayerCurrentFacade.editPlayer(player);
 
-    // this.playerMgmtPlayerCurrentFacade.isSaving$
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     filter((isSaving: boolean) => !isSaving)
-    //   )
-    //   .subscribe(() => this.closeSidebar.emit(true));
+    this.playerMgmtPlayerCurrentFacade.isSaving$
+      .pipe(
+        untilDestroyed(this),
+        filter((isSaving: boolean) => !isSaving)
+      )
+      .subscribe(() => this.closeSidebar.emit(true));
   }
 
   onDelete() {

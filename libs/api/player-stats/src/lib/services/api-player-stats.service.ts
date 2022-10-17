@@ -31,7 +31,9 @@ export class ApiPlayerStatsService {
     attrs: Partial<Players_Stats_V2>
   ) {
     const player = await this.repo.findOneByOrFail({
-      id,
+      player_id: {
+        id: id,
+      },
       playing_year: season,
     });
 
