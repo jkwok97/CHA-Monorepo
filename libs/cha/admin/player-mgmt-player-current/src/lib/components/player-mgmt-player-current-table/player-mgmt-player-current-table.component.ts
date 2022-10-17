@@ -22,21 +22,19 @@ export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {
 
   // TODO UPDATE COLUMNS AFTER EVERY SEASON
   tableColumns = [
-    { field: 'id', header: 'Rating Id', visible: true },
-    { field: 'player_id', header: 'Player Id', visible: true },
+    { field: 'id', header: 'Player Stats Id', visible: true },
+    { field: 'playerId', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'c_rate', header: 'C', visible: true },
-    { field: 'l_rate', header: 'LW', visible: true },
-    { field: 'r_rate', header: 'RW', visible: true },
-    { field: 'ld_rate', header: 'LD', visible: true },
-    { field: 'rd_rate', header: 'RD', visible: true },
+    { field: 'team_name', header: 'Team', visible: true },
+    { field: 'player_status', header: 'Status', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
   mobileTableColumns = [
-    { field: 'id', header: 'Rating Id', visible: true },
-    { field: 'player_id', header: 'Player Id', visible: true },
+    { field: 'id', header: 'Player Stats Id', visible: true },
+    { field: 'playerId', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
+    { field: 'team_name', header: 'Team', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
@@ -60,12 +58,19 @@ export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {
   mapItems(players: StatPlayerAllDto[]) {
     return players.map((player: StatPlayerAllDto) => ({
       ...player,
+      playerId: `${player.player_id.id}`,
       full_name: `${player.player_id?.firstname} ${player.player_id?.lastname}`,
+      team_name: `${player.teamInfo.city} ${player.teamInfo.nickname}`,
     }));
   }
 
   onPlayerClick(player: StatPlayerAllDto) {
     this.player = player;
+    this.display = true;
+  }
+
+  onAddClick() {
+    this.player = null;
     this.display = true;
   }
 
