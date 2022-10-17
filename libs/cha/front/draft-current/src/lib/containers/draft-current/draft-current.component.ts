@@ -18,8 +18,8 @@ export class DraftCurrentComponent implements OnInit {
   teams!: TeamDto[];
 
   selectOptions = [
-    { label: '2022', value: '2022' },
     { label: '2023', value: '2023' },
+    { label: '2024', value: '2024', disabled:  true},
   ];
 
   tableColumns = [
@@ -52,7 +52,7 @@ export class DraftCurrentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.draftCurrentFacade.getDraftTable(2022);
+    this.draftCurrentFacade.getDraftTable(2023);
 
     this.teams$
       .pipe(first())
