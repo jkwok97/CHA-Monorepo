@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { LeagueDataFacade } from '@cha/domain/core';
 import { StatPlayerAllDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
-import { exhaustMap, map, catchError, of, tap } from 'rxjs';
+import { exhaustMap, map, catchError, of, tap, withLatestFrom } from 'rxjs';
 import { PlayerMgmtPlayerCurrentService } from '../services';
 import { PlayerMgmtPlayerCurrentActions } from './player-mgmt-player-current.actions';
 import { PlayerMgmtPlayerCurrentFacade } from './player-mgmt-player-current.facade';
@@ -13,14 +14,16 @@ export class PlayerMgmtPlayerCurrentEffects {
     private actions$: Actions,
     private playerMgmtPlayerCurrentService: PlayerMgmtPlayerCurrentService,
     private playerMgmtPlayerCurrentFacade: PlayerMgmtPlayerCurrentFacade,
+    private leagueDataFacade: LeagueDataFacade,
     private messageService: MessageService
   ) {}
 
   getPlayers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtPlayerCurrentActions.getPlayers),
-      exhaustMap((action) =>
-        this.playerMgmtPlayerCurrentService.getPlayers().pipe(
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.playerMgmtPlayerCurrentService.getPlayers(data.current_year).pipe(
           map((players: StatPlayerAllDto[]) =>
             PlayerMgmtPlayerCurrentActions.getPlayersSuccess({
               players,
@@ -66,15 +69,18 @@ export class PlayerMgmtPlayerCurrentEffects {
   editPlayer$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtPlayerCurrentActions.editPlayer),
-      exhaustMap((action) =>
-        this.playerMgmtPlayerCurrentService.editPlayer(action.player).pipe(
-          map((player: StatPlayerAllDto) =>
-            PlayerMgmtPlayerCurrentActions.editPlayersuccess({
-              player,
-            })
-          ),
-          catchError(() => of(PlayerMgmtPlayerCurrentActions.error()))
-        )
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.playerMgmtPlayerCurrentService
+          .editPlayer(action.player, data.current_year)
+          .pipe(
+            map((player: StatPlayerAllDto) =>
+              PlayerMgmtPlayerCurrentActions.editPlayersuccess({
+                player,
+              })
+            ),
+            catchError(() => of(PlayerMgmtPlayerCurrentActions.error()))
+          )
       )
     )
   );
@@ -98,15 +104,18 @@ export class PlayerMgmtPlayerCurrentEffects {
   deletePlayer$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtPlayerCurrentActions.deletePlayer),
-      exhaustMap((action) =>
-        this.playerMgmtPlayerCurrentService.deletePlayer(action.playerId).pipe(
-          map((player: StatPlayerAllDto) =>
-            PlayerMgmtPlayerCurrentActions.deletePlayersuccess({
-              player,
-            })
-          ),
-          catchError(() => of(PlayerMgmtPlayerCurrentActions.error()))
-        )
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.playerMgmtPlayerCurrentService
+          .deletePlayer(action.playerId, data.current_year)
+          .pipe(
+            map((player: StatPlayerAllDto) =>
+              PlayerMgmtPlayerCurrentActions.deletePlayersuccess({
+                player,
+              })
+            ),
+            catchError(() => of(PlayerMgmtPlayerCurrentActions.error()))
+          )
       )
     )
   );

@@ -32,9 +32,9 @@ export class PlayerStatsController {
     private userPlayersStatsService: ApiUserPlayerStatsService
   ) {}
 
-  @Get()
-  async getAllPlayers(): Promise<StatPlayerAllDto[]> {
-    const players = await this.playerStatsService.getAll();
+  @Get('/:season')
+  async getAllPlayers(@Param() param): Promise<StatPlayerAllDto[]> {
+    const players = await this.playerStatsService.getAll(param.season);
 
     if (!players || players.length < 1) {
       throw new NotFoundException('players not found');
@@ -42,9 +42,13 @@ export class PlayerStatsController {
     return players;
   }
 
-  @Put('/:id')
+  @Put('/:season/:id')
   updatePlayerById(@Param() param, @Body() body): Promise<Players_Stats_V2> {
-    return this.playerStatsService.updatePlayerById(parseInt(param.id), body);
+    return this.playerStatsService.updatePlayerById(
+      parseInt(param.id),
+      param.season,
+      body
+    );
   }
 
   @Post('/add')
@@ -52,9 +56,12 @@ export class PlayerStatsController {
     return this.playerStatsService.addPlayer(body);
   }
 
-  @Delete('/:id')
+  @Delete('/:season/:id')
   deletePlayer(@Param() param) {
-    return this.playerStatsService.deletePlayer(parseInt(param.id));
+    return this.playerStatsService.deletePlayer(
+      parseInt(param.id),
+      param.season
+    );
   }
 
   @Get('/leaders/:season/:seasonType')

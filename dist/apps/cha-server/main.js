@@ -5170,21 +5170,21 @@ let PlayerStatsController = class PlayerStatsController {
         this.playerAllTimeStatsService = playerAllTimeStatsService;
         this.userPlayersStatsService = userPlayersStatsService;
     }
-    async getAllPlayers() {
-        const players = await this.playerStatsService.getAll();
+    async getAllPlayers(param) {
+        const players = await this.playerStatsService.getAll(param.season);
         if (!players || players.length < 1) {
             throw new common_1.NotFoundException('players not found');
         }
         return players;
     }
     updatePlayerById(param, body) {
-        return this.playerStatsService.updatePlayerById(parseInt(param.id), body);
+        return this.playerStatsService.updatePlayerById(parseInt(param.id), param.season, body);
     }
     addPlayer(body) {
         return this.playerStatsService.addPlayer(body);
     }
     deletePlayer(param) {
-        return this.playerStatsService.deletePlayer(parseInt(param.id));
+        return this.playerStatsService.deletePlayer(parseInt(param.id), param.season);
     }
     async getPlayerStatsLeaders(param) {
         const stats = await this.playerLeaderStatsService.getPlayerStatsLeaders(param.season, param.seasonType);
@@ -5237,13 +5237,14 @@ let PlayerStatsController = class PlayerStatsController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], PlayerStatsController.prototype, "getAllPlayers", null);
 tslib_1.__decorate([
-    (0, common_1.Put)('/:id'),
+    (0, common_1.Put)('/:season/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__param(1, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
@@ -5258,7 +5259,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", void 0)
 ], PlayerStatsController.prototype, "addPlayer", null);
 tslib_1.__decorate([
-    (0, common_1.Delete)('/:id'),
+    (0, common_1.Delete)('/:season/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
@@ -6040,13 +6041,20 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
     }
-    async getAll() {
-        const players = await this.repo.find();
+    async getAll(season) {
+        const players = await this.repo.find({
+            where: {
+                playing_year: season,
+            },
+        });
         const playersWithTeamInfo = this.setTeamInfo(players);
         return playersWithTeamInfo;
     }
-    async updatePlayerById(id, attrs) {
-        const player = await this.repo.findOneByOrFail({ id });
+    async updatePlayerById(id, season, attrs) {
+        const player = await this.repo.findOneByOrFail({
+            id,
+            playing_year: season,
+        });
         if (!player) {
             throw new common_1.NotFoundException('player not found');
         }
@@ -6057,8 +6065,11 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         const player = await this.repo.create(body);
         return this.repo.save(player);
     }
-    async deletePlayer(id) {
-        const player = await this.repo.findOneByOrFail({ id });
+    async deletePlayer(id, season) {
+        const player = await this.repo.findOneByOrFail({
+            id,
+            playing_year: season,
+        });
         if (!player) {
             throw new common_1.NotFoundException('player not found');
         }

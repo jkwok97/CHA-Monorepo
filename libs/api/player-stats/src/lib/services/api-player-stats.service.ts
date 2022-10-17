@@ -13,16 +13,27 @@ export class ApiPlayerStatsService {
     private teamInfoRepo: Repository<Teams_V2>
   ) {}
 
-  async getAll(): Promise<StatPlayerAllDto[]> {
-    const players = await this.repo.find();
+  async getAll(season: string): Promise<StatPlayerAllDto[]> {
+    const players = await this.repo.find({
+      where: {
+        playing_year: season,
+      },
+    });
 
     const playersWithTeamInfo = this.setTeamInfo(players);
 
     return playersWithTeamInfo;
   }
 
-  async updatePlayerById(id: number, attrs: Partial<Players_Stats_V2>) {
-    const player = await this.repo.findOneByOrFail({ id });
+  async updatePlayerById(
+    id: number,
+    season: string,
+    attrs: Partial<Players_Stats_V2>
+  ) {
+    const player = await this.repo.findOneByOrFail({
+      id,
+      playing_year: season,
+    });
 
     if (!player) {
       throw new NotFoundException('player not found');
@@ -39,8 +50,11 @@ export class ApiPlayerStatsService {
     return this.repo.save(player);
   }
 
-  async deletePlayer(id: number): Promise<Players_Stats_V2> {
-    const player = await this.repo.findOneByOrFail({ id });
+  async deletePlayer(id: number, season: string): Promise<Players_Stats_V2> {
+    const player = await this.repo.findOneByOrFail({
+      id,
+      playing_year: season,
+    });
 
     if (!player) {
       throw new NotFoundException('player not found');

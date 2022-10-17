@@ -13,9 +13,9 @@ export class PlayerMgmtPlayerCurrentService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getPlayers() {
+  getPlayers(season: string) {
     return this._http
-      .get(`${this.apiUrl}/player-stats`)
+      .get(`${this.apiUrl}/player-stats/${season}`)
       .pipe(map((result: any) => result));
   }
 
@@ -26,15 +26,21 @@ export class PlayerMgmtPlayerCurrentService {
       .pipe(map((result: any) => result));
   }
 
-  editPlayer(player: StatPlayerAllDto): Observable<StatPlayerAllDto> {
+  editPlayer(
+    player: StatPlayerAllDto,
+    season: string
+  ): Observable<StatPlayerAllDto> {
     return this._http
-      .put(`${this.apiUrl}/player-stats/${player.player_id.id}`, player)
+      .put(
+        `${this.apiUrl}/player-stats/${season}/${player.player_id.id}`,
+        player
+      )
       .pipe(map((result: any) => result));
   }
 
-  deletePlayer(playerId: number): Observable<StatPlayerAllDto> {
+  deletePlayer(playerId: number, season: string): Observable<StatPlayerAllDto> {
     return this._http
-      .delete(`${this.apiUrl}/player-stats/${playerId}`)
+      .delete(`${this.apiUrl}/player-stats/${season}/${playerId}`)
       .pipe(map((result: any) => result));
   }
 }
