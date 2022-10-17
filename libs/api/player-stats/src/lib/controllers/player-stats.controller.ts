@@ -1,9 +1,21 @@
+import { Players_Stats_V2 } from '@api/entities';
 import {
+  CreateStatPlayerAllDto,
+  StatPlayerAllDto,
   StatPlayerLeadersDto,
   StatPlayersHistoryDto,
   StatUserPlayersHistoryDto,
 } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import {
   ApiPlayerAllTimeStatsService,
   ApiPlayerLeadersStatsService,
@@ -19,6 +31,31 @@ export class PlayerStatsController {
     private playerAllTimeStatsService: ApiPlayerAllTimeStatsService,
     private userPlayersStatsService: ApiUserPlayerStatsService
   ) {}
+
+  @Get()
+  async getAllPlayers(): Promise<StatPlayerAllDto[]> {
+    const players = await this.playerStatsService.getAll();
+
+    if (!players || players.length < 1) {
+      throw new NotFoundException('players not found');
+    }
+    return players;
+  }
+
+  @Put('/:id')
+  updatePlayerById(@Param() param, @Body() body): Promise<Players_Stats_V2> {
+    return this.playerStatsService.updatePlayerById(parseInt(param.id), body);
+  }
+
+  @Post('/add')
+  addPlayer(@Body() body: CreateStatPlayerAllDto) {
+    return this.playerStatsService.addPlayer(body);
+  }
+
+  @Delete('/:id')
+  deletePlayer(@Param() param) {
+    return this.playerStatsService.deletePlayer(parseInt(param.id));
+  }
 
   @Get('/leaders/:season/:seasonType')
   async getPlayerStatsLeaders(@Param() param): Promise<StatPlayerLeadersDto> {
