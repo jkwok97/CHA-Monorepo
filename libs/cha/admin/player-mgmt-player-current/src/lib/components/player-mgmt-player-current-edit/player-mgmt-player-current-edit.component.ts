@@ -19,7 +19,7 @@ import { PlayerMgmtPlayerCurrentEditFormComponent } from '../player-mgmt-player-
   templateUrl: './player-mgmt-player-current-edit.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerMgmtPlayerCurrentEditComponent implements OnInit {
+export class PlayerMgmtPlayerCurrentEditComponent {
   @Input() player!: StatPlayerAllDto | null;
 
   @Output() closeSidebar = new EventEmitter<boolean>();
@@ -27,15 +27,9 @@ export class PlayerMgmtPlayerCurrentEditComponent implements OnInit {
   @ViewChild(PlayerMgmtPlayerCurrentEditFormComponent, { static: false })
   playerFormRef?: PlayerMgmtPlayerCurrentEditFormComponent;
 
-  editMode = false;
-
   constructor(
     private playerMgmtPlayerCurrentFacade: PlayerMgmtPlayerCurrentFacade
   ) {}
-
-  ngOnInit(): void {
-    this.player ? (this.editMode = true) : (this.editMode = false);
-  }
 
   onCancel() {
     this.closeSidebar.emit(true);
@@ -43,27 +37,19 @@ export class PlayerMgmtPlayerCurrentEditComponent implements OnInit {
 
   onSave() {
     const player = {
-      ...this.playerFormRef?.form.value,
-      isadmin: this.playerFormRef?.form.value.isadmin
-        ? this.playerFormRef?.form.value.isadmin
-        : false,
-      isactive: this.playerFormRef?.form.value.isactive
-        ? this.playerFormRef?.form.value.isactive
-        : false,
+      ...this.playerFormRef?.model,
     };
 
-    !this.editMode
-      ? this.playerMgmtPlayerCurrentFacade.addPlayer(player)
-      : this.player
-      ? this.playerMgmtPlayerCurrentFacade.editPlayer(player)
-      : null;
+    console.log(player);
 
-    this.playerMgmtPlayerCurrentFacade.isSaving$
-      .pipe(
-        untilDestroyed(this),
-        filter((isSaving: boolean) => !isSaving)
-      )
-      .subscribe(() => this.closeSidebar.emit(true));
+    // this.playerMgmtPlayerCurrentFacade.editPlayer(player);
+
+    // this.playerMgmtPlayerCurrentFacade.isSaving$
+    //   .pipe(
+    //     untilDestroyed(this),
+    //     filter((isSaving: boolean) => !isSaving)
+    //   )
+    //   .subscribe(() => this.closeSidebar.emit(true));
   }
 
   onDelete() {

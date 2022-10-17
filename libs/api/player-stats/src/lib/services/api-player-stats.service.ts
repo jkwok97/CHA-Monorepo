@@ -44,12 +44,6 @@ export class ApiPlayerStatsService {
     return this.repo.save(player);
   }
 
-  async addPlayer(body: CreateStatPlayerAllDto) {
-    const player = await this.repo.create(body);
-
-    return this.repo.save(player);
-  }
-
   async deletePlayer(id: number, season: string): Promise<Players_Stats_V2> {
     const player = await this.repo.findOneByOrFail({
       id,
@@ -191,6 +185,7 @@ export class ApiPlayerStatsService {
         city: true,
         teamlogo: true,
         nickname: true,
+        shortname: true,
       },
       where: {
         shortname: teamName,

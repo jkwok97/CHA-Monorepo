@@ -57,14 +57,13 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
   }
 
   patchForm() {
+    console.log(this.player);
     this.model = {
       ...this.player,
       player_id: {
         id: this.player?.player_id.id,
       },
-      teamInfo: {
-        id: this.player?.teamInfo.id,
-      },
+      team_name: this.player?.team_name,
     };
   }
 
@@ -74,7 +73,7 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
       className: 'w-full md:w-3',
       type: 'text-input',
       templateOptions: {
-        label: 'Team',
+        label: 'Player Id',
         required: true,
       },
       validation: {
@@ -87,7 +86,7 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
 
   teamField(): FormlyFieldConfig {
     return {
-      key: 'teamInfo.id',
+      key: 'team_name',
       className: 'w-full md:w-3',
       type: 'single-select',
       templateOptions: {
@@ -110,10 +109,16 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
     return {
       key: 'player_status',
       className: 'w-full md:w-3',
-      type: 'text-input',
+      type: 'single-select',
       templateOptions: {
         label: 'Player Status',
         required: true,
+        options: [
+          { label: 'Veteran', value: 'Veteran' },
+          { label: 'Rookie', value: 'Rookie' },
+        ],
+        valueProp: 'value',
+        labelProp: 'label',
       },
       validation: {
         messages: {

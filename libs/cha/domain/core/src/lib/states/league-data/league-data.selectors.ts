@@ -72,7 +72,7 @@ const selectSortedTeams = createSelector(selectTeams, (teams: TeamDto[]) =>
 
 const selectTeamsOptions = createSelector(selectTeams, (teams: TeamDto[]) =>
   teams.map((team: TeamDto) => ({
-    value: team.id,
+    value: team.shortname,
     label: `${team.city} ${team.nickname}`,
   }))
 );

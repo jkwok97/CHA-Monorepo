@@ -30,7 +30,6 @@ const r = createReducer(
   })),
 
   on(
-    PlayerMgmtPlayerCurrentActions.addPlayer,
     PlayerMgmtPlayerCurrentActions.editPlayer,
     PlayerMgmtPlayerCurrentActions.deletePlayer,
     (state) => ({
@@ -56,13 +55,6 @@ const r = createReducer(
       saved: true,
     })
   ),
-
-  on(PlayerMgmtPlayerCurrentActions.addPlayerSuccess, (state, action) => ({
-    ...state,
-    player: action.player,
-    saving: false,
-    saved: true,
-  })),
 
   on(PlayerMgmtPlayerCurrentActions.error, (state) => initialState)
 );

@@ -5156,11 +5156,10 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/player-stats/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerStatsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/player-stats/src/lib/services/index.ts");
 let PlayerStatsController = class PlayerStatsController {
@@ -5179,9 +5178,6 @@ let PlayerStatsController = class PlayerStatsController {
     }
     updatePlayerById(param, body) {
         return this.playerStatsService.updatePlayerById(parseInt(param.id), param.season, body);
-    }
-    addPlayer(body) {
-        return this.playerStatsService.addPlayer(body);
     }
     deletePlayer(param) {
         return this.playerStatsService.deletePlayer(parseInt(param.id), param.season);
@@ -5252,13 +5248,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
 ], PlayerStatsController.prototype, "updatePlayerById", null);
 tslib_1.__decorate([
-    (0, common_1.Post)('/add'),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.CreateStatPlayerAllDto !== "undefined" && entities_1.CreateStatPlayerAllDto) === "function" ? _g : Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], PlayerStatsController.prototype, "addPlayer", null);
-tslib_1.__decorate([
     (0, common_1.Delete)('/:season/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
@@ -5270,49 +5259,49 @@ tslib_1.__decorate([
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], PlayerStatsController.prototype, "getPlayerStatsLeaders", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/all/:season/:seasonType'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], PlayerStatsController.prototype, "getPlayerStatsAll", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/current/:season/:seasonType/:playerId'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], PlayerStatsController.prototype, "getPlayerStatsByPlayerId", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/history/season/:seasonType'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
+    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
 ], PlayerStatsController.prototype, "getAllTimePlayerStatsBySeasonByType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/history/all-time/:seasonType'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
+    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
 ], PlayerStatsController.prototype, "getAllTimePlayerStatsSummedBySeasonByType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId/history/:seasonType'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
+    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
 ], PlayerStatsController.prototype, "getTeamPlayerStatsBySeasonType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId/history/all/:seasonType'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
+    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
 ], PlayerStatsController.prototype, "getTeamPlayerStatsAllTimeBySeasonType", null);
 PlayerStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('player-stats'),
@@ -6061,10 +6050,6 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         Object.assign(player, attrs);
         return this.repo.save(player);
     }
-    async addPlayer(body) {
-        const player = await this.repo.create(body);
-        return this.repo.save(player);
-    }
     async deletePlayer(id, season) {
         const player = await this.repo.findOneByOrFail({
             id,
@@ -6182,6 +6167,7 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
                 city: true,
                 teamlogo: true,
                 nickname: true,
+                shortname: true,
             },
             where: {
                 shortname: teamName,

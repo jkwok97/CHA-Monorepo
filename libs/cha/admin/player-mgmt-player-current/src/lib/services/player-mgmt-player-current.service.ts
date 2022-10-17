@@ -19,13 +19,6 @@ export class PlayerMgmtPlayerCurrentService {
       .pipe(map((result: any) => result));
   }
 
-  addPlayer(player: CreateStatPlayerAllDto): Observable<StatPlayerAllDto> {
-    const body = player;
-    return this._http
-      .post(`${this.apiUrl}/player-stats/add`, body)
-      .pipe(map((result: any) => result));
-  }
-
   editPlayer(
     player: StatPlayerAllDto,
     season: string

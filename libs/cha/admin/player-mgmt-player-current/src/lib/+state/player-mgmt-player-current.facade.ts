@@ -42,10 +42,6 @@ export class PlayerMgmtPlayerCurrentFacade {
     this.store.dispatch(PlayerMgmtPlayerCurrentActions.getPlayers());
   }
 
-  addPlayer(player: CreateStatPlayerAllDto) {
-    this.store.dispatch(PlayerMgmtPlayerCurrentActions.addPlayer({ player }));
-  }
-
   editPlayer(player: StatPlayerAllDto) {
     this.store.dispatch(PlayerMgmtPlayerCurrentActions.editPlayer({ player }));
   }

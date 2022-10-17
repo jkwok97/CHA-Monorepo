@@ -1,6 +1,6 @@
 <blade-card style="background-color: var(--background-100)">
   <blade-card-header class="text-lg font-light text-center">
-    {{ editMode ? 'Edit Player' : 'Add Player' }}
+    Edit Player
   </blade-card-header>
 
   <blade-card-body>
@@ -16,7 +16,7 @@
           pButton
           pRipple
           type="button"
-          [label]="editMode ? 'Save Player' : 'Add Player'"
+          [label]="'Save Player'"
           class="p-button-raised"
           [disabled]="
             playerFormRef?.form?.invalid || !playerFormRef?.form?.dirty
@@ -39,7 +39,6 @@
         type="button"
         label="Delete"
         class="p-button-raised p-button-danger"
-        *ngIf="editMode"
         (click)="onDelete()"
       ></button>
     </div>

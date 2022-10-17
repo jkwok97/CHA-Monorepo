@@ -44,37 +44,6 @@ export class PlayerMgmtPlayerCurrentEffects {
     )
   );
 
-  addPlayer$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(PlayerMgmtPlayerCurrentActions.addPlayer),
-      exhaustMap((action) =>
-        this.playerMgmtPlayerCurrentService.addPlayer(action.player).pipe(
-          map((player: StatPlayerAllDto) =>
-            PlayerMgmtPlayerCurrentActions.addPlayerSuccess({
-              player,
-            })
-          ),
-          catchError(() => of(PlayerMgmtPlayerCurrentActions.error()))
-        )
-      )
-    )
-  );
-
-  addPlayerSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(PlayerMgmtPlayerCurrentActions.addPlayerSuccess),
-        tap(() => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Add Player',
-            detail: 'Player has been added',
-          });
-        })
-      ),
-    { dispatch: false }
-  );
-
   editPlayer$ = createEffect(() =>
     this.actions$.pipe(
       ofType(PlayerMgmtPlayerCurrentActions.editPlayer),

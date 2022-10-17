@@ -10,16 +10,6 @@ const getPlayersSuccess = createAction(
   props<{ players: StatPlayerAllDto[] }>()
 );
 
-const addPlayer = createAction(
-  `${NAMESPACE} Add Player`,
-  props<{ player: CreateStatPlayerAllDto }>()
-);
-
-const addPlayerSuccess = createAction(
-  `${NAMESPACE} Add Player Success`,
-  props<{ player: StatPlayerAllDto }>()
-);
-
 const editPlayer = createAction(
   `${NAMESPACE} Edit Player`,
   props<{ player: StatPlayerAllDto }>()
@@ -45,8 +35,6 @@ const error = createAction(`${NAMESPACE} Error`);
 export const PlayerMgmtPlayerCurrentActions = {
   getPlayers,
   getPlayersSuccess,
-  addPlayer,
-  addPlayerSuccess,
   editPlayer,
   editPlayersuccess,
   deletePlayer,

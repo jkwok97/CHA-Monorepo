@@ -51,11 +51,6 @@ export class PlayerStatsController {
     );
   }
 
-  @Post('/add')
-  addPlayer(@Body() body: CreateStatPlayerAllDto) {
-    return this.playerStatsService.addPlayer(body);
-  }
-
   @Delete('/:season/:id')
   deletePlayer(@Param() param) {
     return this.playerStatsService.deletePlayer(

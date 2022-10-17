@@ -68,11 +68,6 @@ export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {
     this.display = true;
   }
 
-  onAddClick() {
-    this.player = null;
-    this.display = true;
-  }
-
   onClose() {
     this.display = false;
     this.player = null;

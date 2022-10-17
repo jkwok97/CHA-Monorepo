@@ -33,6 +33,7 @@ export interface StatPlayerAllDto {
   corner_pct: string;
   hits: number;
   blocked_shots: number;
+  team_name?: string;
 }
 
 export interface CreateStatPlayerAllDto {
