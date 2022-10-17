@@ -12,8 +12,8 @@
         <div class="p-3 text-xl font-light">WELCOME ADMINISTRATOR</div>
         <cha-logo
           [logo]="ChaLogo.LEAGUE"
-          [width]="500"
-          [height]="450"
+          [width]="isMobile ? 350 : 500"
+          [height]="isMobile ? 300 : 450"
         ></cha-logo>
       </div>
     </blade-layout-feature-content>
