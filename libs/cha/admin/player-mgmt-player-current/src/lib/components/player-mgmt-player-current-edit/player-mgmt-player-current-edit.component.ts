@@ -40,8 +40,6 @@ export class PlayerMgmtPlayerCurrentEditComponent {
       ...this.playerFormRef?.model,
     };
 
-    console.log(player);
-
     this.playerMgmtPlayerCurrentFacade.editPlayer(player);
 
     this.playerMgmtPlayerCurrentFacade.isSaving$

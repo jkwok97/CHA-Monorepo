@@ -57,7 +57,6 @@ export class PlayerMgmtPlayerCurrentEditFormComponent implements OnInit {
   }
 
   patchForm() {
-    console.log(this.player);
     this.model = {
       ...this.player,
       player_id: {
