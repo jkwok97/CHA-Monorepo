@@ -11,7 +11,6 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'cha-admin-player-mgmt-player-current-table',
   templateUrl: './player-mgmt-player-current-table.component.html',
-  styleUrls: ['./player-mgmt-player-current-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {

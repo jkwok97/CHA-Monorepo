@@ -1,3 +1,4 @@
+import { StatPlayerAllDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as PlayerMgmtPlayerCurrentReducer from './player-mgmt-player-current.reducer';
@@ -37,6 +38,15 @@ const selectPlayer = createSelector(
   PlayerMgmtPlayerCurrentReducer.getPlayer
 );
 
+const selectPlayerOptions = createSelector(
+  selectPlayers,
+  (players: StatPlayerAllDto[]) =>
+    players.map((player: StatPlayerAllDto) => ({
+      value: player.player_id.id,
+      label: `${player.player_id.firstname} ${player.player_id.lastname}`,
+    }))
+);
+
 export const PlayerMgmtPlayerCurrentSelectors = {
   selectLoaded,
   selectLoading,
@@ -44,4 +54,5 @@ export const PlayerMgmtPlayerCurrentSelectors = {
   selectSaved,
   selectPlayers,
   selectPlayer,
+  selectPlayerOptions,
 };

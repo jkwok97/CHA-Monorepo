@@ -32,6 +32,10 @@ export class PlayerMgmtPlayerCurrentFacade {
     PlayerMgmtPlayerCurrentSelectors.selectPlayer
   );
 
+  playersOptions$: Observable<any[]> = this.store.select(
+    PlayerMgmtPlayerCurrentSelectors.selectPlayerOptions
+  );
+
   constructor(private store: Store<State>) {}
 
   getPlayers() {

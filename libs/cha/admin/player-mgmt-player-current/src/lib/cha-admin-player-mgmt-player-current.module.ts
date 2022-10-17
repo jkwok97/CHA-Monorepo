@@ -17,6 +17,7 @@ import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
+import { SingleSelectTypeComponent } from '@blade/angular/formly/types/single-select';
 
 import { PlayerMgmtPlayerCurrentEffects } from './+state/player-mgmt-player-current.effects';
 import { PlayerMgmtPlayerCurrentFacade } from './+state/player-mgmt-player-current.facade';
@@ -57,6 +58,11 @@ import {
         {
           name: 'text-input',
           component: TextInputTypeComponent,
+          wrappers: ['control-wrapper'],
+        },
+        {
+          name: 'single-select',
+          component: SingleSelectTypeComponent,
           wrappers: ['control-wrapper'],
         },
       ],

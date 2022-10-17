@@ -6,16 +6,13 @@ import {
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { TeamDto, UserDto } from '@cha/shared/entities';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { LeagueTeamsFacade } from '../../+state/league-teams.facade';
 
-@UntilDestroy()
 @Component({
   selector: 'cha-admin-league-teams-edit-form',
   templateUrl: './league-teams-edit-form.component.html',
-  styleUrls: ['./league-teams-edit-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueTeamsEditFormComponent implements OnInit {
