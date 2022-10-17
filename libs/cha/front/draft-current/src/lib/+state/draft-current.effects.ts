@@ -19,7 +19,10 @@ export class DraftCurrentEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.draftService
-          .getDraftTable(action.season, data.prev_year) // TODO SWITCH
+          .getDraftTable(
+            action.season,
+            data.offseason ? data.prev_year : data.current_year
+          )
           .pipe(
             map((draftTable: DraftTableDto[]) =>
               DraftCurrentActions.getDraftTableSuccess({ draftTable })

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
-import { DraftTableDto, TeamDto } from '@cha/shared/entities';
-import { Observable, first } from 'rxjs';
+import { DraftTableDto, LeagueDataDto, TeamDto } from '@cha/shared/entities';
+import { Observable, first, tap } from 'rxjs';
 import { DraftCurrentFacade } from '../../+state/draft-current.facade';
 
 @Component({
@@ -19,7 +19,7 @@ export class DraftCurrentComponent implements OnInit {
 
   selectOptions = [
     { label: '2023', value: '2023' },
-    { label: '2024', value: '2024', disabled:  true},
+    { label: '2024', value: '2024' },
   ];
 
   tableColumns = [
@@ -52,7 +52,14 @@ export class DraftCurrentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.draftCurrentFacade.getDraftTable(2023);
+    this.leagueDataFacade.leagueData$
+      .pipe(
+        first(),
+        tap((data: LeagueDataDto) =>
+          this.draftCurrentFacade.getDraftTable(data.current_draft_year)
+        )
+      )
+      .subscribe();
 
     this.teams$
       .pipe(first())
@@ -89,15 +96,6 @@ export class DraftCurrentComponent implements OnInit {
   }
 
   onOptionChanged(option: string) {
-    switch (option) {
-      case '2022':
-        this.draftCurrentFacade.getDraftTable(Number(option));
-        break;
-      case '2023':
-        this.draftCurrentFacade.getDraftTable(Number(option));
-        break;
-      default:
-        return;
-    }
+    this.draftCurrentFacade.getDraftTable(Number(option));
   }
 }
