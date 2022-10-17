@@ -24,15 +24,15 @@ export class PlayerMgmtGoalieCurrentFacade {
     PlayerMgmtGoalieCurrentSelectors.selectSaved
   );
 
-  players$: Observable<StatGoalieAllDto[]> = this.store.select(
+  goalies$: Observable<StatGoalieAllDto[]> = this.store.select(
     PlayerMgmtGoalieCurrentSelectors.selectGoalies
   );
 
-  player$: Observable<StatGoalieAllDto | null> = this.store.select(
+  goalie$: Observable<StatGoalieAllDto | null> = this.store.select(
     PlayerMgmtGoalieCurrentSelectors.selectGoalie
   );
 
-  playersOptions$: Observable<any[]> = this.store.select(
+  goaliesOptions$: Observable<any[]> = this.store.select(
     PlayerMgmtGoalieCurrentSelectors.selectGoalieOptions
   );
 
