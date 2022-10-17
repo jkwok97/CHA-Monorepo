@@ -1,11 +1,11 @@
-import { StatGoalieAllDto, StatPlayerAllDto } from '@cha/shared/entities';
+import { StatGoalieAllDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as PlayerMgmtGoalieCurrentReducer from './player-mgmt-goalie-current.reducer';
 
 export const selectState =
   createFeatureSelector<PlayerMgmtGoalieCurrentReducer.State>(
-    'player-mgmt-player-current'
+    'player-mgmt-goalie-current'
   );
 
 const selectLoading = createSelector(
