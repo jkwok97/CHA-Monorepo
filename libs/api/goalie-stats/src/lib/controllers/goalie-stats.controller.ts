@@ -1,9 +1,19 @@
+import { Goalies_Stats_V2 } from '@api/entities';
 import {
+  StatGoalieAllDto,
   StatGoalieLeadersDto,
   StatGoaliesHistoryDto,
   StatUserGoaliesHistoryDto,
 } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Put,
+} from '@nestjs/common';
 import {
   ApiGoalieAllTimeStatsService,
   ApiGoalieStatsLeadersService,
@@ -19,6 +29,33 @@ export class GoalieStatsController {
     private goalieAllTimeStatsService: ApiGoalieAllTimeStatsService,
     private userGoalieStatsService: ApiUserGoalieStatsService
   ) {}
+
+  @Get('/:season')
+  async getAllPlayers(@Param() param): Promise<StatGoalieAllDto[]> {
+    const players = await this.goalieStatsService.getAll(param.season);
+
+    if (!players || players.length < 1) {
+      throw new NotFoundException('players not found');
+    }
+    return players;
+  }
+
+  @Put('/:season/:id')
+  updatePlayerById(@Param() param, @Body() body): Promise<Goalies_Stats_V2> {
+    return this.goalieStatsService.updateGoalieById(
+      parseInt(param.id),
+      param.season,
+      body
+    );
+  }
+
+  @Delete('/:season/:id')
+  deletePlayer(@Param() param) {
+    return this.goalieStatsService.deleteGoalie(
+      parseInt(param.id),
+      param.season
+    );
+  }
 
   @Get('/leaders/:season/:seasonType/:minGames')
   async getGoalieStatsLeaders(@Param() param): Promise<StatGoalieLeadersDto> {

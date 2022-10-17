@@ -1,5 +1,6 @@
 import { Goalies_Stats_V2, Teams_V2 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { StatGoalieAllDto } from '@cha/shared/entities';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -11,6 +12,51 @@ export class ApiGoalieStatsService {
     @InjectRepository(Teams_V2)
     private teamInfoRepo: Repository<Teams_V2>
   ) {}
+
+  async getAll(season: string): Promise<StatGoalieAllDto[]> {
+    const players = await this.repo.find({
+      where: {
+        playing_year: season,
+      },
+    });
+
+    const playersWithTeamInfo = this.setTeamInfo(players);
+
+    return playersWithTeamInfo;
+  }
+
+  async updateGoalieById(
+    id: number,
+    season: string,
+    attrs: Partial<Goalies_Stats_V2>
+  ) {
+    const player = await this.repo.findOneByOrFail({
+      player_id: {
+        id: id,
+      },
+      playing_year: season,
+    });
+
+    if (!player) {
+      throw new NotFoundException('goalie not found');
+    }
+
+    Object.assign(player, attrs);
+
+    return this.repo.save(player);
+  }
+
+  async deleteGoalie(id: number, season: string): Promise<Goalies_Stats_V2> {
+    const player = await this.repo.findOneByOrFail({
+      id,
+      playing_year: season,
+    });
+
+    if (!player) {
+      throw new NotFoundException('goalie not found');
+    }
+    return this.repo.remove(player);
+  }
 
   async getAllGoalieStats(season: string, seasonType: 'Regular' | 'Playoffs') {
     const allGoalieStats = await this.repo.find({

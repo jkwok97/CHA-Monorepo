@@ -16,7 +16,7 @@ export interface StatGoalieAllDto {
   id: number;
   games_played: number;
   minutes_played: number;
-  goals_against_avg: number;
+  goals_against_avg: number | string;
   wins: number;
   loss: number;
   ties: number;
@@ -25,11 +25,11 @@ export interface StatGoalieAllDto {
   goals_against: number;
   saves: number;
   shots_for: number;
-  save_pct: number;
+  save_pct: number | string;
   goals: number;
   assists: number;
   points: number;
   penalty_minutes: number;
-  pass_pct: number;
-  team_name: number;
+  pass_pct: number | string;
+  team_name: string;
 }
