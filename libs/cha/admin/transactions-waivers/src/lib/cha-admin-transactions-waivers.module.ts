@@ -18,6 +18,7 @@ import { reducer } from './+state/transactions-waivers.reducer';
 import { ChaAdminTransactionsWaiversRoutingModule } from './cha-admin-transactions-waivers-routing.module';
 
 import { TransactionsWaiversComponent } from './containers';
+import { TransactionsWaiversOrderListComponent } from './components';
 
 @NgModule({
   imports: [
@@ -31,7 +32,10 @@ import { TransactionsWaiversComponent } from './containers';
     StoreModule.forFeature('transactions-waivers', reducer),
     EffectsModule.forFeature([TransactionsWaiverssEffects]),
   ],
-  declarations: [TransactionsWaiversComponent],
+  declarations: [
+    TransactionsWaiversComponent,
+    TransactionsWaiversOrderListComponent,
+  ],
   providers: [TransactionsWaiverssEffects, TransactionsWaiversFacade],
 })
 export class ChaAdminTransactionsWaiversModule {}
