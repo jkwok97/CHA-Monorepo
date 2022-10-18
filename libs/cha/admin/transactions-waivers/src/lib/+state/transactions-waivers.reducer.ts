@@ -34,6 +34,18 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(TransactionsWaiversActions.updateWaiver, (state) => ({
+    ...state,
+    saving: true,
+    saved: false,
+  })),
+
+  on(TransactionsWaiversActions.updateWaiverSuccess, (state, action) => ({
+    ...state,
+    saving: false,
+    saved: true,
+  })),
+
   on(TransactionsWaiversActions.error, (state) => initialState)
 );
 

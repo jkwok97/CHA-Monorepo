@@ -1,3 +1,4 @@
+import { WaiversDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as TransactionsWaiversReducer from './transactions-waivers.reducer';
@@ -32,10 +33,21 @@ const selectWaivers = createSelector(
   TransactionsWaiversReducer.getWaivers
 );
 
+const selectWaiversSorted = createSelector(
+  selectWaivers,
+  (waivers: WaiversDto[]) =>
+    waivers
+      .filter((waiver: WaiversDto) => waiver.id !== null)
+      .sort(
+        (a: WaiversDto, b: WaiversDto) => a.priority_number - b.priority_number
+      )
+);
+
 export const TransactionsWaiversSelectors = {
   selectLoaded,
   selectLoading,
   selectWaivers,
+  selectWaiversSorted,
   selectSaving,
   selectSaved,
 };

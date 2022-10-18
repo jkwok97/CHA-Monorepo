@@ -27,4 +27,20 @@ export class TransactionsWaiverssEffects {
       )
     )
   );
+
+  updateWaiver$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TransactionsWaiversActions.updateWaiver),
+      exhaustMap((action) =>
+        this.transactionsWaiversService.updateWaiver(action.team).pipe(
+          map((team: WaiversDto) =>
+            TransactionsWaiversActions.updateWaiverSuccess({
+              team,
+            })
+          ),
+          catchError(() => of(TransactionsWaiversActions.error()))
+        )
+      )
+    )
+  );
 }

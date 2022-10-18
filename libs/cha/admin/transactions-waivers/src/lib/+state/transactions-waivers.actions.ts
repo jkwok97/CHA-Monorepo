@@ -10,10 +10,22 @@ const getWaiversSuccess = createAction(
   props<{ waivers: WaiversDto[] }>()
 );
 
+const updateWaiver = createAction(
+  `${NAMESPACE} Update Waiver`,
+  props<{ team: WaiversDto }>()
+);
+
+const updateWaiverSuccess = createAction(
+  `${NAMESPACE} Update Waiver Success`,
+  props<{ team: WaiversDto }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const TransactionsWaiversActions = {
   getWaivers,
   getWaiversSuccess,
+  updateWaiver,
+  updateWaiverSuccess,
   error,
 };

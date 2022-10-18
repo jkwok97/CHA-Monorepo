@@ -28,6 +28,7 @@ export class TransactionsWaiversOrderListComponent implements OnInit {
 
   ngOnInit(): void {
     this.waiverList = this.mapItems(this.waivers);
+    console.log(this.waiverList);
   }
 
   // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
@@ -43,7 +44,13 @@ export class TransactionsWaiversOrderListComponent implements OnInit {
   }
 
   onReorder(event: any) {
-    console.log(event);
+    this.waiverList.forEach((waiver, index) => {
+      waiver.priority_number = index + 1;
+      this.transactionsWaiversFacade.updateWaiverPriority(waiver);
+    });
+
+    // SEND TO API FOR UPDATE
+
     console.log(this.waiverList);
   }
 }

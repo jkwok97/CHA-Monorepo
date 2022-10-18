@@ -25,12 +25,16 @@ export class TransactionsWaiversFacade {
   );
 
   waivers$: Observable<WaiversDto[]> = this.store.select(
-    TransactionsWaiversSelectors.selectWaivers
+    TransactionsWaiversSelectors.selectWaiversSorted
   );
 
   constructor(private store: Store<State>) {}
 
   getWaivers() {
     this.store.dispatch(TransactionsWaiversActions.getWaivers());
+  }
+
+  updateWaiverPriority(team: WaiversDto) {
+    this.store.dispatch(TransactionsWaiversActions.updateWaiver({ team }));
   }
 }
