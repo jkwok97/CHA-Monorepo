@@ -21,7 +21,8 @@ export class GamesPlayoffsEffects {
       exhaustMap(([action, data]) =>
         this.gamesPlayoffsService
           .getPlayoffStandings(
-            data.offseason ? data.prev_year : data.current_year,
+            // data.offseason ? data.prev_year : data.current_year, // TODO SWITCH THIS
+            data.prev_year,
             'Regular'
           )
           .pipe(
