@@ -32,10 +32,10 @@ export class TransactionsWaiverssEffects {
     this.actions$.pipe(
       ofType(TransactionsWaiversActions.updateWaiver),
       exhaustMap((action) =>
-        this.transactionsWaiversService.updateWaiver(action.team).pipe(
-          map((team: WaiversDto) =>
+        this.transactionsWaiversService.updateWaiver(action.teams).pipe(
+          map((teams: WaiversDto[]) =>
             TransactionsWaiversActions.updateWaiverSuccess({
-              team,
+              teams,
             })
           ),
           catchError(() => of(TransactionsWaiversActions.error()))

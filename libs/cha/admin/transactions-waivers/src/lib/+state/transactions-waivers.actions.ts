@@ -12,12 +12,12 @@ const getWaiversSuccess = createAction(
 
 const updateWaiver = createAction(
   `${NAMESPACE} Update Waiver`,
-  props<{ team: WaiversDto }>()
+  props<{ teams: WaiversDto[] }>()
 );
 
 const updateWaiverSuccess = createAction(
   `${NAMESPACE} Update Waiver Success`,
-  props<{ team: WaiversDto }>()
+  props<{ teams: WaiversDto[] }>()
 );
 
 const error = createAction(`${NAMESPACE} Error`);

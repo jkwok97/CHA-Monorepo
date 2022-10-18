@@ -24,8 +24,8 @@ export class WaiversController {
     return salaries;
   }
 
-  @Put('/:id')
-  updateUserById(@Param() param, @Body() body): Promise<WaiversDto> {
-    return this.waiversService.updateWaiverPriority(parseInt(param.id), body);
+  @Put()
+  updateWaiverById(@Body() body): Promise<void> {
+    return this.waiversService.updateWaiverPriority(body);
   }
 }

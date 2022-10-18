@@ -11,7 +11,6 @@ import { TransactionsWaiversFacade } from '../../+state/transactions-waivers.fac
 @Component({
   selector: 'cha-admin-transactions-waivers-order-list',
   templateUrl: './transactions-waivers-order-list.component.html',
-  styleUrls: ['./transactions-waivers-order-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsWaiversOrderListComponent implements OnInit {
@@ -46,8 +45,9 @@ export class TransactionsWaiversOrderListComponent implements OnInit {
   onReorder(event: any) {
     this.waiverList.forEach((waiver, index) => {
       waiver.priority_number = index + 1;
-      this.transactionsWaiversFacade.updateWaiverPriority(waiver);
     });
+
+    this.transactionsWaiversFacade.updateWaiverPriority(this.waiverList);
 
     // SEND TO API FOR UPDATE
 

@@ -34,7 +34,7 @@ export class TransactionsWaiversFacade {
     this.store.dispatch(TransactionsWaiversActions.getWaivers());
   }
 
-  updateWaiverPriority(team: WaiversDto) {
-    this.store.dispatch(TransactionsWaiversActions.updateWaiver({ team }));
+  updateWaiverPriority(teams: WaiversDto[]) {
+    this.store.dispatch(TransactionsWaiversActions.updateWaiver({ teams }));
   }
 }

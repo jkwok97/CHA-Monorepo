@@ -19,9 +19,9 @@ export class TransactionsWaiversService {
       .pipe(map((result: any) => result));
   }
 
-  updateWaiver(team: WaiversDto): Observable<WaiversDto> {
+  updateWaiver(teams: WaiversDto[]): Observable<WaiversDto[]> {
     return this._http
-      .put(`${this.apiUrl}/waivers/${team.id}`, team)
+      .put(`${this.apiUrl}/waivers`, teams)
       .pipe(map((result: any) => result));
   }
 }
