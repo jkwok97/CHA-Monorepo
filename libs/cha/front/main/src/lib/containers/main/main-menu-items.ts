@@ -115,7 +115,7 @@ export const mainMenuItems: MenuItem[] = [
             label: 'South West Division',
             items: [
               {
-                label: 'Chyenne Desperado',
+                label: 'Cheyenne Desperado',
                 routerLink: ['/league/teams/4'],
               },
               {
