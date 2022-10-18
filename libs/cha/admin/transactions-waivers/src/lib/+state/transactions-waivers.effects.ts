@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { WaiversDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, catchError, of } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { exhaustMap, map, catchError, of, tap, delay } from 'rxjs';
 import { TransactionsWaiversService } from '../services';
 import { TransactionsWaiversActions } from './transactions-waivers.actions';
+import { TransactionsWaiversFacade } from './transactions-waivers.facade';
 
 @Injectable()
 export class TransactionsWaiverssEffects {
   constructor(
     private actions$: Actions,
-    private transactionsWaiversService: TransactionsWaiversService
+    private transactionsWaiversService: TransactionsWaiversService,
+    private transactionsWaiversFacade: TransactionsWaiversFacade,
+    private messageService: MessageService
   ) {}
 
   getWaivers$ = createEffect(() =>
@@ -42,5 +46,22 @@ export class TransactionsWaiverssEffects {
         )
       )
     )
+  );
+
+  updateWaiverSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(TransactionsWaiversActions.updateWaiverSuccess),
+        delay(200),
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Update Waiver Priority',
+            detail: 'Waiver Priority has been updated',
+          });
+          this.transactionsWaiversFacade.getWaivers();
+        })
+      ),
+    { dispatch: false }
   );
 }

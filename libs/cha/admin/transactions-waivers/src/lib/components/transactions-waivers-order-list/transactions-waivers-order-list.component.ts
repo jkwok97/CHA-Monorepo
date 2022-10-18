@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { WaiversDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
 import { TransactionsWaiversFacade } from '../../+state/transactions-waivers.facade';
 
 @Component({
@@ -17,17 +16,12 @@ export class TransactionsWaiversOrderListComponent implements OnInit {
   @Input() waivers!: WaiversDto[];
   @Input() isMobile!: boolean;
 
-  isSaving$: Observable<boolean>;
-
   waiverList!: WaiversDto[];
 
-  constructor(private transactionsWaiversFacade: TransactionsWaiversFacade) {
-    this.isSaving$ = this.transactionsWaiversFacade.isSaving$;
-  }
+  constructor(private transactionsWaiversFacade: TransactionsWaiversFacade) {}
 
   ngOnInit(): void {
     this.waiverList = this.mapItems(this.waivers);
-    console.log(this.waiverList);
   }
 
   // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
@@ -47,10 +41,8 @@ export class TransactionsWaiversOrderListComponent implements OnInit {
       waiver.priority_number = index + 1;
     });
 
-    this.transactionsWaiversFacade.updateWaiverPriority(this.waiverList);
-
-    // SEND TO API FOR UPDATE
-
-    console.log(this.waiverList);
+    setTimeout(() => {
+      this.transactionsWaiversFacade.updateWaiverPriority(this.waiverList);
+    }, 200);
   }
 }

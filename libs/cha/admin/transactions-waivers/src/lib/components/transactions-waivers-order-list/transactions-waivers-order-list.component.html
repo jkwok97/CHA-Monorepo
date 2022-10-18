@@ -4,16 +4,10 @@
   [dragdrop]="true"
   (onReorder)="onReorder($event)"
 >
-  <p-progressBar
-    mode="indeterminate"
-    [style]="{ height: '6px' }"
-    *ngIf="isSaving$ | async"
-  ></p-progressBar>
-  
+
   <ng-template
     let-waiver
     pTemplate="item"
-    *ngIf="(isSaving$ | async) === false"
   >
     <div class="flex column-gap-3 align-items-center">
       <img
