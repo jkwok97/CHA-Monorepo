@@ -1,5 +1,5 @@
 import { Teams_V2, Waivers_V2 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -18,6 +18,18 @@ export class ApiWaiversService {
     const allWaiverWithTeamInfo = await this.setTeamInfo(allWaivers);
 
     return allWaiverWithTeamInfo;
+  }
+
+  async updateWaiverPriority(id: number, attrs: Partial<Waivers_V2>) {
+    const team = await this.repo.findOneByOrFail({ id });
+
+    if (!team) {
+      throw new NotFoundException('team not found');
+    }
+
+    Object.assign(team, attrs);
+
+    return this.repo.save(team);
   }
 
   private async setTeamInfo(array: any[]) {

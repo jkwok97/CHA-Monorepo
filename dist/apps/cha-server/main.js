@@ -8857,7 +8857,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/waivers/src/lib/controllers
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WaiversController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8874,6 +8874,9 @@ let WaiversController = class WaiversController {
         }
         return salaries;
     }
+    updateUserById(param, body) {
+        return this.waiversService.updateWaiverPriority(parseInt(param.id), body);
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/all'),
@@ -8881,6 +8884,14 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], WaiversController.prototype, "getAllPlayerSalaries", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], WaiversController.prototype, "updateUserById", null);
 WaiversController = tslib_1.__decorate([
     (0, common_1.Controller)('waivers'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiWaiversService !== "undefined" && services_1.ApiWaiversService) === "function" ? _a : Object])
@@ -8944,6 +8955,14 @@ let ApiWaiversService = class ApiWaiversService {
         const allWaivers = await this.repo.find();
         const allWaiverWithTeamInfo = await this.setTeamInfo(allWaivers);
         return allWaiverWithTeamInfo;
+    }
+    async updateWaiverPriority(id, attrs) {
+        const team = await this.repo.findOneByOrFail({ id });
+        if (!team) {
+            throw new common_1.NotFoundException('team not found');
+        }
+        Object.assign(team, attrs);
+        return this.repo.save(team);
     }
     async setTeamInfo(array) {
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_id) }))));
