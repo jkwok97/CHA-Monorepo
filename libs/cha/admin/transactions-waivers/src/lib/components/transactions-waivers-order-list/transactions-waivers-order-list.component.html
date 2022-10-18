@@ -1,1 +1,27 @@
-<p>transactions-waivers-order-list works!</p>
+<p-orderList
+  [value]="waiverList"
+  [listStyle]="{ 'max-height': isMobile ? '60vh' : '70vh' }"
+  [dragdrop]="true"
+  (onReorder)="onReorder($event)"
+>
+  <p-progressBar
+    mode="indeterminate"
+    [style]="{ height: '6px' }"
+    *ngIf="isSaving$ | async"
+  ></p-progressBar>
+  
+  <ng-template
+    let-waiver
+    pTemplate="item"
+    *ngIf="(isSaving$ | async) === false"
+  >
+    <div class="flex column-gap-3 align-items-center">
+      <img
+        [src]="this.getString(waiver.teamInfo.teamlogo)"
+        [alt]="waiver.teamInfo.city"
+        [height]="35"
+      />
+      <span> {{ waiver.teamInfo.city }} {{ waiver.teamInfo.nickname }} </span>
+    </div>
+  </ng-template>
+</p-orderList>

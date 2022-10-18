@@ -16,6 +16,14 @@ export class TransactionsWaiversFacade {
     TransactionsWaiversSelectors.selectLoaded
   );
 
+  isSaving$: Observable<boolean> = this.store.select(
+    TransactionsWaiversSelectors.selectSaving
+  );
+
+  isSaved$: Observable<boolean> = this.store.select(
+    TransactionsWaiversSelectors.selectSaved
+  );
+
   waivers$: Observable<WaiversDto[]> = this.store.select(
     TransactionsWaiversSelectors.selectWaivers
   );

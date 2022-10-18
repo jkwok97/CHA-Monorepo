@@ -16,7 +16,12 @@
 
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
-        <ng-container *ngIf="waivers$ | async as waivers"> </ng-container>
+        <ng-container *ngIf="waivers$ | async as waivers">
+          <cha-admin-transactions-waivers-order-list
+            [waivers]="waivers"
+            [isMobile]="isMobile"
+          ></cha-admin-transactions-waivers-order-list>
+        </ng-container>
       </blade-card-body>
     </blade-card>
   </div>
