@@ -18,10 +18,10 @@ export class TransactionsController {
     return stats;
   }
 
-  @Get('team/:id/:season')
+  @Get('team/:team/:season')
   async getTeam(@Param() param): Promise<GetTeamTransactionDto> {
     const team = await this.transactionsService.getTeamBySeason(
-      param.id,
+      param.team,
       param.season
     );
 

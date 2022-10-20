@@ -5,7 +5,7 @@ const NAMESPACE = '[TRANSACTIONS TRADES]';
 
 const getTeamOne = createAction(
   `${NAMESPACE} Get Team One`,
-  props<{ teamId: number }>()
+  props<{ team: string }>()
 );
 
 const getTeamOneSuccess = createAction(
@@ -15,7 +15,7 @@ const getTeamOneSuccess = createAction(
 
 const getTeamTwo = createAction(
   `${NAMESPACE} Get Team Two`,
-  props<{ teamId: number }>()
+  props<{ team: string }>()
 );
 
 const getTeamTwoSuccess = createAction(

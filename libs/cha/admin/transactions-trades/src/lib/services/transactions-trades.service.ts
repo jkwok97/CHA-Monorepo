@@ -13,9 +13,9 @@ export class TransactionsTradesService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getTeam(teamId: number, season: string): Observable<GetTeamTransactionDto> {
+  getTeam(team: string, season: string): Observable<GetTeamTransactionDto> {
     return this._http
-      .get(`${this.apiUrl}/transactions/team/${teamId}/${season}`)
+      .get(`${this.apiUrl}/transactions/team/${team}/${season}`)
       .pipe(map((result: any) => result));
   }
 }

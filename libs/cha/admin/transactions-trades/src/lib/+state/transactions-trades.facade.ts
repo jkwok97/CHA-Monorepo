@@ -42,11 +42,11 @@ export class TransactionsTradesFacade {
 
   constructor(private store: Store<State>) {}
 
-  getTeamOne(teamId: number) {
-    this.store.dispatch(TransactionsTradesActions.getTeamOne({ teamId }));
+  getTeamOne(team: string) {
+    this.store.dispatch(TransactionsTradesActions.getTeamOne({ team }));
   }
 
-  getTeamTwo(teamId: number) {
-    this.store.dispatch(TransactionsTradesActions.getTeamTwo({ teamId }));
+  getTeamTwo(team: string) {
+    this.store.dispatch(TransactionsTradesActions.getTeamTwo({ team }));
   }
 }

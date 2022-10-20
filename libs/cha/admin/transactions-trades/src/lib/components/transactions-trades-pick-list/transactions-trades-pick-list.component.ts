@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { GetTeamTransactionDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
-import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'cha-admin-transactions-trades-pick-list',
@@ -9,4 +6,6 @@ import { TransactionsTradesFacade } from '../../+state/transactions-trades.facad
   styleUrls: ['./transactions-trades-pick-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsTradesPickListComponent {}
+export class TransactionsTradesPickListComponent {
+  @Input() isMobile!: boolean;
+}

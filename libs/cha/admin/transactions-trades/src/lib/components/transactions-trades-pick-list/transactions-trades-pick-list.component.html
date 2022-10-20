@@ -1,7 +1,15 @@
-<div class="flex justify-content-evenly flex-wrap row-gap-3">
-  <cha-admin-transactions-trades-list-box></cha-admin-transactions-trades-list-box>
+<div class="flex justify-content-evenly flex-wrap row-gap-3 align-items-center">
+  <cha-admin-transactions-trades-list-box
+    [isMobile]="isMobile"
+    [team]="'teamOne'"
+  ></cha-admin-transactions-trades-list-box>
 
-  <cha-admin-transaction-trades-buttons></cha-admin-transaction-trades-buttons>
+  <cha-admin-transaction-trades-buttons
+    [isMobile]="isMobile"
+  ></cha-admin-transaction-trades-buttons>
 
-  <cha-admin-transactions-trades-list-box></cha-admin-transactions-trades-list-box>
+  <cha-admin-transactions-trades-list-box
+    [isMobile]="isMobile"
+    [team]="'teamOne'"
+  ></cha-admin-transactions-trades-list-box>
 </div>

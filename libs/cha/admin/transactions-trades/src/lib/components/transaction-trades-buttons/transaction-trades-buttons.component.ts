@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'cha-admin-transaction-trades-buttons',
@@ -7,6 +12,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionTradesButtonsComponent implements OnInit {
+  @Input() isMobile!: boolean;
+
   constructor() {}
 
   ngOnInit(): void {}

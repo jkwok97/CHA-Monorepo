@@ -8,8 +8,6 @@ import {
   map,
   catchError,
   of,
-  tap,
-  delay,
   withLatestFrom,
 } from 'rxjs';
 import { TransactionsTradesService } from '../services';
@@ -32,7 +30,7 @@ export class TransactionsTradesEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.transactionsTradesService
-          .getTeam(action.teamId, data.current_year)
+          .getTeam(action.team, data.current_year)
           .pipe(
             map((team: GetTeamTransactionDto) =>
               TransactionsTradesActions.getTeamOneSuccess({
@@ -51,7 +49,7 @@ export class TransactionsTradesEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.transactionsTradesService
-          .getTeam(action.teamId, data.current_year)
+          .getTeam(action.team, data.current_year)
           .pipe(
             map((team: GetTeamTransactionDto) =>
               TransactionsTradesActions.getTeamTwoSuccess({

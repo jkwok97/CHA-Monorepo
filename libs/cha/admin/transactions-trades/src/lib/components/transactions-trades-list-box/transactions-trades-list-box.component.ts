@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import { SelectItemGroup } from 'primeng/api';
 import { filter, first, Observable, tap } from 'rxjs';
+import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
 
 interface City {
   name: string;
@@ -20,6 +26,9 @@ interface Country {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsTradesListBoxComponent implements OnInit {
+  @Input() isMobile!: boolean;
+  @Input() team!: 'teamOne' | 'teamTwo';
+
   groupedCities: SelectItemGroup[];
 
   cities: City[];
@@ -32,7 +41,10 @@ export class TransactionsTradesListBoxComponent implements OnInit {
 
   teamsOptions!: any[];
 
-  constructor(private leagueDataFacade: LeagueDataFacade) {
+  constructor(
+    private leagueDataFacade: LeagueDataFacade,
+    private transactionsTradesFacade: TransactionsTradesFacade
+  ) {
     this.cities = [
       { name: 'New York', code: 'NY' },
       { name: 'Rome', code: 'RM' },
@@ -97,5 +109,13 @@ export class TransactionsTradesListBoxComponent implements OnInit {
       .subscribe((options) => {
         this.teamsOptions = options;
       });
+  }
+
+  onSelectTeam(event: any) {
+    if (this.team === 'teamOne') {
+      this.transactionsTradesFacade.getTeamOne(event.value);
+    } else if (this.team === 'teamTwo') {
+      this.transactionsTradesFacade.getTeamTwo(event.value);
+    }
   }
 }

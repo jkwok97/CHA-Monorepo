@@ -33,7 +33,7 @@ export class ApiTransactionsService {
   }
 
   async getTeamBySeason(
-    teamId: number,
+    team: string,
     season: string
   ): Promise<GetTeamTransactionDto> {
     return {

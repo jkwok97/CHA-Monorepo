@@ -5,6 +5,7 @@
     optionLabel="label"
     optionValue="value"
     placeholder="Select Team"
+    (onChange)="onSelectTeam($event)"
   ></p-dropdown>
 
   <p-listbox
@@ -14,7 +15,7 @@
     [checkbox]="true"
     [filter]="true"
     [multiple]="true"
-    [listStyle]="{ 'max-height': '250px' }"
+    [listStyle]="{ 'max-height': isMobile ? '250px' : '500px' }"
   >
     <ng-template let-group pTemplate="group">
       <div class="flex align-items-center">

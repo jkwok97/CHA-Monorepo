@@ -8378,7 +8378,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8395,6 +8395,13 @@ let TransactionsController = class TransactionsController {
         }
         return stats;
     }
+    async getTeam(param) {
+        const team = await this.transactionsService.getTeamBySeason(param.team, param.season);
+        if (!team) {
+            throw new common_1.NotFoundException('Team not found');
+        }
+        return team;
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
@@ -8403,6 +8410,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], TransactionsController.prototype, "getTransactionsBySeason", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('team/:team/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], TransactionsController.prototype, "getTeam", null);
 TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiTransactionsService !== "undefined" && services_1.ApiTransactionsService) === "function" ? _a : Object])
@@ -8475,6 +8489,13 @@ let ApiTransactionsService = class ApiTransactionsService {
         });
         const transactionsTeamInfo = await this.setTransactionInfo(transactions);
         return transactionsTeamInfo;
+    }
+    async getTeamBySeason(team, season) {
+        return {
+            players: [],
+            goalies: [],
+            draftPicks: [],
+        };
     }
     async setTransactionInfo(transactions) {
         return await Promise.all(transactions.map(async (transaction) => ({
@@ -9519,6 +9540,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
+/***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
 /***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/get-transaction.dto.ts":
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -9535,6 +9565,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__("tslib");
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-transaction.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts"), exports);
 
 
 /***/ }),
