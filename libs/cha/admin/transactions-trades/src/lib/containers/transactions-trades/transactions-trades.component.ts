@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-admin-transactions-trades',
@@ -6,4 +8,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./transactions-trades.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsTradesComponent {}
+export class TransactionsTradesComponent {
+  isMobile!: boolean;
+
+  constructor(private displayFacade: DisplayFacade) {
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+  }
+}
