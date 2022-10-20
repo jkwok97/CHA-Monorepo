@@ -102,7 +102,7 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/16'],
               },
               {
-                label: 'Victoria Stellar Jays',
+                label: "Victoria Stellar's Jays",
                 routerLink: ['/league/teams/53'],
               },
               {
