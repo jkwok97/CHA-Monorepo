@@ -1,4 +1,5 @@
 import { Players_V2, Teams_V2, Transactions_V2 } from '@api/entities';
+import { GetTeamTransactionDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
@@ -29,6 +30,17 @@ export class ApiTransactionsService {
     const transactionsTeamInfo = await this.setTransactionInfo(transactions);
 
     return transactionsTeamInfo;
+  }
+
+  async getTeamBySeason(
+    teamId: number,
+    season: string
+  ): Promise<GetTeamTransactionDto> {
+    return {
+      players: [],
+      goalies: [],
+      draftPicks: [],
+    };
   }
 
   private async setTransactionInfo(transactions: Transactions_V2[]) {

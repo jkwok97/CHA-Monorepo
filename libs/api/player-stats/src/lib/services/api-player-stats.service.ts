@@ -1,5 +1,5 @@
 import { Players_Stats_V2, Teams_V2 } from '@api/entities';
-import { CreateStatPlayerAllDto, StatPlayerAllDto } from '@cha/shared/entities';
+import { StatPlayerAllDto } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

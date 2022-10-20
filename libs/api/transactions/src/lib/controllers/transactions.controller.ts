@@ -1,3 +1,4 @@
+import { GetTeamTransactionDto } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { ApiTransactionsService } from '../services';
 
@@ -15,5 +16,18 @@ export class TransactionsController {
       throw new NotFoundException('Transactions not found');
     }
     return stats;
+  }
+
+  @Get('team/:id/:season')
+  async getTeam(@Param() param): Promise<GetTeamTransactionDto> {
+    const team = await this.transactionsService.getTeamBySeason(
+      param.id,
+      param.season
+    );
+
+    if (!team) {
+      throw new NotFoundException('Team not found');
+    }
+    return team;
   }
 }
