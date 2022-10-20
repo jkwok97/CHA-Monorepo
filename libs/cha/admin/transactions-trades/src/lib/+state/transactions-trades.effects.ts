@@ -14,14 +14,14 @@ import {
 } from 'rxjs';
 import { TransactionsTradesService } from '../services';
 import { TransactionsTradesActions } from './transactions-trades.actions';
-import { TransactionsWaiversFacade } from './transactions-trades.facade';
+import { TransactionsTradesFacade } from './transactions-trades.facade';
 
 @Injectable()
 export class TransactionsTradesEffects {
   constructor(
     private actions$: Actions,
     private transactionsTradesService: TransactionsTradesService,
-    private transactionsWaiversFacade: TransactionsWaiversFacade,
+    private transactionsTradesFacade: TransactionsTradesFacade,
     private leagueDataFacade: LeagueDataFacade,
     private messageService: MessageService
   ) {}

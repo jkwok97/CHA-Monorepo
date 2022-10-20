@@ -7,7 +7,7 @@ import { TransactionsTradesSelectors } from './transactions-trades.selectors';
 import { GetTeamTransactionDto } from '@cha/shared/entities';
 
 @Injectable()
-export class TransactionsWaiversFacade {
+export class TransactionsTradesFacade {
   isSaving$: Observable<boolean> = this.store.select(
     TransactionsTradesSelectors.selectSaving
   );
