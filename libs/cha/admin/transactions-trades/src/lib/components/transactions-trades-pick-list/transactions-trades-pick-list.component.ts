@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { GetTeamTransactionDto } from '@cha/shared/entities';
+import { Observable } from 'rxjs';
+import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
 
 @Component({
   selector: 'cha-admin-transactions-trades-pick-list',
@@ -6,8 +9,4 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./transactions-trades-pick-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsTradesPickListComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class TransactionsTradesPickListComponent {}

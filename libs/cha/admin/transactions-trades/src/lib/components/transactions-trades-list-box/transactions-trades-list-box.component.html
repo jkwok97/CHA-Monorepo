@@ -1,0 +1,25 @@
+<div class="flex flex-column row-gap-3">
+  <p-dropdown
+    [options]="teamsOptions"
+    [autoDisplayFirst]="false"
+    optionLabel="label"
+    optionValue="value"
+    placeholder="Select Team"
+  ></p-dropdown>
+
+  <p-listbox
+    [options]="groupedCities"
+    [group]="true"
+    [metaKeySelection]="false"
+    [checkbox]="true"
+    [filter]="true"
+    [multiple]="true"
+    [listStyle]="{ 'max-height': '250px' }"
+  >
+    <ng-template let-group pTemplate="group">
+      <div class="flex align-items-center">
+        <span>{{ group.label }}</span>
+      </div>
+    </ng-template>
+  </p-listbox>
+</div>
