@@ -84,7 +84,9 @@
           <div class="table-body-cell">
             <ng-container
               *ngIf="
-                column.field !== 'isactive' && column.field !== 'divisions_id'
+                column.field !== 'isactive' &&
+                column.field !== 'divisions_id' &&
+                column.field !== 'teamlogo'
               "
               >{{ data[column.field] }}</ng-container
             >

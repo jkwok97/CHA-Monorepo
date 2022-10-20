@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FormlyModule } from '@ngx-formly/core';
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { SidebarModule } from 'primeng/sidebar';
@@ -35,6 +36,7 @@ import {
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    PerfectScrollbarModule,
     ProgressBarModule,
     TableModule,
     SidebarModule,

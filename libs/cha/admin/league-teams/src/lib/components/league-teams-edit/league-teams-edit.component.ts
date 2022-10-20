@@ -32,7 +32,7 @@ export class LeagueTeamsEditComponent implements OnInit {
   editMode = false;
   panelStyle = {
     width: '100%',
-    height: '75vh',
+    height: '65vh',
   };
 
   constructor(private leagueTeamsFacade: LeagueTeamsFacade) {}

@@ -21,11 +21,17 @@ import { PlayerMgmtSalariesEditFormComponent } from '../player-mgmt-salaries-edi
 })
 export class PlayerMgmtSalariesEditComponent {
   @Input() salary!: SalaryAllDto | null;
+  @Input() isMobile!: boolean;
 
   @Output() closeSidebar = new EventEmitter<boolean>();
 
   @ViewChild(PlayerMgmtSalariesEditFormComponent, { static: false })
   salaryFormRef?: PlayerMgmtSalariesEditFormComponent;
+
+  panelStyle = {
+    width: '100%',
+    height: '65vh',
+  };
 
   constructor(private playerMgmtSalariesFacade: PlayerMgmtSalariesFacade) {}
 

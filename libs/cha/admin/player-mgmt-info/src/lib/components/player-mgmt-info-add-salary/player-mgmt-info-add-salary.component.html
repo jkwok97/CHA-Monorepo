@@ -5,9 +5,16 @@
 
   <blade-card-body>
     <ng-container *ngIf="player$ | async as player">
-      <cha-admin-player-mgmt-info-add-salary-form
+      <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+        <cha-admin-player-mgmt-info-add-salary-form
+          [player]="player"
+        ></cha-admin-player-mgmt-info-add-salary-form>
+      </perfect-scrollbar>
+
+      <cha-admin-player-mgmt-info-edit-form
         [player]="player"
-      ></cha-admin-player-mgmt-info-add-salary-form>
+        *ngIf="!isMobile"
+      ></cha-admin-player-mgmt-info-edit-form>
     </ng-container>
   </blade-card-body>
 

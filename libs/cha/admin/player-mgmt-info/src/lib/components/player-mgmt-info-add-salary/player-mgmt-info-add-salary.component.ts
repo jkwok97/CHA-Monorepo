@@ -27,7 +27,7 @@ export class PlayerMgmtInfoAddSalaryComponent {
 
   panelStyle = {
     width: '100%',
-    height: '75vh',
+    height: '65vh',
   };
 
   constructor(

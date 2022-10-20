@@ -5,8 +5,15 @@
   </blade-card-header>
 
   <blade-card-body>
+    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+      <cha-admin-player-mgmt-salaries-edit-form
+        [salary]="salary"
+      ></cha-admin-player-mgmt-salaries-edit-form>
+    </perfect-scrollbar>
+
     <cha-admin-player-mgmt-salaries-edit-form
       [salary]="salary"
+      *ngIf="!isMobile"
     ></cha-admin-player-mgmt-salaries-edit-form>
   </blade-card-body>
 
@@ -19,7 +26,9 @@
           type="button"
           [label]="'Save Salary'"
           class="p-button-raised"
-          [disabled]="salaryFormRef?.form?.invalid || !salaryFormRef?.form?.dirty"
+          [disabled]="
+            salaryFormRef?.form?.invalid || !salaryFormRef?.form?.dirty
+          "
           (click)="onSave()"
         ></button>
         <button
