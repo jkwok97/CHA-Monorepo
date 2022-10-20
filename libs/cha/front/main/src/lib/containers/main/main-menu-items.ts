@@ -106,7 +106,7 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/53'],
               },
               {
-                label: 'Sacremento Storm',
+                label: 'Sacramento Storm',
                 routerLink: ['/league/teams/61'],
               },
             ],

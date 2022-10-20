@@ -25,8 +25,10 @@ export class LeagueWaiversTableComponent implements OnInit {
     return waivers
       .map((waiver: WaiversDto) => ({
         ...waiver,
-        teamLogo: this.getString(waiver.teamInfo.teamlogo),
-        teamName: `${waiver.teamInfo.city} ${waiver.teamInfo.nickname}`,
+        teamLogo: this.getString(
+          waiver.teamInfo?.teamlogo ? waiver.teamInfo.teamlogo : ''
+        ),
+        teamName: `${waiver.teamInfo?.city} ${waiver.teamInfo?.nickname}`,
       }))
       .sort((a, b) => a.priority_number - b.priority_number);
   }
