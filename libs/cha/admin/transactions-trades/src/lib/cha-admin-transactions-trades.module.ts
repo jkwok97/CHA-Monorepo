@@ -17,6 +17,7 @@ import { TransactionsTradesFacade } from './+state/transactions-trades.facade';
 import { ChaAdminTransactionsTradesRoutingModule } from './cha-admin-transactions-trades-routing.module';
 
 import { TransactionsTradesComponent } from './containers';
+import { TransactionsTradesPickListComponent } from './components';
 
 @NgModule({
   imports: [
@@ -29,7 +30,10 @@ import { TransactionsTradesComponent } from './containers';
     StoreModule.forFeature('transactions-trades', reducer),
     EffectsModule.forFeature([TransactionsTradesEffects]),
   ],
-  declarations: [TransactionsTradesComponent],
+  declarations: [
+    TransactionsTradesComponent,
+    TransactionsTradesPickListComponent,
+  ],
   providers: [TransactionsTradesEffects, TransactionsTradesFacade],
 })
 export class ChaAdminTransactionsTradesModule {}
