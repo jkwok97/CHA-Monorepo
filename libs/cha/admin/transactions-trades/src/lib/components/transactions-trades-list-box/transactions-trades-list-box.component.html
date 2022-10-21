@@ -29,7 +29,7 @@
   ></p-progressBar>
 
   <p-listbox
-    [options]="groupedCities"
+    [options]="team === 'teamOne' ? teamOneGrouped : teamTwoGrouped"
     [group]="true"
     [metaKeySelection]="false"
     [checkbox]="true"

@@ -3,11 +3,12 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
 } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import { SelectItemGroup } from 'primeng/api';
-import { Observable } from 'rxjs';
+import { filter, first, map, Observable } from 'rxjs';
 import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
 
 interface City {
@@ -26,7 +27,7 @@ interface Country {
   styleUrls: ['./transactions-trades-list-box.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsTradesListBoxComponent {
+export class TransactionsTradesListBoxComponent implements OnInit {
   @Input() isMobile!: boolean;
   @Input() team!: 'teamOne' | 'teamTwo';
   @Input() options!: any[];
@@ -35,6 +36,9 @@ export class TransactionsTradesListBoxComponent {
 
   teamOneLoading$: Observable<boolean>;
   teamTwoLoading$: Observable<boolean>;
+
+  teamOneGrouped!: any[];
+  teamTwoGrouped!: any[];
 
   groupedCities: SelectItemGroup[];
 
@@ -106,6 +110,22 @@ export class TransactionsTradesListBoxComponent {
         ],
       },
     ];
+  }
+
+  ngOnInit(): void {
+    this.transactionsTradesFacade.teamOne$
+      .pipe(
+        filter((options) => options.length > 0),
+        first()
+      )
+      .subscribe((options) => (this.teamOneGrouped = options));
+
+    this.transactionsTradesFacade.teamTwo$
+      .pipe(
+        filter((options) => options.length > 0),
+        first()
+      )
+      .subscribe((options) => (this.teamTwoGrouped = options));
   }
 
   onSelectTeam(event: any) {

@@ -1,6 +1,5 @@
 import { GetTeamTransactionDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { TransactionsWaiversActions } from 'libs/cha/admin/transactions-waivers/src/lib/+state/transactions-waivers.actions';
 import { TransactionsTradesActions } from './transactions-trades.actions';
 
 export interface State {

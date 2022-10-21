@@ -16,8 +16,8 @@ export class TransactionsTradesFacade {
     TransactionsTradesSelectors.selectSaved
   );
 
-  teamOne$: Observable<GetTeamTransactionDto | null> = this.store.select(
-    TransactionsTradesSelectors.selectTeamOne
+  teamOne$: Observable<any[]> = this.store.select(
+    TransactionsTradesSelectors.selectTeamOneGrouped
   );
 
   teamOneLoading$: Observable<boolean> = this.store.select(
@@ -28,8 +28,8 @@ export class TransactionsTradesFacade {
     TransactionsTradesSelectors.selectTeamOneLoaded
   );
 
-  teamTwo$: Observable<GetTeamTransactionDto | null> = this.store.select(
-    TransactionsTradesSelectors.selectTeamTwo
+  teamTwo$: Observable<any[]> = this.store.select(
+    TransactionsTradesSelectors.selectTeamTwoGrouped
   );
 
   teamTwoLoading$: Observable<boolean> = this.store.select(
