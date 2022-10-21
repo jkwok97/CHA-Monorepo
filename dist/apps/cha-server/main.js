@@ -8525,9 +8525,9 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const draftPicks = await this.draftRepo
             .createQueryBuilder('Draft_Order_V2')
             .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
-            // .orWhere('draft.draft_year = :draftYear', {
-            //   draftYear: (Number(draftYear) + 1).toString(),
-            // })
+            .orWhere('draft.draft_year = :draftYear', {
+            draftYear: (Number(draftYear) + 1).toString(),
+        })
             //   .andWhere(
             //     new Brackets((qb) => {
             //       qb.where('Draft_Order_V2.team_id.shortname = :shortName', {
