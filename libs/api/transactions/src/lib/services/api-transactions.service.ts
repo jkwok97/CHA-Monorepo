@@ -82,7 +82,7 @@ export class ApiTransactionsService {
       },
     });
 
-    const draftTeam = await this.getPlayerTeamInfo(team);
+    // const draftTeam = await this.getPlayerTeamInfo(team);
 
     // const draftPicks = await this.draftRepo
     //   .createQueryBuilder('Draft_Order_V2')
