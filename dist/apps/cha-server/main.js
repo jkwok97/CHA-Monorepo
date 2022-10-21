@@ -8535,18 +8535,18 @@ let ApiTransactionsService = class ApiTransactionsService {
         });
         const draftTeam = await this.getPlayerTeamInfo(team);
         const draftPicks = await this.draftRepo
-            .createQueryBuilder('draft')
-            .where('draft.draft_year = :draftYear', { draftYear: draftYear })
+            .createQueryBuilder('Draft_Order_V2')
+            .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
             // .orWhere('draft.draft_year = :draftYear', {
             //   draftYear: (Number(draftYear) + 1).toString(),
             // })
             .andWhere(new typeorm_2.Brackets((qb) => {
-            qb.where('draft.team_id.shortname = :shortName', { shortName: draftTeam.shortname })
-                .orWhere('draft.round_one = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_two = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_three = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_four = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_five = :teamId', { teamId: draftTeam.id });
+            qb.where('Draft_Order_V2.team_id.shortname = :shortName', { shortName: draftTeam.shortname })
+                .orWhere('Draft_Order_V2.round_one = :teamId', { teamId: draftTeam.id })
+                .orWhere('Draft_Order_V2.round_two = :teamId', { teamId: draftTeam.id })
+                .orWhere('Draft_Order_V2.round_three = :teamId', { teamId: draftTeam.id })
+                .orWhere('Draft_Order_V2.round_four = :teamId', { teamId: draftTeam.id })
+                .orWhere('Draft_Order_V2.round_five = :teamId', { teamId: draftTeam.id });
         }))
             .getMany();
         const playersWithTeamInfo = await this.setTeamInfo(players);
