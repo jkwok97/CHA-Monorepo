@@ -1,12 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
-  OnInit,
+  Output,
 } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import { SelectItemGroup } from 'primeng/api';
-import { filter, first, Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
 
 interface City {
@@ -25,9 +26,15 @@ interface Country {
   styleUrls: ['./transactions-trades-list-box.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsTradesListBoxComponent implements OnInit {
+export class TransactionsTradesListBoxComponent {
   @Input() isMobile!: boolean;
   @Input() team!: 'teamOne' | 'teamTwo';
+  @Input() options!: any[];
+
+  @Output() optionChanged = new EventEmitter<string>();
+
+  teamOneLoading$: Observable<boolean>;
+  teamTwoLoading$: Observable<boolean>;
 
   groupedCities: SelectItemGroup[];
 
@@ -39,12 +46,13 @@ export class TransactionsTradesListBoxComponent implements OnInit {
 
   selectedCountries!: Country[];
 
-  teamsOptions!: any[];
-
   constructor(
     private leagueDataFacade: LeagueDataFacade,
     private transactionsTradesFacade: TransactionsTradesFacade
   ) {
+    this.teamOneLoading$ = this.transactionsTradesFacade.teamOneLoading$;
+    this.teamTwoLoading$ = this.transactionsTradesFacade.teamTwoLoading$;
+
     this.cities = [
       { name: 'New York', code: 'NY' },
       { name: 'Rome', code: 'RM' },
@@ -100,21 +108,12 @@ export class TransactionsTradesListBoxComponent implements OnInit {
     ];
   }
 
-  ngOnInit(): void {
-    this.leagueDataFacade.leagueTeamsOptions$
-      .pipe(
-        filter((options) => options.length > 0),
-        first()
-      )
-      .subscribe((options) => {
-        this.teamsOptions = options;
-      });
-  }
-
   onSelectTeam(event: any) {
+    this.optionChanged.emit(event.value);
+
     if (this.team === 'teamOne') {
       this.transactionsTradesFacade.getTeamOne(event.value);
-    } else if (this.team === 'teamTwo') {
+    } else {
       this.transactionsTradesFacade.getTeamTwo(event.value);
     }
   }

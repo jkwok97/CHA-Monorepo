@@ -7,6 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ListboxModule } from 'primeng/listbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -22,13 +23,14 @@ import { TransactionsTradesComponent } from './containers';
 import {
   TransactionsTradesPickListComponent,
   TransactionsTradesListBoxComponent,
+  TransactionTradesButtonsComponent,
 } from './components';
-import { TransactionTradesButtonsComponent } from './components/transaction-trades-buttons/transaction-trades-buttons.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ProgressBarModule,
+    ProgressSpinnerModule,
     ListboxModule,
     DropdownModule,
     BladeAngularUiCardModule,

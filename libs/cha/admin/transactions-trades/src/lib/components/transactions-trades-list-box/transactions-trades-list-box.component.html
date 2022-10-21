@@ -1,12 +1,32 @@
 <div class="flex flex-column row-gap-3">
   <p-dropdown
-    [options]="teamsOptions"
+    [options]="options"
     [autoDisplayFirst]="false"
     optionLabel="label"
     optionValue="value"
     placeholder="Select Team"
     (onChange)="onSelectTeam($event)"
-  ></p-dropdown>
+  >
+    <ng-template let-option pTemplate="item">
+      <div>
+        <div
+          [ngStyle]="
+            option.disabled ? { color: '#ccc', cursor: 'default' } : {}
+          "
+        >
+          {{ option.label }}
+        </div>
+      </div>
+    </ng-template>
+  </p-dropdown>
+
+  <p-progressBar
+    mode="indeterminate"
+    [style]="{ height: '6px' }"
+    *ngIf="
+      team === 'teamOne' ? (teamOneLoading$ | async) : (teamTwoLoading$ | async)
+    "
+  ></p-progressBar>
 
   <p-listbox
     [options]="groupedCities"
@@ -16,6 +36,11 @@
     [filter]="true"
     [multiple]="true"
     [listStyle]="{ 'max-height': isMobile ? '250px' : '500px' }"
+    *ngIf="
+      team === 'teamOne'
+        ? (teamOneLoading$ | async) === false
+        : (teamTwoLoading$ | async) === false
+    "
   >
     <ng-template let-group pTemplate="group">
       <div class="flex align-items-center">

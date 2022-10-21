@@ -2,6 +2,8 @@
   <cha-admin-transactions-trades-list-box
     [isMobile]="isMobile"
     [team]="'teamOne'"
+    [options]="teamOneOptions"
+    (optionChanged)="setTeamOneSelection($event)"
   ></cha-admin-transactions-trades-list-box>
 
   <cha-admin-transaction-trades-buttons
@@ -10,6 +12,8 @@
 
   <cha-admin-transactions-trades-list-box
     [isMobile]="isMobile"
-    [team]="'teamOne'"
+    [team]="'teamTwo'"
+    [options]="teamTwoOptions"
+    (optionChanged)="setTeamTwoSelection($event)"
   ></cha-admin-transactions-trades-list-box>
 </div>
