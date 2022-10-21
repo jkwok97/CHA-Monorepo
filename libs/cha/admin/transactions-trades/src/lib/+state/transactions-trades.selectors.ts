@@ -1,4 +1,7 @@
-import { GetTeamTransactionDto } from '@cha/shared/entities';
+import {
+  DraftPickTransactionDto,
+  GetTeamTransactionDto,
+} from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as TransactionsTradesReducer from './transactions-trades.reducer';
@@ -66,13 +69,10 @@ const selectTeamOneGrouped = createSelector(
             value: `g-${player.player_id.id}`,
           })),
         },
-        // {
-        //   label: 'Draft Picks',
-        //   items: team.draftPicks.map((pick) => ({
-        //     label: `${pick.team_id}`,
-        //     value: pick.id
-        //   }))
-        // }
+        {
+          label: 'Draft Picks',
+          items: getDraftItems(team.draftPicks, team.players[0].teamInfo.id),
+        },
       ];
     } else {
       return [];
@@ -99,13 +99,10 @@ const selectTeamTwoGrouped = createSelector(
             value: `g-${player.player_id.id}`,
           })),
         },
-        // {
-        //   label: 'Draft Picks',
-        //   items: team.draftPicks.map((pick) => ({
-        //     label: `${pick.team_id}`,
-        //     value: pick.id
-        //   }))
-        // }
+        {
+          label: 'Draft Picks',
+          items: getDraftItems(team.draftPicks, team.players[0].teamInfo.id),
+        },
       ];
     } else {
       return [];
@@ -125,3 +122,44 @@ export const TransactionsTradesSelectors = {
   selectTeamOneGrouped,
   selectTeamTwoGrouped,
 };
+
+function getDraftItems(
+  picks: DraftPickTransactionDto[],
+  teamId: number
+): any[] {
+  const picksArray: any[] = [];
+
+  picks.forEach((pick) => {
+    if (pick.round_one === teamId) {
+      picksArray.push({
+        label: `${pick.team_id.shortname} 1st ${pick.draft_year}`,
+        value: `${pick.team_id.shortname} 1st ${pick.draft_year}`,
+      });
+    }
+    if (pick.round_two === teamId) {
+      picksArray.push({
+        label: `${pick.team_id.shortname} 2nd ${pick.draft_year}`,
+        value: `${pick.team_id.shortname} 2nd ${pick.draft_year}`,
+      });
+    }
+    if (pick.round_three === teamId) {
+      picksArray.push({
+        label: `${pick.team_id.shortname} 3rd ${pick.draft_year}`,
+        value: `${pick.team_id.shortname} 3rd ${pick.draft_year}`,
+      });
+    }
+    if (pick.round_four === teamId) {
+      picksArray.push({
+        label: `${pick.team_id.shortname} 4th ${pick.draft_year}`,
+        value: `${pick.team_id.shortname} 4th ${pick.draft_year}`,
+      });
+    }
+    if (pick.round_five === teamId) {
+      picksArray.push({
+        label: `${pick.team_id.shortname} 5th ${pick.draft_year}`,
+        value: `${pick.team_id.shortname} 5th ${pick.draft_year}`,
+      });
+    }
+  });
+  return picksArray;
+}
