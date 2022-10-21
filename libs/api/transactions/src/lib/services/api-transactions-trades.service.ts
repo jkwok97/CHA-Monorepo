@@ -64,51 +64,41 @@ export class ApiTransactionsTradesService {
 
     const draftTeam = await this.getPlayerTeamInfo(team);
 
-    console.log(draftTeam);
-
     const currentDraftPicks = await this.draftRepo.find({
-      where: {
-        draft_year: draftYear,
-      },
+      relations: ['team_id'],
+      where: [
+        {
+          draft_year: draftYear,
+          team_id: {
+            id: draftTeam.id,
+          },
+        },
+        { round_one: draftTeam.id },
+        { round_two: draftTeam.id },
+        { round_three: draftTeam.id },
+        { round_four: draftTeam.id },
+        { round_five: draftTeam.id },
+      ],
     });
 
     const nextDraftPicks = await this.draftRepo.find({
-      where: {
-        draft_year: (Number(draftYear) + 1).toString(),
-      },
+      relations: ['team_id'],
+      where: [
+        {
+          draft_year: (Number(draftYear) + 1).toString(),
+          team_id: {
+            id: draftTeam.id,
+          },
+        },
+        { round_one: draftTeam.id },
+        { round_two: draftTeam.id },
+        { round_three: draftTeam.id },
+        { round_four: draftTeam.id },
+        { round_five: draftTeam.id },
+      ],
     });
 
     const draftPicks = currentDraftPicks.concat(nextDraftPicks);
-
-    // const draftPicks = await this.draftRepo
-    //   .createQueryBuilder('Draft_Order_V2')
-    //   .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
-    //   .orWhere('Draft_Order_V2.draft_year = :draftYear', {
-    //     draftYear: (Number(draftYear) + 1).toString(),
-    //   })
-    //   .andWhere(
-    //     new Brackets((qb) => {
-    //       qb.where('Draft_Order_V2.team_id.id = :teamId', {
-    //         teamId: draftTeam.id,
-    //       });
-    //       //   .orWhere('Draft_Order_V2.round_one = :teamId', {
-    //       //     teamId: draftTeam.id,
-    //       //   })
-    //       //   .orWhere('Draft_Order_V2.round_two = :teamId', {
-    //       //     teamId: draftTeam.id,
-    //       //   })
-    //       //   .orWhere('Draft_Order_V2.round_three = :teamId', {
-    //       //     teamId: draftTeam.id,
-    //       //   })
-    //       //   .orWhere('Draft_Order_V2.round_four = :teamId', {
-    //       //     teamId: draftTeam.id,
-    //       //   })
-    //       //   .orWhere('Draft_Order_V2.round_five = :teamId', {
-    //       //     teamId: draftTeam.id,
-    //       //   });
-    //     })
-    //   )
-    //   .getMany();
 
     const playersWithTeamInfo = await this.setTeamInfo(players);
     const goaliesWithTeamInfo = await this.setTeamInfo(goalies);

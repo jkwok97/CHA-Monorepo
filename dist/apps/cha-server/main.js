@@ -1377,7 +1377,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Number)
 ], Draft_Order_V2.prototype, "id", void 0);
 tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
+    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id, { eager: true }),
     (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
     tslib_1.__metadata("design:type", typeof (_a = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _a : Object)
 ], Draft_Order_V2.prototype, "team_id", void 0);
@@ -8521,47 +8521,39 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             },
         });
         const draftTeam = await this.getPlayerTeamInfo(team);
-        console.log(draftTeam);
         const currentDraftPicks = await this.draftRepo.find({
-            where: {
-                draft_year: draftYear,
-            },
+            relations: ['team_id'],
+            where: [
+                {
+                    draft_year: draftYear,
+                    team_id: {
+                        id: draftTeam.id,
+                    },
+                },
+                { round_one: draftTeam.id },
+                { round_two: draftTeam.id },
+                { round_three: draftTeam.id },
+                { round_four: draftTeam.id },
+                { round_five: draftTeam.id },
+            ],
         });
         const nextDraftPicks = await this.draftRepo.find({
-            where: {
-                draft_year: (Number(draftYear) + 1).toString(),
-            },
+            relations: ['team_id'],
+            where: [
+                {
+                    draft_year: (Number(draftYear) + 1).toString(),
+                    team_id: {
+                        id: draftTeam.id,
+                    },
+                },
+                { round_one: draftTeam.id },
+                { round_two: draftTeam.id },
+                { round_three: draftTeam.id },
+                { round_four: draftTeam.id },
+                { round_five: draftTeam.id },
+            ],
         });
         const draftPicks = currentDraftPicks.concat(nextDraftPicks);
-        // const draftPicks = await this.draftRepo
-        //   .createQueryBuilder('Draft_Order_V2')
-        //   .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
-        //   .orWhere('Draft_Order_V2.draft_year = :draftYear', {
-        //     draftYear: (Number(draftYear) + 1).toString(),
-        //   })
-        //   .andWhere(
-        //     new Brackets((qb) => {
-        //       qb.where('Draft_Order_V2.team_id.id = :teamId', {
-        //         teamId: draftTeam.id,
-        //       });
-        //       //   .orWhere('Draft_Order_V2.round_one = :teamId', {
-        //       //     teamId: draftTeam.id,
-        //       //   })
-        //       //   .orWhere('Draft_Order_V2.round_two = :teamId', {
-        //       //     teamId: draftTeam.id,
-        //       //   })
-        //       //   .orWhere('Draft_Order_V2.round_three = :teamId', {
-        //       //     teamId: draftTeam.id,
-        //       //   })
-        //       //   .orWhere('Draft_Order_V2.round_four = :teamId', {
-        //       //     teamId: draftTeam.id,
-        //       //   })
-        //       //   .orWhere('Draft_Order_V2.round_five = :teamId', {
-        //       //     teamId: draftTeam.id,
-        //       //   });
-        //     })
-        //   )
-        //   .getMany();
         const playersWithTeamInfo = await this.setTeamInfo(players);
         const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
         // const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
