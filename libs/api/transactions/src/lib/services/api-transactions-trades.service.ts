@@ -68,9 +68,11 @@ export class ApiTransactionsTradesService {
 
     const draftPicks = await this.draftRepo
       .createQueryBuilder('Draft_Order_V2')
-      .leftJoinAndSelect(Teams_V2, 'team', 'team.id = :teamId', {
-        teamId: draftTeam.id,
-      })
+      .leftJoinAndSelect(
+        Teams_V2,
+        'team',
+        'team.id = Draft_Order_V2.team_id.id'
+      )
       .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
       .andWhere('Draft_Order_V2.draft_year = :draftYear', {
         draftYear: (Number(draftYear) + 1).toString(),
