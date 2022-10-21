@@ -1,8 +1,15 @@
-import { Players_V2, Teams_V2, Transactions_V2 } from '@api/entities';
+import {
+  Draft_Order_V2,
+  Goalies_Stats_V2,
+  Players_Stats_V2,
+  Players_V2,
+  Teams_V2,
+  Transactions_V2,
+} from '@api/entities';
 import { GetTeamTransactionDto } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Repository } from 'typeorm';
+import { Between, Brackets, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiTransactionsService {
@@ -12,7 +19,13 @@ export class ApiTransactionsService {
     @InjectRepository(Teams_V2)
     private teamInfoRepo: Repository<Teams_V2>,
     @InjectRepository(Players_V2)
-    private playersRepo: Repository<Players_V2>
+    private playersRepo: Repository<Players_V2>,
+    @InjectRepository(Players_Stats_V2)
+    private playerStatsRepo: Repository<Players_Stats_V2>,
+    @InjectRepository(Goalies_Stats_V2)
+    private goalieStatsRepo: Repository<Goalies_Stats_V2>,
+    @InjectRepository(Draft_Order_V2)
+    private draftRepo: Repository<Draft_Order_V2>
   ) {}
 
   async getTransactionsBySeason(year: string) {
@@ -34,13 +47,98 @@ export class ApiTransactionsService {
 
   async getTeamBySeason(
     team: string,
-    season: string
+    season: string,
+    draftYear: string
   ): Promise<GetTeamTransactionDto> {
+    const players = await this.playerStatsRepo.find({
+      select: {
+        id: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      where: {
+        team_name: team,
+        playing_year: season,
+      },
+    });
+
+    const goalies = await this.goalieStatsRepo.find({
+      select: {
+        id: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      where: {
+        team_name: team,
+        playing_year: season,
+      },
+    });
+
+    const draftTeam = await this.getPlayerTeamInfo(team);
+
+    const draftPicks = await this.draftRepo
+      .createQueryBuilder('draft')
+      .where('draft.draft_year = :draftYear', { draftYear: draftYear })
+      .orWhere('draft.draft_year = :draftYear', {
+        draftYear: (Number(draftYear) + 1).toString(),
+      })
+      .andWhere(
+        new Brackets((qb) => {
+          qb.where('draft.team_id.shortname = :shortName', { shortName: team })
+            .orWhere('draft.round_one = :teamId', { teamId: draftTeam.id })
+            .orWhere('draft.round_two = :teamId', { teamId: draftTeam.id })
+            .orWhere('draft.round_three = :teamId', { teamId: draftTeam.id })
+            .orWhere('draft.round_four = :teamId', { teamId: draftTeam.id })
+            .orWhere('draft.round_five = :teamId', { teamId: draftTeam.id });
+        })
+      )
+      .getMany();
+
+    const playersWithTeamInfo = await this.setTeamInfo(players);
+    const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
+    const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
+
     return {
-      players: [],
-      goalies: [],
-      draftPicks: [],
+      players: playersWithTeamInfo,
+      goalies: goaliesWithTeamInfo,
+      draftPicks: draftPicksWithTeamInfo,
     };
+  }
+
+  private async setDraftTeamInfo(array: Draft_Order_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        teamInfo: await this.getPlayerTeamInfo(item.team_id.shortname),
+      }))
+    );
+  }
+
+  private async setTeamInfo(array: Players_Stats_V2[] | Goalies_Stats_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        teamInfo: await this.getPlayerTeamInfo(item.team_name),
+      }))
+    );
+  }
+
+  private async getPlayerTeamInfo(teamName: string) {
+    return await this.teamInfoRepo.findOne({
+      select: {
+        id: true,
+        shortname: true,
+      },
+      where: {
+        shortname: teamName,
+      },
+    });
   }
 
   private async setTransactionInfo(transactions: Transactions_V2[]) {

@@ -8353,7 +8353,16 @@ let ApiTransactionsModule = class ApiTransactionsModule {
 };
 ApiTransactionsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Transactions_V2, entities_1.Teams_V2, entities_1.Players_V2])],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([
+                entities_1.Transactions_V2,
+                entities_1.Teams_V2,
+                entities_1.Players_V2,
+                entities_1.Players_Stats_V2,
+                entities_1.Goalies_Stats_V2,
+                entities_1.Draft_Order_V2,
+            ]),
+        ],
         controllers: [controllers_1.TransactionsController],
         providers: [services_1.ApiTransactionsService],
     })
@@ -8396,7 +8405,7 @@ let TransactionsController = class TransactionsController {
         return stats;
     }
     async getTeam(param) {
-        const team = await this.transactionsService.getTeamBySeason(param.team, param.season);
+        const team = await this.transactionsService.getTeamBySeason(param.team, param.season, param.draftYear);
         if (!team) {
             throw new common_1.NotFoundException('Team not found');
         }
@@ -8411,7 +8420,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], TransactionsController.prototype, "getTransactionsBySeason", null);
 tslib_1.__decorate([
-    (0, common_1.Get)('team/:team/:season'),
+    (0, common_1.Get)('team/:team/:season/:draftYear'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
@@ -8463,7 +8472,7 @@ exports.TransactionsMiddleware = TransactionsMiddleware;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTransactionsService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8472,10 +8481,13 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 let ApiTransactionsService = class ApiTransactionsService {
-    constructor(repo, teamInfoRepo, playersRepo) {
+    constructor(repo, teamInfoRepo, playersRepo, playerStatsRepo, goalieStatsRepo, draftRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
         this.playersRepo = playersRepo;
+        this.playerStatsRepo = playerStatsRepo;
+        this.goalieStatsRepo = goalieStatsRepo;
+        this.draftRepo = draftRepo;
     }
     async getTransactionsBySeason(year) {
         const season = this.findSeasonDates(year);
@@ -8490,12 +8502,76 @@ let ApiTransactionsService = class ApiTransactionsService {
         const transactionsTeamInfo = await this.setTransactionInfo(transactions);
         return transactionsTeamInfo;
     }
-    async getTeamBySeason(team, season) {
+    async getTeamBySeason(team, season, draftYear) {
+        const players = await this.playerStatsRepo.find({
+            select: {
+                id: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+            },
+            where: {
+                team_name: team,
+                playing_year: season,
+            },
+        });
+        const goalies = await this.goalieStatsRepo.find({
+            select: {
+                id: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+            },
+            where: {
+                team_name: team,
+                playing_year: season,
+            },
+        });
+        const draftTeam = await this.getPlayerTeamInfo(team);
+        const draftPicks = await this.draftRepo
+            .createQueryBuilder('draft')
+            .where('draft.draft_year = :draftYear', { draftYear: draftYear })
+            .orWhere('draft.draft_year = :draftYear', {
+            draftYear: (Number(draftYear) + 1).toString(),
+        })
+            .andWhere(new typeorm_2.Brackets((qb) => {
+            qb.where('draft.team_id.shortname = :shortName', { shortName: team })
+                .orWhere('draft.round_one = :teamId', { teamId: draftTeam.id })
+                .orWhere('draft.round_two = :teamId', { teamId: draftTeam.id })
+                .orWhere('draft.round_three = :teamId', { teamId: draftTeam.id })
+                .orWhere('draft.round_four = :teamId', { teamId: draftTeam.id })
+                .orWhere('draft.round_five = :teamId', { teamId: draftTeam.id });
+        }))
+            .getMany();
+        const playersWithTeamInfo = await this.setTeamInfo(players);
+        const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
+        const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
         return {
-            players: [],
-            goalies: [],
-            draftPicks: [],
+            players: playersWithTeamInfo,
+            goalies: goaliesWithTeamInfo,
+            draftPicks: draftPicksWithTeamInfo,
         };
+    }
+    async setDraftTeamInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getPlayerTeamInfo(item.team_id.shortname) }))));
+    }
+    async setTeamInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getPlayerTeamInfo(item.team_name) }))));
+    }
+    async getPlayerTeamInfo(teamName) {
+        return await this.teamInfoRepo.findOne({
+            select: {
+                id: true,
+                shortname: true,
+            },
+            where: {
+                shortname: teamName,
+            },
+        });
     }
     async setTransactionInfo(transactions) {
         return await Promise.all(transactions.map(async (transaction) => ({
@@ -8556,7 +8632,10 @@ ApiTransactionsService = tslib_1.__decorate([
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
+    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(5, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object, typeof (_f = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _f : Object])
 ], ApiTransactionsService);
 exports.ApiTransactionsService = ApiTransactionsService;
 
