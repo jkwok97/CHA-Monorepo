@@ -73,11 +73,11 @@ export class ApiTransactionsTradesService {
             id: draftTeam.id,
           },
         },
-        { round_one: draftTeam.id },
-        { round_two: draftTeam.id },
-        { round_three: draftTeam.id },
-        { round_four: draftTeam.id },
-        { round_five: draftTeam.id },
+        { draft_year: draftYear, round_one: draftTeam.id },
+        { draft_year: draftYear, round_two: draftTeam.id },
+        { draft_year: draftYear, round_three: draftTeam.id },
+        { draft_year: draftYear, round_four: draftTeam.id },
+        { draft_year: draftYear, round_five: draftTeam.id },
       ],
     });
 
@@ -90,11 +90,26 @@ export class ApiTransactionsTradesService {
             id: draftTeam.id,
           },
         },
-        { round_one: draftTeam.id },
-        { round_two: draftTeam.id },
-        { round_three: draftTeam.id },
-        { round_four: draftTeam.id },
-        { round_five: draftTeam.id },
+        {
+          draft_year: (Number(draftYear) + 1).toString(),
+          round_one: draftTeam.id,
+        },
+        {
+          draft_year: (Number(draftYear) + 1).toString(),
+          round_two: draftTeam.id,
+        },
+        {
+          draft_year: (Number(draftYear) + 1).toString(),
+          round_three: draftTeam.id,
+        },
+        {
+          draft_year: (Number(draftYear) + 1).toString(),
+          round_four: draftTeam.id,
+        },
+        {
+          draft_year: (Number(draftYear) + 1).toString(),
+          round_five: draftTeam.id,
+        },
       ],
     });
 
@@ -102,22 +117,12 @@ export class ApiTransactionsTradesService {
 
     const playersWithTeamInfo = await this.setTeamInfo(players);
     const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
-    // const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
 
     return {
       players: playersWithTeamInfo,
       goalies: goaliesWithTeamInfo,
       draftPicks: draftPicks,
     };
-  }
-
-  private async setDraftTeamInfo(array: Draft_Order_V2[]) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        teamInfo: await this.getPlayerTeamInfo(item.team_id.shortname),
-      }))
-    );
   }
 
   private async setTeamInfo(array: Players_Stats_V2[] | Goalies_Stats_V2[]) {
