@@ -8504,6 +8504,11 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
                 team_name: team,
                 playing_year: season,
             },
+            order: {
+                player_id: {
+                    lastname: 'DESC',
+                },
+            },
         });
         const goalies = await this.goalieStatsRepo.find({
             select: {
@@ -8518,6 +8523,11 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             where: {
                 team_name: team,
                 playing_year: season,
+            },
+            order: {
+                player_id: {
+                    lastname: 'DESC',
+                },
             },
         });
         const draftTeam = await this.getPlayerTeamInfo(team);

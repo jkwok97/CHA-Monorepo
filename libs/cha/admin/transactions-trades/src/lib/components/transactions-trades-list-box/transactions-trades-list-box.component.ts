@@ -7,9 +7,11 @@ import {
   Output,
 } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
-import { filter, first, Observable } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter, Observable } from 'rxjs';
 import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-transactions-trades-list-box',
   templateUrl: './transactions-trades-list-box.component.html',
@@ -43,14 +45,14 @@ export class TransactionsTradesListBoxComponent implements OnInit {
     this.transactionsTradesFacade.teamOne$
       .pipe(
         filter((options) => options.length > 0),
-        first()
+        untilDestroyed(this)
       )
       .subscribe((options) => (this.teamOneGrouped = options));
 
     this.transactionsTradesFacade.teamTwo$
       .pipe(
         filter((options) => options.length > 0),
-        first()
+        untilDestroyed(this)
       )
       .subscribe((options) => (this.teamTwoGrouped = options));
   }
