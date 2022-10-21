@@ -53,6 +53,7 @@ export class ApiTransactionsService {
     const players = await this.playerStatsRepo.find({
       select: {
         id: true,
+        team_name: true,
         player_id: {
           id: true,
           firstname: true,
@@ -68,6 +69,7 @@ export class ApiTransactionsService {
     const goalies = await this.goalieStatsRepo.find({
       select: {
         id: true,
+        team_name: true,
         player_id: {
           id: true,
           firstname: true,
