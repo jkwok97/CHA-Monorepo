@@ -1,9 +1,10 @@
-<div class="flex justify-content-evenly flex-wrap row-gap-3 align-items-center">
+<div class="flex justify-content-evenly flex-wrap row-gap-3 align-items-start">
   <cha-admin-transactions-trades-list-box
     [isMobile]="isMobile"
     [team]="'teamOne'"
     [options]="teamOneOptions"
     (optionChanged)="setTeamOneSelection($event)"
+    (teamOneChanged)="setTeamOnePicks($event)"
   ></cha-admin-transactions-trades-list-box>
 
   <cha-admin-transaction-trades-buttons
@@ -15,5 +16,6 @@
     [team]="'teamTwo'"
     [options]="teamTwoOptions"
     (optionChanged)="setTeamTwoSelection($event)"
+    (teamTwoChanged)="setTeamTwoPicks($event)"
   ></cha-admin-transactions-trades-list-box>
 </div>

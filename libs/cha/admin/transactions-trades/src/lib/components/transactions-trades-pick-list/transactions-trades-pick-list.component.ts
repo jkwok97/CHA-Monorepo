@@ -53,4 +53,12 @@ export class TransactionsTradesPickListComponent implements OnInit {
       disabled: option.value === team || option.value === 'FA',
     }));
   }
+
+  setTeamOnePicks(picks: any[]) {
+    console.log(picks);
+  }
+
+  setTeamTwoPicks(picks: any[]) {
+    console.log(picks);
+  }
 }

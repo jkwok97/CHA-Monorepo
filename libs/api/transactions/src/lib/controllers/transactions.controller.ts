@@ -1,10 +1,16 @@
 import { GetTeamTransactionDto } from '@cha/shared/entities';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { ApiTransactionsService } from '../services';
+import {
+  ApiTransactionsService,
+  ApiTransactionsTradesService,
+} from '../services';
 
 @Controller('transactions')
 export class TransactionsController {
-  constructor(private transactionsService: ApiTransactionsService) {}
+  constructor(
+    private transactionsService: ApiTransactionsService,
+    private transactionsTradesService: ApiTransactionsTradesService
+  ) {}
 
   @Get('/:season')
   async getTransactionsBySeason(@Param() param): Promise<any[]> {
@@ -20,7 +26,7 @@ export class TransactionsController {
 
   @Get('team/:team/:season/:draftYear')
   async getTeam(@Param() param): Promise<GetTeamTransactionDto> {
-    const team = await this.transactionsService.getTeamBySeason(
+    const team = await this.transactionsTradesService.getTeamBySeason(
       param.team,
       param.season,
       param.draftYear

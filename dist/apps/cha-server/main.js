@@ -8364,7 +8364,7 @@ ApiTransactionsModule = tslib_1.__decorate([
             ]),
         ],
         controllers: [controllers_1.TransactionsController],
-        providers: [services_1.ApiTransactionsService],
+        providers: [services_1.ApiTransactionsService, services_1.ApiTransactionsTradesService],
     })
 ], ApiTransactionsModule);
 exports.ApiTransactionsModule = ApiTransactionsModule;
@@ -8387,15 +8387,16 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/transactions/src/lib/services/index.ts");
 let TransactionsController = class TransactionsController {
-    constructor(transactionsService) {
+    constructor(transactionsService, transactionsTradesService) {
         this.transactionsService = transactionsService;
+        this.transactionsTradesService = transactionsTradesService;
     }
     async getTransactionsBySeason(param) {
         const stats = await this.transactionsService.getTransactionsBySeason(param.season);
@@ -8405,7 +8406,7 @@ let TransactionsController = class TransactionsController {
         return stats;
     }
     async getTeam(param) {
-        const team = await this.transactionsService.getTeamBySeason(param.team, param.season, param.draftYear);
+        const team = await this.transactionsTradesService.getTeamBySeason(param.team, param.season, param.draftYear);
         if (!team) {
             throw new common_1.NotFoundException('Team not found');
         }
@@ -8417,18 +8418,18 @@ tslib_1.__decorate([
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], TransactionsController.prototype, "getTransactionsBySeason", null);
 tslib_1.__decorate([
     (0, common_1.Get)('team/:team/:season/:draftYear'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], TransactionsController.prototype, "getTeam", null);
 TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiTransactionsService !== "undefined" && services_1.ApiTransactionsService) === "function" ? _a : Object])
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiTransactionsService !== "undefined" && services_1.ApiTransactionsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiTransactionsTradesService !== "undefined" && services_1.ApiTransactionsTradesService) === "function" ? _b : Object])
 ], TransactionsController);
 exports.TransactionsController = TransactionsController;
 
@@ -8468,39 +8469,25 @@ exports.TransactionsMiddleware = TransactionsMiddleware;
 
 /***/ }),
 
-/***/ "./libs/api/transactions/src/lib/services/api-transactions.service.ts":
+/***/ "./libs/api/transactions/src/lib/services/api-transactions-trades.service.ts":
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiTransactionsService = void 0;
+exports.ApiTransactionsTradesService = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
-let ApiTransactionsService = class ApiTransactionsService {
-    constructor(repo, teamInfoRepo, playersRepo, playerStatsRepo, goalieStatsRepo, draftRepo) {
+let ApiTransactionsTradesService = class ApiTransactionsTradesService {
+    constructor(repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
-        this.playersRepo = playersRepo;
         this.playerStatsRepo = playerStatsRepo;
         this.goalieStatsRepo = goalieStatsRepo;
         this.draftRepo = draftRepo;
-    }
-    async getTransactionsBySeason(year) {
-        const season = this.findSeasonDates(year);
-        const transactions = await this.repo.find({
-            where: {
-                transaction_date: (0, typeorm_2.Between)(new Date(season.start), new Date(season.end)),
-            },
-            order: {
-                transaction_date: 'DESC',
-            },
-        });
-        const transactionsTeamInfo = await this.setTransactionInfo(transactions);
-        return transactionsTeamInfo;
     }
     async getTeamBySeason(team, season, draftYear) {
         const players = await this.playerStatsRepo.find({
@@ -8533,31 +8520,41 @@ let ApiTransactionsService = class ApiTransactionsService {
                 playing_year: season,
             },
         });
-        // const draftTeam = await this.getPlayerTeamInfo(team);
-        // const draftPicks = await this.draftRepo
-        //   .createQueryBuilder('Draft_Order_V2')
-        //   .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
-        //   // .orWhere('draft.draft_year = :draftYear', {
-        //   //   draftYear: (Number(draftYear) + 1).toString(),
-        //   // })
-        //   .andWhere(
-        //     new Brackets((qb) => {
-        //       qb.where('Draft_Order_V2.team_id.shortname = :shortName', { shortName: draftTeam.shortname })
-        //         .orWhere('Draft_Order_V2.round_one = :teamId', { teamId: draftTeam.id })
-        //         .orWhere('Draft_Order_V2.round_two = :teamId', { teamId: draftTeam.id })
-        //         .orWhere('Draft_Order_V2.round_three = :teamId', { teamId: draftTeam.id })
-        //         .orWhere('Draft_Order_V2.round_four = :teamId', { teamId: draftTeam.id })
-        //         .orWhere('Draft_Order_V2.round_five = :teamId', { teamId: draftTeam.id });
-        //     })
-        //   )
-        //   .getMany();
+        const draftTeam = await this.getPlayerTeamInfo(team);
+        const draftPicks = await this.draftRepo
+            .createQueryBuilder('Draft_Order_V2')
+            .where('Draft_Order_V2.draft_year = :draftYear', { draftYear: draftYear })
+            // .orWhere('draft.draft_year = :draftYear', {
+            //   draftYear: (Number(draftYear) + 1).toString(),
+            // })
+            .andWhere(new typeorm_2.Brackets((qb) => {
+            qb.where('Draft_Order_V2.team_id.shortname = :shortName', {
+                shortName: draftTeam.shortname,
+            })
+                .orWhere('Draft_Order_V2.round_one = :teamId', {
+                teamId: draftTeam.id,
+            })
+                .orWhere('Draft_Order_V2.round_two = :teamId', {
+                teamId: draftTeam.id,
+            })
+                .orWhere('Draft_Order_V2.round_three = :teamId', {
+                teamId: draftTeam.id,
+            })
+                .orWhere('Draft_Order_V2.round_four = :teamId', {
+                teamId: draftTeam.id,
+            })
+                .orWhere('Draft_Order_V2.round_five = :teamId', {
+                teamId: draftTeam.id,
+            });
+        }))
+            .getMany();
         const playersWithTeamInfo = await this.setTeamInfo(players);
         const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
         // const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
         return {
             players: playersWithTeamInfo,
             goalies: goaliesWithTeamInfo,
-            draftPicks: [],
+            draftPicks: draftPicks,
         };
     }
     async setDraftTeamInfo(array) {
@@ -8576,6 +8573,52 @@ let ApiTransactionsService = class ApiTransactionsService {
                 shortname: teamName,
             },
         });
+    }
+};
+ApiTransactionsTradesService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object])
+], ApiTransactionsTradesService);
+exports.ApiTransactionsTradesService = ApiTransactionsTradesService;
+
+
+/***/ }),
+
+/***/ "./libs/api/transactions/src/lib/services/api-transactions.service.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiTransactionsService = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
+const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const typeorm_2 = __webpack_require__("typeorm");
+let ApiTransactionsService = class ApiTransactionsService {
+    constructor(repo, teamInfoRepo, playersRepo) {
+        this.repo = repo;
+        this.teamInfoRepo = teamInfoRepo;
+        this.playersRepo = playersRepo;
+    }
+    async getTransactionsBySeason(year) {
+        const season = this.findSeasonDates(year);
+        const transactions = await this.repo.find({
+            where: {
+                transaction_date: (0, typeorm_2.Between)(new Date(season.start), new Date(season.end)),
+            },
+            order: {
+                transaction_date: 'DESC',
+            },
+        });
+        const transactionsTeamInfo = await this.setTransactionInfo(transactions);
+        return transactionsTeamInfo;
     }
     async setTransactionInfo(transactions) {
         return await Promise.all(transactions.map(async (transaction) => ({
@@ -8636,10 +8679,7 @@ ApiTransactionsService = tslib_1.__decorate([
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
-    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
-    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
-    tslib_1.__param(5, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object, typeof (_f = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _f : Object])
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
 ], ApiTransactionsService);
 exports.ApiTransactionsService = ApiTransactionsService;
 
@@ -8653,6 +8693,7 @@ exports.ApiTransactionsService = ApiTransactionsService;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__("tslib");
 tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/services/api-transactions.service.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/services/api-transactions-trades.service.ts"), exports);
 
 
 /***/ }),

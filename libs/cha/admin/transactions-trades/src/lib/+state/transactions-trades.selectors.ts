@@ -55,14 +55,15 @@ const selectTeamOneGrouped = createSelector(
           label: 'Players',
           items: team.players.map((player) => ({
             label: `${player.player_id.firstname} ${player.player_id.lastname}`,
-            value: player.player_id.id,
+            value: `p-${player.player_id.id}`,
           })),
         },
         {
           label: 'Goalies',
+          value: 'g',
           items: team.goalies.map((player) => ({
             label: `${player.player_id.firstname} ${player.player_id.lastname}`,
-            value: player.player_id.id,
+            value: `g-${player.player_id.id}`,
           })),
         },
         // {
@@ -88,14 +89,14 @@ const selectTeamTwoGrouped = createSelector(
           label: 'Players',
           items: team.players.map((player) => ({
             label: `${player.player_id.firstname} ${player.player_id.lastname}`,
-            value: player.player_id.id,
+            value: `p-${player.player_id.id}`,
           })),
         },
         {
           label: 'Goalies',
           items: team.goalies.map((player) => ({
             label: `${player.player_id.firstname} ${player.player_id.lastname}`,
-            value: player.player_id.id,
+            value: `g-${player.player_id.id}`,
           })),
         },
         // {

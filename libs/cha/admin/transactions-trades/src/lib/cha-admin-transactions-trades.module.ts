@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ListboxModule } from 'primeng/listbox';
 import { DropdownModule } from 'primeng/dropdown';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -30,9 +30,9 @@ import {
   imports: [
     CommonModule,
     ProgressBarModule,
-    ProgressSpinnerModule,
     ListboxModule,
     DropdownModule,
+    ButtonModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,

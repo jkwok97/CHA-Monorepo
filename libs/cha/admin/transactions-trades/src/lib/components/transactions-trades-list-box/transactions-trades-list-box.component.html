@@ -41,6 +41,7 @@
         ? (teamOneLoading$ | async) === false
         : (teamTwoLoading$ | async) === false
     "
+    (onChange)="onTransactionSelection($event)"
   >
     <ng-template let-group pTemplate="group">
       <div class="flex align-items-center">

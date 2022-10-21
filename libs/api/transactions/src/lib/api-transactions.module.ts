@@ -10,7 +10,10 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TransactionsController } from './controllers';
 import { TransactionsMiddleware } from './middlewares';
-import { ApiTransactionsService } from './services';
+import {
+  ApiTransactionsService,
+  ApiTransactionsTradesService,
+} from './services';
 
 @Module({
   imports: [
@@ -24,7 +27,7 @@ import { ApiTransactionsService } from './services';
     ]),
   ],
   controllers: [TransactionsController],
-  providers: [ApiTransactionsService],
+  providers: [ApiTransactionsService, ApiTransactionsTradesService],
 })
 export class ApiTransactionsModule {
   configure(consumer: MiddlewareConsumer) {
