@@ -8532,28 +8532,30 @@ let ApiTransactionsService = class ApiTransactionsService {
             },
         });
         const draftTeam = await this.getPlayerTeamInfo(team);
-        const draftPicks = await this.draftRepo
-            .createQueryBuilder('draft')
-            .where('draft.draft_year = :draftYear', { draftYear: draftYear })
-            .orWhere('draft.draft_year = :draftYear', {
-            draftYear: (Number(draftYear) + 1).toString(),
-        })
-            .andWhere(new typeorm_2.Brackets((qb) => {
-            qb.where('draft.team_id.shortname = :shortName', { shortName: team })
-                .orWhere('draft.round_one = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_two = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_three = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_four = :teamId', { teamId: draftTeam.id })
-                .orWhere('draft.round_five = :teamId', { teamId: draftTeam.id });
-        }))
-            .getMany();
+        // const draftPicks = await this.draftRepo
+        //   .createQueryBuilder('draft')
+        //   .where('draft.draft_year = :draftYear', { draftYear: draftYear })
+        //   .orWhere('draft.draft_year = :draftYear', {
+        //     draftYear: (Number(draftYear) + 1).toString(),
+        //   })
+        //   .andWhere(
+        //     new Brackets((qb) => {
+        //       qb.where('draft.team_id.shortname = :shortName', { shortName: team })
+        //         .orWhere('draft.round_one = :teamId', { teamId: draftTeam.id })
+        //         .orWhere('draft.round_two = :teamId', { teamId: draftTeam.id })
+        //         .orWhere('draft.round_three = :teamId', { teamId: draftTeam.id })
+        //         .orWhere('draft.round_four = :teamId', { teamId: draftTeam.id })
+        //         .orWhere('draft.round_five = :teamId', { teamId: draftTeam.id });
+        //     })
+        //   )
+        //   .getMany();
         const playersWithTeamInfo = await this.setTeamInfo(players);
         const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
-        const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
+        // const draftPicksWithTeamInfo = await this.setDraftTeamInfo(draftPicks);
         return {
             players: playersWithTeamInfo,
             goalies: goaliesWithTeamInfo,
-            draftPicks: draftPicksWithTeamInfo,
+            draftPicks: [],
         };
     }
     async setDraftTeamInfo(array) {

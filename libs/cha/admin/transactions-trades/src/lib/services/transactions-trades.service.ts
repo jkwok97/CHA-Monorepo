@@ -13,9 +13,13 @@ export class TransactionsTradesService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getTeam(team: string, season: string): Observable<GetTeamTransactionDto> {
+  getTeam(
+    team: string,
+    season: string,
+    draftYear: string
+  ): Observable<GetTeamTransactionDto> {
     return this._http
-      .get(`${this.apiUrl}/transactions/team/${team}/${season}`)
+      .get(`${this.apiUrl}/transactions/team/${team}/${season}/${draftYear}`)
       .pipe(map((result: any) => result));
   }
 }

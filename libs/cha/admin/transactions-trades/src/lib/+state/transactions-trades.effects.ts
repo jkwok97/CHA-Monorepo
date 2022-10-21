@@ -3,13 +3,7 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { GetTeamTransactionDto, WaiversDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
-import {
-  exhaustMap,
-  map,
-  catchError,
-  of,
-  withLatestFrom,
-} from 'rxjs';
+import { exhaustMap, map, catchError, of, withLatestFrom } from 'rxjs';
 import { TransactionsTradesService } from '../services';
 import { TransactionsTradesActions } from './transactions-trades.actions';
 import { TransactionsTradesFacade } from './transactions-trades.facade';
@@ -30,7 +24,11 @@ export class TransactionsTradesEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.transactionsTradesService
-          .getTeam(action.team, data.current_year)
+          .getTeam(
+            action.team,
+            data.current_year,
+            data.current_draft_year.toString()
+          )
           .pipe(
             map((team: GetTeamTransactionDto) =>
               TransactionsTradesActions.getTeamOneSuccess({
@@ -49,7 +47,11 @@ export class TransactionsTradesEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.transactionsTradesService
-          .getTeam(action.team, data.current_year)
+          .getTeam(
+            action.team,
+            data.current_year,
+            data.current_draft_year.toString()
+          )
           .pipe(
             map((team: GetTeamTransactionDto) =>
               TransactionsTradesActions.getTeamTwoSuccess({
