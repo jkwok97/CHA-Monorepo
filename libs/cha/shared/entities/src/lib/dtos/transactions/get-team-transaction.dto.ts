@@ -1,3 +1,5 @@
+import { Teams_V2 } from '@api/entities';
+
 export interface GetTeamTransactionDto {
   players: PlayerTransactionDto[];
   goalies: PlayerTransactionDto[];
@@ -19,8 +21,11 @@ export interface PlayerTransactionDto {
 
 export interface DraftPickTransactionDto {
   id: number;
-  teamInfo: {
-    id: number;
-    shortname: string;
-  };
+  team_id: Teams_V2;
+  round_one: number;
+  round_two: number;
+  round_three: number;
+  round_four: number;
+  round_five: number;
+  draft_year: string;
 }
