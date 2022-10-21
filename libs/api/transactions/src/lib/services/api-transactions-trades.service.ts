@@ -66,11 +66,19 @@ export class ApiTransactionsTradesService {
 
     console.log(draftTeam);
 
-    const draftPicks = await this.draftRepo.find({
+    const currentDraftPicks = await this.draftRepo.find({
       where: {
-        draft_year: draftYear || (Number(draftYear) + 1).toString(),
+        draft_year: draftYear,
       },
     });
+
+    const nextDraftPicks = await this.draftRepo.find({
+      where: {
+        draft_year: (Number(draftYear) + 1).toString(),
+      },
+    });
+
+    const draftPicks = currentDraftPicks.concat(nextDraftPicks);
 
     // const draftPicks = await this.draftRepo
     //   .createQueryBuilder('Draft_Order_V2')
