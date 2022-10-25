@@ -7,9 +7,9 @@
   position: fixed;
   top: 50%;
   left: 25px;
-  z-index: 99999;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%),
-  0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+  z-index: 1099;
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+    0 1px 3px 0 rgb(0 0 0 / 12%);
 }
 
 .button-forward {
@@ -17,6 +17,6 @@
   position: fixed;
   top: 50%;
   right: 25px;
-  z-index: 99999;
+  z-index: 1099;
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 }
