@@ -20,14 +20,14 @@
   </blade-card-header>
   <blade-card-body>
     <ng-container *ngIf="loadedSalaries$ | async">
-      <div class="flex flex-wrap row-gap-3 column-gap-3">
+      <div class="flex flex-wrap flex-column row-gap-3 column-gap-3">
         <div class="w-full flex flex-wrap row-gap-3 justify-content-around">
           <ng-container *ngIf="leftWingers$ | async as leftWingers">
             <cha-front-home-summary-depth-chart-position
               [title]="'LW'"
               [players]="leftWingers"
               [isOffSeason]="isOffSeason"
-              class="w-full sm:w-max h-auto md:h-full"
+              class="w-full sm:w-max"
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
           <ng-container *ngIf="centers$ | async as centers">
@@ -35,7 +35,7 @@
               [title]="'C'"
               [players]="centers"
               [isOffSeason]="isOffSeason"
-              class="w-full sm:w-max h-auto md:h-full"
+              class="w-full sm:w-max"
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
           <ng-container *ngIf="rightWingers$ | async as rightWingers">
@@ -43,10 +43,11 @@
               [title]="'RW'"
               [players]="rightWingers"
               [isOffSeason]="isOffSeason"
-              class="w-full sm:w-max h-auto md:h-full"
+              class="w-full sm:w-max"
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
         </div>
+
         <div class="w-full flex flex-wrap row-gap-3 justify-content-evenly">
           <ng-container *ngIf="leftDefense$ | async as leftDefense">
             <cha-front-home-summary-depth-chart-position
@@ -65,6 +66,7 @@
             ></cha-front-home-summary-depth-chart-position>
           </ng-container>
         </div>
+
         <div class="w-full flex justify-content-center">
           <ng-container *ngIf="goalies$ | async as goalies">
             <cha-front-home-summary-depth-chart-position
