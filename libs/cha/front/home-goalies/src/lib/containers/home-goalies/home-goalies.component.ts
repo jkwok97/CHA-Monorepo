@@ -30,12 +30,12 @@ export class HomeGoaliesComponent implements OnInit {
 
   panelStyleMobile = {
     width: '100%',
-    height: '77vh',
+    height: '85vh',
   };
 
   panelStyleDesktop = {
     width: '100%',
-    height: '83vh',
+    height: '90vh',
   };
 
   constructor(

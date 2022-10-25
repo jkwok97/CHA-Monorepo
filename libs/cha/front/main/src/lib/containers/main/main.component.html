@@ -1,15 +1,17 @@
 <section *ngIf="currentTeam$ | async">
-  <div class="main-menu">
-    <blade-menu
-      [items]="items"
-      [logo]="teamLogo"
-      [isMobile]="isMobile$ | async"
-    ></blade-menu>
-  </div>
+  <div class="pt-3 pb-3">
+    <div class="main-menu">
+      <blade-menu
+        [items]="items"
+        [logo]="teamLogo"
+        [isMobile]="isMobile$ | async"
+      ></blade-menu>
+    </div>
 
-  <blade-layout-feature>
-    <router-outlet></router-outlet>
-  </blade-layout-feature>
+    <blade-layout-feature>
+      <router-outlet></router-outlet>
+    </blade-layout-feature>
+  </div>
 </section>
 
 <ng-template #teamLogo>

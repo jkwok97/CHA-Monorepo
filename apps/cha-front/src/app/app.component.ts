@@ -7,6 +7,7 @@ import {
 } from '@cha/domain/core';
 import { Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AuthFacade } from '@cha/domain/auth';
 
 @UntilDestroy()
 @Component({
@@ -15,13 +16,16 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class AppComponent implements OnInit {
   currentTeam$: Observable<TeamDto | undefined>;
+  loggedIn$: Observable<boolean>;
 
   constructor(
     private userTeamFacade: UserTeamFacade,
+    private authFacade: AuthFacade,
     private displayFacade: DisplayFacade,
     private leagueDataFacade: LeagueDataFacade
   ) {
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
+    this.loggedIn$ = this.authFacade.loggingInComplete$;
 
     this.displayFacade.get();
     this.leagueDataFacade.getLeagueData();

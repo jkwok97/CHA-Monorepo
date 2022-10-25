@@ -19,12 +19,12 @@ export class HomeSummaryComponent {
 
   panelStyleMobile = {
     width: '100%',
-    height: '77vh',
+    height: '85vh',
   };
 
   panelStyleDesktop = {
     width: '100%',
-    height: '83vh',
+    height: '90vh',
   };
 
   pages = [
@@ -46,7 +46,7 @@ export class HomeSummaryComponent {
       .subscribe((isOffSeason: boolean) => {
         this.isOffSeason = isOffSeason;
       });
-    
+
     this.isLoaded$ = combineLatest([
       this.homeSummaryFacade.goalieSalaryLoaded$,
       this.homeSummaryFacade.playerSalaryLoaded$,

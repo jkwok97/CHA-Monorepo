@@ -21,12 +21,12 @@ export class TeamsSummaryAwardsComponent implements OnInit {
   isMobile = false;
   panelStyleMobile = {
     width: '100%',
-    height: '77vh',
+    height: '85vh',
   };
 
   panelStyleDesktop = {
     width: '100%',
-    height: '83vh',
+    height: '90vh',
   };
 
   constructor(
