@@ -307,7 +307,7 @@ export class ApiTransactionsTradesService {
     });
 
     const postJson = {
-      text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerArray}`,
+      text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: ${playerArray}`,
       channel: '#waivers-and-drops',
       username: 'League Office',
       icon_emoji: ':office',
