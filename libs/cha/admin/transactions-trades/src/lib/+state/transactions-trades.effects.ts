@@ -129,7 +129,6 @@ export class TransactionsTradesEffects {
             summary: 'Waiver Release',
             detail: 'Waiver Release is completed',
           });
-          this.transactionsTradesFacade.reset();
         })
       ),
     { dispatch: false }
@@ -167,7 +166,6 @@ export class TransactionsTradesEffects {
             summary: 'Trade',
             detail: 'Trade is completed',
           });
-          this.transactionsTradesFacade.reset();
         })
       ),
     { dispatch: false }

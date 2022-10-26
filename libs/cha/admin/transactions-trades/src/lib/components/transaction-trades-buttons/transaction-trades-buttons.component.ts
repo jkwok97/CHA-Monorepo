@@ -47,12 +47,14 @@ export class TransactionTradesButtonsComponent implements OnChanges {
       this.teamTwoPicks
     );
 
-    this.saving$.pipe(untilDestroyed(this), delay(500)).subscribe((saving: boolean) => {
-      if (!saving) {
-        this.transactionsTradesFacade.getTeamOne(this.teamOne);
-        this.transactionsTradesFacade.getTeamTwo(this.teamTwo);
-      }
-    });
+    this.saving$
+      .pipe(untilDestroyed(this), delay(500))
+      .subscribe((saving: boolean) => {
+        if (!saving) {
+          this.transactionsTradesFacade.getTeamOne(this.teamOne);
+          this.transactionsTradesFacade.getTeamTwo(this.teamTwo);
+        }
+      });
   }
 
   onRelease(): void {
@@ -60,6 +62,15 @@ export class TransactionTradesButtonsComponent implements OnChanges {
       this.teamOne,
       this.teamOnePicks
     );
+
+    this.saving$
+      .pipe(untilDestroyed(this), delay(500))
+      .subscribe((saving: boolean) => {
+        if (!saving) {
+          this.transactionsTradesFacade.getTeamOne(this.teamOne);
+          this.transactionsTradesFacade.getTeamTwo(this.teamTwo);
+        }
+      });
   }
 
   onTrade(): void {
