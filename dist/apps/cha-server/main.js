@@ -8685,7 +8685,6 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const player = await this.playerStatsRepo.findOneByOrFail({
             player_id: { id: Number(stringId[1]) },
             playing_year: season,
-            team_name: team,
         });
         if (!player) {
             throw new common_1.NotFoundException('player not found');
@@ -8701,7 +8700,6 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const player = await this.goalieStatsRepo.findOneByOrFail({
             player_id: { id: Number(stringId[1]) },
             playing_year: season,
-            team_name: team,
         });
         if (!player) {
             throw new common_1.NotFoundException('player not found');
