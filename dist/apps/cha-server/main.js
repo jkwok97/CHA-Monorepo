@@ -8389,7 +8389,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8450,15 +8450,15 @@ tslib_1.__decorate([
     (0, common_1.Put)('/waivers/release'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.WaiverAcquisitionDto !== "undefined" && entities_1.WaiverAcquisitionDto) === "function" ? _g : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], TransactionsController.prototype, "waiverRelease", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/trade'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], TransactionsController.prototype, "trade", null);
 TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
@@ -8723,7 +8723,30 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
     }
     // WAIVER RELEASE
     async waiverRelease(body) {
-        return null;
+        const team = body.team;
+        const players = body.players;
+        const season = body.season;
+        if (players && players.length > 0) {
+            await players.forEach(async (player) => {
+                if (player.includes('p-')) {
+                    await this.updateTeamForPlayer(player, 'FA', season);
+                }
+                else if (player.includes('g-')) {
+                    await this.updateTeamForGoalie(player, 'FA', season);
+                }
+            });
+        }
+        const playersWithInfo = await this.setPlayerInfo(players);
+        const playerString = await playersWithInfo.forEach(async (player) => await this.getPlayerString(player));
+        console.log(playerString);
+        const postJson = {
+            text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerString}`,
+            channel: '#waivers-and-drops',
+            username: 'League Office',
+            icon_emoji: ':office',
+        };
+        console.log(postJson);
+        this.httpService.post(`${this.waiversHookURL}`, postJson).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
     // TRADES
     async trade(body) {

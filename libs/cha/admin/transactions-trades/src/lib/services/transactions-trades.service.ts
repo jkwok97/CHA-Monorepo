@@ -2,7 +2,10 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { GetTeamTransactionDto, WaiverAcquisitionDto } from '@cha/shared/entities';
+import {
+  GetTeamTransactionDto,
+  WaiverAcquisitionDto,
+} from '@cha/shared/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +37,6 @@ export class TransactionsTradesService {
       season,
     };
 
-    console.log(body);
     return this._http
       .put(`${this.apiUrl}/transactions/waivers/acquire`, body)
       .pipe(map((result: any) => result));
@@ -45,12 +47,12 @@ export class TransactionsTradesService {
     players: string[],
     season: string
   ): Observable<any> {
-    const body = {
+    const body: WaiverAcquisitionDto = {
       team,
       players,
       season,
     };
-    console.log(body);
+
     return this._http
       .put(`${this.apiUrl}/transactions/waivers/release`, body)
       .pipe(map((result: any) => result));

@@ -51,7 +51,7 @@ export class TransactionsController {
   }
 
   @Put('/waivers/release')
-  waiverRelease(@Body() body): Promise<void> {
+  waiverRelease(@Body() body: WaiverAcquisitionDto): Promise<void> {
     return this.transactionsTradesService.waiverRelease(body);
   }
 

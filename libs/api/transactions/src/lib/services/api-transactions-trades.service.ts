@@ -285,7 +285,41 @@ export class ApiTransactionsTradesService {
   // WAIVER RELEASE
 
   async waiverRelease(body: any) {
-    return null;
+    const team = body.team;
+    const players = body.players;
+    const season = body.season;
+
+    if (players && players.length > 0) {
+      await players.forEach(async (player: string) => {
+        if (player.includes('p-')) {
+          await this.updateTeamForPlayer(player, 'FA', season);
+        } else if (player.includes('g-')) {
+          await this.updateTeamForGoalie(player, 'FA', season);
+        }
+      });
+    }
+
+    const playersWithInfo = await this.setPlayerInfo(players);
+
+    const playerString = await playersWithInfo.forEach(
+      async (player) => await this.getPlayerString(player)
+    );
+
+    console.log(playerString);
+
+    const postJson = {
+      text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerString}`,
+      channel: '#waivers-and-drops',
+      username: 'League Office',
+      icon_emoji: ':office',
+    };
+
+    console.log(postJson);
+
+    this.httpService.post(`${this.waiversHookURL}`, postJson).pipe(
+      map((response) => response.data),
+      catchError((error) => error)
+    );
   }
   // TRADES
   async trade(body: any) {
