@@ -8760,7 +8760,12 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
     async sendToSlack(message) {
         console.log('slack message:', message);
         console.log(this.waiversHookURL);
-        this.httpService.post(`${this.waiversHookURL}`, message).pipe((0, rxjs_1.tap)((response) => console.log(response)), (0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
+        const options = {
+            headers: {
+                'Content-type': 'application/json',
+            },
+        };
+        this.httpService.post(`${this.waiversHookURL}`, message, options).pipe((0, rxjs_1.tap)((response) => console.log(response)), (0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
 };
 ApiTransactionsTradesService = tslib_1.__decorate([

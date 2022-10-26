@@ -323,7 +323,14 @@ export class ApiTransactionsTradesService {
   private async sendToSlack(message) {
     console.log('slack message:', message);
     console.log(this.waiversHookURL);
-    this.httpService.post(`${this.waiversHookURL}`, message).pipe(
+
+    const options = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+    
+    this.httpService.post(`${this.waiversHookURL}`, message, options).pipe(
       tap((response) => console.log(response)),
       map((response) => response.data),
       catchError((error) => error)
