@@ -8758,7 +8758,8 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return null;
     }
     async sendToSlack(message) {
-        console.log(message);
+        console.log('slack message:', message);
+        console.log(this.waiversHookURL);
         this.httpService.post(`${this.waiversHookURL}`, message).pipe((0, rxjs_1.tap)((response) => console.log(response)), (0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
 };
