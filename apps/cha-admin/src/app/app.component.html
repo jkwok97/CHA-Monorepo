@@ -1,5 +1,5 @@
 <blade-layout>
-  <cha-main-title></cha-main-title>
+  <cha-main-title *ngIf="(loggedIn$ | async) === false"></cha-main-title>
   <router-outlet></router-outlet>
 </blade-layout>
 
