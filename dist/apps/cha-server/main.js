@@ -8661,15 +8661,13 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             const string = await this.getPlayerString(player);
             playerArray.push(string);
         });
-        console.log(playerArray);
         const postJson = {
             text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playerArray}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
         };
-        console.log(postJson);
-        this.httpService.post(`${this.waiversHookURL}`, postJson).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
+        return await this.sendToSlack(postJson);
     }
     getPlayerString(player) {
         return `${player.playerInfo.firstname} ${player.playerInfo.lastname}, `;
@@ -8742,20 +8740,26 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             });
         }
         const playersWithInfo = await this.setPlayerInfo(players);
-        const playerString = await playersWithInfo.forEach(async (player) => await this.getPlayerString(player));
-        console.log(playerString);
+        const playerArray = [];
+        await playersWithInfo.forEach(async (player) => {
+            const string = await this.getPlayerString(player);
+            playerArray.push(string);
+        });
         const postJson = {
-            text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerString}`,
+            text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerArray}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
         };
-        console.log(postJson);
-        this.httpService.post(`${this.waiversHookURL}`, postJson).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
+        return await this.sendToSlack(postJson);
     }
     // TRADES
     async trade(body) {
         return null;
+    }
+    async sendToSlack(message) {
+        console.log(message);
+        this.httpService.post(`${this.waiversHookURL}`, message).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
 };
 ApiTransactionsTradesService = tslib_1.__decorate([

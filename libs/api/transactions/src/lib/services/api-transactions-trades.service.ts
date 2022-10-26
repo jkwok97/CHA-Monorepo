@@ -193,8 +193,6 @@ export class ApiTransactionsTradesService {
       playerArray.push(string);
     });
 
-    console.log(playerArray);
-
     const postJson = {
       text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playerArray}`,
       channel: '#waivers-and-drops',
@@ -202,12 +200,7 @@ export class ApiTransactionsTradesService {
       icon_emoji: ':office',
     };
 
-    console.log(postJson);
-
-    this.httpService.post(`${this.waiversHookURL}`, postJson).pipe(
-      map((response) => response.data),
-      catchError((error) => error)
-    );
+    return await this.sendToSlack(postJson);
   }
 
   private getPlayerString(player: any) {
@@ -306,28 +299,32 @@ export class ApiTransactionsTradesService {
 
     const playersWithInfo = await this.setPlayerInfo(players);
 
-    const playerString = await playersWithInfo.forEach(
-      async (player) => await this.getPlayerString(player)
-    );
+    const playerArray = [];
 
-    console.log(playerString);
+    await playersWithInfo.forEach(async (player) => {
+      const string = await this.getPlayerString(player);
+      playerArray.push(string);
+    });
 
     const postJson = {
-      text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerString}`,
+      text: `:rotating_light: WAIVER DROP ALERT :rotating_light \n \n To Waivers From ${team}: ${playerArray}`,
       channel: '#waivers-and-drops',
       username: 'League Office',
       icon_emoji: ':office',
     };
 
-    console.log(postJson);
-
-    this.httpService.post(`${this.waiversHookURL}`, postJson).pipe(
-      map((response) => response.data),
-      catchError((error) => error)
-    );
+    return await this.sendToSlack(postJson);
   }
   // TRADES
   async trade(body: any) {
     return null;
+  }
+
+  private async sendToSlack(message) {
+    console.log(message);
+    this.httpService.post(`${this.waiversHookURL}`, message).pipe(
+      map((response) => response.data),
+      catchError((error) => error)
+    );
   }
 }
