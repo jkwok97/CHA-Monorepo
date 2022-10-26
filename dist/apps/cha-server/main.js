@@ -8665,9 +8665,8 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
                 icon_emoji: ':office',
             },
         };
-        this.httpService
-            .post(`${this.waiversHookURL}`, postJson)
-            .pipe((0, rxjs_1.map)((response) => response.data));
+        console.log(this.waiversHookURL);
+        this.httpService.post(`${this.waiversHookURL}`, postJson).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
     getPlayerString(player) {
         return `${player.playerInfo.firstname} ${player.playerInfo.lastname}, `;

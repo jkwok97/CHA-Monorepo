@@ -14,7 +14,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
-import { map } from 'rxjs';
+import { catchError, map } from 'rxjs';
 
 @Injectable()
 export class ApiTransactionsTradesService {
@@ -199,9 +199,12 @@ export class ApiTransactionsTradesService {
       },
     };
 
-    this.httpService
-      .post(`${this.waiversHookURL}`, postJson)
-      .pipe(map((response) => response.data));
+    console.log(this.waiversHookURL);
+
+    this.httpService.post(`${this.waiversHookURL}`, postJson).pipe(
+      map((response) => response.data),
+      catchError((error) => error)
+    );
   }
 
   private getPlayerString(player: any) {
