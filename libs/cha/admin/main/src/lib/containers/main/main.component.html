@@ -1,7 +1,11 @@
 <section>
   <div class="pt-3 pb-3">
     <div class="main-menu">
-      <blade-menu [items]="items"></blade-menu>
+      <blade-menu
+        [items]="items"
+        [logo]="teamLogo"
+        [isMobile]="isMobile$ | async"
+      ></blade-menu>
     </div>
 
     <blade-layout-feature>
@@ -9,3 +13,13 @@
     </blade-layout-feature>
   </div>
 </section>
+
+<ng-template #teamLogo>
+  <ng-container>
+    <div class="flex align-items-center w-full">
+      <div *ngIf="isMobile$ | async" class="pl-2 pr-2">
+        CHA Administration Portal
+      </div>
+    </div>
+  </ng-container>
+</ng-template>
