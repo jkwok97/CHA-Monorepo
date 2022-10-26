@@ -14,7 +14,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
-import { catchError, map } from 'rxjs';
+import { catchError, map, tap } from 'rxjs';
 
 @Injectable()
 export class ApiTransactionsTradesService {
@@ -323,6 +323,7 @@ export class ApiTransactionsTradesService {
   private async sendToSlack(message) {
     console.log(message);
     this.httpService.post(`${this.waiversHookURL}`, message).pipe(
+      tap((response) => console.log(response)),
       map((response) => response.data),
       catchError((error) => error)
     );

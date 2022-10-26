@@ -8759,7 +8759,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
     }
     async sendToSlack(message) {
         console.log(message);
-        this.httpService.post(`${this.waiversHookURL}`, message).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
+        this.httpService.post(`${this.waiversHookURL}`, message).pipe((0, rxjs_1.tap)((response) => console.log(response)), (0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
 };
 ApiTransactionsTradesService = tslib_1.__decorate([
