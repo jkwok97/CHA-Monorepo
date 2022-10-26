@@ -203,8 +203,43 @@ export class ApiTransactionsTradesService {
     return await this.sendToSlack(postJson);
   }
 
+  // WAIVER RELEASE
+  async waiverRelease(body: any) {
+    const team = body.team;
+    const players = body.players;
+    const season = body.season;
+
+    if (players && players.length > 0) {
+      await players.forEach(async (player: string) => {
+        if (player.includes('p-')) {
+          await this.updateTeamForPlayer(player, 'FA', season);
+        } else if (player.includes('g-')) {
+          await this.updateTeamForGoalie(player, 'FA', season);
+        }
+      });
+    }
+
+    const playersWithInfo = await this.setPlayerInfo(players);
+
+    const playerArray = [];
+
+    await playersWithInfo.forEach(async (player) => {
+      const string = await this.getPlayerString(player);
+      playerArray.push(string);
+    });
+
+    const postJson = {
+      text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: ${playerArray}`,
+      channel: '#waivers-and-drops',
+      username: 'League Office',
+      icon_emoji: ':office',
+    };
+
+    return await this.sendToSlack(postJson);
+  }
+
   private getPlayerString(player: any) {
-    return `${player.playerInfo.firstname} ${player.playerInfo.lastname}, `;
+    return `${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
   }
 
   private async setPlayerInfo(players) {
@@ -280,50 +315,13 @@ export class ApiTransactionsTradesService {
     return this.goalieStatsRepo.save(player);
   }
 
-  // WAIVER RELEASE
-
-  async waiverRelease(body: any) {
-    const team = body.team;
-    const players = body.players;
-    const season = body.season;
-
-    if (players && players.length > 0) {
-      await players.forEach(async (player: string) => {
-        if (player.includes('p-')) {
-          await this.updateTeamForPlayer(player, 'FA', season);
-        } else if (player.includes('g-')) {
-          await this.updateTeamForGoalie(player, 'FA', season);
-        }
-      });
-    }
-
-    const playersWithInfo = await this.setPlayerInfo(players);
-
-    const playerArray = [];
-
-    await playersWithInfo.forEach(async (player) => {
-      const string = await this.getPlayerString(player);
-      playerArray.push(string);
-    });
-
-    const postJson = {
-      text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: ${playerArray}`,
-      channel: '#waivers-and-drops',
-      username: 'League Office',
-      icon_emoji: ':office',
-    };
-
-    return await this.sendToSlack(postJson);
-  }
+  
   // TRADES
   async trade(body: any) {
     return null;
   }
 
   private async sendToSlack(message) {
-    console.log('slack message:', message);
-    console.log(this.waiversHookURL);
-
     const options = {
       headers: {
         'Content-type': 'application/json',
