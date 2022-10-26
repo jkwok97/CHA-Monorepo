@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { GetTeamTransactionDto } from '@cha/shared/entities';
+import { GetTeamTransactionDto, WaiverAcquisitionDto } from '@cha/shared/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class TransactionsTradesService {
     players: string[],
     season: string
   ): Observable<any> {
-    const body = {
+    const body: WaiverAcquisitionDto = {
       team,
       players,
       season,

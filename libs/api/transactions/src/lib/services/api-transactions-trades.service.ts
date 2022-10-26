@@ -2,17 +2,26 @@ import {
   Draft_Order_V2,
   Goalies_Stats_V2,
   Players_Stats_V2,
+  Players_V2,
   Teams_V2,
   Transactions_V2,
 } from '@api/entities';
-import { GetTeamTransactionDto } from '@cha/shared/entities';
-import { Injectable } from '@nestjs/common';
+import {
+  GetTeamTransactionDto,
+  WaiverAcquisitionDto,
+} from '@cha/shared/entities';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class ApiTransactionsTradesService {
+  waiversHookURL = process.env.SLACK_WAIVERS_WEBHOOK;
+  tradeHookURL = process.env.SLACK_WEBHOOK;
+
   constructor(
+    private httpService: HttpService,
     @InjectRepository(Transactions_V2)
     private repo: Repository<Transactions_V2>,
     @InjectRepository(Teams_V2)
@@ -22,7 +31,9 @@ export class ApiTransactionsTradesService {
     @InjectRepository(Goalies_Stats_V2)
     private goalieStatsRepo: Repository<Goalies_Stats_V2>,
     @InjectRepository(Draft_Order_V2)
-    private draftRepo: Repository<Draft_Order_V2>
+    private draftRepo: Repository<Draft_Order_V2>,
+    @InjectRepository(Players_V2)
+    private playersRepo: Repository<Players_V2>
   ) {}
 
   async getTeamBySeason(
@@ -154,5 +165,112 @@ export class ApiTransactionsTradesService {
         shortname: teamName,
       },
     });
+  }
+
+  // WAIVER ACQUISITIONS
+  async waiverAcquire(body: WaiverAcquisitionDto) {
+    const team = body.team;
+    const players = body.players;
+    const season = body.season;
+
+    if (players && players.length > 0) {
+      await players.forEach(async (player: string) => {
+        if (player.includes('p-')) {
+          await this.updateTeamForPlayer(player, team, season);
+        } else if (player.includes('g-')) {
+          await this.updateTeamForGoalie(player, team, season);
+        }
+      });
+    }
+
+    const playersWithInfo = await this.setPlayerInfo(players);
+
+    console.log(playersWithInfo);
+  }
+
+  private async setPlayerInfo(players) {
+    return await Promise.all(
+      players.map(async (item) => ({
+        ...item,
+        playerInfo: await this.getPlayerInfo(item.split('-')[1]),
+      }))
+    );
+  }
+
+  private async getPlayerInfo(playerId: number) {
+    if (playerId) {
+      return await this.playersRepo.findOne({
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+        where: {
+          id: playerId,
+        },
+      });
+    } else {
+      return {};
+    }
+  }
+
+  private async updateTeamForPlayer(
+    playerId: string,
+    team: string,
+    season: string
+  ) {
+    const stringId = playerId.split('-');
+    const attrs: Partial<Players_Stats_V2> = {
+      team_name: team,
+    };
+
+    const player = await this.playerStatsRepo.findOneByOrFail({
+      player_id: { id: Number(stringId[1]) },
+      playing_year: season,
+      team_name: team,
+    });
+
+    if (!player) {
+      throw new NotFoundException('player not found');
+    }
+
+    Object.assign(player, attrs);
+
+    return this.playerStatsRepo.save(player);
+  }
+
+  private async updateTeamForGoalie(
+    playerId: string,
+    team: string,
+    season: string
+  ) {
+    const stringId = playerId.split('-');
+    const attrs: Partial<Goalies_Stats_V2> = {
+      team_name: team,
+    };
+
+    const player = await this.goalieStatsRepo.findOneByOrFail({
+      player_id: { id: Number(stringId[1]) },
+      playing_year: season,
+      team_name: team,
+    });
+
+    if (!player) {
+      throw new NotFoundException('player not found');
+    }
+
+    Object.assign(player, attrs);
+
+    return this.goalieStatsRepo.save(player);
+  }
+
+  // WAIVER RELEASE
+
+  async waiverRelease(body: any) {
+    return null;
+  }
+  // TRADES
+  async trade(body: any) {
+    return null;
   }
 }

@@ -8,6 +8,7 @@ import {
 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { HttpModule } from '@nestjs/axios';
 import { TransactionsController } from './controllers';
 import { TransactionsMiddleware } from './middlewares';
 import {
@@ -17,6 +18,7 @@ import {
 
 @Module({
   imports: [
+    HttpModule,
     TypeOrmModule.forFeature([
       Transactions_V2,
       Teams_V2,

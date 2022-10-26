@@ -5,7 +5,6 @@ import {
   Controller,
   Get,
   NotFoundException,
-  Param,
   Put,
 } from '@nestjs/common';
 import { ApiWaiversService } from '../services';

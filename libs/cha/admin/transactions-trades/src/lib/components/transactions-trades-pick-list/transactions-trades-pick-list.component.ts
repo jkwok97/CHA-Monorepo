@@ -60,6 +60,7 @@ export class TransactionsTradesPickListComponent implements OnInit {
   }
 
   setTeamOnePicks(picks: string[]) {
+    console.log(picks);
     this.teamOnePicks = picks;
   }
 

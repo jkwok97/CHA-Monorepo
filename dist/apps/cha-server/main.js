@@ -8343,6 +8343,7 @@ const tslib_1 = __webpack_require__("tslib");
 const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const axios_1 = __webpack_require__("@nestjs/axios");
 const controllers_1 = __webpack_require__("./libs/api/transactions/src/lib/controllers/index.ts");
 const middlewares_1 = __webpack_require__("./libs/api/transactions/src/lib/middlewares/index.ts");
 const services_1 = __webpack_require__("./libs/api/transactions/src/lib/services/index.ts");
@@ -8354,6 +8355,7 @@ let ApiTransactionsModule = class ApiTransactionsModule {
 ApiTransactionsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
+            axios_1.HttpModule,
             typeorm_1.TypeOrmModule.forFeature([
                 entities_1.Transactions_V2,
                 entities_1.Teams_V2,
@@ -8387,10 +8389,11 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/transactions/src/lib/services/index.ts");
 let TransactionsController = class TransactionsController {
@@ -8412,6 +8415,15 @@ let TransactionsController = class TransactionsController {
         }
         return team;
     }
+    waiverAcquire(body) {
+        return this.transactionsTradesService.waiverAcquire(body);
+    }
+    waiverRelease(body) {
+        return this.transactionsTradesService.waiverRelease(body);
+    }
+    trade(body) {
+        return this.transactionsTradesService.trade(body);
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
@@ -8427,6 +8439,27 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], TransactionsController.prototype, "getTeam", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/waivers/acquire'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.WaiverAcquisitionDto !== "undefined" && entities_1.WaiverAcquisitionDto) === "function" ? _e : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+], TransactionsController.prototype, "waiverAcquire", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/waivers/release'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+], TransactionsController.prototype, "waiverRelease", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/trade'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+], TransactionsController.prototype, "trade", null);
 TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiTransactionsService !== "undefined" && services_1.ApiTransactionsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiTransactionsTradesService !== "undefined" && services_1.ApiTransactionsTradesService) === "function" ? _b : Object])
@@ -8473,7 +8506,7 @@ exports.TransactionsMiddleware = TransactionsMiddleware;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTransactionsTradesService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8481,13 +8514,18 @@ const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
+const axios_1 = __webpack_require__("@nestjs/axios");
 let ApiTransactionsTradesService = class ApiTransactionsTradesService {
-    constructor(repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo) {
+    constructor(httpService, repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo, playersRepo) {
+        this.httpService = httpService;
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
         this.playerStatsRepo = playerStatsRepo;
         this.goalieStatsRepo = goalieStatsRepo;
         this.draftRepo = draftRepo;
+        this.playersRepo = playersRepo;
+        this.waiversHookURL = process.env.SLACK_WAIVERS_WEBHOOK;
+        this.tradeHookURL = process.env.SLACK_WEBHOOK;
     }
     async getTeamBySeason(team, season, draftYear) {
         const players = await this.playerStatsRepo.find({
@@ -8506,7 +8544,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             },
             order: {
                 player_id: {
-                    lastname: 'DESC',
+                    lastname: 'ASC',
                 },
             },
         });
@@ -8526,7 +8564,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             },
             order: {
                 player_id: {
-                    lastname: 'DESC',
+                    lastname: 'ASC',
                 },
             },
         });
@@ -8601,15 +8639,94 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             },
         });
     }
+    // WAIVER ACQUISITIONS
+    async waiverAcquire(body) {
+        const team = body.team;
+        const players = body.players;
+        const season = body.season;
+        if (players && players.length > 0) {
+            await players.forEach(async (player) => {
+                if (player.includes('p-')) {
+                    await this.updateTeamForPlayer(player, team, season);
+                }
+                else if (player.includes('g-')) {
+                    await this.updateTeamForGoalie(player, team, season);
+                }
+            });
+        }
+        const playersWithInfo = await this.setPlayerInfo(players);
+        console.log(playersWithInfo);
+    }
+    async setPlayerInfo(players) {
+        return await Promise.all(players.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.split('-')[1]) }))));
+    }
+    async getPlayerInfo(playerId) {
+        if (playerId) {
+            return await this.playersRepo.findOne({
+                select: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                where: {
+                    id: playerId,
+                },
+            });
+        }
+        else {
+            return {};
+        }
+    }
+    async updateTeamForPlayer(playerId, team, season) {
+        const stringId = playerId.split('-');
+        const attrs = {
+            team_name: team,
+        };
+        const player = await this.playerStatsRepo.findOneByOrFail({
+            player_id: { id: Number(stringId[1]) },
+            playing_year: season,
+            team_name: team,
+        });
+        if (!player) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(player, attrs);
+        return this.playerStatsRepo.save(player);
+    }
+    async updateTeamForGoalie(playerId, team, season) {
+        const stringId = playerId.split('-');
+        const attrs = {
+            team_name: team,
+        };
+        const player = await this.goalieStatsRepo.findOneByOrFail({
+            player_id: { id: Number(stringId[1]) },
+            playing_year: season,
+            team_name: team,
+        });
+        if (!player) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(player, attrs);
+        return this.goalieStatsRepo.save(player);
+    }
+    // WAIVER RELEASE
+    async waiverRelease(body) {
+        return null;
+    }
+    // TRADES
+    async trade(body) {
+        return null;
+    }
 };
 ApiTransactionsTradesService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
-    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
-    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object])
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(5, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
+    tslib_1.__param(6, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object, typeof (_f = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _f : Object, typeof (_g = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _g : Object])
 ], ApiTransactionsTradesService);
 exports.ApiTransactionsTradesService = ApiTransactionsTradesService;
 
@@ -9717,6 +9834,16 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__("tslib");
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-transaction.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/waiver-acquisition.dto.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/waiver-acquisition.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),

@@ -1,5 +1,12 @@
-import { GetTeamTransactionDto } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { GetTeamTransactionDto, WaiverAcquisitionDto } from '@cha/shared/entities';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Put,
+} from '@nestjs/common';
 import {
   ApiTransactionsService,
   ApiTransactionsTradesService,
@@ -36,5 +43,20 @@ export class TransactionsController {
       throw new NotFoundException('Team not found');
     }
     return team;
+  }
+
+  @Put('/waivers/acquire')
+  waiverAcquire(@Body() body: WaiverAcquisitionDto): Promise<void> {
+    return this.transactionsTradesService.waiverAcquire(body);
+  }
+
+  @Put('/waivers/release')
+  waiverRelease(@Body() body): Promise<void> {
+    return this.transactionsTradesService.waiverRelease(body);
+  }
+
+  @Put('/trade')
+  trade(@Body() body): Promise<void> {
+    return this.transactionsTradesService.trade(body);
   }
 }

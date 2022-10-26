@@ -1,4 +1,10 @@
-import { Players_V2, Teams_V2, Transactions_V2 } from '@api/entities';
+import {
+  Goalies_Stats_V2,
+  Players_Stats_V2,
+  Players_V2,
+  Teams_V2,
+  Transactions_V2,
+} from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
@@ -11,7 +17,7 @@ export class ApiTransactionsService {
     @InjectRepository(Teams_V2)
     private teamInfoRepo: Repository<Teams_V2>,
     @InjectRepository(Players_V2)
-    private playersRepo: Repository<Players_V2>
+    private playersRepo: Repository<Players_V2>,
   ) {}
 
   async getTransactionsBySeason(year: string) {
