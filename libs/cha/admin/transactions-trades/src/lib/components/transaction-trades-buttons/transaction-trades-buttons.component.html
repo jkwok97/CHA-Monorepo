@@ -1,1 +1,22 @@
-<p>transaction-trades-buttons works!</p>
+<div *ngIf="setTrade">
+  <p-button label="Trade" [disabled]="!teamOne && !teamTwo"></p-button>
+</div>
+
+<div
+  *ngIf="!setTrade"
+  class="flex flex-column row-gap-3 justify-content-center align-items-center"
+>
+  <p-button
+    label="Acquire"
+    [icon]="isMobile ? 'pi pi-arrow-circle-up' : 'pi pi-arrow-circle-left'"
+    [disabled]="!teamOne"
+    (click)="onAcquire()"
+  ></p-button>
+  <p-button
+    label="Release"
+    [icon]="isMobile ? 'pi pi-arrow-circle-down' : 'pi pi-arrow-circle-right'"
+    iconPos="right"
+    [disabled]="!teamOne"
+    (click)="onRelease()"
+  ></p-button>
+</div>

@@ -49,4 +49,36 @@ export class TransactionsTradesFacade {
   getTeamTwo(team: string) {
     this.store.dispatch(TransactionsTradesActions.getTeamTwo({ team }));
   }
+
+  setWaiverAcquisition(team: string, players: string[]) {
+    this.store.dispatch(
+      TransactionsTradesActions.setWaiverAcquisition({ team, players })
+    );
+  }
+
+  setWaiverRelease(team: string, players: string[]) {
+    this.store.dispatch(
+      TransactionsTradesActions.setWaiverRelease({ team, players })
+    );
+  }
+
+  setTrade(
+    teamOne: string,
+    teamTwo: string,
+    teamOnePicks: string[],
+    teamTwoPicks: string[]
+  ) {
+    this.store.dispatch(
+      TransactionsTradesActions.setTrade({
+        teamOne,
+        teamTwo,
+        teamOnePicks,
+        teamTwoPicks,
+      })
+    );
+  }
+
+  reset() {
+    this.store.dispatch(TransactionsTradesActions.reset());
+  }
 }

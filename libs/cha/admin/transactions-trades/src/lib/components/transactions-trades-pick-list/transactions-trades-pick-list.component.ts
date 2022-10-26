@@ -18,6 +18,10 @@ export class TransactionsTradesPickListComponent implements OnInit {
 
   teamOneOptions!: any[];
   teamTwoOptions!: any[];
+  teamOne!: string;
+  teamTwo!: string;
+  teamOnePicks!: string[];
+  teamTwoPicks!: string[];
 
   constructor(private leagueDataFacade: LeagueDataFacade) {}
 
@@ -41,6 +45,7 @@ export class TransactionsTradesPickListComponent implements OnInit {
   }
 
   setTeamOneSelection(team: string) {
+    this.teamOne = team;
     this.teamTwoOptions = this.teamTwoOptions.map((option) => ({
       ...option,
       disabled: option.value === team,
@@ -48,17 +53,18 @@ export class TransactionsTradesPickListComponent implements OnInit {
   }
 
   setTeamTwoSelection(team: string) {
+    this.teamTwo = team;
     this.teamOneOptions = this.teamOneOptions.map((option) => ({
       ...option,
       disabled: option.value === team || option.value === 'FA',
     }));
   }
 
-  setTeamOnePicks(picks: any[]) {
-    console.log(picks);
+  setTeamOnePicks(picks: string[]) {
+    this.teamOnePicks = picks;
   }
 
-  setTeamTwoPicks(picks: any[]) {
-    console.log(picks);
+  setTeamTwoPicks(picks: string[]) {
+    this.teamTwoPicks = picks;
   }
 }

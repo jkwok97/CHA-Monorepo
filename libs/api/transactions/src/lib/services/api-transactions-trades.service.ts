@@ -46,7 +46,7 @@ export class ApiTransactionsTradesService {
       },
       order: {
         player_id: {
-          lastname: 'DESC',
+          lastname: 'ASC',
         },
       },
     });
@@ -67,7 +67,7 @@ export class ApiTransactionsTradesService {
       },
       order: {
         player_id: {
-          lastname: 'DESC',
+          lastname: 'ASC',
         },
       },
     });
