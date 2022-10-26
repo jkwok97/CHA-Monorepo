@@ -15,7 +15,6 @@ import { TransactionsTradesFacade } from '../../+state/transactions-trades.facad
 @Component({
   selector: 'cha-admin-transactions-trades-list-box',
   templateUrl: './transactions-trades-list-box.component.html',
-  styleUrls: ['./transactions-trades-list-box.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsTradesListBoxComponent implements OnInit {

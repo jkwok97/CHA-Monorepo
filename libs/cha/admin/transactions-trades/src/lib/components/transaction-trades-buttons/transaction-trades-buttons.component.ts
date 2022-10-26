@@ -10,7 +10,6 @@ import { TransactionsTradesFacade } from '../../+state/transactions-trades.facad
 @Component({
   selector: 'cha-admin-transaction-trades-buttons',
   templateUrl: './transaction-trades-buttons.component.html',
-  styleUrls: ['./transaction-trades-buttons.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionTradesButtonsComponent implements OnChanges {
