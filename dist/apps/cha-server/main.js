@@ -8656,9 +8656,14 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             });
         }
         const playersWithInfo = await this.setPlayerInfo(players);
-        console.log(playersWithInfo);
+        const playerArray = [];
+        await playersWithInfo.forEach(async (player) => {
+            const string = await this.getPlayerString(player);
+            playerArray.push(string);
+        });
+        console.log(playerArray);
         const postJson = {
-            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach((player) => this.getPlayerString(player))}`,
+            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playerArray}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
