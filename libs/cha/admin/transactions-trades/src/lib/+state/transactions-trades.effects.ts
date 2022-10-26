@@ -98,7 +98,6 @@ export class TransactionsTradesEffects {
             summary: 'Waiver Acquisition',
             detail: 'Waiver Acquisition is completed',
           });
-          this.transactionsTradesFacade.reset();
         })
       ),
     { dispatch: false }

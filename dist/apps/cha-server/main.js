@@ -8515,6 +8515,7 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 const axios_1 = __webpack_require__("@nestjs/axios");
+const rxjs_1 = __webpack_require__("rxjs");
 let ApiTransactionsTradesService = class ApiTransactionsTradesService {
     constructor(httpService, repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo, playersRepo) {
         this.httpService = httpService;
@@ -8656,9 +8657,25 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         }
         const playersWithInfo = await this.setPlayerInfo(players);
         console.log(playersWithInfo);
+        const postJson = {
+            json: {
+                text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach((player) => this.getPlayerString(player))}`,
+                channel: '#waivers-and-drops',
+                username: 'League Office',
+                icon_emoji: ':office',
+            },
+        };
+        this.httpService
+            .post(`${this.waiversHookURL}`, postJson)
+            .pipe((0, rxjs_1.map)((response) => response.data));
+    }
+    getPlayerString(player) {
+        return `${player.playerInfo.firstname} ${player.playerInfo.lastname}, `;
     }
     async setPlayerInfo(players) {
-        return await Promise.all(players.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.split('-')[1]) }))));
+        return await Promise.all(players.map(async (item) => ({
+            playerInfo: await this.getPlayerInfo(item.split('-')[1]),
+        })));
     }
     async getPlayerInfo(playerId) {
         if (playerId) {

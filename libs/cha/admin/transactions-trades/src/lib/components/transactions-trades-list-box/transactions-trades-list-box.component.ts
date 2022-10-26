@@ -28,6 +28,7 @@ export class TransactionsTradesListBoxComponent implements OnInit {
 
   teamOneLoading$: Observable<boolean>;
   teamTwoLoading$: Observable<boolean>;
+  saving$: Observable<boolean>;
 
   teamOneGrouped!: any[];
   teamTwoGrouped!: any[];
@@ -38,6 +39,7 @@ export class TransactionsTradesListBoxComponent implements OnInit {
   ) {
     this.teamOneLoading$ = this.transactionsTradesFacade.teamOneLoading$;
     this.teamTwoLoading$ = this.transactionsTradesFacade.teamTwoLoading$;
+    this.saving$ = this.transactionsTradesFacade.isSaving$;
   }
 
   ngOnInit(): void {

@@ -5,8 +5,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { delay, Observable } from 'rxjs';
 import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-transaction-trades-buttons',
   templateUrl: './transaction-trades-buttons.component.html',
@@ -19,9 +22,13 @@ export class TransactionTradesButtonsComponent implements OnChanges {
   @Input() teamOnePicks!: string[];
   @Input() teamTwoPicks!: string[];
 
+  saving$: Observable<boolean>;
+
   setTrade = true;
 
-  constructor(private transactionsTradesFacade: TransactionsTradesFacade) {}
+  constructor(private transactionsTradesFacade: TransactionsTradesFacade) {
+    this.saving$ = this.transactionsTradesFacade.isSaving$;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
@@ -39,6 +46,13 @@ export class TransactionTradesButtonsComponent implements OnChanges {
       this.teamOne,
       this.teamTwoPicks
     );
+
+    this.saving$.pipe(untilDestroyed(this), delay(500)).subscribe((saving: boolean) => {
+      if (!saving) {
+        this.transactionsTradesFacade.getTeamOne(this.teamOne);
+        this.transactionsTradesFacade.getTeamTwo(this.teamTwo);
+      }
+    });
   }
 
   onRelease(): void {

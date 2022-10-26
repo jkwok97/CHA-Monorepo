@@ -24,7 +24,9 @@
     mode="indeterminate"
     [style]="{ height: '6px' }"
     *ngIf="
-      team === 'teamOne' ? (teamOneLoading$ | async) : (teamTwoLoading$ | async)
+      team === 'teamOne'
+        ? (teamOneLoading$ | async) || (saving$ | async)
+        : (teamTwoLoading$ | async) || (saving$ | async)
     "
   ></p-progressBar>
 
@@ -38,8 +40,8 @@
     [listStyle]="{ 'max-height': isMobile ? '250px' : '500px' }"
     *ngIf="
       team === 'teamOne'
-        ? (teamOneLoading$ | async) === false
-        : (teamTwoLoading$ | async) === false
+        ? (teamOneLoading$ | async) === false || (saving$ | async) === false
+        : (teamTwoLoading$ | async) === false || (saving$ | async) === false
     "
     (onChange)="onTransactionSelection($event)"
   >

@@ -14,6 +14,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
+import { map } from 'rxjs';
 
 @Injectable()
 export class ApiTransactionsTradesService {
@@ -186,12 +187,30 @@ export class ApiTransactionsTradesService {
     const playersWithInfo = await this.setPlayerInfo(players);
 
     console.log(playersWithInfo);
+
+    const postJson = {
+      json: {
+        text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach(
+          (player) => this.getPlayerString(player)
+        )}`,
+        channel: '#waivers-and-drops',
+        username: 'League Office',
+        icon_emoji: ':office',
+      },
+    };
+
+    this.httpService
+      .post(`${this.waiversHookURL}`, postJson)
+      .pipe(map((response) => response.data));
+  }
+
+  private getPlayerString(player: any) {
+    return `${player.playerInfo.firstname} ${player.playerInfo.lastname}, `;
   }
 
   private async setPlayerInfo(players) {
     return await Promise.all(
       players.map(async (item) => ({
-        ...item,
         playerInfo: await this.getPlayerInfo(item.split('-')[1]),
       }))
     );

@@ -54,6 +54,28 @@ const r = createReducer(
   })),
 
   on(
+    TransactionsTradesActions.setTrade,
+    TransactionsTradesActions.setWaiverAcquisition,
+    TransactionsTradesActions.setWaiverRelease,
+    (state) => ({
+      ...state,
+      saving: true,
+      saved: false,
+    })
+  ),
+
+  on(
+    TransactionsTradesActions.setTradeSuccess,
+    TransactionsTradesActions.setWaiverAcquisitionSuccess,
+    TransactionsTradesActions.setWaiverReleaseSuccess,
+    (state) => ({
+      ...state,
+      saving: false,
+      saved: true,
+    })
+  ),
+
+  on(
     TransactionsTradesActions.error,
     TransactionsTradesActions.reset,
     (state) => initialState
