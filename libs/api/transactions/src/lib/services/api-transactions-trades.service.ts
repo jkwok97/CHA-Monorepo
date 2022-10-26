@@ -189,17 +189,15 @@ export class ApiTransactionsTradesService {
     console.log(playersWithInfo);
 
     const postJson = {
-      json: {
-        text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach(
-          (player) => this.getPlayerString(player)
-        )}`,
-        channel: '#waivers-and-drops',
-        username: 'League Office',
-        icon_emoji: ':office',
-      },
+      text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach(
+        (player) => this.getPlayerString(player)
+      )}`,
+      channel: '#waivers-and-drops',
+      username: 'League Office',
+      icon_emoji: ':office',
     };
 
-    console.log(this.waiversHookURL);
+    console.log(postJson);
 
     this.httpService.post(`${this.waiversHookURL}`, postJson).pipe(
       map((response) => response.data),

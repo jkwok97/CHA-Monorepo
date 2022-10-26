@@ -8658,14 +8658,12 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const playersWithInfo = await this.setPlayerInfo(players);
         console.log(playersWithInfo);
         const postJson = {
-            json: {
-                text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach((player) => this.getPlayerString(player))}`,
-                channel: '#waivers-and-drops',
-                username: 'League Office',
-                icon_emoji: ':office',
-            },
+            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playersWithInfo.forEach((player) => this.getPlayerString(player))}`,
+            channel: '#waivers-and-drops',
+            username: 'League Office',
+            icon_emoji: ':office',
         };
-        console.log(this.waiversHookURL);
+        console.log(postJson);
         this.httpService.post(`${this.waiversHookURL}`, postJson).pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.catchError)((error) => error));
     }
     getPlayerString(player) {
