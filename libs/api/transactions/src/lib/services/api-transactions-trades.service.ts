@@ -194,7 +194,7 @@ export class ApiTransactionsTradesService {
     });
 
     const postJson = {
-      text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light \n \n To ${team}: ${playerArray}`,
+      text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: ${playerArray}`,
       channel: '#waivers-and-drops',
       username: 'League Office',
       icon_emoji: ':office',
@@ -236,6 +236,11 @@ export class ApiTransactionsTradesService {
     };
 
     return await this.sendToSlack(postJson);
+  }
+
+  // TRADES
+  async trade(body: any) {
+    return null;
   }
 
   private getPlayerString(player: any) {
@@ -313,12 +318,6 @@ export class ApiTransactionsTradesService {
     Object.assign(player, attrs);
 
     return this.goalieStatsRepo.save(player);
-  }
-
-  
-  // TRADES
-  async trade(body: any) {
-    return null;
   }
 
   private async sendToSlack(message) {
