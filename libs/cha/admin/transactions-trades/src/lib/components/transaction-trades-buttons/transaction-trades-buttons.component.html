@@ -1,5 +1,9 @@
 <div *ngIf="setTrade">
-  <p-button label="Trade" [disabled]="!teamOne && !teamTwo"></p-button>
+  <p-button
+    label="Trade"
+    [disabled]="!teamOne && !teamTwo"
+    (click)="onTrade()"
+  ></p-button>
 </div>
 
 <div

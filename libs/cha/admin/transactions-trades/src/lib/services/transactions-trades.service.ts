@@ -33,6 +33,8 @@ export class TransactionsTradesService {
       players,
       season,
     };
+
+    console.log(body);
     return this._http
       .put(`${this.apiUrl}/transactions/waivers/acquire`, body)
       .pipe(map((result: any) => result));
@@ -48,6 +50,7 @@ export class TransactionsTradesService {
       players,
       season,
     };
+    console.log(body);
     return this._http
       .put(`${this.apiUrl}/transactions/waivers/release`, body)
       .pipe(map((result: any) => result));
@@ -67,6 +70,7 @@ export class TransactionsTradesService {
       teamTwoPicks,
       season,
     };
+    console.log(body);
     return this._http
       .put(`${this.apiUrl}/transactions/trade`, body)
       .pipe(map((result: any) => result));

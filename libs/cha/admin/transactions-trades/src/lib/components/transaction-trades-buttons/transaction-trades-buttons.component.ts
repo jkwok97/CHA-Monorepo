@@ -24,10 +24,13 @@ export class TransactionTradesButtonsComponent implements OnChanges {
   constructor(private transactionsTradesFacade: TransactionsTradesFacade) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['teamTwo']?.currentValue === 'FA') {
-      this.setTrade = false;
-    } else if (changes['teamTwo']?.currentValue !== 'FA') {
-      this.setTrade = true;
+    console.log(changes);
+    if (changes['teamTwo']) {
+      if (changes['teamTwo']?.currentValue === 'FA') {
+        this.setTrade = false;
+      } else if (changes['teamTwo']?.currentValue !== 'FA') {
+        this.setTrade = true;
+      }
     }
   }
 
