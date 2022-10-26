@@ -329,11 +329,13 @@ export class ApiTransactionsTradesService {
         'Content-type': 'application/json',
       },
     };
-    
-    this.httpService.post(`${this.waiversHookURL}`, message, options).pipe(
-      tap((response) => console.log(response)),
-      map((response) => response.data),
-      catchError((error) => error)
-    );
+
+    this.httpService
+      .post(`${this.waiversHookURL}`, message, options)
+      .pipe(map((response) => response.data))
+      .subscribe({
+        complete: () => console.log('completed'),
+        error: (err) => console.log(err),
+      });
   }
 }
