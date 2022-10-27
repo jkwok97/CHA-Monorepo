@@ -17,6 +17,11 @@ import { reducer } from './+state/schedule-games.reducer';
 import { ChaAdminScheduleGamesRoutingModule } from './cha-admin-schedule-games-routing.module';
 
 import { ScheduleGamesComponent } from './containers';
+import {
+  ScheduleGamesTableComponent,
+  ScheduleGamesEditComponent,
+  ScheduleGamesEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import { ScheduleGamesComponent } from './containers';
     StoreModule.forFeature('schedule-games', reducer),
     EffectsModule.forFeature([ScheduleGamesEffects]),
   ],
-  declarations: [ScheduleGamesComponent],
+  declarations: [
+    ScheduleGamesComponent,
+    ScheduleGamesTableComponent,
+    ScheduleGamesEditComponent,
+    ScheduleGamesEditFormComponent,
+  ],
   providers: [ScheduleGamesEffects, ScheduleGamesFacade],
 })
 export class ChaAdminScheduleGamesModule {}
