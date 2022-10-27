@@ -8662,7 +8662,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             playerArray.push(string);
         });
         const postJson = {
-            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: ${playerArray}`,
+            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerArray}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
@@ -8691,7 +8691,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             playerArray.push(string);
         });
         const postJson = {
-            text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: ${playerArray}`,
+            text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerArray}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
@@ -8752,7 +8752,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const teamOnePickString = await this.getDraftPickStringArray(teamOnePicks);
         const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
         const postJson = {
-            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray}, ${teamTwoPicks.length > 0 ? teamTwoPickString : ''} \n \n To ${teamTwo}: ${teamOneplayerArray}, ${teamOnePicks.length > 0 ? teamOnePickString : ''}`,
+            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: \n ${teamTwoplayerArray}, ${teamTwoPicks.length > 0 ? teamTwoPickString : ''} \n \n To ${teamTwo}: \n ${teamOneplayerArray}, ${teamOnePicks.length > 0 ? teamOnePickString : ''}`,
             channel: '#trades',
             username: 'League Office',
             icon_emoji: ':office',
