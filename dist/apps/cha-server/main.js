@@ -8752,7 +8752,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const teamOnePickString = await this.getDraftPickStringArray(teamOnePicks);
         const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
         const postJson = {
-            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${teamTwoPicks.length > 0 ? teamTwoPickString : ''} \n \n To ${teamTwo}: ${teamOneplayerArray} ${teamOnePicks.length > 0 ? teamOnePickString : ''}`,
+            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray}, ${teamTwoPicks.length > 0 ? teamTwoPickString : ''} \n \n To ${teamTwo}: ${teamOneplayerArray}, ${teamOnePicks.length > 0 ? teamOnePickString : ''}`,
             channel: '#trades',
             username: 'League Office',
             icon_emoji: ':office',
