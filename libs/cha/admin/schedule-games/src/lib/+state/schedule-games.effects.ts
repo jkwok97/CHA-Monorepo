@@ -2,7 +2,16 @@ import { Injectable } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import { ScheduleAllDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { withLatestFrom, exhaustMap, map, catchError, of, delay } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import {
+  withLatestFrom,
+  exhaustMap,
+  map,
+  catchError,
+  of,
+  delay,
+  tap,
+} from 'rxjs';
 import { ScheduleGamesService } from '../services';
 import { ScheduleGamesActions } from './schedule-games.actions';
 
@@ -11,7 +20,8 @@ export class ScheduleGamesEffects {
   constructor(
     private actions$: Actions,
     private leagueDataFacade: LeagueDataFacade,
-    private scheduleGamesService: ScheduleGamesService
+    private scheduleGamesService: ScheduleGamesService,
+    private messageService: MessageService
   ) {}
 
   getSchedule$ = createEffect(() =>
@@ -47,5 +57,20 @@ export class ScheduleGamesEffects {
         )
       )
     )
+  );
+
+  saveGameSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScheduleGamesActions.saveGameSuccess),
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Update Game',
+            detail: 'Game has been updated',
+          });
+        })
+      ),
+    { dispatch: false }
   );
 }
