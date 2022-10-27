@@ -1,0 +1,26 @@
+{
+  "name": "cha-admin-transactions-table",
+  "projectType": "library",
+  "sourceRoot": "libs/cha/admin/transactions-table/src",
+  "prefix": "cha-admin",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cha/admin/transactions-table"],
+      "options": {
+        "jestConfig": "libs/cha/admin/transactions-table/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/cha/admin/transactions-table/**/*.ts",
+          "libs/cha/admin/transactions-table/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:feature", "admin"]
+}

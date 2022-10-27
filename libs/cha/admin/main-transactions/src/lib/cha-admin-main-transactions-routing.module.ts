@@ -26,6 +26,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaAdminTransactionsWaiversModule
           ),
       },
+      {
+        path: 'table',
+        loadChildren: () =>
+          import('@cha/admin/transactions-table').then(
+            (mod) => mod.ChaAdminTransactionsTableModule
+          ),
+      },
     ],
   },
 ];

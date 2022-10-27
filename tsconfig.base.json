@@ -127,6 +127,9 @@
       "@cha/admin/schedule-games": [
         "libs/cha/admin/schedule-games/src/index.ts"
       ],
+      "@cha/admin/transactions-table": [
+        "libs/cha/admin/transactions-table/src/index.ts"
+      ],
       "@cha/admin/transactions-trades": [
         "libs/cha/admin/transactions-trades/src/index.ts"
       ],

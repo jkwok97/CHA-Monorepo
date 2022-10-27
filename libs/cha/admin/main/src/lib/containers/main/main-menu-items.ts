@@ -79,6 +79,10 @@ export const mainMenuItems: MenuItem[] = [
         label: 'Waiver Order',
         routerLink: ['/transactions/waiver'],
       },
+      {
+        label: 'Trades Table',
+        routerLink: ['/transactions/table'],
+      },
     ],
   },
   {
