@@ -6,8 +6,18 @@
 
     <blade-divider></blade-divider>
 
-    <blade-card>
-      <blade-card-body> </blade-card-body>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="games$ | async as games">
+          {{ games | json }}
+        </ng-container>
+      </blade-card-body>
     </blade-card>
   </div>
 </blade-layout-feature-content>
