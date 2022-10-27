@@ -201,7 +201,7 @@ export class ApiTransactionsTradesService {
       icon_emoji: ':office',
     };
 
-    return await this.sendToSlack(postJson);
+    return await this.sendToSlack(postJson, this.waiversHookURL);
   }
 
   // WAIVER RELEASE
@@ -236,7 +236,7 @@ export class ApiTransactionsTradesService {
       icon_emoji: ':office',
     };
 
-    return await this.sendToSlack(postJson);
+    return await this.sendToSlack(postJson, this.waiversHookURL);
   }
 
   // TRADES
@@ -249,7 +249,116 @@ export class ApiTransactionsTradesService {
     const teamTwoPicks = await this.getDraftPicksFromArray(body.teamTwoPicks);
     const season = body.season;
 
-    return null;
+    if (teamOnePlayers && teamOnePlayers.length > 0) {
+      await teamOnePlayers.forEach(async (player: string) => {
+        if (player.includes('p-')) {
+          await this.updateTeamForPlayer(player, teamTwo, season);
+        } else if (player.includes('g-')) {
+          await this.updateTeamForGoalie(player, teamTwo, season);
+        }
+      });
+    }
+
+    if (teamOnePicks && teamOnePicks.length > 0) {
+      await teamOnePicks.forEach(
+        async (pick: { team: string; value: string; year: string }) => {
+          await this.updateTeamForPick(pick, teamTwo);
+        }
+      );
+    }
+
+    if (teamTwoPlayers && teamTwoPlayers.length > 0) {
+      await teamTwoPlayers.forEach(async (player: string) => {
+        if (player.includes('p-')) {
+          await this.updateTeamForPlayer(player, teamOne, season);
+        } else if (player.includes('g-')) {
+          await this.updateTeamForGoalie(player, teamOne, season);
+        }
+      });
+    }
+
+    if (teamTwoPicks && teamTwoPicks.length > 0) {
+      await teamTwoPicks.forEach(
+        async (pick: { team: string; value: string; year: string }) => {
+          await this.updateTeamForPick(pick, teamOne);
+        }
+      );
+    }
+
+    const teamOneplayersWithInfo = await this.setPlayerInfo(teamOnePlayers);
+    const teamTwoplayersWithInfo = await this.setPlayerInfo(teamTwoPlayers);
+
+    const teamOneplayerArray = [];
+    const teamTwoplayerArray = [];
+
+    await teamOneplayersWithInfo.forEach(async (player) => {
+      const string = await this.getPlayerString(player);
+      teamOneplayerArray.push(string);
+    });
+
+    await teamTwoplayersWithInfo.forEach(async (player) => {
+      const string = await this.getPlayerString(player);
+      teamTwoplayerArray.push(string);
+    });
+
+    const postJson = {
+      text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${
+        teamTwoPicks.length > 0 ? teamTwoPicks : ''
+      } \n \n To ${teamTwo}: ${teamOneplayerArray} ${
+        teamOnePicks.length > 0 ? teamOnePicks : ''
+      }`,
+      channel: '#trades',
+      username: 'League Office',
+      icon_emoji: ':office',
+    };
+
+    return await this.sendToSlack(postJson, this.tradeHookURL);
+  }
+
+  private async updateTeamForPick(
+    pick: { team: string; value: string; year: string },
+    team: string
+  ) {
+    const teamId = await this.getTeamInfo(team);
+
+    let attrs: Partial<Draft_Order_V2>;
+
+    if (pick.value.includes('1')) {
+      attrs = {
+        round_one: teamId.id,
+      };
+    } else if (pick.value.includes('2')) {
+      attrs = {
+        round_two: teamId.id,
+      };
+    } else if (pick.value.includes('3')) {
+      attrs = {
+        round_three: teamId.id,
+      };
+    } else if (pick.value.includes('4')) {
+      attrs = {
+        round_four: teamId.id,
+      };
+    } else if (pick.value.includes('5')) {
+      attrs = {
+        round_five: teamId.id,
+      };
+    }
+
+    const draftRow = await this.draftRepo.findOneByOrFail({
+      draft_year: pick.year,
+      team_id: {
+        shortname: pick.team,
+      },
+    });
+
+    if (!draftRow) {
+      throw new NotFoundException('player not found');
+    }
+
+    Object.assign(draftRow, attrs);
+
+    return this.draftRepo.save(draftRow);
   }
 
   private async getDraftPicksFromArray(picksArray: string[]) {
@@ -257,7 +366,15 @@ export class ApiTransactionsTradesService {
 
     await picksArray.forEach((pick: string) => {
       if (!pick.includes('-')) {
-        picks.push(pick);
+        const newPick = pick.split(' ');
+
+        const pickObject = {
+          team: newPick[0],
+          value: newPick[1],
+          year: newPick[2],
+        };
+
+        picks.push(pickObject);
       }
     });
 
@@ -286,6 +403,17 @@ export class ApiTransactionsTradesService {
         playerInfo: await this.getPlayerInfo(item.split('-')[1]),
       }))
     );
+  }
+
+  private async getTeamInfo(shortname: string) {
+    return await this.teamInfoRepo.findOne({
+      select: {
+        id: true,
+      },
+      where: {
+        shortname,
+      },
+    });
   }
 
   private async getPlayerInfo(playerId: number) {
@@ -353,7 +481,7 @@ export class ApiTransactionsTradesService {
     return this.goalieStatsRepo.save(player);
   }
 
-  private async sendToSlack(message) {
+  private async sendToSlack(message, hook) {
     const options = {
       headers: {
         'Content-type': 'application/json',
@@ -361,7 +489,7 @@ export class ApiTransactionsTradesService {
     };
 
     this.httpService
-      .post(`${this.waiversHookURL}`, message, options)
+      .post(`${hook}`, message, options)
       .pipe(map((response) => response.data))
       .subscribe({
         complete: () => console.log('completed'),
