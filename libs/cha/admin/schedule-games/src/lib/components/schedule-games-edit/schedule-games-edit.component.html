@@ -4,15 +4,8 @@
   </blade-card-header>
 
   <blade-card-body>
-    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
-      <cha-admin-schedule-games-edit-form
-        [game]="game"
-      ></cha-admin-schedule-games-edit-form>
-    </perfect-scrollbar>
-
     <cha-admin-schedule-games-edit-form
       [game]="game"
-      *ngIf="!isMobile"
     ></cha-admin-schedule-games-edit-form>
   </blade-card-body>
 

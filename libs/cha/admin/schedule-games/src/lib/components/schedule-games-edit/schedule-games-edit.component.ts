@@ -16,7 +16,6 @@ import { ScheduleGamesEditFormComponent } from '../schedule-games-edit-form';
 @Component({
   selector: 'cha-admin-schedule-games-edit',
   templateUrl: './schedule-games-edit.component.html',
-  styleUrls: ['./schedule-games-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleGamesEditComponent {
@@ -28,11 +27,6 @@ export class ScheduleGamesEditComponent {
   @ViewChild(ScheduleGamesEditFormComponent, { static: false })
   gameFormRef?: ScheduleGamesEditFormComponent;
 
-  panelStyle = {
-    width: '100%',
-    height: '65vh',
-  };
-
   constructor(private scheduleGamesFacade: ScheduleGamesFacade) {}
 
   onCancel() {
@@ -40,8 +34,12 @@ export class ScheduleGamesEditComponent {
   }
 
   onSave() {
-    // const game = {
-    // };
+    const game = {
+      ...this.game,
+      vis_team_score: this.gameFormRef?.form.value.vis_team_score,
+      home_team_score: this.gameFormRef?.form.value.home_team_score
+    };
+
     // this.scheduleGamesFacade.saveGame(game);
     // this.scheduleGamesFacade.isSaving$
     //   .pipe(
