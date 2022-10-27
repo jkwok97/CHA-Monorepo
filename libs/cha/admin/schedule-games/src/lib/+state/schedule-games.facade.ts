@@ -16,6 +16,14 @@ export class ScheduleGamesFacade {
     ScheduleGamesSelectors.selectLoaded
   );
 
+  isSaving$: Observable<boolean> = this.store.select(
+    ScheduleGamesSelectors.selectSaving
+  );
+
+  isSaved$: Observable<boolean> = this.store.select(
+    ScheduleGamesSelectors.selectSaved
+  );
+
   schedule$: Observable<ScheduleAllDto[]> = this.store.select(
     ScheduleGamesSelectors.selectSchedule
   );

@@ -6,12 +6,16 @@ export interface State {
   schedule: ScheduleAllDto[];
   loading: boolean;
   loaded: boolean;
+  saving: boolean;
+  saved: boolean;
 }
 
 const initialState: State = {
   schedule: [],
   loading: false,
   loaded: false,
+  saving: false,
+  saved: false
 };
 
 const r = createReducer(
@@ -42,3 +46,7 @@ export const getSchedule = (state: State) => state.schedule;
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
+
+export const getSaving = (state: State) => state.saving;
+
+export const getSaved = (state: State) => state.saved;

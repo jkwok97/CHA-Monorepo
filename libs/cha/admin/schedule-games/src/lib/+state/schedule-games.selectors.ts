@@ -21,6 +21,16 @@ const selectSchedule = createSelector(
   ScheduleGamesReducer.getSchedule
 );
 
+const selectSaving = createSelector(
+  selectState,
+  ScheduleGamesReducer.getSaving
+);
+
+const selectSaved = createSelector(
+  selectState,
+  ScheduleGamesReducer.getSaved
+);
+
 const selectSeason = createSelector(
   selectSchedule,
   (schedule: ScheduleAllDto[]) => schedule[0]?.playing_year
@@ -29,6 +39,8 @@ const selectSeason = createSelector(
 export const ScheduleGamesSelectors = {
   selectLoaded,
   selectLoading,
+  selectSaving,
+  selectSaved,
   selectSchedule,
   selectSeason,
 };

@@ -40,14 +40,15 @@ export class ScheduleGamesEditComponent {
       home_team_score: this.gameFormRef?.form.value.home_team_score
     };
 
-    // this.scheduleGamesFacade.saveGame(game);
-    // this.scheduleGamesFacade.isSaving$
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     filter((isSaving: boolean) => !isSaving)
-    //   )
-    //   .subscribe(() => {
-    //     this.closeSidebar.emit(true);
-    //   });
+    this.scheduleGamesFacade.saveGame(game);
+    
+    this.scheduleGamesFacade.isSaving$
+      .pipe(
+        untilDestroyed(this),
+        filter((isSaving: boolean) => !isSaving)
+      )
+      .subscribe(() => {
+        this.closeSidebar.emit(true);
+      });
   }
 }
