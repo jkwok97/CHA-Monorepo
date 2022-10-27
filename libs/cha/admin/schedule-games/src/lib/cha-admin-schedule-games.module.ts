@@ -5,6 +5,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -23,11 +26,15 @@ import {
   ScheduleGamesEditFormComponent,
 } from './components';
 
+
 @NgModule({
   imports: [
     CommonModule,
     ChaAdminScheduleGamesRoutingModule,
     ProgressBarModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,

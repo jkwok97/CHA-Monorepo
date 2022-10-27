@@ -15,7 +15,10 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="games$ | async as games">
-          {{ games | json }}
+          <cha-admin-schedule-games-table
+            [games]="games"
+            [isMobile]="isMobile"
+          ></cha-admin-schedule-games-table>
         </ng-container>
       </blade-card-body>
     </blade-card>

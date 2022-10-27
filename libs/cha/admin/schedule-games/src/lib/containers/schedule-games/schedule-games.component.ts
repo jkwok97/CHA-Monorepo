@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { ScheduleAllDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { ScheduleGamesFacade } from '../../+state/schedule-games.facade';
 
 @Component({
@@ -12,13 +13,23 @@ import { ScheduleGamesFacade } from '../../+state/schedule-games.facade';
 export class ScheduleGamesComponent implements OnInit {
   isLoaded$: Observable<boolean>;
   isLoading$: Observable<boolean>;
-
   games$: Observable<ScheduleAllDto[]>;
 
-  constructor(private scheduleGamesFacade: ScheduleGamesFacade) {
+  isMobile!: boolean;
+
+  constructor(
+    private scheduleGamesFacade: ScheduleGamesFacade,
+    private displayFacade: DisplayFacade
+  ) {
     this.isLoaded$ = this.scheduleGamesFacade.isLoaded$;
     this.isLoading$ = this.scheduleGamesFacade.isLoading$;
     this.games$ = this.scheduleGamesFacade.schedule$;
+
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
   }
 
   ngOnInit(): void {
