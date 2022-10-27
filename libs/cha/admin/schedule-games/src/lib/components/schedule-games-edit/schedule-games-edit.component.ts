@@ -41,7 +41,7 @@ export class ScheduleGamesEditComponent {
     };
 
     this.scheduleGamesFacade.saveGame(game);
-    
+
     this.scheduleGamesFacade.isSaving$
       .pipe(
         untilDestroyed(this),

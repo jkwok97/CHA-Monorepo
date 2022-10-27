@@ -31,4 +31,21 @@ export class ScheduleGamesEffects {
       )
     )
   );
+
+  saveGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ScheduleGamesActions.saveGame),
+      delay(500),
+      exhaustMap((action) =>
+        this.scheduleGamesService.saveGame(action.game).pipe(
+          map((game: ScheduleAllDto) =>
+            ScheduleGamesActions.saveGameSuccess({
+              game,
+            })
+          ),
+          catchError(() => of(ScheduleGamesActions.error()))
+        )
+      )
+    )
+  );
 }

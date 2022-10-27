@@ -15,7 +15,7 @@ const initialState: State = {
   loading: false,
   loaded: false,
   saving: false,
-  saved: false
+  saved: false,
 };
 
 const r = createReducer(
@@ -32,6 +32,18 @@ const r = createReducer(
     schedule: action.schedule,
     loading: false,
     loaded: true,
+  })),
+
+  on(ScheduleGamesActions.saveGame, (state) => ({
+    ...state,
+    saving: true,
+    saved: false,
+  })),
+
+  on(ScheduleGamesActions.saveGameSuccess, (state) => ({
+    ...state,
+    saving: false,
+    saved: true,
   })),
 
   on(ScheduleGamesActions.error, (state) => initialState)
