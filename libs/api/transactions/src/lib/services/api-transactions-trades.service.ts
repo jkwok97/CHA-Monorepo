@@ -301,11 +301,14 @@ export class ApiTransactionsTradesService {
       teamTwoplayerArray.push(string);
     });
 
+    const teamOnePickString = await this.getDraftPickStringArray(teamOnePicks);
+    const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
+
     const postJson = {
       text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${
-        teamTwoPicks.length > 0 ? body.teamTwoPicks : ''
+        teamTwoPicks.length > 0 ? teamTwoPickString : ''
       } \n \n To ${teamTwo}: ${teamOneplayerArray} ${
-        teamOnePicks.length > 0 ? body.teamOnePicks : ''
+        teamOnePicks.length > 0 ? teamOnePickString : ''
       }`,
       channel: '#trades',
       username: 'League Office',
@@ -313,6 +316,12 @@ export class ApiTransactionsTradesService {
     };
 
     return await this.sendToSlack(postJson, this.tradeHookURL);
+  }
+
+  private async getDraftPickStringArray(
+    picks: { team: string; value: string; year: string }[]
+  ) {
+    return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year}`);
   }
 
   private async updateTeamForPick(

@@ -8749,13 +8749,18 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             const string = await this.getPlayerString(player);
             teamTwoplayerArray.push(string);
         });
+        const teamOnePickString = await this.getDraftPickStringArray(teamOnePicks);
+        const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
         const postJson = {
-            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${teamTwoPicks.length > 0 ? body.teamTwoPicks : ''} \n \n To ${teamTwo}: ${teamOneplayerArray} ${teamOnePicks.length > 0 ? body.teamOnePicks : ''}`,
+            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${teamTwoPicks.length > 0 ? teamTwoPickString : ''} \n \n To ${teamTwo}: ${teamOneplayerArray} ${teamOnePicks.length > 0 ? teamOnePickString : ''}`,
             channel: '#trades',
             username: 'League Office',
             icon_emoji: ':office',
         };
         return await this.sendToSlack(postJson, this.tradeHookURL);
+    }
+    async getDraftPickStringArray(picks) {
+        return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year}`);
     }
     async updateTeamForPick(pick, team) {
         const teamId = await this.getTeamInfo(team);
