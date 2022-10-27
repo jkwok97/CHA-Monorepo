@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import {
   GetTeamTransactionDto,
+  TradeDto,
   WaiverAcquisitionDto,
 } from '@cha/shared/entities';
 
@@ -65,14 +66,14 @@ export class TransactionsTradesService {
     teamTwoPicks: string[],
     season: string
   ): Observable<any> {
-    const body = {
+    const body: TradeDto = {
       teamOne,
       teamTwo,
       teamOnePicks,
       teamTwoPicks,
       season,
     };
-    console.log(body);
+    
     return this._http
       .put(`${this.apiUrl}/transactions/trade`, body)
       .pipe(map((result: any) => result));

@@ -1,4 +1,4 @@
-import { GetTeamTransactionDto, WaiverAcquisitionDto } from '@cha/shared/entities';
+import { GetTeamTransactionDto, TradeDto, WaiverAcquisitionDto } from '@cha/shared/entities';
 import {
   Body,
   Controller,
@@ -56,7 +56,7 @@ export class TransactionsController {
   }
 
   @Put('/trade')
-  trade(@Body() body): Promise<void> {
+  trade(@Body() body: TradeDto): Promise<void> {
     return this.transactionsTradesService.trade(body);
   }
 }

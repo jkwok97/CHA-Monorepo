@@ -31,7 +31,6 @@ export class TransactionTradesButtonsComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes['teamTwo']) {
       if (changes['teamTwo']?.currentValue === 'FA') {
         this.setTrade = false;
@@ -80,5 +79,14 @@ export class TransactionTradesButtonsComponent implements OnChanges {
       this.teamOnePicks,
       this.teamTwoPicks
     );
+
+    this.saving$
+      .pipe(untilDestroyed(this), delay(500))
+      .subscribe((saving: boolean) => {
+        if (!saving) {
+          this.transactionsTradesFacade.getTeamOne(this.teamOne);
+          this.transactionsTradesFacade.getTeamTwo(this.teamTwo);
+        }
+      });
   }
 }

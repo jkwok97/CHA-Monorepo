@@ -8,6 +8,7 @@ import {
 } from '@api/entities';
 import {
   GetTeamTransactionDto,
+  TradeDto,
   WaiverAcquisitionDto,
 } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -239,8 +240,40 @@ export class ApiTransactionsTradesService {
   }
 
   // TRADES
-  async trade(body: any) {
+  async trade(body: TradeDto) {
+    const teamOne = body.teamOne;
+    const teamOnePlayers = await this.getPlayersFromArray(body.teamOnePicks);
+    const teamOnePicks = await this.getDraftPicksFromArray(body.teamOnePicks);
+    const teamTwo = body.teamTwo;
+    const teamTwoPlayers = await this.getPlayersFromArray(body.teamTwoPicks);
+    const teamTwoPicks = await this.getDraftPicksFromArray(body.teamTwoPicks);
+    const season = body.season;
+
     return null;
+  }
+
+  private async getDraftPicksFromArray(picksArray: string[]) {
+    const picks = [];
+
+    await picksArray.forEach((pick: string) => {
+      if (!pick.includes('-')) {
+        picks.push(pick);
+      }
+    });
+
+    return picks;
+  }
+
+  private async getPlayersFromArray(picksArray: string[]) {
+    const players = [];
+
+    await picksArray.forEach((pick: string) => {
+      if (pick.includes('p-') || pick.includes('g-')) {
+        players.push(pick);
+      }
+    });
+
+    return players;
   }
 
   private getPlayerString(player: any) {
