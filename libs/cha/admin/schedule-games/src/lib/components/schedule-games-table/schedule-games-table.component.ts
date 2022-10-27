@@ -11,7 +11,6 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'cha-admin-schedule-games-table',
   templateUrl: './schedule-games-table.component.html',
-  styleUrls: ['./schedule-games-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScheduleGamesTableComponent implements OnInit {
@@ -68,5 +67,10 @@ export class ScheduleGamesTableComponent implements OnInit {
   onClick(game: ScheduleAllDto) {
     this.game = game;
     this.display = true;
+  }
+
+  onClose() {
+    this.display = false;
+    this.game = null;
   }
 }
