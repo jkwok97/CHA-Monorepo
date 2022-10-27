@@ -301,6 +301,9 @@ export class ApiTransactionsTradesService {
       teamTwoplayerArray.push(string);
     });
 
+    console.log(teamOnePicks);
+    console.log(teamTwoPicks);
+
     const postJson = {
       text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${
         teamTwoPicks.length > 0 ? teamTwoPicks : ''

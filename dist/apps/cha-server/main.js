@@ -8749,6 +8749,8 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             const string = await this.getPlayerString(player);
             teamTwoplayerArray.push(string);
         });
+        console.log(teamOnePicks);
+        console.log(teamTwoPicks);
         const postJson = {
             text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${teamTwoPicks.length > 0 ? teamTwoPicks : ''} \n \n To ${teamTwo}: ${teamOneplayerArray} ${teamOnePicks.length > 0 ? teamOnePicks : ''}`,
             channel: '#trades',
