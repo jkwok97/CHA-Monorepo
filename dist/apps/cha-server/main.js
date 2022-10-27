@@ -8389,7 +8389,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8457,8 +8457,8 @@ tslib_1.__decorate([
     (0, common_1.Put)('/trade'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+    tslib_1.__metadata("design:paramtypes", [typeof (_j = typeof entities_1.TradeDto !== "undefined" && entities_1.TradeDto) === "function" ? _j : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
 ], TransactionsController.prototype, "trade", null);
 TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
@@ -8667,7 +8667,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             username: 'League Office',
             icon_emoji: ':office',
         };
-        return await this.sendToSlack(postJson);
+        return await this.sendToSlack(postJson, this.waiversHookURL);
     }
     // WAIVER RELEASE
     async waiverRelease(body) {
@@ -8696,11 +8696,130 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             username: 'League Office',
             icon_emoji: ':office',
         };
-        return await this.sendToSlack(postJson);
+        return await this.sendToSlack(postJson, this.waiversHookURL);
     }
     // TRADES
     async trade(body) {
-        return null;
+        const teamOne = body.teamOne;
+        const teamOnePlayers = await this.getPlayersFromArray(body.teamOnePicks);
+        const teamOnePicks = await this.getDraftPicksFromArray(body.teamOnePicks);
+        const teamTwo = body.teamTwo;
+        const teamTwoPlayers = await this.getPlayersFromArray(body.teamTwoPicks);
+        const teamTwoPicks = await this.getDraftPicksFromArray(body.teamTwoPicks);
+        const season = body.season;
+        if (teamOnePlayers && teamOnePlayers.length > 0) {
+            await teamOnePlayers.forEach(async (player) => {
+                if (player.includes('p-')) {
+                    await this.updateTeamForPlayer(player, teamTwo, season);
+                }
+                else if (player.includes('g-')) {
+                    await this.updateTeamForGoalie(player, teamTwo, season);
+                }
+            });
+        }
+        if (teamOnePicks && teamOnePicks.length > 0) {
+            await teamOnePicks.forEach(async (pick) => {
+                await this.updateTeamForPick(pick, teamTwo);
+            });
+        }
+        if (teamTwoPlayers && teamTwoPlayers.length > 0) {
+            await teamTwoPlayers.forEach(async (player) => {
+                if (player.includes('p-')) {
+                    await this.updateTeamForPlayer(player, teamOne, season);
+                }
+                else if (player.includes('g-')) {
+                    await this.updateTeamForGoalie(player, teamOne, season);
+                }
+            });
+        }
+        if (teamTwoPicks && teamTwoPicks.length > 0) {
+            await teamTwoPicks.forEach(async (pick) => {
+                await this.updateTeamForPick(pick, teamOne);
+            });
+        }
+        const teamOneplayersWithInfo = await this.setPlayerInfo(teamOnePlayers);
+        const teamTwoplayersWithInfo = await this.setPlayerInfo(teamTwoPlayers);
+        const teamOneplayerArray = [];
+        const teamTwoplayerArray = [];
+        await teamOneplayersWithInfo.forEach(async (player) => {
+            const string = await this.getPlayerString(player);
+            teamOneplayerArray.push(string);
+        });
+        await teamTwoplayersWithInfo.forEach(async (player) => {
+            const string = await this.getPlayerString(player);
+            teamTwoplayerArray.push(string);
+        });
+        const postJson = {
+            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: ${teamTwoplayerArray} ${teamTwoPicks.length > 0 ? teamTwoPicks : ''} \n \n To ${teamTwo}: ${teamOneplayerArray} ${teamOnePicks.length > 0 ? teamOnePicks : ''}`,
+            channel: '#trades',
+            username: 'League Office',
+            icon_emoji: ':office',
+        };
+        return await this.sendToSlack(postJson, this.tradeHookURL);
+    }
+    async updateTeamForPick(pick, team) {
+        const teamId = await this.getTeamInfo(team);
+        let attrs;
+        if (pick.value.includes('1')) {
+            attrs = {
+                round_one: teamId.id,
+            };
+        }
+        else if (pick.value.includes('2')) {
+            attrs = {
+                round_two: teamId.id,
+            };
+        }
+        else if (pick.value.includes('3')) {
+            attrs = {
+                round_three: teamId.id,
+            };
+        }
+        else if (pick.value.includes('4')) {
+            attrs = {
+                round_four: teamId.id,
+            };
+        }
+        else if (pick.value.includes('5')) {
+            attrs = {
+                round_five: teamId.id,
+            };
+        }
+        const draftRow = await this.draftRepo.findOneByOrFail({
+            draft_year: pick.year,
+            team_id: {
+                shortname: pick.team,
+            },
+        });
+        if (!draftRow) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(draftRow, attrs);
+        return this.draftRepo.save(draftRow);
+    }
+    async getDraftPicksFromArray(picksArray) {
+        const picks = [];
+        await picksArray.forEach((pick) => {
+            if (!pick.includes('-')) {
+                const newPick = pick.split(' ');
+                const pickObject = {
+                    team: newPick[0],
+                    value: newPick[1],
+                    year: newPick[2],
+                };
+                picks.push(pickObject);
+            }
+        });
+        return picks;
+    }
+    async getPlayersFromArray(picksArray) {
+        const players = [];
+        await picksArray.forEach((pick) => {
+            if (pick.includes('p-') || pick.includes('g-')) {
+                players.push(pick);
+            }
+        });
+        return players;
     }
     getPlayerString(player) {
         return `${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
@@ -8709,6 +8828,16 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return await Promise.all(players.map(async (item) => ({
             playerInfo: await this.getPlayerInfo(item.split('-')[1]),
         })));
+    }
+    async getTeamInfo(shortname) {
+        return await this.teamInfoRepo.findOne({
+            select: {
+                id: true,
+            },
+            where: {
+                shortname,
+            },
+        });
     }
     async getPlayerInfo(playerId) {
         if (playerId) {
@@ -8757,14 +8886,14 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         Object.assign(player, attrs);
         return this.goalieStatsRepo.save(player);
     }
-    async sendToSlack(message) {
+    async sendToSlack(message, hook) {
         const options = {
             headers: {
                 'Content-type': 'application/json',
             },
         };
         this.httpService
-            .post(`${this.waiversHookURL}`, message, options)
+            .post(`${hook}`, message, options)
             .pipe((0, rxjs_1.map)((response) => response.data))
             .subscribe({
             complete: () => console.log('completed'),
@@ -9889,6 +10018,16 @@ const tslib_1 = __webpack_require__("tslib");
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-transaction.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/waiver-acquisition.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/trade.dto.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/trade.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 /***/ }),
