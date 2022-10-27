@@ -1,5 +1,6 @@
 import { Schedule_V2, Teams_V2, Team_Stats_V2 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { ScheduleAllDto } from '@cha/shared/entities';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Brackets, Repository } from 'typeorm';
 
@@ -43,6 +44,23 @@ export class ApiScheduleService {
     const scheduleTeamInfo = await this.setTeamNextInfo(schedule);
 
     return scheduleTeamInfo;
+  }
+
+  async updateGameById(gameId: number, gameData: ScheduleAllDto) {
+    const game = await this.repo.findOneByOrFail({ id: gameId });
+
+    if (!game) {
+      throw new NotFoundException('player not found');
+    }
+
+    const attrs: Partial<Schedule_V2> = {
+      home_team_score: gameData.home_team_score,
+      vis_team_score: gameData.vis_team_score,
+    };
+
+    Object.assign(game, attrs);
+
+    return this.repo.save(game);
   }
 
   private async getTeamLastFive(teamId: number, season: string) {

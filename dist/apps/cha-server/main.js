@@ -7021,7 +7021,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/schedule/src/lib/controller
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ScheduleController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -7045,6 +7045,9 @@ let ScheduleController = class ScheduleController {
         }
         return stats;
     }
+    updateGameById(param, body) {
+        return this.scheduleService.updateGameById(parseInt(param.id), body);
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
@@ -7060,6 +7063,14 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], ScheduleController.prototype, "getNextDays", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+], ScheduleController.prototype, "updateGameById", null);
 ScheduleController = tslib_1.__decorate([
     (0, common_1.Controller)('schedule'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiScheduleService !== "undefined" && services_1.ApiScheduleService) === "function" ? _a : Object])
@@ -7144,6 +7155,18 @@ let ApiScheduleService = class ApiScheduleService {
         });
         const scheduleTeamInfo = await this.setTeamNextInfo(schedule);
         return scheduleTeamInfo;
+    }
+    async updateGameById(gameId, gameData) {
+        const game = await this.repo.findOneByOrFail({ id: gameId });
+        if (!game) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        const attrs = {
+            home_team_score: gameData.home_team_score,
+            vis_team_score: gameData.vis_team_score,
+        };
+        Object.assign(game, attrs);
+        return this.repo.save(game);
     }
     async getTeamLastFive(teamId, season) {
         const lastFive = await this.repo
