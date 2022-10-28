@@ -9,6 +9,7 @@
   [optionLabel]="props['labelProp']"
   [virtualScroll]="true"
   [virtualScrollItemSize]="10"
+  [filter]="true"
   appendTo="body"
   (onChange)="props.change && props.change(field, $event)"
   class="w-full inputfield"

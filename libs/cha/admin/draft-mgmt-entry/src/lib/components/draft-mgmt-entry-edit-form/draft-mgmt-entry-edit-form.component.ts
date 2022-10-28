@@ -58,7 +58,6 @@ export class DraftMgmtEntryEditFormComponent implements OnInit {
   }
 
   patchForm() {
-    console.log(this.pick);
     this.model = {
       draft_year: this.pick?.draft_year,
       draft_round: this.pick?.draft_round,

@@ -47,6 +47,7 @@ export class DraftMgmtEntryEditComponent implements OnInit {
   onSave() {
     const pick = {
       ...this.draftPickFormRef?.form.value,
+      id: this.pick?.id
     };
 
     !this.editMode
