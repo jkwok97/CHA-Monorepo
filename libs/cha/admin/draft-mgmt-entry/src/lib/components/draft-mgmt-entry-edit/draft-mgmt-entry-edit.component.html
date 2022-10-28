@@ -1,1 +1,54 @@
-<p>draft-mgmt-entry-edit works!</p>
+<blade-card style="background-color: var(--background-100)">
+  <blade-card-header class="text-lg font-light text-center">
+    {{ editMode ? 'Edit Pick' : 'Add Pick' }}
+  </blade-card-header>
+
+  <blade-card-body>
+    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+      <cha-admin-draft-mgmt-entry-edit-form
+        [pick]="pick"
+      ></cha-admin-draft-mgmt-entry-edit-form>
+    </perfect-scrollbar>
+
+    <cha-admin-draft-mgmt-entry-edit-form
+      [pick]="pick"
+      *ngIf="!isMobile"
+    ></cha-admin-draft-mgmt-entry-edit-form>
+  </blade-card-body>
+
+  <blade-card-footer>
+    <div class="flex justify-content-between">
+      <div class="flex column-gap-1">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="editMode ? 'Save Pick' : 'Add Pick'"
+          class="p-button-raised"
+          [disabled]="
+            draftPickFormRef?.form?.invalid || !draftPickFormRef?.form?.dirty
+          "
+          (click)="onSave()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-raised p-button-warning"
+          (click)="onCancel()"
+        ></button>
+      </div>
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Delete"
+        class="p-button-raised p-button-danger"
+        *ngIf="editMode"
+        (click)="onDelete()"
+      ></button>
+    </div>
+  </blade-card-footer>
+</blade-card>

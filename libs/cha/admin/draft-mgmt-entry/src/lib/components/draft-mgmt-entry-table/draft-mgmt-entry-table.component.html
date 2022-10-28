@@ -112,16 +112,16 @@
   </ng-template>
 </p-table>
 
-<!-- <p-sidebar
+<p-sidebar
   [(visible)]="display"
   [fullScreen]="true"
   [showCloseIcon]="false"
   [dismissible]="false"
   *ngIf="display"
 >
-  <cha-admin-player-mgmt-info-edit
-    [player]="player"
+  <cha-admin-draft-mgmt-entry-edit
+    [pick]="pick"
     [isMobile]="isMobile"
     (closeSidebar)="onClose()"
-  ></cha-admin-player-mgmt-info-edit>
-</p-sidebar> -->
+  ></cha-admin-draft-mgmt-entry-edit>
+</p-sidebar>

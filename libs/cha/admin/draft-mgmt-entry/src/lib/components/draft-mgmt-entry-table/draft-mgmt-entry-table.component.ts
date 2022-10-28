@@ -11,7 +11,6 @@ import { Table } from 'primeng/table';
 @Component({
   selector: 'cha-admin-draft-mgmt-entry-table',
   templateUrl: './draft-mgmt-entry-table.component.html',
-  styleUrls: ['./draft-mgmt-entry-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftMgmtEntryTableComponent implements OnInit {
@@ -45,12 +44,9 @@ export class DraftMgmtEntryTableComponent implements OnInit {
   rows = 20;
   totalRecords = 0;
   sortField = 'full_name';
-  statsForTable!: any;
   display = false;
   picksForTable!: any;
   pick!: DraftPickDto | null;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.picksForTable = this.mapItems(this.draftPicks);
