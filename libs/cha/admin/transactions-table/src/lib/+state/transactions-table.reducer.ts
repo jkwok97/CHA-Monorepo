@@ -1,8 +1,9 @@
+import { GetTradeDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { TransactionsTableActions } from './transactions-table.actions';
 
 export interface State {
-  trades: any[];
+  trades: GetTradeDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;

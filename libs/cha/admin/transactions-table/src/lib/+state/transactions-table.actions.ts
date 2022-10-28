@@ -1,3 +1,4 @@
+import { GetTradeDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[TRANSACTIONS TABLE]';
@@ -6,7 +7,7 @@ const get = createAction(`${NAMESPACE} Get`);
 
 const getSuccess = createAction(
   `${NAMESPACE} Get Success`,
-  props<{ trades: any[] }>()
+  props<{ trades: GetTradeDto[] }>()
 );
 
 const error = createAction(`${NAMESPACE} Error`);

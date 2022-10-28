@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GetTradeDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of } from 'rxjs';
@@ -18,7 +19,7 @@ export class TransactionsTableEffects {
       ofType(TransactionsTableActions.get),
       exhaustMap((action) =>
         this.transactionsTableService.getTrades().pipe(
-          map((trades: any[]) =>
+          map((trades: GetTradeDto[]) =>
             TransactionsTableActions.getSuccess({
               trades,
             })
