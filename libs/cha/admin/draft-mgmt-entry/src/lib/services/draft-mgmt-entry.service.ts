@@ -1,7 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { CreateDraftPickDto, DraftPickDto } from '@cha/shared/entities';
+import {
+  CreateDraftPickDto,
+  DraftPickDto,
+  PlayerDto,
+} from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -35,6 +39,12 @@ export class DraftMgmtEntryService {
   deletePick(pickId: number): Observable<DraftPickDto> {
     return this._http
       .delete(`${this.apiUrl}/entry-draft/${pickId}`)
+      .pipe(map((result: any) => result));
+  }
+
+  getPlayers(): Observable<PlayerDto[]> {
+    return this._http
+      .get(`${this.apiUrl}/player-info`)
       .pipe(map((result: any) => result));
   }
 }

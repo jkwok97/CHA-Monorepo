@@ -4920,7 +4920,11 @@ let ApiPlayerInfoService = class ApiPlayerInfoService {
         this.repo = repo;
     }
     async getAll() {
-        return await this.repo.find();
+        return await this.repo.find({
+            order: {
+                lastname: 'ASC',
+            },
+        });
     }
     async updatePlayerById(id, attrs) {
         const player = await this.repo.findOneByOrFail({ id });

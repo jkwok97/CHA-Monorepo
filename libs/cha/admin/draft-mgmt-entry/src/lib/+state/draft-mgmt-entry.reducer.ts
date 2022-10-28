@@ -1,9 +1,10 @@
-import { DraftPickDto } from '@cha/shared/entities';
+import { DraftPickDto, PlayerDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { DraftMgmtEntryActions } from './draft-mgmt-entry.actions';
 
 export interface State {
   picks: DraftPickDto[];
+  players: PlayerDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -12,6 +13,7 @@ export interface State {
 
 const initialState: State = {
   picks: [],
+  players: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -45,6 +47,13 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(DraftMgmtEntryActions.getPlayersSuccess, (state, action) => ({
+    ...state,
+    players: action.players,
+    loading: false,
+    loaded: true,
+  })),
+
   on(
     DraftMgmtEntryActions.addDraftPickSuccess,
     DraftMgmtEntryActions.editDraftPickSuccess,
@@ -64,6 +73,8 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getPicks = (state: State) => state.picks;
+
+export const getPlayers = (state: State) => state.players;
 
 export const getLoading = (state: State) => state.loading;
 

@@ -18,6 +18,7 @@ import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
+import { SingleSelectTypeComponent } from '@blade/angular/formly/types/single-select';
 
 import { DraftMgmtEntryEffects } from './+state/draft-mgmt-entry.effects';
 import { DraftMgmtEntryFacade } from './+state/draft-mgmt-entry.facade';
@@ -59,6 +60,11 @@ import {
         {
           name: 'text-input',
           component: TextInputTypeComponent,
+          wrappers: ['control-wrapper'],
+        },
+        {
+          name: 'single-select',
+          component: SingleSelectTypeComponent,
           wrappers: ['control-wrapper'],
         },
       ],

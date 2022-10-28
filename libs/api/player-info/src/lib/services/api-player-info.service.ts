@@ -11,7 +11,11 @@ export class ApiPlayerInfoService {
   ) {}
 
   async getAll(): Promise<Players_V2[]> {
-    return await this.repo.find();
+    return await this.repo.find({
+      order: {
+        lastname: 'ASC',
+      },
+    });
   }
 
   async updatePlayerById(id: number, attrs: Partial<Players_V2>) {

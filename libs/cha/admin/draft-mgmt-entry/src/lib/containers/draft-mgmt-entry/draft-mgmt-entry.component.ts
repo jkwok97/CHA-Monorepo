@@ -32,6 +32,7 @@ export class DraftMgmtEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.draftMgmtEntryFacade.getPicks();
+    this.draftMgmtEntryFacade.getPicks();
+    this.draftMgmtEntryFacade.getPlayers();
   }
 }

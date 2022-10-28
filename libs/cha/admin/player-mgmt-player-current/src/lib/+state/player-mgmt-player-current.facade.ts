@@ -4,7 +4,7 @@ import { State } from './player-mgmt-player-current.reducer';
 import { PlayerMgmtPlayerCurrentActions } from './player-mgmt-player-current.actions';
 import { Observable } from 'rxjs';
 import { PlayerMgmtPlayerCurrentSelectors } from './player-mgmt-player-current.selectors';
-import { CreateStatPlayerAllDto, StatPlayerAllDto } from '@cha/shared/entities';
+import { StatPlayerAllDto } from '@cha/shared/entities';
 
 @Injectable()
 export class PlayerMgmtPlayerCurrentFacade {

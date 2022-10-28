@@ -7,6 +7,8 @@
   [showClear]="props['showClear']"
   [optionValue]="props['valueProp']"
   [optionLabel]="props['labelProp']"
+  [virtualScroll]="true"
+  [virtualScrollItemSize]="10"
   appendTo="body"
   (onChange)="props.change && props.change(field, $event)"
   class="w-full inputfield"

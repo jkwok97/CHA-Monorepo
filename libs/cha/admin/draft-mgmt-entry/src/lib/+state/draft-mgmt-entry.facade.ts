@@ -4,7 +4,11 @@ import { State } from './draft-mgmt-entry.reducer';
 import { DraftMgmtEntryActions } from './draft-mgmt-entry.actions';
 import { Observable } from 'rxjs';
 import { DraftMgmtEntrySelectors } from './draft-mgmt-entry.selectors';
-import { CreateDraftPickDto, DraftPickDto } from '@cha/shared/entities';
+import {
+  CreateDraftPickDto,
+  DraftPickDto,
+  PlayerDto,
+} from '@cha/shared/entities';
 
 @Injectable()
 export class DraftMgmtEntryFacade {
@@ -28,10 +32,22 @@ export class DraftMgmtEntryFacade {
     DraftMgmtEntrySelectors.selectPicks
   );
 
+  players$: Observable<PlayerDto[]> = this.store.select(
+    DraftMgmtEntrySelectors.selectPlayers
+  );
+
+  playerOptions$: Observable<any[]> = this.store.select(
+    DraftMgmtEntrySelectors.selectPlayerOptions
+  );
+
   constructor(private store: Store<State>) {}
 
   getPicks() {
     this.store.dispatch(DraftMgmtEntryActions.getDraftPicks());
+  }
+
+  getPlayers() {
+    this.store.dispatch(DraftMgmtEntryActions.getPlayers());
   }
 
   addPick(pick: CreateDraftPickDto) {

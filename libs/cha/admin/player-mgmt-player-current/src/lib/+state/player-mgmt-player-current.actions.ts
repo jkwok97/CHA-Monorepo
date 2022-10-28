@@ -1,4 +1,4 @@
-import { CreateStatPlayerAllDto, StatPlayerAllDto } from '@cha/shared/entities';
+import { StatPlayerAllDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[PLAYER MGMT PLAYER CURRENT]';
