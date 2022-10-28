@@ -2945,10 +2945,11 @@ exports.ApiEntryDraftModule = ApiEntryDraftModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EntryDraftController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/entry-draft/src/lib/services/index.ts");
 let EntryDraftController = class EntryDraftController {
@@ -2962,6 +2963,15 @@ let EntryDraftController = class EntryDraftController {
         }
         return entries;
     }
+    updatePickById(param, body) {
+        return this.draftService.updatePickById(parseInt(param.id), body);
+    }
+    addPick(body) {
+        return this.draftService.addPick(body);
+    }
+    deletePick(param) {
+        return this.draftService.deletePick(parseInt(param.id));
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/ordered'),
@@ -2969,6 +2979,28 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], EntryDraftController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], EntryDraftController.prototype, "updatePickById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.CreateDraftPickDto !== "undefined" && entities_1.CreateDraftPickDto) === "function" ? _d : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], EntryDraftController.prototype, "addPick", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], EntryDraftController.prototype, "deletePick", null);
 EntryDraftController = tslib_1.__decorate([
     (0, common_1.Controller)('entry-draft'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiEntryDraftService !== "undefined" && services_1.ApiEntryDraftService) === "function" ? _a : Object])
@@ -3059,7 +3091,7 @@ let ApiEntryDraftService = class ApiEntryDraftService {
                     city: true,
                     nickname: true,
                     teamlogo: true,
-                }
+                },
             },
             order: {
                 draft_year: 'DESC',
@@ -3068,6 +3100,25 @@ let ApiEntryDraftService = class ApiEntryDraftService {
             },
         });
         return draftTable;
+    }
+    async updatePickById(id, attrs) {
+        const pick = await this.repo.findOneByOrFail({ id });
+        if (!pick) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(pick, attrs);
+        return this.repo.save(pick);
+    }
+    async addPick(body) {
+        const pick = await this.repo.create(body);
+        return this.repo.save(pick);
+    }
+    async deletePick(id) {
+        const pick = await this.repo.findOneByOrFail({ id });
+        if (!pick) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        return this.repo.remove(pick);
     }
 };
 ApiEntryDraftService = tslib_1.__decorate([

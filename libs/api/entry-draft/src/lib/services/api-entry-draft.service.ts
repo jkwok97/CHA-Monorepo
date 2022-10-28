@@ -1,5 +1,5 @@
 import { Drafts_V2 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -30,7 +30,7 @@ export class ApiEntryDraftService {
           city: true,
           nickname: true,
           teamlogo: true,
-        }
+        },
       },
       order: {
         draft_year: 'DESC',
@@ -40,5 +40,32 @@ export class ApiEntryDraftService {
     });
 
     return draftTable;
+  }
+
+  async updatePickById(id: number, attrs: Partial<Drafts_V2>) {
+    const pick = await this.repo.findOneByOrFail({ id });
+
+    if (!pick) {
+      throw new NotFoundException('player not found');
+    }
+
+    Object.assign(pick, attrs);
+
+    return this.repo.save(pick);
+  }
+
+  async addPick(body: any) {
+    const pick = await this.repo.create(body);
+
+    return this.repo.save(pick);
+  }
+
+  async deletePick(id: number): Promise<Drafts_V2> {
+    const pick = await this.repo.findOneByOrFail({ id });
+
+    if (!pick) {
+      throw new NotFoundException('player not found');
+    }
+    return this.repo.remove(pick);
   }
 }
