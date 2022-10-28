@@ -307,10 +307,30 @@ export class ApiTransactionsTradesService {
     const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
 
     const postJson = {
-      text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: \n ${teamTwoplayerArray}, ${
-        teamTwoPicks.length > 0 ? teamTwoPickString : ''
-      } \n \n To ${teamTwo}: \n ${teamOneplayerArray}, ${
-        teamOnePicks.length > 0 ? teamOnePickString : ''
+      text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: \n ${
+        teamTwoplayerArray.length > 0
+          ? teamTwoplayerArray
+          : teamTwoPicks.length > 0
+          ? teamTwoPickString
+          : ''
+      } \n ${
+        teamTwoplayerArray.length > 0
+          ? teamTwoPicks.length > 0
+            ? teamTwoPickString
+            : ''
+          : ''
+      } \n \n To ${teamTwo}: \n ${
+        teamOneplayerArray.length > 0
+          ? teamOneplayerArray
+          : teamOnePicks.length > 0
+          ? teamOnePickString
+          : ''
+      } \n ${
+        teamOneplayerArray.length > 0
+          ? teamOnePicks.length > 0
+            ? teamOnePickString
+            : ''
+          : ''
       }`,
       channel: '#trades',
       username: 'League Office',
