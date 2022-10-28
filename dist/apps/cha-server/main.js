@@ -1417,7 +1417,7 @@ exports.Draft_Order_V2 = Draft_Order_V2;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Drafts_V2 = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -1452,6 +1452,11 @@ tslib_1.__decorate([
     (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
     tslib_1.__metadata("design:type", typeof (_b = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _b : Object)
 ], Drafts_V2.prototype, "team_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
+    (0, typeorm_1.JoinColumn)({ name: 'pick_team_id' }),
+    tslib_1.__metadata("design:type", typeof (_c = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _c : Object)
+], Drafts_V2.prototype, "pick_team_id", void 0);
 Drafts_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Drafts_V2);

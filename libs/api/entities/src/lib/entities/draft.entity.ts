@@ -30,4 +30,8 @@ export class Drafts_V2 {
   @ManyToOne(() => Teams_V2, (team) => team.id)
   @JoinColumn({ name: 'team_id' })
   team_id!: Teams_V2;
+
+  @ManyToOne(() => Teams_V2, (team) => team.id)
+  @JoinColumn({ name: 'pick_team_id' })
+  pick_team_id!: Teams_V2;
 }

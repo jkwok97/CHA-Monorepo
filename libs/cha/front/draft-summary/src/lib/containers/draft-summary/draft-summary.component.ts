@@ -19,10 +19,11 @@ export class DraftSummaryComponent implements OnInit {
 
   tableColumns = [
     { field: 'draft_year', header: 'Year' },
+    { field: 'orgTeam', header: 'Team' },
     { field: 'draft_round', header: 'Round' },
     { field: 'draft_overall', header: 'Overall' },
     { field: 'player', header: 'Player' },
-    { field: 'team', header: 'Team' },
+    { field: 'team', header: 'Picked By' },
   ];
 
   filteringOptions = [
