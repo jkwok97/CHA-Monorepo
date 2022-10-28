@@ -1,1 +1,1 @@
-export * from './lib/blade-angular-formly-types-repeating.module';
+export * from './lib/repeating-type';

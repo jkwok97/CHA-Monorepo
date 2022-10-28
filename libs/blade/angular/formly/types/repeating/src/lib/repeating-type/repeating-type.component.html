@@ -1,0 +1,6 @@
+<div *ngFor="let field of field.fieldGroup; let i = index">
+  <formly-field
+    [attr.data-field-index-num-ele]="i"
+    [field]="field"
+  ></formly-field>
+</div>
