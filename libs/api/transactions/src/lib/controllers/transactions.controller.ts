@@ -19,6 +19,16 @@ export class TransactionsController {
     private transactionsTradesService: ApiTransactionsTradesService
   ) {}
 
+  @Get()
+  async getAllTransactions(@Param() param): Promise<any[]> {
+    const trades = await this.transactionsService.getAllTransactions();
+
+    if (!trades || trades.length < 1) {
+      throw new NotFoundException('Transactions not found');
+    }
+    return trades;
+  }
+
   @Get('/:season')
   async getTransactionsBySeason(@Param() param): Promise<any[]> {
     const stats = await this.transactionsService.getTransactionsBySeason(

@@ -20,6 +20,14 @@ export class ApiTransactionsService {
     private playersRepo: Repository<Players_V2>,
   ) {}
 
+  async getAllTransactions() {
+    return await this.repo.find({
+      order: {
+        transaction_date: 'ASC',
+      },
+    });
+  }
+
   async getTransactionsBySeason(year: string) {
     const season = this.findSeasonDates(year);
 

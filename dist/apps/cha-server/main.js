@@ -8482,7 +8482,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/transactions/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -8493,6 +8493,13 @@ let TransactionsController = class TransactionsController {
     constructor(transactionsService, transactionsTradesService) {
         this.transactionsService = transactionsService;
         this.transactionsTradesService = transactionsTradesService;
+    }
+    async getAllTransactions(param) {
+        const trades = await this.transactionsService.getAllTransactions();
+        if (!trades || trades.length < 1) {
+            throw new common_1.NotFoundException('Transactions not found');
+        }
+        return trades;
     }
     async getTransactionsBySeason(param) {
         const stats = await this.transactionsService.getTransactionsBySeason(param.season);
@@ -8519,39 +8526,46 @@ let TransactionsController = class TransactionsController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Get)('/:season'),
+    (0, common_1.Get)(),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], TransactionsController.prototype, "getAllTransactions", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], TransactionsController.prototype, "getTransactionsBySeason", null);
 tslib_1.__decorate([
     (0, common_1.Get)('team/:team/:season/:draftYear'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], TransactionsController.prototype, "getTeam", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/waivers/acquire'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.WaiverAcquisitionDto !== "undefined" && entities_1.WaiverAcquisitionDto) === "function" ? _e : Object]),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+    tslib_1.__metadata("design:paramtypes", [typeof (_f = typeof entities_1.WaiverAcquisitionDto !== "undefined" && entities_1.WaiverAcquisitionDto) === "function" ? _f : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], TransactionsController.prototype, "waiverAcquire", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/waivers/release'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.WaiverAcquisitionDto !== "undefined" && entities_1.WaiverAcquisitionDto) === "function" ? _g : Object]),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+    tslib_1.__metadata("design:paramtypes", [typeof (_h = typeof entities_1.WaiverAcquisitionDto !== "undefined" && entities_1.WaiverAcquisitionDto) === "function" ? _h : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], TransactionsController.prototype, "waiverRelease", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/trade'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_j = typeof entities_1.TradeDto !== "undefined" && entities_1.TradeDto) === "function" ? _j : Object]),
-    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
+    tslib_1.__metadata("design:paramtypes", [typeof (_k = typeof entities_1.TradeDto !== "undefined" && entities_1.TradeDto) === "function" ? _k : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
 ], TransactionsController.prototype, "trade", null);
 TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
@@ -9100,6 +9114,13 @@ let ApiTransactionsService = class ApiTransactionsService {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
         this.playersRepo = playersRepo;
+    }
+    async getAllTransactions() {
+        return await this.repo.find({
+            order: {
+                transaction_date: 'ASC',
+            },
+        });
     }
     async getTransactionsBySeason(year) {
         const season = this.findSeasonDates(year);
