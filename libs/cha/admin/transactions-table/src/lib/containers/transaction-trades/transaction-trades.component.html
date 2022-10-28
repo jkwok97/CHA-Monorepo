@@ -6,21 +6,18 @@
 
     <blade-divider></blade-divider>
 
-    <!-- <p-progressBar
-        mode="indeterminate"
-        [style]="{ height: '6px' }"
-        *ngIf="isLoading$ | async"
-      ></p-progressBar> -->
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
 
-    <!-- <blade-card *ngIf="isLoaded$ | async">
-        <blade-card-body>
-          <ng-container *ngIf="picks$ | async as draftPicks">
-            <cha-admin-draft-mgmt-entry-table
-              [draftPicks]="draftPicks"
-              [isMobile]="isMobile"
-            ></cha-admin-draft-mgmt-entry-table>
-          </ng-container>
-        </blade-card-body>
-      </blade-card> -->
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="trades$ | async as trades">
+          {{ trades | json }}
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
   </div>
 </blade-layout-feature-content>

@@ -17,15 +17,19 @@ export class ApiTransactionsService {
     @InjectRepository(Teams_V2)
     private teamInfoRepo: Repository<Teams_V2>,
     @InjectRepository(Players_V2)
-    private playersRepo: Repository<Players_V2>,
+    private playersRepo: Repository<Players_V2>
   ) {}
 
   async getAllTransactions() {
-    return await this.repo.find({
+    const transactions = await this.repo.find({
       order: {
-        transaction_date: 'ASC',
+        transaction_date: 'DESC',
       },
     });
+
+    const transactionsWithInfo = await this.setInfo(transactions);
+
+    return transactionsWithInfo;
   }
 
   async getTransactionsBySeason(year: string) {
@@ -64,6 +68,18 @@ export class ApiTransactionsService {
     return await Promise.all(
       array.map(async (item) => ({
         player: await this.getPlayerInfo(item),
+      }))
+    );
+  }
+
+  private async setInfo(array) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        team_one_id: await this.getTeamInfo(item.team_one_id),
+        team_two_id: await this.getTeamInfo(item.team_two_id),
+        team_one_players: await this.setPlayersInfo(item.team_one_players),
+        team_two_players: await this.setPlayersInfo(item.team_two_players),
       }))
     );
   }

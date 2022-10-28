@@ -1,27 +1,27 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
 import { Observable, first } from 'rxjs';
+import { TransactionsTableFacade } from '../../+state/transactions-table.facade';
 
 @Component({
   selector: 'cha-admin-transaction-trades',
   templateUrl: './transaction-trades.component.html',
-  styleUrls: ['./transaction-trades.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionTradesComponent {
-  // isLoading$: Observable<boolean>;
-  // isLoaded$: Observable<boolean>;
-  // picks$: Observable<DraftPickDto[]>;
+export class TransactionTradesComponent implements OnInit {
+  isLoading$: Observable<boolean>;
+  isLoaded$: Observable<boolean>;
+  trades$: Observable<any[]>;
 
   isMobile!: boolean;
 
   constructor(
-    // private draftMgmtEntryFacade: DraftMgmtEntryFacade,
+    private transactionsTableFacade: TransactionsTableFacade,
     private displayFacade: DisplayFacade
   ) {
-    // this.isLoaded$ = this.draftMgmtEntryFacade.isLoaded$;
-    // this.isLoading$ = this.draftMgmtEntryFacade.isLoading$;
-    // this.picks$ = this.draftMgmtEntryFacade.picks$;
+    this.isLoaded$ = this.transactionsTableFacade.loaded$;
+    this.isLoading$ = this.transactionsTableFacade.loading$;
+    this.trades$ = this.transactionsTableFacade.trades$;
 
     this.displayFacade.isMobile$
       .pipe(first())
@@ -31,8 +31,6 @@ export class TransactionTradesComponent {
   }
 
   ngOnInit(): void {
-    // this.draftMgmtEntryFacade.getPicks();
-    // this.draftMgmtEntryFacade.getPlayers();
-    // this.draftMgmtEntryFacade.getTeams();
+    this.transactionsTableFacade.getTrades();
   }
 }

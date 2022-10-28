@@ -9116,11 +9116,13 @@ let ApiTransactionsService = class ApiTransactionsService {
         this.playersRepo = playersRepo;
     }
     async getAllTransactions() {
-        return await this.repo.find({
+        const transactions = await this.repo.find({
             order: {
-                transaction_date: 'ASC',
+                transaction_date: 'DESC',
             },
         });
+        const transactionsWithInfo = await this.setInfo(transactions);
+        return transactionsWithInfo;
     }
     async getTransactionsBySeason(year) {
         const season = this.findSeasonDates(year);
@@ -9151,6 +9153,9 @@ let ApiTransactionsService = class ApiTransactionsService {
         return await Promise.all(array.map(async (item) => ({
             player: await this.getPlayerInfo(item),
         })));
+    }
+    async setInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { team_one_id: await this.getTeamInfo(item.team_one_id), team_two_id: await this.getTeamInfo(item.team_two_id), team_one_players: await this.setPlayersInfo(item.team_one_players), team_two_players: await this.setPlayersInfo(item.team_two_players) }))));
     }
     async getTeamInfo(teamId) {
         return await this.teamInfoRepo.findOne({
