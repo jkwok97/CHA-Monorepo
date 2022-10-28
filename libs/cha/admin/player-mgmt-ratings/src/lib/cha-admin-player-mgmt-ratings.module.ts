@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { FormlyModule } from '@ngx-formly/core';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SidebarModule } from 'primeng/sidebar';
@@ -15,6 +16,8 @@ import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
+import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
+import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
 
 import { PlayerMgmtRatingsFacade } from './+state/player-mgmt-ratings.facade';
 import { reducer } from './+state/player-mgmt-ratings.reducer';
@@ -31,9 +34,6 @@ import {
   PlayerMgmtRatingsPlayerEditFormComponent,
   PlayerMgmtRatingsGoalieEditFormComponent,
 } from './components';
-import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
-import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
-import { FormlyModule } from '@ngx-formly/core';
 
 @NgModule({
   imports: [
@@ -64,6 +64,7 @@ import { FormlyModule } from '@ngx-formly/core';
           component: TextInputTypeComponent,
           wrappers: ['control-wrapper'],
         },
+        
       ],
     }),
   ],

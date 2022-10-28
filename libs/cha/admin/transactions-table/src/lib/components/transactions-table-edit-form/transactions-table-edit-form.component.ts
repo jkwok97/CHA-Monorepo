@@ -45,12 +45,17 @@ export class TransactionsTableEditFormComponent implements OnInit {
   }
 
   patchForm() {
+    console.log(this.trade?.team_one_picks);
     this.model = {
       id: this.trade?.id,
       team_one_id: `${this.trade?.team_one_id.city} ${this.trade?.team_one_id.nickname}`,
-      team_one_picks: this.trade?.team_one_picks,
+      team_one_picks: this.trade?.team_one_picks.map((pick: string) => ({
+        pick: pick,
+      })),
       team_two_id: `${this.trade?.team_two_id.city} ${this.trade?.team_two_id.nickname}`,
-      team_two_picks: this.trade?.team_two_picks,
+      team_two_picks: this.trade?.team_two_picks.map((pick: string) => ({
+        pick: pick,
+      })),
     };
   }
 
@@ -82,8 +87,9 @@ export class TransactionsTableEditFormComponent implements OnInit {
     return {
       key: 'team_one_picks',
       type: 'repeating',
+      className: 'w-full',
       fieldArray: {
-        className: '',
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [this.teamPickField()],
       },
     };
@@ -93,8 +99,9 @@ export class TransactionsTableEditFormComponent implements OnInit {
     return {
       key: 'team_two_picks',
       type: 'repeating',
+      className: 'w-full',
       fieldArray: {
-        className: '',
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [this.teamPickField()],
       },
     };
@@ -103,8 +110,8 @@ export class TransactionsTableEditFormComponent implements OnInit {
   teamPickField(): FormlyFieldConfig {
     return {
       key: 'pick',
-      className: 'w-full md:w-3',
       type: 'text-input',
+      className: 'w-full md:w-3',
       templateOptions: {
         label: 'Pick',
       },

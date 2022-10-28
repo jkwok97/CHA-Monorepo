@@ -17,6 +17,7 @@ import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
+import { RepeatingTypeComponent } from '@blade/angular/formly/types/repeating';
 
 import { TransactionsTableFacade } from './+state/transactions-table.facade';
 import { reducer } from './+state/transactions-table.reducer';
@@ -58,6 +59,10 @@ import {
           name: 'text-input',
           component: TextInputTypeComponent,
           wrappers: ['control-wrapper'],
+        },
+        {
+          name: 'repeating',
+          component: RepeatingTypeComponent,
         },
       ],
     }),
