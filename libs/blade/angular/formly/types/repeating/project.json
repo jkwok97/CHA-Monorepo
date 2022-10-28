@@ -1,0 +1,26 @@
+{
+  "name": "blade-angular-formly-types-repeating",
+  "projectType": "library",
+  "sourceRoot": "libs/blade/angular/formly/types/repeating/src",
+  "prefix": "blade",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/blade/angular/formly/types/repeating"],
+      "options": {
+        "jestConfig": "libs/blade/angular/formly/types/repeating/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/blade/angular/formly/types/repeating/**/*.ts",
+          "libs/blade/angular/formly/types/repeating/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["angular:forms"]
+}

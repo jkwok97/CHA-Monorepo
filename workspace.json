@@ -47,6 +47,7 @@
     "blade-angular-formly-types-checkbox": "libs/blade/angular/formly/types/checkbox",
     "blade-angular-formly-types-email-input": "libs/blade/angular/formly/types/email-input",
     "blade-angular-formly-types-radio": "libs/blade/angular/formly/types/radio",
+    "blade-angular-formly-types-repeating": "libs/blade/angular/formly/types/repeating",
     "blade-angular-formly-types-single-select": "libs/blade/angular/formly/types/single-select",
     "blade-angular-formly-types-text-input": "libs/blade/angular/formly/types/text-input",
     "blade-angular-formly-wrappers-default": "libs/blade/angular/formly/wrappers/default",

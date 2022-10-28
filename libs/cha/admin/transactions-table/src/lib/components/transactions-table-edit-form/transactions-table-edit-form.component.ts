@@ -32,17 +32,82 @@ export class TransactionsTableEditFormComponent implements OnInit {
   createFields() {
     this.fields = [
       {
-        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
-        fieldGroup: [],
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [this.teamOneField()],
       },
+      this.teamOnePicks(),
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-        fieldGroup: [],
+        fieldGroup: [this.teamTwoField()],
       },
+      this.teamTwoPicks(),
     ];
   }
 
   patchForm() {
-    this.model = {};
+    this.model = {
+      id: this.trade?.id,
+      team_one_id: `${this.trade?.team_one_id.city} ${this.trade?.team_one_id.nickname}`,
+      team_one_picks: this.trade?.team_one_picks,
+      team_two_id: `${this.trade?.team_two_id.city} ${this.trade?.team_two_id.nickname}`,
+      team_two_picks: this.trade?.team_two_picks,
+    };
+  }
+
+  teamOneField(): FormlyFieldConfig {
+    return {
+      key: 'team_one_id',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Team',
+        readonly: true,
+      },
+    };
+  }
+
+  teamTwoField(): FormlyFieldConfig {
+    return {
+      key: 'team_two_id',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Team',
+        readonly: true,
+      },
+    };
+  }
+
+  teamOnePicks(): FormlyFieldConfig {
+    return {
+      key: 'team_one_picks',
+      type: 'repeating',
+      fieldArray: {
+        className: '',
+        fieldGroup: [this.teamPickField()],
+      },
+    };
+  }
+
+  teamTwoPicks(): FormlyFieldConfig {
+    return {
+      key: 'team_two_picks',
+      type: 'repeating',
+      fieldArray: {
+        className: '',
+        fieldGroup: [this.teamPickField()],
+      },
+    };
+  }
+
+  teamPickField(): FormlyFieldConfig {
+    return {
+      key: 'pick',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Pick',
+      },
+    };
   }
 }
