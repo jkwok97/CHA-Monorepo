@@ -14,7 +14,7 @@
   [sortField]="sortField"
   [sortOrder]="-1"
   [filterDelay]="0"
-  [globalFilterFields]="['team_name']"
+  [globalFilterFields]="['team_name', 'playing_year']"
 >
   <ng-template pTemplate="caption">
     <div class="flex">
@@ -24,7 +24,7 @@
           pInputText
           type="text"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search Team"
+          placeholder="Search Team / Year"
         />
       </span>
     </div>

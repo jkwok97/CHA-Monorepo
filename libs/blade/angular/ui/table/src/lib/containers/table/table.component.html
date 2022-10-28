@@ -101,6 +101,11 @@
               height="30px"
               *ngIf="column.field === 'team'"
             />
+            <img
+              [src]="data.orgTeamImg"
+              height="30px"
+              *ngIf="column.field === 'orgTeam'"
+            />
             <p-avatar
               [image]="data.playerImg"
               shape="circle"

@@ -58,6 +58,7 @@ export class DraftSummaryComponent implements OnInit {
       orgTeam: `${item.pick_team_id ? item.pick_team_id.city : ''} ${
         item.pick_team_id ? item.pick_team_id.nickname : ''
       }`,
+      orgTeamImg: item.pick_team_id ? this.getString(item.pick_team_id.teamlogo) : '',
     }));
   }
 
