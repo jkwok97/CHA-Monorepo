@@ -319,7 +319,7 @@ export class ApiTransactionsTradesService {
             ? teamTwoPickString
             : ''
           : ''
-      } \n \n To ${teamTwo}: \n ${
+      } \n To ${teamTwo}: \n ${
         teamOneplayerArray.length > 0
           ? teamOneplayerArray
           : teamOnePicks.length > 0
@@ -331,7 +331,7 @@ export class ApiTransactionsTradesService {
             ? teamOnePickString
             : ''
           : ''
-      }`,
+      } \n`,
       channel: '#trades',
       username: 'League Office',
       icon_emoji: ':office',

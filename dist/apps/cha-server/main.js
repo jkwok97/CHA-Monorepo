@@ -8854,7 +8854,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
                 ? teamTwoPicks.length > 0
                     ? teamTwoPickString
                     : ''
-                : ''} \n \n To ${teamTwo}: \n ${teamOneplayerArray.length > 0
+                : ''} \n To ${teamTwo}: \n ${teamOneplayerArray.length > 0
                 ? teamOneplayerArray
                 : teamOnePicks.length > 0
                     ? teamOnePickString
@@ -8862,7 +8862,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
                 ? teamOnePicks.length > 0
                     ? teamOnePickString
                     : ''
-                : ''}`,
+                : ''} \n`,
             channel: '#trades',
             username: 'League Office',
             icon_emoji: ':office',
