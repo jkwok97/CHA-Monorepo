@@ -1,0 +1,103 @@
+<p-table
+  #dt
+  [responsiveLayout]="'stack'"
+  [value]="tradesForTable"
+  [columns]="tableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [sortField]="sortField"
+  [sortOrder]="1"
+  [filterDelay]="0"
+  [globalFilterFields]="['full_name']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex flex-wrap justify-content-between">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Player"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns let-data>
+    <tr>
+      <th *ngFor="let column of tableColumns" [pSortableColumn]="column.field">
+        {{ column.header }}
+        <p-sortIcon [field]="column.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of tableColumns">
+        <span class="p-column-title">{{ column.header }}</span>
+        <div class="table-body-cell">
+          <ng-container *ngIf="column.field === 'transaction_date'">
+            {{ formatDate(data[column.field]) }}
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              column.field === 'team_one_picks' ||
+              column.field === 'team_two_picks' ||
+              column.field === 'teamOnePlayers' ||
+              column.field === 'teamTwoPlayers'
+            "
+          >
+            <div *ngFor="let item of data[column.field]">- {{ item }}</div>
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              column.field !== 'transaction_date' &&
+              column.field !== 'team_one_picks' &&
+              column.field !== 'team_two_picks' &&
+              column.field !== 'teamOnePlayers' &&
+              column.field !== 'teamTwoPlayers'
+            "
+          >
+            {{ data[column.field] }}
+          </ng-container>
+          <ng-container *ngIf="column.field === 'action'">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-user-edit"
+              class="p-button-rounded p-button-primary"
+              (click)="onClick(data)"
+            ></button>
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- <p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [showCloseIcon]="false"
+  [dismissible]="false"
+  *ngIf="display"
+>
+  <cha-admin-player-mgmt-ratings-player-edit
+    [player]="player"
+    (closeSidebar)="onClose()"
+  ></cha-admin-player-mgmt-ratings-player-edit>
+</p-sidebar> -->
