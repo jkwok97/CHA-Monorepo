@@ -11,7 +11,7 @@ export class ApiEntryDraftService {
 
   async getAll(): Promise<Drafts_V2[]> {
     const draftTable = await this.repo.find({
-      relations: ['team_id', 'player_id'],
+      relations: ['team_id', 'player_id', 'pick_team_id'],
       select: {
         team_id: {
           id: true,
