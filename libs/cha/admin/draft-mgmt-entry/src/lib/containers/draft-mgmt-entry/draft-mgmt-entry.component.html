@@ -1,1 +1,25 @@
-<p>draft-mgmt-entry works!</p>
+<blade-layout-feature-content>
+  <div>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="pt-2">
+      <div class="text-lg text-center" style="font-weight: 100">
+        Entry Draft
+      </div>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="picks$ | async as draftPicks">
+          {{ draftPicks | json }}
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>

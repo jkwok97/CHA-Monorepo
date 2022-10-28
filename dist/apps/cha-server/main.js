@@ -3054,6 +3054,12 @@ let ApiEntryDraftService = class ApiEntryDraftService {
                     lastname: true,
                     nhl_id: true,
                 },
+                pick_team_id: {
+                    id: true,
+                    city: true,
+                    nickname: true,
+                    teamlogo: true,
+                }
             },
             order: {
                 draft_year: 'DESC',
