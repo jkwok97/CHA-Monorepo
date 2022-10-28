@@ -285,6 +285,8 @@ export class ApiTransactionsTradesService {
       );
     }
 
+    await this.addTransaction(body);
+
     const teamOneplayersWithInfo = await this.setPlayerInfo(teamOnePlayers);
     const teamTwoplayersWithInfo = await this.setPlayerInfo(teamTwoPlayers);
 
@@ -316,6 +318,70 @@ export class ApiTransactionsTradesService {
     };
 
     return await this.sendToSlack(postJson, this.tradeHookURL);
+  }
+
+  private async addTransaction(body: TradeDto) {
+    const transaction_date = await this.getDate();
+    const teamOneId = await this.getTeamInfo(body.teamOne);
+    const teamTwoId = await this.getTeamInfo(body.teamTwo);
+    const teamOnePlayers = await this.getPlayerIds(body.teamOnePicks);
+    const teamTwoPlayers = await this.getPlayerIds(body.teamTwoPicks);
+    const teamOnePicks = await this.getPicks(body.teamOnePicks);
+    const teamTwoPicks = await this.getPicks(body.teamTwoPicks);
+
+    const createTransaction = {
+      transaction_date,
+      team_one_id: teamOneId.id,
+      team_two_id: teamTwoId.id,
+      team_one_players: teamOnePlayers,
+      team_two_players: teamTwoPlayers,
+      team_one_picks: teamOnePicks,
+      team_two_picks: teamTwoPicks,
+    };
+
+    const trade = await this.repo.create(createTransaction);
+
+    return this.repo.save(trade);
+  }
+
+  private async getPicks(array: string[]) {
+    const picks = [];
+
+    await array.forEach((pick: string) => {
+      if (!pick.includes('-')) {
+        picks.push(pick);
+      }
+    });
+
+    return picks;
+  }
+
+  private async getPlayerIds(array: string[]) {
+    const players = [];
+
+    await array.forEach((pick: string) => {
+      if (pick.includes('p-') || pick.includes('g-')) {
+        const newPick = pick.split('-');
+        players.push(newPick[1]);
+      }
+    });
+
+    return players;
+  }
+
+  private async getDate() {
+    const today = new Date();
+    let dd: string | number = today.getDate();
+    let mm: string | number = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+
+    if (dd < 10) {
+      dd = `0${dd}`;
+    }
+    if (mm < 10) {
+      mm = `0${mm}`;
+    }
+    return `${yyyy}-${mm}-${dd}`;
   }
 
   private async getDraftPickStringArray(

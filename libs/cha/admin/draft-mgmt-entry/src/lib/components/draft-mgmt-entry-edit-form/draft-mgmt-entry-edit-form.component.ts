@@ -170,7 +170,7 @@ export class DraftMgmtEntryEditFormComponent implements OnInit {
       className: 'w-full md:w-3',
       type: 'single-select',
       templateOptions: {
-        label: 'Original Team',
+        label: 'Picked By Team',
         placeholder: 'Select Team',
         required: true,
         options: this.teamOptions$,
