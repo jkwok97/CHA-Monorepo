@@ -8327,7 +8327,11 @@ let TeamsService = class TeamsService {
         return user;
     }
     async getAll() {
-        return await this.repo.find();
+        return await this.repo.find({
+            order: {
+                city: 'ASC',
+            },
+        });
     }
     async updateTeamById(id, attrs) {
         const team = await this.repo.findOneByOrFail({ id });

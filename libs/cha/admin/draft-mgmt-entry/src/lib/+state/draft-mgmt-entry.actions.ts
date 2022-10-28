@@ -2,6 +2,7 @@ import {
   CreateDraftPickDto,
   DraftPickDto,
   PlayerDto,
+  TeamDto,
 } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
@@ -19,6 +20,13 @@ const getPlayers = createAction(`${NAMESPACE} Get Players`);
 const getPlayersSuccess = createAction(
   `${NAMESPACE} Get Players Success`,
   props<{ players: PlayerDto[] }>()
+);
+
+const getTeams = createAction(`${NAMESPACE} Get Teams`);
+
+const getTeamsSuccess = createAction(
+  `${NAMESPACE} Get Teams Success`,
+  props<{ teams: TeamDto[] }>()
 );
 
 const addDraftPick = createAction(
@@ -63,5 +71,7 @@ export const DraftMgmtEntryActions = {
   deleteDraftPickSuccess,
   getPlayers,
   getPlayersSuccess,
+  getTeams,
+  getTeamsSuccess,
   error,
 };

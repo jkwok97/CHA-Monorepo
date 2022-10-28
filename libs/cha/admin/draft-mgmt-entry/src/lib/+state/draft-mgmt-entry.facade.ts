@@ -40,6 +40,10 @@ export class DraftMgmtEntryFacade {
     DraftMgmtEntrySelectors.selectPlayerOptions
   );
 
+  teamOptions$: Observable<any[]> = this.store.select(
+    DraftMgmtEntrySelectors.selectTeamsOptionsById
+  );
+
   constructor(private store: Store<State>) {}
 
   getPicks() {
@@ -48,6 +52,10 @@ export class DraftMgmtEntryFacade {
 
   getPlayers() {
     this.store.dispatch(DraftMgmtEntryActions.getPlayers());
+  }
+
+  getTeams() {
+    this.store.dispatch(DraftMgmtEntryActions.getTeams());
   }
 
   addPick(pick: CreateDraftPickDto) {

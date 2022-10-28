@@ -77,6 +77,13 @@ const selectTeamsOptions = createSelector(selectTeams, (teams: TeamDto[]) =>
   }))
 );
 
+const selectTeamsOptionsById = createSelector(selectTeams, (teams: TeamDto[]) =>
+  teams.map((team: TeamDto) => ({
+    value: team.id,
+    label: `${team.city} ${team.nickname}`,
+  }))
+);
+
 const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
 
 const selectLoaded = createSelector(selectState, LeagueDataReducer.getLoaded);
@@ -97,4 +104,5 @@ export const LeagueDataSelectors = {
   selectSortedTeams,
   selectSaving,
   selectTeamsOptions,
+  selectTeamsOptionsById
 };

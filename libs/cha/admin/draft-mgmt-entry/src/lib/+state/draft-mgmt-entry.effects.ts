@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DraftPickDto, PlayerDto } from '@cha/shared/entities';
+import { DraftPickDto, PlayerDto, TeamDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -40,6 +40,22 @@ export class DraftMgmtEntryEffects {
           map((players: PlayerDto[]) =>
             DraftMgmtEntryActions.getPlayersSuccess({
               players,
+            })
+          ),
+          catchError(() => of(DraftMgmtEntryActions.error()))
+        )
+      )
+    )
+  );
+
+  getTeams$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DraftMgmtEntryActions.getTeams),
+      exhaustMap((action) =>
+        this.draftMgmtEntryService.getTeams().pipe(
+          map((teams: TeamDto[]) =>
+            DraftMgmtEntryActions.getTeamsSuccess({
+              teams,
             })
           ),
           catchError(() => of(DraftMgmtEntryActions.error()))

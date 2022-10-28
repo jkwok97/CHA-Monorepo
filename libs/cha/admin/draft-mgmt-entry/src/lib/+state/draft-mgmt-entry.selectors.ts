@@ -1,4 +1,4 @@
-import { PlayerDto } from '@cha/shared/entities';
+import { PlayerDto, TeamDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as DraftMgmtEntryReducer from './draft-mgmt-entry.reducer';
@@ -25,7 +25,10 @@ const selectSaved = createSelector(selectState, DraftMgmtEntryReducer.getSaved);
 
 const selectPicks = createSelector(selectState, DraftMgmtEntryReducer.getPicks);
 
-const selectPlayers = createSelector(selectState, DraftMgmtEntryReducer.getPlayers);
+const selectPlayers = createSelector(
+  selectState,
+  DraftMgmtEntryReducer.getPlayers
+);
 
 const selectPlayerOptions = createSelector(
   selectPlayers,
@@ -36,6 +39,15 @@ const selectPlayerOptions = createSelector(
     }))
 );
 
+const selectTeams = createSelector(selectState, DraftMgmtEntryReducer.getTeams);
+
+const selectTeamsOptionsById = createSelector(selectTeams, (teams: TeamDto[]) =>
+  teams.map((team: TeamDto) => ({
+    value: team.id,
+    label: `${team.city} ${team.nickname}`,
+  }))
+);
+
 export const DraftMgmtEntrySelectors = {
   selectLoaded,
   selectLoading,
@@ -43,5 +55,6 @@ export const DraftMgmtEntrySelectors = {
   selectSaved,
   selectPicks,
   selectPlayers,
-  selectPlayerOptions
+  selectPlayerOptions,
+  selectTeamsOptionsById,
 };

@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 export class TeamsService {
   constructor(
     @InjectRepository(Teams_V2) private repo: Repository<Teams_V2>,
-    @InjectRepository(Users_V2) private userRepo: Repository<Users_V2>,
+    @InjectRepository(Users_V2) private userRepo: Repository<Users_V2>
   ) {}
 
   async getUserTeams(id: number): Promise<Teams_V2[]> {
@@ -40,7 +40,11 @@ export class TeamsService {
   }
 
   async getAll(): Promise<Teams_V2[]> {
-    return await this.repo.find();
+    return await this.repo.find({
+      order: {
+        city: 'ASC',
+      },
+    });
   }
 
   async updateTeamById(id: number, attrs: Partial<Teams_V2>) {

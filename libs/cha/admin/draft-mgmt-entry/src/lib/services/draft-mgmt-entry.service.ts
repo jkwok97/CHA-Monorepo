@@ -5,6 +5,7 @@ import {
   CreateDraftPickDto,
   DraftPickDto,
   PlayerDto,
+  TeamDto,
 } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 
@@ -45,6 +46,12 @@ export class DraftMgmtEntryService {
   getPlayers(): Observable<PlayerDto[]> {
     return this._http
       .get(`${this.apiUrl}/player-info`)
+      .pipe(map((result: any) => result));
+  }
+
+  getTeams(): Observable<TeamDto[]> {
+    return this._http
+      .get(`${this.apiUrl}/teams`)
       .pipe(map((result: any) => result));
   }
 }
