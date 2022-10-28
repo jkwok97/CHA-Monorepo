@@ -14,7 +14,7 @@
   [sortField]="sortField"
   [sortOrder]="1"
   [filterDelay]="0"
-  [globalFilterFields]="['full_name']"
+  [globalFilterFields]="['teamOne', 'teamTwo']"
 >
   <ng-template pTemplate="caption">
     <div class="flex flex-wrap justify-content-between">
@@ -24,7 +24,7 @@
           pInputText
           type="text"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search Player"
+          placeholder="Search Team"
         />
       </span>
     </div>
@@ -89,15 +89,15 @@
   </ng-template>
 </p-table>
 
-<!-- <p-sidebar
+<p-sidebar
   [(visible)]="display"
   [fullScreen]="true"
   [showCloseIcon]="false"
   [dismissible]="false"
   *ngIf="display"
 >
-  <cha-admin-player-mgmt-ratings-player-edit
-    [player]="player"
+  <cha-admin-transactions-table-edit
+    [trade]="trade"
     (closeSidebar)="onClose()"
-  ></cha-admin-player-mgmt-ratings-player-edit>
-</p-sidebar> -->
+  ></cha-admin-transactions-table-edit>
+</p-sidebar>

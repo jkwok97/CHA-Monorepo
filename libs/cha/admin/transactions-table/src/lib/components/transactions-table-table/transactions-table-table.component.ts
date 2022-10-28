@@ -5,13 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { GetTradeDto, PlayerDto } from '@cha/shared/entities';
+import { GetTradeDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
 
 @Component({
   selector: 'cha-admin-transactions-table-table',
   templateUrl: './transactions-table-table.component.html',
-  styleUrls: ['./transactions-table-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionsTableTableComponent implements OnInit {

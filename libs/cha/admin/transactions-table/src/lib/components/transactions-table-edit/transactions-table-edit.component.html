@@ -1,1 +1,37 @@
-<p>transactions-table-edit works!</p>
+<blade-card style="background-color: var(--background-100)">
+  <blade-card-header class="text-lg font-light text-center">
+    Edit Trade Picks
+  </blade-card-header>
+
+  <blade-card-body>
+    <cha-admin-transactions-table-edit-form
+      [trade]="trade"
+    ></cha-admin-transactions-table-edit-form>
+  </blade-card-body>
+
+  <blade-card-footer>
+    <div class="flex justify-content-between">
+      <div class="flex column-gap-1">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="'Save Trade'"
+          class="p-button-raised"
+          [disabled]="
+            ratingFormRef?.form?.invalid || !ratingFormRef?.form?.dirty
+          "
+          (click)="onSave()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-raised p-button-warning"
+          (click)="onCancel()"
+        ></button>
+      </div>
+    </div>
+  </blade-card-footer>
+</blade-card>
