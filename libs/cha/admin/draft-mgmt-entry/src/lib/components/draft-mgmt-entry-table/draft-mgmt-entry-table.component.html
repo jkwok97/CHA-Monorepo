@@ -1,0 +1,127 @@
+<p-table
+  #dt
+  [responsiveLayout]="'stack'"
+  [value]="picksForTable"
+  [columns]="!isMobile ? tableColumns : mobileTableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [sortField]="sortField"
+  [sortOrder]="1"
+  [filterDelay]="0"
+  [globalFilterFields]="['player', 'team', 'orgTeam']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex flex-wrap justify-content-between">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search Player / Team"
+        />
+      </span>
+
+      <button
+        pButton
+        type="button"
+        icon="pi pi-user-plus"
+        class="p-button-rounded p-button-primary"
+        (click)="onAddClick()"
+      ></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns let-data>
+    <ng-container
+      *ngIf="isMobile; then showMobile; else showDesktop"
+    ></ng-container>
+    <ng-template #showMobile>
+      <tr>
+        <th *ngFor="let column of mobileTableColumns">
+          {{ column.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktop>
+      <tr>
+        <th
+          *ngFor="let column of tableColumns"
+          [pSortableColumn]="column.field"
+        >
+          {{ column.header }}
+          <p-sortIcon [field]="column.field"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <ng-container
+      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
+    ></ng-container>
+    <ng-template #showMobileBody>
+      <tr>
+        <td *ngFor="let column of mobileTableColumns">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container>{{ data[column.field] }}</ng-container>
+
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-user-edit"
+                class="p-button-rounded p-button-primary"
+                (click)="onClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template #showDesktopBody>
+      <tr>
+        <td *ngFor="let column of tableColumns">
+          <span class="p-column-title">{{ column.header }}</span>
+          <div class="table-body-cell">
+            <ng-container>{{ data[column.field] }}</ng-container>
+            <ng-container *ngIf="column.field === 'action'">
+              <button
+                pButton
+                type="button"
+                icon="pi pi-user-edit"
+                class="p-button-rounded p-button-primary"
+                (click)="onClick(data)"
+              ></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </ng-template>
+</p-table>
+
+<!-- <p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [showCloseIcon]="false"
+  [dismissible]="false"
+  *ngIf="display"
+>
+  <cha-admin-player-mgmt-info-edit
+    [player]="player"
+    [isMobile]="isMobile"
+    (closeSidebar)="onClose()"
+  ></cha-admin-player-mgmt-info-edit>
+</p-sidebar> -->

@@ -17,7 +17,10 @@
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
         <ng-container *ngIf="picks$ | async as draftPicks">
-          {{ draftPicks | json }}
+          <cha-admin-draft-mgmt-entry-table
+            [draftPicks]="draftPicks"
+            [isMobile]="isMobile"
+          ></cha-admin-draft-mgmt-entry-table>
         </ng-container>
       </blade-card-body>
     </blade-card>
