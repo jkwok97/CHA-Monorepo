@@ -8865,10 +8865,10 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             transaction_date,
             team_one_id: teamOneId.id,
             team_two_id: teamTwoId.id,
-            team_one_players: teamOnePlayers,
-            team_two_players: teamTwoPlayers,
-            team_one_picks: teamOnePicks,
-            team_two_picks: teamTwoPicks,
+            team_one_players: teamTwoPlayers,
+            team_two_players: teamOnePlayers,
+            team_one_picks: teamTwoPicks,
+            team_two_picks: teamOnePicks,
         };
         const trade = await this.repo.create(createTransaction);
         return this.repo.save(trade);
