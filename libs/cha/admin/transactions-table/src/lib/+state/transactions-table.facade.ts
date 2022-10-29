@@ -4,6 +4,7 @@ import { State } from './transactions-table.reducer';
 import { TransactionsTableActions } from './transactions-table.actions';
 import { Observable } from 'rxjs';
 import { TransactionsTableSelectors } from './transactions-table.selectors';
+import { EditTradeDto } from '@cha/shared/entities';
 
 @Injectable()
 export class TransactionsTableFacade {
@@ -31,6 +32,10 @@ export class TransactionsTableFacade {
 
   getTrades() {
     this.store.dispatch(TransactionsTableActions.get());
+  }
+
+  editTrade(trade: EditTradeDto) {
+    this.store.dispatch(TransactionsTableActions.edit({ trade }));
   }
 
   reset() {

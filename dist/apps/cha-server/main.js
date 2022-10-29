@@ -8501,6 +8501,9 @@ let TransactionsController = class TransactionsController {
         }
         return trades;
     }
+    updateTradeById(param, body) {
+        return this.transactionsService.updateTradeById(parseInt(param.id), body);
+    }
     async getTransactionsBySeason(param) {
         const stats = await this.transactionsService.getTransactionsBySeason(param.season);
         if (!stats || stats.length < 1) {
@@ -8532,6 +8535,14 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], TransactionsController.prototype, "getAllTransactions", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/trade/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], TransactionsController.prototype, "updateTradeById", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -9136,6 +9147,14 @@ let ApiTransactionsService = class ApiTransactionsService {
         });
         const transactionsTeamInfo = await this.setTransactionInfo(transactions);
         return transactionsTeamInfo;
+    }
+    async updateTradeById(id, attrs) {
+        const trade = await this.repo.findOneByOrFail({ id });
+        if (!trade) {
+            throw new common_1.NotFoundException('trade not found');
+        }
+        Object.assign(trade, attrs);
+        return this.repo.save(trade);
     }
     async setTransactionInfo(transactions) {
         return await Promise.all(transactions.map(async (transaction) => ({
@@ -10184,7 +10203,25 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 /***/ }),
 
+/***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/edit-trade.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
 /***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
+/***/ "./libs/cha/shared/entities/src/lib/dtos/transactions/get-trade.dto.ts":
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -10212,6 +10249,8 @@ tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dto
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/waiver-acquisition.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/trade.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/get-trade.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/transactions/edit-trade.dto.ts"), exports);
 
 
 /***/ }),

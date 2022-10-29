@@ -5,7 +5,7 @@ import {
   Teams_V2,
   Transactions_V2,
 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
 
@@ -47,6 +47,18 @@ export class ApiTransactionsService {
     const transactionsTeamInfo = await this.setTransactionInfo(transactions);
 
     return transactionsTeamInfo;
+  }
+
+  async updateTradeById(id: number, attrs: Partial<Transactions_V2>) {
+    const trade = await this.repo.findOneByOrFail({ id });
+
+    if (!trade) {
+      throw new NotFoundException('trade not found');
+    }
+
+    Object.assign(trade, attrs);
+
+    return this.repo.save(trade);
   }
 
   private async setTransactionInfo(transactions: Transactions_V2[]) {

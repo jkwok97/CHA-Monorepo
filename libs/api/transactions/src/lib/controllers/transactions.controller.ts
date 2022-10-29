@@ -29,6 +29,11 @@ export class TransactionsController {
     return trades;
   }
 
+  @Put('/trade/:id')
+  updateTradeById(@Param() param, @Body() body) {
+    return this.transactionsService.updateTradeById(parseInt(param.id), body);
+  }
+
   @Get('/:season')
   async getTransactionsBySeason(@Param() param): Promise<any[]> {
     const stats = await this.transactionsService.getTransactionsBySeason(

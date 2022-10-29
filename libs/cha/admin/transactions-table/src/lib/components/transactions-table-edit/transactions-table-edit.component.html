@@ -18,9 +18,7 @@
           type="button"
           [label]="'Save Trade'"
           class="p-button-raised"
-          [disabled]="
-            ratingFormRef?.form?.invalid || !ratingFormRef?.form?.dirty
-          "
+          [disabled]="tradeFormRef?.form?.invalid || !tradeFormRef?.form?.dirty"
           (click)="onSave()"
         ></button>
         <button

@@ -34,6 +34,18 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(TransactionsTableActions.edit, (state) => ({
+    ...state,
+    saving: true,
+    saved: false,
+  })),
+
+  on(TransactionsTableActions.editSuccess, (state) => ({
+    ...state,
+    saving: false,
+    saved: true,
+  })),
+
   on(
     TransactionsTableActions.error,
     TransactionsTableActions.reset,

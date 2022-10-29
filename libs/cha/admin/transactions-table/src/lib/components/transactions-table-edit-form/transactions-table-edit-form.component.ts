@@ -45,7 +45,6 @@ export class TransactionsTableEditFormComponent implements OnInit {
   }
 
   patchForm() {
-    console.log(this.trade?.team_one_picks);
     this.model = {
       id: this.trade?.id,
       team_one_id: `${this.trade?.team_one_id.city} ${this.trade?.team_one_id.nickname}`,
@@ -87,9 +86,7 @@ export class TransactionsTableEditFormComponent implements OnInit {
     return {
       key: 'team_one_picks',
       type: 'repeating',
-      className: 'w-full',
       fieldArray: {
-        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [this.teamPickField()],
       },
     };
@@ -99,9 +96,7 @@ export class TransactionsTableEditFormComponent implements OnInit {
     return {
       key: 'team_two_picks',
       type: 'repeating',
-      className: 'w-full',
       fieldArray: {
-        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [this.teamPickField()],
       },
     };
@@ -111,7 +106,6 @@ export class TransactionsTableEditFormComponent implements OnInit {
     return {
       key: 'pick',
       type: 'text-input',
-      className: 'w-full md:w-3',
       templateOptions: {
         label: 'Pick',
       },

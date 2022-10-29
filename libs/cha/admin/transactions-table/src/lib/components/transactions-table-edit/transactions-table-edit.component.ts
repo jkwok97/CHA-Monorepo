@@ -6,7 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { GetTradeDto } from '@cha/shared/entities';
+import { EditTradeDto, GetTradeDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs';
 import { TransactionsTableFacade } from '../../+state/transactions-table.facade';
@@ -24,7 +24,7 @@ export class TransactionsTableEditComponent {
   @Output() closeSidebar = new EventEmitter<boolean>();
 
   @ViewChild(TransactionsTableEditFormComponent, { static: false })
-  ratingFormRef?: TransactionsTableEditFormComponent;
+  tradeFormRef?: TransactionsTableEditFormComponent;
 
   constructor(private transactionsTableFacade: TransactionsTableFacade) {}
 
@@ -33,16 +33,34 @@ export class TransactionsTableEditComponent {
   }
 
   onSave() {
-    // const trade = {
-    //   id: this.trade?.id,
-    //   ...this.ratingFormRef?.form.value,
-    // };
-    // this.transactionsTableFacade.editTrade(trade);
-    // this.transactionsTableFacade.isSaving$
-    //   .pipe(
-    //     untilDestroyed(this),
-    //     filter((isSaving: boolean) => !isSaving)
-    //   )
-    //   .subscribe(() => this.closeSidebar.emit(true));
+    const trade: EditTradeDto = {
+      id: this.trade?.id,
+      team_one_picks: this.getNewArray(
+        this.tradeFormRef?.form.value.team_one_picks
+      ),
+      team_two_picks: this.getNewArray(
+        this.tradeFormRef?.form.value.team_two_picks
+      ),
+    };
+
+    console.log(trade);
+
+    this.transactionsTableFacade.editTrade(trade);
+    this.transactionsTableFacade.isSaving$
+      .pipe(
+        untilDestroyed(this),
+        filter((isSaving: boolean) => !isSaving)
+      )
+      .subscribe(() => this.closeSidebar.emit(true));
+  }
+
+  getNewArray(array: any[]) {
+    const newArray: string[] = [];
+
+    array.forEach((item) => {
+      newArray.push(item.pick);
+    });
+
+    return newArray;
   }
 }
