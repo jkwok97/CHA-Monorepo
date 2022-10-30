@@ -5,12 +5,14 @@ import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, delay, tap } from 'rxjs';
 import { TransactionsTableService } from '../services';
 import { TransactionsTableActions } from './transactions-table.actions';
+import { TransactionsTableFacade } from './transactions-table.facade';
 
 @Injectable()
 export class TransactionsTableEffects {
   constructor(
     private actions$: Actions,
     private transactionsTableService: TransactionsTableService,
+    private transactionsTableFacade: TransactionsTableFacade,
     private messageService: MessageService
   ) {}
 
@@ -53,6 +55,7 @@ export class TransactionsTableEffects {
             summary: 'Edit Trade Picks',
             detail: 'Trade Picks are updated',
           });
+          this.transactionsTableFacade.getTrades();
         })
       ),
     { dispatch: false }

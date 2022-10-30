@@ -6,7 +6,6 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { LeagueDataFacade } from '@cha/domain/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, Observable } from 'rxjs';
 import { TransactionsTradesFacade } from '../../+state/transactions-trades.facade';
@@ -32,11 +31,9 @@ export class TransactionsTradesListBoxComponent implements OnInit {
 
   teamOneGrouped!: any[];
   teamTwoGrouped!: any[];
+  selectedPlayers!: any[];
 
-  constructor(
-    private leagueDataFacade: LeagueDataFacade,
-    private transactionsTradesFacade: TransactionsTradesFacade
-  ) {
+  constructor(private transactionsTradesFacade: TransactionsTradesFacade) {
     this.teamOneLoading$ = this.transactionsTradesFacade.teamOneLoading$;
     this.teamTwoLoading$ = this.transactionsTradesFacade.teamTwoLoading$;
     this.saving$ = this.transactionsTradesFacade.isSaving$;
@@ -56,6 +53,12 @@ export class TransactionsTradesListBoxComponent implements OnInit {
         untilDestroyed(this)
       )
       .subscribe((options) => (this.teamTwoGrouped = options));
+
+    this.saving$.pipe(untilDestroyed(this)).subscribe((saving: boolean) => {
+      if (!saving) {
+        this.selectedPlayers = [];
+      }
+    });
   }
 
   onSelectTeam(event: any) {

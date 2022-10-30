@@ -38,6 +38,7 @@
     [filter]="true"
     [multiple]="true"
     [listStyle]="{ 'max-height': isMobile ? '250px' : '500px' }"
+    [(ngModel)]="selectedPlayers"
     *ngIf="
       team === 'teamOne'
         ? (teamOneLoading$ | async) === false || (saving$ | async) === false
