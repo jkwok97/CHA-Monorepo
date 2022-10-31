@@ -24,8 +24,8 @@ export class DraftMgmtTableFacade {
     DraftMgmtTableSelectors.selectSaved
   );
 
-  draftTableItems$: Observable<boolean> = this.store.select(
-    DraftMgmtTableSelectors.selectSaved
+  draftTableItems$: Observable<DraftTableDto[]> = this.store.select(
+    DraftMgmtTableSelectors.selectDraftTableItems
   );
 
   constructor(private store: Store<State>) {}
