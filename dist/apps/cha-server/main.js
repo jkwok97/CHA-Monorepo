@@ -941,7 +941,7 @@ exports.ApiDraftTableModule = ApiDraftTableModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DraftTableController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -957,6 +957,9 @@ let DraftTableController = class DraftTableController {
             throw new common_1.NotFoundException('teams not found');
         }
         return teams;
+    }
+    updateTableById(param, body) {
+        return this.draftTableService.updateTableById(parseInt(param.id), body);
     }
     async getDraftTableByYearByStandings(param) {
         const draftTable = await this.draftTableService.getDraftTableByYearByStandings(param.draft_year, param.playing_year);
@@ -974,11 +977,19 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], DraftTableController.prototype, "getDraftTable", null);
 tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], DraftTableController.prototype, "updateTableById", null);
+tslib_1.__decorate([
     (0, common_1.Get)('/:draft_year/:playing_year'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], DraftTableController.prototype, "getDraftTableByYearByStandings", null);
 DraftTableController = tslib_1.__decorate([
     (0, common_1.Controller)('draft-table'),
@@ -1089,8 +1100,16 @@ let ApiDraftTableService = class ApiDraftTableService {
             },
             where: {
                 draft_year: draftYear,
-            }
+            },
         });
+    }
+    async updateTableById(id, attrs) {
+        const item = await this.repo.findOneByOrFail({ id });
+        if (!item) {
+            throw new common_1.NotFoundException('item not found');
+        }
+        Object.assign(item, attrs);
+        return this.repo.save(item);
     }
     async getDraftTableByYearByStandings(draftYear, playingYear) {
         const draftTable = await this.repo.find({

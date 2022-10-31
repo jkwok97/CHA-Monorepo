@@ -1,5 +1,12 @@
 import { Draft_Order_V2 } from '@api/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Put,
+} from '@nestjs/common';
 import { ApiDraftTableService } from '../services';
 
 @Controller('draft-table')
@@ -14,6 +21,11 @@ export class DraftTableController {
       throw new NotFoundException('teams not found');
     }
     return teams;
+  }
+
+  @Put('/:id')
+  updateTableById(@Param() param, @Body() body): Promise<Draft_Order_V2> {
+    return this.draftTableService.updateTableById(parseInt(param.id), body);
   }
 
   @Get('/:draft_year/:playing_year')

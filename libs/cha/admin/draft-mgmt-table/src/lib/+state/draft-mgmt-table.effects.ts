@@ -42,7 +42,7 @@ export class DraftMgmtTableEffects {
     )
   );
 
-  editPick$ = createEffect(() =>
+  editDraftTable$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DraftMgmtTableActions.editDraftPick),
       exhaustMap((action) =>

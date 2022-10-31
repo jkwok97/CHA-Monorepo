@@ -1,10 +1,18 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { DraftTableDto } from '@cha/shared/entities';
-import { untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs';
 import { DraftMgmtTableFacade } from '../../+state/draft-mgmt-table.facade';
 import { DraftMgmtTableEditFormComponent } from '../draft-mgmt-table-edit-form';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-admin-draft-mgmt-table-edit',
   templateUrl: './draft-mgmt-table-edit.component.html',
@@ -12,7 +20,7 @@ import { DraftMgmtTableEditFormComponent } from '../draft-mgmt-table-edit-form';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftMgmtTableEditComponent {
-  @Input() draftTableItem!: DraftTableDto | null;;
+  @Input() draftTableItem!: DraftTableDto | null;
   @Input() isMobile!: boolean;
 
   @Output() closeSidebar = new EventEmitter<boolean>();
@@ -27,7 +35,6 @@ export class DraftMgmtTableEditComponent {
 
   constructor(private draftMgmtTableFacade: DraftMgmtTableFacade) {}
 
-
   onCancel() {
     this.closeSidebar.emit(true);
   }
@@ -35,10 +42,12 @@ export class DraftMgmtTableEditComponent {
   onSave() {
     const pick = {
       ...this.draftTableFormRef?.form.value,
-      id: this.draftTableItem?.id
+      id: this.draftTableItem?.id,
     };
 
-    this.draftMgmtTableFacade.editPick(pick)
+    console.log(pick);
+
+    // this.draftMgmtTableFacade.editPick(pick)
 
     this.draftMgmtTableFacade.isSaving$
       .pipe(

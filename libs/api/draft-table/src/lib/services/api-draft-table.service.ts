@@ -1,5 +1,5 @@
 import { Draft_Order_V2, Team_Stats_V2 } from '@api/entities';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -25,8 +25,20 @@ export class ApiDraftTableService {
       },
       where: {
         draft_year: draftYear,
-      }
+      },
     });
+  }
+
+  async updateTableById(id: number, attrs: Partial<Draft_Order_V2>) {
+    const item = await this.repo.findOneByOrFail({ id });
+
+    if (!item) {
+      throw new NotFoundException('item not found');
+    }
+
+    Object.assign(item, attrs);
+
+    return this.repo.save(item);
   }
 
   async getDraftTableByYearByStandings(
