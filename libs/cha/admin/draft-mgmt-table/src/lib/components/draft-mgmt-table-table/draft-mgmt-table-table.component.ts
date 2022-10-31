@@ -8,12 +8,11 @@ import {
 import { LeagueDataFacade } from '@cha/domain/core';
 import { DraftTableDto, TeamDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
-import { first, Observable } from 'rxjs';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-admin-draft-mgmt-table-table',
   templateUrl: './draft-mgmt-table-table.component.html',
-  styleUrls: ['./draft-mgmt-table-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftMgmtTableTableComponent implements OnInit {

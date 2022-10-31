@@ -7,7 +7,6 @@ import { DraftMgmtTableFacade } from '../../+state/draft-mgmt-table.facade';
 @Component({
   selector: 'cha-admin-draft-mgmt-table',
   templateUrl: './draft-mgmt-table.component.html',
-  styleUrls: ['./draft-mgmt-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftMgmtTableComponent implements OnInit {

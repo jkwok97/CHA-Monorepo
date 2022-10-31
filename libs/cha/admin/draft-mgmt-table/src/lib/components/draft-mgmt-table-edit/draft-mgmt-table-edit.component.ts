@@ -16,7 +16,6 @@ import { DraftMgmtTableEditFormComponent } from '../draft-mgmt-table-edit-form';
 @Component({
   selector: 'cha-admin-draft-mgmt-table-edit',
   templateUrl: './draft-mgmt-table-edit.component.html',
-  styleUrls: ['./draft-mgmt-table-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftMgmtTableEditComponent {
@@ -47,7 +46,7 @@ export class DraftMgmtTableEditComponent {
 
     console.log(pick);
 
-    // this.draftMgmtTableFacade.editPick(pick)
+    this.draftMgmtTableFacade.editPick(pick);
 
     this.draftMgmtTableFacade.isSaving$
       .pipe(
