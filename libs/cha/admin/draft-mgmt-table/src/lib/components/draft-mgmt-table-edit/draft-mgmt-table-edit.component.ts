@@ -44,8 +44,6 @@ export class DraftMgmtTableEditComponent {
       id: this.draftTableItem?.id,
     };
 
-    console.log(pick);
-
     this.draftMgmtTableFacade.editPick(pick);
 
     this.draftMgmtTableFacade.isSaving$

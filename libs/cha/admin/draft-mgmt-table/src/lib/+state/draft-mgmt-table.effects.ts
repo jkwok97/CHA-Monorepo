@@ -65,10 +65,10 @@ export class DraftMgmtTableEffects {
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Edit Draft Pick',
-            detail: 'Draft Pick has been updated',
+            summary: 'Edit Draft Row',
+            detail: 'Draft Row has been updated',
           });
-          // this.draftMgmtTableFacade.getDraftTable();
+          this.draftMgmtTableFacade.getDraftTable();
         })
       ),
     { dispatch: false }
