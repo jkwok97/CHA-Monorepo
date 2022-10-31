@@ -56,7 +56,13 @@
       <td *ngFor="let column of tableColumns">
         <span class="p-column-title">{{ column.header }}</span>
         <div class="table-body-cell">
-          <ng-container>{{ data[column.field] }}</ng-container>
+          <ng-container *ngIf="!column.field.includes('round')">
+            {{ data[column.field] }}
+          </ng-container>
+          <ng-container *ngIf="column.field.includes('round')">
+            <img [src]="getLogo(data[column.field])" height="30px" />
+          </ng-container>
+
           <ng-container *ngIf="column.field === 'action'">
             <button
               pButton

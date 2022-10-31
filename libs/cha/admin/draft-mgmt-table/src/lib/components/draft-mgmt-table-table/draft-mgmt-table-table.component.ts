@@ -5,8 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { DraftTableDto } from '@cha/shared/entities';
+import { LeagueDataFacade } from '@cha/domain/core';
+import { DraftTableDto, TeamDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
+import { first, Observable } from 'rxjs';
 
 @Component({
   selector: 'cha-admin-draft-mgmt-table-table',
@@ -17,6 +19,8 @@ import { Table } from 'primeng/table';
 export class DraftMgmtTableTableComponent implements OnInit {
   @Input() isMobile!: boolean;
   @Input() draftTableItems!: DraftTableDto[];
+
+  teams!: TeamDto[];
 
   @ViewChild('dt') dt: Table | undefined;
 
@@ -39,6 +43,12 @@ export class DraftMgmtTableTableComponent implements OnInit {
   display = false;
   draftTableItemsForTable!: any;
   draftTableItem!: DraftTableDto | null;
+
+  constructor(private leagueDataFacade: LeagueDataFacade) {
+    this.leagueDataFacade.leagueTeams$
+      .pipe(first())
+      .subscribe((teams: TeamDto[]) => (this.teams = teams));
+  }
 
   ngOnInit(): void {
     this.draftTableItemsForTable = this.mapItems(this.draftTableItems);
@@ -68,5 +78,27 @@ export class DraftMgmtTableTableComponent implements OnInit {
   onClose() {
     this.display = false;
     this.draftTableItem = null;
+  }
+
+  getLogo(item: any) {
+    if (this.teams.length > 0) {
+      const found = this.teams.find(
+        (team: TeamDto) => team.id === item
+      )?.teamlogo;
+
+      if (found) {
+        return this.getString(found);
+      } else {
+        return;
+      }
+    } else {
+      return;
+    }
+  }
+
+  // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
+  getString(urlString: string) {
+    const temp = urlString.split('/');
+    return `assets/${temp[temp.length - 1]}`;
   }
 }

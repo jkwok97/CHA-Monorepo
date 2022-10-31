@@ -8910,7 +8910,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
                 ? teamTwoPicks.length > 0
                     ? teamTwoPickString
                     : ''
-                : ''} \n To ${teamTwo}: \n ${teamOneplayerArray.length > 0
+                : ''} \n \n To ${teamTwo}: \n ${teamOneplayerArray.length > 0
                 ? teamOneplayerArray
                 : teamOnePicks.length > 0
                     ? teamOnePickString
@@ -8978,7 +8978,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return `${yyyy}-${mm}-${dd}`;
     }
     async getDraftPickStringArray(picks) {
-        return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year}`);
+        return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year} \n`);
     }
     async updateTeamForPick(pick, team) {
         const teamId = await this.getTeamInfo(team);
@@ -9045,7 +9045,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return players;
     }
     getPlayerString(player) {
-        return `${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
+        return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname} \n`;
     }
     async setPlayerInfo(players) {
         return await Promise.all(players.map(async (item) => ({

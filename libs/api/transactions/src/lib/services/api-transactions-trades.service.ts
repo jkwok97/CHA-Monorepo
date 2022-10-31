@@ -319,7 +319,7 @@ export class ApiTransactionsTradesService {
             ? teamTwoPickString
             : ''
           : ''
-      } \n To ${teamTwo}: \n ${
+      } \n \n To ${teamTwo}: \n ${
         teamOneplayerArray.length > 0
           ? teamOneplayerArray
           : teamOnePicks.length > 0
@@ -407,7 +407,7 @@ export class ApiTransactionsTradesService {
   private async getDraftPickStringArray(
     picks: { team: string; value: string; year: string }[]
   ) {
-    return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year}`);
+    return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year} \n`);
   }
 
   private async updateTeamForPick(
@@ -489,7 +489,7 @@ export class ApiTransactionsTradesService {
   }
 
   private getPlayerString(player: any) {
-    return `${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
+    return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname} \n`;
   }
 
   private async setPlayerInfo(players) {
