@@ -8811,7 +8811,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             playerArray.push(string);
         });
         const postJson = {
-            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerArray}`,
+            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerArray.join('\n')}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
@@ -8840,7 +8840,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
             playerArray.push(string);
         });
         const postJson = {
-            text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerArray}`,
+            text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerArray.join('\n')}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
@@ -8903,20 +8903,20 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
         const postJson = {
             text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: \n ${teamTwoplayerArray.length > 0
-                ? teamTwoplayerArray
+                ? teamTwoplayerArray.join('\n')
                 : teamTwoPicks.length > 0
-                    ? teamTwoPickString
+                    ? teamTwoPickString.join('\n')
                     : ''} \n ${teamTwoplayerArray.length > 0
                 ? teamTwoPicks.length > 0
-                    ? teamTwoPickString
+                    ? teamTwoPickString.join('\n')
                     : ''
                 : ''} \n \n To ${teamTwo}: \n ${teamOneplayerArray.length > 0
-                ? teamOneplayerArray
+                ? teamOneplayerArray.join('\n')
                 : teamOnePicks.length > 0
-                    ? teamOnePickString
+                    ? teamOnePickString.join('\n')
                     : ''} \n ${teamOneplayerArray.length > 0
                 ? teamOnePicks.length > 0
-                    ? teamOnePickString
+                    ? teamOnePickString.join('\n')
                     : ''
                 : ''} \n`,
             channel: '#trades',
@@ -8978,7 +8978,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return `${yyyy}-${mm}-${dd}`;
     }
     async getDraftPickStringArray(picks) {
-        return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year} `);
+        return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year}`);
     }
     async updateTeamForPick(pick, team) {
         const teamId = await this.getTeamInfo(team);
@@ -9045,7 +9045,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return players;
     }
     getPlayerString(player) {
-        return `${player.playerInfo.firstname} ${player.playerInfo.lastname} `;
+        return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
     }
     async setPlayerInfo(players) {
         return await Promise.all(players.map(async (item) => ({
