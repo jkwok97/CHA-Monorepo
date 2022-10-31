@@ -6,6 +6,16 @@ import { ApiDraftTableService } from '../services';
 export class DraftTableController {
   constructor(private draftTableService: ApiDraftTableService) {}
 
+  @Get()
+  async getDraftTable(): Promise<Draft_Order_V2[]> {
+    const teams = await this.draftTableService.getAll();
+
+    if (!teams || teams.length < 1) {
+      throw new NotFoundException('teams not found');
+    }
+    return teams;
+  }
+
   @Get('/:draft_year/:playing_year')
   async getDraftTableByYearByStandings(
     @Param() param: any

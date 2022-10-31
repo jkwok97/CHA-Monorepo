@@ -11,6 +11,24 @@ export class ApiDraftTableService {
     private teamStatsRepo: Repository<Team_Stats_V2>
   ) {}
 
+  async getAll() {
+    return await this.repo.find({
+      relations: ['team_id'],
+      select: {
+        team_id: {
+          id: true,
+          shortname: true,
+          city: true,
+          nickname: true,
+          teamlogo: true,
+        },
+      },
+      order: {
+        draft_year: 'ASC',
+      },
+    });
+  }
+
   async getDraftTableByYearByStandings(
     draftYear: string,
     playingYear: string

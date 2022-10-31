@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
 import { DraftTableDto } from '@cha/shared/entities';
 import { Observable, first } from 'rxjs';
@@ -10,7 +10,7 @@ import { DraftMgmtTableFacade } from '../../+state/draft-mgmt-table.facade';
   styleUrls: ['./draft-mgmt-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DraftMgmtTableComponent {
+export class DraftMgmtTableComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
   draftTableItems$: Observable<DraftTableDto[]>;
@@ -33,6 +33,6 @@ export class DraftMgmtTableComponent {
   }
 
   ngOnInit(): void {
-   
+    this.draftMgmtTableFacade.getDraftTable();
   }
 }
