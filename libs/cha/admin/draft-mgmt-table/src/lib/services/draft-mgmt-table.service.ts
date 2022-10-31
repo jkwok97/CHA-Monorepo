@@ -13,9 +13,9 @@ export class DraftMgmtTableService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getDraftTable(): Observable<DraftTableDto[]> {
+  getDraftTable(season: number): Observable<DraftTableDto[]> {
     return this._http
-      .get(`${this.apiUrl}/draft-table/`)
+      .get(`${this.apiUrl}/draft-table/${season}`)
       .pipe(map((result: any) => result));
   }
 

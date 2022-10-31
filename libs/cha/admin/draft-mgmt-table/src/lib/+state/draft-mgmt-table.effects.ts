@@ -3,7 +3,7 @@ import { DraftService, LeagueDataFacade } from '@cha/domain/core';
 import { DraftTableDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
-import { exhaustMap, map, catchError, of, tap } from 'rxjs';
+import { exhaustMap, map, catchError, of, tap, withLatestFrom } from 'rxjs';
 import { DraftMgmtTableService } from '../services';
 import { DraftMgmtTableActions } from './draft-mgmt-table.actions';
 import { DraftMgmtTableFacade } from './draft-mgmt-table.facade';
@@ -14,14 +14,16 @@ export class DraftMgmtTableEffects {
     private actions$: Actions,
     private draftMgmtTableFacade: DraftMgmtTableFacade,
     private draftMgmtTableService: DraftMgmtTableService,
+    private leagueDataFacade: LeagueDataFacade,
     private messageService: MessageService
   ) {}
 
   getDraftTable$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DraftMgmtTableActions.getDraftTable),
-      exhaustMap((action) =>
-        this.draftMgmtTableService.getDraftTable().pipe(
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.draftMgmtTableService.getDraftTable(data.current_draft_year).pipe(
           map((draftTableItems: DraftTableDto[]) =>
             DraftMgmtTableActions.getDraftTableSuccess({ draftTableItems })
           ),

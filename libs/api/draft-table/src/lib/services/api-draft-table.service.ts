@@ -11,7 +11,7 @@ export class ApiDraftTableService {
     private teamStatsRepo: Repository<Team_Stats_V2>
   ) {}
 
-  async getAll() {
+  async getAll(draftYear: string) {
     return await this.repo.find({
       relations: ['team_id'],
       select: {
@@ -23,8 +23,11 @@ export class ApiDraftTableService {
           teamlogo: true,
         },
       },
+      where: {
+        draft_year: draftYear,
+      },
       order: {
-        draft_year: 'ASC',
+        draft_year: 'DESC',
       },
     });
   }
