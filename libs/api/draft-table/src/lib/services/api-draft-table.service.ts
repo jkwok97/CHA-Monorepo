@@ -25,10 +25,7 @@ export class ApiDraftTableService {
       },
       where: {
         draft_year: draftYear,
-      },
-      order: {
-        draft_year: 'DESC',
-      },
+      }
     });
   }
 

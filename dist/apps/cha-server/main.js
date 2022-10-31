@@ -951,8 +951,8 @@ let DraftTableController = class DraftTableController {
     constructor(draftTableService) {
         this.draftTableService = draftTableService;
     }
-    async getDraftTable() {
-        const teams = await this.draftTableService.getAll();
+    async getDraftTable(param) {
+        const teams = await this.draftTableService.getAll(param.draft_year);
         if (!teams || teams.length < 1) {
             throw new common_1.NotFoundException('teams not found');
         }
@@ -967,9 +967,10 @@ let DraftTableController = class DraftTableController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/:draft_year'),
+    tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], DraftTableController.prototype, "getDraftTable", null);
 tslib_1.__decorate([
@@ -1074,7 +1075,7 @@ let ApiDraftTableService = class ApiDraftTableService {
                 .reverse();
         };
     }
-    async getAll() {
+    async getAll(draftYear) {
         return await this.repo.find({
             relations: ['team_id'],
             select: {
@@ -1086,9 +1087,9 @@ let ApiDraftTableService = class ApiDraftTableService {
                     teamlogo: true,
                 },
             },
-            order: {
-                draft_year: 'ASC',
-            },
+            where: {
+                draft_year: draftYear,
+            }
         });
     }
     async getDraftTableByYearByStandings(draftYear, playingYear) {
