@@ -1,1 +1,44 @@
-<p>draft-mgmt-table-edit works!</p>
+<blade-card style="background-color: var(--background-100)">
+  <blade-card-header class="text-lg font-light text-center">
+    Edit Draft Row
+  </blade-card-header>
+
+  <blade-card-body>
+    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+      <cha-admin-draft-mgmt-table-edit-form
+        [draftTableItem]="draftTableItem"
+      ></cha-admin-draft-mgmt-table-edit-form>
+    </perfect-scrollbar>
+
+    <cha-admin-draft-mgmt-table-edit-form
+      [draftTableItem]="draftTableItem"
+      *ngIf="!isMobile"
+    ></cha-admin-draft-mgmt-table-edit-form>
+  </blade-card-body>
+
+  <blade-card-footer>
+    <div class="flex justify-content-between">
+      <div class="flex column-gap-1">
+        <button
+          pButton
+          pRipple
+          type="button"
+          [label]="'Save Draft Row'"
+          class="p-button-raised"
+          [disabled]="
+            draftTableFormRef?.form?.invalid || !draftTableFormRef?.form?.dirty
+          "
+          (click)="onSave()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-raised p-button-warning"
+          (click)="onCancel()"
+        ></button>
+      </div>
+    </div>
+  </blade-card-footer>
+</blade-card>

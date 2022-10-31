@@ -70,11 +70,6 @@ export class DraftMgmtTableTableComponent implements OnInit {
     this.display = true;
   }
 
-  onAddClick() {
-    this.draftTableItem = null;
-    this.display = true;
-  }
-
   onClose() {
     this.display = false;
     this.draftTableItem = null;

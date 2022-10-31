@@ -27,14 +27,6 @@
           placeholder="Search Team"
         />
       </span>
-
-      <button
-        pButton
-        type="button"
-        icon="pi pi-user-plus"
-        class="p-button-rounded p-button-primary"
-        (click)="onAddClick()"
-      ></button>
     </div>
   </ng-template>
   <ng-template pTemplate="header" let-columns let-data>
@@ -78,16 +70,16 @@
   </ng-template>
 </p-table>
 
-<!-- <p-sidebar
+<p-sidebar
   [(visible)]="display"
   [fullScreen]="true"
   [showCloseIcon]="false"
   [dismissible]="false"
   *ngIf="display"
 >
-  <cha-admin-draft-mgmt-entry-edit
-    [pick]="pick"
+  <cha-admin-draft-mgmt-table-edit
+    [draftTableItem]="draftTableItem"
     [isMobile]="isMobile"
     (closeSidebar)="onClose()"
-  ></cha-admin-draft-mgmt-entry-edit>
-</p-sidebar> -->
+  ></cha-admin-draft-mgmt-table-edit>
+</p-sidebar>
