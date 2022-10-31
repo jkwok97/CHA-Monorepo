@@ -13,9 +13,9 @@ import {
 } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Brackets, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
-import { catchError, map, tap } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable()
 export class ApiTransactionsTradesService {
@@ -407,7 +407,7 @@ export class ApiTransactionsTradesService {
   private async getDraftPickStringArray(
     picks: { team: string; value: string; year: string }[]
   ) {
-    return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year} \n`);
+    return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year} `);
   }
 
   private async updateTeamForPick(
@@ -489,7 +489,7 @@ export class ApiTransactionsTradesService {
   }
 
   private getPlayerString(player: any) {
-    return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname} \n`;
+    return `${player.playerInfo.firstname} ${player.playerInfo.lastname} `;
   }
 
   private async setPlayerInfo(players) {

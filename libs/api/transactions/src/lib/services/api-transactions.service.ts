@@ -1,10 +1,4 @@
-import {
-  Goalies_Stats_V2,
-  Players_Stats_V2,
-  Players_V2,
-  Teams_V2,
-  Transactions_V2,
-} from '@api/entities';
+import { Players_V2, Teams_V2, Transactions_V2 } from '@api/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';

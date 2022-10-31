@@ -8978,7 +8978,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return `${yyyy}-${mm}-${dd}`;
     }
     async getDraftPickStringArray(picks) {
-        return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year} \n`);
+        return picks.map((pick) => `${pick.team} ${pick.value} ${pick.year} `);
     }
     async updateTeamForPick(pick, team) {
         const teamId = await this.getTeamInfo(team);
@@ -9045,7 +9045,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         return players;
     }
     getPlayerString(player) {
-        return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname} \n`;
+        return `${player.playerInfo.firstname} ${player.playerInfo.lastname} `;
     }
     async setPlayerInfo(players) {
         return await Promise.all(players.map(async (item) => ({
