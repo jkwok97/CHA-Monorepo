@@ -7427,16 +7427,16 @@ let ApiScheduleService = class ApiScheduleService {
             .orderBy('schedule.game_day', 'DESC')
             .limit(5)
             .getMany();
-        return await this.getLastFiveRecord(lastFive, teamId);
+        return await this.getLastFiveRecord(lastFive, Number(teamId));
     }
     async getLastFiveRecord(lastFive, teamId) {
         const lastFiveRecord = [];
         await lastFive.forEach((record) => {
             if (record.home_team_id === teamId) {
-                if (record.home_team_score > record.vis_team_score) {
+                if (Number(record.home_team_score) > Number(record.vis_team_score)) {
                     lastFiveRecord.push('W');
                 }
-                else if (record.home_team_score < record.vis_team_score) {
+                else if (Number(record.home_team_score) < Number(record.vis_team_score)) {
                     lastFiveRecord.push('L');
                 }
                 else {
@@ -7444,10 +7444,10 @@ let ApiScheduleService = class ApiScheduleService {
                 }
             }
             else {
-                if (record.vis_team_score > record.home_team_score) {
+                if (Number(record.vis_team_score) > Number(record.home_team_score)) {
                     lastFiveRecord.push('W');
                 }
-                else if (record.vis_team_score < record.home_team_score) {
+                else if (Number(record.vis_team_score) < Number(record.home_team_score)) {
                     lastFiveRecord.push('L');
                 }
                 else {
@@ -7463,16 +7463,16 @@ let ApiScheduleService = class ApiScheduleService {
         let ties = 0;
         await data.forEach((game) => {
             if (game.vis_team_id === teamId) {
-                game.vis_team_score > game.home_team_score
+                Number(game.vis_team_score) > Number(game.home_team_score)
                     ? wins++
-                    : game.vis_team_score === game.home_team_score
+                    : Number(game.vis_team_score) === Number(game.home_team_score)
                         ? ties++
                         : loss++;
             }
             else if (game.home_team_id === teamId) {
-                game.home_team_score > game.vis_team_score
+                Number(game.home_team_score) > Number(game.vis_team_score)
                     ? wins++
-                    : game.home_team_score === game.vis_team_score
+                    : Number(game.home_team_score) === Number(game.vis_team_score)
                         ? ties++
                         : loss++;
             }
@@ -7489,14 +7489,14 @@ let ApiScheduleService = class ApiScheduleService {
             gameDay: item.game_day,
             visTeamScore: item.vis_team_score,
             visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-            visTeamLastFive: await this.getTeamLastFive(item.vis_team_id, item.playing_year),
-            visTeamRecord: await this.getTeamSeasonRecord(item.vis_team_id, item.playing_year),
-            visTeamVersus: await this.getTeamRecordVersus(item.vis_team_id, item.home_team_id, item.playing_year),
+            visTeamLastFive: await this.getTeamLastFive(Number(item.vis_team_id), item.playing_year),
+            visTeamRecord: await this.getTeamSeasonRecord(Number(item.vis_team_id), item.playing_year),
+            visTeamVersus: await this.getTeamRecordVersus(Number(item.vis_team_id), Number(item.home_team_id), item.playing_year),
             homeTeamScore: item.home_team_score,
             homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-            homeTeamLastFive: await this.getTeamLastFive(item.home_team_id, item.playing_year),
-            homeTeamRecord: await this.getTeamSeasonRecord(item.home_team_id, item.playing_year),
-            homeTeamVersus: await this.getTeamRecordVersus(item.home_team_id, item.vis_team_id, item.playing_year),
+            homeTeamLastFive: await this.getTeamLastFive(Number(item.home_team_id), item.playing_year),
+            homeTeamRecord: await this.getTeamSeasonRecord(Number(item.home_team_id), item.playing_year),
+            homeTeamVersus: await this.getTeamRecordVersus(Number(item.home_team_id), Number(item.vis_team_id), item.playing_year),
         })));
     }
     async setTeamInfo(array) {
@@ -7519,7 +7519,7 @@ let ApiScheduleService = class ApiScheduleService {
                 .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
         }))
             .getMany();
-        return await this.getVersusRecord(versus, teamOneId);
+        return await this.getVersusRecord(versus, Number(teamOneId));
     }
     async getTeamSeasonRecord(teamId, season) {
         return await this.teamStatsRepo.findOne({

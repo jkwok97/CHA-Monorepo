@@ -79,7 +79,7 @@ export class ApiScheduleService {
       .limit(5)
       .getMany();
 
-    return await this.getLastFiveRecord(lastFive, teamId);
+    return await this.getLastFiveRecord(lastFive, Number(teamId));
   }
 
   private async getLastFiveRecord(lastFive: Schedule_V2[], teamId: number) {
@@ -87,17 +87,21 @@ export class ApiScheduleService {
 
     await lastFive.forEach((record: Schedule_V2) => {
       if (record.home_team_id === teamId) {
-        if (record.home_team_score > record.vis_team_score) {
+        if (Number(record.home_team_score) > Number(record.vis_team_score)) {
           lastFiveRecord.push('W');
-        } else if (record.home_team_score < record.vis_team_score) {
+        } else if (
+          Number(record.home_team_score) < Number(record.vis_team_score)
+        ) {
           lastFiveRecord.push('L');
         } else {
           lastFiveRecord.push('T');
         }
       } else {
-        if (record.vis_team_score > record.home_team_score) {
+        if (Number(record.vis_team_score) > Number(record.home_team_score)) {
           lastFiveRecord.push('W');
-        } else if (record.vis_team_score < record.home_team_score) {
+        } else if (
+          Number(record.vis_team_score) < Number(record.home_team_score)
+        ) {
           lastFiveRecord.push('L');
         } else {
           lastFiveRecord.push('T');
@@ -115,15 +119,15 @@ export class ApiScheduleService {
 
     await data.forEach((game: Schedule_V2) => {
       if (game.vis_team_id === teamId) {
-        game.vis_team_score > game.home_team_score
+        Number(game.vis_team_score) > Number(game.home_team_score)
           ? wins++
-          : game.vis_team_score === game.home_team_score
+          : Number(game.vis_team_score) === Number(game.home_team_score)
           ? ties++
           : loss++;
       } else if (game.home_team_id === teamId) {
-        game.home_team_score > game.vis_team_score
+        Number(game.home_team_score) > Number(game.vis_team_score)
           ? wins++
-          : game.home_team_score === game.vis_team_score
+          : Number(game.home_team_score) === Number(game.vis_team_score)
           ? ties++
           : loss++;
       }
@@ -144,31 +148,31 @@ export class ApiScheduleService {
         visTeamScore: item.vis_team_score,
         visTeamInfo: await this.getTeamInfo(item.vis_team_id),
         visTeamLastFive: await this.getTeamLastFive(
-          item.vis_team_id,
+          Number(item.vis_team_id),
           item.playing_year
         ),
         visTeamRecord: await this.getTeamSeasonRecord(
-          item.vis_team_id,
+          Number(item.vis_team_id),
           item.playing_year
         ),
         visTeamVersus: await this.getTeamRecordVersus(
-          item.vis_team_id,
-          item.home_team_id,
+          Number(item.vis_team_id),
+          Number(item.home_team_id),
           item.playing_year
         ),
         homeTeamScore: item.home_team_score,
         homeTeamInfo: await this.getTeamInfo(item.home_team_id),
         homeTeamLastFive: await this.getTeamLastFive(
-          item.home_team_id,
+          Number(item.home_team_id),
           item.playing_year
         ),
         homeTeamRecord: await this.getTeamSeasonRecord(
-          item.home_team_id,
+          Number(item.home_team_id),
           item.playing_year
         ),
         homeTeamVersus: await this.getTeamRecordVersus(
-          item.home_team_id,
-          item.vis_team_id,
+          Number(item.home_team_id),
+          Number(item.vis_team_id),
           item.playing_year
         ),
       }))
@@ -211,7 +215,7 @@ export class ApiScheduleService {
       )
       .getMany();
 
-    return await this.getVersusRecord(versus, teamOneId);
+    return await this.getVersusRecord(versus, Number(teamOneId));
   }
 
   private async getTeamSeasonRecord(teamId: number, season: string) {
