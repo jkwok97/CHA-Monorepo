@@ -49,7 +49,7 @@
       >
         <div>{{ item.player.fullName }}</div>
         <div *ngIf="item.gaa">{{ item.gaa.toFixed(2) }}</div>
-        <div *ngIf="item.savePctg">{{ item.savePctg }}</div>
+        <div *ngIf="item.savePctg">{{ item.savePctg.toFixed(3) }}</div>
         <div *ngIf="item.shutouts">{{ item.shutouts }}</div>
       </div>
     </ng-container>
