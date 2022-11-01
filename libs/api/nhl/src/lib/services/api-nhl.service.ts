@@ -1,3 +1,4 @@
+import { ɵɵsetComponentScope } from '@angular/core';
 import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
@@ -125,6 +126,8 @@ export class ApiNhlService {
   }
 
   private async setChaTeamInfo(array: any[], season: string) {
+    console.log(" I'M IN THE SET CHA TEAM FUNCTION ", array);
+
     const string1 = season.slice(0, 4);
     const string2 = season.slice(6, 8);
 
@@ -166,11 +169,11 @@ export class ApiNhlService {
     return this.teamsRepo.find({
       select: {
         id: true,
-        teamlogo: true
+        teamlogo: true,
       },
       where: {
-        shortname: playerStatTeam.team_name
-      }
-    })
+        shortname: playerStatTeam.team_name,
+      },
+    });
   }
 }

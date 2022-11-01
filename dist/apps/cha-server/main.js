@@ -4840,6 +4840,7 @@ let ApiNhlService = class ApiNhlService {
         return stats;
     }
     async setChaTeamInfo(array, season) {
+        console.log(" I'M IN THE SET CHA TEAM FUNCTION ", array);
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
@@ -4870,11 +4871,11 @@ let ApiNhlService = class ApiNhlService {
         return this.teamsRepo.find({
             select: {
                 id: true,
-                teamlogo: true
+                teamlogo: true,
             },
             where: {
-                shortname: playerStatTeam.team_name
-            }
+                shortname: playerStatTeam.team_name,
+            },
         });
     }
 };
