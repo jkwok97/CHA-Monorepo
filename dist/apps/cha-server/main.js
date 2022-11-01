@@ -2241,6 +2241,10 @@ tslib_1.__decorate([
 ], Players_V2.prototype, "nhl_id", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Players_V2.prototype, "sportsnet_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", Boolean)
 ], Players_V2.prototype, "isactive", void 0);
 tslib_1.__decorate([

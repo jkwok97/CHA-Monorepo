@@ -30,6 +30,9 @@ export class Players_V2 {
   nhl_id!: string;
 
   @Column()
+  sportsnet_id!: string;
+
+  @Column()
   isactive!: boolean;
 
   @Column()
