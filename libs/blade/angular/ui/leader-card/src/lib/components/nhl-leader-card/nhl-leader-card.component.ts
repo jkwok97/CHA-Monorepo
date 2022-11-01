@@ -54,7 +54,7 @@ export class BladeNhlLeaderCardComponent implements OnInit {
   getTeamPicture() {
     if (this.selected) {
       if (this.selected.chaPlayerTeam) {
-        return this.getString(this.selected.chaPlayerTeam[0].teamlogo)
+        return this.getString(this.selected.chaPlayerTeam[0].teamlogo);
       } else {
         return this.selected.team.logos.find(
           (logo: any) =>
@@ -116,7 +116,7 @@ export class BladeNhlLeaderCardComponent implements OnInit {
         case 'gaa':
           return this.selected.gaa.toFixed(2);
         case 'savePct':
-          return this.selected.savePctg;
+          return this.selected.savePctg.toFixed(3);
         case 'shutouts':
           return this.selected.shutouts;
         default:
