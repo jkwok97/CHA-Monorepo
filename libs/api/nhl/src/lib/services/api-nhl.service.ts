@@ -1,10 +1,9 @@
-import { ɵɵsetComponentScope } from '@angular/core';
 import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AxiosResponse } from 'axios';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -65,6 +64,7 @@ export class ApiNhlService {
       )
       .pipe(
         map((response) => response.data),
+        tap(console.log),
         switchMap((response) => this.setChaTeamInfo(response.data, season))
       );
 
@@ -132,8 +132,6 @@ export class ApiNhlService {
   }
 
   private async setChaTeamInfo(array: any[], season: string) {
-    console.log(" I'M IN THE SET CHA TEAM FUNCTION ", array);
-
     const string1 = season.slice(0, 4);
     const string2 = season.slice(6, 8);
 

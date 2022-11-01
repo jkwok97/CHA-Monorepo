@@ -4812,7 +4812,7 @@ let ApiNhlService = class ApiNhlService {
     getNhlRookieLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
         return leaders;
     }
     getNhlDefenseLeaders(playerType, statType, season) {
@@ -4840,7 +4840,6 @@ let ApiNhlService = class ApiNhlService {
         return stats;
     }
     async setChaTeamInfo(array, season) {
-        console.log(" I'M IN THE SET CHA TEAM FUNCTION ", array);
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;

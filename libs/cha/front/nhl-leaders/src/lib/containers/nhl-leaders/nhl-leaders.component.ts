@@ -60,7 +60,5 @@ export class NhlLeadersComponent implements OnInit {
 
   ngOnInit(): void {
     this.nhlLeadersFacade.getLeaders();
-
-    this.pointsLeaders$.subscribe(console.log);
   }
 }
