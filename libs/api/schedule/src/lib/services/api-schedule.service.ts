@@ -83,6 +83,7 @@ export class ApiScheduleService {
   }
 
   private async getLastFiveRecord(lastFive: Schedule_V2[], teamId: number) {
+    console.log(lastFive);
     const lastFiveRecord = [];
 
     await lastFive.forEach((record: Schedule_V2) => {
