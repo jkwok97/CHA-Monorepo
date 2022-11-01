@@ -79,12 +79,12 @@ export class NhlLeadersService {
   private getNhlRookieLeaders(season: string, player: string, stat: string) {
     return this._http
       .get(`${this.apiUrl}/nhl/nhl-rookie-leaders/${season}/${player}/${stat}`)
-      .pipe(map((result: any) => result['data']));
+      .pipe(map((result: any) => result));
   }
 
   private getNhlDefenseLeaders(season: string, player: string, stat: string) {
     return this._http
       .get(`${this.apiUrl}/nhl/nhl-defense-leaders/${season}/${player}/${stat}`)
-      .pipe(map((result: any) => result['data']));
+      .pipe(map((result: any) => result));
   }
 }

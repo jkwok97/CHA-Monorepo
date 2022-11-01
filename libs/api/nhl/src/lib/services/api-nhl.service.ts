@@ -58,12 +58,15 @@ export class ApiNhlService {
     playerType: string,
     statType: string,
     season: string
-  ): Observable<AxiosResponse<any[]>> {
+  ): Observable<any[]> {
     const leaders = this.httpService
       .get(
         `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        switchMap((response) => this.setChaTeamInfo(response.data, season))
+      );
 
     return leaders;
   }
@@ -72,12 +75,15 @@ export class ApiNhlService {
     playerType: string,
     statType: string,
     season: string
-  ): Observable<AxiosResponse<any[]>> {
+  ): Observable<any[]> {
     const leaders = this.httpService
       .get(
         `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        switchMap((response) => this.setChaTeamInfo(response.data, season))
+      );
 
     return leaders;
   }

@@ -4812,13 +4812,13 @@ let ApiNhlService = class ApiNhlService {
     getNhlRookieLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
         return leaders;
     }
     getNhlDefenseLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
         return leaders;
     }
     getNhlSummaryFromSportsnet(season, seasonType) {
