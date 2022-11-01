@@ -96,7 +96,7 @@ export class ApiNhlService {
   getNhlSummaryFromSportsnet(
     season: string,
     seasonType: string
-  ): Observable<any[]> {
+  ): Observable<{ player_stats: { skaters: any[]; goalies: any[] } }> {
     const leaders = this.httpService
       .get(
         `${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`
@@ -158,24 +158,28 @@ export class ApiNhlService {
 
     return (statObject = {
       player_stats: {
-        skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => ({
-          ...skater,
-          chaPlayerTeam: await this.getChaTeam(
-            skater.player_id,
-            newSeasonString,
-            'p'
-          ),
-        }))),
-        goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => ({
-          ...skater,
-          chaPlayerTeam: await this.getChaTeam(
-            skater.player_id,
-            newSeasonString,
-            'g'
-          ),
-        }))),
+        skaters: await Promise.all(
+          statObject.player_stats.skaters.map(async (skater) => ({
+            ...skater,
+            chaPlayerTeam: await this.getChaTeam(
+              skater.player_id,
+              newSeasonString,
+              'p'
+            ),
+          }))
+        ),
+        goalies: await Promise.all(
+          statObject.player_stats.goalies.map(async (skater) => ({
+            ...skater,
+            chaPlayerTeam: await this.getChaTeam(
+              skater.player_id,
+              newSeasonString,
+              'g'
+            ),
+          }))
+        ),
       },
-    })
+    });
   }
 
   private async setChaTeamInfo(array: any[], season: string, type: string) {
