@@ -4825,7 +4825,9 @@ let ApiNhlService = class ApiNhlService {
     getNhlSummaryFromSportsnet(season, seasonType) {
         const leaders = this.httpService
             .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoForSportsnet(response.data, season)));
+        // skaters: result['data']['player_stats']['skaters'],
+        // goalies: result['data']['player_stats']['goalies'],
         return leaders;
     }
     getNhlRookieSummary(season, player, statsType, sort, start, pageSize) {
@@ -4839,6 +4841,16 @@ let ApiNhlService = class ApiNhlService {
             .get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`)
             .pipe((0, rxjs_1.map)((response) => response.data.stats[0].splits));
         return stats;
+    }
+    async setChaTeamInfoForSportsnet(array, season) {
+        const string1 = season.slice(2, 4);
+        const newSeasonString = `${season}-${Number(string1) + 1}`;
+        return await Promise.all(array.map(async (item) => ({
+            player_stats: {
+                skaters: item.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'p') }))),
+                goalies: item.player_stats.goalies.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'g') }))),
+            },
+        })));
     }
     async setChaTeamInfo(array, season, type) {
         const string1 = season.slice(0, 4);

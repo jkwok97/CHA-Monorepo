@@ -96,13 +96,20 @@ export class ApiNhlService {
   getNhlSummaryFromSportsnet(
     season: string,
     seasonType: string
-  ): Observable<AxiosResponse<any[]>> {
+  ): Observable<any[]> {
     const leaders = this.httpService
       .get(
         `${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        switchMap((response) =>
+          this.setChaTeamInfoForSportsnet(response.data, season)
+        )
+      );
 
+    // skaters: result['data']['player_stats']['skaters'],
+    // goalies: result['data']['player_stats']['goalies'],
     return leaders;
   }
 
@@ -134,6 +141,35 @@ export class ApiNhlService {
       .pipe(map((response) => response.data.stats[0].splits));
 
     return stats;
+  }
+
+  private async setChaTeamInfoForSportsnet(array: any[], season: string) {
+    const string1 = season.slice(2, 4);
+
+    const newSeasonString = `${season}-${Number(string1) + 1}`;
+
+    return await Promise.all(
+      array.map(async (item) => ({
+        player_stats: {
+          skaters: item.player_stats.skaters.map(async (skater) => ({
+            ...skater,
+            chaPlayerTeam: await this.getChaTeam(
+              skater.player_id,
+              newSeasonString,
+              'p'
+            ),
+          })),
+          goalies: item.player_stats.goalies.map(async (skater) => ({
+            ...skater,
+            chaPlayerTeam: await this.getChaTeam(
+              skater.player_id,
+              newSeasonString,
+              'g'
+            ),
+          })),
+        },
+      }))
+    );
   }
 
   private async setChaTeamInfo(array: any[], season: string, type: string) {
