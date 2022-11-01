@@ -53,13 +53,23 @@ export class BladeNhlLeaderCardComponent implements OnInit {
 
   getTeamPicture() {
     if (this.selected) {
-      return this.selected.team.logos.find(
-        (logo: any) =>
-          logo.endSeason === 20222023 && logo.background === 'light'
-      )?.secureUrl;
+      if (this.selected.chaPlayerTeam) {
+        return this.getString(this.selected.chaPlayerTeam[0].teamlogo)
+      } else {
+        return this.selected.team.logos.find(
+          (logo: any) =>
+            logo.endSeason === 20222023 && logo.background === 'light'
+        )?.secureUrl;
+      }
     } else {
       return;
     }
+  }
+
+  // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
+  getString(urlString: string) {
+    const temp = urlString.split('/');
+    return `assets/${temp[temp.length - 1]}`;
   }
 
   getPlayerNumber() {

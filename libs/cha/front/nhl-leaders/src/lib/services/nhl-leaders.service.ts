@@ -60,12 +60,19 @@ export class NhlLeadersService {
   private getNhlLeaders(season: string, player: string, stat: string) {
     return this._http
       .get(`${this.apiUrl}/nhl/nhl-leaders/${season}/${player}/${stat}`)
-      .pipe(map((result: any) => result['data']));
+      .pipe(map((result: any) => result));
   }
 
-  private getNhlGoalieLeaders(season: string, player: string, stat: string, minGames: string) {
+  private getNhlGoalieLeaders(
+    season: string,
+    player: string,
+    stat: string,
+    minGames: string
+  ) {
     return this._http
-      .get(`${this.apiUrl}/nhl/nhl-leaders/${season}/${player}/${stat}/${minGames}`)
+      .get(
+        `${this.apiUrl}/nhl/nhl-leaders/${season}/${player}/${stat}/${minGames}`
+      )
       .pipe(map((result: any) => result['data']));
   }
 
@@ -77,9 +84,7 @@ export class NhlLeadersService {
 
   private getNhlDefenseLeaders(season: string, player: string, stat: string) {
     return this._http
-      .get(
-        `${this.apiUrl}/nhl/nhl-defense-leaders/${season}/${player}/${stat}`
-      )
+      .get(`${this.apiUrl}/nhl/nhl-defense-leaders/${season}/${player}/${stat}`)
       .pipe(map((result: any) => result['data']));
   }
 }
