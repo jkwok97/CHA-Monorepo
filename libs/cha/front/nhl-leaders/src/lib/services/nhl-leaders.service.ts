@@ -73,7 +73,7 @@ export class NhlLeadersService {
       .get(
         `${this.apiUrl}/nhl/nhl-leaders/${season}/${player}/${stat}/${minGames}`
       )
-      .pipe(map((result: any) => result['data']));
+      .pipe(map((result: any) => result));
   }
 
   private getNhlRookieLeaders(season: string, player: string, stat: string) {

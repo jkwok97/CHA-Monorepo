@@ -4596,7 +4596,7 @@ ApiNhlModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
             axios_1.HttpModule,
-            typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2]),
+            typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2, entities_1.Goalies_Stats_V2]),
         ],
         controllers: [controllers_1.NhlController],
         providers: [services_1.ApiNhlService],
@@ -4777,7 +4777,7 @@ exports.NhlMiddleware = NhlMiddleware;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiNhlService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -4788,9 +4788,10 @@ const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const rxjs_1 = __webpack_require__("rxjs");
 const typeorm_2 = __webpack_require__("typeorm");
 let ApiNhlService = class ApiNhlService {
-    constructor(httpService, playerStatsRepo, teamsRepo) {
+    constructor(httpService, playerStatsRepo, goalieStatsRepo, teamsRepo) {
         this.httpService = httpService;
         this.playerStatsRepo = playerStatsRepo;
+        this.goalieStatsRepo = goalieStatsRepo;
         this.teamsRepo = teamsRepo;
         this.nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
         this.nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
@@ -4800,25 +4801,25 @@ let ApiNhlService = class ApiNhlService {
     getNhlLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
     getNhlGoalieLeaders(playerType, statType, season, minGames) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%20${minGames}`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'g')));
         return leaders;
     }
     getNhlRookieLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
     getNhlDefenseLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
     getNhlSummaryFromSportsnet(season, seasonType) {
@@ -4839,30 +4840,52 @@ let ApiNhlService = class ApiNhlService {
             .pipe((0, rxjs_1.map)((response) => response.data.stats[0].splits));
         return stats;
     }
-    async setChaTeamInfo(array, season) {
+    async setChaTeamInfo(array, season, type) {
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString) }))));
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString, type) }))));
     }
-    async getChaTeam(id, season) {
-        const playerStatTeam = await this.playerStatsRepo.findOne({
-            select: {
-                id: true,
-                player_id: {
+    async getChaTeam(id, season, type) {
+        let playerStatTeam;
+        if (type === 'p') {
+            playerStatTeam = await this.playerStatsRepo.findOne({
+                select: {
                     id: true,
-                    nhl_id: true,
+                    player_id: {
+                        id: true,
+                        nhl_id: true,
+                    },
+                    team_name: true,
                 },
-                team_name: true,
-            },
-            where: {
-                player_id: {
-                    nhl_id: id.toString(),
+                where: {
+                    player_id: {
+                        nhl_id: id.toString(),
+                    },
+                    playing_year: season,
+                    season_type: 'Regular',
                 },
-                playing_year: season,
-                season_type: 'Regular',
-            },
-        });
+            });
+        }
+        else {
+            playerStatTeam = await this.goalieStatsRepo.findOne({
+                select: {
+                    id: true,
+                    player_id: {
+                        id: true,
+                        nhl_id: true,
+                    },
+                    team_name: true,
+                },
+                where: {
+                    player_id: {
+                        nhl_id: id.toString(),
+                    },
+                    playing_year: season,
+                    season_type: 'Regular',
+                },
+            });
+        }
         const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
         return playerStatTeamWithInfo;
     }
@@ -4881,8 +4904,9 @@ let ApiNhlService = class ApiNhlService {
 ApiNhlService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object])
 ], ApiNhlService);
 exports.ApiNhlService = ApiNhlService;
 

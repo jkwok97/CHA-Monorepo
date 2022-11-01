@@ -1,4 +1,4 @@
-import { Players_Stats_V2, Teams_V2 } from '@api/entities';
+import { Goalies_Stats_V2, Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,6 +12,8 @@ export class ApiNhlService {
     private httpService: HttpService,
     @InjectRepository(Players_Stats_V2)
     private playerStatsRepo: Repository<Players_Stats_V2>,
+    @InjectRepository(Goalies_Stats_V2)
+    private goalieStatsRepo: Repository<Goalies_Stats_V2>,
     @InjectRepository(Teams_V2)
     private teamsRepo: Repository<Teams_V2>
   ) {}
@@ -32,7 +34,7 @@ export class ApiNhlService {
       )
       .pipe(
         map((response) => response.data),
-        switchMap((response) => this.setChaTeamInfo(response.data, season))
+        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
       );
 
     return leaders;
@@ -43,12 +45,15 @@ export class ApiNhlService {
     statType: string,
     season: string,
     minGames: string
-  ): Observable<AxiosResponse<any[]>> {
+  ): Observable<any[]> {
     const leaders = this.httpService
       .get(
         `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%20${minGames}`
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        switchMap((response) => this.setChaTeamInfo(response.data, season, 'g'))
+      );
 
     return leaders;
   }
@@ -65,7 +70,7 @@ export class ApiNhlService {
       .pipe(
         map((response) => response.data),
         tap(console.log),
-        switchMap((response) => this.setChaTeamInfo(response.data, season))
+        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
       );
 
     return leaders;
@@ -82,7 +87,7 @@ export class ApiNhlService {
       )
       .pipe(
         map((response) => response.data),
-        switchMap((response) => this.setChaTeamInfo(response.data, season))
+        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
       );
 
     return leaders;
@@ -131,7 +136,7 @@ export class ApiNhlService {
     return stats;
   }
 
-  private async setChaTeamInfo(array: any[], season: string) {
+  private async setChaTeamInfo(array: any[], season: string, type: string) {
     const string1 = season.slice(0, 4);
     const string2 = season.slice(6, 8);
 
@@ -140,29 +145,55 @@ export class ApiNhlService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString),
+        chaPlayerTeam: await this.getChaTeam(
+          item.player.id,
+          newSeasonString,
+          type
+        ),
       }))
     );
   }
 
-  private async getChaTeam(id: number, season: string) {
-    const playerStatTeam = await this.playerStatsRepo.findOne({
-      select: {
-        id: true,
-        player_id: {
+  private async getChaTeam(id: number, season: string, type: string) {
+    let playerStatTeam;
+
+    if (type === 'p') {
+      playerStatTeam = await this.playerStatsRepo.findOne({
+        select: {
           id: true,
-          nhl_id: true,
+          player_id: {
+            id: true,
+            nhl_id: true,
+          },
+          team_name: true,
         },
-        team_name: true,
-      },
-      where: {
-        player_id: {
-          nhl_id: id.toString(),
+        where: {
+          player_id: {
+            nhl_id: id.toString(),
+          },
+          playing_year: season,
+          season_type: 'Regular',
         },
-        playing_year: season,
-        season_type: 'Regular',
-      },
-    });
+      });
+    } else {
+      playerStatTeam = await this.goalieStatsRepo.findOne({
+        select: {
+          id: true,
+          player_id: {
+            id: true,
+            nhl_id: true,
+          },
+          team_name: true,
+        },
+        where: {
+          player_id: {
+            nhl_id: id.toString(),
+          },
+          playing_year: season,
+          season_type: 'Regular',
+        },
+      });
+    }
 
     const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
 
