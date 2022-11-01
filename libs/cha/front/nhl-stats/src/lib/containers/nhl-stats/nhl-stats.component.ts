@@ -9,7 +9,7 @@ import { NhlStatsFacade } from '../../+state/nhl-stats.facade';
 })
 export class NhlStatsComponent {
   isLoading$: Observable<boolean>;
-  isLoaded$: Observable<boolean>;
+  isLoaded$!: Observable<boolean>;
 
   selectOptions = [
     { label: 'Skaters', value: 'skater' },
@@ -22,8 +22,8 @@ export class NhlStatsComponent {
   showRookies = false;
 
   constructor(private nhlStatsFacade: NhlStatsFacade) {
-    this.isLoaded$ = this.nhlStatsFacade.isAllStatsLoaded$;
     this.isLoading$ = this.nhlStatsFacade.isLoading$;
+    this.isLoaded$ = this.nhlStatsFacade.isAllStatsLoaded$;
     this.nhlStatsFacade.getSportsnetStats('2022', 'reg');
     this.nhlStatsFacade.getRookieStats('skater', 'points', 'DESC', 0, 100);
   }
