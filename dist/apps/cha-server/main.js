@@ -4845,6 +4845,7 @@ let ApiNhlService = class ApiNhlService {
     async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
         const newSeasonString = `${season}-${Number(string1) + 1}`;
+        console.log(newSeasonString);
         return (statObject = {
             player_stats: {
                 skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'p') })))),

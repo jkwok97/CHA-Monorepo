@@ -79,9 +79,7 @@
             <ng-container *ngIf="column.field === 'skaterFullName'"
               >{{ data.first_name + ' ' + data.last_name }}
             </ng-container>
-            <ng-container>{{
-              column.field !== 'chaTeam' ? data[column.field] : ''
-            }}</ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
             <ng-container *ngIf="column.field === 'action'">
               <button
                 pButton
@@ -108,9 +106,7 @@
             <ng-container *ngIf="column.field === 'skaterFullName'"
               >{{ data.first_name + ' ' + data.last_name }}
             </ng-container>
-            <ng-container>{{
-              column.field !== 'chaTeam' ? data[column.field] : ''
-            }}</ng-container>
+            <ng-container>{{ data[column.field] }}</ng-container>
           </div>
         </td>
       </tr>
