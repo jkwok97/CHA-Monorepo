@@ -7424,7 +7424,7 @@ let ApiScheduleService = class ApiScheduleService {
             .andWhere(new typeorm_2.Brackets((qb) => {
             qb.where('schedule.home_team_id = :teamId', { teamId }).orWhere('schedule.vis_team_id = :teamId', { teamId });
         }))
-            .orderBy('schedule.game_day', 'DESC')
+            .orderBy('schedule.game_day', 'ASC')
             .limit(5)
             .getMany();
         return await this.getLastFiveRecord(lastFive, Number(teamId));
