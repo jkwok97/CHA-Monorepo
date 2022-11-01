@@ -20,8 +20,8 @@ export class NhlStatsService {
       .pipe(
         map((result: any) => {
           return {
-            skaters: result['data']['player_stats']['skaters'],
-            goalies: result['data']['player_stats']['goalies'],
+            skaters: result['player_stats']['skaters'],
+            goalies: result['player_stats']['goalies'],
           };
         }),
         delay(500)

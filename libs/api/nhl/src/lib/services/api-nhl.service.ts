@@ -251,6 +251,8 @@ export class ApiNhlService {
       select: {
         id: true,
         teamlogo: true,
+        city: true,
+        nickname: true,
       },
       where: {
         shortname: playerStatTeam ? playerStatTeam.team_name : 'FA',

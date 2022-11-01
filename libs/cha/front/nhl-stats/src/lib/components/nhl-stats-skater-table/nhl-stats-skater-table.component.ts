@@ -26,6 +26,7 @@ export class NhlStatsSkaterTableComponent {
 
   playerTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
+    { field: 'skaterFullName', header: 'Team' },
     { field: 'position', header: 'Position' },
     { field: 'games_played', header: 'GP' },
     { field: 'goals', header: 'G' },
