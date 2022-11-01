@@ -4849,8 +4849,8 @@ let ApiNhlService = class ApiNhlService {
         const newSeasonString = `${season}-${Number(string1) + 1}`;
         return (statObject = {
             player_stats: {
-                skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'p') })))),
-                goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'g') })))),
+                skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'p') })))),
+                goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'g') })))),
             },
         });
     }
@@ -4894,6 +4894,49 @@ let ApiNhlService = class ApiNhlService {
                 where: {
                     player_id: {
                         nhl_id: id.toString(),
+                    },
+                    playing_year: season,
+                    season_type: 'Regular',
+                },
+            });
+        }
+        const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
+        return playerStatTeamWithInfo;
+    }
+    async getChaTeamSportsnet(id, season, type) {
+        let playerStatTeam;
+        if (type === 'p') {
+            playerStatTeam = await this.playerStatsRepo.findOne({
+                select: {
+                    id: true,
+                    player_id: {
+                        id: true,
+                        sportsnet_id: true,
+                    },
+                    team_name: true,
+                },
+                where: {
+                    player_id: {
+                        sportsnet_id: id.toString(),
+                    },
+                    playing_year: season,
+                    season_type: 'Regular',
+                },
+            });
+        }
+        else {
+            playerStatTeam = await this.goalieStatsRepo.findOne({
+                select: {
+                    id: true,
+                    player_id: {
+                        id: true,
+                        sportsnet_id: true,
+                    },
+                    team_name: true,
+                },
+                where: {
+                    player_id: {
+                        sportsnet_id: id.toString(),
                     },
                     playing_year: season,
                     season_type: 'Regular',

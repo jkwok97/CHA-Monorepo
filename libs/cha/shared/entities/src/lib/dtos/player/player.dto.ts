@@ -3,6 +3,7 @@ export interface PlayerDto {
   firstname: string;
   lastname: string;
   nhl_id: string;
+  sportsnet_id: string;
   isactive: boolean;
   isgoalie: boolean;
   isdefense: boolean;
@@ -16,6 +17,7 @@ export interface PlayerCreateDto {
   firstname: string;
   lastname: string;
   nhl_id: string;
+  sportsnet_id: string;
   isactive: boolean;
   isgoalie: boolean;
   isdefense: boolean;

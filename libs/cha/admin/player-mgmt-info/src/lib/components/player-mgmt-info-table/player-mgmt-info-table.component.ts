@@ -24,6 +24,7 @@ export class PlayerMgmtInfoTableComponent implements OnInit {
     { field: 'id', header: 'Player Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'nhl_id', header: 'NHL Id', visible: true },
+    { field: 'sportsnet_id', header: 'Sportsnet Id', visible: true },
     { field: 'isactive', header: 'Is Active', visible: true },
     { field: 'isgoalie', header: 'Is Goalie', visible: true },
     { field: 'isdefense', header: 'Is Defense', visible: true },

@@ -41,9 +41,12 @@ export class PlayerMgmtInfoEditFormComponent implements OnInit {
           this.firstNameField(),
           this.lastNameField(),
           this.nhlIdField(),
-          this.primaryPositionField(),
-          this.altPositionField(),
+          this.sportsnetField(),
         ],
+      },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [this.primaryPositionField(), this.altPositionField()],
       },
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
@@ -62,6 +65,7 @@ export class PlayerMgmtInfoEditFormComponent implements OnInit {
       lastname: this.player?.lastname,
       isactive: this.player?.isactive,
       nhl_id: this.player?.nhl_id,
+      sportsnet_id: this.player?.sportsnet_id,
       isgoalie: this.player?.isgoalie,
       isdefense: this.player?.isdefense,
       isforward: this.player?.isforward,
@@ -143,6 +147,18 @@ export class PlayerMgmtInfoEditFormComponent implements OnInit {
         messages: {
           required: () => 'NHL Id is required',
         },
+      },
+    };
+  }
+
+  sportsnetField(): FormlyFieldConfig {
+    return {
+      key: 'sportsnet_id',
+      className: 'w-full md:w-2',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Sportsnet Id',
+        placeholder: 'Enter Id',
       },
     };
   }

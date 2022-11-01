@@ -159,7 +159,7 @@ export class ApiNhlService {
         skaters: await Promise.all(
           statObject.player_stats.skaters.map(async (skater) => ({
             ...skater,
-            chaPlayerTeam: await this.getChaTeam(
+            chaPlayerTeam: await this.getChaTeamSportsnet(
               skater.player_id,
               newSeasonString,
               'p'
@@ -169,7 +169,7 @@ export class ApiNhlService {
         goalies: await Promise.all(
           statObject.player_stats.goalies.map(async (skater) => ({
             ...skater,
-            chaPlayerTeam: await this.getChaTeam(
+            chaPlayerTeam: await this.getChaTeamSportsnet(
               skater.player_id,
               newSeasonString,
               'g'
@@ -232,6 +232,52 @@ export class ApiNhlService {
         where: {
           player_id: {
             nhl_id: id.toString(),
+          },
+          playing_year: season,
+          season_type: 'Regular',
+        },
+      });
+    }
+
+    const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
+
+    return playerStatTeamWithInfo;
+  }
+
+  private async getChaTeamSportsnet(id: number, season: string, type: string) {
+    let playerStatTeam;
+
+    if (type === 'p') {
+      playerStatTeam = await this.playerStatsRepo.findOne({
+        select: {
+          id: true,
+          player_id: {
+            id: true,
+            sportsnet_id: true,
+          },
+          team_name: true,
+        },
+        where: {
+          player_id: {
+            sportsnet_id: id.toString(),
+          },
+          playing_year: season,
+          season_type: 'Regular',
+        },
+      });
+    } else {
+      playerStatTeam = await this.goalieStatsRepo.findOne({
+        select: {
+          id: true,
+          player_id: {
+            id: true,
+            sportsnet_id: true,
+          },
+          team_name: true,
+        },
+        where: {
+          player_id: {
+            sportsnet_id: id.toString(),
           },
           playing_year: season,
           season_type: 'Regular',
