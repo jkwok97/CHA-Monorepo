@@ -176,7 +176,7 @@ export class ApiNhlService {
         teamlogo: true,
       },
       where: {
-        shortname: playerStatTeam.team_name,
+        shortname: playerStatTeam?.team_name,
       },
     });
   }

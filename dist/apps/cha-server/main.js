@@ -4873,7 +4873,7 @@ let ApiNhlService = class ApiNhlService {
                 teamlogo: true,
             },
             where: {
-                shortname: playerStatTeam.team_name,
+                shortname: playerStatTeam === null || playerStatTeam === void 0 ? void 0 : playerStatTeam.team_name,
             },
         });
     }
