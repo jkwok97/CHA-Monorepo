@@ -26,7 +26,7 @@ export class NhlStatsSkaterTableComponent {
 
   playerTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
-    { field: 'skaterFullName', header: 'Team' },
+    { field: 'chaTeam', header: 'Team' },
     { field: 'position', header: 'Position' },
     { field: 'games_played', header: 'GP' },
     { field: 'goals', header: 'G' },
@@ -88,6 +88,9 @@ export class NhlStatsSkaterTableComponent {
     return stats.map((stat: NhlPlayerStatDto | NhlGoalieStatDto) => ({
       ...stat,
       playerImg: this.getPlayerPicture(stat.player_id),
+      chaTeam: `${stat.chaPlayerTeam ? stat.chaPlayerTeam[0]['city'] : ''} ${
+        stat.chaPlayerTeam ? stat.chaPlayerTeam[0]['nickname'] : ''
+      }`,
     }));
   }
 
