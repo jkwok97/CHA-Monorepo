@@ -108,8 +108,6 @@ export class ApiNhlService {
         )
       );
 
-    // skaters: result['data']['player_stats']['skaters'],
-    // goalies: result['data']['player_stats']['goalies'],
     return leaders;
   }
 
@@ -155,8 +153,6 @@ export class ApiNhlService {
     const string1 = season.slice(2, 4);
 
     const newSeasonString = `${season}-${Number(string1) + 1}`;
-
-    console.log(newSeasonString);
 
     return (statObject = {
       player_stats: {

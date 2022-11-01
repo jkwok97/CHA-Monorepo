@@ -4826,8 +4826,6 @@ let ApiNhlService = class ApiNhlService {
         const leaders = this.httpService
             .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoForSportsnet(response.data, season)));
-        // skaters: result['data']['player_stats']['skaters'],
-        // goalies: result['data']['player_stats']['goalies'],
         return leaders;
     }
     getNhlRookieSummary(season, player, statsType, sort, start, pageSize) {
@@ -4845,7 +4843,6 @@ let ApiNhlService = class ApiNhlService {
     async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
         const newSeasonString = `${season}-${Number(string1) + 1}`;
-        console.log(newSeasonString);
         return (statObject = {
             player_stats: {
                 skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'p') })))),
