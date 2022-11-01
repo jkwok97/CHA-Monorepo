@@ -1,11 +1,20 @@
+import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { AxiosResponse } from 'axios';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ApiNhlService {
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    @InjectRepository(Players_Stats_V2)
+    private playerStatsRepo: Repository<Players_Stats_V2>,
+    @InjectRepository(Teams_V2)
+    private teamsRepo: Repository<Teams_V2>
+  ) {}
 
   nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
   nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
@@ -16,12 +25,15 @@ export class ApiNhlService {
     playerType: string,
     statType: string,
     season: string
-  ): Observable<AxiosResponse<any[]>> {
+  ): Observable<any[]> {
     const leaders = this.httpService
       .get(
         `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        switchMap((data) => this.setChaTeamInfo(data, season))
+      );
 
     return leaders;
   }
@@ -110,5 +122,55 @@ export class ApiNhlService {
       .pipe(map((response) => response.data.stats[0].splits));
 
     return stats;
+  }
+
+  private async setChaTeamInfo(array: any[], season: string) {
+    const string1 = season.slice(0, 4);
+    const string2 = season.slice(6, 8);
+
+    const newSeasonString = `${string1}-${string2}`;
+
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString),
+      }))
+    );
+  }
+
+  private async getChaTeam(id: number, season: string) {
+    const playerStatTeam = await this.playerStatsRepo.findOne({
+      select: {
+        id: true,
+        player_id: {
+          id: true,
+          nhl_id: true,
+        },
+        team_name: true,
+      },
+      where: {
+        player_id: {
+          nhl_id: id.toString(),
+        },
+        playing_year: season,
+        season_type: 'Regular',
+      },
+    });
+
+    const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
+
+    return playerStatTeamWithInfo;
+  }
+
+  private async getChaTeamInfo(playerStatTeam: Players_Stats_V2) {
+    return this.teamsRepo.find({
+      select: {
+        id: true,
+        teamlogo: true
+      },
+      where: {
+        shortname: playerStatTeam.team_name
+      }
+    })
   }
 }

@@ -4585,6 +4585,8 @@ const axios_1 = __webpack_require__("@nestjs/axios");
 const controllers_1 = __webpack_require__("./libs/api/nhl/src/lib/controllers/index.ts");
 const middlewares_1 = __webpack_require__("./libs/api/nhl/src/lib/middlewares/index.ts");
 const services_1 = __webpack_require__("./libs/api/nhl/src/lib/services/index.ts");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 let ApiNhlModule = class ApiNhlModule {
     configure(consumer) {
         consumer.apply(middlewares_1.NhlMiddleware).forRoutes('*');
@@ -4592,7 +4594,10 @@ let ApiNhlModule = class ApiNhlModule {
 };
 ApiNhlModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [axios_1.HttpModule],
+        imports: [
+            axios_1.HttpModule,
+            typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2]),
+        ],
         controllers: [controllers_1.NhlController],
         providers: [services_1.ApiNhlService],
     })
@@ -4772,16 +4777,21 @@ exports.NhlMiddleware = NhlMiddleware;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiNhlService = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const axios_1 = __webpack_require__("@nestjs/axios");
 const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const rxjs_1 = __webpack_require__("rxjs");
+const typeorm_2 = __webpack_require__("typeorm");
 let ApiNhlService = class ApiNhlService {
-    constructor(httpService) {
+    constructor(httpService, playerStatsRepo, teamsRepo) {
         this.httpService = httpService;
+        this.playerStatsRepo = playerStatsRepo;
+        this.teamsRepo = teamsRepo;
         this.nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
         this.nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
         this.nhlComSummary = 'https://api.nhle.com/stats/rest/en';
@@ -4790,7 +4800,7 @@ let ApiNhlService = class ApiNhlService {
     getNhlLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((data) => this.setChaTeamInfo(data, season)));
         return leaders;
     }
     getNhlGoalieLeaders(playerType, statType, season, minGames) {
@@ -4829,10 +4839,50 @@ let ApiNhlService = class ApiNhlService {
             .pipe((0, rxjs_1.map)((response) => response.data.stats[0].splits));
         return stats;
     }
+    async setChaTeamInfo(array, season) {
+        const string1 = season.slice(0, 4);
+        const string2 = season.slice(6, 8);
+        const newSeasonString = `${string1}-${string2}`;
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString) }))));
+    }
+    async getChaTeam(id, season) {
+        const playerStatTeam = await this.playerStatsRepo.findOne({
+            select: {
+                id: true,
+                player_id: {
+                    id: true,
+                    nhl_id: true,
+                },
+                team_name: true,
+            },
+            where: {
+                player_id: {
+                    nhl_id: id.toString(),
+                },
+                playing_year: season,
+                season_type: 'Regular',
+            },
+        });
+        const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
+        return playerStatTeamWithInfo;
+    }
+    async getChaTeamInfo(playerStatTeam) {
+        return this.teamsRepo.find({
+            select: {
+                id: true,
+                teamlogo: true
+            },
+            where: {
+                shortname: playerStatTeam.team_name
+            }
+        });
+    }
 };
 ApiNhlService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
 ], ApiNhlService);
 exports.ApiNhlService = ApiNhlService;
 
