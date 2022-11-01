@@ -33,7 +33,7 @@ export class ApiNhlService {
       )
       .pipe(
         map((response) => response.data),
-        switchMap((data) => this.setChaTeamInfo(data, season))
+        switchMap((response) => this.setChaTeamInfo(response.data, season))
       );
 
     return leaders;

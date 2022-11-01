@@ -4800,7 +4800,7 @@ let ApiNhlService = class ApiNhlService {
     getNhlLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((data) => this.setChaTeamInfo(data, season)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season)));
         return leaders;
     }
     getNhlGoalieLeaders(playerType, statType, season, minGames) {
