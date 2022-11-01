@@ -143,33 +143,39 @@ export class ApiNhlService {
     return stats;
   }
 
-  private async setChaTeamInfoForSportsnet(array: any[], season: string) {
+  private async setChaTeamInfoForSportsnet(
+    statObject: {
+      player_stats: {
+        skaters: any[];
+        goalies: any[];
+      };
+    },
+    season: string
+  ) {
     const string1 = season.slice(2, 4);
 
     const newSeasonString = `${season}-${Number(string1) + 1}`;
 
-    return await Promise.all(
-      array.map(async (item) => ({
-        player_stats: {
-          skaters: item.player_stats.skaters.map(async (skater) => ({
-            ...skater,
-            chaPlayerTeam: await this.getChaTeam(
-              skater.player_id,
-              newSeasonString,
-              'p'
-            ),
-          })),
-          goalies: item.player_stats.goalies.map(async (skater) => ({
-            ...skater,
-            chaPlayerTeam: await this.getChaTeam(
-              skater.player_id,
-              newSeasonString,
-              'g'
-            ),
-          })),
-        },
-      }))
-    );
+    return (statObject = {
+      player_stats: {
+        skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => ({
+          ...skater,
+          chaPlayerTeam: await this.getChaTeam(
+            skater.player_id,
+            newSeasonString,
+            'p'
+          ),
+        }))),
+        goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => ({
+          ...skater,
+          chaPlayerTeam: await this.getChaTeam(
+            skater.player_id,
+            newSeasonString,
+            'g'
+          ),
+        }))),
+      },
+    })
   }
 
   private async setChaTeamInfo(array: any[], season: string, type: string) {

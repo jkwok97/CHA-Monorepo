@@ -4842,15 +4842,15 @@ let ApiNhlService = class ApiNhlService {
             .pipe((0, rxjs_1.map)((response) => response.data.stats[0].splits));
         return stats;
     }
-    async setChaTeamInfoForSportsnet(array, season) {
+    async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
         const newSeasonString = `${season}-${Number(string1) + 1}`;
-        return await Promise.all(array.map(async (item) => ({
+        return (statObject = {
             player_stats: {
-                skaters: item.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'p') }))),
-                goalies: item.player_stats.goalies.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'g') }))),
+                skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'p') })))),
+                goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeam(skater.player_id, newSeasonString, 'g') })))),
             },
-        })));
+        });
     }
     async setChaTeamInfo(array, season, type) {
         const string1 = season.slice(0, 4);
