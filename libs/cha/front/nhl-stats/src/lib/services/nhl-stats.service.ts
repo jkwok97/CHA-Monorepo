@@ -1,8 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, map, tap } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { NhlPlayerStatDto } from '@cha/shared/entities';
 
 @Injectable()
 export class NhlStatsService {
@@ -40,9 +39,6 @@ export class NhlStatsService {
       .get(
         `${this.apiUrl}/nhl/nhl-summary/rookies/${season}/${player}/${statsType}/${sort}/${start}/${pageSize}`
       )
-      .pipe(
-        tap(console.log),
-        map((result: any) => result)
-      );
+      .pipe(map((result: any) => result));
   }
 }
