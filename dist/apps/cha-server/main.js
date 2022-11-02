@@ -4835,7 +4835,7 @@ let ApiNhlService = class ApiNhlService {
     getNhlRookieSummary(season, player, statsType, sort, start, pageSize) {
         const leaders = this.httpService
             .get(`${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D%5D&start=${start}&limit=${pageSize}&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoRookies(response.data.stats, season)));
         return leaders;
     }
     getNhlPlayerStatsByPlayerId(playerId, season) {
@@ -4859,6 +4859,12 @@ let ApiNhlService = class ApiNhlService {
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString, type) }))));
+    }
+    async setChaTeamInfoRookies(array, season) {
+        const string1 = season.slice(0, 4);
+        const string2 = season.slice(6, 8);
+        const newSeasonString = `${string1}-${string2}`;
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.playerId, newSeasonString, 'p') }))));
     }
     async getChaTeam(id, season, type) {
         let playerStatTeam;

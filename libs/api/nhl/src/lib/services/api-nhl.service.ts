@@ -126,7 +126,9 @@ export class ApiNhlService {
       .pipe(
         map((response) => response.data),
         tap(console.log),
-        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
+        switchMap((response) =>
+          this.setChaTeamInfoRookies(response.data.stats, season)
+        )
       );
 
     return leaders;
@@ -197,6 +199,24 @@ export class ApiNhlService {
           item.player.id,
           newSeasonString,
           type
+        ),
+      }))
+    );
+  }
+
+  private async setChaTeamInfoRookies(array: any[], season: string) {
+    const string1 = season.slice(0, 4);
+    const string2 = season.slice(6, 8);
+
+    const newSeasonString = `${string1}-${string2}`;
+
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        chaPlayerTeam: await this.getChaTeam(
+          item.playerId,
+          newSeasonString,
+          'p'
         ),
       }))
     );
