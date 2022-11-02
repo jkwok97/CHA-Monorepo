@@ -118,12 +118,15 @@ export class ApiNhlService {
     sort: string,
     start: string,
     pageSize: string
-  ): Observable<AxiosResponse<any[]>> {
+  ): Observable<any[]> {
     const leaders = this.httpService
       .get(
         `${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D%5D&start=${start}&limit=${pageSize}&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`
       )
-      .pipe(map((response) => response.data));
+      .pipe(
+        map((response) => response.data),
+        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
+      );
 
     return leaders;
   }
