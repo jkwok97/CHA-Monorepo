@@ -127,7 +127,7 @@ export class ApiNhlService {
         map((response) => response.data),
         tap(console.log),
         switchMap((response) =>
-          this.setChaTeamInfoRookies(response.data.stats, season)
+          this.setChaTeamInfoRookies(response.data, season)
         )
       );
 
