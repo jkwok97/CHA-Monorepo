@@ -30,6 +30,7 @@ export class NhlStatsGoalieTableComponent {
 
   goalieTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
+    { field: 'chaTeam', header: 'Team' },
     { field: 'games_played', header: 'GP' },
     { field: 'wins', header: 'W' },
     { field: 'losses', header: 'L' },
@@ -43,6 +44,7 @@ export class NhlStatsGoalieTableComponent {
 
   mobileGoalieTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
+    { field: 'chaTeam', header: 'Team' },
     { field: 'wins', header: 'W' },
     { field: 'action', header: '...More' },
   ];
@@ -84,6 +86,9 @@ export class NhlStatsGoalieTableComponent {
     return stats.map((stat: NhlPlayerStatDto | NhlGoalieStatDto) => ({
       ...stat,
       playerImg: this.getPlayerPicture(stat.player_id),
+      chaTeam: `${stat.chaPlayerTeam ? stat.chaPlayerTeam[0]['city'] : ''} ${
+        stat.chaPlayerTeam ? stat.chaPlayerTeam[0]['nickname'] : ''
+      }`,
     }));
   }
 

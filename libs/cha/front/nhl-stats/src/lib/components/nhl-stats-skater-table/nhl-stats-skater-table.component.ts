@@ -26,7 +26,7 @@ export class NhlStatsSkaterTableComponent {
 
   playerTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
-    // { field: 'chaTeam', header: 'Team' },
+    { field: 'chaTeam', header: 'Team' },
     { field: 'position', header: 'Position' },
     { field: 'games_played', header: 'GP' },
     { field: 'goals', header: 'G' },
@@ -44,7 +44,7 @@ export class NhlStatsSkaterTableComponent {
 
   mobilePlayerTableColumns = [
     { field: 'skaterFullName', header: 'Name' },
-    // { field: 'chaTeam', header: 'Team' },
+    { field: 'chaTeam', header: 'Team' },
     { field: 'points', header: 'Pts' },
     { field: 'action', header: '...More' },
   ];
