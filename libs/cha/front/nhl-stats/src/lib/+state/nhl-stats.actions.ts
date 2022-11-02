@@ -29,7 +29,7 @@ const getRookieStats = createAction(
 
 const getRookieStatsSuccess = createAction(
   `${NAMESPACE} Get Rookie Stats Success`,
-  props<{ stats: NhlPlayerStatDto[]; total: number }>()
+  props<{ stats: NhlPlayerStatDto[] }>()
 );
 
 const error = createAction(`${NAMESPACE} Error`);

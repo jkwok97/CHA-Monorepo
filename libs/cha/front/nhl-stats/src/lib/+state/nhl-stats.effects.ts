@@ -44,9 +44,7 @@ export class NhlStatsEffects {
             action.pageSize
           )
           .pipe(
-            map(({ stats, total }) =>
-              NhlStatsActions.getRookieStatsSuccess({ stats, total })
-            ),
+            map((stats) => NhlStatsActions.getRookieStatsSuccess({ stats })),
             catchError(() => of(NhlStatsActions.error()))
           )
       )

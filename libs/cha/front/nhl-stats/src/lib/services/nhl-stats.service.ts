@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NhlPlayerStatDto } from '@cha/shared/entities';
 
@@ -35,16 +35,14 @@ export class NhlStatsService {
     sort: string,
     start: number,
     pageSize: number
-  ): Observable<{ stats: NhlPlayerStatDto[]; total: number }> {
+  ) {
     return this._http
       .get(
         `${this.apiUrl}/nhl/nhl-summary/rookies/${season}/${player}/${statsType}/${sort}/${start}/${pageSize}`
       )
       .pipe(
-        map((result: any) => {
-          return { stats: result['data'], total: result['total'] };
-        }),
-        delay(500)
+        tap(console.log),
+        map((result: any) => result)
       );
   }
 }
