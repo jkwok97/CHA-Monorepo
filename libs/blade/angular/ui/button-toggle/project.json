@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/blade/angular/ui/button-toggle"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/blade/angular/ui/button-toggle"
+      ],
       "options": {
         "jestConfig": "libs/blade/angular/ui/button-toggle/jest.config.ts",
         "passWithNoTests": true

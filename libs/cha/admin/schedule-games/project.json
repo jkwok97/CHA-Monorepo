@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/admin/schedule-games"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/schedule-games"],
       "options": {
         "jestConfig": "libs/cha/admin/schedule-games/jest.config.ts",
         "passWithNoTests": true

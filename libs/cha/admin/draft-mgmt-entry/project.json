@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/admin/draft-mgmt-entry"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/draft-mgmt-entry"],
       "options": {
         "jestConfig": "libs/cha/admin/draft-mgmt-entry/jest.config.ts",
         "passWithNoTests": true

@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/admin/player-mgmt-ratings"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/cha/admin/player-mgmt-ratings"
+      ],
       "options": {
         "jestConfig": "libs/cha/admin/player-mgmt-ratings/jest.config.ts",
         "passWithNoTests": true

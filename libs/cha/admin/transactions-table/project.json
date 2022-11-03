@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/admin/transactions-table"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/transactions-table"],
       "options": {
         "jestConfig": "libs/cha/admin/transactions-table/jest.config.ts",
         "passWithNoTests": true

@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/blade/angular/ui/leader-card"],
+      "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/leader-card"],
       "options": {
         "jestConfig": "libs/blade/angular/ui/leader-card/jest.config.ts",
         "passWithNoTests": true

@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/blade/angular/ui/layout"],
+      "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/layout"],
       "options": {
         "jestConfig": "libs/blade/angular/ui/layout/jest.config.ts",
         "passWithNoTests": true

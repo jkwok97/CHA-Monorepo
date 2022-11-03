@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/blade/angular/ui/divider"],
+      "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/divider"],
       "options": {
         "jestConfig": "libs/blade/angular/ui/divider/jest.config.ts",
         "passWithNoTests": true

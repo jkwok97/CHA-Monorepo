@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/front/rules-winnings"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cha/front/rules-winnings"],
       "options": {
         "jestConfig": "libs/cha/front/rules-winnings/jest.config.ts",
         "passWithNoTests": true

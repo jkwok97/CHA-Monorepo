@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/draft-table"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/draft-table"],
       "options": {
         "jestConfig": "libs/api/draft-table/jest.config.ts",
         "passWithNoTests": true

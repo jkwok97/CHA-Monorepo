@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/waivers"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/waivers"],
       "options": {
         "jestConfig": "libs/api/waivers/jest.config.ts",
         "passWithNoTests": true

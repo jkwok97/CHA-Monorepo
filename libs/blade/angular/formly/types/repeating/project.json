@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/blade/angular/formly/types/repeating"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/blade/angular/formly/types/repeating"
+      ],
       "options": {
         "jestConfig": "libs/blade/angular/formly/types/repeating/jest.config.ts",
         "passWithNoTests": true

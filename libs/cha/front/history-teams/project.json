@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/front/history-teams"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cha/front/history-teams"],
       "options": {
         "jestConfig": "libs/cha/front/history-teams/jest.config.ts",
         "passWithNoTests": true

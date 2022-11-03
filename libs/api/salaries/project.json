@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/salaries"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/salaries"],
       "options": {
         "jestConfig": "libs/api/salaries/jest.config.ts",
         "passWithNoTests": true

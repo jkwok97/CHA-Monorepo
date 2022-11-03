@@ -13,7 +13,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api/player-info"],
+      "outputs": ["{workspaceRoot}/coverage/libs/api/player-info"],
       "options": {
         "jestConfig": "libs/api/player-info/jest.config.ts",
         "passWithNoTests": true

@@ -6,7 +6,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/front/stats-team-all"],
+      "outputs": ["{workspaceRoot}/coverage/libs/cha/front/stats-team-all"],
       "options": {
         "jestConfig": "libs/cha/front/stats-team-all/jest.config.ts",
         "passWithNoTests": true

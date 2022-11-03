@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cha/admin/transactions-waivers"],
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/cha/admin/transactions-waivers"
+      ],
       "options": {
         "jestConfig": "libs/cha/admin/transactions-waivers/jest.config.ts",
         "passWithNoTests": true
