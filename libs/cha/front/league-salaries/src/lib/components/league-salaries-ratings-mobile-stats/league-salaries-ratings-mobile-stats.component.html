@@ -1,1 +1,11 @@
-<p>league-salaries-ratings-mobile-stats works!</p>
+<div class="text-lg pb-3 text-center">Stats</div>
+<div class="p-2 flex flex-column">
+  <div>Games Played: {{ stats.games_played }}</div>
+  <div *ngIf="stats.goals">Goals: {{ stats.goals }}</div>
+  <div *ngIf="stats.assists">Assists: {{ stats.assists }}</div>
+  <div *ngIf="stats.points">Points: {{ stats.points }}</div>
+  <div *ngIf="stats.shooting_pct">Shooting %: {{ stats.shooting_pct }}%</div>
+  <div *ngIf="stats.wins">Wins: {{ stats.wins }}</div>
+  <div *ngIf="stats.goals_against_avg">GAA: {{ stats.goals_against_avg }}</div>
+  <div *ngIf="stats.save_pct">Save %: {{ stats.save_pct }}%</div>
+</div>
