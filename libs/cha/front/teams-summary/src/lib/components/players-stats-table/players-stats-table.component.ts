@@ -51,7 +51,7 @@ export class PlayersStatsTableComponent implements OnInit {
   ];
 
   mobilePlayerTableColumns = [
-    { field: 'team', header: 'Team', visible: true },
+    { field: 'playing_year', header: 'Year', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'points', header: 'Pts', visible: true },
     { field: 'action', header: '...More', visible: true },

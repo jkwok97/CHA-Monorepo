@@ -48,7 +48,7 @@ export class GoalieStatsTableComponent implements OnInit {
   ];
 
   mobileGoalieTableColumns = [
-    { field: 'team', header: 'Team', visible: true },
+    { field: 'playing_year', header: 'Year', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'wins', header: 'Wins', visible: true },
     { field: 'action', header: '...More', visible: true },
