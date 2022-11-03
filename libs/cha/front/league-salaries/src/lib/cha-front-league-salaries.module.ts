@@ -34,6 +34,7 @@ import {
   LeagueSalariesRatingsExpansionComponent,
   LeagueSalariesRatingsMobileRatingsComponent,
 } from './components';
+import { LeagueSalariesRatingsMobileStatsComponent } from './components/league-salaries-ratings-mobile-stats/league-salaries-ratings-mobile-stats.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import {
     LeagueSalariesRatingsSidebarComponent,
     LeagueSalariesRatingsExpansionComponent,
     LeagueSalariesRatingsMobileRatingsComponent,
+    LeagueSalariesRatingsMobileStatsComponent,
   ],
   providers: [
     LeagueSalariesAndRatingsService,

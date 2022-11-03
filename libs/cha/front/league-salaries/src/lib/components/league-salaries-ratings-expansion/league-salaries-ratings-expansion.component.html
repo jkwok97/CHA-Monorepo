@@ -1,4 +1,6 @@
-<div *ngIf="isOffSeason$ | async" class="text-center">** it is currently the offseason, ratings shown are from previous season **</div>
+<div *ngIf="isOffSeason$ | async" class="text-center">
+  ** it is currently the offseason, ratings shown are from previous season **
+</div>
 <div
   class="flex column-gap-2 h-full justify-content-evenly p-3 flex-wrap row-gap-3"
 >
@@ -102,4 +104,19 @@
     [title]="'SF'"
     [rating]="ratings.shift_fatigue"
   ></cha-front-league-salaries-ratings-badge>
+</div>
+
+<div class="p-2 flex justify-content-evenly">
+  <div>Games Played: {{ ratings.games_played }}</div>
+  <div *ngIf="ratings.goals">Goals: {{ ratings.goals }}</div>
+  <div *ngIf="ratings.assists">Assists: {{ ratings.assists }}</div>
+  <div *ngIf="ratings.points">Points: {{ ratings.points }}</div>
+  <div *ngIf="ratings.shooting_pct">
+    Shooting %: {{ ratings.shooting_pct }}%
+  </div>
+  <div *ngIf="ratings.wins">Wins: {{ ratings.wins }}</div>
+  <div *ngIf="ratings.goals_against_avg">
+    GAA: {{ ratings.goals_against_avg }}
+  </div>
+  <div *ngIf="ratings.save_pct">Save %: {{ ratings.save_pct }}%</div>
 </div>
