@@ -1,13 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { PlayerRatingDto, GoalieRatingDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-front-league-salaries-ratings-mobile-stats',
   templateUrl: './league-salaries-ratings-mobile-stats.component.html',
-  styleUrls: ['./league-salaries-ratings-mobile-stats.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LeagueSalariesRatingsMobileStatsComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class LeagueSalariesRatingsMobileStatsComponent {
+  @Input() stats!: PlayerRatingDto | GoalieRatingDto;
 }

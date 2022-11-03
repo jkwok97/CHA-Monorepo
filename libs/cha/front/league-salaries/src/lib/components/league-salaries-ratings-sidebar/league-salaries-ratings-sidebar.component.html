@@ -20,8 +20,13 @@
 </div>
 <blade-divider></blade-divider>
 <div class="text-md font-light flex justify-content-evenly">
-  <cha-front-league-salaries-ratings-mobile-salary [salaries]="data.salaries">
-  </cha-front-league-salaries-ratings-mobile-salary>
+  <div>
+    <cha-front-league-salaries-ratings-mobile-salary [salaries]="data.salaries">
+    </cha-front-league-salaries-ratings-mobile-salary>
+    <blade-divider></blade-divider>
+    <cha-front-league-salaries-ratings-mobile-stats [stats]="data.ratings"></cha-front-league-salaries-ratings-mobile-stats>
+  </div>
+
   <blade-divider [layout]="'vertical'"></blade-divider>
   <cha-front-league-salaries-ratings-mobile-ratings
     [ratings]="data.ratings"
