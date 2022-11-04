@@ -18,6 +18,7 @@ import { GamesAllFacade } from '../../+state/games-all.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamesAllBoxScoreComponent implements OnInit {
+  @Input() isMobile!: boolean;
   @Output() closeSidebar = new EventEmitter<boolean>();
 
   isLoading$: Observable<boolean>;

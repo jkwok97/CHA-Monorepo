@@ -7,9 +7,18 @@
 </ng-container>
 
 <ng-container *ngIf="(isLoading$ | async) === false">
-  <div class="text-sm boxscore" *ngIf="content">
-    {{ content }}
-  </div>
+  <ng-container *ngIf="!isMobile">
+    <div class="text-sm boxscore flex justify-content-center" *ngIf="content">
+      {{ content }}
+    </div>
 
-  <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+    <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+  </ng-container>
+  <ng-container *ngIf="isMobile">
+    <div class="text-xs boxscore-mobile" *ngIf="content">
+      {{ content }}
+    </div>
+
+    <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+  </ng-container>
 </ng-container>

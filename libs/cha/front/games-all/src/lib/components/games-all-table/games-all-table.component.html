@@ -27,12 +27,12 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Day</th>
-      <th>Visitor</th>
-      <th>Score</th>
+      <th *ngIf="!isMobile">Visitor</th>
+      <th *ngIf="!isMobile">Score</th>
       <th>Versus</th>
-      <th>Score</th>
-      <th>Home</th>
-      <th *ngIf="!isMobile"></th>
+      <th *ngIf="!isMobile">Score</th>
+      <th *ngIf="!isMobile">Home</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template
@@ -70,11 +70,11 @@
           <span class="ml-2" *ngIf="!isMobile">{{ day.visTeamName }}</span>
         </div>
       </td>
-      <td>
+      <td *ngIf="!isMobile">
         {{ day.vis_team_score }}
       </td>
       <td>@</td>
-      <td>
+      <td *ngIf="!isMobile">
         {{ day.home_team_score }}
       </td>
       <td>
@@ -90,7 +90,6 @@
           icon="pi pi-file"
           class="p-button-rounded p-button-primary"
           (click)="onClick(day)"
-          *ngIf="!isMobile"
         ></button>
       </td>
     </tr>
@@ -105,6 +104,7 @@
   *ngIf="display"
 >
   <cha-front-games-all-box-score
+    [isMobile]="isMobile"
     (closeSidebar)="onClose()"
   ></cha-front-games-all-box-score>
 </p-sidebar>
