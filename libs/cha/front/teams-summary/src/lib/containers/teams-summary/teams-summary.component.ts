@@ -21,15 +21,6 @@ export class TeamsSummaryComponent implements OnDestroy {
   isMobile = false;
   teams!: TeamDto[];
   currentTeamId!: number;
-  panelStyleMobile = {
-    width: '100%',
-    height: '85vh',
-  };
-
-  panelStyleDesktop = {
-    width: '100%',
-    height: '90vh',
-  };
 
   pages = [
     { page: 1, name: 'Depth Chart' },

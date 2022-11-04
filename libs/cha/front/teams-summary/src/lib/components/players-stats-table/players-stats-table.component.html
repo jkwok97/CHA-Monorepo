@@ -1,8 +1,10 @@
 <p-table
   #dt
-  [responsiveLayout]="'stack'"
   [value]="statsForTable"
-  [columns]="!isMobile ? playerTableColumns : mobilePlayerTableColumns"
+  [scrollable]="isMobile ? true : false"
+  scrollDirection="both"
+  [scrollHeight]="'100%'"
+  [showPageLinks]="isMobile ? false : true"
   styleClass="p-datatable-sm p-datatable-striped"
   class="table"
   [rows]="rows"
@@ -29,111 +31,76 @@
       </span>
     </div>
   </ng-template>
-  <ng-template pTemplate="header" let-columns let-data>
-    <ng-container
-      *ngIf="isMobile; then showMobile; else showDesktop"
-    ></ng-container>
-    <ng-template #showMobile>
-      <tr>
-        <th
-          *ngFor="let column of mobilePlayerTableColumns"
-          [hidden]="!column.visible"
-        >
-          {{ column.header }}
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template #showDesktop>
-      <tr>
-        <th
-          *ngFor="let column of playerTableColumns"
-          [hidden]="!column.visible"
-          [pSortableColumn]="column.field"
-          [pSortableColumnDisabled]="column.field === 'team'"
-        >
-          {{ column.header }}
-          <p-sortIcon
-            [field]="column.field"
-            *ngIf="column.field !== 'team'"
-          ></p-sortIcon>
-        </th>
-      </tr>
-    </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th
+        pSortableColumn="full_name"
+        [style]="{
+          width: '175px',
+          'box-shadow': isMobile ? '8px 0px 8px -8px white' : ''
+        }"
+        pFrozenColumn
+      >
+        Name
+      </th>
+      <th pSortableColumn="playing_year" style="width: 125px">Playing Year</th>
+      <th pSortableColumn="games_played" style="width: 75px">GP</th>
+      <th pSortableColumn="goals" style="width: 75px">G</th>
+      <th pSortableColumn="assists" style="width: 75px">A</th>
+      <th pSortableColumn="points" style="width: 75px">Pts</th>
+      <th pSortableColumn="pointsPerSixty" style="width: 75px">Pts/60</th>
+      <th pSortableColumn="plus_minus" style="width: 75px">+/-</th>
+      <th pSortableColumn="penalty_minutes" style="width: 75px">PIM</th>
+      <th pSortableColumn="pp_goals" style="width: 75px">PPG</th>
+      <th pSortableColumn="sh_goals" style="width: 75px">SHG</th>
+      <th pSortableColumn="gw_goals" style="width: 75px">GWG</th>
+      <th pSortableColumn="shots" style="width: 75px">SOG</th>
+      <th pSortableColumn="shooting_pct" style="width: 75px">Sh%</th>
+      <th pSortableColumn="minutes_per_game" style="width: 75px">Min/G</th>
+      <th pSortableColumn="fo_pct" style="width: 75px">FO%</th>
+      <th pSortableColumn="pass_pct" style="width: 75px">Pass%</th>
+      <th pSortableColumn="corner_pct" style="width: 75px">CB%</th>
+      <th pSortableColumn="hit_per_game" style="width: 75px">Hits/G</th>
+      <th pSortableColumn="blocked_shots" style="width: 75px">BS</th>
+    </tr>
   </ng-template>
 
-  <ng-template
-    pTemplate="body"
-    let-data
-    let-columns="columns"
-    let-rowIndex="rowIndex"
-  >
-    <ng-container
-      *ngIf="isMobile; then showMobileBody; else showDesktopBody"
-    ></ng-container>
-    <ng-template #showMobileBody>
-      <tr>
-        <td
-          *ngFor="let column of mobilePlayerTableColumns"
-          [hidden]="!column.visible"
-        >
-          <span
-            class="p-column-title"
-            *ngIf="statType === 'season' || column.header !== 'Team'"
-            >{{ column.header }}</span
-          >
-          <div class="table-body-cell">
-            <ng-container
-              *ngIf="column.field === 'team' && statType === 'season'"
-            >
-              <img
-                [src]="data.teamLogo"
-                height="30px"
-                [pTooltip]="data.team_name"
-                tooltipPosition="right"
-              />
-            </ng-container>
-            <p-avatar
-              [image]="getPlayerPicture(data.player_id?.nhl_id)"
-              shape="circle"
-              *ngIf="
-                column.field.includes('full_name') && data.player_id.nhl_id
-              "
-            ></p-avatar>
-            <ng-container>{{ data[column.field] }}</ng-container>
-            <ng-container *ngIf="column.field === 'action'">
-              <button
-                pButton
-                type="button"
-                icon="pi pi-window-maximize"
-                class="p-button-rounded p-button-info"
-                (click)="onPlayerClick(data)"
-              ></button>
-            </ng-container>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #showDesktopBody>
-      <tr>
-        <td
-          *ngFor="let column of playerTableColumns"
-          [hidden]="!column.visible"
-        >
-          <span class="p-column-title">{{ column.header }}</span>
-          <div class="table-body-cell">
-            <ng-container *ngIf="column.field === 'team'">
-              <img
-                [src]="data.teamLogo"
-                height="30px"
-                [pTooltip]="data.team_name"
-                tooltipPosition="right"
-              />
-            </ng-container>
-            <ng-container>{{ data[column.field] }}</ng-container>
-          </div>
-        </td>
-      </tr>
-    </ng-template>
+  <ng-template pTemplate="body" let-statsForTable>
+    <tr>
+      <td
+        [style]="{
+          width: '175px',
+          'box-shadow': isMobile ? '8px 0px 8px -8px white' : ''
+        }"
+        pFrozenColumn
+      >
+        {{ statsForTable.full_name }}
+      </td>
+      <td style="width: 125px">
+        {{ statsForTable.playing_year }}
+      </td>
+      <td style="width: 75px">
+        {{ statsForTable.games_played }}
+      </td>
+      <td style="width: 75px">{{ statsForTable.goals }}</td>
+      <td style="width: 75px">{{ statsForTable.assists }}</td>
+      <td style="width: 75px">{{ statsForTable.points }}</td>
+      <td style="width: 75px">{{ statsForTable.pointsPerSixty }}</td>
+      <td style="width: 75px">{{ statsForTable.plus_minus }}</td>
+      <td style="width: 75px">{{ statsForTable.penalty_minutes }}</td>
+      <td style="width: 75px">{{ statsForTable.pp_goals }}</td>
+      <td style="width: 75px">{{ statsForTable.sh_goals }}</td>
+      <td style="width: 75px">{{ statsForTable.gw_goals }}</td>
+      <td style="width: 75px">{{ statsForTable.shots }}</td>
+      <td style="width: 75px">{{ statsForTable.shooting_pct }}</td>
+      <td style="width: 75px">{{ statsForTable.minutes_per_game }}</td>
+      <td style="width: 75px">{{ statsForTable.fo_pct }}</td>
+      <td style="width: 75px">{{ statsForTable.pass_pct }}</td>
+      <td style="width: 75px">{{ statsForTable.corner_pct }}</td>
+      <td style="width: 75px">{{ statsForTable.hit_per_game }}</td>
+      <td style="width: 75px">{{ statsForTable.blocked_shots }}</td>
+    </tr>
   </ng-template>
 </p-table>
 
