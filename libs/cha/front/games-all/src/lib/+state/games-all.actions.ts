@@ -20,6 +20,8 @@ const getBoxScoreSuccess = createAction(
   props<{ game: File | null }>()
 );
 
+const resetBoxScore = createAction(`${NAMESPACE} Reset Box Score`);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const GamesAllActions = {
@@ -27,5 +29,6 @@ export const GamesAllActions = {
   getAllSuccess,
   getBoxScore,
   getBoxScoreSuccess,
+  resetBoxScore,
   error,
 };

@@ -28,6 +28,10 @@ export class GamesAllFacade {
     GamesAllSelectors.selectBoxScore
   );
 
+  gameLoading$: Observable<boolean> = this.store.select(
+    GamesAllSelectors.selectGameLoading
+  );
+
   constructor(private store: Store<State>) {}
 
   getSchedule() {
@@ -36,5 +40,9 @@ export class GamesAllFacade {
 
   getBoxScore(gameId: number, playingYear: string) {
     this.store.dispatch(GamesAllActions.getBoxScore({ gameId, playingYear }));
+  }
+
+  resetBoxScore() {
+    this.store.dispatch(GamesAllActions.resetBoxScore());
   }
 }

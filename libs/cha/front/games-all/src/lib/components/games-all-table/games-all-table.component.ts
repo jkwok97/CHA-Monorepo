@@ -65,16 +65,11 @@ export class GamesAllTableComponent implements OnInit {
 
   onClick(day: ScheduleAllDto) {
     this.gamesAllFacade.getBoxScore(day.id, day.playing_year);
-
-    this.gamesAllFacade.boxScore$
-      .pipe(untilDestroyed(this))
-      .subscribe((game: File | null) => {
-        this.game = game;
-        this.display = true;
-      });
+    this.display = true;
   }
 
   onClose() {
+    this.gamesAllFacade.resetBoxScore();
     this.display = false;
   }
 }

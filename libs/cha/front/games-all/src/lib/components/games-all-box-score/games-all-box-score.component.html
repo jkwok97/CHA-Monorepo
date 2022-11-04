@@ -1,5 +1,15 @@
-<div class="text-sm boxscore" *ngIf="content">
-  {{ content }}
-</div>
+<ng-container *ngIf="isLoading$ | async">
+  <p-progressBar
+    mode="indeterminate"
+    [style]="{ height: '6px' }"
+    *ngIf="isLoading$ | async"
+  ></p-progressBar>
+</ng-container>
 
-<div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <div class="text-sm boxscore" *ngIf="content">
+    {{ content }}
+  </div>
+
+  <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+</ng-container>

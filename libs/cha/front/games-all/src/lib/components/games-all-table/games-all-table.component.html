@@ -100,10 +100,10 @@
   [(visible)]="display"
   [fullScreen]="true"
   [dismissible]="false"
+  (onHide)="onClose()"
   *ngIf="display"
 >
   <cha-front-games-all-box-score
     (closeSidebar)="onClose()"
-    [content]="game"
   ></cha-front-games-all-box-score>
 </p-sidebar>

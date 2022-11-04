@@ -7,6 +7,7 @@ export interface State {
   game: File | null;
   loading: boolean;
   loaded: boolean;
+  gameLoading: boolean;
 }
 
 const initialState: State = {
@@ -14,6 +15,7 @@ const initialState: State = {
   game: null,
   loading: false,
   loaded: false,
+  gameLoading: false
 };
 
 const r = createReducer(
@@ -32,9 +34,20 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(GamesAllActions.getBoxScore, (state, action) => ({
+    ...state,
+    gameLoading: true
+  })),
+
   on(GamesAllActions.getBoxScoreSuccess, (state, action) => ({
     ...state,
     game: action.game,
+    gameLoading: false
+  })),
+
+  on(GamesAllActions.resetBoxScore, (state, action) => ({
+    ...state,
+    game: null,
   })),
 
   on(GamesAllActions.error, (state) => initialState)
@@ -51,3 +64,5 @@ export const getGame = (state: State) => state.game;
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
+
+export const getGameLoading = (state: State) => state.gameLoading;
