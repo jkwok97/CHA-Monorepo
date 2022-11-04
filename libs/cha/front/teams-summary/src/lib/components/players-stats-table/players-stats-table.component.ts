@@ -57,6 +57,33 @@ export class PlayersStatsTableComponent implements OnInit {
     { field: 'action', header: '...More', visible: true },
   ];
 
+  scrollableCols = [
+    { field: 'player_name', header: 'Player Name', visible: false },
+    { field: 'games_played', header: 'GP', visible: true },
+    { field: 'goals', header: 'G', visible: true },
+    { field: 'assists', header: 'A', visible: true },
+    { field: 'points', header: 'Pts', visible: true },
+    { field: 'pointsPerSixty', header: 'Pts/60', visible: true },
+    { field: 'plus_minus', header: '+/-', visible: true },
+    { field: 'penalty_minutes', header: 'PIM', visible: true },
+    { field: 'pp_goals', header: 'PPG', visible: true },
+    { field: 'sh_goals', header: 'SHG', visible: true },
+    { field: 'gw_goals', header: 'GWG', visible: true },
+    { field: 'shots', header: 'SOG', visible: true },
+    { field: 'shooting_pct', header: 'Sh%', visible: true },
+    { field: 'minutes_per_game', header: 'Min/G', visible: true },
+    { field: 'fo_pct', header: 'FO%', visible: true },
+    { field: 'pass_pct', header: 'Pass%', visible: true },
+    { field: 'corner_pct', header: 'CB%', visible: true },
+    { field: 'hit_per_game', header: 'Hits/G', visible: true },
+    { field: 'blocked_shots', header: 'BS', visible: true },
+  ];
+
+  frozenColumns = [
+    { field: 'playing_year', header: 'Year', visible: true },
+    { field: 'full_name', header: 'Name', visible: true },
+  ];
+
   first = 0;
   rows = 25;
   totalRecords = 0;
