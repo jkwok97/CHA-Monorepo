@@ -38,4 +38,8 @@ export class GamesAllBoxScoreComponent implements OnInit {
         }
       });
   }
+
+  onClose() {
+    this.closeSidebar.emit(true);
+  }
 }

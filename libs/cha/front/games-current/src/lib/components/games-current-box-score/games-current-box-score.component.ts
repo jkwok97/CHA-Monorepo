@@ -38,4 +38,8 @@ export class GamesCurrentBoxScoreComponent implements OnInit {
         }
       });
   }
+
+  onClose() {
+    this.closeSidebar.emit(true);
+  }
 }

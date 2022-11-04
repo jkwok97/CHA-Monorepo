@@ -10,16 +10,21 @@
   ></cha-front-games-current-team-card>
 
   <div class="result">
-    <div *ngIf="game.visTeamScore && game.homeTeamScore">Results:</div>
+    <div *ngIf="game.visTeamScore >= 0 && game.homeTeamScore >= 0">
+      Results:
+    </div>
     <div>{{ game.visTeamScore }} @ {{ game.homeTeamScore }}</div>
-    <div *ngIf="game.visTeamScore && game.homeTeamScore" class="text-sm">
+    <div
+      *ngIf="game.visTeamScore >= 0 && game.homeTeamScore >= 0"
+      class="text-sm"
+    >
       <button
-          pButton
-          type="button"
-          icon="pi pi-file"
-          class="p-button-rounded p-button-primary"
-          (click)="onClick(game)"
-        ></button>
+        pButton
+        type="button"
+        icon="pi pi-file"
+        class="p-button-rounded p-button-primary"
+        (click)="onClick(game)"
+      ></button>
     </div>
   </div>
 
@@ -35,6 +40,7 @@
   [(visible)]="display"
   [fullScreen]="true"
   [dismissible]="false"
+  [showCloseIcon]="false"
   (onHide)="onClose()"
   *ngIf="display"
 >

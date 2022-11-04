@@ -1,25 +1,49 @@
 <ng-container *ngIf="isLoading$ | async">
-    <p-progressBar
-      mode="indeterminate"
-      [style]="{ height: '6px' }"
-      *ngIf="isLoading$ | async"
-    ></p-progressBar>
-  </ng-container>
-  
-  <ng-container *ngIf="(isLoading$ | async) === false">
-    <ng-container *ngIf="!isMobile">
-      <div class="text-sm boxscore flex justify-content-center" *ngIf="content">
+  <p-progressBar
+    mode="indeterminate"
+    [style]="{ height: '6px' }"
+    *ngIf="isLoading$ | async"
+  ></p-progressBar>
+</ng-container>
+
+<ng-container *ngIf="(isLoading$ | async) === false">
+  <ng-container *ngIf="!isMobile">
+    <div class="flex justify-content-center pt-3">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Close"
+        class="p-button-raised"
+        (click)="onClose()"
+      ></button>
+    </div>
+
+    <div *ngIf="content">
+      <div class="text-sm boxscore flex justify-content-center">
         {{ content }}
       </div>
-  
-      <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
-    </ng-container>
-    <ng-container *ngIf="isMobile">
-      <div class="text-xs boxscore-mobile" *ngIf="content">
-        <div class="text-lg">Turn Phone To Side</div>
-        {{ content }}
-      </div>
-  
-      <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
-    </ng-container>
+    </div>
+
+    <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
   </ng-container>
+  <ng-container *ngIf="isMobile">
+    <div class="flex justify-content-center pt-3 pb-3">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Close"
+        class="p-button-raised"
+        (click)="onClose()"
+      ></button>
+    </div>
+
+    <div class="text-xs boxscore-mobile" *ngIf="content">
+      <div class="text-lg text-center">Turn Phone To Side For Best View</div>
+      {{ content }}
+    </div>
+
+    <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+  </ng-container>
+</ng-container>
