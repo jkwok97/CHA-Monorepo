@@ -1,3 +1,5 @@
-<div class="text-sm boxscore">
+<div class="text-sm boxscore" *ngIf="content">
   {{ content }}
 </div>
+
+<div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
