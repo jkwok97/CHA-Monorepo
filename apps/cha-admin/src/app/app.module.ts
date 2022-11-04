@@ -39,6 +39,10 @@ const getApiUrl = (appConfig: AppConfigService) => {
   return appConfig.getConfig().apiUrl;
 };
 
+const getFileUrl = (appConfig: AppConfigService) => {
+  return appConfig.getConfig().fileUrl;
+};
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -93,6 +97,12 @@ const getApiUrl = (appConfig: AppConfigService) => {
     {
       provide: 'apiUrl',
       useFactory: getApiUrl,
+      multi: false,
+      deps: [AppConfigService],
+    },
+    {
+      provide: 'fileUrl',
+      useFactory: getFileUrl,
       multi: false,
       deps: [AppConfigService],
     },

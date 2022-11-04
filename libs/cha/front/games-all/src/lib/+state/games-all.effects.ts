@@ -30,4 +30,18 @@ export class GamesAllEffects {
       )
     )
   );
+
+  getBoxScore$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GamesAllActions.getBoxScore),
+      exhaustMap((action) =>
+        this.gamesAllService
+          .getBoxScore(action.gameId, action.playingYear)
+          .pipe(
+            map((game: File) => GamesAllActions.getBoxScoreSuccess({ game })),
+            catchError(() => of(GamesAllActions.error()))
+          )
+      )
+    )
+  );
 }

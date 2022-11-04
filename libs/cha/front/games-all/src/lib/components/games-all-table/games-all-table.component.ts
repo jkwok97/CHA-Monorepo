@@ -9,7 +9,10 @@ import { DisplayFacade } from '@cha/domain/core';
 import { ScheduleAllDto } from '@cha/shared/entities';
 import { first } from 'rxjs';
 import { Table } from 'primeng/table';
+import { GamesAllFacade } from '../../+state/games-all.facade';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'cha-front-games-all-table',
   templateUrl: './games-all-table.component.html',
@@ -22,8 +25,13 @@ export class GamesAllTableComponent implements OnInit {
 
   gamesForTable!: any;
   isMobile = false;
+  display = false;
+  game!: File | null;
 
-  constructor(private displayFacade: DisplayFacade) {
+  constructor(
+    private displayFacade: DisplayFacade,
+    private gamesAllFacade: GamesAllFacade
+  ) {
     this.displayFacade.isMobile$
       .pipe(first())
       .subscribe((isMobile: boolean) => {
@@ -53,5 +61,20 @@ export class GamesAllTableComponent implements OnInit {
 
   applyFilterGlobal(event: any, stringVal: string) {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
+  }
+
+  onClick(day: ScheduleAllDto) {
+    this.gamesAllFacade.getBoxScore(day.id, day.playing_year);
+
+    this.gamesAllFacade.boxScore$
+      .pipe(untilDestroyed(this))
+      .subscribe((game: File | null) => {
+        this.game = game;
+        this.display = true;
+      });
+  }
+
+  onClose() {
+    this.display = false;
   }
 }

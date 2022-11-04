@@ -24,9 +24,17 @@ export class GamesAllFacade {
     GamesAllSelectors.selectSeason
   );
 
+  boxScore$: Observable<File | null> = this.store.select(
+    GamesAllSelectors.selectBoxScore
+  );
+
   constructor(private store: Store<State>) {}
 
   getSchedule() {
     this.store.dispatch(GamesAllActions.getAll());
+  }
+
+  getBoxScore(gameId: number, playingYear: string) {
+    this.store.dispatch(GamesAllActions.getBoxScore({ gameId, playingYear }));
   }
 }

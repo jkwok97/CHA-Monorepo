@@ -32,6 +32,7 @@
       <th>Versus</th>
       <th>Score</th>
       <th>Home</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template
@@ -82,6 +83,27 @@
           <span class="ml-2" *ngIf="!isMobile">{{ day.homeTeamName }}</span>
         </div>
       </td>
+      <td>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-file"
+          class="p-button-rounded p-button-primary"
+          (click)="onClick(day)"
+        ></button>
+      </td>
     </tr>
   </ng-template>
 </p-table>
+
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [dismissible]="false"
+  *ngIf="display"
+>
+  <cha-front-games-all-box-score
+    (closeSidebar)="onClose()"
+    [content]="game"
+  ></cha-front-games-all-box-score>
+</p-sidebar>

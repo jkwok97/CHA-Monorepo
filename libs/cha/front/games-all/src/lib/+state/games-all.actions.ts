@@ -10,10 +10,22 @@ const getAllSuccess = createAction(
   props<{ schedule: ScheduleAllDto[] }>()
 );
 
+const getBoxScore = createAction(
+  `${NAMESPACE} Get Box Score`,
+  props<{ gameId: number; playingYear: string }>()
+);
+
+const getBoxScoreSuccess = createAction(
+  `${NAMESPACE} Get Box Score Success`,
+  props<{ game: File | null }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const GamesAllActions = {
   getAll,
   getAllSuccess,
+  getBoxScore,
+  getBoxScoreSuccess,
   error,
 };

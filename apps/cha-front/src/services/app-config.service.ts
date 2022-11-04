@@ -27,4 +27,8 @@ export class AppConfigService {
   getApiUrl() {
     return this._appConfig.apiUrl;
   }
+
+  getFileUrl() {
+    return this._appConfig.fileUrl;
+  }
 }

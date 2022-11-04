@@ -4,12 +4,14 @@ import { GamesAllActions } from './games-all.actions';
 
 export interface State {
   schedule: ScheduleAllDto[];
+  game: File | null;
   loading: boolean;
   loaded: boolean;
 }
 
 const initialState: State = {
   schedule: [],
+  game: null,
   loading: false,
   loaded: false,
 };
@@ -30,6 +32,11 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(GamesAllActions.getBoxScoreSuccess, (state, action) => ({
+    ...state,
+    game: action.game,
+  })),
+
   on(GamesAllActions.error, (state) => initialState)
 );
 
@@ -38,6 +45,8 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getSchedule = (state: State) => state.schedule;
+
+export const getGame = (state: State) => state.game;
 
 export const getLoading = (state: State) => state.loading;
 
