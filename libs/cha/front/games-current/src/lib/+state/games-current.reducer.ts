@@ -4,14 +4,18 @@ import { GamesCurrentActions } from './games-current.actions';
 
 export interface State {
   games: GamesDto[];
+  game: File | null;
   loading: boolean;
   loaded: boolean;
+  gameLoading: boolean;
 }
 
 const initialState: State = {
   games: [],
+  game: null,
   loading: false,
   loaded: false,
+  gameLoading: false,
 };
 
 const r = createReducer(
@@ -40,6 +44,28 @@ const r = createReducer(
     })
   ),
 
+  on(GamesCurrentActions.getBoxScore, (state, action) => ({
+    ...state,
+    gameLoading: true,
+  })),
+
+  on(GamesCurrentActions.getBoxScoreSuccess, (state, action) => ({
+    ...state,
+    game: action.game,
+    gameLoading: false,
+  })),
+
+  on(GamesCurrentActions.getBoxScoreError, (state, action) => ({
+    ...state,
+    game: null,
+    gameLoading: false,
+  })),
+
+  on(GamesCurrentActions.resetBoxScore, (state, action) => ({
+    ...state,
+    game: null,
+  })),
+
   on(GamesCurrentActions.error, (state) => initialState)
 );
 
@@ -52,3 +78,7 @@ export const getGames = (state: State) => state.games;
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
+
+export const getGameLoading = (state: State) => state.gameLoading;
+
+export const getGame = (state: State) => state.game;

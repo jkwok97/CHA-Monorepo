@@ -1,0 +1,25 @@
+<ng-container *ngIf="isLoading$ | async">
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+  </ng-container>
+  
+  <ng-container *ngIf="(isLoading$ | async) === false">
+    <ng-container *ngIf="!isMobile">
+      <div class="text-sm boxscore flex justify-content-center" *ngIf="content">
+        {{ content }}
+      </div>
+  
+      <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+    </ng-container>
+    <ng-container *ngIf="isMobile">
+      <div class="text-xs boxscore-mobile" *ngIf="content">
+        <div class="text-lg">Turn Phone To Side</div>
+        {{ content }}
+      </div>
+  
+      <div *ngIf="!content">Sorry, Box Score is not uploaded yet</div>
+    </ng-container>
+  </ng-container>

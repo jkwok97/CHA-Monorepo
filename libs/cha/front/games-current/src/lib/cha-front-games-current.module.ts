@@ -6,6 +6,8 @@ import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { AvatarModule } from 'primeng/avatar';
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -20,9 +22,12 @@ import { GamesCurrentService } from './services';
 import { ChaFrontGamesCurrentRoutingModule } from './cha-front-games-current-routing.module';
 
 import { GamesCurrentComponent } from './containers';
-import { GamesCurrentTeamCardComponent } from './components/games-current-team-card/games-current-team-card.component';
-import { GamesCurrentMatchupComponent } from './components/games-current-matchup/games-current-matchup.component';
-import { GamesCurrentDayComponent } from './components/games-current-day/games-current-day.component';
+import {
+  GamesCurrentTeamCardComponent,
+  GamesCurrentMatchupComponent,
+  GamesCurrentDayComponent,
+  GamesCurrentBoxScoreComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -30,6 +35,8 @@ import { GamesCurrentDayComponent } from './components/games-current-day/games-c
     ChaFrontGamesCurrentRoutingModule,
     ProgressBarModule,
     AvatarModule,
+    SidebarModule,
+    ButtonModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeButtonSelectComponent,
@@ -43,6 +50,7 @@ import { GamesCurrentDayComponent } from './components/games-current-day/games-c
     GamesCurrentTeamCardComponent,
     GamesCurrentMatchupComponent,
     GamesCurrentDayComponent,
+    GamesCurrentBoxScoreComponent,
   ],
   providers: [GamesCurrentService, GamesCurrentFacade, GamesCurrentEffects],
 })

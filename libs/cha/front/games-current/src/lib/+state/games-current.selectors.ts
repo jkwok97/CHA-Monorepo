@@ -14,8 +14,17 @@ const selectLoaded = createSelector(selectState, GamesCurrentReducer.getLoaded);
 
 const selectGames = createSelector(selectState, GamesCurrentReducer.getGames);
 
+const selectBoxScore = createSelector(selectState, GamesCurrentReducer.getGame);
+
+const selectGameLoading = createSelector(
+  selectState,
+  GamesCurrentReducer.getGameLoading
+);
+
 export const GamesCurrentSelectors = {
   selectLoaded,
   selectLoading,
   selectGames,
+  selectBoxScore,
+  selectGameLoading,
 };

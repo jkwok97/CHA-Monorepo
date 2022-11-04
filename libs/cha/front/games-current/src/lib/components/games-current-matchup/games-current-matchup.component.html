@@ -12,6 +12,15 @@
   <div class="result">
     <div *ngIf="game.visTeamScore && game.homeTeamScore">Results:</div>
     <div>{{ game.visTeamScore }} @ {{ game.homeTeamScore }}</div>
+    <div *ngIf="game.visTeamScore && game.homeTeamScore" class="text-sm">
+      <button
+          pButton
+          type="button"
+          icon="pi pi-file"
+          class="p-button-rounded p-button-primary"
+          (click)="onClick(game)"
+        ></button>
+    </div>
   </div>
 
   <cha-front-games-current-team-card
@@ -21,3 +30,16 @@
     [teamVersus]="game.homeTeamVersus"
   ></cha-front-games-current-team-card>
 </div>
+
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [dismissible]="false"
+  (onHide)="onClose()"
+  *ngIf="display"
+>
+  <cha-front-games-current-box-score
+    [isMobile]="isMobile"
+    (closeSidebar)="onClose()"
+  ></cha-front-games-current-box-score>
+</p-sidebar>

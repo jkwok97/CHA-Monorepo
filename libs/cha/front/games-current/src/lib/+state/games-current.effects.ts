@@ -70,4 +70,21 @@ export class GamesCurrentEffects {
       )
     )
   );
+
+  getBoxScore$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GamesCurrentActions.getBoxScore),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.gamesCurrentService
+          .getBoxScore(action.gameId, data.current_year)
+          .pipe(
+            map((game: File) =>
+              GamesCurrentActions.getBoxScoreSuccess({ game })
+            ),
+            catchError(() => of(GamesCurrentActions.getBoxScoreError()))
+          )
+      )
+    )
+  );
 }

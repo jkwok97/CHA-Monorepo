@@ -24,6 +24,14 @@ export class GamesCurrentFacade {
     GamesCurrentSelectors.selectGames
   );
 
+  boxScore$: Observable<File | null> = this.store.select(
+    GamesCurrentSelectors.selectBoxScore
+  );
+
+  gameLoading$: Observable<boolean> = this.store.select(
+    GamesCurrentSelectors.selectGameLoading
+  );
+
   constructor(private store: Store<State>) {}
 
   getGames() {
@@ -36,5 +44,13 @@ export class GamesCurrentFacade {
 
   getPreviousGames() {
     this.store.dispatch(GamesCurrentActions.getPrevious());
+  }
+
+  getBoxScore(gameId: number) {
+    this.store.dispatch(GamesCurrentActions.getBoxScore({ gameId }));
+  }
+
+  resetBoxScore() {
+    this.store.dispatch(GamesCurrentActions.resetBoxScore());
   }
 }

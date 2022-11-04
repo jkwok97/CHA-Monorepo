@@ -24,6 +24,20 @@ const getPreviousSuccess = createAction(
   props<{ games: GamesDto[] }>()
 );
 
+const getBoxScore = createAction(
+  `${NAMESPACE} Get Box Score`,
+  props<{ gameId: number }>()
+);
+
+const getBoxScoreSuccess = createAction(
+  `${NAMESPACE} Get Box Score Success`,
+  props<{ game: File | null }>()
+);
+
+const resetBoxScore = createAction(`${NAMESPACE} Reset Box Score`);
+
+const getBoxScoreError = createAction(`${NAMESPACE} Get Box Score Error`);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const GamesCurrentActions = {
@@ -33,5 +47,9 @@ export const GamesCurrentActions = {
   getNextSuccess,
   getPrevious,
   getPreviousSuccess,
+  getBoxScore,
+  getBoxScoreSuccess,
+  resetBoxScore,
+  getBoxScoreError,
   error,
 };
