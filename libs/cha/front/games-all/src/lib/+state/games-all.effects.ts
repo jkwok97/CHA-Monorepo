@@ -38,7 +38,8 @@ export class GamesAllEffects {
         this.gamesAllService
           .getBoxScore(action.gameId, action.playingYear)
           .pipe(
-            map((game: File) => GamesAllActions.getBoxScoreSuccess({ game }))
+            map((game: File) => GamesAllActions.getBoxScoreSuccess({ game })),
+            catchError(() => of(GamesAllActions.getBoxScoreError()))
           )
       )
     )

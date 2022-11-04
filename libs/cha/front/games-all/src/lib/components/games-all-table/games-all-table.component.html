@@ -32,7 +32,7 @@
       <th>Versus</th>
       <th>Score</th>
       <th>Home</th>
-      <th></th>
+      <th *ngIf="!isMobile"></th>
     </tr>
   </ng-template>
   <ng-template
@@ -90,6 +90,7 @@
           icon="pi pi-file"
           class="p-button-rounded p-button-primary"
           (click)="onClick(day)"
+          *ngIf="!isMobile"
         ></button>
       </td>
     </tr>

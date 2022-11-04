@@ -22,6 +22,8 @@ const getBoxScoreSuccess = createAction(
 
 const resetBoxScore = createAction(`${NAMESPACE} Reset Box Score`);
 
+const getBoxScoreError = createAction(`${NAMESPACE} Get Box Score Error`);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const GamesAllActions = {
@@ -30,5 +32,6 @@ export const GamesAllActions = {
   getBoxScore,
   getBoxScoreSuccess,
   resetBoxScore,
+  getBoxScoreError,
   error,
 };

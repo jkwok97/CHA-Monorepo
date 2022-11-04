@@ -10,9 +10,7 @@ import { ScheduleAllDto } from '@cha/shared/entities';
 import { first } from 'rxjs';
 import { Table } from 'primeng/table';
 import { GamesAllFacade } from '../../+state/games-all.facade';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-@UntilDestroy()
 @Component({
   selector: 'cha-front-games-all-table',
   templateUrl: './games-all-table.component.html',

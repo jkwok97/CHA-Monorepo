@@ -15,7 +15,7 @@ const initialState: State = {
   game: null,
   loading: false,
   loaded: false,
-  gameLoading: false
+  gameLoading: false,
 };
 
 const r = createReducer(
@@ -36,13 +36,19 @@ const r = createReducer(
 
   on(GamesAllActions.getBoxScore, (state, action) => ({
     ...state,
-    gameLoading: true
+    gameLoading: true,
   })),
 
   on(GamesAllActions.getBoxScoreSuccess, (state, action) => ({
     ...state,
     game: action.game,
-    gameLoading: false
+    gameLoading: false,
+  })),
+
+  on(GamesAllActions.getBoxScoreError, (state, action) => ({
+    ...state,
+    game: null,
+    gameLoading: false,
   })),
 
   on(GamesAllActions.resetBoxScore, (state, action) => ({
