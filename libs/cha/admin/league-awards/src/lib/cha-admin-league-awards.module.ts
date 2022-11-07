@@ -17,6 +17,11 @@ import { reducer } from './+state/league-awards.reducer';
 import { ChaAdminLeagueAwardsRoutingModule } from './cha-admin-league-awards-routing.module';
 
 import { LeagueAwardsComponent } from './containers';
+import {
+  LeagueAwardsTableComponent,
+  LeagueAwardsEditComponent,
+  LeagueAwardsEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import { LeagueAwardsComponent } from './containers';
     StoreModule.forFeature('league-awards', reducer),
     EffectsModule.forFeature([LeagueAwardsEffects]),
   ],
-  declarations: [LeagueAwardsComponent],
+  declarations: [
+    LeagueAwardsComponent,
+    LeagueAwardsTableComponent,
+    LeagueAwardsEditComponent,
+    LeagueAwardsEditFormComponent,
+  ],
   providers: [LeagueAwardsEffects, LeagueAwardsFacade],
 })
 export class ChaAdminLeagueAwardsModule {}
