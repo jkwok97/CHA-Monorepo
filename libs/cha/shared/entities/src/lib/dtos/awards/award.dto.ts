@@ -14,3 +14,12 @@ export interface AwardDto {
   player_id?: PlayerDto;
   stats?: AwardStatsDto;
 }
+
+export interface AwardCreateDto {
+  display_season: string;
+  cha_season: string;
+  award_type: AwardAwardTypeDto;
+  users_id: UserDto;
+  team_id: TeamDto;
+  player_id?: PlayerDto;
+}

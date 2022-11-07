@@ -11,12 +11,6 @@ export class AwardsService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  // getAll(): Observable<AwardDto[]> {
-  //   return this._http
-  //     .get(`${this.apiUrl}/v2/awards`)
-  //     .pipe(map((result: any) => result['result']));
-  // }
-
   getChampions(): Observable<AwardDto[]> {
     return this._http
       .get(`${this.apiUrl}/awards/champions`)

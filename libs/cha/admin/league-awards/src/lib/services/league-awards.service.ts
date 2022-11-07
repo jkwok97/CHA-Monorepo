@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
+import { AwardCreateDto, AwardDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,28 +13,28 @@ export class LeagueAwardsService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getTeams() {
+  getAll(): Observable<AwardDto[]> {
     return this._http
-      .get(`${this.apiUrl}/teams`)
+      .get(`${this.apiUrl}/awards`)
       .pipe(map((result: any) => result));
   }
 
-  addTeam(user: TeamCreateDto): Observable<TeamDto> {
-    const body = user;
+  addAward(award: AwardCreateDto): Observable<AwardDto> {
+    const body = award;
     return this._http
-      .post(`${this.apiUrl}/teams/add`, body)
+      .post(`${this.apiUrl}/awards/add`, body)
       .pipe(map((result: any) => result));
   }
 
-  editTeam(team: TeamDto): Observable<TeamDto> {
+  editAward(award: AwardDto): Observable<AwardDto> {
     return this._http
-      .put(`${this.apiUrl}/teams/${team.id}`, team)
+      .put(`${this.apiUrl}/awards/${award.id}`, award)
       .pipe(map((result: any) => result));
   }
 
-  deleteTeam(teamId: number): Observable<TeamDto> {
+  deleteAward(awardId: number): Observable<AwardDto> {
     return this._http
-      .delete(`${this.apiUrl}/teams/delete/${teamId}`)
+      .delete(`${this.apiUrl}/awards/${awardId}`)
       .pipe(map((result: any) => result));
   }
 

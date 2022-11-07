@@ -1,48 +1,48 @@
 import { Injectable } from '@angular/core';
-import { DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
+import { AwardDto, DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
-import { LeagueTeamsService } from '../services';
-import { LeagueTeamsActions } from './league-teams.actions';
-import { LeagueTeamsFacade } from './league-teams.facade';
+import { LeagueAwardsService } from '../services';
+import { LeagueAwardsActions } from './league-awards.actions';
+import { LeagueAwardsFacade } from './league-awards.facade';
 
 @Injectable()
-export class LeagueTeamsEffects {
+export class LeagueAwardsEffects {
   constructor(
     private actions$: Actions,
-    private leagueTeamsService: LeagueTeamsService,
-    private leagueTeamsFacade: LeagueTeamsFacade,
+    private leagueAwardsService: LeagueAwardsService,
+    private leagueAwardsFacade: LeagueAwardsFacade,
     private messageService: MessageService
   ) {}
 
-  getTeams$ = createEffect(() =>
+  getAwards$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueTeamsActions.getTeams),
+      ofType(LeagueAwardsActions.getAwards),
       exhaustMap((action) =>
-        this.leagueTeamsService.getTeams().pipe(
-          map((teams: TeamDto[]) =>
-            LeagueTeamsActions.getTeamsSuccess({
-              teams,
+        this.leagueAwardsService.getAll().pipe(
+          map((awards: AwardDto[]) =>
+            LeagueAwardsActions.getAwardsSuccess({
+              awards,
             })
           ),
-          catchError(() => of(LeagueTeamsActions.error()))
+          catchError(() => of(LeagueAwardsActions.error()))
         )
       )
     )
   );
 
-  addTeam$ = createEffect(() =>
+  addAward$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueTeamsActions.addTeam),
+      ofType(LeagueAwardsActions.addAward),
       exhaustMap((action) =>
-        this.leagueTeamsService.addTeam(action.team).pipe(
-          map((team: TeamDto) =>
-            LeagueTeamsActions.addTeamSuccess({
-              team,
+        this.leagueAwardsService.addAward(action.award).pipe(
+          map((award: AwardDto) =>
+            LeagueAwardsActions.addAwardSuccess({
+              award,
             })
           ),
-          catchError(() => of(LeagueTeamsActions.error()))
+          catchError(() => of(LeagueAwardsActions.error()))
         )
       )
     )
@@ -51,14 +51,14 @@ export class LeagueTeamsEffects {
   addTeamSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueTeamsActions.addTeamSuccess),
+        ofType(LeagueAwardsActions.addAwardSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Add Team',
-            detail: 'Team has been added',
+            summary: 'Add Award',
+            detail: 'Award has been added',
           });
-          this.leagueTeamsFacade.getTeams();
+          this.leagueAwardsFacade.getAwards();
         })
       ),
     { dispatch: false }
@@ -66,15 +66,15 @@ export class LeagueTeamsEffects {
 
   editTeam$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueTeamsActions.editTeam),
+      ofType(LeagueAwardsActions.editAward),
       exhaustMap((action) =>
-        this.leagueTeamsService.editTeam(action.team).pipe(
-          map((team: TeamDto) =>
-            LeagueTeamsActions.editTeamSuccess({
-              team,
+        this.leagueAwardsService.editAward(action.award).pipe(
+          map((award: AwardDto) =>
+            LeagueAwardsActions.editAwardSuccess({
+              award,
             })
           ),
-          catchError(() => of(LeagueTeamsActions.error()))
+          catchError(() => of(LeagueAwardsActions.error()))
         )
       )
     )
@@ -83,30 +83,30 @@ export class LeagueTeamsEffects {
   editTeamSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueTeamsActions.editTeamSuccess),
+        ofType(LeagueAwardsActions.editAwardSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Edit Team',
-            detail: 'Team has been updated',
+            summary: 'Edit Award',
+            detail: 'Award has been updated',
           });
-          this.leagueTeamsFacade.getTeams();
+          this.leagueAwardsFacade.getAwards();
         })
       ),
     { dispatch: false }
   );
 
-  deleteTeam$ = createEffect(() =>
+  deleteAward$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueTeamsActions.deleteTeam),
+      ofType(LeagueAwardsActions.deleteAward),
       exhaustMap((action) =>
-        this.leagueTeamsService.deleteTeam(action.teamId).pipe(
-          map((team: TeamDto) =>
-            LeagueTeamsActions.deleteTeamSuccess({
-              team,
+        this.leagueAwardsService.deleteAward(action.awardId).pipe(
+          map((award: AwardDto) =>
+            LeagueAwardsActions.deleteAwardSuccess({
+              award,
             })
           ),
-          catchError(() => of(LeagueTeamsActions.error()))
+          catchError(() => of(LeagueAwardsActions.error()))
         )
       )
     )
@@ -115,14 +115,14 @@ export class LeagueTeamsEffects {
   deleteTeamSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueTeamsActions.deleteTeamSuccess),
+        ofType(LeagueAwardsActions.deleteAwardSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Delete Team',
-            detail: 'Team has been removed',
+            summary: 'Delete Award',
+            detail: 'Award has been removed',
           });
-          this.leagueTeamsFacade.getTeams();
+          this.leagueAwardsFacade.getAwards();
         })
       ),
     { dispatch: false }
@@ -130,31 +130,15 @@ export class LeagueTeamsEffects {
 
   getUsers$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueTeamsActions.getUsers),
+      ofType(LeagueAwardsActions.getUsers),
       exhaustMap((action) =>
-        this.leagueTeamsService.getUsers().pipe(
+        this.leagueAwardsService.getUsers().pipe(
           map((users: UserDto[]) =>
-            LeagueTeamsActions.getUsersSuccess({
+            LeagueAwardsActions.getUsersSuccess({
               users,
             })
           ),
-          catchError(() => of(LeagueTeamsActions.error()))
-        )
-      )
-    )
-  );
-
-  getDivisions$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(LeagueTeamsActions.getDivisions),
-      exhaustMap((action) =>
-        this.leagueTeamsService.getDivisions().pipe(
-          map((divisions: DivisionDto[]) =>
-            LeagueTeamsActions.getDivisionsSuccess({
-              divisions,
-            })
-          ),
-          catchError(() => of(LeagueTeamsActions.error()))
+          catchError(() => of(LeagueAwardsActions.error()))
         )
       )
     )

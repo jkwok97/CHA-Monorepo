@@ -1,43 +1,43 @@
-import { DivisionDto, TeamCreateDto, TeamDto, UserDto } from '@cha/shared/entities';
+import { AwardCreateDto, AwardDto, UserDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
-const NAMESPACE = '[LEAGUE TEAMS]';
+const NAMESPACE = '[LEAGUE AWARDS]';
 
-const getTeams = createAction(`${NAMESPACE} Get Teams`);
+const getAwards = createAction(`${NAMESPACE} Get Awards`);
 
-const getTeamsSuccess = createAction(
-  `${NAMESPACE} Get Teams Success`,
-  props<{ teams: TeamDto[] }>()
+const getAwardsSuccess = createAction(
+  `${NAMESPACE} Get Awards Success`,
+  props<{ awards: AwardDto[] }>()
 );
 
-const addTeam = createAction(
-  `${NAMESPACE} Add Team`,
-  props<{ team: TeamCreateDto }>()
+const addAward = createAction(
+  `${NAMESPACE} Add Award`,
+  props<{ award: AwardCreateDto }>()
 );
 
-const addTeamSuccess = createAction(
-  `${NAMESPACE} Add Team Success`,
-  props<{ team: TeamDto }>()
+const addAwardSuccess = createAction(
+  `${NAMESPACE} Add Award Success`,
+  props<{ award: AwardDto }>()
 );
 
-const editTeam = createAction(
-  `${NAMESPACE} Edit Team`,
-  props<{ team: TeamDto }>()
+const editAward = createAction(
+  `${NAMESPACE} Edit Award`,
+  props<{ award: AwardDto }>()
 );
 
-const editTeamSuccess = createAction(
-  `${NAMESPACE} Edit Team Success`,
-  props<{ team: TeamDto }>()
+const editAwardSuccess = createAction(
+  `${NAMESPACE} Edit Award Success`,
+  props<{ award: AwardDto }>()
 );
 
-const deleteTeam = createAction(
-  `${NAMESPACE} Delete Team`,
-  props<{ teamId: number }>()
+const deleteAward = createAction(
+  `${NAMESPACE} Delete Award`,
+  props<{ awardId: number }>()
 );
 
-const deleteTeamSuccess = createAction(
-  `${NAMESPACE} Delete Team Success`,
-  props<{ team: TeamDto }>()
+const deleteAwardSuccess = createAction(
+  `${NAMESPACE} Delete Award Success`,
+  props<{ award: AwardDto }>()
 );
 
 const getUsers = createAction(`${NAMESPACE} Get Users`);
@@ -47,27 +47,18 @@ const getUsersSuccess = createAction(
   props<{ users: UserDto[] }>()
 );
 
-const getDivisions = createAction(`${NAMESPACE} Get Divisions`);
-
-const getDivisionsSuccess = createAction(
-  `${NAMESPACE} Get Divisions Success`,
-  props<{ divisions: DivisionDto[] }>()
-);
-
 const error = createAction(`${NAMESPACE} Error`);
 
-export const LeagueTeamsActions = {
-  getTeams,
-  getTeamsSuccess,
-  addTeam,
-  addTeamSuccess,
-  editTeam,
-  editTeamSuccess,
-  deleteTeam,
-  deleteTeamSuccess,
+export const LeagueAwardsActions = {
+  getAwards,
+  getAwardsSuccess,
+  addAward,
+  addAwardSuccess,
+  editAward,
+  editAwardSuccess,
+  deleteAward,
+  deleteAwardSuccess,
   getUsers,
   getUsersSuccess,
-  getDivisions,
-  getDivisionsSuccess,
   error,
 };

@@ -3,6 +3,7 @@ import { DisplayFacade } from './lib/states/display/display.facade';
 import { LeagueDataFacade } from './lib/states/league-data/league-data.facade';
 import { AwardsFacade } from './lib/states/awards/awards.facade';
 import { DraftService } from './lib/services';
+import { AwardsService } from './lib/services';
 
 export * from './lib/cha-domain-core.module';
 
@@ -12,4 +13,5 @@ export {
   LeagueDataFacade,
   AwardsFacade,
   DraftService,
+  AwardsService,
 };

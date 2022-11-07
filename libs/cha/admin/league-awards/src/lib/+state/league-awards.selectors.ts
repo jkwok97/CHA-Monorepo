@@ -1,25 +1,25 @@
-import { DivisionDto, UserDto } from '@cha/shared/entities';
+import { UserDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as LeagueTeamsReducer from './league-teams.reducer';
+import * as LeagueAwardsReducer from './league-awards.reducer';
 
 export const selectState =
-  createFeatureSelector<LeagueTeamsReducer.State>('league-teams');
+  createFeatureSelector<LeagueAwardsReducer.State>('league-awards');
 
 const selectLoading = createSelector(
   selectState,
-  LeagueTeamsReducer.getLoading
+  LeagueAwardsReducer.getLoading
 );
 
-const selectLoaded = createSelector(selectState, LeagueTeamsReducer.getLoaded);
+const selectLoaded = createSelector(selectState, LeagueAwardsReducer.getLoaded);
 
-const selectSaving = createSelector(selectState, LeagueTeamsReducer.getSaving);
+const selectSaving = createSelector(selectState, LeagueAwardsReducer.getSaving);
 
-const selectSaved = createSelector(selectState, LeagueTeamsReducer.getSaved);
+const selectSaved = createSelector(selectState, LeagueAwardsReducer.getSaved);
 
-const selectTeams = createSelector(selectState, LeagueTeamsReducer.getTeams);
+const selectAwards = createSelector(selectState, LeagueAwardsReducer.getAwards);
 
-const selectUsers = createSelector(selectState, LeagueTeamsReducer.getUsers);
+const selectUsers = createSelector(selectState, LeagueAwardsReducer.getUsers);
 
 const selectUsersOptions = createSelector(selectUsers, (users: UserDto[]) =>
   users.map((user: UserDto) => ({
@@ -28,27 +28,12 @@ const selectUsersOptions = createSelector(selectUsers, (users: UserDto[]) =>
   }))
 );
 
-const selectDivisions = createSelector(
-  selectState,
-  LeagueTeamsReducer.getDivisions
-);
-
-const selectDivisionsOptions = createSelector(
-  selectDivisions,
-  (divisions: DivisionDto[]) =>
-    divisions.map((division: DivisionDto) => ({
-      value: division.id,
-      label: division.divisionname,
-    }))
-);
-
 export const LeagueTeamsSelectors = {
   selectLoaded,
   selectLoading,
   selectSaving,
   selectSaved,
-  selectTeams,
+  selectAwards,
   selectUsers,
   selectUsersOptions,
-  selectDivisionsOptions,
 };

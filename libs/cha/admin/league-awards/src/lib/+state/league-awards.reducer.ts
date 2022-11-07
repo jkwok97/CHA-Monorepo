@@ -1,11 +1,10 @@
-import { DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
+import { AwardDto, UserDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { LeagueTeamsActions } from './league-teams.actions';
+import { LeagueAwardsActions } from './league-awards.actions';
 
 export interface State {
-  teams: TeamDto[];
+  awards: AwardDto[];
   users: UserDto[];
-  divisions: DivisionDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -13,9 +12,8 @@ export interface State {
 }
 
 const initialState: State = {
-  teams: [],
+  awards: [],
   users: [],
-  divisions: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -25,16 +23,16 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(LeagueTeamsActions.getTeams, (state) => ({
+  on(LeagueAwardsActions.getAwards, (state) => ({
     ...state,
     loading: true,
     loaded: false,
   })),
 
   on(
-    LeagueTeamsActions.addTeam,
-    LeagueTeamsActions.editTeam,
-    LeagueTeamsActions.deleteTeam,
+    LeagueAwardsActions.addAward,
+    LeagueAwardsActions.editAward,
+    LeagueAwardsActions.deleteAward,
     (state) => ({
       ...state,
       saving: true,
@@ -42,27 +40,22 @@ const r = createReducer(
     })
   ),
 
-  on(LeagueTeamsActions.getTeamsSuccess, (state, action) => ({
+  on(LeagueAwardsActions.getAwardsSuccess, (state, action) => ({
     ...state,
-    teams: action.teams,
+    awards: action.awards,
     loading: false,
     loaded: true,
   })),
 
-  on(LeagueTeamsActions.getUsersSuccess, (state, action) => ({
+  on(LeagueAwardsActions.getUsersSuccess, (state, action) => ({
     ...state,
     users: action.users,
   })),
 
-  on(LeagueTeamsActions.getDivisionsSuccess, (state, action) => ({
-    ...state,
-    divisions: action.divisions,
-  })),
-
   on(
-    LeagueTeamsActions.addTeamSuccess,
-    LeagueTeamsActions.editTeamSuccess,
-    LeagueTeamsActions.deleteTeamSuccess,
+    LeagueAwardsActions.addAwardSuccess,
+    LeagueAwardsActions.editAwardSuccess,
+    LeagueAwardsActions.deleteAwardSuccess,
     (state, action) => ({
       ...state,
       saving: false,
@@ -70,18 +63,16 @@ const r = createReducer(
     })
   ),
 
-  on(LeagueTeamsActions.error, (state) => initialState)
+  on(LeagueAwardsActions.error, (state) => initialState)
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return r(state, action);
 }
 
-export const getTeams = (state: State) => state.teams;
+export const getAwards = (state: State) => state.awards;
 
 export const getUsers = (state: State) => state.users;
-
-export const getDivisions = (state: State) => state.divisions;
 
 export const getLoading = (state: State) => state.loading;
 

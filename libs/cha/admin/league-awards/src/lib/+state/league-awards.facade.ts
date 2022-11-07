@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from './league-teams.reducer';
-import { LeagueTeamsActions } from './league-teams.actions';
+import { State } from './league-awards.reducer';
+import { LeagueAwardsActions } from './league-awards.actions';
 import { Observable } from 'rxjs';
-import { LeagueTeamsSelectors } from './league-teams.selectors';
-import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
+import { LeagueTeamsSelectors } from './league-awards.selectors';
+import { AwardCreateDto, AwardDto } from '@cha/shared/entities';
 
 @Injectable()
-export class LeagueTeamsFacade {
+export class LeagueAwardsFacade {
   isLoading$: Observable<boolean> = this.store.select(
     LeagueTeamsSelectors.selectLoading
   );
@@ -24,41 +24,33 @@ export class LeagueTeamsFacade {
     LeagueTeamsSelectors.selectSaved
   );
 
-  teams$: Observable<TeamDto[]> = this.store.select(
-    LeagueTeamsSelectors.selectTeams
+  awards$: Observable<AwardDto[]> = this.store.select(
+    LeagueTeamsSelectors.selectAwards
   );
 
   users$: Observable<any[]> = this.store.select(
     LeagueTeamsSelectors.selectUsersOptions
   );
 
-  divisions$: Observable<any[]> = this.store.select(
-    LeagueTeamsSelectors.selectDivisionsOptions
-  )
-
   constructor(private store: Store<State>) {}
 
-  getTeams() {
-    this.store.dispatch(LeagueTeamsActions.getTeams());
+  getAwards() {
+    this.store.dispatch(LeagueAwardsActions.getAwards());
   }
 
   getUsers() {
-    this.store.dispatch(LeagueTeamsActions.getUsers());
+    this.store.dispatch(LeagueAwardsActions.getUsers());
   }
 
-  getDivisions() {
-    this.store.dispatch(LeagueTeamsActions.getDivisions());
+  addAward(award: AwardCreateDto) {
+    this.store.dispatch(LeagueAwardsActions.addAward({ award }));
   }
 
-  addTeam(team: TeamCreateDto) {
-    this.store.dispatch(LeagueTeamsActions.addTeam({ team }));
+  editAward(award: AwardDto) {
+    this.store.dispatch(LeagueAwardsActions.editAward({ award }));
   }
 
-  editTeam(team: TeamDto) {
-    this.store.dispatch(LeagueTeamsActions.editTeam({ team }));
-  }
-
-  deleteTeam(teamId: number) {
-    this.store.dispatch(LeagueTeamsActions.deleteTeam({ teamId }));
+  deleteAward(awardId: number) {
+    this.store.dispatch(LeagueAwardsActions.deleteAward({ awardId }));
   }
 }
