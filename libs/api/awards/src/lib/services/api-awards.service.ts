@@ -70,8 +70,31 @@ export class ApiAwardsService {
 
   async getAll(): Promise<Awards_V2[]> {
     return await this.repo.find({
+      relations: ['player_id', 'award_type', 'team_id', 'users_id'],
+      select: {
+        id: true,
+        team_id: {
+          id: true,
+          city: true,
+          nickname: true,
+        },
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+        award_type: {
+          id: true,
+          display_name: true,
+        },
+        users_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
       order: {
-        display_season: 'ASC',
+        display_season: 'DESC',
       },
     });
   }
