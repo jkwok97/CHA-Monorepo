@@ -7,7 +7,6 @@ import { LeagueTeamsFacade } from '../../+state/league-teams.facade';
 @Component({
   selector: 'cha-admin-league-teams',
   templateUrl: './league-teams.component.html',
-  styleUrls: ['./league-teams.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueTeamsComponent {

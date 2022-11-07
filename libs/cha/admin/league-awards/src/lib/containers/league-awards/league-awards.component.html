@@ -1,1 +1,28 @@
-<p>league-awards works!</p>
+<blade-layout-feature-content>
+  <div>
+    <div class="pt-2">
+      <div class="text-lg text-center" style="font-weight: 100">
+        League Awards
+      </div>
+    </div>
+
+    <blade-divider></blade-divider>
+
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="awards$ | async as awards">
+          <!-- <cha-admin-league-teams-table
+            [isMobile]="isMobile"
+            [teams]="teams"
+          ></cha-admin-league-teams-table> -->
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
+  </div>
+</blade-layout-feature-content>
