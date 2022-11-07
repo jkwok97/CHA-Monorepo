@@ -73,6 +73,8 @@ export class ApiAwardsService {
       relations: ['player_id', 'award_type', 'team_id', 'users_id'],
       select: {
         id: true,
+        display_season: true,
+        cha_season: true,
         team_id: {
           id: true,
           city: true,

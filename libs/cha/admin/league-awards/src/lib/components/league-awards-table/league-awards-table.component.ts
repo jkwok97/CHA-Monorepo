@@ -20,22 +20,13 @@ export class LeagueAwardsTableComponent implements OnInit {
 
   @ViewChild('dt') dt: Table | undefined;
 
-  teamTableColumns = [
-    { field: 'id', header: 'Team Id', visible: true },
-    { field: 'teamlogo', header: 'Current Logo', visible: true },
-    { field: 'team_name', header: 'Name', visible: true },
-    { field: 'divisions_id', header: 'Division', visible: true },
-    { field: 'isactive', header: 'Is Active', visible: true },
-    { field: 'users_id', header: 'User Id', visible: true },
-    { field: 'action', header: 'Edit', visible: true },
-  ];
-
-  mobileTeamTableColumns = [
-    { field: 'teamlogo', header: 'Current Logo', visible: true },
-    { field: 'team_name', header: 'Name', visible: true },
-    { field: 'divisions_id', header: 'Division', visible: true },
-    { field: 'isactive', header: 'Is Active', visible: true },
-    { field: 'users_id', header: 'User Id', visible: true },
+  tableColumns = [
+    { field: 'id', header: 'Award Id', visible: true },
+    { field: 'display_season', header: 'Season', visible: true },
+    { field: 'player', header: 'Player', visible: true },
+    { field: 'award', header: 'Award', visible: true },
+    { field: 'team', header: 'Team', visible: true },
+    { field: 'user', header: 'User', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
@@ -58,8 +49,12 @@ export class LeagueAwardsTableComponent implements OnInit {
   mapItems(awards: AwardDto[]) {
     return awards.map((award: AwardDto) => ({
       ...award,
-      // team_name: `${award.city} ${award.nickname}`,
-      // teamlogo: this.getString(team.teamlogo),
+      player: award.player_id
+        ? `${award.player_id?.firstname} ${award.player_id?.lastname}`
+        : null,
+      award: `${award.award_type?.display_name}`,
+      team: `${award.team_id?.city} ${award.team_id?.nickname}`,
+      user: `${award.users_id?.firstname} ${award.users_id?.lastname}`,
     }));
   }
 
