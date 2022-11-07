@@ -22,7 +22,7 @@ export class LeagueAwardsTableComponent implements OnInit {
 
   tableColumns = [
     { field: 'id', header: 'Award Id', visible: true },
-    { field: 'display_season', header: 'Season', visible: true },
+    { field: 'cha_season', header: 'Season', visible: true },
     { field: 'player', header: 'Player', visible: true },
     { field: 'award', header: 'Award', visible: true },
     { field: 'team', header: 'Team', visible: true },
@@ -58,13 +58,7 @@ export class LeagueAwardsTableComponent implements OnInit {
     }));
   }
 
-  // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
-  getString(urlString: string) {
-    const temp = urlString.split('/');
-    return `assets/${temp[temp.length - 1]}`;
-  }
-
-  onTeamClick(award: AwardDto) {
+  onClick(award: AwardDto) {
     this.award = award;
     this.display = true;
   }

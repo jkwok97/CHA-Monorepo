@@ -14,7 +14,7 @@
   [sortField]="sortField"
   [sortOrder]="-1"
   [filterDelay]="0"
-  [globalFilterFields]="['team_name']"
+  [globalFilterFields]="['player', 'award', 'team', 'user', 'cha_season']"
 >
   <ng-template pTemplate="caption">
     <div class="flex flex-wrap justify-content-between">
@@ -24,7 +24,7 @@
           pInputText
           type="text"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search Team"
+          placeholder="Search"
         />
       </span>
 
@@ -60,31 +60,8 @@
       <td *ngFor="let column of tableColumns" [hidden]="!column.visible">
         <span class="p-column-title">{{ column.header }}</span>
         <div class="table-body-cell">
-          <ng-container *ngIf="column.field === 'isactive'">
-            <div>
-              <i
-                class="pi pi-ban text-red-600"
-                *ngIf="data[column.field] === false"
-              ></i>
-              <i
-                class="pi pi-check-circle text-green-600"
-                *ngIf="data[column.field] === true"
-              ></i>
-            </div>
-          </ng-container>
-          <ng-container *ngIf="column.field === 'teamlogo'">
-            <img [src]="data.teamlogo" height="30px" />
-          </ng-container>
-          <ng-container
-            *ngIf="
-              column.field !== 'isactive' &&
-              column.field !== 'teamlogo' &&
-              column.field !== 'divisions_id'
-            "
-            >{{ data[column.field] }}</ng-container
-          >
-          <ng-container *ngIf="column.field === 'divisions_id'">
-            {{ data[column.field]?.divisionname }}
+          <ng-container *ngIf="column.field !== 'action'">
+            {{ data[column.field] }}
           </ng-container>
           <ng-container *ngIf="column.field === 'action'">
             <button
@@ -92,7 +69,7 @@
               type="button"
               icon="pi pi-pencil"
               class="p-button-rounded p-button-primary"
-              (click)="onTeamClick(data)"
+              (click)="onClick(data)"
             ></button>
           </ng-container>
         </div>
