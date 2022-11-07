@@ -14,7 +14,7 @@
   [sortField]="sortField"
   [sortOrder]="1"
   [filterDelay]="0"
-  [globalFilterFields]="['visTeam', 'homeTeam']"
+  [globalFilterFields]="['visTeam', 'homeTeam', 'game_day']"
 >
   <ng-template pTemplate="caption">
     <div class="flex flex-wrap justify-content-between">
@@ -24,7 +24,7 @@
           pInputText
           type="text"
           (input)="applyFilterGlobal($event, 'contains')"
-          placeholder="Search Team"
+          placeholder="Search Team / Game Day"
         />
       </span>
     </div>
