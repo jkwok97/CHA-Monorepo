@@ -4,8 +4,8 @@ import {
   Goalies_Stats_V2,
   Team_Stats_V2,
 } from '@api/entities';
-import { AwardTypeEnum } from '@cha/shared/entities';
-import { Injectable } from '@nestjs/common';
+import { AwardCreateDto, AwardTypeEnum } from '@cha/shared/entities';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -67,6 +67,41 @@ export class ApiAwardsService {
       lastname: true,
     },
   };
+
+  async getAll(): Promise<Awards_V2[]> {
+    return await this.repo.find({
+      order: {
+        display_season: 'ASC',
+      },
+    });
+  }
+
+  async updateAwardById(id: number, attrs: Partial<Awards_V2>) {
+    const award = await this.repo.findOneByOrFail({ id });
+
+    if (!award) {
+      throw new NotFoundException('award not found');
+    }
+
+    Object.assign(award, attrs);
+
+    return this.repo.save(award);
+  }
+
+  async addAward(body: AwardCreateDto) {
+    const award = await this.repo.create(body);
+
+    return this.repo.save(award);
+  }
+
+  async deleteAward(id: number): Promise<Awards_V2> {
+    const award = await this.repo.findOneByOrFail({ id });
+
+    if (!award) {
+      throw new NotFoundException('award not found');
+    }
+    return this.repo.remove(award);
+  }
 
   async getChampions(): Promise<Awards_V2[]> {
     return await this.repo.find({

@@ -1,6 +1,6 @@
 import { Awards_V2 } from '@api/entities';
-import { UserAwardDto } from '@cha/shared/entities';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import { AwardCreateDto, AwardDto, UserAwardDto } from '@cha/shared/entities';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ApiUserAwardsService } from '../services';
 import { ApiAwardsService } from '../services/api-awards.service';
 
@@ -10,6 +10,31 @@ export class AwardsController {
     private awardsService: ApiAwardsService,
     private userAwardsService: ApiUserAwardsService
   ) {}
+
+  @Get()
+  async getAll(): Promise<Awards_V2[]> {
+    const awards = await this.awardsService.getAll();
+
+    if (!awards || awards.length < 1) {
+      throw new NotFoundException('awards not found');
+    }
+    return awards;
+  }
+
+  @Put('/:id')
+  updateAwardById(@Param() param, @Body() body): Promise<AwardDto> {
+    return this.awardsService.updateAwardById(parseInt(param.id), body);
+  }
+
+  @Post('/add')
+  addPlayer(@Body() body: AwardCreateDto) {
+    return this.awardsService.addAward(body);
+  }
+
+  @Delete('/:id')
+  deletePlayer(@Param() param) {
+    return this.awardsService.deleteAward(parseInt(param.id));
+  }
 
   @Get('/champions')
   async getChampions(): Promise<Awards_V2[]> {

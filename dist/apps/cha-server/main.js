@@ -174,10 +174,11 @@ exports.ApiAwardsModule = ApiAwardsModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AwardsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/awards/src/lib/services/index.ts");
 const api_awards_service_1 = __webpack_require__("./libs/api/awards/src/lib/services/api-awards.service.ts");
@@ -185,6 +186,22 @@ let AwardsController = class AwardsController {
     constructor(awardsService, userAwardsService) {
         this.awardsService = awardsService;
         this.userAwardsService = userAwardsService;
+    }
+    async getAll() {
+        const awards = await this.awardsService.getAll();
+        if (!awards || awards.length < 1) {
+            throw new common_1.NotFoundException('awards not found');
+        }
+        return awards;
+    }
+    updateAwardById(param, body) {
+        return this.awardsService.updateAwardById(parseInt(param.id), body);
+    }
+    addPlayer(body) {
+        return this.awardsService.addAward(body);
+    }
+    deletePlayer(param) {
+        return this.awardsService.deleteAward(parseInt(param.id));
     }
     async getChampions() {
         const champions = await this.awardsService.getChampions();
@@ -244,10 +261,38 @@ let AwardsController = class AwardsController {
     }
 };
 tslib_1.__decorate([
-    (0, common_1.Get)('/champions'),
+    (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], AwardsController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+], AwardsController.prototype, "updateAwardById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.AwardCreateDto !== "undefined" && entities_1.AwardCreateDto) === "function" ? _e : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], AwardsController.prototype, "addPlayer", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], AwardsController.prototype, "deletePlayer", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/champions'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
 ], AwardsController.prototype, "getChampions", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/scorers'),
@@ -259,38 +304,38 @@ tslib_1.__decorate([
     (0, common_1.Get)('/defense'),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], AwardsController.prototype, "getDefenseAwards", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/rookies'),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], AwardsController.prototype, "getRookieAwards", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/goalies'),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], AwardsController.prototype, "getGoalieAwards", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/gm'),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
 ], AwardsController.prototype, "getGmAwards", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/season'),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
 ], AwardsController.prototype, "getSeasonAwards", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
 ], AwardsController.prototype, "getTeamAwardsByUserId", null);
 AwardsController = tslib_1.__decorate([
     (0, common_1.Controller)('awards'),
@@ -409,6 +454,32 @@ let ApiAwardsService = class ApiAwardsService {
                 lastname: true,
             },
         };
+    }
+    async getAll() {
+        return await this.repo.find({
+            order: {
+                display_season: 'ASC',
+            },
+        });
+    }
+    async updateAwardById(id, attrs) {
+        const award = await this.repo.findOneByOrFail({ id });
+        if (!award) {
+            throw new common_1.NotFoundException('award not found');
+        }
+        Object.assign(award, attrs);
+        return this.repo.save(award);
+    }
+    async addAward(body) {
+        const award = await this.repo.create(body);
+        return this.repo.save(award);
+    }
+    async deleteAward(id) {
+        const award = await this.repo.findOneByOrFail({ id });
+        if (!award) {
+            throw new common_1.NotFoundException('award not found');
+        }
+        return this.repo.remove(award);
     }
     async getChampions() {
         return await this.repo.find({
