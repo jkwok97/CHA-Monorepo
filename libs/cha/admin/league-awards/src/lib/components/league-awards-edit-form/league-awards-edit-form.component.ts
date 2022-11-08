@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
+import { AwardDto, UserDto } from '@cha/shared/entities';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
+import { Observable } from 'rxjs';
+import { LeagueAwardsFacade } from '../../+state/league-awards.facade';
 
 @Component({
   selector: 'cha-admin-league-awards-edit-form',
@@ -7,7 +17,45 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueAwardsEditFormComponent implements OnInit {
-  constructor() {}
+  @Input() award!: AwardDto | null;
 
-  ngOnInit(): void {}
+  users$: Observable<UserDto[]>;
+
+  form = new UntypedFormGroup({});
+  model: any = {};
+  options: FormlyFormOptions = {};
+  fields!: FormlyFieldConfig[];
+
+  constructor(private leagueAwardsFacade: LeagueAwardsFacade) {
+    this.users$ = this.leagueAwardsFacade.users$;
+  }
+
+  ngOnInit(): void {
+    if (this.award) {
+      this.patchForm();
+    }
+
+    this.createFields();
+  }
+
+  createFields() {
+    this.fields = [
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
+        fieldGroup: [],
+      },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [],
+      },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
+        fieldGroup: [],
+      },
+    ];
+  }
+
+  patchForm() {
+    this.model = {};
+  }
 }

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { FormlyModule } from '@ngx-formly/core';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -13,6 +16,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
+import { SingleSelectTypeComponent } from '@blade/angular/formly/types/single-select';
+import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
 
 import { LeagueAwardsEffects } from './+state/league-awards.effects';
 import { LeagueAwardsFacade } from './+state/league-awards.facade';
@@ -30,6 +35,8 @@ import {
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    PerfectScrollbarModule,
     ProgressBarModule,
     TableModule,
     ButtonModule,
@@ -41,6 +48,21 @@ import {
     ChaAdminLeagueAwardsRoutingModule,
     StoreModule.forFeature('league-awards', reducer),
     EffectsModule.forFeature([LeagueAwardsEffects]),
+    FormlyModule.forRoot({
+      wrappers: [
+        {
+          name: 'control-wrapper',
+          component: DefaultFormFieldWrapperComponent,
+        },
+      ],
+      types: [
+        {
+          name: 'single-select',
+          component: SingleSelectTypeComponent,
+          wrappers: ['control-wrapper'],
+        },
+      ],
+    }),
   ],
   declarations: [
     LeagueAwardsComponent,
