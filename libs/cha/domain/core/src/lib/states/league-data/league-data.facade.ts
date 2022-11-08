@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { State } from './league-data.reducer';
 import { LeagueDataActions } from './league-data.actions';
 import { LeagueDataSelectors } from './league-data.selectors';
-import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
+import { LeagueDataDto, TeamDto, TeamsEnum } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueDataFacade {
@@ -68,5 +68,9 @@ export class LeagueDataFacade {
 
   editData(data: LeagueDataDto) {
     this.store.dispatch(LeagueDataActions.editData({ data }));
+  }
+
+  getTeamIdFromUserId(userId: number): Observable<TeamsEnum | undefined> {
+    return this.store.select(LeagueDataSelectors.selectTeamIdByUserId(userId));
   }
 }

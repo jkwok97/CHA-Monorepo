@@ -10,6 +10,7 @@
   [virtualScroll]="true"
   [virtualScrollItemSize]="10"
   [filter]="true"
+  [readonly]="props.readonly ? props.readonly : false"
   appendTo="body"
   (onChange)="props.change && props.change(field, $event)"
   class="w-full inputfield"

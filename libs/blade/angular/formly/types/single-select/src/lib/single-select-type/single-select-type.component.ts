@@ -24,6 +24,7 @@ export class SingleSelectTypeComponent extends FieldType<FieldTypeConfig> {
       placeholder: 'Select an option',
       options: [],
       showClear: false,
+      readonly: false,
     },
   };
 }

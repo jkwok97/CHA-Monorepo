@@ -90,6 +90,13 @@ const selectLoaded = createSelector(selectState, LeagueDataReducer.getLoaded);
 
 const selectSaving = createSelector(selectState, LeagueDataReducer.getSaving);
 
+const selectTeamIdByUserId = (userId: number) =>
+  createSelector(
+    selectTeams,
+    (teams: TeamDto[]) =>
+      teams.find((team: TeamDto) => team.users_id === userId)?.id
+  );
+
 export const LeagueDataSelectors = {
   selectLeagueData,
   selectCurrentSeason,
@@ -104,5 +111,6 @@ export const LeagueDataSelectors = {
   selectSortedTeams,
   selectSaving,
   selectTeamsOptions,
-  selectTeamsOptionsById
+  selectTeamsOptionsById,
+  selectTeamIdByUserId
 };
