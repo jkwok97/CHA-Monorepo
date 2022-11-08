@@ -262,6 +262,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
         onInit: (field: FormlyFieldConfig) => {
           const teamControl = this.form.get('team_id');
           const seasonControl = this.form.get('cha_season');
+          const awardTypeControl = this.form.get('award_type');
 
           combineLatest([
             teamControl?.valueChanges,
@@ -291,6 +292,17 @@ export class LeagueAwardsEditFormComponent implements OnInit {
                   result[0] as string
                 );
               }
+            });
+
+          awardTypeControl?.valueChanges
+            .pipe(
+              startWith(awardTypeControl.value as number),
+              untilDestroyed(this)
+            )
+            .subscribe((value) => {
+              console.log(value);
+
+              
             });
         },
       },
