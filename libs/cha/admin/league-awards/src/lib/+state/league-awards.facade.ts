@@ -50,6 +50,14 @@ export class LeagueAwardsFacade {
     this.store.dispatch(LeagueAwardsActions.getAwardTypes());
   }
 
+  getPlayers(season: string, teamName: string) {
+    this.store.dispatch(LeagueAwardsActions.getPlayers({ season, teamName }));
+  }
+
+  getGoalies(season: string, teamName: string) {
+    this.store.dispatch(LeagueAwardsActions.getGoalies({ season, teamName }));
+  }
+
   addAward(award: AwardCreateDto) {
     this.store.dispatch(LeagueAwardsActions.addAward({ award }));
   }

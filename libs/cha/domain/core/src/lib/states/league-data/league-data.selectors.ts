@@ -97,6 +97,13 @@ const selectTeamIdByUserId = (userId: number) =>
       teams.find((team: TeamDto) => team.users_id === userId)?.id
   );
 
+const selectTeamNameById = (teamId: number) =>
+  createSelector(
+    selectTeams,
+    (teams: TeamDto[]) =>
+      teams.find((team: TeamDto) => team.id === teamId)?.shortname
+  );
+
 export const LeagueDataSelectors = {
   selectLeagueData,
   selectCurrentSeason,
@@ -112,5 +119,6 @@ export const LeagueDataSelectors = {
   selectSaving,
   selectTeamsOptions,
   selectTeamsOptionsById,
-  selectTeamIdByUserId
+  selectTeamIdByUserId,
+  selectTeamNameById,
 };

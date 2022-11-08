@@ -73,4 +73,8 @@ export class LeagueDataFacade {
   getTeamIdFromUserId(userId: number): Observable<TeamsEnum | undefined> {
     return this.store.select(LeagueDataSelectors.selectTeamIdByUserId(userId));
   }
+
+  getTeamNameById(teamId: number): Observable<string | undefined> {
+    return this.store.select(LeagueDataSelectors.selectTeamNameById(teamId))
+  }
 }

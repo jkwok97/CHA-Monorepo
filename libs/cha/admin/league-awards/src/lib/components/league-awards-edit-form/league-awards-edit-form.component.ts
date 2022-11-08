@@ -9,7 +9,7 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { AwardDto, TeamsEnum, UserDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-import { first, Observable, startWith, switchMap } from 'rxjs';
+import { combineLatest, first, Observable, startWith, switchMap } from 'rxjs';
 import { LeagueAwardsFacade } from '../../+state/league-awards.facade';
 
 @UntilDestroy()
@@ -66,7 +66,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
       },
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-        fieldGroup: [],
+        fieldGroup: [this.playerField()],
       },
     ];
   }
@@ -77,6 +77,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
       display_season: this.award?.display_season,
       award_type: this.award?.award_type.id,
       users_id: this.award?.users_id.id,
+      player_id: this.award?.player_id?.id,
     };
   }
 
@@ -222,6 +223,56 @@ export class LeagueAwardsEditFormComponent implements OnInit {
       validation: {
         messages: {
           required: () => 'Owner is required',
+        },
+      },
+    };
+  }
+
+  playerField(): FormlyFieldConfig {
+    return {
+      key: 'player_id',
+      className: 'w-full md:w-3',
+      type: 'single-select',
+      templateOptions: {
+        label: 'Player / Goalie',
+        placeholder: 'Select',
+        required: true,
+        valueProp: 'value',
+        labelProp: 'label',
+      },
+      validation: {
+        messages: {
+          required: () => 'Player is required',
+        },
+      },
+      hideExpression: (model) =>
+        model.award_type === 2 ||
+        model.award_type === 3 ||
+        model.award_type === 4 ||
+        !model.award_type,
+      hooks: {
+        onInit: (field: FormlyFieldConfig) => {
+          const teamControl = this.form.get('team_id');
+          const seasonControl = this.form.get('cha_season');
+
+          combineLatest([
+            teamControl?.valueChanges,
+            seasonControl?.valueChanges,
+          ])
+            .pipe(
+              startWith([
+                teamControl?.value as number,
+                seasonControl?.value as string,
+              ]),
+              switchMap(([team, season]) => [
+                this.leagueDataFacade.getTeamNameById(team as number),
+                season,
+              ]),
+              untilDestroyed(this)
+            )
+            .subscribe((result) => {
+              console.log(result);
+            });
         },
       },
     };

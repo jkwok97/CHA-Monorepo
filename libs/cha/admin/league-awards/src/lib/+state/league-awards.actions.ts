@@ -1,4 +1,11 @@
-import { AwardAwardTypeDto, AwardCreateDto, AwardDto, UserDto } from '@cha/shared/entities';
+import {
+  AwardAwardTypeDto,
+  AwardCreateDto,
+  AwardDto,
+  StatPlayerAllDto,
+  StatPlayerAwardDto,
+  UserDto,
+} from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[LEAGUE AWARDS]';
@@ -54,6 +61,26 @@ const getAwardTypesSuccess = createAction(
   props<{ awardTypes: AwardAwardTypeDto[] }>()
 );
 
+const getPlayers = createAction(
+  `${NAMESPACE} Get Players`,
+  props<{ season: string; teamName: string }>()
+);
+
+const getPlayersSuccess = createAction(
+  `${NAMESPACE} Get Players Success`,
+  props<{ players: StatPlayerAwardDto[] }>()
+);
+
+const getGoalies = createAction(
+  `${NAMESPACE} Get Goalies`,
+  props<{ season: string; teamName: string }>()
+);
+
+const getGoaliesSuccess = createAction(
+  `${NAMESPACE} Get Goalies Success`,
+  props<{ goalies: StatPlayerAwardDto[] }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const LeagueAwardsActions = {
@@ -69,5 +96,9 @@ export const LeagueAwardsActions = {
   getUsersSuccess,
   getAwardTypes,
   getAwardTypesSuccess,
+  getPlayers,
+  getPlayersSuccess,
+  getGoalies,
+  getGoaliesSuccess,
   error,
 };

@@ -14,3 +14,4 @@ export * from './stat-user-team-record.dto';
 export * from './stat-user-teams-history.dto';
 export * from './stat-user-players-history.dto';
 export * from './stat-user-goalies-history.dto';
+export * from './stat-player-award.dto';
