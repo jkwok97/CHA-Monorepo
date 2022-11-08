@@ -1,4 +1,4 @@
-import { UserDto } from '@cha/shared/entities';
+import { AwardAwardTypeDto, UserDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as LeagueAwardsReducer from './league-awards.reducer';
@@ -28,7 +28,21 @@ const selectUsersOptions = createSelector(selectUsers, (users: UserDto[]) =>
   }))
 );
 
-export const LeagueTeamsSelectors = {
+const selectAwardTypes = createSelector(
+  selectState,
+  LeagueAwardsReducer.getAwardTypes
+);
+
+const selectAwardTypesOptions = createSelector(
+  selectAwardTypes,
+  (awardTypes: AwardAwardTypeDto[]) =>
+    awardTypes.map((awardType: AwardAwardTypeDto) => ({
+      value: awardType.id,
+      label: `${awardType.display_name}`,
+    }))
+);
+
+export const LeagueAwardsSelectors = {
   selectLoaded,
   selectLoading,
   selectSaving,
@@ -36,4 +50,5 @@ export const LeagueTeamsSelectors = {
   selectAwards,
   selectUsers,
   selectUsersOptions,
+  selectAwardTypesOptions,
 };

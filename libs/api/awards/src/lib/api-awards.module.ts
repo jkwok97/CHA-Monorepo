@@ -3,6 +3,7 @@ import {
   Players_Stats_V2,
   Goalies_Stats_V2,
   Team_Stats_V2,
+  Award_Type_V2,
 } from '@api/entities';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -17,6 +18,7 @@ import { ApiAwardsService, ApiUserAwardsService } from './services';
       Players_Stats_V2,
       Goalies_Stats_V2,
       Team_Stats_V2,
+      Award_Type_V2,
     ]),
   ],
   controllers: [AwardsController],

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AwardDto, DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
+import { AwardAwardTypeDto, AwardDto, DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -136,6 +136,22 @@ export class LeagueAwardsEffects {
           map((users: UserDto[]) =>
             LeagueAwardsActions.getUsersSuccess({
               users,
+            })
+          ),
+          catchError(() => of(LeagueAwardsActions.error()))
+        )
+      )
+    )
+  );
+
+  getAwardTypes$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LeagueAwardsActions.getAwardTypes),
+      exhaustMap((action) =>
+        this.leagueAwardsService.getAwardTypes().pipe(
+          map((awardTypes: AwardAwardTypeDto[]) =>
+            LeagueAwardsActions.getAwardTypesSuccess({
+              awardTypes,
             })
           ),
           catchError(() => of(LeagueAwardsActions.error()))

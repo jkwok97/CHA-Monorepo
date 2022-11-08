@@ -3,6 +3,7 @@ import {
   Players_Stats_V2,
   Goalies_Stats_V2,
   Team_Stats_V2,
+  Award_Type_V2,
 } from '@api/entities';
 import { AwardCreateDto, AwardTypeEnum } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -13,6 +14,8 @@ import { Repository } from 'typeorm';
 export class ApiAwardsService {
   constructor(
     @InjectRepository(Awards_V2) private repo: Repository<Awards_V2>,
+    @InjectRepository(Award_Type_V2)
+    private awardTypeRepo: Repository<Award_Type_V2>,
     @InjectRepository(Players_Stats_V2)
     private playerStatsRepo: Repository<Players_Stats_V2>,
     @InjectRepository(Goalies_Stats_V2)
@@ -230,6 +233,10 @@ export class ApiAwardsService {
     const seasonAwardsWithStats = await this.setSeasonStats(seasonAwards);
 
     return seasonAwardsWithStats;
+  }
+
+  async getAwardTypes(): Promise<Award_Type_V2[]> {
+    return await this.awardTypeRepo.find();
   }
 
   private async setPlayerStats(array: Awards_V2[]) {

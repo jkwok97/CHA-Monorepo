@@ -159,6 +159,7 @@ ApiAwardsModule = tslib_1.__decorate([
                 entities_1.Players_Stats_V2,
                 entities_1.Goalies_Stats_V2,
                 entities_1.Team_Stats_V2,
+                entities_1.Award_Type_V2,
             ]),
         ],
         controllers: [controllers_1.AwardsController],
@@ -174,7 +175,7 @@ exports.ApiAwardsModule = ApiAwardsModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AwardsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -259,6 +260,13 @@ let AwardsController = class AwardsController {
         }
         return awardsByUser;
     }
+    async getAwardTypes() {
+        const awardTypes = await this.awardsService.getAwardTypes();
+        if (!awardTypes || awardTypes.length < 1) {
+            throw new common_1.NotFoundException('Award Types not found');
+        }
+        return awardTypes;
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)(),
@@ -337,6 +345,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
 ], AwardsController.prototype, "getTeamAwardsByUserId", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/types'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
+], AwardsController.prototype, "getAwardTypes", null);
 AwardsController = tslib_1.__decorate([
     (0, common_1.Controller)('awards'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof api_awards_service_1.ApiAwardsService !== "undefined" && api_awards_service_1.ApiAwardsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiUserAwardsService !== "undefined" && services_1.ApiUserAwardsService) === "function" ? _b : Object])
@@ -394,7 +408,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/awards/src/lib/middlewares/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiAwardsService = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -404,8 +418,9 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 let ApiAwardsService = class ApiAwardsService {
-    constructor(repo, playerStatsRepo, goalieStatsRepo, teamStatsRepo) {
+    constructor(repo, awardTypeRepo, playerStatsRepo, goalieStatsRepo, teamStatsRepo) {
         this.repo = repo;
+        this.awardTypeRepo = awardTypeRepo;
         this.playerStatsRepo = playerStatsRepo;
         this.goalieStatsRepo = goalieStatsRepo;
         this.teamStatsRepo = teamStatsRepo;
@@ -593,6 +608,9 @@ let ApiAwardsService = class ApiAwardsService {
         const seasonAwardsWithStats = await this.setSeasonStats(seasonAwards);
         return seasonAwardsWithStats;
     }
+    async getAwardTypes() {
+        return await this.awardTypeRepo.find();
+    }
     async setPlayerStats(array) {
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { stats: await this.getPlayerStats(item.player_id.id, item.cha_season) }))));
     }
@@ -671,10 +689,11 @@ let ApiAwardsService = class ApiAwardsService {
 ApiAwardsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
-    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object])
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Award_Type_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object])
 ], ApiAwardsService);
 exports.ApiAwardsService = ApiAwardsService;
 

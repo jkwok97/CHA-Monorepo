@@ -3,33 +3,37 @@ import { Store } from '@ngrx/store';
 import { State } from './league-awards.reducer';
 import { LeagueAwardsActions } from './league-awards.actions';
 import { Observable } from 'rxjs';
-import { LeagueTeamsSelectors } from './league-awards.selectors';
+import { LeagueAwardsSelectors } from './league-awards.selectors';
 import { AwardCreateDto, AwardDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueAwardsFacade {
   isLoading$: Observable<boolean> = this.store.select(
-    LeagueTeamsSelectors.selectLoading
+    LeagueAwardsSelectors.selectLoading
   );
 
   isLoaded$: Observable<boolean> = this.store.select(
-    LeagueTeamsSelectors.selectLoaded
+    LeagueAwardsSelectors.selectLoaded
   );
 
   isSaving$: Observable<boolean> = this.store.select(
-    LeagueTeamsSelectors.selectSaving
+    LeagueAwardsSelectors.selectSaving
   );
 
   isSaved$: Observable<boolean> = this.store.select(
-    LeagueTeamsSelectors.selectSaved
+    LeagueAwardsSelectors.selectSaved
   );
 
   awards$: Observable<AwardDto[]> = this.store.select(
-    LeagueTeamsSelectors.selectAwards
+    LeagueAwardsSelectors.selectAwards
   );
 
   users$: Observable<any[]> = this.store.select(
-    LeagueTeamsSelectors.selectUsersOptions
+    LeagueAwardsSelectors.selectUsersOptions
+  );
+
+  awardTypes: Observable<any[]> = this.store.select(
+    LeagueAwardsSelectors.selectAwardTypesOptions
   );
 
   constructor(private store: Store<State>) {}
@@ -40,6 +44,10 @@ export class LeagueAwardsFacade {
 
   getUsers() {
     this.store.dispatch(LeagueAwardsActions.getUsers());
+  }
+
+  getAwardTypes() {
+    this.store.dispatch(LeagueAwardsActions.getAwardTypes());
   }
 
   addAward(award: AwardCreateDto) {

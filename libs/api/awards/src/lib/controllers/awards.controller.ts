@@ -1,4 +1,4 @@
-import { Awards_V2 } from '@api/entities';
+import { Awards_V2, Award_Type_V2 } from '@api/entities';
 import { AwardCreateDto, AwardDto, UserAwardDto } from '@cha/shared/entities';
 import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ApiUserAwardsService } from '../services';
@@ -118,21 +118,13 @@ export class AwardsController {
     return awardsByUser;
   }
 
-  // @Get('/player/:id')
-  // getPlayerAwardsByPlayerId() {}
+  @Get('/types')
+  async getAwardTypes(): Promise<Award_Type_V2[]> {
+    const awardTypes = await this.awardsService.getAwardTypes();
 
-  // @Get('/goalie/:id')
-  // getGoalieAwardsByPlayerId() {}
-
-  // @Get('/award-types')
-  // getAwardTypes() {}
-
-  // @Post('/add')
-  // addAwardWinner() {}
-
-  // @Put('/winners/:id')
-  // editAwardWinnerById() {}
-
-  // @Delete('/winners/:id')
-  // deleteAwardWinnerById() {}
+    if (!awardTypes || awardTypes.length < 1) {
+      throw new NotFoundException('Award Types not found');
+    }
+    return awardTypes;
+  }
 }
