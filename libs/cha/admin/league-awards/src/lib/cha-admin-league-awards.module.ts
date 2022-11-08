@@ -18,6 +18,7 @@ import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { SingleSelectTypeComponent } from '@blade/angular/formly/types/single-select';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
+import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
 
 import { LeagueAwardsEffects } from './+state/league-awards.effects';
 import { LeagueAwardsFacade } from './+state/league-awards.facade';
@@ -59,6 +60,11 @@ import {
         {
           name: 'single-select',
           component: SingleSelectTypeComponent,
+          wrappers: ['control-wrapper'],
+        },
+        {
+          name: 'text-input',
+          component: TextInputTypeComponent,
           wrappers: ['control-wrapper'],
         },
       ],

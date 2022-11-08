@@ -9,7 +9,7 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { AwardDto, TeamsEnum, UserDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-import { Observable, startWith, switchMap } from 'rxjs';
+import { first, Observable, startWith, switchMap } from 'rxjs';
 import { LeagueAwardsFacade } from '../../+state/league-awards.facade';
 
 @UntilDestroy()
@@ -54,6 +54,10 @@ export class LeagueAwardsEditFormComponent implements OnInit {
     this.fields = [
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
+        fieldGroup: [this.currentSeasonField(), this.displaySeasonField()],
+      },
+      {
+        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [
           this.awardTypeField(),
           this.userField(),
@@ -64,17 +68,79 @@ export class LeagueAwardsEditFormComponent implements OnInit {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [],
       },
-      {
-        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-        fieldGroup: [],
-      },
     ];
   }
 
   patchForm() {
     this.model = {
+      cha_season: this.award?.cha_season,
+      display_season: this.award?.display_season,
       award_type: this.award?.award_type.id,
       users_id: this.award?.users_id.id,
+    };
+  }
+
+  currentSeasonField(): FormlyFieldConfig {
+    return {
+      key: 'cha_season',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'CHA Season',
+        placeholder: 'Enter Season',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'Season is required',
+        },
+      },
+      hooks: {
+        onInit: (field: FormlyFieldConfig) => {
+          if (!this.award) {
+            this.leagueDataFacade.currentSeason$
+              .pipe(first())
+              .subscribe((season: string | undefined) => {
+                if (season) {
+                  field.formControl?.setValue(season);
+                }
+              });
+          }
+        },
+      },
+    };
+  }
+
+  displaySeasonField(): FormlyFieldConfig {
+    return {
+      key: 'display_season',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Season To Display',
+        placeholder: 'Enter Season',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'Season is required',
+        },
+      },
+      hooks: {
+        onInit: (field: FormlyFieldConfig) => {
+          if (!this.award) {
+            this.leagueDataFacade.currentSeason$
+              .pipe(first())
+              .subscribe((season: string | undefined) => {
+                const seasonSplit = season?.split('-');
+
+                if (seasonSplit) {
+                  field.formControl?.setValue(Number(seasonSplit[0]) + 1);
+                }
+              });
+          }
+        },
+      },
     };
   }
 
@@ -131,7 +197,9 @@ export class LeagueAwardsEditFormComponent implements OnInit {
               untilDestroyed(this)
             )
             .subscribe((teamId: TeamsEnum | undefined) => {
-              field.formControl?.setValue(teamId);
+              if (teamId) {
+                field.formControl?.setValue(teamId);
+              }
             });
         },
       },
