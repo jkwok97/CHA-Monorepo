@@ -1,52 +1,52 @@
 <blade-card style="background-color: var(--background-100)">
-    <blade-card-header class="text-lg font-light text-center">
-      {{ editMode ? 'Edit Team' : 'Add Team' }}
-    </blade-card-header>
-  
-    <blade-card-body>
-      <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
-        <cha-admin-league-awards-edit-form
-          [award]="award"
-        ></cha-admin-league-awards-edit-form>
-      </perfect-scrollbar>
-  
+  <blade-card-header class="text-lg font-light text-center">
+    {{ editMode ? 'Edit Award' : 'Add Award' }}
+  </blade-card-header>
+
+  <blade-card-body>
+    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
       <cha-admin-league-awards-edit-form
         [award]="award"
-        *ngIf="!isMobile"
       ></cha-admin-league-awards-edit-form>
-    </blade-card-body>
-  
-    <blade-card-footer>
-      <div class="flex justify-content-between">
-        <div class="flex column-gap-1">
-          <button
-            pButton
-            pRipple
-            type="button"
-            [label]="editMode ? 'Save Team' : 'Add Team'"
-            class="p-button-raised"
-            [disabled]="awardFormRef?.form?.invalid || !awardFormRef?.form?.dirty"
-            (click)="onSave()"
-          ></button>
-          <button
-            pButton
-            pRipple
-            type="button"
-            label="Cancel"
-            class="p-button-raised p-button-warning"
-            (click)="onCancel()"
-          ></button>
-        </div>
-  
+    </perfect-scrollbar>
+
+    <cha-admin-league-awards-edit-form
+      [award]="award"
+      *ngIf="!isMobile"
+    ></cha-admin-league-awards-edit-form>
+  </blade-card-body>
+
+  <blade-card-footer>
+    <div class="flex justify-content-between">
+      <div class="flex column-gap-1">
         <button
           pButton
           pRipple
           type="button"
-          label="Delete"
-          class="p-button-raised p-button-danger"
-          *ngIf="editMode"
-          (click)="onDelete()"
+          [label]="editMode ? 'Save Award' : 'Add Award'"
+          class="p-button-raised"
+          [disabled]="awardFormRef?.form?.invalid || !awardFormRef?.form?.dirty"
+          (click)="onSave()"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-raised p-button-warning"
+          (click)="onCancel()"
         ></button>
       </div>
-    </blade-card-footer>
-  </blade-card>
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Delete"
+        class="p-button-raised p-button-danger"
+        *ngIf="editMode"
+        (click)="onDelete()"
+      ></button>
+    </div>
+  </blade-card-footer>
+</blade-card>
