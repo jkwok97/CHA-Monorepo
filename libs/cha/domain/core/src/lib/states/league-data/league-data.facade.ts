@@ -75,6 +75,6 @@ export class LeagueDataFacade {
   }
 
   getTeamNameById(teamId: number): Observable<string | undefined> {
-    return this.store.select(LeagueDataSelectors.selectTeamNameById(teamId))
+    return this.store.select(LeagueDataSelectors.selectTeamNameById(teamId));
   }
 }

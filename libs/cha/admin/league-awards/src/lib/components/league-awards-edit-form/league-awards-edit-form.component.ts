@@ -9,7 +9,15 @@ import { LeagueDataFacade } from '@cha/domain/core';
 import { AwardDto, TeamsEnum, UserDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-import { combineLatest, first, Observable, startWith, switchMap } from 'rxjs';
+import {
+  combineLatest,
+  first,
+  map,
+  Observable,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { LeagueAwardsFacade } from '../../+state/league-awards.facade';
 
 @UntilDestroy()
@@ -264,14 +272,25 @@ export class LeagueAwardsEditFormComponent implements OnInit {
                 teamControl?.value as number,
                 seasonControl?.value as string,
               ]),
-              switchMap(([team, season]) => [
-                this.leagueDataFacade.getTeamNameById(team as number),
-                season,
-              ]),
+              switchMap(([team, season]) =>
+                this.leagueDataFacade.getTeamNameById(team as number).pipe(
+                  tap(console.log),
+                  map((teamName: string) => [teamName, season])
+                )
+              ),
               untilDestroyed(this)
             )
             .subscribe((result) => {
-              console.log(result);
+              if (result.length > 0) {
+                this.leagueAwardsFacade.getPlayers(
+                  result[1] as string,
+                  result[0] as string
+                );
+                this.leagueAwardsFacade.getGoalies(
+                  result[1] as string,
+                  result[0] as string
+                );
+              }
             });
         },
       },
