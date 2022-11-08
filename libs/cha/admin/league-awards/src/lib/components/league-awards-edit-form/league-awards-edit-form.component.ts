@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { AwardDto, UserDto } from '@cha/shared/entities';
+import { AwardAwardTypeDto, AwardDto, UserDto } from '@cha/shared/entities';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { LeagueAwardsFacade } from '../../+state/league-awards.facade';
@@ -19,6 +19,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
   @Input() award!: AwardDto | null;
 
   users$: Observable<UserDto[]>;
+  awardTypes$: Observable<any[]>;
 
   form = new UntypedFormGroup({});
   model: any = {};
@@ -27,9 +28,12 @@ export class LeagueAwardsEditFormComponent implements OnInit {
 
   constructor(private leagueAwardsFacade: LeagueAwardsFacade) {
     this.users$ = this.leagueAwardsFacade.users$;
+    this.awardTypes$ = this.leagueAwardsFacade.awardTypes$;
   }
 
   ngOnInit(): void {
+    this.leagueAwardsFacade.getAwardTypes();
+
     if (this.award) {
       this.patchForm();
     }

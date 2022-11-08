@@ -32,7 +32,7 @@ export class LeagueAwardsFacade {
     LeagueAwardsSelectors.selectUsersOptions
   );
 
-  awardTypes: Observable<any[]> = this.store.select(
+  awardTypes$: Observable<any[]> = this.store.select(
     LeagueAwardsSelectors.selectAwardTypesOptions
   );
 

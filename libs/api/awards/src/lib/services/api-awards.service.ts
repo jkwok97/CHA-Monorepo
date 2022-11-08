@@ -8,7 +8,7 @@ import {
 import { AwardCreateDto, AwardTypeEnum } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiAwardsService {
@@ -236,7 +236,11 @@ export class ApiAwardsService {
   }
 
   async getAwardTypes(): Promise<Award_Type_V2[]> {
-    return await this.awardTypeRepo.find();
+    return await this.awardTypeRepo.find({
+      where: {
+        id: Not(1),
+      },
+    });
   }
 
   private async setPlayerStats(array: Awards_V2[]) {

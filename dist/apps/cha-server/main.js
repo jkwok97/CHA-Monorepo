@@ -609,7 +609,11 @@ let ApiAwardsService = class ApiAwardsService {
         return seasonAwardsWithStats;
     }
     async getAwardTypes() {
-        return await this.awardTypeRepo.find();
+        return await this.awardTypeRepo.find({
+            where: {
+                id: (0, typeorm_2.Not)(1),
+            },
+        });
     }
     async setPlayerStats(array) {
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { stats: await this.getPlayerStats(item.player_id.id, item.cha_season) }))));

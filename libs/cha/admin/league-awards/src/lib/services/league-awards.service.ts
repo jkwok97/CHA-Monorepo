@@ -46,7 +46,7 @@ export class LeagueAwardsService {
 
   getAwardTypes() {
     return this._http
-      .get(`${this.apiUrl}/users`)
+      .get(`${this.apiUrl}/awards/types`)
       .pipe(map((result: any) => result));
   }
 }
