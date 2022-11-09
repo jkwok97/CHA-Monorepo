@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AwardAwardTypeDto, AwardDto, DivisionDto, TeamDto, UserDto } from '@cha/shared/entities';
+import {
+  AwardAwardTypeDto,
+  AwardDto,
+  DivisionDto,
+  StatPlayerAwardDto,
+  TeamDto,
+  UserDto,
+} from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -156,6 +163,42 @@ export class LeagueAwardsEffects {
           ),
           catchError(() => of(LeagueAwardsActions.error()))
         )
+      )
+    )
+  );
+
+  getPlayers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LeagueAwardsActions.getPlayers),
+      exhaustMap((action) =>
+        this.leagueAwardsService
+          .getPlayers(action.season, action.teamName)
+          .pipe(
+            map((players: StatPlayerAwardDto[]) =>
+              LeagueAwardsActions.getPlayersSuccess({
+                players,
+              })
+            ),
+            catchError(() => of(LeagueAwardsActions.error()))
+          )
+      )
+    )
+  );
+
+  getGoalies$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LeagueAwardsActions.getGoalies),
+      exhaustMap((action) =>
+        this.leagueAwardsService
+          .getGoalies(action.season, action.teamName)
+          .pipe(
+            map((goalies: StatPlayerAwardDto[]) =>
+              LeagueAwardsActions.getGoaliesSuccess({
+                goalies,
+              })
+            ),
+            catchError(() => of(LeagueAwardsActions.error()))
+          )
       )
     )
   );

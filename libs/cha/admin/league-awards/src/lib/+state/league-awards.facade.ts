@@ -36,6 +36,14 @@ export class LeagueAwardsFacade {
     LeagueAwardsSelectors.selectAwardTypesOptions
   );
 
+  players$: Observable<any[]> = this.store.select(
+    LeagueAwardsSelectors.selectPlayersOptions
+  );
+
+  goalies$: Observable<any[]> = this.store.select(
+    LeagueAwardsSelectors.selectGoaliesOptions
+  );
+
   constructor(private store: Store<State>) {}
 
   getAwards() {

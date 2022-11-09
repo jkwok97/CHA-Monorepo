@@ -49,4 +49,16 @@ export class LeagueAwardsService {
       .get(`${this.apiUrl}/awards/types`)
       .pipe(map((result: any) => result));
   }
+
+  getPlayers(season: string, teamName: string) {
+    return this._http
+    .get(`${this.apiUrl}/awards/types`)
+    .pipe(map((result: any) => result));
+  }
+
+  getGoalies(season: string, teamName: string) {
+    return this._http
+    .get(`${this.apiUrl}/awards/types`)
+    .pipe(map((result: any) => result));
+  }
 }

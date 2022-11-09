@@ -1,4 +1,9 @@
-import { AwardAwardTypeDto, AwardDto, UserDto } from '@cha/shared/entities';
+import {
+  AwardAwardTypeDto,
+  AwardDto,
+  StatPlayerAwardDto,
+  UserDto,
+} from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { LeagueAwardsActions } from './league-awards.actions';
 
@@ -6,6 +11,8 @@ export interface State {
   awards: AwardDto[];
   users: UserDto[];
   awardTypes: AwardAwardTypeDto[];
+  players: StatPlayerAwardDto[];
+  goalies: StatPlayerAwardDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -16,6 +23,8 @@ const initialState: State = {
   awards: [],
   users: [],
   awardTypes: [],
+  players: [],
+  goalies: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -59,6 +68,16 @@ const r = createReducer(
     awardTypes: action.awardTypes,
   })),
 
+  on(LeagueAwardsActions.getPlayersSuccess, (state, action) => ({
+    ...state,
+    players: action.players,
+  })),
+
+  on(LeagueAwardsActions.getGoaliesSuccess, (state, action) => ({
+    ...state,
+    goalies: action.goalies,
+  })),
+
   on(
     LeagueAwardsActions.addAwardSuccess,
     LeagueAwardsActions.editAwardSuccess,
@@ -82,6 +101,10 @@ export const getAwards = (state: State) => state.awards;
 export const getUsers = (state: State) => state.users;
 
 export const getAwardTypes = (state: State) => state.awardTypes;
+
+export const getPlayers = (state: State) => state.players;
+
+export const getGoalies = (state: State) => state.goalies;
 
 export const getLoading = (state: State) => state.loading;
 
