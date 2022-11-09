@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@api/awards": ["libs/api/awards/src/index.ts"],
+      "@api/conferences": ["libs/api/conferences/src/index.ts"],
       "@api/core": ["libs/api/core/src/index.ts"],
       "@api/divisions": ["libs/api/divisions/src/index.ts"],
       "@api/draft-table": ["libs/api/draft-table/src/index.ts"],

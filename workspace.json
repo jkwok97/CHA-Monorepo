@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "api-awards": "libs/api/awards",
+    "api-conferences": "libs/api/conferences",
     "api-core": "libs/api/core",
     "api-divisions": "libs/api/divisions",
     "api-draft-table": "libs/api/draft-table",
