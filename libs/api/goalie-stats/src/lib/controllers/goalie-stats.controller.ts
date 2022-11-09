@@ -3,6 +3,7 @@ import {
   StatGoalieAllDto,
   StatGoalieLeadersDto,
   StatGoaliesHistoryDto,
+  StatPlayerAwardDto,
   StatUserGoaliesHistoryDto,
 } from '@cha/shared/entities';
 import {
@@ -156,6 +157,22 @@ export class GoalieStatsController {
 
     if (!record) {
       throw new NotFoundException('Team Goalies Stats not found');
+    }
+    return record;
+  }
+
+  @Get('/team/:teamName/:season')
+  async getTeamPlayersByTeamName(
+    @Param() param
+  ): Promise<StatPlayerAwardDto[]> {
+    const record =
+      await this.userGoalieStatsService.getTeamPlayersByTeamName(
+        param.teamName,
+        param.season
+      );
+
+    if (!record) {
+      throw new NotFoundException('Team Players Stats not found');
     }
     return record;
   }

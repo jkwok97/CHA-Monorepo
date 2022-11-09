@@ -3576,7 +3576,7 @@ exports.ApiGoalieStatsModule = ApiGoalieStatsModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GoalieStatsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -3648,6 +3648,13 @@ let GoalieStatsController = class GoalieStatsController {
         const record = await this.userGoalieStatsService.getUserGoaliesStatsAllTimeBySeasonType(param.userId, param.seasonType);
         if (!record) {
             throw new common_1.NotFoundException('Team Goalies Stats not found');
+        }
+        return record;
+    }
+    async getTeamPlayersByTeamName(param) {
+        const record = await this.userGoalieStatsService.getTeamPlayersByTeamName(param.teamName, param.season);
+        if (!record) {
+            throw new common_1.NotFoundException('Team Players Stats not found');
         }
         return record;
     }
@@ -3723,6 +3730,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
 ], GoalieStatsController.prototype, "getTeamGoaliesStatsAllTimeBySeasonType", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/team/:teamName/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
+], GoalieStatsController.prototype, "getTeamPlayersByTeamName", null);
 GoalieStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('goalie-stats'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiGoalieStatsLeadersService !== "undefined" && services_1.ApiGoalieStatsLeadersService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiGoalieStatsService !== "undefined" && services_1.ApiGoalieStatsService) === "function" ? _b : Object, typeof (_c = typeof services_1.ApiGoalieAllTimeStatsService !== "undefined" && services_1.ApiGoalieAllTimeStatsService) === "function" ? _c : Object, typeof (_d = typeof services_1.ApiUserGoalieStatsService !== "undefined" && services_1.ApiUserGoalieStatsService) === "function" ? _d : Object])
@@ -4353,6 +4367,21 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
         const userTeamsWithGoalieStats = await this.setGoalieAllTimeStats(userTeams, seasonType);
         const userTeamsWithGoaliesStatsConverted = await this.setConvertedGoaliesStats(userTeamsWithGoalieStats, true);
         return userTeamsWithGoaliesStatsConverted;
+    }
+    async getTeamPlayersByTeamName(teamName, season) {
+        return await this.repo.find({
+            select: {
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+            },
+            where: {
+                team_name: teamName,
+                playing_year: season,
+            },
+        });
     }
     async setGoalieStats(array, seasonType) {
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { goalieStats: await this.getGoalieStats(item.shortname, seasonType) }))));
@@ -5598,7 +5627,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/player-stats/src/lib/contro
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerStatsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -5668,6 +5697,13 @@ let PlayerStatsController = class PlayerStatsController {
     }
     async getTeamPlayerStatsAllTimeBySeasonType(param) {
         const record = await this.userPlayersStatsService.getUserPlayerStatsAllTimeBySeasonType(param.userId, param.seasonType);
+        if (!record) {
+            throw new common_1.NotFoundException('Team Players Stats not found');
+        }
+        return record;
+    }
+    async getTeamPlayersByTeamName(param) {
+        const record = await this.userPlayersStatsService.getTeamPlayersByTeamName(param.teamName, param.season);
         if (!record) {
             throw new common_1.NotFoundException('Team Players Stats not found');
         }
@@ -5745,6 +5781,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
 ], PlayerStatsController.prototype, "getTeamPlayerStatsAllTimeBySeasonType", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/team/:teamName/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
+], PlayerStatsController.prototype, "getTeamPlayersByTeamName", null);
 PlayerStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('player-stats'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiPlayerLeadersStatsService !== "undefined" && services_1.ApiPlayerLeadersStatsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiPlayerStatsService !== "undefined" && services_1.ApiPlayerStatsService) === "function" ? _b : Object, typeof (_c = typeof services_1.ApiPlayerAllTimeStatsService !== "undefined" && services_1.ApiPlayerAllTimeStatsService) === "function" ? _c : Object, typeof (_d = typeof services_1.ApiUserPlayerStatsService !== "undefined" && services_1.ApiUserPlayerStatsService) === "function" ? _d : Object])
@@ -6662,6 +6705,21 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
         const userTeamsWithPlayerStats = await this.setPlayerAllTimeStats(userTeams, seasonType);
         const userTeamsWithPlayersStatsConverted = await this.setConvertedPlayersStats(userTeamsWithPlayerStats, true);
         return userTeamsWithPlayersStatsConverted;
+    }
+    async getTeamPlayersByTeamName(teamName, season) {
+        return await this.repo.find({
+            select: {
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+            },
+            where: {
+                team_name: teamName,
+                playing_year: season,
+            },
+        });
     }
     async setPlayerStats(array, seasonType) {
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerStats: await this.getPlayerStats(item.shortname, seasonType) }))));
@@ -10344,6 +10402,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dto
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/stats/stat-user-teams-history.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/stats/stat-user-players-history.dto.ts"), exports);
 tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/stats/stat-user-goalies-history.dto.ts"), exports);
+tslib_1.__exportStar(__webpack_require__("./libs/cha/shared/entities/src/lib/dtos/stats/stat-player-award.dto.ts"), exports);
 
 
 /***/ }),
@@ -10385,6 +10444,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 /***/ }),
 
 /***/ "./libs/cha/shared/entities/src/lib/dtos/stats/stat-player-all.dto.ts":
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
+/***/ "./libs/cha/shared/entities/src/lib/dtos/stats/stat-player-award.dto.ts":
 /***/ ((__unused_webpack_module, exports) => {
 
 

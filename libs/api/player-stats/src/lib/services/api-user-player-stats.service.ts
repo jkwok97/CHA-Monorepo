@@ -47,6 +47,22 @@ export class ApiUserPlayerStatsService {
     return userTeamsWithPlayersStatsConverted;
   }
 
+  async getTeamPlayersByTeamName(teamName: string, season: string) {
+    return await this.repo.find({
+      select: {
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      where: {
+        team_name: teamName,
+        playing_year: season,
+      },
+    });
+  }
+
   private async setPlayerStats(
     array: Teams_V2[],
     seasonType: 'Regular' | 'Playoffs'
@@ -225,7 +241,9 @@ export class ApiUserPlayerStatsService {
         pointsPerSixty: Number(
           ((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)
         ),
-        hit_per_game: Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
+        hit_per_game: Number(
+          (Number(stat.hits) / Number(stat.games_played)).toFixed(1)
+        ),
         player_id: !raw
           ? stat.player_id
           : {

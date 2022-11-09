@@ -47,6 +47,22 @@ export class ApiUserGoalieStatsService {
     return userTeamsWithGoaliesStatsConverted;
   }
 
+  async getTeamPlayersByTeamName(teamName: string, season: string) {
+    return await this.repo.find({
+      select: {
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      where: {
+        team_name: teamName,
+        playing_year: season,
+      },
+    });
+  }
+
   private async setGoalieStats(
     array: Teams_V2[],
     seasonType: 'Regular' | 'Playoffs'

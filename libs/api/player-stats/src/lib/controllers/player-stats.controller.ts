@@ -1,7 +1,7 @@
 import { Players_Stats_V2 } from '@api/entities';
 import {
-  CreateStatPlayerAllDto,
   StatPlayerAllDto,
+  StatPlayerAwardDto,
   StatPlayerLeadersDto,
   StatPlayersHistoryDto,
   StatUserPlayersHistoryDto,
@@ -13,7 +13,6 @@ import {
   Get,
   NotFoundException,
   Param,
-  Post,
   Put,
 } from '@nestjs/common';
 import {
@@ -153,6 +152,22 @@ export class PlayerStatsController {
       await this.userPlayersStatsService.getUserPlayerStatsAllTimeBySeasonType(
         param.userId,
         param.seasonType
+      );
+
+    if (!record) {
+      throw new NotFoundException('Team Players Stats not found');
+    }
+    return record;
+  }
+
+  @Get('/team/:teamName/:season')
+  async getTeamPlayersByTeamName(
+    @Param() param
+  ): Promise<StatPlayerAwardDto[]> {
+    const record =
+      await this.userPlayersStatsService.getTeamPlayersByTeamName(
+        param.teamName,
+        param.season
       );
 
     if (!record) {
