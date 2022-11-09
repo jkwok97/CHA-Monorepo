@@ -16,6 +16,14 @@ export class UsersService {
     return await this.repo.find();
   }
 
+  async getCurrent(): Promise<Users_V2[]> {
+    return await this.repo.find({
+      where: {
+        isactive: true,
+      },
+    });
+  }
+
   async findUserById(id: number): Promise<Users_V2> {
     return await this.repo.findOneByOrFail({ id });
   }

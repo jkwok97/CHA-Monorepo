@@ -11,12 +11,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import {
   combineLatest,
+  delay,
   first,
   map,
   Observable,
   startWith,
   switchMap,
   tap,
+  withLatestFrom,
 } from 'rxjs';
 import { LeagueAwardsFacade } from '../../+state/league-awards.facade';
 
@@ -30,8 +32,11 @@ export class LeagueAwardsEditFormComponent implements OnInit {
   @Input() award!: AwardDto | null;
 
   users$: Observable<UserDto[]>;
+  currentUsers$!: Observable<UserDto[]>;
   awardTypes$: Observable<any[]>;
   teams$: Observable<any[]>;
+  players$: Observable<any[]>;
+  goalies$: Observable<any[]>;
 
   form = new UntypedFormGroup({});
   model: any = {};
@@ -45,6 +50,8 @@ export class LeagueAwardsEditFormComponent implements OnInit {
     this.users$ = this.leagueAwardsFacade.users$;
     this.awardTypes$ = this.leagueAwardsFacade.awardTypes$;
     this.teams$ = this.leagueDataFacade.leagueTeamsOptionsById$;
+    this.players$ = this.leagueAwardsFacade.players$;
+    this.goalies$ = this.leagueAwardsFacade.goalies$;
   }
 
   ngOnInit(): void {
@@ -67,9 +74,9 @@ export class LeagueAwardsEditFormComponent implements OnInit {
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
         fieldGroup: [
-          this.awardTypeField(),
           this.userField(),
           this.userTeamField(),
+          this.awardTypeField(),
         ],
       },
       {
@@ -207,7 +214,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
             )
             .subscribe((teamId: TeamsEnum | undefined) => {
               if (teamId) {
-                field.formControl?.setValue(teamId);
+                field.formControl?.patchValue(teamId);
               }
             });
         },
@@ -264,32 +271,21 @@ export class LeagueAwardsEditFormComponent implements OnInit {
           const seasonControl = this.form.get('cha_season');
           const awardTypeControl = this.form.get('award_type');
 
-          combineLatest([
-            teamControl?.valueChanges,
-            seasonControl?.valueChanges,
-          ])
+          teamControl?.valueChanges
             .pipe(
-              startWith([
-                teamControl?.value as number,
-                seasonControl?.value as string,
-              ]),
-              switchMap(([team, season]) =>
-                this.leagueDataFacade.getTeamNameById(team as number).pipe(
-                  tap(console.log),
-                  map((teamName: string) => [teamName, season])
-                )
-              ),
+              startWith(teamControl.value),
+              switchMap((team) => this.leagueDataFacade.getTeamNameById(team)),
               untilDestroyed(this)
             )
-            .subscribe((result) => {
-              if (result.length > 0) {
+            .subscribe((teamName) => {
+              if (teamName && seasonControl) {
                 this.leagueAwardsFacade.getPlayers(
-                  result[1] as string,
-                  result[0] as string
+                  seasonControl.value,
+                  teamName
                 );
                 this.leagueAwardsFacade.getGoalies(
-                  result[1] as string,
-                  result[0] as string
+                  seasonControl.value,
+                  teamName
                 );
               }
             });
@@ -300,9 +296,20 @@ export class LeagueAwardsEditFormComponent implements OnInit {
               untilDestroyed(this)
             )
             .subscribe((value) => {
-              console.log(value);
-
-              
+              if (field.props) {
+                switch (value) {
+                  case 7:
+                    field.props.options = this.goalies$;
+                    break;
+                  case 5:
+                  case 6:
+                  case 8:
+                    field.props.options = this.players$;
+                    break;
+                  default:
+                    break;
+                }
+              }
             });
         },
       },

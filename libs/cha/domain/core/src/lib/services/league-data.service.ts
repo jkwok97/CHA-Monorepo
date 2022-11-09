@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
+import { LeagueDataDto, TeamDto, UserDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueDataService {
@@ -20,6 +20,12 @@ export class LeagueDataService {
   getTeams(): Observable<TeamDto[]> {
     return this._http
       .get(`${this.apiUrl}/teams/current`)
+      .pipe(map((result: any) => result));
+  }
+
+  getUsers(): Observable<UserDto[]> {
+    return this._http
+      .get(`${this.apiUrl}/users/current`)
       .pipe(map((result: any) => result));
   }
 

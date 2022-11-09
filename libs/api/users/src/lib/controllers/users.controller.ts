@@ -25,6 +25,16 @@ export class UsersController {
     return users;
   }
 
+  @Get('/current')
+  async getCurrentUsers(): Promise<UserDto[]> {
+    const users = await this.usersService.getCurrent();
+
+    if (!users || users.length < 1) {
+      throw new NotFoundException('users not found');
+    }
+    return users;
+  }
+
   @Get('/:email')
   async getUserByEmail(@Param() param): Promise<UserDto> {
     const user = await this.usersService.findUserByEmail(param.email);

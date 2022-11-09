@@ -1,10 +1,11 @@
-import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
+import { LeagueDataDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { Action, createReducer, on } from '@ngrx/store';
 import { LeagueDataActions } from './league-data.actions';
 
 export interface State {
   currentData: LeagueDataDto;
   teams: TeamDto[];
+  users: UserDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -27,6 +28,7 @@ const initialState: State = {
     offseason: false,
   },
   teams: [],
+  users: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -54,6 +56,11 @@ const r = createReducer(
     teams: action.teams,
     loading: false,
     loaded: true,
+  })),
+
+  on(LeagueDataActions.getUsersSuccess, (state, action) => ({
+    ...state,
+    users: action.users,
   })),
 
   on(LeagueDataActions.editData, (state) => ({

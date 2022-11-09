@@ -9662,7 +9662,7 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/users/src/lib/controllers/u
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f;
+var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UsersController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -9675,6 +9675,13 @@ let UsersController = class UsersController {
     }
     async getUsers() {
         const users = await this.usersService.getAll();
+        if (!users || users.length < 1) {
+            throw new common_1.NotFoundException('users not found');
+        }
+        return users;
+    }
+    async getCurrentUsers() {
+        const users = await this.usersService.getCurrent();
         if (!users || users.length < 1) {
             throw new common_1.NotFoundException('users not found');
         }
@@ -9711,18 +9718,24 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], UsersController.prototype, "getUsers", null);
 tslib_1.__decorate([
+    (0, common_1.Get)('/current'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], UsersController.prototype, "getCurrentUsers", null);
+tslib_1.__decorate([
     (0, common_1.Get)('/:email'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], UsersController.prototype, "getUserByEmail", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/userId/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], UsersController.prototype, "getUserById", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/userId/:id'),
@@ -9730,13 +9743,13 @@ tslib_1.__decorate([
     tslib_1.__param(1, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
 ], UsersController.prototype, "updateUserById", null);
 tslib_1.__decorate([
     (0, common_1.Post)('/add'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_f = typeof entities_1.UserCreateDto !== "undefined" && entities_1.UserCreateDto) === "function" ? _f : Object]),
+    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.UserCreateDto !== "undefined" && entities_1.UserCreateDto) === "function" ? _g : Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], UsersController.prototype, "addUser", null);
 tslib_1.__decorate([
@@ -9820,6 +9833,13 @@ let UsersService = class UsersService {
     }
     async getAll() {
         return await this.repo.find();
+    }
+    async getCurrent() {
+        return await this.repo.find({
+            where: {
+                isactive: true,
+            },
+        });
     }
     async findUserById(id) {
         return await this.repo.findOneByOrFail({ id });

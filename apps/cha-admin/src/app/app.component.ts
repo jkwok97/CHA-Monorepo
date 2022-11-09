@@ -9,15 +9,16 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   loggedIn$: Observable<boolean>;
-  
+
   constructor(
     private displayFacade: DisplayFacade,
     private leagueDataFacade: LeagueDataFacade,
-    private authFacade: AuthFacade,
+    private authFacade: AuthFacade
   ) {
     this.loggedIn$ = this.authFacade.loggingInComplete$;
     this.displayFacade.get();
     this.leagueDataFacade.getLeagueData();
     this.leagueDataFacade.getLeagueTeams();
+    this.leagueDataFacade.getCurrentUsers();
   }
 }

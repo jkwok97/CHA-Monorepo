@@ -1,4 +1,4 @@
-import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
+import { LeagueDataDto, TeamDto, UserDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[League Data]';
@@ -15,6 +15,13 @@ const getTeams = createAction(`${NAMESPACE} Get Teams`);
 const getTeamsSuccess = createAction(
   `${NAMESPACE} Get Teams Success`,
   props<{ teams: TeamDto[] }>()
+);
+
+const getUsers = createAction(`${NAMESPACE} Get Users`);
+
+const getUsersSuccess = createAction(
+  `${NAMESPACE} Get Users Success`,
+  props<{ users: UserDto[] }>()
 );
 
 const editData = createAction(
@@ -34,6 +41,8 @@ export const LeagueDataActions = {
   getLeagueDataSuccess,
   getTeams,
   getTeamsSuccess,
+  getUsers,
+  getUsersSuccess,
   editData,
   editDataSuccess,
   error,

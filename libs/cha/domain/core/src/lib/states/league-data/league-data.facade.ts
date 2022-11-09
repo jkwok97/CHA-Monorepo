@@ -66,6 +66,10 @@ export class LeagueDataFacade {
     this.store.dispatch(LeagueDataActions.getTeams());
   }
 
+  getCurrentUsers() {
+    this.store.dispatch(LeagueDataActions.getUsers());
+  }
+
   editData(data: LeagueDataDto) {
     this.store.dispatch(LeagueDataActions.editData({ data }));
   }
