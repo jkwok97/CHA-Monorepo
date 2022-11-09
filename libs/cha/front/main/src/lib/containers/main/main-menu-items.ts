@@ -1,4 +1,3 @@
-import { HomeLogoutComponent } from 'libs/cha/front/home-logout/src';
 import { MenuItem } from 'primeng/api';
 
 export const mainMenuItems: MenuItem[] = [

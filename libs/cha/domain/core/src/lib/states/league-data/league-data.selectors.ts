@@ -2,7 +2,12 @@ import { createSelector } from '@ngrx/store';
 
 import * as LeagueDataReducer from './league-data.reducer';
 import { AppState, selectFeatureState } from '../index';
-import { LeagueDataDto, TeamDto, UserDto } from '@cha/shared/entities';
+import {
+  DivisionsEnum,
+  LeagueDataDto,
+  TeamDto,
+  UserDto,
+} from '@cha/shared/entities';
 
 const selectState = createSelector(
   selectFeatureState,
@@ -63,6 +68,52 @@ const selectNextYearCapHit = createSelector(
 );
 
 const selectTeams = createSelector(selectState, LeagueDataReducer.getTeams);
+
+const selectTeamsByDivision = createSelector(
+  selectTeams,
+  (teams: TeamDto[]) => {
+    if (teams && teams.length > 0) {
+      const divOneTeams = teams.filter(
+        (team: TeamDto) => team.divisions_id?.id === DivisionsEnum.NORTH_WEST
+      );
+      const divTwoTeams = teams.filter(
+        (team: TeamDto) => team.divisions_id?.id === DivisionsEnum.SOUTH_WEST
+      );
+      const divThreeTeams = teams.filter(
+        (team: TeamDto) => team.divisions_id?.id === DivisionsEnum.NORTH_EAST
+      );
+      const divFourTeams = teams.filter(
+        (team: TeamDto) => team.divisions_id?.id === DivisionsEnum.SOUTH_EAST
+      );
+
+      const divOneTeamItems = getTeamMenuItem(divOneTeams);
+      const divTwoTeamItems = getTeamMenuItem(divTwoTeams);
+      const divThreeTeamItems = getTeamMenuItem(divThreeTeams);
+      const divFourTeamItems = getTeamMenuItem(divFourTeams);
+
+      return [
+        {
+          label: `${divOneTeams[0].divisions_id.divisionname} Division`,
+          items: divOneTeamItems,
+        },
+        {
+          label: `${divTwoTeams[0].divisions_id.divisionname} Division`,
+          items: divTwoTeamItems,
+        },
+        {
+          label: `${divThreeTeams[0].divisions_id.divisionname} Division`,
+          items: divThreeTeamItems,
+        },
+        {
+          label: `${divFourTeams[0].divisions_id.divisionname} Division`,
+          items: divFourTeamItems,
+        },
+      ];
+    } else {
+      return [];
+    }
+  }
+);
 
 const selectSortedTeams = createSelector(selectTeams, (teams: TeamDto[]) =>
   teams
@@ -131,4 +182,12 @@ export const LeagueDataSelectors = {
   selectTeamIdByUserId,
   selectTeamNameById,
   selectUsersOptions,
+  selectTeamsByDivision,
 };
+
+function getTeamMenuItem(teams: TeamDto[]) {
+  return teams.map((team: TeamDto) => ({
+    label: `${team.city} ${team.nickname}`,
+    routerLink: [`/league/teams/${team.id}`],
+  }));
+}

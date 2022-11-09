@@ -5,6 +5,7 @@ import { State } from './league-data.reducer';
 import { LeagueDataActions } from './league-data.actions';
 import { LeagueDataSelectors } from './league-data.selectors';
 import { LeagueDataDto, TeamDto, TeamsEnum } from '@cha/shared/entities';
+import { MenuItem } from 'primeng/api';
 
 @Injectable()
 export class LeagueDataFacade {
@@ -26,6 +27,10 @@ export class LeagueDataFacade {
 
   leagueTeams$: Observable<TeamDto[]> = this.store.select(
     LeagueDataSelectors.selectTeams
+  );
+
+  leagueTeamsByDivisionMenuItems$: Observable<MenuItem[]> = this.store.select(
+    LeagueDataSelectors.selectTeamsByDivision
   );
 
   leagueTeamsOptions$: Observable<any[]> = this.store.select(
