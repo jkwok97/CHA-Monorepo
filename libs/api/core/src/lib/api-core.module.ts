@@ -18,6 +18,7 @@ import { ApiTransactionsModule } from '@api/transactions';
 import { ApiWaiversModule } from '@api/waivers';
 import { ApiDivisionsModule } from '@api/divisions';
 import { ApiGoalieRatingsModule } from '@api/goalie-ratings';
+import { ApiConferencesModule } from '@api/conferences';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ApiGoalieRatingsModule } from '@api/goalie-ratings';
     ApiWaiversModule,
     ApiDivisionsModule,
     ApiGoalieRatingsModule,
+    ApiConferencesModule,
   ],
   controllers: [],
   providers: [],

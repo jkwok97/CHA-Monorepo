@@ -781,6 +781,39 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/awards/src/lib/services/api
 
 /***/ }),
 
+/***/ "./libs/api/conferences/src/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/conferences/src/lib/api-conferences.module.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/api-conferences.module.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiConferencesModule = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+let ApiConferencesModule = class ApiConferencesModule {
+};
+ApiConferencesModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        controllers: [],
+        providers: [],
+        exports: [],
+    })
+], ApiConferencesModule);
+exports.ApiConferencesModule = ApiConferencesModule;
+
+
+/***/ }),
+
 /***/ "./libs/api/core/src/index.ts":
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
@@ -818,6 +851,7 @@ const transactions_1 = __webpack_require__("./libs/api/transactions/src/index.ts
 const waivers_1 = __webpack_require__("./libs/api/waivers/src/index.ts");
 const divisions_1 = __webpack_require__("./libs/api/divisions/src/index.ts");
 const goalie_ratings_1 = __webpack_require__("./libs/api/goalie-ratings/src/index.ts");
+const conferences_1 = __webpack_require__("./libs/api/conferences/src/index.ts");
 let ApiCoreModule = class ApiCoreModule {
 };
 ApiCoreModule = tslib_1.__decorate([
@@ -841,6 +875,7 @@ ApiCoreModule = tslib_1.__decorate([
             waivers_1.ApiWaiversModule,
             divisions_1.ApiDivisionsModule,
             goalie_ratings_1.ApiGoalieRatingsModule,
+            conferences_1.ApiConferencesModule,
         ],
         controllers: [],
         providers: [],
