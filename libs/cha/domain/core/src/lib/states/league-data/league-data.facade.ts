@@ -36,6 +36,10 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectTeamsOptionsById
   );
 
+  leagueUsersOptions$: Observable<any[]> = this.store.select(
+    LeagueDataSelectors.selectUsersOptions
+  );
+
   sortedLeagueTeams$: Observable<TeamDto[]> = this.store.select(
     LeagueDataSelectors.selectSortedTeams
   );

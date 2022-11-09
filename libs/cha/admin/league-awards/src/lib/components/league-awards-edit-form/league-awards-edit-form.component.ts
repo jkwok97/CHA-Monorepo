@@ -48,6 +48,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
     private leagueDataFacade: LeagueDataFacade
   ) {
     this.users$ = this.leagueAwardsFacade.users$;
+    this.currentUsers$ = this.leagueDataFacade.leagueUsersOptions$;
     this.awardTypes$ = this.leagueAwardsFacade.awardTypes$;
     this.teams$ = this.leagueDataFacade.leagueTeamsOptionsById$;
     this.players$ = this.leagueAwardsFacade.players$;
@@ -231,7 +232,7 @@ export class LeagueAwardsEditFormComponent implements OnInit {
         label: 'Owner',
         placeholder: 'Select Owner',
         required: true,
-        options: this.users$,
+        options: this.award ? this.users$ : this.currentUsers$,
         valueProp: 'value',
         labelProp: 'label',
       },

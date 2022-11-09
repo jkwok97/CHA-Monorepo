@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import * as LeagueDataReducer from './league-data.reducer';
 import { AppState, selectFeatureState } from '../index';
-import { LeagueDataDto, TeamDto } from '@cha/shared/entities';
+import { LeagueDataDto, TeamDto, UserDto } from '@cha/shared/entities';
 
 const selectState = createSelector(
   selectFeatureState,
@@ -84,6 +84,15 @@ const selectTeamsOptionsById = createSelector(selectTeams, (teams: TeamDto[]) =>
   }))
 );
 
+const selectUsers = createSelector(selectState, LeagueDataReducer.getUsers);
+
+const selectUsersOptions = createSelector(selectUsers, (users: UserDto[]) =>
+  users.map((user: UserDto) => ({
+    value: user.id,
+    label: `${user.firstname} ${user.lastname}`,
+  }))
+);
+
 const selectLoading = createSelector(selectState, LeagueDataReducer.getLoading);
 
 const selectLoaded = createSelector(selectState, LeagueDataReducer.getLoaded);
@@ -121,4 +130,5 @@ export const LeagueDataSelectors = {
   selectTeamsOptionsById,
   selectTeamIdByUserId,
   selectTeamNameById,
+  selectUsersOptions,
 };

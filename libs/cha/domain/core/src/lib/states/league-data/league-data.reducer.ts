@@ -86,6 +86,8 @@ export const getLeagueData = (state: State) => state.currentData;
 
 export const getTeams = (state: State) => state.teams;
 
+export const getUsers = (state: State) => state.users;
+
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
