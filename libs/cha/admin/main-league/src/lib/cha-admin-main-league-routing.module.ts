@@ -41,6 +41,13 @@ const ROUTES: Route[] = [
           ),
       },
       {
+        path: 'conferences',
+        loadChildren: () =>
+          import('@cha/admin/league-conferences').then(
+            (mod) => mod.ChaAdminLeagueConferencesModule
+          ),
+      },
+      {
         path: 'awards',
         loadChildren: () =>
           import('@cha/admin/league-awards').then(

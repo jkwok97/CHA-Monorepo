@@ -92,6 +92,9 @@
       ],
       "@cha/admin/home": ["libs/cha/admin/home/src/index.ts"],
       "@cha/admin/league-awards": ["libs/cha/admin/league-awards/src/index.ts"],
+      "@cha/admin/league-conferences": [
+        "libs/cha/admin/league-conferences/src/index.ts"
+      ],
       "@cha/admin/league-current-data": [
         "libs/cha/admin/league-current-data/src/index.ts"
       ],

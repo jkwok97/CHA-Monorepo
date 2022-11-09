@@ -21,12 +21,16 @@ export const mainMenuItems: MenuItem[] = [
         routerLink: ['/league/teams'],
       },
       {
+        label: 'Awards',
+        routerLink: ['/league/awards'],
+      },
+      {
         label: 'Divisions',
         routerLink: ['/league/divisions'],
       },
       {
-        label: 'Awards',
-        routerLink: ['/league/awards'],
+        label: 'Conferences',
+        routerLink: ['/league/conferences'],
       },
     ],
   },

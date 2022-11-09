@@ -71,6 +71,7 @@
     "cha-admin-e2e": "apps/cha-admin-e2e",
     "cha-admin-home": "libs/cha/admin/home",
     "cha-admin-league-awards": "libs/cha/admin/league-awards",
+    "cha-admin-league-conferences": "libs/cha/admin/league-conferences",
     "cha-admin-league-current-data": "libs/cha/admin/league-current-data",
     "cha-admin-league-divisions": "libs/cha/admin/league-divisions",
     "cha-admin-league-teams": "libs/cha/admin/league-teams",
