@@ -4380,6 +4380,7 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
             where: {
                 team_name: teamName,
                 playing_year: season,
+                season_type: 'Regular'
             },
         });
     }
@@ -6718,6 +6719,7 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
             where: {
                 team_name: teamName,
                 playing_year: season,
+                season_type: 'Regular',
             },
         });
     }

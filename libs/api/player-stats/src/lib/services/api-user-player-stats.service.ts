@@ -59,6 +59,7 @@ export class ApiUserPlayerStatsService {
       where: {
         team_name: teamName,
         playing_year: season,
+        season_type: 'Regular',
       },
     });
   }
