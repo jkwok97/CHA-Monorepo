@@ -1,27 +1,39 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as LeagueUsersReducer from './league-divisions.reducer';
+import * as LeagueDivisionsReducer from './league-divisions.reducer';
 
 export const selectState =
-  createFeatureSelector<LeagueUsersReducer.State>('league-users');
+  createFeatureSelector<LeagueDivisionsReducer.State>('league-divisions');
 
 const selectLoading = createSelector(
   selectState,
-  LeagueUsersReducer.getLoading
+  LeagueDivisionsReducer.getLoading
 );
 
-const selectLoaded = createSelector(selectState, LeagueUsersReducer.getLoaded);
+const selectLoaded = createSelector(
+  selectState,
+  LeagueDivisionsReducer.getLoaded
+);
 
-const selectSaving = createSelector(selectState, LeagueUsersReducer.getSaving);
+const selectSaving = createSelector(
+  selectState,
+  LeagueDivisionsReducer.getSaving
+);
 
-const selectSaved = createSelector(selectState, LeagueUsersReducer.getSaved);
+const selectSaved = createSelector(
+  selectState,
+  LeagueDivisionsReducer.getSaved
+);
 
-const selectUsers = createSelector(selectState, LeagueUsersReducer.getUsers);
+const selectDivisions = createSelector(
+  selectState,
+  LeagueDivisionsReducer.getDivisions
+);
 
-export const LeagueUsersSelectors = {
+export const LeagueDivisionsSelectors = {
   selectLoaded,
   selectLoading,
   selectSaving,
   selectSaved,
-  selectUsers,
+  selectDivisions,
 };
