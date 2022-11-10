@@ -1,18 +1,7 @@
-import {
-  ConferenceDto,
-  DivisionCreateDto,
-  DivisionDto,
-} from '@cha/shared/entities';
+import { ConferenceCreateDto, ConferenceDto } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
-const NAMESPACE = '[LEAGUE DIVISIONS]';
-
-const getDivisions = createAction(`${NAMESPACE} Get Divisions`);
-
-const getDivisionsSuccess = createAction(
-  `${NAMESPACE} Get Divisions Success`,
-  props<{ divisions: DivisionDto[] }>()
-);
+const NAMESPACE = '[LEAGUE CONFERENCES]';
 
 const getConferences = createAction(`${NAMESPACE} Get Conferences`);
 
@@ -21,48 +10,46 @@ const getConferencesSuccess = createAction(
   props<{ conferences: ConferenceDto[] }>()
 );
 
-const addDivision = createAction(
-  `${NAMESPACE} Add Division`,
-  props<{ division: DivisionCreateDto }>()
+const addConference = createAction(
+  `${NAMESPACE} Add Conference`,
+  props<{ conference: ConferenceCreateDto }>()
 );
 
-const addDivisionSuccess = createAction(
-  `${NAMESPACE} Add Division Success`,
-  props<{ division: DivisionDto }>()
+const addConferenceSuccess = createAction(
+  `${NAMESPACE} Add Conference Success`,
+  props<{ conference: ConferenceDto }>()
 );
 
-const editDivision = createAction(
-  `${NAMESPACE} Edit Division`,
-  props<{ division: DivisionDto }>()
+const editConference = createAction(
+  `${NAMESPACE} Edit Conference`,
+  props<{ conference: ConferenceDto }>()
 );
 
-const editDivisionSuccess = createAction(
-  `${NAMESPACE} Edit Division Success`,
-  props<{ division: DivisionDto }>()
+const editConferenceSuccess = createAction(
+  `${NAMESPACE} Edit Conference Success`,
+  props<{ conference: ConferenceDto }>()
 );
 
-const deleteDivision = createAction(
-  `${NAMESPACE} Delete Division`,
-  props<{ divisionId: number }>()
+const deleteConference = createAction(
+  `${NAMESPACE} Delete Conference`,
+  props<{ conferenceId: number }>()
 );
 
-const deleteDivisionSuccess = createAction(
-  `${NAMESPACE} Delete Division Success`,
-  props<{ division: DivisionDto }>()
+const deleteConferenceSuccess = createAction(
+  `${NAMESPACE} Delete Conference Success`,
+  props<{ conference: ConferenceDto }>()
 );
 
 const error = createAction(`${NAMESPACE} Error`);
 
-export const LeagueDivisionsActions = {
-  getDivisions,
-  getDivisionsSuccess,
+export const LeagueConferencesActions = {
   getConferences,
   getConferencesSuccess,
-  addDivision,
-  addDivisionSuccess,
-  editDivision,
-  editDivisionSuccess,
-  deleteDivision,
-  deleteDivisionSuccess,
+  addConference,
+  addConferenceSuccess,
+  editConference,
+  editConferenceSuccess,
+  deleteConference,
+  deleteConferenceSuccess,
   error,
 };
