@@ -3,37 +3,29 @@ import { Store } from '@ngrx/store';
 import { State } from './league-conferences.reducer';
 import { LeagueConferencesActions } from './league-conferences.actions';
 import { Observable } from 'rxjs';
-import { LeagueDivisionsSelectors } from './league-conferences.selectors';
-import {
-  ConferenceCreateDto,
-  ConferenceDto,
-  DivisionDto,
-} from '@cha/shared/entities';
+import { LeagueConferenceSelectors } from './league-conferences.selectors';
+import { ConferenceCreateDto, ConferenceDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueDivisionsFacade {
   isLoading$: Observable<boolean> = this.store.select(
-    LeagueDivisionsSelectors.selectLoading
+    LeagueConferenceSelectors.selectLoading
   );
 
   isLoaded$: Observable<boolean> = this.store.select(
-    LeagueDivisionsSelectors.selectLoaded
+    LeagueConferenceSelectors.selectLoaded
   );
 
   isSaving$: Observable<boolean> = this.store.select(
-    LeagueDivisionsSelectors.selectSaving
+    LeagueConferenceSelectors.selectSaving
   );
 
   isSaved$: Observable<boolean> = this.store.select(
-    LeagueDivisionsSelectors.selectSaved
+    LeagueConferenceSelectors.selectSaved
   );
 
-  divisions$: Observable<DivisionDto[]> = this.store.select(
-    LeagueDivisionsSelectors.selectDivisions
-  );
-
-  conferenceOptions$: Observable<any[]> = this.store.select(
-    LeagueDivisionsSelectors.selectConferencesOptions
+  conferences$: Observable<ConferenceDto[]> = this.store.select(
+    LeagueConferenceSelectors.selectConferences
   );
 
   constructor(private store: Store<State>) {}

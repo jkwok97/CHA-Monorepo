@@ -1,55 +1,39 @@
-import { ConferenceDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as LeagueDivisionsReducer from './league-conferences.reducer';
+import * as LeagueConferencesReducer from './league-conferences.reducer';
 
 export const selectState =
-  createFeatureSelector<LeagueDivisionsReducer.State>('league-divisions');
+  createFeatureSelector<LeagueConferencesReducer.State>('league-conferences');
 
 const selectLoading = createSelector(
   selectState,
-  LeagueDivisionsReducer.getLoading
+  LeagueConferencesReducer.getLoading
 );
 
 const selectLoaded = createSelector(
   selectState,
-  LeagueDivisionsReducer.getLoaded
+  LeagueConferencesReducer.getLoaded
 );
 
 const selectSaving = createSelector(
   selectState,
-  LeagueDivisionsReducer.getSaving
+  LeagueConferencesReducer.getSaving
 );
 
 const selectSaved = createSelector(
   selectState,
-  LeagueDivisionsReducer.getSaved
-);
-
-const selectDivisions = createSelector(
-  selectState,
-  LeagueDivisionsReducer.getDivisions
+  LeagueConferencesReducer.getSaved
 );
 
 const selectConferences = createSelector(
   selectState,
-  LeagueDivisionsReducer.getConferences
+  LeagueConferencesReducer.getConferences
 );
 
-const selectConferencesOptions = createSelector(
-  selectConferences,
-  (conferences: ConferenceDto[]) =>
-    conferences.map((conference: ConferenceDto) => ({
-      label: conference.conferencename,
-      value: conference.id,
-    }))
-);
-
-export const LeagueDivisionsSelectors = {
+export const LeagueConferenceSelectors = {
   selectLoaded,
   selectLoading,
   selectSaving,
   selectSaved,
-  selectDivisions,
-  selectConferencesOptions,
+  selectConferences,
 };
