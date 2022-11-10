@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from './league-conferences.reducer';
-import { LeagueDivisionsActions } from './league-divisions.actions';
+import { LeagueConferencesActions } from './league-conferences.actions';
 import { Observable } from 'rxjs';
 import { LeagueDivisionsSelectors } from './league-conferences.selectors';
-import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
+import {
+  ConferenceCreateDto,
+  ConferenceDto,
+  DivisionDto,
+} from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueDivisionsFacade {
@@ -34,23 +38,23 @@ export class LeagueDivisionsFacade {
 
   constructor(private store: Store<State>) {}
 
-  getDivisions() {
-    this.store.dispatch(LeagueDivisionsActions.getDivisions());
-  }
-
   getConferences() {
-    this.store.dispatch(LeagueDivisionsActions.getConferences());
+    this.store.dispatch(LeagueConferencesActions.getConferences());
   }
 
-  addDivision(division: DivisionCreateDto) {
-    this.store.dispatch(LeagueDivisionsActions.addDivision({ division }));
+  addConference(conference: ConferenceCreateDto) {
+    this.store.dispatch(LeagueConferencesActions.addConference({ conference }));
   }
 
-  editDivision(division: DivisionDto) {
-    this.store.dispatch(LeagueDivisionsActions.editDivision({ division }));
+  editConference(conference: ConferenceDto) {
+    this.store.dispatch(
+      LeagueConferencesActions.editConference({ conference })
+    );
   }
 
-  deleteDivision(divisionId: number) {
-    this.store.dispatch(LeagueDivisionsActions.deleteDivision({ divisionId }));
+  deleteConference(conferenceId: number) {
+    this.store.dispatch(
+      LeagueConferencesActions.deleteConference({ conferenceId })
+    );
   }
 }

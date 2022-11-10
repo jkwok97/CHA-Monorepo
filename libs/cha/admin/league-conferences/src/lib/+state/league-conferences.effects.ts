@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
+import { ConferenceDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -8,7 +8,7 @@ import { LeagueConferencesActions } from './league-conferences.actions';
 import { LeagueDivisionsFacade } from './league-conferences.facade';
 
 @Injectable()
-export class LeagueDivisionsEffects {
+export class LeagueConferencesEffects {
   constructor(
     private actions$: Actions,
     private leagueConferencesService: LeagueConferencesService,
@@ -58,7 +58,7 @@ export class LeagueDivisionsEffects {
             summary: 'Add Conference',
             detail: 'Conference has been added',
           });
-          this.leagueDivisionsFacade.getDivisions();
+          this.leagueDivisionsFacade.getConferences();
         })
       ),
     { dispatch: false }
@@ -90,7 +90,7 @@ export class LeagueDivisionsEffects {
             summary: 'Edit Conference',
             detail: 'Conference has been updated',
           });
-          this.leagueDivisionsFacade.getDivisions();
+          this.leagueDivisionsFacade.getConferences();
         })
       ),
     { dispatch: false }
@@ -124,7 +124,7 @@ export class LeagueDivisionsEffects {
             summary: 'Delete Conference',
             detail: 'Conference has been removed',
           });
-          this.leagueDivisionsFacade.getDivisions();
+          this.leagueDivisionsFacade.getConferences();
         })
       ),
     { dispatch: false }
