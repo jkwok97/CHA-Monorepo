@@ -3,29 +3,29 @@ import { Store } from '@ngrx/store';
 import { State } from './league-divisions.reducer';
 import { LeagueDivisionsActions } from './league-divisions.actions';
 import { Observable } from 'rxjs';
-import { LeagueUsersSelectors } from './league-divisions.selectors';
-import { DivisionCreateDto, DivisionDto, UserDto } from '@cha/shared/entities';
+import { LeagueDivisionsSelectors } from './league-divisions.selectors';
+import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueDivisionsFacade {
   isLoading$: Observable<boolean> = this.store.select(
-    LeagueUsersSelectors.selectLoading
+    LeagueDivisionsSelectors.selectLoading
   );
 
   isLoaded$: Observable<boolean> = this.store.select(
-    LeagueUsersSelectors.selectLoaded
+    LeagueDivisionsSelectors.selectLoaded
   );
 
   isSaving$: Observable<boolean> = this.store.select(
-    LeagueUsersSelectors.selectSaving
+    LeagueDivisionsSelectors.selectSaving
   );
 
   isSaved$: Observable<boolean> = this.store.select(
-    LeagueUsersSelectors.selectSaved
+    LeagueDivisionsSelectors.selectSaved
   );
 
-  users$: Observable<UserDto[]> = this.store.select(
-    LeagueUsersSelectors.selectUsers
+  divisions$: Observable<DivisionDto[]> = this.store.select(
+    LeagueDivisionsSelectors.selectDivisions
   );
 
   constructor(private store: Store<State>) {}
