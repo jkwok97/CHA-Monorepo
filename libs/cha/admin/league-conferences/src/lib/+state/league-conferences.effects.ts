@@ -3,76 +3,60 @@ import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
-import { LeagueDivisionsService } from '../services';
-import { LeagueDivisionsActions } from './league-divisions.actions';
+import { LeagueConferencesService } from '../services';
+import { LeagueConferencesActions } from './league-conferences.actions';
 import { LeagueDivisionsFacade } from './league-conferences.facade';
 
 @Injectable()
 export class LeagueDivisionsEffects {
   constructor(
     private actions$: Actions,
-    private leagueDivisionsService: LeagueDivisionsService,
+    private leagueConferencesService: LeagueConferencesService,
     private leagueDivisionsFacade: LeagueDivisionsFacade,
     private messageService: MessageService
   ) {}
 
-  getDivisions$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(LeagueDivisionsActions.getDivisions),
-      exhaustMap((action) =>
-        this.leagueDivisionsService.getDivisions().pipe(
-          map((divisions: DivisionDto[]) =>
-            LeagueDivisionsActions.getDivisionsSuccess({
-              divisions,
-            })
-          ),
-          catchError(() => of(LeagueDivisionsActions.error()))
-        )
-      )
-    )
-  );
-
   getConferences$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueDivisionsActions.getConferences),
+      ofType(LeagueConferencesActions.getConferences),
       exhaustMap((action) =>
-        this.leagueDivisionsService.getConferences().pipe(
+        this.leagueConferencesService.getConferences().pipe(
           map((conferences: ConferenceDto[]) =>
-            LeagueDivisionsActions.getConferencesSuccess({
+            LeagueConferencesActions.getConferencesSuccess({
               conferences,
             })
           ),
-          catchError(() => of(LeagueDivisionsActions.error()))
+          catchError(() => of(LeagueConferencesActions.error()))
         )
       )
     )
   );
 
-  addDivision$ = createEffect(() =>
+  addConference$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueDivisionsActions.addDivision),
+      ofType(LeagueConferencesActions.addConference),
       exhaustMap((action) =>
-        this.leagueDivisionsService.addDivisions(action.division).pipe(
-          map((division: DivisionDto) =>
-            LeagueDivisionsActions.addDivisionSuccess({
-              division,
+        this.leagueConferencesService.addConferences(action.conference).pipe(
+          map((conference: ConferenceDto) =>
+            LeagueConferencesActions.addConferenceSuccess({
+              conference,
             })
           ),
-          catchError(() => of(LeagueDivisionsActions.error()))
+          catchError(() => of(LeagueConferencesActions.error()))
         )
       )
     )
   );
 
-  addDivisionSuccess$ = createEffect(
+  addConferenceSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueDivisionsActions.addDivisionSuccess),
+        ofType(LeagueConferencesActions.addConferenceSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Add Division',
-            detail: 'Division has been added',
+            summary: 'Add Conference',
+            detail: 'Conference has been added',
           });
           this.leagueDivisionsFacade.getDivisions();
         })
@@ -80,31 +64,31 @@ export class LeagueDivisionsEffects {
     { dispatch: false }
   );
 
-  editDivision$ = createEffect(() =>
+  editConference$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueDivisionsActions.editDivision),
+      ofType(LeagueConferencesActions.editConference),
       exhaustMap((action) =>
-        this.leagueDivisionsService.editDivisions(action.division).pipe(
-          map((division: DivisionDto) =>
-            LeagueDivisionsActions.editDivisionSuccess({
-              division,
+        this.leagueConferencesService.editConferences(action.conference).pipe(
+          map((conference: ConferenceDto) =>
+            LeagueConferencesActions.editConferenceSuccess({
+              conference,
             })
           ),
-          catchError(() => of(LeagueDivisionsActions.error()))
+          catchError(() => of(LeagueConferencesActions.error()))
         )
       )
     )
   );
 
-  editDivisionSuccess$ = createEffect(
+  editConferenceSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueDivisionsActions.editDivisionSuccess),
+        ofType(LeagueConferencesActions.editConferenceSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Edit Division',
-            detail: 'Division has been updated',
+            summary: 'Edit Conference',
+            detail: 'Conference has been updated',
           });
           this.leagueDivisionsFacade.getDivisions();
         })
@@ -112,31 +96,33 @@ export class LeagueDivisionsEffects {
     { dispatch: false }
   );
 
-  deleteDevision$ = createEffect(() =>
+  deleteConference$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueDivisionsActions.deleteDivision),
+      ofType(LeagueConferencesActions.deleteConference),
       exhaustMap((action) =>
-        this.leagueDivisionsService.deleteDivisions(action.divisionId).pipe(
-          map((division: DivisionDto) =>
-            LeagueDivisionsActions.deleteDivisionSuccess({
-              division,
-            })
-          ),
-          catchError(() => of(LeagueDivisionsActions.error()))
-        )
+        this.leagueConferencesService
+          .deleteConferences(action.conferenceId)
+          .pipe(
+            map((conference: ConferenceDto) =>
+              LeagueConferencesActions.deleteConferenceSuccess({
+                conference,
+              })
+            ),
+            catchError(() => of(LeagueConferencesActions.error()))
+          )
       )
     )
   );
 
-  deleteDivisionSuccess$ = createEffect(
+  deleteConferenceSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueDivisionsActions.deleteDivisionSuccess),
+        ofType(LeagueConferencesActions.deleteConferenceSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Delete Division',
-            detail: 'Division has been removed',
+            summary: 'Delete Conference',
+            detail: 'Conference has been removed',
           });
           this.leagueDivisionsFacade.getDivisions();
         })
