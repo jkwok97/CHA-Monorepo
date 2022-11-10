@@ -1,9 +1,9 @@
-import { UserDto } from '@cha/shared/entities';
+import { DivisionDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { LeagueUsersActions } from './league-users.actions';
+import { LeagueDivisionsActions } from './league-divisions.actions';
 
 export interface State {
-  users: UserDto[];
+  divisions: DivisionDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -11,7 +11,7 @@ export interface State {
 }
 
 const initialState: State = {
-  users: [],
+  divisions: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -21,16 +21,16 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(LeagueUsersActions.getUsers, (state) => ({
+  on(LeagueDivisionsActions.getDivisions, (state) => ({
     ...state,
     loading: true,
     loaded: false,
   })),
 
   on(
-    LeagueUsersActions.addUser,
-    LeagueUsersActions.editUser,
-    LeagueUsersActions.deleteUser,
+    LeagueDivisionsActions.addDivision,
+    LeagueDivisionsActions.editDivision,
+    LeagueDivisionsActions.deleteDivision,
     (state) => ({
       ...state,
       saving: true,
@@ -38,17 +38,17 @@ const r = createReducer(
     })
   ),
 
-  on(LeagueUsersActions.getUsersSuccess, (state, action) => ({
+  on(LeagueDivisionsActions.getDivisionsSuccess, (state, action) => ({
     ...state,
-    users: action.users,
+    divisions: action.divisions,
     loading: false,
     loaded: true,
   })),
 
   on(
-    LeagueUsersActions.addUserSuccess,
-    LeagueUsersActions.editUserSuccess,
-    LeagueUsersActions.deleteUserSuccess,
+    LeagueDivisionsActions.addDivisionSuccess,
+    LeagueDivisionsActions.editDivisionSuccess,
+    LeagueDivisionsActions.deleteDivisionSuccess,
     (state, action) => ({
       ...state,
       saving: false,
@@ -56,14 +56,14 @@ const r = createReducer(
     })
   ),
 
-  on(LeagueUsersActions.error, (state) => initialState)
+  on(LeagueDivisionsActions.error, (state) => initialState)
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return r(state, action);
 }
 
-export const getUsers = (state: State) => state.users;
+export const getDivisions = (state: State) => state.divisions;
 
 export const getLoading = (state: State) => state.loading;
 
