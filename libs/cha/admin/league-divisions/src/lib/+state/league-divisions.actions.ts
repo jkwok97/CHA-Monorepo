@@ -1,4 +1,8 @@
-import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
+import {
+  ConferenceDto,
+  DivisionCreateDto,
+  DivisionDto,
+} from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[LEAGUE DIVISIONS]';
@@ -8,6 +12,13 @@ const getDivisions = createAction(`${NAMESPACE} Get Divisions`);
 const getDivisionsSuccess = createAction(
   `${NAMESPACE} Get Divisions Success`,
   props<{ divisions: DivisionDto[] }>()
+);
+
+const getConferences = createAction(`${NAMESPACE} Get Conferences`);
+
+const getConferencesSuccess = createAction(
+  `${NAMESPACE} Get Conferences Success`,
+  props<{ conferences: ConferenceDto[] }>()
 );
 
 const addDivision = createAction(
@@ -45,6 +56,8 @@ const error = createAction(`${NAMESPACE} Error`);
 export const LeagueDivisionsActions = {
   getDivisions,
   getDivisionsSuccess,
+  getConferences,
+  getConferencesSuccess,
   addDivision,
   addDivisionSuccess,
   editDivision,

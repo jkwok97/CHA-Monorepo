@@ -19,6 +19,12 @@ export class LeagueDivisionsService {
       .pipe(map((result: any) => result));
   }
 
+  getConferences() {
+    return this._http
+      .get(`${this.apiUrl}/conferences`)
+      .pipe(map((result: any) => result));
+  }
+
   addDivisions(division: DivisionCreateDto): Observable<DivisionDto> {
     const body = division;
     return this._http
