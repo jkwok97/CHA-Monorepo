@@ -16,9 +16,11 @@ import { LeagueConferencesFacade } from './+state/league-conferences.facade';
 import { ChaAdminLeagueConferencesRoutingModule } from './cha-admin-league-conferences-routing.module';
 
 import { LeagueConferencesComponent } from './containers';
-import { LeagueConferencesTableComponent } from './components/league-conferences-table/league-conferences-table.component';
-import { LeagueConferencesEditComponent } from './components/league-conferences-edit/league-conferences-edit.component';
-import { LeagueConferencesEditFormComponent } from './components/league-conferences-edit-form/league-conferences-edit-form.component';
+import {
+  LeagueConferencesTableComponent,
+  LeagueConferencesEditComponent,
+  LeagueConferencesEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
