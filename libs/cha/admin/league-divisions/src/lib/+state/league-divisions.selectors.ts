@@ -1,3 +1,4 @@
+import { ConferenceDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as LeagueDivisionsReducer from './league-divisions.reducer';
@@ -30,10 +31,25 @@ const selectDivisions = createSelector(
   LeagueDivisionsReducer.getDivisions
 );
 
+const selectConferences = createSelector(
+  selectState,
+  LeagueDivisionsReducer.getConferences
+);
+
+const selectConferencesOptions = createSelector(
+  selectConferences,
+  (conferences: ConferenceDto[]) =>
+    conferences.map((conference: ConferenceDto) => ({
+      label: conference.conferencename,
+      value: conference.id,
+    }))
+);
+
 export const LeagueDivisionsSelectors = {
   selectLoaded,
   selectLoading,
   selectSaving,
   selectSaved,
   selectDivisions,
+  selectConferencesOptions,
 };

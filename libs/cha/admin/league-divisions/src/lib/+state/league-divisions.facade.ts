@@ -28,10 +28,18 @@ export class LeagueDivisionsFacade {
     LeagueDivisionsSelectors.selectDivisions
   );
 
+  conferenceOptions$: Observable<any[]> = this.store.select(
+    LeagueDivisionsSelectors.selectConferencesOptions
+  );
+
   constructor(private store: Store<State>) {}
 
   getDivisions() {
     this.store.dispatch(LeagueDivisionsActions.getDivisions());
+  }
+
+  getConferences() {
+    this.store.dispatch(LeagueDivisionsActions.getConferences());
   }
 
   addDivision(division: DivisionCreateDto) {
