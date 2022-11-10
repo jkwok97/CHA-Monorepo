@@ -4,6 +4,13 @@ import { ConferenceDto } from './conference.dto';
 export interface DivisionDto {
   id: number;
   divisionname: string;
+  conference_id: ConferencesEnum;
+  isactive: boolean;
+}
+
+export interface GetDivisionDto {
+  id: number;
+  divisionname: string;
   conference_id: ConferenceDto;
   isactive: boolean;
 }

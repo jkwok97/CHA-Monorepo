@@ -2,6 +2,7 @@ import {
   ConferenceDto,
   DivisionCreateDto,
   DivisionDto,
+  GetDivisionDto,
 } from '@cha/shared/entities';
 import { createAction, props } from '@ngrx/store';
 
@@ -11,7 +12,7 @@ const getDivisions = createAction(`${NAMESPACE} Get Divisions`);
 
 const getDivisionsSuccess = createAction(
   `${NAMESPACE} Get Divisions Success`,
-  props<{ divisions: DivisionDto[] }>()
+  props<{ divisions: GetDivisionDto[] }>()
 );
 
 const getConferences = createAction(`${NAMESPACE} Get Conferences`);

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
-import { DivisionDto } from '@cha/shared/entities';
+import { GetDivisionDto } from '@cha/shared/entities';
 import { Observable, first } from 'rxjs';
 import { LeagueDivisionsFacade } from '../../+state/league-divisions.facade';
 
@@ -12,7 +12,7 @@ import { LeagueDivisionsFacade } from '../../+state/league-divisions.facade';
 export class LeagueDivisionsComponent {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
-  divisions$: Observable<DivisionDto[]>;
+  divisions$: Observable<GetDivisionDto[]>;
 
   isMobile!: boolean;
 

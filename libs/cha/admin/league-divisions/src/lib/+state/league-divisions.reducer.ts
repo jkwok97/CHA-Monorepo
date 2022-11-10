@@ -1,9 +1,9 @@
-import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
+import { ConferenceDto, GetDivisionDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { LeagueDivisionsActions } from './league-divisions.actions';
 
 export interface State {
-  divisions: DivisionDto[];
+  divisions: GetDivisionDto[];
   conferences: ConferenceDto[];
   loading: boolean;
   loaded: boolean;
