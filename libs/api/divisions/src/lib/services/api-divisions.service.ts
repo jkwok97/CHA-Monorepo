@@ -16,7 +16,7 @@ export class ApiDivisionsService {
 
   async getAll(): Promise<Divisions_V2[]> {
     return await this.repo.find({
-      relations: ['conferences_id'],
+      relations: ['conference_id'],
     });
   }
 

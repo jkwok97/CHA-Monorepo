@@ -1075,7 +1075,7 @@ let ApiDivisionsService = class ApiDivisionsService {
     }
     async getAll() {
         return await this.repo.find({
-            relations: ['conferences_id'],
+            relations: ['conference_id'],
         });
     }
     async updateDivisionById(id, attrs) {
@@ -1622,7 +1622,7 @@ tslib_1.__decorate([
     (0, typeorm_1.OneToOne)(() => conference_entity_1.Conferences_V2, (conference) => conference.id, {
         eager: true,
     }),
-    (0, typeorm_1.JoinColumn)({ name: 'conferences_id' }),
+    (0, typeorm_1.JoinColumn)({ name: 'conference_id' }),
     tslib_1.__metadata("design:type", Number)
 ], Divisions_V2.prototype, "conference_id", void 0);
 tslib_1.__decorate([

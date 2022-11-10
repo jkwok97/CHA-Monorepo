@@ -18,7 +18,7 @@ export class Divisions_V2 {
   @OneToOne(() => Conferences_V2, (conference) => conference.id, {
     eager: true,
   })
-  @JoinColumn({ name: 'conferences_id' })
+  @JoinColumn({ name: 'conference_id' })
   conference_id!: number;
 
   @Column()
