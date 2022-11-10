@@ -22,7 +22,7 @@ export class LeagueDivisionsTableComponent implements OnInit {
   tableColumns = [
     { field: 'id', header: 'Division Id', visible: true },
     { field: 'divisionname', header: 'Name', visible: true },
-    { field: 'conference_id', header: 'Conference', visible: true },
+    { field: 'conference', header: 'Conference', visible: true },
     { field: 'isactive', header: 'Active', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
@@ -46,6 +46,7 @@ export class LeagueDivisionsTableComponent implements OnInit {
   mapItems(divisions: DivisionDto[]) {
     return divisions.map((division: DivisionDto) => ({
       ...division,
+      conference: `${division.conference_id.conferencename}`,
     }));
   }
 
