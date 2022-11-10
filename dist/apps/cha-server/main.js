@@ -799,17 +799,147 @@ tslib_1.__exportStar(__webpack_require__("./libs/api/conferences/src/lib/api-con
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiConferencesModule = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const controllers_1 = __webpack_require__("./libs/api/conferences/src/lib/controllers/index.ts");
+const middlewares_1 = __webpack_require__("./libs/api/conferences/src/lib/middlewares/index.ts");
+const services_1 = __webpack_require__("./libs/api/conferences/src/lib/services/index.ts");
 let ApiConferencesModule = class ApiConferencesModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.ConferencesMiddleware).forRoutes('*');
+    }
 };
 ApiConferencesModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        controllers: [],
-        providers: [],
-        exports: [],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Conferences_V2])],
+        controllers: [controllers_1.ConferencesController],
+        providers: [services_1.ApiConferencesService],
     })
 ], ApiConferencesModule);
 exports.ApiConferencesModule = ApiConferencesModule;
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/controllers/conferences.controller.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConferencesController = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+const services_1 = __webpack_require__("./libs/api/conferences/src/lib/services/index.ts");
+let ConferencesController = class ConferencesController {
+    constructor(conferencesService) {
+        this.conferencesService = conferencesService;
+    }
+    async getAll() {
+        const conferences = await this.conferencesService.getAll();
+        if (!conferences || conferences.length < 1) {
+            throw new common_1.NotFoundException('Conferences not found');
+        }
+        return conferences;
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], ConferencesController.prototype, "getAll", null);
+ConferencesController = tslib_1.__decorate([
+    (0, common_1.Controller)('conferences'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiConferencesService !== "undefined" && services_1.ApiConferencesService) === "function" ? _a : Object])
+], ConferencesController);
+exports.ConferencesController = ConferencesController;
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/controllers/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/conferences/src/lib/controllers/conferences.controller.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/middlewares/conferences.middleware.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConferencesMiddleware = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const common_1 = __webpack_require__("@nestjs/common");
+let ConferencesMiddleware = class ConferencesMiddleware {
+    use(req, res, next) {
+        console.log('Request Conferences...');
+        next();
+    }
+};
+ConferencesMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], ConferencesMiddleware);
+exports.ConferencesMiddleware = ConferencesMiddleware;
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/middlewares/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/conferences/src/lib/middlewares/conferences.middleware.ts"), exports);
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/services/api-conferences.service.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiConferencesService = void 0;
+const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/api/entities/src/index.ts");
+const common_1 = __webpack_require__("@nestjs/common");
+const typeorm_1 = __webpack_require__("@nestjs/typeorm");
+const typeorm_2 = __webpack_require__("typeorm");
+let ApiConferencesService = class ApiConferencesService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async getAll() {
+        return await this.repo.find();
+    }
+};
+ApiConferencesService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Conferences_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], ApiConferencesService);
+exports.ApiConferencesService = ApiConferencesService;
+
+
+/***/ }),
+
+/***/ "./libs/api/conferences/src/lib/services/index.ts":
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__("tslib");
+tslib_1.__exportStar(__webpack_require__("./libs/api/conferences/src/lib/services/api-conferences.service.ts"), exports);
 
 
 /***/ }),
