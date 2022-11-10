@@ -1589,6 +1589,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Divisions_V2 = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const typeorm_1 = __webpack_require__("typeorm");
+const conference_entity_1 = __webpack_require__("./libs/api/entities/src/lib/entities/conference.entity.ts");
 let Divisions_V2 = class Divisions_V2 {
 };
 tslib_1.__decorate([
@@ -1600,7 +1601,10 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], Divisions_V2.prototype, "divisionname", void 0);
 tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.OneToOne)(() => conference_entity_1.Conferences_V2, (conference) => conference.id, {
+        eager: true,
+    }),
+    (0, typeorm_1.JoinColumn)({ name: 'conference_id' }),
     tslib_1.__metadata("design:type", Number)
 ], Divisions_V2.prototype, "conference_id", void 0);
 tslib_1.__decorate([
