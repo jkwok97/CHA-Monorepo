@@ -47,6 +47,11 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(LeagueDivisionsActions.getConferencesSuccess, (state, action) => ({
+    ...state,
+    conferences: action.conferences,
+  })),
+
   on(
     LeagueDivisionsActions.addDivisionSuccess,
     LeagueDivisionsActions.editDivisionSuccess,

@@ -38,6 +38,10 @@ export class LeagueDivisionsFacade {
     this.store.dispatch(LeagueDivisionsActions.getDivisions());
   }
 
+  getConferences() {
+    this.store.dispatch(LeagueDivisionsActions.getConferences());
+  }
+
   addDivision(division: DivisionCreateDto) {
     this.store.dispatch(LeagueDivisionsActions.addDivision({ division }));
   }

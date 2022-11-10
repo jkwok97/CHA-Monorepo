@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
+import { DivisionDto } from '@cha/shared/entities';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { Observable } from 'rxjs';
 import { LeagueDivisionsFacade } from '../../+state/league-divisions.facade';
@@ -18,7 +18,7 @@ import { LeagueDivisionsFacade } from '../../+state/league-divisions.facade';
 export class LeagueDivisionsEditFormComponent implements OnInit {
   @Input() division!: DivisionDto | null;
 
-  // conferences$: Observable<ConferenceDto[]>;
+  conferences$: Observable<any[]>;
 
   form = new UntypedFormGroup({});
   model: any = {};
@@ -26,7 +26,9 @@ export class LeagueDivisionsEditFormComponent implements OnInit {
   fields!: FormlyFieldConfig[];
 
   constructor(private leagueDivisionsFacade: LeagueDivisionsFacade) {
-    // this.conferences$ = this.leagueDivisionsFacade.conferences$;
+    this.conferences$ = this.leagueDivisionsFacade.conferenceOptions$;
+
+    this.leagueDivisionsFacade.getConferences()
   }
 
   ngOnInit(): void {
