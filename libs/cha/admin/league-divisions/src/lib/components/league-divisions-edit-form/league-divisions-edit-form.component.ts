@@ -28,7 +28,7 @@ export class LeagueDivisionsEditFormComponent implements OnInit {
   constructor(private leagueDivisionsFacade: LeagueDivisionsFacade) {
     this.conferences$ = this.leagueDivisionsFacade.conferenceOptions$;
 
-    this.leagueDivisionsFacade.getConferences()
+    this.leagueDivisionsFacade.getConferences();
   }
 
   ngOnInit(): void {
@@ -43,20 +43,70 @@ export class LeagueDivisionsEditFormComponent implements OnInit {
     this.fields = [
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-3',
-        fieldGroup: [],
+        fieldGroup: [this.isActiveField()],
       },
       {
         fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-        fieldGroup: [],
-      },
-      {
-        fieldGroupClassName: 'w-full flex flex-wrap column-gap-2 row-gap-2',
-        fieldGroup: [],
+        fieldGroup: [this.nameField(), this.conferencesField()],
       },
     ];
   }
 
   patchForm() {
-    this.model = {};
+    this.model = {
+      isactive: this.division?.isactive,
+      divisionname: this.division?.divisionname,
+      conference_id: this.division?.conference_id.id,
+    };
+  }
+
+  isActiveField(): FormlyFieldConfig {
+    return {
+      key: 'isactive',
+      className: 'w-5',
+      type: 'checkbox',
+      templateOptions: {
+        label: 'Active Division',
+      },
+    };
+  }
+
+  nameField(): FormlyFieldConfig {
+    return {
+      key: 'divisionname',
+      className: 'w-full md:w-3',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Division Name',
+        placeholder: 'Enter name',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'name is required',
+        },
+      },
+    };
+  }
+
+  conferencesField(): FormlyFieldConfig {
+    return {
+      key: 'conference_id',
+      className: 'w-full md:w-2',
+      type: 'single-select',
+      templateOptions: {
+        label: 'Conference',
+        placeholder: 'Select Conference',
+        required: true,
+        options: this.conferences$,
+        valueProp: 'value',
+        labelProp: 'label',
+      },
+      validation: {
+        messages: {
+          required: () => 'Conference is required',
+        },
+      },
+    };
   }
 }
