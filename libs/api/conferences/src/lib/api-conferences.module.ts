@@ -4,10 +4,10 @@ import { Module } from '@nestjs/common';
 @Module({
   imports: [TypeOrmModule.forFeature([Conferences_V2])],
   controllers: [DivisionsController],
-  providers: [ApiDivisionsService],
+  providers: [ApiConferencesService],
 })
 export class ApiConferencesModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(DivisionsMiddleware).forRoutes('*');
+    consumer.apply(ConferencesMiddleware).forRoutes('*');
   }
 }

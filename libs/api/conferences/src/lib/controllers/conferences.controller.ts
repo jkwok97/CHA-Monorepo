@@ -1,53 +1,33 @@
-import { Divisions_V2 } from '@api/entities';
-import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
-import { ApiDivisionsService } from '../services';
+import { Conferences_V2 } from '@api/entities';
+import { Controller, Get, NotFoundException } from '@nestjs/common';
+import { ApiConferencesService } from '../services';
 
 @Controller('conferences')
 export class ConferencesController {
-  constructor(private divisionsService: ApiDivisionsService) {}
+  constructor(private conferencesService: ApiConferencesService) {}
 
   @Get()
-  async getAll(): Promise<Divisions_V2[]> {
-    const divisions = await this.divisionsService.getAll();
+  async getAll(): Promise<Conferences_V2[]> {
+    const conferences = await this.conferencesService.getAll();
 
-    if (!divisions || divisions.length < 1) {
-      throw new NotFoundException('Divisions not found');
+    if (!conferences || conferences.length < 1) {
+      throw new NotFoundException('Conferences not found');
     }
-    return divisions;
+    return conferences;
   }
 
-  @Get('/active')
-  async getAllActive(): Promise<Divisions_V2[]> {
-    const divisions = await this.divisionsService.getAllActive();
+  // @Put('/:id')
+  // updateDivisionById(@Param() param, @Body() body): Promise<DivisionDto> {
+  //   return this.conferencesService.updateDivisionById(parseInt(param.id), body);
+  // }
 
-    if (!divisions || divisions.length < 1) {
-      throw new NotFoundException('Divisions not found');
-    }
-    return divisions;
-  }
+  // @Post('/add')
+  // addDivision(@Body() body: DivisionCreateDto) {
+  //   return this.conferencesService.addDivision(body);
+  // }
 
-  @Put('/:id')
-  updateDivisionById(@Param() param, @Body() body): Promise<DivisionDto> {
-    return this.divisionsService.updateDivisionById(parseInt(param.id), body);
-  }
-
-  @Post('/add')
-  addDivision(@Body() body: DivisionCreateDto) {
-    return this.divisionsService.addDivision(body);
-  }
-
-  @Delete('/:id')
-  deleteDivision(@Param() param) {
-    return this.divisionsService.deleteDivision(parseInt(param.id));
-  }
+  // @Delete('/:id')
+  // deleteDivision(@Param() param) {
+  //   return this.conferencesService.deleteDivision(parseInt(param.id));
+  // }
 }
