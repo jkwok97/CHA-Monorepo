@@ -932,7 +932,7 @@ exports.ApiDivisionsModule = ApiDivisionsModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DivisionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
@@ -945,6 +945,13 @@ let DivisionsController = class DivisionsController {
     }
     async getAll() {
         const divisions = await this.divisionsService.getAll();
+        if (!divisions || divisions.length < 1) {
+            throw new common_1.NotFoundException('Divisions not found');
+        }
+        return divisions;
+    }
+    async getAllActive() {
+        const divisions = await this.divisionsService.getAllActive();
         if (!divisions || divisions.length < 1) {
             throw new common_1.NotFoundException('Divisions not found');
         }
@@ -967,18 +974,24 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], DivisionsController.prototype, "getAll", null);
 tslib_1.__decorate([
+    (0, common_1.Get)('/active'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], DivisionsController.prototype, "getAllActive", null);
+tslib_1.__decorate([
     (0, common_1.Put)('/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__param(1, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], DivisionsController.prototype, "updateDivisionById", null);
 tslib_1.__decorate([
     (0, common_1.Post)('/add'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.DivisionCreateDto !== "undefined" && entities_1.DivisionCreateDto) === "function" ? _d : Object]),
+    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.DivisionCreateDto !== "undefined" && entities_1.DivisionCreateDto) === "function" ? _e : Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], DivisionsController.prototype, "addDivision", null);
 tslib_1.__decorate([
@@ -1057,8 +1070,13 @@ let ApiDivisionsService = class ApiDivisionsService {
     constructor(repo) {
         this.repo = repo;
     }
-    async getAll() {
+    async getAllActive() {
         return await this.repo.findBy({ isactive: true });
+    }
+    async getAll() {
+        return await this.repo.find({
+            relations: ['conferences_id'],
+        });
     }
     async updateDivisionById(id, attrs) {
         const division = await this.repo.findOneByOrFail({ id });
@@ -1589,6 +1607,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Divisions_V2 = void 0;
 const tslib_1 = __webpack_require__("tslib");
 const typeorm_1 = __webpack_require__("typeorm");
+const conference_entity_1 = __webpack_require__("./libs/api/entities/src/lib/entities/conference.entity.ts");
 let Divisions_V2 = class Divisions_V2 {
 };
 tslib_1.__decorate([
@@ -1600,7 +1619,10 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], Divisions_V2.prototype, "divisionname", void 0);
 tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.OneToOne)(() => conference_entity_1.Conferences_V2, (conference) => conference.id, {
+        eager: true,
+    }),
+    (0, typeorm_1.JoinColumn)({ name: 'conference_id' }),
     tslib_1.__metadata("design:type", Number)
 ], Divisions_V2.prototype, "conference_id", void 0);
 tslib_1.__decorate([

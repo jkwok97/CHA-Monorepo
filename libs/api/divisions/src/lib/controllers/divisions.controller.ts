@@ -26,6 +26,16 @@ export class DivisionsController {
     return divisions;
   }
 
+  @Get('/active')
+  async getAllActive(): Promise<Divisions_V2[]> {
+    const divisions = await this.divisionsService.getAllActive();
+
+    if (!divisions || divisions.length < 1) {
+      throw new NotFoundException('Divisions not found');
+    }
+    return divisions;
+  }
+
   @Put('/:id')
   updateDivisionById(@Param() param, @Body() body): Promise<DivisionDto> {
     return this.divisionsService.updateDivisionById(parseInt(param.id), body);

@@ -10,8 +10,14 @@ export class ApiDivisionsService {
     @InjectRepository(Divisions_V2) private repo: Repository<Divisions_V2>
   ) {}
 
-  async getAll(): Promise<Divisions_V2[]> {
+  async getAllActive(): Promise<Divisions_V2[]> {
     return await this.repo.findBy({ isactive: true });
+  }
+
+  async getAll(): Promise<Divisions_V2[]> {
+    return await this.repo.find({
+      relations: ['conferences_id'],
+    });
   }
 
   async updateDivisionById(id: number, attrs: Partial<Divisions_V2>) {

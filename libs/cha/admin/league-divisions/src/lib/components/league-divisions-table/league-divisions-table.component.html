@@ -1,0 +1,93 @@
+<p-table
+  #dt
+  [responsiveLayout]="'stack'"
+  [value]="divisionsForTable"
+  [columns]="tableColumns"
+  styleClass="p-datatable-sm p-datatable-striped"
+  class="table"
+  [rows]="rows"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [totalRecords]="totalRecords"
+  [sortField]="sortField"
+  [sortOrder]="-1"
+  [filterDelay]="0"
+  [globalFilterFields]="['player', 'award', 'team', 'user', 'cha_season']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex flex-wrap justify-content-between">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="applyFilterGlobal($event, 'contains')"
+          placeholder="Search"
+        />
+      </span>
+
+      <button
+        pButton
+        type="button"
+        icon="pi pi-plus"
+        class="p-button-rounded p-button-primary"
+        (click)="onAddClick()"
+      ></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns let-data>
+    <tr>
+      <th
+        *ngFor="let column of tableColumns"
+        [hidden]="!column.visible"
+        [pSortableColumn]="column.field"
+      >
+        {{ column.header }}
+        <p-sortIcon [field]="column.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template
+    pTemplate="body"
+    let-data
+    let-columns="columns"
+    let-rowIndex="rowIndex"
+  >
+    <tr>
+      <td *ngFor="let column of tableColumns" [hidden]="!column.visible">
+        <span class="p-column-title">{{ column.header }}</span>
+        <div class="table-body-cell">
+          <ng-container *ngIf="column.field !== 'action'">
+            {{ data[column.field] }}
+          </ng-container>
+          <ng-container *ngIf="column.field === 'action'">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-primary"
+              (click)="onClick(data)"
+            ></button>
+          </ng-container>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- <p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [showCloseIcon]="false"
+  [dismissible]="false"
+  *ngIf="display"
+>
+  <cha-admin-league-awards-edit
+    [award]="award"
+    [isMobile]="isMobile"
+    (closeSidebar)="onClose()"
+  ></cha-admin-league-awards-edit>
+</p-sidebar> -->
