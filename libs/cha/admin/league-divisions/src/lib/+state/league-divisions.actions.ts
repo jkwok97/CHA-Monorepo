@@ -22,7 +22,7 @@ const addDivisionSuccess = createAction(
 
 const editDivision = createAction(
   `${NAMESPACE} Edit Division`,
-  props<{ division: DivisionCreateDto }>()
+  props<{ division: DivisionDto }>()
 );
 
 const editDivisionSuccess = createAction(
@@ -42,7 +42,7 @@ const deleteDivisionSuccess = createAction(
 
 const error = createAction(`${NAMESPACE} Error`);
 
-export const LeagueUsersActions = {
+export const LeagueDivisionsActions = {
   getDivisions,
   getDivisionsSuccess,
   addDivision,

@@ -1,62 +1,62 @@
 import { Injectable } from '@angular/core';
-import { UserDto } from '@cha/shared/entities';
+import { DivisionDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
-import { LeagueUsersService } from '../services';
-import { LeagueUsersActions } from './league-users.actions';
+import { LeagueDivisionsService } from '../services';
+import { LeagueDivisionsActions } from './league-divisions.actions';
 import { LeagueUsersFacade } from './league-divisions.facade';
 
 @Injectable()
-export class LeagueUsersEffects {
+export class LeagueDivisionsEffects {
   constructor(
     private actions$: Actions,
-    private leagueUsersService: LeagueUsersService,
+    private leagueDivisionsService: LeagueDivisionsService,
     private leagueUsersFacade: LeagueUsersFacade,
     private messageService: MessageService
   ) {}
 
-  getUsers$ = createEffect(() =>
+  getDivisions$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueUsersActions.getUsers),
+      ofType(LeagueDivisionsActions.getDivisions),
       exhaustMap((action) =>
-        this.leagueUsersService.getUsers().pipe(
-          map((users: UserDto[]) =>
-            LeagueUsersActions.getUsersSuccess({
-              users,
+        this.leagueDivisionsService.getDivisions().pipe(
+          map((divisions: DivisionDto[]) =>
+            LeagueDivisionsActions.getDivisionsSuccess({
+              divisions,
             })
           ),
-          catchError(() => of(LeagueUsersActions.error()))
+          catchError(() => of(LeagueDivisionsActions.error()))
         )
       )
     )
   );
 
-  addUser$ = createEffect(() =>
+  addDivision$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueUsersActions.addUser),
+      ofType(LeagueDivisionsActions.addDivision),
       exhaustMap((action) =>
-        this.leagueUsersService.addUser(action.user).pipe(
-          map((user: UserDto) =>
-            LeagueUsersActions.addUserSuccess({
-              user,
+        this.leagueDivisionsService.addDivisions(action.division).pipe(
+          map((division: DivisionDto) =>
+            LeagueDivisionsActions.addDivisionSuccess({
+              division,
             })
           ),
-          catchError(() => of(LeagueUsersActions.error()))
+          catchError(() => of(LeagueDivisionsActions.error()))
         )
       )
     )
   );
 
-  addUserSuccess$ = createEffect(
+  addDivisionSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueUsersActions.addUserSuccess),
+        ofType(LeagueDivisionsActions.addDivisionSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Add User',
-            detail: 'User has been added',
+            summary: 'Add Division',
+            detail: 'Division has been added',
           });
           this.leagueUsersFacade.getUsers();
         })
@@ -64,31 +64,31 @@ export class LeagueUsersEffects {
     { dispatch: false }
   );
 
-  editUser$ = createEffect(() =>
+  editDivision$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueUsersActions.editUser),
+      ofType(LeagueDivisionsActions.editDivision),
       exhaustMap((action) =>
-        this.leagueUsersService.editUser(action.user, action.userId).pipe(
-          map((user: UserDto) =>
-            LeagueUsersActions.editUserSuccess({
-              user,
+        this.leagueDivisionsService.editDivisions(action.division).pipe(
+          map((division: DivisionDto) =>
+            LeagueDivisionsActions.editDivisionSuccess({
+              division,
             })
           ),
-          catchError(() => of(LeagueUsersActions.error()))
+          catchError(() => of(LeagueDivisionsActions.error()))
         )
       )
     )
   );
 
-  editUserSuccess$ = createEffect(
+  editDivisionSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueUsersActions.editUserSuccess),
+        ofType(LeagueDivisionsActions.editDivisionSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Edit User',
-            detail: 'User has been updated',
+            summary: 'Edit Division',
+            detail: 'Division has been updated',
           });
           this.leagueUsersFacade.getUsers();
         })
@@ -96,31 +96,31 @@ export class LeagueUsersEffects {
     { dispatch: false }
   );
 
-  deleteUser$ = createEffect(() =>
+  deleteDevision$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(LeagueUsersActions.deleteUser),
+      ofType(LeagueDivisionsActions.deleteDivision),
       exhaustMap((action) =>
-        this.leagueUsersService.deleteUser(action.userId).pipe(
-          map((user: UserDto) =>
-            LeagueUsersActions.deleteUserSuccess({
-              user,
+        this.leagueDivisionsService.deleteDivisions(action.divisionId).pipe(
+          map((division: DivisionDto) =>
+            LeagueDivisionsActions.deleteDivisionSuccess({
+              division,
             })
           ),
-          catchError(() => of(LeagueUsersActions.error()))
+          catchError(() => of(LeagueDivisionsActions.error()))
         )
       )
     )
   );
 
-  deleteUserSuccess$ = createEffect(
+  deleteDivisionSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(LeagueUsersActions.deleteUserSuccess),
+        ofType(LeagueDivisionsActions.deleteDivisionSuccess),
         tap(() => {
           this.messageService.add({
             severity: 'success',
-            summary: 'Delete User',
-            detail: 'User has been removed',
+            summary: 'Delete Division',
+            detail: 'Division has been removed',
           });
           this.leagueUsersFacade.getUsers();
         })
