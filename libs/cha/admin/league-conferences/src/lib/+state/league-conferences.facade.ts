@@ -7,7 +7,7 @@ import { LeagueConferenceSelectors } from './league-conferences.selectors';
 import { ConferenceCreateDto, ConferenceDto } from '@cha/shared/entities';
 
 @Injectable()
-export class LeagueDivisionsFacade {
+export class LeagueConferencesFacade {
   isLoading$: Observable<boolean> = this.store.select(
     LeagueConferenceSelectors.selectLoading
   );

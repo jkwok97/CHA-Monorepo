@@ -5,14 +5,14 @@ import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
 import { LeagueConferencesService } from '../services';
 import { LeagueConferencesActions } from './league-conferences.actions';
-import { LeagueDivisionsFacade } from './league-conferences.facade';
+import { LeagueConferencesFacade } from './league-conferences.facade';
 
 @Injectable()
 export class LeagueConferencesEffects {
   constructor(
     private actions$: Actions,
     private leagueConferencesService: LeagueConferencesService,
-    private leagueDivisionsFacade: LeagueDivisionsFacade,
+    private leagueConferenceFacade: LeagueConferencesFacade,
     private messageService: MessageService
   ) {}
 
@@ -58,7 +58,7 @@ export class LeagueConferencesEffects {
             summary: 'Add Conference',
             detail: 'Conference has been added',
           });
-          this.leagueDivisionsFacade.getConferences();
+          this.leagueConferenceFacade.getConferences();
         })
       ),
     { dispatch: false }
@@ -90,7 +90,7 @@ export class LeagueConferencesEffects {
             summary: 'Edit Conference',
             detail: 'Conference has been updated',
           });
-          this.leagueDivisionsFacade.getConferences();
+          this.leagueConferenceFacade.getConferences();
         })
       ),
     { dispatch: false }
@@ -124,7 +124,7 @@ export class LeagueConferencesEffects {
             summary: 'Delete Conference',
             detail: 'Conference has been removed',
           });
-          this.leagueDivisionsFacade.getConferences();
+          this.leagueConferenceFacade.getConferences();
         })
       ),
     { dispatch: false }
