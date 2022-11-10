@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
+import { ConferenceDto, DivisionDto, GetDivisionDto } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
@@ -21,7 +21,7 @@ export class LeagueDivisionsEffects {
       ofType(LeagueDivisionsActions.getDivisions),
       exhaustMap((action) =>
         this.leagueDivisionsService.getDivisions().pipe(
-          map((divisions: DivisionDto[]) =>
+          map((divisions: GetDivisionDto[]) =>
             LeagueDivisionsActions.getDivisionsSuccess({
               divisions,
             })

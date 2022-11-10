@@ -826,10 +826,11 @@ exports.ApiConferencesModule = ApiConferencesModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ConferencesController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/conferences/src/lib/services/index.ts");
 let ConferencesController = class ConferencesController {
@@ -843,6 +844,15 @@ let ConferencesController = class ConferencesController {
         }
         return conferences;
     }
+    updateConferenceById(param, body) {
+        return this.conferencesService.updateConferenceById(parseInt(param.id), body);
+    }
+    addConference(body) {
+        return this.conferencesService.addConference(body);
+    }
+    deleteConference(param) {
+        return this.conferencesService.deleteConference(parseInt(param.id));
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)(),
@@ -850,6 +860,28 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], ConferencesController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], ConferencesController.prototype, "updateConferenceById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.ConferenceCreateDto !== "undefined" && entities_1.ConferenceCreateDto) === "function" ? _d : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], ConferencesController.prototype, "addConference", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], ConferencesController.prototype, "deleteConference", null);
 ConferencesController = tslib_1.__decorate([
     (0, common_1.Controller)('conferences'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiConferencesService !== "undefined" && services_1.ApiConferencesService) === "function" ? _a : Object])
@@ -921,6 +953,25 @@ let ApiConferencesService = class ApiConferencesService {
     }
     async getAll() {
         return await this.repo.find();
+    }
+    async updateConferenceById(id, attrs) {
+        const conference = await this.repo.findOneByOrFail({ id });
+        if (!conference) {
+            throw new common_1.NotFoundException('conference not found');
+        }
+        Object.assign(conference, attrs);
+        return this.repo.save(conference);
+    }
+    async addConference(body) {
+        const conference = await this.repo.create(body);
+        return this.repo.save(conference);
+    }
+    async deleteConference(id) {
+        const conference = await this.repo.findOneByOrFail({ id });
+        if (!conference) {
+            throw new common_1.NotFoundException('conference not found');
+        }
+        return this.repo.remove(conference);
     }
 };
 ApiConferencesService = tslib_1.__decorate([

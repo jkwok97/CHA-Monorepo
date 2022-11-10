@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { DivisionDto } from '@cha/shared/entities';
+import { GetDivisionDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -15,7 +15,7 @@ import { Table } from 'primeng/table';
 })
 export class LeagueDivisionsTableComponent implements OnInit {
   @Input() isMobile!: boolean;
-  @Input() divisions!: DivisionDto[];
+  @Input() divisions!: GetDivisionDto[];
 
   @ViewChild('dt') dt: Table | undefined;
 
@@ -33,7 +33,7 @@ export class LeagueDivisionsTableComponent implements OnInit {
   sortField = 'isactive';
   display = false;
   divisionsForTable!: any;
-  division!: DivisionDto | null;
+  division!: GetDivisionDto | null;
 
   ngOnInit(): void {
     this.divisionsForTable = this.mapItems(this.divisions);
@@ -43,14 +43,14 @@ export class LeagueDivisionsTableComponent implements OnInit {
     this.dt?.filterGlobal((event.target as HTMLInputElement).value, stringVal);
   }
 
-  mapItems(divisions: DivisionDto[]) {
-    return divisions.map((division: DivisionDto) => ({
+  mapItems(divisions: GetDivisionDto[]) {
+    return divisions.map((division: GetDivisionDto) => ({
       ...division,
       conference: `${division.conference_id.conferencename}`,
     }));
   }
 
-  onClick(division: DivisionDto) {
+  onClick(division: GetDivisionDto) {
     this.division = division;
     this.display = true;
   }

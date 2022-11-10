@@ -4,7 +4,7 @@ import { State } from './league-divisions.reducer';
 import { LeagueDivisionsActions } from './league-divisions.actions';
 import { Observable } from 'rxjs';
 import { LeagueDivisionsSelectors } from './league-divisions.selectors';
-import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
+import { DivisionCreateDto, DivisionDto, GetDivisionDto } from '@cha/shared/entities';
 
 @Injectable()
 export class LeagueDivisionsFacade {
@@ -24,7 +24,7 @@ export class LeagueDivisionsFacade {
     LeagueDivisionsSelectors.selectSaved
   );
 
-  divisions$: Observable<DivisionDto[]> = this.store.select(
+  divisions$: Observable<GetDivisionDto[]> = this.store.select(
     LeagueDivisionsSelectors.selectDivisions
   );
 

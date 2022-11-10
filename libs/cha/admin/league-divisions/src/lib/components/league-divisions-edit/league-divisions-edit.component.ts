@@ -7,7 +7,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { DivisionDto } from '@cha/shared/entities';
+import { GetDivisionDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter } from 'rxjs';
 import { LeagueDivisionsFacade } from '../../+state/league-divisions.facade';
@@ -20,7 +20,7 @@ import { LeagueDivisionsEditFormComponent } from '../league-divisions-edit-form'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueDivisionsEditComponent implements OnInit {
-  @Input() division!: DivisionDto | null;
+  @Input() division!: GetDivisionDto | null;
   @Input() isMobile!: boolean;
 
   @Output() closeSidebar = new EventEmitter<boolean>();

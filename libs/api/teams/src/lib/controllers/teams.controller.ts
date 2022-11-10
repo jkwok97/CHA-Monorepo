@@ -1,4 +1,4 @@
-import { DivisionDto, TeamCreateDto, TeamDto } from '@cha/shared/entities';
+import { TeamCreateDto, TeamDto } from '@cha/shared/entities';
 import {
   Body,
   Controller,
