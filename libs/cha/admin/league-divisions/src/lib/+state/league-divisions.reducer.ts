@@ -1,9 +1,10 @@
-import { DivisionDto } from '@cha/shared/entities';
+import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
 import { LeagueDivisionsActions } from './league-divisions.actions';
 
 export interface State {
   divisions: DivisionDto[];
+  conferences: ConferenceDto[];
   loading: boolean;
   loaded: boolean;
   saving: boolean;
@@ -12,6 +13,7 @@ export interface State {
 
 const initialState: State = {
   divisions: [],
+  conferences: [],
   loading: false,
   loaded: false,
   saving: false,
@@ -64,6 +66,8 @@ export function reducer(state: State | undefined, action: Action) {
 }
 
 export const getDivisions = (state: State) => state.divisions;
+
+export const getConferences = (state: State) => state.conferences;
 
 export const getLoading = (state: State) => state.loading;
 
