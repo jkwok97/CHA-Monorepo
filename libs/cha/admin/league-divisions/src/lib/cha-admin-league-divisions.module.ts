@@ -17,6 +17,11 @@ import { reducer } from './+state/league-divisions.reducer';
 import { ChaAdminLeagueDivisionsRoutingModule } from './cha-admin-league-divisions-routing.module';
 
 import { LeagueDivisionsComponent } from './containers';
+import {
+  LeagueDivisionsTableComponent,
+  LeagueDivisionsEditComponent,
+  LeagueDivisionsEditFormComponent,
+} from './components';
 
 @NgModule({
   imports: [
@@ -29,7 +34,12 @@ import { LeagueDivisionsComponent } from './containers';
     StoreModule.forFeature('league-divisions', reducer),
     EffectsModule.forFeature([LeagueDivisionsEffects]),
   ],
-  declarations: [LeagueDivisionsComponent],
+  declarations: [
+    LeagueDivisionsComponent,
+    LeagueDivisionsTableComponent,
+    LeagueDivisionsEditComponent,
+    LeagueDivisionsEditFormComponent,
+  ],
   providers: [LeagueDivisionsEffects, LeagueDivisionsFacade],
 })
 export class ChaAdminLeagueDivisionsModule {}
