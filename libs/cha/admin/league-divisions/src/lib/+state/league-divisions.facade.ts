@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from './league-users.reducer';
+import { State } from './league-divisions.reducer';
 import { LeagueUsersActions } from './league-users.actions';
 import { Observable } from 'rxjs';
-import { LeagueUsersSelectors } from './league-users.selectors';
+import { LeagueUsersSelectors } from './league-divisions.selectors';
 import { UserCreateDto, UserDto } from '@cha/shared/entities';
 
 @Injectable()
@@ -18,11 +18,11 @@ export class LeagueUsersFacade {
 
   isSaving$: Observable<boolean> = this.store.select(
     LeagueUsersSelectors.selectSaving
-  )
+  );
 
   isSaved$: Observable<boolean> = this.store.select(
     LeagueUsersSelectors.selectSaved
-  )
+  );
 
   users$: Observable<UserDto[]> = this.store.select(
     LeagueUsersSelectors.selectUsers

@@ -5,7 +5,7 @@ import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
 import { LeagueUsersService } from '../services';
 import { LeagueUsersActions } from './league-users.actions';
-import { LeagueUsersFacade } from './league-users.facade';
+import { LeagueUsersFacade } from './league-divisions.facade';
 
 @Injectable()
 export class LeagueUsersEffects {

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as LeagueUsersReducer from './league-users.reducer';
+import * as LeagueUsersReducer from './league-divisions.reducer';
 
 export const selectState =
   createFeatureSelector<LeagueUsersReducer.State>('league-users');
