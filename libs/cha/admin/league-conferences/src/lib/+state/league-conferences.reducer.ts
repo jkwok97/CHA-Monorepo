@@ -1,9 +1,8 @@
-import { ConferenceDto, DivisionDto } from '@cha/shared/entities';
+import { ConferenceDto } from '@cha/shared/entities';
 import { createReducer, on, Action } from '@ngrx/store';
-import { LeagueDivisionsActions } from './league-divisions.actions';
+import { LeagueConferencesActions } from './league-conferences.actions';
 
 export interface State {
-  divisions: DivisionDto[];
   conferences: ConferenceDto[];
   loading: boolean;
   loaded: boolean;
@@ -12,7 +11,6 @@ export interface State {
 }
 
 const initialState: State = {
-  divisions: [],
   conferences: [],
   loading: false,
   loaded: false,
@@ -23,16 +21,16 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(LeagueDivisionsActions.getDivisions, (state) => ({
+  on(LeagueConferencesActions.getConferences, (state) => ({
     ...state,
     loading: true,
     loaded: false,
   })),
 
   on(
-    LeagueDivisionsActions.addDivision,
-    LeagueDivisionsActions.editDivision,
-    LeagueDivisionsActions.deleteDivision,
+    LeagueConferencesActions.addConference,
+    LeagueConferencesActions.editConference,
+    LeagueConferencesActions.deleteConference,
     (state) => ({
       ...state,
       saving: true,
@@ -40,22 +38,17 @@ const r = createReducer(
     })
   ),
 
-  on(LeagueDivisionsActions.getDivisionsSuccess, (state, action) => ({
+  on(LeagueConferencesActions.getConferencesSuccess, (state, action) => ({
     ...state,
-    divisions: action.divisions,
+    conferences: action.conferences,
     loading: false,
     loaded: true,
   })),
 
-  on(LeagueDivisionsActions.getConferencesSuccess, (state, action) => ({
-    ...state,
-    conferences: action.conferences,
-  })),
-
   on(
-    LeagueDivisionsActions.addDivisionSuccess,
-    LeagueDivisionsActions.editDivisionSuccess,
-    LeagueDivisionsActions.deleteDivisionSuccess,
+    LeagueConferencesActions.addConferenceSuccess,
+    LeagueConferencesActions.editConferenceSuccess,
+    LeagueConferencesActions.deleteConferenceSuccess,
     (state, action) => ({
       ...state,
       saving: false,
@@ -63,14 +56,12 @@ const r = createReducer(
     })
   ),
 
-  on(LeagueDivisionsActions.error, (state) => initialState)
+  on(LeagueConferencesActions.error, (state) => initialState)
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return r(state, action);
 }
-
-export const getDivisions = (state: State) => state.divisions;
 
 export const getConferences = (state: State) => state.conferences;
 
