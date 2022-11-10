@@ -3,3 +3,8 @@ export interface ConferenceDto {
   conferencename: string;
   isactive: boolean;
 }
+
+export interface ConferenceCreateDto {
+  conferencename: string;
+  isactive: boolean;
+}

@@ -1,5 +1,6 @@
 import { Conferences_V2 } from '@api/entities';
-import { Controller, Get, NotFoundException } from '@nestjs/common';
+import { ConferenceCreateDto, ConferenceDto } from '@cha/shared/entities';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { ApiConferencesService } from '../services';
 
 @Controller('conferences')
@@ -16,18 +17,18 @@ export class ConferencesController {
     return conferences;
   }
 
-  // @Put('/:id')
-  // updateDivisionById(@Param() param, @Body() body): Promise<DivisionDto> {
-  //   return this.conferencesService.updateDivisionById(parseInt(param.id), body);
-  // }
+  @Put('/:id')
+  updateConferenceById(@Param() param, @Body() body): Promise<ConferenceDto> {
+    return this.conferencesService.updateConferenceById(parseInt(param.id), body);
+  }
 
-  // @Post('/add')
-  // addDivision(@Body() body: DivisionCreateDto) {
-  //   return this.conferencesService.addDivision(body);
-  // }
+  @Post('/add')
+  addConference(@Body() body: ConferenceCreateDto) {
+    return this.conferencesService.addConference(body);
+  }
 
-  // @Delete('/:id')
-  // deleteDivision(@Param() param) {
-  //   return this.conferencesService.deleteDivision(parseInt(param.id));
-  // }
+  @Delete('/:id')
+  deleteConference(@Param() param) {
+    return this.conferencesService.deleteConference(parseInt(param.id));
+  }
 }
