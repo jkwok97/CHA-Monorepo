@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -20,6 +21,7 @@ import { LeagueConferencesComponent } from './containers';
   imports: [
     CommonModule,
     ChaAdminLeagueConferencesRoutingModule,
+    ProgressBarModule,
     BladeAngularUiCardModule,
     BladeAngularUiLayoutModule,
     BladeDividerComponent,
