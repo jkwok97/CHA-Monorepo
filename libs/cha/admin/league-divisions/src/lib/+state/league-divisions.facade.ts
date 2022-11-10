@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from './league-divisions.reducer';
-import { LeagueUsersActions } from './league-users.actions';
+import { LeagueDivisionsActions } from './league-divisions.actions';
 import { Observable } from 'rxjs';
 import { LeagueUsersSelectors } from './league-divisions.selectors';
-import { UserCreateDto, UserDto } from '@cha/shared/entities';
+import { DivisionCreateDto, DivisionDto, UserDto } from '@cha/shared/entities';
 
 @Injectable()
-export class LeagueUsersFacade {
+export class LeagueDivisionsFacade {
   isLoading$: Observable<boolean> = this.store.select(
     LeagueUsersSelectors.selectLoading
   );
@@ -30,19 +30,19 @@ export class LeagueUsersFacade {
 
   constructor(private store: Store<State>) {}
 
-  getUsers() {
-    this.store.dispatch(LeagueUsersActions.getUsers());
+  getDivisions() {
+    this.store.dispatch(LeagueDivisionsActions.getDivisions());
   }
 
-  addUser(user: UserCreateDto) {
-    this.store.dispatch(LeagueUsersActions.addUser({ user }));
+  addDivision(division: DivisionCreateDto) {
+    this.store.dispatch(LeagueDivisionsActions.addDivision({ division }));
   }
 
-  editUser(user: UserCreateDto, userId: number) {
-    this.store.dispatch(LeagueUsersActions.editUser({ user, userId }));
+  editDivision(division: DivisionDto) {
+    this.store.dispatch(LeagueDivisionsActions.editDivision({ division }));
   }
 
-  deleteUser(userId: number) {
-    this.store.dispatch(LeagueUsersActions.deleteUser({ userId }));
+  deleteDivision(divisionId: number) {
+    this.store.dispatch(LeagueDivisionsActions.deleteDivision({ divisionId }));
   }
 }

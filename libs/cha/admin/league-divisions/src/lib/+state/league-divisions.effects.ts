@@ -5,14 +5,14 @@ import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';
 import { LeagueDivisionsService } from '../services';
 import { LeagueDivisionsActions } from './league-divisions.actions';
-import { LeagueUsersFacade } from './league-divisions.facade';
+import { LeagueDivisionsFacade } from './league-divisions.facade';
 
 @Injectable()
 export class LeagueDivisionsEffects {
   constructor(
     private actions$: Actions,
     private leagueDivisionsService: LeagueDivisionsService,
-    private leagueUsersFacade: LeagueUsersFacade,
+    private leagueDivisionsFacade: LeagueDivisionsFacade,
     private messageService: MessageService
   ) {}
 
@@ -58,7 +58,7 @@ export class LeagueDivisionsEffects {
             summary: 'Add Division',
             detail: 'Division has been added',
           });
-          this.leagueUsersFacade.getUsers();
+          this.leagueDivisionsFacade.getDivisions();
         })
       ),
     { dispatch: false }
@@ -90,7 +90,7 @@ export class LeagueDivisionsEffects {
             summary: 'Edit Division',
             detail: 'Division has been updated',
           });
-          this.leagueUsersFacade.getUsers();
+          this.leagueDivisionsFacade.getDivisions();
         })
       ),
     { dispatch: false }
@@ -122,7 +122,7 @@ export class LeagueDivisionsEffects {
             summary: 'Delete Division',
             detail: 'Division has been removed',
           });
-          this.leagueUsersFacade.getUsers();
+          this.leagueDivisionsFacade.getDivisions();
         })
       ),
     { dispatch: false }
