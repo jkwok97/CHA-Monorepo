@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
+import { DivisionDto } from '@cha/shared/entities';
+import { Observable, first } from 'rxjs';
+import { LeagueDivisionsFacade } from '../../+state/league-divisions.facade';
 
 @Component({
   selector: 'cha-admin-league-divisions',
@@ -6,26 +10,26 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeagueDivisionsComponent {
-  // isLoading$: Observable<boolean>;
-  // isLoaded$: Observable<boolean>;
-  // awards$: Observable<AwardDto[]>;
+  isLoading$: Observable<boolean>;
+  isLoaded$: Observable<boolean>;
+  divisions$: Observable<DivisionDto[]>;
 
-  // isMobile!: boolean;
+  isMobile!: boolean;
 
-  // constructor(
-  //   private leagueAwardsFacade: LeagueAwardsFacade,
-  //   private displayFacade: DisplayFacade
-  // ) {
-  //   this.isLoaded$ = this.leagueAwardsFacade.isLoaded$;
-  //   this.isLoading$ = this.leagueAwardsFacade.isLoading$;
-  //   this.awards$ = this.leagueAwardsFacade.awards$;
+  constructor(
+    private leagueDivisionsFacade: LeagueDivisionsFacade,
+    private displayFacade: DisplayFacade
+  ) {
+    this.isLoaded$ = this.leagueDivisionsFacade.isLoaded$;
+    this.isLoading$ = this.leagueDivisionsFacade.isLoading$;
+    this.divisions$ = this.leagueDivisionsFacade.divisions$;
 
-  //   this.displayFacade.isMobile$
-  //     .pipe(first())
-  //     .subscribe((isMobile: boolean) => {
-  //       this.isMobile = isMobile;
-  //     });
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
 
-  //   this.leagueAwardsFacade.getAwards();
-  // }
+    this.leagueDivisionsFacade.getDivisions();
+  }
 }

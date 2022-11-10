@@ -8,7 +8,7 @@
 
     <blade-divider></blade-divider>
 
-    <!-- <p-progressBar
+    <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
@@ -16,13 +16,14 @@
 
     <blade-card *ngIf="isLoaded$ | async">
       <blade-card-body>
-        <ng-container *ngIf="awards$ | async as awards">
-          <cha-admin-league-awards-table
+        <ng-container *ngIf="divisions$ | async as divisions">
+          {{ divisions | json }}
+          <!-- <cha-admin-league-awards-table
               [isMobile]="isMobile"
               [awards]="awards"
-            ></cha-admin-league-awards-table>
+            ></cha-admin-league-awards-table> -->
         </ng-container>
       </blade-card-body>
-    </blade-card> -->
+    </blade-card>
   </div>
 </blade-layout-feature-content>
