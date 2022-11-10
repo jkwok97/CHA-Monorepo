@@ -8,21 +8,21 @@
 
     <blade-divider></blade-divider>
 
-    <!-- <p-progressBar
-        mode="indeterminate"
-        [style]="{ height: '6px' }"
-        *ngIf="isLoading$ | async"
-      ></p-progressBar>
-  
-      <blade-card *ngIf="isLoaded$ | async">
-        <blade-card-body>
-          <ng-container *ngIf="awards$ | async as awards">
-            <cha-admin-league-awards-table
-                [isMobile]="isMobile"
-                [awards]="awards"
-              ></cha-admin-league-awards-table>
-          </ng-container>
-        </blade-card-body>
-      </blade-card> -->
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <blade-card *ngIf="isLoaded$ | async">
+      <blade-card-body>
+        <ng-container *ngIf="conferences$ | async as conferences">
+          <cha-admin-league-conferences-table
+            [isMobile]="isMobile"
+            [conferences]="conferences"
+          ></cha-admin-league-conferences-table>
+        </ng-container>
+      </blade-card-body>
+    </blade-card>
   </div>
 </blade-layout-feature-content>
