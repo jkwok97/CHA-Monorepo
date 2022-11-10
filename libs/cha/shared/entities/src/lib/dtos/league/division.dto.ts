@@ -6,3 +6,9 @@ export interface DivisionDto {
   conference_id: ConferencesEnum;
   isactive: boolean;
 }
+
+export interface DivisionCreateDto {
+  divisionname: string;
+  conference_id: ConferencesEnum;
+  isactive: boolean;
+}

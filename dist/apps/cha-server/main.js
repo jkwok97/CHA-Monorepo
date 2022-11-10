@@ -932,10 +932,11 @@ exports.ApiDivisionsModule = ApiDivisionsModule;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DivisionsController = void 0;
 const tslib_1 = __webpack_require__("tslib");
+const entities_1 = __webpack_require__("./libs/cha/shared/entities/src/index.ts");
 const common_1 = __webpack_require__("@nestjs/common");
 const services_1 = __webpack_require__("./libs/api/divisions/src/lib/services/index.ts");
 let DivisionsController = class DivisionsController {
@@ -949,6 +950,15 @@ let DivisionsController = class DivisionsController {
         }
         return divisions;
     }
+    updateDivisionById(param, body) {
+        return this.divisionsService.updateDivisionById(parseInt(param.id), body);
+    }
+    addDivision(body) {
+        return this.divisionsService.addDivision(body);
+    }
+    deleteDivision(param) {
+        return this.divisionsService.deleteDivision(parseInt(param.id));
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)(),
@@ -956,6 +966,28 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
 ], DivisionsController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], DivisionsController.prototype, "updateDivisionById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.DivisionCreateDto !== "undefined" && entities_1.DivisionCreateDto) === "function" ? _d : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], DivisionsController.prototype, "addDivision", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], DivisionsController.prototype, "deleteDivision", null);
 DivisionsController = tslib_1.__decorate([
     (0, common_1.Controller)('divisions'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiDivisionsService !== "undefined" && services_1.ApiDivisionsService) === "function" ? _a : Object])
@@ -1027,6 +1059,25 @@ let ApiDivisionsService = class ApiDivisionsService {
     }
     async getAll() {
         return await this.repo.findBy({ isactive: true });
+    }
+    async updateDivisionById(id, attrs) {
+        const division = await this.repo.findOneByOrFail({ id });
+        if (!division) {
+            throw new common_1.NotFoundException('division not found');
+        }
+        Object.assign(division, attrs);
+        return this.repo.save(division);
+    }
+    async addDivision(body) {
+        const division = await this.repo.create(body);
+        return this.repo.save(division);
+    }
+    async deleteDivision(id) {
+        const division = await this.repo.findOneByOrFail({ id });
+        if (!division) {
+            throw new common_1.NotFoundException('division not found');
+        }
+        return this.repo.remove(division);
     }
 };
 ApiDivisionsService = tslib_1.__decorate([
