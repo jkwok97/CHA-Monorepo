@@ -1,23 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
+import { ConferenceCreateDto, ConferenceDto } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LeagueDivisionsService {
+export class LeagueConferencesService {
   constructor(
     private _http: HttpClient,
     @Inject('apiUrl') private apiUrl: string
   ) {}
-
-  getDivisions() {
-    return this._http
-      .get(`${this.apiUrl}/divisions`)
-      .pipe(map((result: any) => result));
-  }
 
   getConferences() {
     return this._http
@@ -25,22 +19,22 @@ export class LeagueDivisionsService {
       .pipe(map((result: any) => result));
   }
 
-  addDivisions(division: DivisionCreateDto): Observable<DivisionDto> {
-    const body = division;
+  addConferences(conference: ConferenceCreateDto): Observable<ConferenceDto> {
+    const body = conference;
     return this._http
-      .post(`${this.apiUrl}/divisions/add`, body)
+      .post(`${this.apiUrl}/conferences/add`, body)
       .pipe(map((result: any) => result));
   }
 
-  editDivisions(division: DivisionDto): Observable<DivisionDto> {
+  editConferences(conference: ConferenceDto): Observable<ConferenceDto> {
     return this._http
-      .put(`${this.apiUrl}/divisions/${division.id}`, division)
+      .put(`${this.apiUrl}/conferences/${conference.id}`, conference)
       .pipe(map((result: any) => result));
   }
 
-  deleteDivisions(divisionId: number): Observable<DivisionDto> {
+  deleteConferences(conferenceId: number): Observable<ConferenceDto> {
     return this._http
-      .delete(`${this.apiUrl}/divisions/${divisionId}`)
+      .delete(`${this.apiUrl}/conferences/${conferenceId}`)
       .pipe(map((result: any) => result));
   }
 }

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from './league-divisions.reducer';
+import { State } from './league-conferences.reducer';
 import { LeagueDivisionsActions } from './league-divisions.actions';
 import { Observable } from 'rxjs';
-import { LeagueDivisionsSelectors } from './league-divisions.selectors';
+import { LeagueDivisionsSelectors } from './league-conferences.selectors';
 import { DivisionCreateDto, DivisionDto } from '@cha/shared/entities';
 
 @Injectable()

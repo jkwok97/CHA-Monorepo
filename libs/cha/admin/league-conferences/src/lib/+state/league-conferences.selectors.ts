@@ -1,7 +1,7 @@
 import { ConferenceDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import * as LeagueDivisionsReducer from './league-divisions.reducer';
+import * as LeagueDivisionsReducer from './league-conferences.reducer';
 
 export const selectState =
   createFeatureSelector<LeagueDivisionsReducer.State>('league-divisions');
