@@ -1,6 +1,8 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Input,
   OnInit,
   SimpleChanges,
@@ -17,12 +19,13 @@ import { first } from 'rxjs';
   styleUrls: ['./goalie-stats-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GoalieStatsTableComponent implements OnInit {
+export class GoalieStatsTableComponent implements OnInit, AfterViewInit {
   @Input() stats!: StatGoaliesHistoryDto[];
   @Input() statType!: string;
 
   @ViewChild('dt') dt: Table | undefined;
-
+  @ViewChild('filterInput') filterInput!: ElementRef;
+  
   goalieTableColumns = [
     { field: 'playing_year', header: 'Year', visible: true },
     { field: 'season_type', header: 'Season', visible: false },
@@ -73,6 +76,15 @@ export class GoalieStatsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
+  }
+
+  ngAfterViewInit(): void {
+    this.filterInput.nativeElement.value = '23';
+
+    this.applyFilterGlobal(
+      { target: { value: this.filterInput.nativeElement.value } },
+      'contains'
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
