@@ -7905,7 +7905,6 @@ let ApiScheduleService = class ApiScheduleService {
         return await this.getLastFiveRecord(lastFive, Number(teamId));
     }
     async getLastFiveRecord(lastFive, teamId) {
-        console.log(lastFive);
         const lastFiveRecord = [];
         await lastFive.forEach((record) => {
             if (record.home_team_id === teamId) {
