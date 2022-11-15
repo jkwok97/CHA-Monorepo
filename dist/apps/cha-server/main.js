@@ -7898,6 +7898,7 @@ let ApiScheduleService = class ApiScheduleService {
             .andWhere(new typeorm_2.Brackets((qb) => {
             qb.where('schedule.home_team_id = :teamId', { teamId }).orWhere('schedule.vis_team_id = :teamId', { teamId });
         }))
+            .andWhere('schedule.home_team_score is not null')
             .orderBy('schedule.game_day', 'DESC')
             .limit(5)
             .getMany();

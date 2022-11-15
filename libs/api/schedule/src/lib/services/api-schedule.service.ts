@@ -75,6 +75,7 @@ export class ApiScheduleService {
           );
         })
       )
+      .andWhere('schedule.home_team_score is not null')
       .orderBy('schedule.game_day', 'DESC')
       .limit(5)
       .getMany();
