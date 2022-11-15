@@ -14,9 +14,11 @@
         <div class="w-full flex justify-content-between p-2 align-items-center">
           <div class="flex column-gap-3 align-items-center">
             <p-avatar
+              #avatar
               [image]="getPlayerPicture(player.player_id.nhl_id)"
               shape="circle"
               size="large"
+              (onImageError)="onImageError($event)"
             ></p-avatar>
             <div class="flex flex-wrap align-items-center justify-content-left">
               <div class="w-full">

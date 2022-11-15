@@ -3,10 +3,11 @@ import {
   Component,
   Input,
   OnInit,
+  ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NhlPlayerDto, NhlGoalieDto } from '@cha/shared/entities';
-import { AvatarModule } from 'primeng/avatar';
+import { Avatar, AvatarModule } from 'primeng/avatar';
 
 @Component({
   selector: 'blade-nhl-leader-card',
@@ -20,6 +21,7 @@ export class BladeNhlLeaderCardComponent implements OnInit {
   @Input() leaders!: NhlPlayerDto[] | null;
   @Input() goalieLeaders!: NhlGoalieDto[] | null;
   @Input() type: any;
+  @ViewChild('avatar') avatar!: Avatar;
 
   selected!: any;
 
@@ -125,5 +127,9 @@ export class BladeNhlLeaderCardComponent implements OnInit {
     } else {
       return;
     }
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/images/skater.jpg';
   }
 }

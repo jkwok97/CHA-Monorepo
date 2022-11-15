@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { DisplayFacade } from '@cha/domain/core';
 import { SalariesAndRatingsDto } from '@cha/shared/entities';
+import { Avatar } from 'primeng/avatar';
 import { first } from 'rxjs';
 
 @Component({
@@ -12,6 +18,7 @@ export class DepthChartPositionComponent {
   @Input() title!: string;
   @Input() players!: SalariesAndRatingsDto[];
   @Input() isOffSeason!: boolean;
+  @ViewChild('avatar') avatar!: Avatar;
 
   display = false;
   playerStats!: any;
@@ -36,5 +43,9 @@ export class DepthChartPositionComponent {
   onPlayerClick(stat: SalariesAndRatingsDto) {
     this.playerStats = stat;
     this.display = true;
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/images/skater.jpg';
   }
 }

@@ -25,9 +25,11 @@
         "
       >
         <p-avatar
+          #avatar
           [image]="getPlayerPicture(award.player_id?.nhl_id)"
           size="xlarge"
           shape="circle"
+          (onImageError)="onImageError($event)"
         ></p-avatar>
         <p-avatar
           [image]="getString(award.team_id.teamlogo)"
