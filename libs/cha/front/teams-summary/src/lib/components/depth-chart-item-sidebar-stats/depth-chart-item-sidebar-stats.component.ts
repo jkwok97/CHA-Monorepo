@@ -11,6 +11,7 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 export class DepthChartItemSidebarStatsComponent {
   @Input() currentStat: any;
   @Input() nhlStat: any;
+  @Input() isMobile!: boolean;
 
   userTeam$: Observable<TeamDto | undefined>;
 

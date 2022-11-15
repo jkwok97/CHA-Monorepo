@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DisplayFacade } from '@cha/domain/core';
 import { SalariesAndRatingsDto } from '@cha/shared/entities';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'cha-front-depth-chart-position',
@@ -13,6 +15,15 @@ export class DepthChartPositionComponent {
 
   display = false;
   playerStats!: any;
+  isMobile = false;
+
+  constructor(private displayFacade: DisplayFacade) {
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+  }
 
   getPlayerPicture(id: string | undefined) {
     if (id) {

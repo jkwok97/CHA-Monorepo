@@ -89,13 +89,15 @@
 
 <p-sidebar
   [(visible)]="display"
-  [fullScreen]="true"
+  [fullScreen]="isMobile ? true : false"
+  [position]="isMobile ? 'bottom' : 'right'"
   [blockScroll]="true"
   appendTo="body"
 >
   <ng-container *ngIf="playerStats as playerStats">
     <cha-front-depth-chart-item-sidebar
       [playerStats]="playerStats"
+      [isMobile]="isMobile"
     ></cha-front-depth-chart-item-sidebar>
   </ng-container>
 </p-sidebar>
