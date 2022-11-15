@@ -89,7 +89,8 @@
 
 <p-sidebar
   [(visible)]="display"
-  [fullScreen]="true"
+  [fullScreen]="isMobile ? true : false"
+  [position]="isMobile ? 'bottom' : 'right'"
   [blockScroll]="true"
   appendTo="body"
 >
