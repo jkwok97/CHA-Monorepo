@@ -10,24 +10,12 @@
   ></cha-front-games-current-team-card>
 
   <div class="result">
-    <div
-      *ngIf="
-        game.visTeamScore &&
-        game.visTeamScore >= 0 &&
-        game.homeTeamScore &&
-        game.homeTeamScore >= 0
-      "
-    >
+    <div *ngIf="game.visTeamScore >= 0 && game.homeTeamScore >= 0">
       Results:
     </div>
     <div>{{ game.visTeamScore }} @ {{ game.homeTeamScore }}</div>
     <div
-      *ngIf="
-        game.visTeamScore &&
-        game.visTeamScore >= 0 &&
-        game.homeTeamScore &&
-        game.homeTeamScore >= 0
-      "
+      *ngIf="game.visTeamScore >= 0 && game.homeTeamScore >= 0"
       class="text-sm"
     >
       <button
