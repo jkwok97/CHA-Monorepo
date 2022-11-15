@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class HomeSummaryDepthChartItemSidebarStatNhlComponent {
   @Input() nhlStat: any;
+  @Input() isMobile!: boolean;
 }

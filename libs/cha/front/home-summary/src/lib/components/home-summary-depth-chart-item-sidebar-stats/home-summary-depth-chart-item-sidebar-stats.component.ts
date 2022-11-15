@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'cha-front-home-summary-depth-chart-item-sidebar-stats',
@@ -12,5 +8,5 @@ import {
 export class HomeSummaryDepthChartItemSidebarStatsComponent {
   @Input() currentStat: any;
   @Input() nhlStat: any;
- 
+  @Input() isMobile!: boolean;
 }
