@@ -1,6 +1,8 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   Input,
   OnInit,
   SimpleChanges,
@@ -17,11 +19,12 @@ import { Table } from 'primeng/table';
   styleUrls: ['./players-stats-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayersStatsTableComponent implements OnInit {
+export class PlayersStatsTableComponent implements OnInit, AfterViewInit {
   @Input() stats!: StatPlayersHistoryDto[];
   @Input() statType!: string;
 
   @ViewChild('dt') dt: Table | undefined;
+  @ViewChild('filterInput') filterInput!: ElementRef;
 
   playerTableColumns = [
     { field: 'playing_year', header: 'Year', visible: true },
@@ -103,6 +106,15 @@ export class PlayersStatsTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.statsForTable = this.mapItems(this.stats);
+  }
+
+  ngAfterViewInit(): void {
+    this.filterInput.nativeElement.value = '23';
+
+    this.applyFilterGlobal(
+      { target: { value: this.filterInput.nativeElement.value } },
+      'contains'
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
