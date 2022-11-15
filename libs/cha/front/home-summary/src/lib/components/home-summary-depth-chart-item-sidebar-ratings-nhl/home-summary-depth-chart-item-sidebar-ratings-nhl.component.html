@@ -1,0 +1,65 @@
+<blade-card style="background-color: var(--team-100)">
+  <blade-card-header [ngStyle]="{ 'padding-top': '10px' }">
+    <div class="text-lg text-center">Past NHL Season Stats</div>
+  </blade-card-header>
+  <blade-card-body [ngStyle]="{ padding: '10px' }">
+    <div
+      class="w-full flex flex-wrap column-gap-4 text-sm md:text-md md:flex-column"
+    >
+      <div *ngIf="ratings.games_played">
+        Games Played:
+        <span style="font-weight: 100">
+          <i>{{ ratings.games_played }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.goals">
+        Goals:
+        <span style="font-weight: 100">
+          <i>{{ ratings.goals }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.assists">
+        Assists:
+        <span style="font-weight: 100">
+          <i>{{ ratings.assists }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.points">
+        Points:
+        <span style="font-weight: 100">
+          <i>{{ ratings.points }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.shots">
+        Shots:
+        <span style="font-weight: 100">
+          <i>{{ ratings.shots }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.shooting_pct">
+        Shooting Pct:
+        <span style="font-weight: 100">
+          <i>{{ ratings.shooting_pct }}%</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.wins">
+        Wins:
+        <span style="font-weight: 100">
+          <i>{{ ratings.wins }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.goals_against_avg">
+        GAA:
+        <span style="font-weight: 100">
+          <i>{{ ratings.goals_against_avg }}</i>
+        </span>
+      </div>
+      <div *ngIf="ratings.save_pct">
+        Save Pct:
+        <span style="font-weight: 100">
+          <i>{{ ratings.save_pct }}%</i>
+        </span>
+      </div>
+    </div>
+  </blade-card-body>
+</blade-card>
