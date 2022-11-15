@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class MainLeagueComponent {
   panelStyleMobile = {
     width: '100%',
-    height: '87vh',
+    height: '88vh',
   };
 
   panelStyleDesktop = {
