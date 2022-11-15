@@ -75,7 +75,7 @@ export class ApiScheduleService {
           );
         })
       )
-      .orderBy('schedule.game_day', 'ASC')
+      .orderBy('schedule.game_day', 'DESC')
       .limit(5)
       .getMany();
 
