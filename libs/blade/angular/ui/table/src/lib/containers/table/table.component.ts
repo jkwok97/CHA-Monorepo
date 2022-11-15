@@ -60,4 +60,9 @@ export class BladeTableComponent {
   clear(table: Table) {
     table.clear();
   }
+
+  onImageError(event: any) {
+    console.log(event);
+    event.target.src = 'assets/images/skater.jpg';
+  }
 }

@@ -6,7 +6,11 @@
           {{ type | titlecase }}
         </div>
 
-        <img [src]="getPlayerPicture()" />
+        <img
+          [src]="getPlayerPicture()"
+          #avatar
+          (error)="onImageError($event)"
+        />
         <p-avatar
           [image]="getTeamPicture()"
           shape="square"
