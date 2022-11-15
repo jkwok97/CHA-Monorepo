@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AvatarModule } from 'primeng/avatar';
+import { Avatar, AvatarModule } from 'primeng/avatar';
 import { DividerModule } from 'primeng/divider';
 import { AwardTypeEnum, UserAwardDto } from '@cha/shared/entities';
 
@@ -15,6 +15,7 @@ import { AwardTypeEnum, UserAwardDto } from '@cha/shared/entities';
 export class BladeUserAwardCardComponent {
   @Input()
   award!: UserAwardDto;
+  @ViewChild('avatar') avatar!: Avatar;
 
   AwardTypeEnum = AwardTypeEnum;
 
@@ -30,5 +31,9 @@ export class BladeUserAwardCardComponent {
 
   getPlayerPicture(id: string | undefined) {
     return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'assets/images/skater.jpg';
   }
 }
