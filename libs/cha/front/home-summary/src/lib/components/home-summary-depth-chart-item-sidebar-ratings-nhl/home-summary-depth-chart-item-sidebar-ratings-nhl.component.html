@@ -1,0 +1,62 @@
+<p-fieldset
+  legend="Past NHL Season Stats"
+  [toggleable]="true"
+  [collapsed]="isMobile ? true : false"
+>
+  <div class="w-full flex-column column-gap-4 text-sm md:text-md">
+    <div *ngIf="ratings.games_played" class="flex justify-content-between">
+      Games Played:
+      <span style="font-weight: 100">
+        <i>{{ ratings.games_played }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.goals" class="flex justify-content-between">
+      Goals:
+      <span style="font-weight: 100">
+        <i>{{ ratings.goals }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.assists" class="flex justify-content-between">
+      Assists:
+      <span style="font-weight: 100">
+        <i>{{ ratings.assists }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.points" class="flex justify-content-between">
+      Points:
+      <span style="font-weight: 100">
+        <i>{{ ratings.points }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.shots" class="flex justify-content-between">
+      Shots:
+      <span style="font-weight: 100">
+        <i>{{ ratings.shots }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.shooting_pct" class="flex justify-content-between">
+      Shooting Pct:
+      <span style="font-weight: 100">
+        <i>{{ ratings.shooting_pct }}%</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.wins" class="flex justify-content-between">
+      Wins:
+      <span style="font-weight: 100">
+        <i>{{ ratings.wins }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.goals_against_avg" class="flex justify-content-between">
+      GAA:
+      <span style="font-weight: 100">
+        <i>{{ ratings.goals_against_avg }}</i>
+      </span>
+    </div>
+    <div *ngIf="ratings.save_pct" class="flex justify-content-between">
+      Save Pct:
+      <span style="font-weight: 100">
+        <i>{{ ratings.save_pct }}%</i>
+      </span>
+    </div>
+  </div>
+</p-fieldset>

@@ -22,6 +22,7 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 })
 export class DepthChartItemSidebarComponent implements OnInit, OnChanges {
   @Input() playerStats: any;
+  @Input() isMobile!: boolean;
 
   currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
   currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;

@@ -8,4 +8,5 @@ import { PlayerRatingDto, GoalieRatingDto } from '@cha/shared/entities';
 })
 export class HomeSummaryDepthChartItemSidebarRatingsComponent {
   @Input() ratings!: PlayerRatingDto | GoalieRatingDto;
+  @Input() isMobile!: boolean;
 }

@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -36,6 +37,10 @@ import {
   HomeSummaryDepthChartItemSidebarRatingsComponent,
   HomeSummaryDepthChartItemSidebarStatsComponent,
   HomeSummarySalariesComponent,
+  HomeSummaryDepthChartItemSidebarStatChaComponent,
+  HomeSummaryDepthChartItemSidebarStatNhlComponent,
+  HomeSummaryDepthChartItemSidebarRatingsNhlComponent,
+  HomeSummaryDepthChartItemSidebarRatingsRateComponent,
 } from './components';
 
 @NgModule({
@@ -49,6 +54,7 @@ import {
     ButtonModule,
     CarouselModule,
     DropdownModule,
+    FieldsetModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,
     BladeDividerComponent,
@@ -69,6 +75,10 @@ import {
     HomeSummaryDepthChartItemSidebarRatingsComponent,
     HomeSummaryDepthChartItemSidebarStatsComponent,
     HomeSummarySalariesComponent,
+    HomeSummaryDepthChartItemSidebarStatChaComponent,
+    HomeSummaryDepthChartItemSidebarStatNhlComponent,
+    HomeSummaryDepthChartItemSidebarRatingsNhlComponent,
+    HomeSummaryDepthChartItemSidebarRatingsRateComponent,
   ],
   providers: [HomeSummaryService, HomeSummaryFacade, HomeSummaryEffects],
 })

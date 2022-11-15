@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { PlayerRatingDto, GoalieRatingDto, TeamDto } from '@cha/shared/entities';
-import { Observable } from 'rxjs';
-import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
+import { PlayerRatingDto, GoalieRatingDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-front-depth-chart-item-sidebar-ratings',
@@ -10,10 +8,5 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 })
 export class DepthChartItemSidebarRatingsComponent {
   @Input() ratings!: PlayerRatingDto | GoalieRatingDto;
-
-  userTeam$: Observable<TeamDto | undefined>;
-
-  constructor(private teamsSummaryFacade: TeamsSummaryFacade) {
-    this.userTeam$ = this.teamsSummaryFacade.userTeam$;
-  }
+  @Input() isMobile!: boolean;
 }

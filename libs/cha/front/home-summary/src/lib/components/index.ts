@@ -7,3 +7,7 @@ export * from './home-summary-depth-chart-item-sidebar';
 export * from './home-summary-depth-chart-item-sidebar-ratings';
 export * from './home-summary-depth-chart-item-sidebar-stats';
 export * from './home-summary-salaries';
+export * from './home-summary-depth-chart-item-sidebar-stat-cha';
+export * from './home-summary-depth-chart-item-sidebar-stat-nhl';
+export * from './home-summary-depth-chart-item-sidebar-ratings-nhl';
+export * from './home-summary-depth-chart-item-sidebar-ratings-rate';

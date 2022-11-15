@@ -3708,9 +3708,9 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 }
 
 .p-fieldset {
-  border: 1px solid #dee2e6;
-  background: #fff;
-  color: #495057;
+  border: 1px solid #e0771f;
+  background: #e0771f;
+  color: whitesmoke;
   border-radius: 6px;
 }
 
@@ -3742,7 +3742,6 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a:focus {
   outline: 0 none;
   outline-offset: 0;
-  box-shadow: 0 0 0 0.2rem #c7d2fe;
 }
 
 .p-fieldset.p-fieldset-toggleable .p-fieldset-legend:hover {

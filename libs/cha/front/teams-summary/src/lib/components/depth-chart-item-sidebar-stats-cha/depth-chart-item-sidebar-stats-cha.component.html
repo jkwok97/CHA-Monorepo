@@ -1,0 +1,105 @@
+<p-fieldset
+  legend="Current CHA Season Stats"
+  [toggleable]="true"
+  [collapsed]="isMobile ? true : false"
+  *ngIf="currentStat.games_played > 0"
+>
+  <div class="w-full flex-column column-gap-4 text-sm md:text-md">
+    <div *ngIf="currentStat.games_played" class="flex justify-content-between">
+      Games Played:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.games_played }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.goals" class="flex justify-content-between">
+      Goals:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.goals }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.assists" class="flex justify-content-between">
+      Assists:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.assists }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.points" class="flex justify-content-between">
+      Points:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.points }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.pp_goals" class="flex justify-content-between">
+      PP Goals:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.pp_goals }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.sh_goals" class="flex justify-content-between">
+      SH Goals:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.sh_goals }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.shots" class="flex justify-content-between">
+      Shots:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.shots }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.shooting_pct" class="flex justify-content-between">
+      Shooting Pct:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.shooting_pct }}%</i>
+      </span>
+    </div>
+    <div
+      *ngIf="currentStat.penalty_minutes"
+      class="flex justify-content-between"
+    >
+      PIM:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.penalty_minutes }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.wins" class="flex justify-content-between">
+      Wins:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.wins }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.loss" class="flex justify-content-between">
+      Loss:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.loss }}</i>
+      </span>
+    </div>
+    <div
+      *ngIf="currentStat.goals_against_avg"
+      class="flex justify-content-between"
+    >
+      GAA:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.goals_against_avg }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.saves" class="flex justify-content-between">
+      Saves:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.saves }}</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.save_pct" class="flex justify-content-between">
+      Save Pct:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.save_pct }}%</i>
+      </span>
+    </div>
+    <div *ngIf="currentStat.shots_for" class="flex justify-content-between">
+      Shots Faced:
+      <span style="font-weight: 100">
+        <i>{{ currentStat.shots_for }}</i>
+      </span>
+    </div>
+  </div>
+</p-fieldset>

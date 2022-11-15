@@ -15,6 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
@@ -69,6 +70,10 @@ import {
   PlayersStatsTableSiderComponent,
   GoalieStatsTableComponent,
   GoalieStatsTableSiderComponent,
+  DepthChartItemSidebarRatingsNhlComponent,
+  DepthChartItemSidebarRatingsRateComponent,
+  DepthChartItemSidebarStatsNhlComponent,
+  DepthChartItemSidebarStatsChaComponent,
 } from './components';
 
 @NgModule({
@@ -81,6 +86,7 @@ import {
     AvatarModule,
     SidebarModule,
     TooltipModule,
+    FieldsetModule,
     TableModule,
     ProgressBarModule,
     InputTextModule,
@@ -124,6 +130,10 @@ import {
     GoalieStatsTableComponent,
     GoalieStatsTableSiderComponent,
     TeamsSummarySalariesComponent,
+    DepthChartItemSidebarRatingsNhlComponent,
+    DepthChartItemSidebarRatingsRateComponent,
+    DepthChartItemSidebarStatsNhlComponent,
+    DepthChartItemSidebarStatsChaComponent,
   ],
   providers: [
     TeamsSummaryService,

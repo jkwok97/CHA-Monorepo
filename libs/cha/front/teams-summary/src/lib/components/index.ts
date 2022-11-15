@@ -12,3 +12,7 @@ export * from './players-stats-table';
 export * from './players-stats-table-sider';
 export * from './goalie-stats-table';
 export * from './goalie-stats-table-sider';
+export * from './depth-chart-item-sidebar-ratings-nhl';
+export * from './depth-chart-item-sidebar-ratings-rate';
+export * from './depth-chart-item-sidebar-stats-cha';
+export * from './depth-chart-item-sidebar-stats-nhl';
