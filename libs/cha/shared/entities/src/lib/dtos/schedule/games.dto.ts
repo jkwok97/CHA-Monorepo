@@ -8,7 +8,7 @@ export interface GamesDto {
   visTeamLastFive: string[];
   visTeamRecord: TeamRecordDto;
   visTeamVersus: TeamVersusRecordDto;
-  homeTeamScore: 3;
+  homeTeamScore: number;
   homeTeamInfo: TeamDto;
   homeTeamLastFive: string[];
   homeTeamRecord: TeamRecordDto;
