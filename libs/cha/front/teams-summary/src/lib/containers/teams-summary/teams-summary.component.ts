@@ -43,6 +43,12 @@ export class TeamsSummaryComponent implements OnDestroy {
     this.userTeam$ = this.teamsSummaryFacade.userTeam$;
     this.teams$ = this.leagueDataFacade.sortedLeagueTeams$;
 
+    this.displayFacade.isMobile$
+      .pipe(first())
+      .subscribe((isMobile: boolean) => {
+        this.isMobile = isMobile;
+      });
+
     this.isLoading$ = combineLatest([
       this.teamsSummaryFacade.teamRecordLoading$,
       this.teamsSummaryFacade.playerSalaryLoading$,
@@ -56,12 +62,6 @@ export class TeamsSummaryComponent implements OnDestroy {
     this.teams$.pipe(first()).subscribe((teams: TeamDto[]) => {
       this.teams = teams;
     });
-
-    this.displayFacade.isMobile$
-      .pipe(first())
-      .subscribe((isMobile: boolean) => {
-        this.isMobile = isMobile;
-      });
 
     this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {
       this.currentTeamId = params['teamId'];

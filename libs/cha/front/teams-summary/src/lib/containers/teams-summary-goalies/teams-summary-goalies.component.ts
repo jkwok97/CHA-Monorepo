@@ -32,16 +32,6 @@ export class TeamsSummaryGoaliesComponent implements OnInit {
     { label: 'Playoffs', value: 'Playoffs' },
   ];
 
-  panelStyleMobile = {
-    width: '100%',
-    height: '88vh',
-  };
-
-  panelStyleDesktop = {
-    width: '100%',
-    height: '90vh',
-  };
-
   constructor(
     private goalieStatsFacade: GoalieStatsFacade,
     private teamsSummaryFacade: TeamsSummaryFacade,

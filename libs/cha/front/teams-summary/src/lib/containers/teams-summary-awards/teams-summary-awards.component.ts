@@ -19,15 +19,6 @@ export class TeamsSummaryAwardsComponent implements OnInit {
   user$: Observable<UserDto | undefined>;
 
   isMobile = false;
-  panelStyleMobile = {
-    width: '100%',
-    height: '88vh',
-  };
-
-  panelStyleDesktop = {
-    width: '100%',
-    height: '90vh',
-  };
 
   constructor(
     private displayFacade: DisplayFacade,
