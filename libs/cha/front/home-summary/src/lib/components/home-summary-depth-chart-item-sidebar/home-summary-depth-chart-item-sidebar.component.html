@@ -34,24 +34,28 @@
 <blade-divider></blade-divider>
 
 <div class="flex flex-column justify-content-evenly column-gap-3 row-gap-2">
-  <ng-container>
-    <p-progressBar
-      mode="indeterminate"
-      [style]="{ height: '6px' }"
-      *ngIf="statsLoading$ | async"
-    ></p-progressBar>
+  <p-progressBar
+    mode="indeterminate"
+    [style]="{ height: '6px' }"
+    *ngIf="statsLoading$ | async"
+  ></p-progressBar>
 
-    <ng-container *ngIf="currentStat$ | async as currentStat">
-      <ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
-        <cha-front-home-summary-depth-chart-item-sidebar-stats
-          [currentStat]="currentStat"
+  <div class="flex md:column-gap-3 row-gap-2 flex-column w-full">
+    <ng-container *ngIf="currentNhlStat$ | async as currentNHLStat">
+      <div class="w-full">
+        <cha-front-home-summary-depth-chart-item-sidebar-stat-nhl
           [nhlStat]="currentNHLStat"
           [isMobile]="isMobile"
-          class="w-full"
-        ></cha-front-home-summary-depth-chart-item-sidebar-stats>
-      </ng-container>
+        ></cha-front-home-summary-depth-chart-item-sidebar-stat-nhl>
+      </div>
     </ng-container>
-  </ng-container>
+    <ng-container *ngIf="currentStat$ | async as currentStat">
+      <cha-front-home-summary-depth-chart-item-sidebar-stat-cha
+        [currentStat]="currentStat"
+        [isMobile]="isMobile"
+      ></cha-front-home-summary-depth-chart-item-sidebar-stat-cha>
+    </ng-container>
+  </div>
 
   <cha-front-home-summary-depth-chart-item-sidebar-ratings
     [ratings]="playerStats.ratings"
