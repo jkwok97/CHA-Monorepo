@@ -53,14 +53,14 @@ export const getLoaded = (state: State) => state.loaded;
 function separateConferences(standings: StatTeamPlayoffsDto[]) {
   const eastTeams = standings.filter(
     (team: StatTeamPlayoffsDto) =>
-      team.conference.id === ConferencesEnum.EASTERN
+      team.division.conference_id.id === ConferencesEnum.EASTERN
   );
 
   eastTeams.splice(eastTeams.length - 2, 2);
 
   const westTeams = standings.filter(
     (team: StatTeamPlayoffsDto) =>
-      team.conference.id === ConferencesEnum.WESTERN
+      team.division.conference_id.id === ConferencesEnum.WESTERN
   );
 
   westTeams.splice(westTeams.length - 2, 2);
