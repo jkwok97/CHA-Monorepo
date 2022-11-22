@@ -110,7 +110,7 @@ export class ApiTeamStatsService {
     seasonType: 'Regular' | 'Playoffs'
   ): Promise<Team_Stats_V2[]> {
     const teamStats = await this.repo.find({
-      relations: ['team_id', 'conference_id'],
+      relations: ['team_id'],
       select: {
         team_id: {
           id: true,

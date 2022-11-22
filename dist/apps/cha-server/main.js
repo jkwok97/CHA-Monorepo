@@ -8558,7 +8558,7 @@ let ApiTeamStatsService = class ApiTeamStatsService {
     }
     async getTeamStandingsForPlayoffs(season, seasonType) {
         const teamStats = await this.repo.find({
-            relations: ['team_id', 'conference_id'],
+            relations: ['team_id'],
             select: {
                 team_id: {
                     id: true,
