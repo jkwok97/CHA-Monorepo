@@ -2910,7 +2910,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Number)
 ], Team_Stats_V2.prototype, "id", void 0);
 tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
+    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id, { eager: true }),
     (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
     tslib_1.__metadata("design:type", typeof (_a = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _a : Object)
 ], Team_Stats_V2.prototype, "team_id", void 0);
@@ -8591,7 +8591,7 @@ let ApiTeamStatsService = class ApiTeamStatsService {
     }
     async setConferenceInfo(array) {
         console.log(array);
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { conference: await this.getConferenceInfo(item.team_id.divisions_id.conference_id) }))));
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { conference: await this.getConferenceInfo(item.team_id.divisions_id.id) }))));
     }
     async getConferenceInfo(conferenceId) {
         console.log(conferenceId);

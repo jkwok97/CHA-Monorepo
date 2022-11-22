@@ -12,7 +12,7 @@ export class Team_Stats_V2 {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => Teams_V2, (team) => team.id)
+  @ManyToOne(() => Teams_V2, (team) => team.id, { eager: true })
   @JoinColumn({ name: 'team_id' })
   team_id!: Teams_V2;
 

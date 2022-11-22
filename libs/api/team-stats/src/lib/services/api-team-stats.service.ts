@@ -152,9 +152,7 @@ export class ApiTeamStatsService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        conference: await this.getConferenceInfo(
-          item.team_id.divisions_id.conference_id
-        ),
+        conference: await this.getConferenceInfo(item.team_id.divisions_id.id),
       }))
     );
   }
