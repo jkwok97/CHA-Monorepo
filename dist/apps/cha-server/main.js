@@ -8558,7 +8558,7 @@ let ApiTeamStatsService = class ApiTeamStatsService {
     }
     async getTeamStandingsForPlayoffs(season, seasonType) {
         const teamStats = await this.repo.find({
-            relations: ['team_id'],
+            relations: ['team_id', 'conference_id'],
             select: {
                 team_id: {
                     id: true,
@@ -8590,6 +8590,7 @@ let ApiTeamStatsService = class ApiTeamStatsService {
         return teamStatsWithConferenceSorted;
     }
     async setConferenceInfo(array) {
+        console.log(array);
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { conference: await this.getConferenceInfo(item.team_id.divisions_id.conference_id) }))));
     }
     async getConferenceInfo(conferenceId) {
