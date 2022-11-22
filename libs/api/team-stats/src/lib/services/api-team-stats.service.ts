@@ -1,4 +1,4 @@
-import { Conferences_V2, Team_Stats_V2 } from '@api/entities';
+import { Divisions_V2, Team_Stats_V2 } from '@api/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -8,8 +8,8 @@ export class ApiTeamStatsService {
   constructor(
     @InjectRepository(Team_Stats_V2)
     private repo: Repository<Team_Stats_V2>,
-    @InjectRepository(Conferences_V2)
-    private conferencesRepo: Repository<Conferences_V2>
+    @InjectRepository(Divisions_V2)
+    private divisionsRepo: Repository<Divisions_V2>
   ) {}
 
   async getTeamStatsBySeasonByType(
@@ -100,9 +100,9 @@ export class ApiTeamStatsService {
       },
     });
 
-    const teamStatsWithConference = await this.setConferenceInfo(teamStats);
+    const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
 
-    return teamStatsWithConference;
+    return teamStatsWithDivision;
   }
 
   async getTeamStandingsForPlayoffs(
@@ -138,34 +138,29 @@ export class ApiTeamStatsService {
       },
     });
 
-    const teamStatsWithConference = await this.setConferenceInfo(teamStats);
+    const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
 
-    const teamStatsWithConferenceSorted = await this.sortTeamStatsByStandings(
-      teamStatsWithConference
+    const teamStatsWithDivisionSorted = await this.sortTeamStatsByStandings(
+      teamStatsWithDivision
     );
 
-    return teamStatsWithConferenceSorted;
+    return teamStatsWithDivisionSorted;
   }
 
-  private async setConferenceInfo(array: Team_Stats_V2[]) {
-    console.log(array);
+  private async setDivisionInfo(array: Team_Stats_V2[]) {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        conference: await this.getConferenceInfo(item.team_id.divisions_id.id),
+        division: await this.getDivisionInfo(item.team_id.divisions_id.id),
       }))
     );
   }
 
-  private async getConferenceInfo(conferenceId: number) {
-    console.log(conferenceId);
-    return await this.conferencesRepo.findOne({
-      select: {
-        id: true,
-        conferencename: true,
-      },
+  private async getDivisionInfo(divisionId: number) {
+    return await this.divisionsRepo.findOne({
+      relations: ['conference_id'],
       where: {
-        id: conferenceId,
+        id: divisionId,
       },
     });
   }

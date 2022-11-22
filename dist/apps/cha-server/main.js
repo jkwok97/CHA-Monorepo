@@ -8082,9 +8082,7 @@ let ApiTeamStatsModule = class ApiTeamStatsModule {
 };
 ApiTeamStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forFeature([entities_1.Team_Stats_V2, entities_1.Teams_V2, entities_1.Conferences_V2]),
-        ],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Team_Stats_V2, entities_1.Teams_V2, entities_1.Divisions_V2])],
         controllers: [controllers_1.TeamStatsController],
         providers: [
             services_1.ApiTeamStatsService,
@@ -8449,9 +8447,9 @@ const common_1 = __webpack_require__("@nestjs/common");
 const typeorm_1 = __webpack_require__("@nestjs/typeorm");
 const typeorm_2 = __webpack_require__("typeorm");
 let ApiTeamStatsService = class ApiTeamStatsService {
-    constructor(repo, conferencesRepo) {
+    constructor(repo, divisionsRepo) {
         this.repo = repo;
-        this.conferencesRepo = conferencesRepo;
+        this.divisionsRepo = divisionsRepo;
         this.sortTeamStatsByStandings = (data) => {
             return data.sort((a, b) => {
                 if (b.points === a.points) {
@@ -8553,8 +8551,8 @@ let ApiTeamStatsService = class ApiTeamStatsService {
                 season_type: seasonType,
             },
         });
-        const teamStatsWithConference = await this.setConferenceInfo(teamStats);
-        return teamStatsWithConference;
+        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
+        return teamStatsWithDivision;
     }
     async getTeamStandingsForPlayoffs(season, seasonType) {
         const teamStats = await this.repo.find({
@@ -8585,23 +8583,18 @@ let ApiTeamStatsService = class ApiTeamStatsService {
                 season_type: seasonType,
             },
         });
-        const teamStatsWithConference = await this.setConferenceInfo(teamStats);
-        const teamStatsWithConferenceSorted = await this.sortTeamStatsByStandings(teamStatsWithConference);
-        return teamStatsWithConferenceSorted;
+        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
+        const teamStatsWithDivisionSorted = await this.sortTeamStatsByStandings(teamStatsWithDivision);
+        return teamStatsWithDivisionSorted;
     }
-    async setConferenceInfo(array) {
-        console.log(array);
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { conference: await this.getConferenceInfo(item.team_id.divisions_id.id) }))));
+    async setDivisionInfo(array) {
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { division: await this.getDivisionInfo(item.team_id.divisions_id.id) }))));
     }
-    async getConferenceInfo(conferenceId) {
-        console.log(conferenceId);
-        return await this.conferencesRepo.findOne({
-            select: {
-                id: true,
-                conferencename: true,
-            },
+    async getDivisionInfo(divisionId) {
+        return await this.divisionsRepo.findOne({
+            relations: ['conference_id'],
             where: {
-                id: conferenceId,
+                id: divisionId,
             },
         });
     }
@@ -8609,7 +8602,7 @@ let ApiTeamStatsService = class ApiTeamStatsService {
 ApiTeamStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Conferences_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiTeamStatsService);
 exports.ApiTeamStatsService = ApiTeamStatsService;
