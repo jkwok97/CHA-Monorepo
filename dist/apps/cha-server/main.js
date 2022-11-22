@@ -8453,12 +8453,10 @@ let ApiTeamStatsService = class ApiTeamStatsService {
         this.repo = repo;
         this.conferencesRepo = conferencesRepo;
         this.sortTeamStatsByStandings = (data) => {
-            return data
-                .sort((a, b) => {
+            return data.sort((a, b) => {
                 if (b.points === a.points) {
                     if (b.wins === a.wins) {
-                        if (b.goals_for - b.goals_against ===
-                            a.goals_for - a.goals_against) {
+                        if (b.goals_for - b.goals_against === a.goals_for - a.goals_against) {
                             return b.goals_for - a.goals_for;
                         }
                         else {
@@ -8595,6 +8593,7 @@ let ApiTeamStatsService = class ApiTeamStatsService {
         return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { conference: await this.getConferenceInfo(item.team_id.divisions_id.conference_id) }))));
     }
     async getConferenceInfo(conferenceId) {
+        console.log(conferenceId);
         return await this.conferencesRepo.findOne({
             select: {
                 id: true,

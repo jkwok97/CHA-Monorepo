@@ -159,6 +159,7 @@ export class ApiTeamStatsService {
   }
 
   private async getConferenceInfo(conferenceId: number) {
+    console.log(conferenceId);
     return await this.conferencesRepo.findOne({
       select: {
         id: true,
@@ -171,26 +172,22 @@ export class ApiTeamStatsService {
   }
 
   private sortTeamStatsByStandings = (data) => {
-    return data
-      .sort((a: any, b: any) => {
-        if (b.points === a.points) {
-          if (b.wins === a.wins) {
-            if (
-              b.goals_for - b.goals_against ===
-              a.goals_for - a.goals_against
-            ) {
-              return b.goals_for - a.goals_for;
-            } else {
-              return (
-                b.goals_for - b.goals_against - (a.goals_for - a.goals_against)
-              );
-            }
+    return data.sort((a: any, b: any) => {
+      if (b.points === a.points) {
+        if (b.wins === a.wins) {
+          if (b.goals_for - b.goals_against === a.goals_for - a.goals_against) {
+            return b.goals_for - a.goals_for;
           } else {
-            return b.wins - a.wins;
+            return (
+              b.goals_for - b.goals_against - (a.goals_for - a.goals_against)
+            );
           }
         } else {
-          return b.points - a.points;
+          return b.wins - a.wins;
         }
-      });
+      } else {
+        return b.points - a.points;
+      }
+    });
   };
 }
