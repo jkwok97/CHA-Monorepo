@@ -39,11 +39,11 @@
               },
               {
                 "sourceTag": "app:admin",
-                "onlyDependOnLibsWithTags": ["admin"]
+                "onlyDependOnLibsWithTags": ["admin", "domain"]
               },
               {
                 "sourceTag": "app:front",
-                "onlyDependOnLibsWithTags": ["front"]
+                "onlyDependOnLibsWithTags": ["front", "domain"]
               },
               {
                 "sourceTag": "domain",
