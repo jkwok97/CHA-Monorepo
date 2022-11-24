@@ -4765,6 +4765,7 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
         return await Promise.all(array.map((stat) => ({
             playing_year: stat.playing_year,
             season_type: stat.season_type,
+            team_name: stat.team_name,
             teamInfo: !raw
                 ? {
                     id: teamInfo.id,
@@ -7110,6 +7111,7 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
         return await Promise.all(array.map((stat) => ({
             playing_year: stat.playing_year,
             season_type: stat.season_type,
+            team_name: stat.team_name,
             teamInfo: !raw
                 ? {
                     id: teamInfo.id,

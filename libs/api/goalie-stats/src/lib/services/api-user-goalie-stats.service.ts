@@ -198,6 +198,7 @@ export class ApiUserGoalieStatsService {
       array.map((stat: Goalies_Stats_V2) => ({
         playing_year: stat.playing_year,
         season_type: stat.season_type,
+        team_name: stat.team_name,
         teamInfo: !raw
           ? {
               id: teamInfo.id,
