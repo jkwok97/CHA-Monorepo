@@ -75,6 +75,7 @@ export class PlayersStatsTableComponent
   mapItems(stats: StatPlayersHistoryDto[]) {
     return stats.map((stat: StatPlayersHistoryDto) => ({
       ...stat,
+      team_string: `${stat.team_name}`,
       full_name: `${stat.player_id?.firstname} ${stat.player_id?.lastname}`,
       team_name: `${stat.teamInfo?.city} ${stat.teamInfo?.nickname}`,
       teamLogo: stat.teamInfo?.teamlogo

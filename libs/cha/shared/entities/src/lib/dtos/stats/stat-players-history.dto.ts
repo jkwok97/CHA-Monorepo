@@ -25,4 +25,5 @@ export interface StatPlayersHistoryDto {
   pass_pct: number;
   hit_per_game: number;
   blocked_shots: number;
+  team_name: string;
 }

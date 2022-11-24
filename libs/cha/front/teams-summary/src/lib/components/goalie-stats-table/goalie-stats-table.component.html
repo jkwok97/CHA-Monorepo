@@ -83,15 +83,17 @@
             >{{ column.header }}</span
           >
           <div class="table-body-cell">
-            <ng-container
-              *ngIf="column.field === 'team' && statType === 'season'"
-            >
-              <img
-                [src]="data.teamLogo"
-                height="30px"
-                [pTooltip]="data.team_name"
-                tooltipPosition="right"
-              />
+            <ng-container *ngIf="column.field === 'team'">
+              <div *ngIf="statType === 'season'">
+                <img
+                  [src]="data.teamLogo"
+                  height="30px"
+                  [pTooltip]="data.team_name"
+                  tooltipPosition="right"
+                />
+              </div>
+
+              <span *ngIf="statType === 'all'">{{ data.team_string }}</span>
             </ng-container>
             <p-avatar
               [image]="getPlayerPicture(data.player_id?.nhl_id)"
@@ -123,12 +125,16 @@
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container *ngIf="column.field === 'team'">
-              <img
-                [src]="data.teamLogo"
-                height="30px"
-                [pTooltip]="data.team_name"
-                tooltipPosition="right"
-              />
+              <div *ngIf="statType === 'season'">
+                <img
+                  [src]="data.teamLogo"
+                  height="30px"
+                  [pTooltip]="data.team_name"
+                  tooltipPosition="right"
+                />
+              </div>
+
+              <span *ngIf="statType === 'all'">{{ data.team_string }}</span>
             </ng-container>
             <ng-container>{{ data[column.field] }}</ng-container>
           </div>

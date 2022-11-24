@@ -52,7 +52,7 @@
       >
         Playing Year
       </th>
-      <!-- <th *ngIf="statType === 'all'" style="width: 75px">Team</th> -->
+      <th style="width: 75px">Team</th>
       <th pSortableColumn="games_played" style="width: 75px">GP</th>
       <th pSortableColumn="goals" style="width: 75px">G</th>
       <th pSortableColumn="assists" style="width: 75px">A</th>
@@ -106,7 +106,17 @@
       <td style="width: 125px" *ngIf="statType === 'season'">
         {{ statsForTable.playing_year }}
       </td>
-      <!-- <td *ngIf="statType === 'all'" style="width: 75px">{{ statsForTable.teamLogo }}</td> -->
+      <td *ngIf="statType === 'all'" style="width: 75px">
+        {{ statsForTable.team_string }}
+      </td>
+      <td *ngIf="statType === 'season'" style="width: 75px">
+        <img
+          [src]="statsForTable.teamLogo"
+          height="30px"
+          [pTooltip]="statsForTable.team_name"
+          tooltipPosition="right"
+        />
+      </td>
       <td style="width: 75px">
         {{ statsForTable.games_played }}
       </td>

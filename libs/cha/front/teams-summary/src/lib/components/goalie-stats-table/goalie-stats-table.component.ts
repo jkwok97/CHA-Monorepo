@@ -25,7 +25,7 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild('dt') dt: Table | undefined;
   @ViewChild('filterInput') filterInput!: ElementRef;
-  
+
   goalieTableColumns = [
     { field: 'playing_year', header: 'Year', visible: true },
     { field: 'season_type', header: 'Season', visible: false },
@@ -91,16 +91,26 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit {
     if (changes['statType']) {
       this.goalieTableColumns[0].visible =
         changes['statType'].currentValue === 'season';
-      this.goalieTableColumns[2].visible =
-        changes['statType'].currentValue === 'season';
       this.mobileGoalieTableColumns[0].visible =
         changes['statType'].currentValue === 'season';
+    }
+
+    if (changes['statType'].currentValue === 'all') {
+      setTimeout(() => {
+        this.filterInput.nativeElement.value = '';
+
+        this.applyFilterGlobal(
+          { target: { value: this.filterInput.nativeElement.value } },
+          'contains'
+        );
+      }, 100);
     }
   }
 
   mapItems(stats: StatGoaliesHistoryDto[]) {
     return stats.map((stat: StatGoaliesHistoryDto) => ({
       ...stat,
+      team_string: `${stat.team_name}`,
       full_name: `${stat.player_id?.firstname} ${stat.player_id?.lastname}`,
       team_name: `${stat.teamInfo?.city} ${stat.teamInfo?.nickname}`,
       teamLogo: stat.teamInfo?.teamlogo
