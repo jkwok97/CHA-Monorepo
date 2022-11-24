@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   Input,
+  OnChanges,
   OnInit,
   SimpleChanges,
   ViewChild,
@@ -19,73 +20,14 @@ import { Table } from 'primeng/table';
   styleUrls: ['./players-stats-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayersStatsTableComponent implements OnInit, AfterViewInit {
+export class PlayersStatsTableComponent
+  implements OnInit, AfterViewInit, OnChanges
+{
   @Input() stats!: StatPlayersHistoryDto[];
   @Input() statType!: string;
 
   @ViewChild('dt') dt: Table | undefined;
   @ViewChild('filterInput') filterInput!: ElementRef;
-
-  playerTableColumns = [
-    { field: 'playing_year', header: 'Year', visible: true },
-    { field: 'season_type', header: 'Season', visible: false },
-    { field: 'team', header: 'Team', visible: true },
-    { field: 'team_name', header: 'Team Name', visible: false },
-    { field: 'full_name', header: 'Player', visible: true },
-    { field: 'player_name', header: 'Player Name', visible: false },
-    { field: 'games_played', header: 'GP', visible: true },
-    { field: 'goals', header: 'G', visible: true },
-    { field: 'assists', header: 'A', visible: true },
-    { field: 'points', header: 'Pts', visible: true },
-    { field: 'pointsPerSixty', header: 'Pts/60', visible: true },
-    { field: 'plus_minus', header: '+/-', visible: true },
-    { field: 'penalty_minutes', header: 'PIM', visible: true },
-    { field: 'pp_goals', header: 'PPG', visible: true },
-    { field: 'sh_goals', header: 'SHG', visible: true },
-    { field: 'gw_goals', header: 'GWG', visible: true },
-    { field: 'shots', header: 'SOG', visible: true },
-    { field: 'shooting_pct', header: 'Sh%', visible: true },
-    { field: 'minutes_per_game', header: 'Min/G', visible: true },
-    { field: 'fo_pct', header: 'FO%', visible: true },
-    { field: 'pass_pct', header: 'Pass%', visible: true },
-    { field: 'corner_pct', header: 'CB%', visible: true },
-    { field: 'hit_per_game', header: 'Hits/G', visible: true },
-    { field: 'blocked_shots', header: 'BS', visible: true },
-  ];
-
-  mobilePlayerTableColumns = [
-    { field: 'playing_year', header: 'Year', visible: true },
-    { field: 'full_name', header: 'Name', visible: true },
-    { field: 'points', header: 'Pts', visible: true },
-    { field: 'action', header: '...More', visible: true },
-  ];
-
-  scrollableCols = [
-    { field: 'player_name', header: 'Player Name', visible: false },
-    { field: 'games_played', header: 'GP', visible: true },
-    { field: 'goals', header: 'G', visible: true },
-    { field: 'assists', header: 'A', visible: true },
-    { field: 'points', header: 'Pts', visible: true },
-    { field: 'pointsPerSixty', header: 'Pts/60', visible: true },
-    { field: 'plus_minus', header: '+/-', visible: true },
-    { field: 'penalty_minutes', header: 'PIM', visible: true },
-    { field: 'pp_goals', header: 'PPG', visible: true },
-    { field: 'sh_goals', header: 'SHG', visible: true },
-    { field: 'gw_goals', header: 'GWG', visible: true },
-    { field: 'shots', header: 'SOG', visible: true },
-    { field: 'shooting_pct', header: 'Sh%', visible: true },
-    { field: 'minutes_per_game', header: 'Min/G', visible: true },
-    { field: 'fo_pct', header: 'FO%', visible: true },
-    { field: 'pass_pct', header: 'Pass%', visible: true },
-    { field: 'corner_pct', header: 'CB%', visible: true },
-    { field: 'hit_per_game', header: 'Hits/G', visible: true },
-    { field: 'blocked_shots', header: 'BS', visible: true },
-  ];
-
-  frozenColumns = [
-    { field: 'playing_year', header: 'Year', visible: true },
-    { field: 'full_name', header: 'Name', visible: true },
-  ];
 
   first = 0;
   rows = 25;
@@ -118,19 +60,15 @@ export class PlayersStatsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['statType']) {
-      this.mobilePlayerTableColumns[0].visible =
-        changes['statType'].currentValue === 'season';
-      this.playerTableColumns[0].visible =
-        changes['statType'].currentValue === 'season';
-      this.playerTableColumns[2].visible =
-        changes['statType'].currentValue === 'season';
-      this.playerTableColumns[19].visible =
-        changes['statType'].currentValue === 'season';
-      this.playerTableColumns[20].visible =
-        changes['statType'].currentValue === 'season';
-      this.playerTableColumns[21].visible =
-        changes['statType'].currentValue === 'season';
+    if (changes['statType'].currentValue === 'all') {
+      setTimeout(() => {
+        this.filterInput.nativeElement.value = '';
+
+        this.applyFilterGlobal(
+          { target: { value: this.filterInput.nativeElement.value } },
+          'contains'
+        );
+      }, 100);
     }
   }
 

@@ -59,7 +59,7 @@ export class ApiUserGoalieStatsService {
       where: {
         team_name: teamName,
         playing_year: season,
-        season_type: 'Regular'
+        season_type: 'Regular',
       },
     });
   }
@@ -103,6 +103,7 @@ export class ApiUserGoalieStatsService {
       b.nhl_id as nhl_id,
       a.player_id as player_id,
       a.season_type as season_type, 
+      a.team_name as team_name,
       sum(games_played) as games_played, 
       sum(wins) as wins, 
       sum(loss) as loss, 
@@ -127,7 +128,7 @@ export class ApiUserGoalieStatsService {
       and
       a.season_type = '${seasonType}'
       and a.team_name = '${teamShortName}')
-      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
+      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type, a.team_name
       order by wins DESC`
     );
   }

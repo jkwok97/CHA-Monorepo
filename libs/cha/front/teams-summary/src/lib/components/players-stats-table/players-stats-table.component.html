@@ -45,7 +45,14 @@
       >
         Name
       </th>
-      <th pSortableColumn="playing_year" style="width: 125px">Playing Year</th>
+      <th
+        pSortableColumn="playing_year"
+        style="width: 125px"
+        *ngIf="statType === 'season'"
+      >
+        Playing Year
+      </th>
+      <!-- <th *ngIf="statType === 'all'" style="width: 75px">Team</th> -->
       <th pSortableColumn="games_played" style="width: 75px">GP</th>
       <th pSortableColumn="goals" style="width: 75px">G</th>
       <th pSortableColumn="assists" style="width: 75px">A</th>
@@ -59,9 +66,27 @@
       <th pSortableColumn="shots" style="width: 75px">SOG</th>
       <th pSortableColumn="shooting_pct" style="width: 75px">Sh%</th>
       <th pSortableColumn="minutes_per_game" style="width: 75px">Min/G</th>
-      <th pSortableColumn="fo_pct" style="width: 75px">FO%</th>
-      <th pSortableColumn="pass_pct" style="width: 75px">Pass%</th>
-      <th pSortableColumn="corner_pct" style="width: 75px">CB%</th>
+      <th
+        pSortableColumn="fo_pct"
+        style="width: 75px"
+        *ngIf="statType === 'season'"
+      >
+        FO%
+      </th>
+      <th
+        pSortableColumn="pass_pct"
+        style="width: 75px"
+        *ngIf="statType === 'season'"
+      >
+        Pass%
+      </th>
+      <th
+        pSortableColumn="corner_pct"
+        style="width: 75px"
+        *ngIf="statType === 'season'"
+      >
+        CB%
+      </th>
       <th pSortableColumn="hit_per_game" style="width: 75px">Hits/G</th>
       <th pSortableColumn="blocked_shots" style="width: 75px">BS</th>
     </tr>
@@ -78,9 +103,10 @@
       >
         {{ statsForTable.full_name }}
       </td>
-      <td style="width: 125px">
+      <td style="width: 125px" *ngIf="statType === 'season'">
         {{ statsForTable.playing_year }}
       </td>
+      <!-- <td *ngIf="statType === 'all'" style="width: 75px">{{ statsForTable.teamLogo }}</td> -->
       <td style="width: 75px">
         {{ statsForTable.games_played }}
       </td>
@@ -96,9 +122,15 @@
       <td style="width: 75px">{{ statsForTable.shots }}</td>
       <td style="width: 75px">{{ statsForTable.shooting_pct }}</td>
       <td style="width: 75px">{{ statsForTable.minutes_per_game }}</td>
-      <td style="width: 75px">{{ statsForTable.fo_pct }}</td>
-      <td style="width: 75px">{{ statsForTable.pass_pct }}</td>
-      <td style="width: 75px">{{ statsForTable.corner_pct }}</td>
+      <td style="width: 75px" *ngIf="statType === 'season'">
+        {{ statsForTable.fo_pct }}
+      </td>
+      <td style="width: 75px" *ngIf="statType === 'season'">
+        {{ statsForTable.pass_pct }}
+      </td>
+      <td style="width: 75px" *ngIf="statType === 'season'">
+        {{ statsForTable.corner_pct }}
+      </td>
       <td style="width: 75px">{{ statsForTable.hit_per_game }}</td>
       <td style="width: 75px">{{ statsForTable.blocked_shots }}</td>
     </tr>

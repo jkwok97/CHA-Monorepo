@@ -4669,7 +4669,7 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
             where: {
                 team_name: teamName,
                 playing_year: season,
-                season_type: 'Regular'
+                season_type: 'Regular',
             },
         });
     }
@@ -4687,6 +4687,7 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
       b.nhl_id as nhl_id,
       a.player_id as player_id,
       a.season_type as season_type, 
+      a.team_name as team_name,
       sum(games_played) as games_played, 
       sum(wins) as wins, 
       sum(loss) as loss, 
@@ -4711,7 +4712,7 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
       and
       a.season_type = '${seasonType}'
       and a.team_name = '${teamShortName}')
-      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
+      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type, a.team_name
       order by wins DESC`);
     }
     async getGoalieStats(teamShortName, seasonType) {
@@ -7029,6 +7030,7 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
       a.player_id as player_id,
       a.season_type as season_type, 
       a.position as position,
+      a.team_name as team_name,
       sum(a.games_played) as games_played, 
       sum(a.goals) as goals, 
       sum(a.assists) as assists, 
@@ -7053,7 +7055,7 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
       and
       a.season_type = '${seasonType}'
       and a.team_name = '${teamShortName}')
-      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
+      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position, a.team_name
       order by points DESC`);
     }
     async getPlayerStats(teamShortName, seasonType) {
