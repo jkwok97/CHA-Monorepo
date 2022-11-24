@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UserTeamFacade } from '@cha/domain/core';
+import { LeagueDataFacade, UserTeamFacade } from '@cha/domain/core';
 import { StatGoalieLeaderDto, TeamDto } from '@cha/shared/entities';
 import { first, Observable } from 'rxjs';
 import { LeagueStatsGoaliesFacade } from '../../+state/stats-goalie-leader.facade';
@@ -20,11 +20,13 @@ export class StatsGoalieLeadersComponent implements OnInit {
   shotsFacedLeaders$: Observable<StatGoalieLeaderDto[]>;
   shutoutLeaders$: Observable<StatGoalieLeaderDto[]>;
   currentTeam$: Observable<TeamDto | undefined>;
+  minGames$: Observable<number>;
 
   backgroundColor!: string;
 
   constructor(
     private leagueStatsGoalieFacade: LeagueStatsGoaliesFacade,
+    private leagueDataFacade: LeagueDataFacade,
     private userTeamFacade: UserTeamFacade
   ) {
     this.isLoaded$ = this.leagueStatsGoalieFacade.isLoaded$;
@@ -35,6 +37,7 @@ export class StatsGoalieLeadersComponent implements OnInit {
     this.savePctLeaders$ = this.leagueStatsGoalieFacade.savePctLeaders$;
     this.shotsFacedLeaders$ = this.leagueStatsGoalieFacade.shotsFacedLeaders$;
     this.shutoutLeaders$ = this.leagueStatsGoalieFacade.shutoutsLeaders$;
+    this.minGames$ = this.leagueDataFacade.minGames$;
 
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
 

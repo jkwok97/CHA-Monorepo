@@ -65,6 +65,10 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectNextYearCapHit
   );
 
+  minGames$: Observable<number> = this.store.select(
+    LeagueDataSelectors.selectMinGames
+  );
+
   constructor(private store: Store<State>) {}
 
   getLeagueData() {

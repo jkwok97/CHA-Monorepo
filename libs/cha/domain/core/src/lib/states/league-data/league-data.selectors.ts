@@ -57,6 +57,11 @@ const selectIsOffSeason = createSelector(
   (data: LeagueDataDto) => data.offseason
 );
 
+const selectMinGames = createSelector(
+  selectLeagueData,
+  (data: LeagueDataDto) => data.min_games
+);
+
 const selectCurrentCapHit = createSelector(
   selectLeagueData,
   (data: LeagueDataDto) => data.current_cap
@@ -183,6 +188,7 @@ export const LeagueDataSelectors = {
   selectTeamNameById,
   selectUsersOptions,
   selectTeamsByDivision,
+  selectMinGames,
 };
 
 function getTeamMenuItem(teams: TeamDto[]) {

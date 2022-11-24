@@ -21,6 +21,8 @@ export class BladeChaLeaderCardComponent implements OnInit {
   @Input() leaders!: StatPlayerLeaderDto[] | null;
   @Input() goalieLeaders!: StatGoalieLeaderDto[] | null;
   @Input() type: any;
+  @Input() minGames!: number | null;
+
   @ViewChild('avatar') avatar!: Avatar;
 
   selected!: any;

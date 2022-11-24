@@ -4,6 +4,12 @@
       <div class="leader-card-highlighted-player-avatar">
         <div class="leader-card-highlighted-player-avatar-name">
           {{ type | titlecase }}
+          <span
+            class="text-xs text-center"
+            *ngIf="type === 'Save Pct' || type === 'Goals Against Avg'"
+          >
+            Min. {{ minGames }} GP
+          </span>
         </div>
 
         <img

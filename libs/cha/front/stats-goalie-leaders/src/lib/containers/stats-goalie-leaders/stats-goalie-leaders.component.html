@@ -20,6 +20,7 @@
               *ngIf="gaaLeaders.length > 0"
               [goalieLeaders]="gaaLeaders"
               [type]="'Goals Against Avg'"
+              [minGames]="minGames$ | async"
             ></blade-cha-leader-card>
           </ng-container>
           <ng-container *ngIf="savePctLeaders$ | async as savePctLeaders">
@@ -27,6 +28,7 @@
               *ngIf="savePctLeaders.length > 0"
               [goalieLeaders]="savePctLeaders"
               [type]="'Save Pct'"
+              [minGames]="minGames$ | async"
             ></blade-cha-leader-card>
           </ng-container>
         </div>
