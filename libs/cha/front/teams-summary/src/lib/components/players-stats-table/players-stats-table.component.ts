@@ -30,7 +30,7 @@ export class PlayersStatsTableComponent
   @ViewChild('filterInput') filterInput!: ElementRef;
 
   first = 0;
-  rows = 25;
+  rows = 30;
   totalRecords = 0;
   sortField = 'points';
   statsForTable!: any;
