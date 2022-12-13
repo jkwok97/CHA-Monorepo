@@ -17,10 +17,13 @@
         </div>
         <div>
           <div class="text-xl">{{ userTeam.city }} {{ userTeam.nickname }}</div>
-          <div class="text-md">
+          <div class="text-sm">
             <ng-container *ngIf="user$ | async as user">
               owner: {{ user.firstname }} {{ user.lastname }}
             </ng-container>
+          </div>
+          <div class="text-sm">
+            divison: {{ userTeam.divisions_id.divisionname }}
           </div>
         </div>
       </div>
