@@ -15,6 +15,7 @@ import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
 })
 export class DepthChartComponent implements OnInit {
   @Input() isOffSeason!: boolean;
+  @Input() type!: 'future' | 'current';
 
   userTeam$: Observable<TeamDto | undefined>;
   leftWingers$!: Observable<SalariesAndRatingsDto[]>;

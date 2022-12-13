@@ -74,6 +74,7 @@ import {
   DepthChartItemSidebarStatsNhlComponent,
   DepthChartItemSidebarStatsChaComponent,
 } from './components';
+import { TeamsSummaryFutureDepthComponent } from './containers/teams-summary-future-depth/teams-summary-future-depth.component';
 
 @NgModule({
   imports: [
@@ -132,6 +133,7 @@ import {
     DepthChartItemSidebarRatingsRateComponent,
     DepthChartItemSidebarStatsNhlComponent,
     DepthChartItemSidebarStatsChaComponent,
+    TeamsSummaryFutureDepthComponent,
   ],
   providers: [
     TeamsSummaryService,

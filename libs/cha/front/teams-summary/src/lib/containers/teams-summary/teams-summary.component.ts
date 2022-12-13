@@ -25,10 +25,11 @@ export class TeamsSummaryComponent implements OnDestroy {
   pages = [
     { page: 1, name: 'Depth Chart' },
     { page: 2, name: 'Salaries' },
-    { page: 3, name: 'Team Stats' },
-    { page: 4, name: 'Player Stats' },
-    { page: 5, name: 'Goalie Stats' },
-    { page: 6, name: 'Awards' },
+    { page: 3, name: 'Future Depth Chart' },
+    { page: 4, name: 'Team Stats' },
+    { page: 5, name: 'Player Stats' },
+    { page: 6, name: 'Goalie Stats' },
+    { page: 7, name: 'Awards' },
   ];
 
   selectedEntity = this.pages[0];

@@ -318,16 +318,24 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id),
+        nhlStats: await this.getNhlPlayerStatsByPlayerId(
+          item.player_id.nhl_id,
+          '20212022'
+        ), //TODO CHANGE EVERY YEAR
+        nextNhlStats: await this.getNhlPlayerStatsByPlayerId(
+          item.player_id.nhl_id,
+          '20222023'
+        ), //TODO CHANGE EVERY YEAR
       }))
     );
   }
 
   async getNhlPlayerStatsByPlayerId(
-    playerId: number
+    playerId: number,
+    season: string
   ): Promise<Observable<any>> {
     const stats = this.httpService.get(
-      `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022` //TODO CHANGE EVERY YEAR
+      `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`
     );
 
     const response = await firstValueFrom(stats);
