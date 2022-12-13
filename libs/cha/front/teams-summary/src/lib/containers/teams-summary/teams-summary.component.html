@@ -93,6 +93,9 @@
               [isMobile]="isMobile"
             ></cha-front-teams-summary-salaries>
           </ng-container>
+          <ng-container *ngIf="selectedEntity.name === 'Future Depth Chart'">
+            <cha-front-teams-summary-future-depth></cha-front-teams-summary-future-depth>
+          </ng-container>
           <ng-container *ngIf="selectedEntity.name === 'Team Stats'">
             <cha-front-teams-summary-team></cha-front-teams-summary-team>
           </ng-container>
