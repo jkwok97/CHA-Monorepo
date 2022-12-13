@@ -7437,6 +7437,7 @@ let ApiSalariesService = class ApiSalariesService {
             where: {
                 player_id: {
                     isgoalie: false,
+                    isactive: true,
                 },
                 season_type: 'Regular',
                 playing_year: season,
