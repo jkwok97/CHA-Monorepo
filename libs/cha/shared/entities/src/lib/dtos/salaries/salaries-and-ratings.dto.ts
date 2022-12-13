@@ -11,6 +11,7 @@ export interface SalariesAndRatingsDto {
   ratings: PlayerRatingDto | GoalieRatingDto;
   teamInfo: TeamDto;
   nhlStats: any;
+  nextNhlStats?: any;
 }
 
 export interface SalaryDto {

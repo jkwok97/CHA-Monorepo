@@ -18,6 +18,7 @@ export class DepthChartPositionComponent {
   @Input() title!: string;
   @Input() players!: SalariesAndRatingsDto[];
   @Input() isOffSeason!: boolean;
+  @Input() type!: 'future' | 'current';
   @ViewChild('avatar') avatar!: Avatar;
 
   display = false;

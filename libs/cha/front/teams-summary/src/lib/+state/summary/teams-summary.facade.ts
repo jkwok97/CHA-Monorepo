@@ -101,16 +101,36 @@ export class TeamsSummaryFacade {
   leftWingersByNhlStats$: Observable<SalariesAndRatingsDto[]> =
     this.store.select(TeamsSummarySelectors.selectLeftWingSalariesByNhlStats);
 
+  leftWingersByNextNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectLeftWingSalariesByFutureNhlStats
+    );
+
   centersByNhlStats$: Observable<SalariesAndRatingsDto[]> = this.store.select(
     TeamsSummarySelectors.selectCenterSalariesByNhlStats
   );
 
+  centersByNextNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectCenterSalariesByFutureNhlStats
+    );
+
   rightWingersByNhlStats$: Observable<SalariesAndRatingsDto[]> =
     this.store.select(TeamsSummarySelectors.selectRightWingSalariesByNhlStats);
+
+  rightWingersByNextNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectRightWingSalariesByFutureNhlStats
+    );
 
   leftDefensemanByNhlStats$: Observable<SalariesAndRatingsDto[]> =
     this.store.select(
       TeamsSummarySelectors.selectLeftDefenseSalariesByNhlStats
+    );
+
+  leftDefensemanByNextNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectLeftDefenseSalariesByFutureNhlStats
     );
 
   rightDefensemanByNhlStats$: Observable<SalariesAndRatingsDto[]> =
@@ -118,9 +138,19 @@ export class TeamsSummaryFacade {
       TeamsSummarySelectors.selectRightDefenseSalariesByNhlStats
     );
 
+  rightDefensemanByNextNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectRightDefenseSalariesByFutureNhlStats
+    );
+
   goaliesByNhlStats$: Observable<SalariesAndRatingsDto[]> = this.store.select(
     TeamsSummarySelectors.selectGoalieSalariesSortedByNhlStats
   );
+
+  goaliesByNextNhlStats$: Observable<SalariesAndRatingsDto[]> =
+    this.store.select(
+      TeamsSummarySelectors.selectGoalieSalariesSortedByFutureNhlStats
+    );
 
   currentPlayerCHAStats$: Observable<StatPlayerAllDto> = this.store.select(
     TeamsSummarySelectors.selectCurrentPlayerStat

@@ -36,12 +36,30 @@ export class DepthChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.leftWingers$ = this.teamsSummaryFacade.leftWingersByNhlStats$;
-    this.centers$ = this.teamsSummaryFacade.centersByNhlStats$;
-    this.rightWingers$ = this.teamsSummaryFacade.rightWingersByNhlStats$;
-    this.leftDefense$ = this.teamsSummaryFacade.leftDefensemanByNhlStats$;
-    this.rightDefense$ = this.teamsSummaryFacade.rightDefensemanByNhlStats$;
-    this.goalies$ = this.teamsSummaryFacade.goaliesByNhlStats$;
+    this.leftWingers$ =
+      this.type === 'current'
+        ? this.teamsSummaryFacade.leftWingersByNhlStats$
+        : this.teamsSummaryFacade.leftWingersByNextNhlStats$;
+    this.centers$ =
+      this.type === 'current'
+        ? this.teamsSummaryFacade.centersByNhlStats$
+        : this.teamsSummaryFacade.centersByNextNhlStats$;
+    this.rightWingers$ =
+      this.type === 'current'
+        ? this.teamsSummaryFacade.rightWingersByNhlStats$
+        : this.teamsSummaryFacade.rightWingersByNextNhlStats$;
+    this.leftDefense$ =
+      this.type === 'current'
+        ? this.teamsSummaryFacade.leftDefensemanByNhlStats$
+        : this.teamsSummaryFacade.leftDefensemanByNextNhlStats$;
+    this.rightDefense$ =
+      this.type === 'current'
+        ? this.teamsSummaryFacade.rightDefensemanByNhlStats$
+        : this.teamsSummaryFacade.rightDefensemanByNextNhlStats$;
+    this.goalies$ =
+      this.type === 'current'
+        ? this.teamsSummaryFacade.goaliesByNhlStats$
+        : this.teamsSummaryFacade.goaliesByNextNhlStats$;
 
     this.loadedSalaries$ = combineLatest([
       this.leftWingers$,

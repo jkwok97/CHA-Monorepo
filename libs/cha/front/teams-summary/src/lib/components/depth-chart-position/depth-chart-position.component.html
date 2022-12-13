@@ -42,13 +42,19 @@
                 <div class="text-xs" *ngIf="!player.player_id.isgoalie">
                   G:
                   {{
-                    isOffSeason ? player.nhlStats?.goals : player.ratings?.goals
+                    type === 'future'
+                      ? player.nextNhlStats?.goals
+                      : isOffSeason
+                      ? player.nhlStats?.goals
+                      : player.ratings?.goals
                   }}
                 </div>
                 <div class="text-xs" *ngIf="!player.player_id.isgoalie">
                   Pts:
                   {{
-                    isOffSeason
+                    type === 'future'
+                      ? player.nextNhlStats?.points
+                      : isOffSeason
                       ? player.nhlStats?.points
                       : player.ratings?.points
                   }}
@@ -56,19 +62,30 @@
                 <div class="text-xs" *ngIf="player.player_id.isgoalie">
                   Wins:
                   {{
-                    isOffSeason ? player.nhlStats?.wins : player.ratings?.wins
+                    type === 'future'
+                      ? player.nextNhlStats?.wins
+                      : isOffSeason
+                      ? player.nhlStats?.wins
+                      : player.ratings?.wins
                   }}
                 </div>
                 <div class="text-xs" *ngIf="player.player_id.isgoalie">
                   Sv%:
                   {{
-                    isOffSeason
+                    type === 'future'
+                      ? player.nextNhlStats?.savePercentage.toFixed(3)
+                      : isOffSeason
                       ? player.nhlStats?.savePercentage
                       : player.ratings?.save_pct
                   }}
                 </div>
                 <div class="text-xs">
-                  Salary: {{ player.salaries.season_2022 }}
+                  Salary:
+                  {{
+                    type === 'future'
+                      ? player.salaries.season_2023
+                      : player.salaries.season_2022
+                  }}
                 </div>
               </div>
             </div>

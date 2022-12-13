@@ -135,6 +135,23 @@ const selectCenterSalariesByNhlStats = createSelector(
       .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
 );
 
+const selectCenterSalariesByFutureNhlStats = createSelector(
+  selectPlayerSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter(
+        (playerSalaries: SalariesAndRatingsDto) =>
+          playerSalaries.player_id.primary_position === 'C'
+      )
+      .sort(
+        (a, b) =>
+          (b.nextNhlStats?.points != null
+            ? b.nextNhlStats?.points
+            : -Infinity) -
+          (a.nextNhlStats?.points != null ? a.nextNhlStats?.points : -Infinity)
+      )
+);
+
 const selectLeftWingSalariesByRating = createSelector(
   selectPlayerSalaries,
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
@@ -155,6 +172,23 @@ const selectLeftWingSalariesByNhlStats = createSelector(
           playerSalaries.player_id.primary_position === 'LW'
       )
       .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+);
+
+const selectLeftWingSalariesByFutureNhlStats = createSelector(
+  selectPlayerSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter(
+        (playerSalaries: SalariesAndRatingsDto) =>
+          playerSalaries.player_id.primary_position === 'LW'
+      )
+      .sort(
+        (a, b) =>
+          (b.nextNhlStats?.points != null
+            ? b.nextNhlStats?.points
+            : -Infinity) -
+          (a.nextNhlStats?.points != null ? a.nextNhlStats?.points : -Infinity)
+      )
 );
 
 const selectRightWingSalariesByRating = createSelector(
@@ -179,6 +213,23 @@ const selectRightWingSalariesByNhlStats = createSelector(
       .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
 );
 
+const selectRightWingSalariesByFutureNhlStats = createSelector(
+  selectPlayerSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter(
+        (playerSalaries: SalariesAndRatingsDto) =>
+          playerSalaries.player_id.primary_position === 'RW'
+      )
+      .sort(
+        (a, b) =>
+          (b.nextNhlStats?.points != null
+            ? b.nextNhlStats?.points
+            : -Infinity) -
+          (a.nextNhlStats?.points != null ? a.nextNhlStats?.points : -Infinity)
+      )
+);
+
 const selectLeftDefenseSalariesByRating = createSelector(
   selectPlayerSalaries,
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
@@ -201,6 +252,23 @@ const selectLeftDefenseSalariesByNhlStats = createSelector(
       .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
 );
 
+const selectLeftDefenseSalariesByFutureNhlStats = createSelector(
+  selectPlayerSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter(
+        (playerSalaries: SalariesAndRatingsDto) =>
+          playerSalaries.player_id.primary_position === 'LD'
+      )
+      .sort(
+        (a, b) =>
+          (b.nextNhlStats?.points != null
+            ? b.nextNhlStats?.points
+            : -Infinity) -
+          (a.nextNhlStats?.points != null ? a.nextNhlStats?.points : -Infinity)
+      )
+);
+
 const selectRightDefenseSalariesByRating = createSelector(
   selectPlayerSalaries,
   (playerSalariesRating: SalariesAndRatingsDto[]) =>
@@ -221,6 +289,23 @@ const selectRightDefenseSalariesByNhlStats = createSelector(
           playerSalaries.player_id.primary_position === 'RD'
       )
       .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+);
+
+const selectRightDefenseSalariesByFutureNhlStats = createSelector(
+  selectPlayerSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter(
+        (playerSalaries: SalariesAndRatingsDto) =>
+          playerSalaries.player_id.primary_position === 'RD'
+      )
+      .sort(
+        (a, b) =>
+          (b.nextNhlStats?.points != null
+            ? b.nextNhlStats?.points
+            : -Infinity) -
+          (a.nextNhlStats?.points != null ? a.nextNhlStats?.points : -Infinity)
+      )
 );
 
 const selectGoaliesSalaryLoaded = createSelector(
@@ -272,6 +357,21 @@ const selectGoalieSalariesSortedByNhlStats = createSelector(
           playerSalaries.player_id.primary_position === 'G'
       )
       .sort((a, b) => Number(b.nhlStats?.wins) - Number(a.nhlStats?.wins))
+);
+
+const selectGoalieSalariesSortedByFutureNhlStats = createSelector(
+  selectGoalieSalaries,
+  (playerSalariesRating: SalariesAndRatingsDto[]) =>
+    playerSalariesRating
+      .filter(
+        (playerSalaries: SalariesAndRatingsDto) =>
+          playerSalaries.player_id.primary_position === 'G'
+      )
+      .sort(
+        (a, b) =>
+          (b.nextNhlStats?.wins != null ? b.nextNhlStats?.wins : -Infinity) -
+          (a.nextNhlStats?.wins != null ? a.nextNhlStats?.wins : -Infinity)
+      )
 );
 
 const selectTotal = createSelector(
@@ -366,6 +466,12 @@ export const TeamsSummarySelectors = {
   selectForwardSalaries,
   selectDefenseSalaries,
   selectGoalieSalariesFiltered,
+  selectCenterSalariesByFutureNhlStats,
+  selectLeftWingSalariesByFutureNhlStats,
+  selectRightWingSalariesByFutureNhlStats,
+  selectLeftDefenseSalariesByFutureNhlStats,
+  selectRightDefenseSalariesByFutureNhlStats,
+  selectGoalieSalariesSortedByFutureNhlStats
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
