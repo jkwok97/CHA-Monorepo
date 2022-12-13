@@ -7619,12 +7619,11 @@ let ApiSalariesService = class ApiSalariesService {
         }
     }
     async setNHLStats(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id) }))));
+        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20212022'), nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20222023') }))));
     }
-    async getNhlPlayerStatsByPlayerId(playerId) {
+    async getNhlPlayerStatsByPlayerId(playerId, season) {
         var _a;
-        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=20212022` //TODO CHANGE EVERY YEAR
-        );
+        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
         return (_a = response.data.stats[0].splits[0]) === null || _a === void 0 ? void 0 : _a.stat;
     }
