@@ -210,7 +210,11 @@ const selectRightWingSalariesByNhlStats = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'RW'
       )
-      .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+      .sort(
+        (a, b) =>
+          (b.nhlStats?.points != null ? b.nhlStats?.points : -Infinity) -
+          (a.nhlStats?.points != null ? a.nhlStats?.points : -Infinity)
+      )
 );
 
 const selectRightWingSalariesByFutureNhlStats = createSelector(
@@ -471,7 +475,7 @@ export const TeamsSummarySelectors = {
   selectRightWingSalariesByFutureNhlStats,
   selectLeftDefenseSalariesByFutureNhlStats,
   selectRightDefenseSalariesByFutureNhlStats,
-  selectGoalieSalariesSortedByFutureNhlStats
+  selectGoalieSalariesSortedByFutureNhlStats,
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
