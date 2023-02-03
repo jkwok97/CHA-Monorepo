@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { LeagueDataFacade, DisplayFacade } from '@cha/domain/core';
 import { statTeamDto, TeamDto } from '@cha/shared/entities';
 import { Observable, first } from 'rxjs';
@@ -26,7 +27,8 @@ export class StatsTeamLeadersTableComponent {
 
   constructor(
     private leagueDataFacade: LeagueDataFacade,
-    private displayFacade: DisplayFacade
+    private displayFacade: DisplayFacade,
+    private router: Router
   ) {
     this.teams$ = this.leagueDataFacade.leagueTeams$;
 
@@ -69,5 +71,9 @@ export class StatsTeamLeadersTableComponent {
       team: `${item.team_id.nickname}`,
       teamImg: this.getString(item.team_id.teamlogo),
     }));
+  }
+
+  onClick(team: statTeamDto) {
+    this.router.navigate([`/league/teams/${team.team_id.id}`]);
   }
 }

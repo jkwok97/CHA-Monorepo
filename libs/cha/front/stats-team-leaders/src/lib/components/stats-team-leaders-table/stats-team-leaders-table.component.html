@@ -20,7 +20,7 @@
     let-columns="columns"
     let-rowIndex="rowIndex"
   >
-    <tr>
+    <tr class="cursor-pointer" (click)="onClick(data)">
       <td *ngFor="let column of tableColumns">
         <span class="p-column-title">{{ column.header }}</span>
         <div class="table-body-cell">
