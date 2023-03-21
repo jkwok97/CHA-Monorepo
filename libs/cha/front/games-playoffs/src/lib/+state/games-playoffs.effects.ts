@@ -22,7 +22,7 @@ export class GamesPlayoffsEffects {
         this.gamesPlayoffsService
           .getPlayoffStandings(
             // data.offseason ? data.prev_year : data.current_year, // TODO SWITCH THIS
-            data.prev_year,
+            data.current_year,
             'Regular'
           )
           .pipe(
