@@ -3,7 +3,10 @@ import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[LEAGUE STATS GOALIES]';
 
-const getLeaders = createAction(`${NAMESPACE} Get League Leaders`);
+const getLeaders = createAction(
+  `${NAMESPACE} Get League Leaders`,
+  props<{ seasonType: string }>()
+);
 
 const getLeadersSuccess = createAction(
   `${NAMESPACE} Get League Leaders Success`,

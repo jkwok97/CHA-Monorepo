@@ -23,6 +23,10 @@ export class StatsGoalieLeadersComponent implements OnInit {
   minGames$: Observable<number>;
 
   backgroundColor!: string;
+  selectSeasonOptions = [
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Playoffs', value: 'Playoffs', disabled: false },
+  ];
 
   constructor(
     private leagueStatsGoalieFacade: LeagueStatsGoaliesFacade,
@@ -51,6 +55,10 @@ export class StatsGoalieLeadersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.leagueStatsGoalieFacade.getLeagueTeamStats();
+    this.leagueStatsGoalieFacade.getLeagueTeamStats('Regular');
+  }
+
+  onSeasonOptionChanged(seasonType: string) {
+    this.leagueStatsGoalieFacade.getLeagueTeamStats(seasonType);
   }
 }

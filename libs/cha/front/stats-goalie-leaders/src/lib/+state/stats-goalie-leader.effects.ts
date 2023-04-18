@@ -22,7 +22,7 @@ export class LeagueStatsGoaliesEffects {
         this.goaliesStatsService
           .getAllGoalieLeaders(
             data.current_year,
-            data.current_season_type,
+            action.seasonType,
             data.min_games.toString()
           )
           .pipe(

@@ -45,7 +45,7 @@ export class LeagueStatsGoaliesFacade {
 
   constructor(private store: Store<State>) {}
 
-  getLeagueTeamStats() {
-    this.store.dispatch(LeagueStatsGoaliesActions.getLeaders());
+  getLeagueTeamStats(seasonType: string) {
+    this.store.dispatch(LeagueStatsGoaliesActions.getLeaders({ seasonType }));
   }
 }

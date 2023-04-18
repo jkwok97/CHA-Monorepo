@@ -17,6 +17,7 @@ import { ChaFrontStatsGoalieLeadersRoutingModule } from './cha-front-stats-goali
 
 import { StatsGoalieLeadersComponent } from './containers';
 import { StatsGoalieLeadersService } from './services';
+import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { StatsGoalieLeadersService } from './services';
     ProgressBarModule,
     BladeAngularUiLayoutModule,
     BladeChaLeaderCardComponent,
+    BladeButtonSelectComponent,
     StoreModule.forFeature('league-stats-goalie', reducer),
     EffectsModule.forFeature([LeagueStatsGoaliesEffects]),
   ],
