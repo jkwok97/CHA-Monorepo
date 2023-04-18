@@ -8,6 +8,12 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
+    <blade-button-select
+      class="flex justify-content-center"
+      [options]="selectSeasonOptions"
+      (optionChanged)="onSeasonOptionChanged($event)"
+    ></blade-button-select>
+
     <ng-container *ngIf="isLoaded$ | async">
       <div class="league-stats-players-section">
         <div class="league-stats-players-section-body">

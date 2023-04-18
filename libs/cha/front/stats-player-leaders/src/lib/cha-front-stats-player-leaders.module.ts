@@ -17,6 +17,7 @@ import { StatsPlayersLeadersService } from './services';
 import { ChaFrontStatsPlayerPleadersRoutingModule } from './cha-front-stats-player-leaders-routing.module';
 
 import { StatsPlayersLeadersComponent } from './containers';
+import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { StatsPlayersLeadersComponent } from './containers';
     ProgressBarModule,
     BladeAngularUiLayoutModule,
     BladeChaLeaderCardComponent,
+    BladeButtonSelectComponent,
     StoreModule.forFeature('league-stats-player', reducer),
     EffectsModule.forFeature([LeagueStatsPlayersEffects]),
   ],

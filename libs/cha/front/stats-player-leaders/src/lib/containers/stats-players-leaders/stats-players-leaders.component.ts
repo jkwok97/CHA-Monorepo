@@ -32,6 +32,10 @@ export class StatsPlayersLeadersComponent implements OnInit {
   currentTeam$: Observable<TeamDto | undefined>;
 
   backgroundColor!: string;
+  selectSeasonOptions = [
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Playoffs', value: 'Playoffs', disabled: false },
+  ];
 
   constructor(
     private leagueStatsPlayersFacade: LeagueStatsPlayersFacade,
@@ -70,6 +74,10 @@ export class StatsPlayersLeadersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.leagueStatsPlayersFacade.getLeagueTeamStats();
+    this.leagueStatsPlayersFacade.getLeagueTeamStats('Regular');
+  }
+
+  onSeasonOptionChanged(seasonType: string) {
+    this.leagueStatsPlayersFacade.getLeagueTeamStats(seasonType);
   }
 }
