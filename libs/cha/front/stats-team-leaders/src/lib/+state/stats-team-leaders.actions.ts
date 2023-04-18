@@ -3,7 +3,10 @@ import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[LEAGUE STATS TEAM]';
 
-const getLeagueTeamStats = createAction(`${NAMESPACE} Get League Team Stats`);
+const getLeagueTeamStats = createAction(
+  `${NAMESPACE} Get League Team Stats`,
+  props<{ seasonType: string }>()
+);
 
 const getLeagueTeamStatsSuccess = createAction(
   `${NAMESPACE} Get League Team Stats Success`,

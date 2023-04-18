@@ -20,10 +20,7 @@ export class LeagueStatsTeamEffects {
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
         this.statsTeamLeadersService
-          .getTeamStatsBySeasonByType(
-            data.current_year,
-            data.current_season_type
-          )
+          .getTeamStatsBySeasonByType(data.current_year, action.seasonType)
           .pipe(
             map((leagueTeamStats: statTeamDto[]) =>
               LeagueStatsTeamActions.getLeagueTeamStatsSuccess({

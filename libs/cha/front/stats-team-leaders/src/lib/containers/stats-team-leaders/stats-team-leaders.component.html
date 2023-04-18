@@ -6,8 +6,15 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
+    <blade-card>
+      <blade-card-header>
+        <blade-button-select
+          class="flex justify-content-center"
+          [options]="selectSeasonOptions"
+          (optionChanged)="onSeasonOptionChanged($event)"
+        ></blade-button-select>
+      </blade-card-header>
+      <blade-card-body *ngIf="isLoaded$ | async">
         <div class="league-stats-team-container">
           <cha-front-stats-team-leaders-standings></cha-front-stats-team-leaders-standings>
           <cha-front-stats-team-leaders-streak></cha-front-stats-team-leaders-streak>

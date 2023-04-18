@@ -12,12 +12,21 @@ export class StatsTeamLeadersComponent implements OnInit {
   isLoading$: Observable<boolean>;
   isLoaded$: Observable<boolean>;
 
+  selectSeasonOptions = [
+    { label: 'Regular', value: 'Regular' },
+    { label: 'Playoffs', value: 'Playoffs', disabled: false },
+  ];
+
   constructor(private leagueStatsTeamFacade: LeagueStatsTeamFacade) {
     this.isLoading$ = this.leagueStatsTeamFacade.isLoading$;
     this.isLoaded$ = this.leagueStatsTeamFacade.isLoaded$;
   }
 
   ngOnInit(): void {
-    this.leagueStatsTeamFacade.getLeagueTeamStats();
+    this.leagueStatsTeamFacade.getLeagueTeamStats('Regular');
+  }
+
+  onSeasonOptionChanged(seasonType: string) {
+    this.leagueStatsTeamFacade.getLeagueTeamStats(seasonType);
   }
 }
