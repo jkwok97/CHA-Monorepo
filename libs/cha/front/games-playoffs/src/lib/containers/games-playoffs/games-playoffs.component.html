@@ -16,51 +16,57 @@
 
             <div class="conference-container">
               <div class="round-container">
-                <!-- SAC / MEM -->
+                <!-- MEM / CHY -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
                   [visTeam]="westernTeams[7]"
-                 
+                  [seriesScore]="'2-0'"
+                  [seriesTied]="false"
+                  [winningTeam]="westernTeams[0]"
+                  [losingTeam]="westernTeams[7]"
                 ></cha-front-games-playoffs-matchup-card>
 
-                <!-- OAK / KEL -->
+                <!-- LSB / SAC -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[3]"
                   [visTeam]="westernTeams[4]"
-                 
+                  [seriesScore]="'1-1'"
+                  [seriesTied]="true"
+                  [winningTeam]="westernTeams[3]"
+                  [losingTeam]="westernTeams[4]"
                 ></cha-front-games-playoffs-matchup-card>
 
-                <!-- WIC / VIC -->
+                <!-- SFC / WIC -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[2]"
                   [visTeam]="westernTeams[5]"
-                  
+                  [seriesScore]="'2-0'"
+                  [seriesTied]="false"
+                  [winningTeam]="westernTeams[2]"
+                  [losingTeam]="westernTeams[5]"
                 ></cha-front-games-playoffs-matchup-card>
 
-                <!-- CHY / SFC -->
+                <!-- KEL / OAK -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[1]"
                   [visTeam]="westernTeams[6]"
-                
+                  [seriesScore]="'2-0'"
+                  [seriesTied]="false"
+                  [winningTeam]="westernTeams[1]"
+                  [losingTeam]="westernTeams[6]"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
                 <!-- KEL / SAC -->
-                <cha-front-games-playoffs-matchup-card
-                  
-                ></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
                 <!-- WIT / CHY -->
-                <cha-front-games-playoffs-matchup-card
-                  
-                ></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
                 <!-- KEL / CHY -->
-                <cha-front-games-playoffs-matchup-card
-                  
-                ></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
               </div>
             </div>
           </div>
@@ -71,15 +77,11 @@
             <div class="playoff-tree-games-final-matchup">
               <img src="assets/images/libertycup.jpg" />
 
-              <cha-front-games-playoffs-matchup-final-card
-                
-              ></cha-front-games-playoffs-matchup-final-card>
+              <cha-front-games-playoffs-matchup-final-card></cha-front-games-playoffs-matchup-final-card>
             </div>
 
             <div>
-              <cha-front-games-playoffs-final-champion-card
-                
-              ></cha-front-games-playoffs-final-champion-card>
+              <cha-front-games-playoffs-final-champion-card></cha-front-games-playoffs-final-champion-card>
 
               <h2>CHAMPION</h2>
             </div>
@@ -91,51 +93,55 @@
             <div class="conference-container">
               <div class="round-container">
                 <!-- PEO / MSG -->
-                <cha-front-games-playoffs-matchup-card
-                  
-                  
-                ></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+              </div>
+
+              <div class="round-container">
+                <!-- AUG / MSG -->
+                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <!--  CIN / PEO -->
+                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
                 <!-- AUG / MSG -->
                 <cha-front-games-playoffs-matchup-card
-                  
-                  
-                ></cha-front-games-playoffs-matchup-card>
-                <!--  CIN / PEO -->
-                <cha-front-games-playoffs-matchup-card
-                  
-                ></cha-front-games-playoffs-matchup-card>
-              </div>
-
-              <div class="round-container">
-                <!-- VIKINGS / NORTH STARS -->
-                <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
                   [visTeam]="easternTeams[7]"
-                  
+                  [seriesScore]="'2-0'"
+                  [seriesTied]="false"
+                  [winningTeam]="easternTeams[0]"
+                  [losingTeam]="easternTeams[7]"
                 ></cha-front-games-playoffs-matchup-card>
 
-                <!-- MIL / AUG -->
+                <!-- MIL / CIN -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[3]"
                   [visTeam]="easternTeams[4]"
-                 
+                  [seriesScore]="'2-0'"
+                  [seriesTied]="false"
+                  [winningTeam]="easternTeams[3]"
+                  [losingTeam]="easternTeams[4]"
                 ></cha-front-games-playoffs-matchup-card>
 
-                <!-- ATL / CIN -->
+                <!-- STA / IND -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[2]"
                   [visTeam]="easternTeams[5]"
-                  
+                  [seriesScore]="'1-1'"
+                  [seriesTied]="true"
+                  [winningTeam]="easternTeams[5]"
+                  [losingTeam]="easternTeams[2]"
                 ></cha-front-games-playoffs-matchup-card>
 
-                <!-- PEO / IND -->
+                <!-- GRE / ATL -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
                   [visTeam]="easternTeams[6]"
-                  
+                  [seriesScore]="'2-0'"
+                  [seriesTied]="false"
+                  [winningTeam]="easternTeams[1]"
+                  [losingTeam]="easternTeams[6]"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
             </div>
