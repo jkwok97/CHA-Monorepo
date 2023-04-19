@@ -1,25 +1,61 @@
-<div class="playoff-matchup-card">
-  <cha-front-games-playoffs-team-avatar
-    [team]="visTeam"
-  ></cha-front-games-playoffs-team-avatar>
-
-  <div *ngIf="visTeam && homeTeam && !(winningTeam && losingTeam)">
-    {{ visTeam.team_id.shortname }} @ {{ homeTeam.team_id.shortname }}
+<div class="flex column-gap-2 align-items-center">
+  <div *ngIf="isEast">
+    <button
+      pButton
+      type="button"
+      icon="pi pi-file"
+      class="p-button-rounded p-button-primary"
+      (click)="onClick()"
+    ></button>
   </div>
 
-  <div *ngIf="winningTeam && losingTeam && !seriesTied && !seriesDone">
-    {{ winningTeam.team_id.shortname }} leads {{ seriesScore }}
+  <div class="playoff-matchup-card">
+    <cha-front-games-playoffs-team-avatar
+      [team]="visTeam"
+    ></cha-front-games-playoffs-team-avatar>
+
+    <div *ngIf="visTeam && homeTeam && !(winningTeam && losingTeam)">
+      {{ visTeam.team_id.shortname }} @ {{ homeTeam.team_id.shortname }}
+    </div>
+
+    <div *ngIf="winningTeam && losingTeam && !seriesTied && !seriesDone">
+      {{ winningTeam.team_id.shortname }} leads {{ seriesScore }}
+    </div>
+
+    <div *ngIf="seriesDone">
+      {{ winningTeam.team_id.shortname }} wins {{ seriesScore }}
+    </div>
+
+    <div *ngIf="!visTeam && !homeTeam && !winningTeam && !losingTeam">vs.</div>
+
+    <div *ngIf="seriesTied">Tied {{ seriesScore }}</div>
+
+    <cha-front-games-playoffs-team-avatar
+      [team]="homeTeam"
+    ></cha-front-games-playoffs-team-avatar>
   </div>
 
-  <div *ngIf="seriesDone">
-    {{ winningTeam.team_id.shortname }} wins {{ seriesScore }}
+  <div *ngIf="isWest">
+    <button
+      pButton
+      type="button"
+      icon="pi pi-file"
+      class="p-button-rounded p-button-primary"
+      (click)="onClick()"
+    ></button>
   </div>
-
-  <div *ngIf="!visTeam && !homeTeam && !winningTeam && !losingTeam">vs.</div>
-
-  <div *ngIf="seriesTied">Tied {{ seriesScore }}</div>
-
-  <cha-front-games-playoffs-team-avatar
-    [team]="homeTeam"
-  ></cha-front-games-playoffs-team-avatar>
 </div>
+
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [dismissible]="false"
+  [showCloseIcon]="false"
+  (onHide)="onClose()"
+  *ngIf="display"
+>
+  <cha-front-games-playoffs-box-score
+    [isMobile]="isMobile"
+    (closeSidebar)="onClose()"
+  ></cha-front-games-playoffs-box-score>
+</p-sidebar>

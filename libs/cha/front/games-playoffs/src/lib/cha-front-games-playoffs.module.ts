@@ -5,6 +5,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
@@ -22,6 +24,7 @@ import {
   GamesPlayoffsMatchupFinalCardComponent,
   GamesPlayoffsFinalChampionCardComponent,
   GamesPlayoffsTeamAvatarComponent,
+  GamesPlayoffsBoxScoreComponent,
 } from './components';
 
 @NgModule({
@@ -30,6 +33,8 @@ import {
     ChaFrontGamesPlayoffsRoutingModule,
     ProgressBarModule,
     BladeAngularUiLayoutModule,
+    ButtonModule,
+    SidebarModule,
     StoreModule.forFeature('games-playoffs', reducer),
     EffectsModule.forFeature([GamesPlayoffsEffects]),
   ],
@@ -39,6 +44,7 @@ import {
     GamesPlayoffsMatchupFinalCardComponent,
     GamesPlayoffsFinalChampionCardComponent,
     GamesPlayoffsTeamAvatarComponent,
+    GamesPlayoffsBoxScoreComponent,
   ],
   providers: [GamesPlayoffsService, GamesPlayoffsFacade, GamesPlayoffsEffects],
 })
