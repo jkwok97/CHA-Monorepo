@@ -36,4 +36,21 @@ export class GamesPlayoffsEffects {
       )
     )
   );
+
+  getBoxScore$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GamesPlayoffsActions.getBoxScore),
+      withLatestFrom(this.leagueDataFacade.leagueData$),
+      exhaustMap(([action, data]) =>
+        this.gamesPlayoffsService
+          .getBoxScore(action.gameId, data.current_year)
+          .pipe(
+            map((game: File) =>
+            GamesPlayoffsActions.getBoxScoreSuccess({ game })
+            ),
+            catchError(() => of(GamesPlayoffsActions.getBoxScoreError()))
+          )
+      )
+    )
+  );
 }

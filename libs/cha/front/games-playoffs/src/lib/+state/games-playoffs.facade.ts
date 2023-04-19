@@ -31,9 +31,25 @@ export class GamesPlayoffsFacade {
     GamesPlayoffsSelectors.selectEastTeams
   );
 
+  boxScore$: Observable<File | null> = this.store.select(
+    GamesPlayoffsSelectors.selectBoxScore
+  );
+
+  gameLoading$: Observable<boolean> = this.store.select(
+    GamesPlayoffsSelectors.selectGameLoading
+  );
+
   constructor(private store: Store<State>) {}
 
   getPlayoffStandings() {
     this.store.dispatch(GamesPlayoffsActions.getStandings());
+  }
+
+  getBoxScore(gameId: string) {
+    this.store.dispatch(GamesPlayoffsActions.getBoxScore({ gameId }));
+  }
+
+  resetBoxScore() {
+    this.store.dispatch(GamesPlayoffsActions.resetBoxScore());
   }
 }

@@ -7,7 +7,8 @@ import {
   Output,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { GamesPlayoffsFacade } from '../../+state/games-playoffs.facade';
 
 @UntilDestroy()
 @Component({
@@ -24,19 +25,18 @@ export class GamesPlayoffsBoxScoreComponent {
 
   content!: File | null;
 
-  constructor() {
-    // this.isLoading$ = this.gamesCurrentFacade.gameLoading$;
-    this.isLoading$ = of(false);
+  constructor(private gamesPlayoffsFacade: GamesPlayoffsFacade) {
+    this.isLoading$ = this.gamesPlayoffsFacade.gameLoading$;
   }
 
   ngOnInit(): void {
-    // this.gamesCurrentFacade.boxScore$
-    //   .pipe(untilDestroyed(this))
-    //   .subscribe((game: File | null) => {
-    //     if (game) {
-    //       this.content = game;
-    //     }
-    //   });
+    this.gamesPlayoffsFacade.boxScore$
+      .pipe(untilDestroyed(this))
+      .subscribe((game: File | null) => {
+        if (game) {
+          this.content = game;
+        }
+      });
   }
 
   onClose() {

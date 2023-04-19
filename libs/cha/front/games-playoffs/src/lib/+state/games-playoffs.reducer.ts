@@ -10,6 +10,8 @@ export interface State {
   playoffStandings: PlayoffStandingsModel;
   loading: boolean;
   loaded: boolean;
+  game: File | null;
+  gameLoading: boolean;
 }
 
 const initialState: State = {
@@ -19,6 +21,8 @@ const initialState: State = {
   },
   loading: false,
   loaded: false,
+  game: null,
+  gameLoading: false,
 };
 
 const r = createReducer(
@@ -37,6 +41,28 @@ const r = createReducer(
     loaded: true,
   })),
 
+  on(GamesPlayoffsActions.getBoxScore, (state, action) => ({
+    ...state,
+    gameLoading: true,
+  })),
+
+  on(GamesPlayoffsActions.getBoxScoreSuccess, (state, action) => ({
+    ...state,
+    game: action.game,
+    gameLoading: false,
+  })),
+
+  on(GamesPlayoffsActions.getBoxScoreError, (state, action) => ({
+    ...state,
+    game: null,
+    gameLoading: false,
+  })),
+
+  on(GamesPlayoffsActions.resetBoxScore, (state, action) => ({
+    ...state,
+    game: null,
+  })),
+
   on(GamesPlayoffsActions.error, (state) => initialState)
 );
 
@@ -49,6 +75,10 @@ export const getPlayoffStandings = (state: State) => state.playoffStandings;
 export const getLoading = (state: State) => state.loading;
 
 export const getLoaded = (state: State) => state.loaded;
+
+export const getGameLoading = (state: State) => state.gameLoading;
+
+export const getGame = (state: State) => state.game;
 
 function separateConferences(standings: StatTeamPlayoffsDto[]) {
   const eastTeams = standings.filter(

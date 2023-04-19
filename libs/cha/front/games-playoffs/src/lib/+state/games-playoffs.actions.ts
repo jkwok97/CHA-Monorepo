@@ -12,8 +12,26 @@ const getStandingsSuccess = createAction(
 
 const error = createAction(`${NAMESPACE} Error`);
 
+const getBoxScore = createAction(
+  `${NAMESPACE} Get Box Score`,
+  props<{ gameId: string }>()
+);
+
+const getBoxScoreSuccess = createAction(
+  `${NAMESPACE} Get Box Score Success`,
+  props<{ game: File | null }>()
+);
+
+const resetBoxScore = createAction(`${NAMESPACE} Reset Box Score`);
+
+const getBoxScoreError = createAction(`${NAMESPACE} Get Box Score Error`);
+
 export const GamesPlayoffsActions = {
   getStandings,
   getStandingsSuccess,
   error,
+  getBoxScore,
+  getBoxScoreSuccess,
+  resetBoxScore,
+  getBoxScoreError
 };

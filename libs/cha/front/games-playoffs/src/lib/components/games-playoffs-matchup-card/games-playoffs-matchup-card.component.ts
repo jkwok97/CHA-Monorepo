@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { first } from 'rxjs';
 import { DisplayFacade } from '@cha/domain/core';
 import { StatTeamPlayoffsDto } from '@cha/shared/entities';
+import { GamesPlayoffsFacade } from '../../+state/games-playoffs.facade';
 
 @Component({
   selector: 'cha-front-games-playoffs-matchup-card',
@@ -19,12 +20,13 @@ export class GamesPlayoffsMatchupCardComponent {
   @Input() seriesTied!: boolean;
   @Input() isWest!: boolean;
   @Input() isEast!: boolean;
+  @Input() gameFile!: string;
 
   display = false;
   isMobile = false;
 
   constructor(
-    // private gamesCurrentFacade: GamesCurrentFacade,
+    private gamesPlayoffsFacade: GamesPlayoffsFacade,
     private displayFacade: DisplayFacade
   ) {
     this.displayFacade.isMobile$
@@ -35,13 +37,13 @@ export class GamesPlayoffsMatchupCardComponent {
   }
 
   onClick() {
-    // this.gamesCurrentFacade.getBoxScore(game.id);
+    this.gamesPlayoffsFacade.getBoxScore(this.gameFile);
     this.display = true;
     console.log('clicked');
   }
 
   onClose() {
-    // this.gamesCurrentFacade.resetBoxScore();
+    this.gamesPlayoffsFacade.resetBoxScore();
     this.display = false;
   }
 }

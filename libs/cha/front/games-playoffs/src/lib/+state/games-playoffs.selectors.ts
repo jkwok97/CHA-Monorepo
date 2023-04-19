@@ -43,10 +43,22 @@ const selectEastTeams = createSelector(
     }))
 );
 
+const selectBoxScore = createSelector(
+  selectState,
+  GamesPlayoffsReducer.getGame
+);
+
+const selectGameLoading = createSelector(
+  selectState,
+  GamesPlayoffsReducer.getGameLoading
+);
+
 export const GamesPlayoffsSelectors = {
   selectLoaded,
   selectLoading,
   selectPlayoffStandings,
   selectWestTeams,
   selectEastTeams,
+  selectBoxScore,
+  selectGameLoading,
 };
