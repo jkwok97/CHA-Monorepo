@@ -20,8 +20,9 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
                   [visTeam]="westernTeams[7]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
                   [seriesTied]="false"
+                  [seriesDone]="true"
                   [winningTeam]="westernTeams[0]"
                   [losingTeam]="westernTeams[7]"
                   [isWest]="true"
@@ -32,8 +33,9 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[3]"
                   [visTeam]="westernTeams[4]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-2'"
                   [seriesTied]="false"
+                  [seriesDone]="true"
                   [winningTeam]="westernTeams[4]"
                   [losingTeam]="westernTeams[3]"
                   [isWest]="true"
@@ -69,7 +71,10 @@
 
               <div class="round-container">
                 <!-- KEL / SAC -->
-                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card
+                  [visTeam]="westernTeams[4]"
+                  [homeTeam]="westernTeams[0]"
+                ></cha-front-games-playoffs-matchup-card>
                 <!-- WIT / CHY -->
                 <cha-front-games-playoffs-matchup-card
                   [visTeam]="westernTeams[2]"
@@ -113,10 +118,12 @@
                 <!-- AUG / MSG -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
+                  [visTeam]="easternTeams[3]"
                 ></cha-front-games-playoffs-matchup-card>
                 <!--  CIN / PEO -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
+                  [visTeam]="easternTeams[2]"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
 
@@ -138,8 +145,9 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[3]"
                   [visTeam]="easternTeams[4]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-3'"
                   [seriesTied]="false"
+                  [seriesDone]="true"
                   [winningTeam]="easternTeams[3]"
                   [losingTeam]="easternTeams[4]"
                   [isEast]="true"
@@ -150,10 +158,11 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[2]"
                   [visTeam]="easternTeams[5]"
-                  [seriesScore]="'2-2'"
+                  [seriesScore]="'4-2'"
                   [seriesTied]="true"
-                  [winningTeam]="easternTeams[5]"
-                  [losingTeam]="easternTeams[2]"
+                  [seriesDone]="true"
+                  [winningTeam]="easternTeams[2]"
+                  [losingTeam]="easternTeams[5]"
                   [isEast]="true"
                   [gameFile]="'2023-R1-E3'"
                 ></cha-front-games-playoffs-matchup-card>
