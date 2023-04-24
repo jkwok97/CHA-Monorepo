@@ -45,14 +45,14 @@ export class StatsPlayerAllComponent implements OnInit {
     this.leagueDataFacade.isOffSeason$
       .pipe(first())
       .subscribe((isOffSeason: boolean) => {
-        // this.selectSeasonOptions = [
-        //   { label: 'Regular', value: 'Regular' },
-        //   { label: 'Playoffs', value: 'Playoffs', disabled: !isOffSeason },
-        // ];
         this.selectSeasonOptions = [
           { label: 'Regular', value: 'Regular' },
-          { label: 'Playoffs', value: 'Playoffs', disabled: true },
+          { label: 'Playoffs', value: 'Playoffs', disabled: isOffSeason },
         ];
+        // this.selectSeasonOptions = [
+        //   { label: 'Regular', value: 'Regular' },
+        //   { label: 'Playoffs', value: 'Playoffs', disabled: true },
+        // ];
       });
   }
 
