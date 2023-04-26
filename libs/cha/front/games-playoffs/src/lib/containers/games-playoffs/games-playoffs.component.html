@@ -74,7 +74,7 @@
                 <cha-front-games-playoffs-matchup-card
                   [visTeam]="westernTeams[4]"
                   [homeTeam]="westernTeams[0]"
-                  [seriesScore]="'2-0'"
+                  [seriesScore]="'3-1'"
                   [seriesTied]="false"
                   [seriesDone]="false"
                   [winningTeam]="westernTeams[4]"
@@ -86,11 +86,11 @@
                 <cha-front-games-playoffs-matchup-card
                   [visTeam]="westernTeams[2]"
                   [homeTeam]="westernTeams[1]"
-                  [seriesScore]="'1-1'"
-                  [seriesTied]="true"
+                  [seriesScore]="'3-1'"
+                  [seriesTied]="false"
                   [seriesDone]="false"
-                  [winningTeam]="westernTeams[4]"
-                  [losingTeam]="westernTeams[0]"
+                  [winningTeam]="westernTeams[2]"
+                  [losingTeam]="westernTeams[1]"
                   [isWest]="true"
                   [gameFile]="'2023-R2-W2'"
                 ></cha-front-games-playoffs-matchup-card>
@@ -125,7 +125,9 @@
             <div class="conference-container">
               <div class="round-container">
                 <!-- PEO / MSG -->
-                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card
+                  [homeTeam]="easternTeams[1]"
+                ></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
@@ -133,7 +135,7 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
                   [visTeam]="easternTeams[3]"
-                  [seriesScore]="'2-0'"
+                  [seriesScore]="'3-1'"
                   [seriesTied]="false"
                   [seriesDone]="false"
                   [winningTeam]="easternTeams[0]"
@@ -145,9 +147,9 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
                   [visTeam]="easternTeams[2]"
-                  [seriesScore]="'2-0'"
+                  [seriesScore]="'4-0'"
                   [seriesTied]="false"
-                  [seriesDone]="false"
+                  [seriesDone]="true"
                   [winningTeam]="easternTeams[1]"
                   [losingTeam]="easternTeams[2]"
                   [isEast]="true"
@@ -187,7 +189,7 @@
                   [homeTeam]="easternTeams[2]"
                   [visTeam]="easternTeams[5]"
                   [seriesScore]="'4-2'"
-                  [seriesTied]="true"
+                  [seriesTied]="false"
                   [seriesDone]="true"
                   [winningTeam]="easternTeams[2]"
                   [losingTeam]="easternTeams[5]"
