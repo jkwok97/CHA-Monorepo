@@ -101,6 +101,12 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
                   [visTeam]="westernTeams[2]"
+                  [winningTeam]="westernTeams[0]"
+                  [losingTeam]="westernTeams[2]"
+                  [seriesTied]="true"
+                  [seriesScore]="'1-1'"
+                  [isWest]="true"
+                  [gameFile]="'2023-R3-W1'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
             </div>
@@ -131,6 +137,12 @@
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
                   [visTeam]="easternTeams[1]"
+                  [seriesTied]="false"
+                  [seriesScore]="'2-0'"
+                  [winningTeam]="easternTeams[0]"
+                  [losingTeam]="easternTeams[1]"
+                  [isEast]="true"
+                  [gameFile]="'2023-R3-E1'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
 
