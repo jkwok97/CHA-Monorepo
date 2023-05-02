@@ -25,5 +25,27 @@
     <div *ngIf="!visTeam && !homeTeam && !winningTeam && !losingTeam">vs.</div>
 
     <div *ngIf="seriesTied">Tied {{ seriesScore }}</div>
+
+    <button
+      pButton
+      type="button"
+      icon="pi pi-file"
+      class="p-button-rounded p-button-primary"
+      (click)="onClick()"
+    ></button>
   </div>
 </div>
+
+<p-sidebar
+  [(visible)]="display"
+  [fullScreen]="true"
+  [dismissible]="false"
+  [showCloseIcon]="false"
+  (onHide)="onClose()"
+  *ngIf="display"
+>
+  <cha-front-games-playoffs-box-score
+    [isMobile]="isMobile"
+    (closeSidebar)="onClose()"
+  ></cha-front-games-playoffs-box-score>
+</p-sidebar>

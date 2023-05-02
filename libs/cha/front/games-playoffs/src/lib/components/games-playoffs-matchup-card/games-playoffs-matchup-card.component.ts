@@ -39,7 +39,6 @@ export class GamesPlayoffsMatchupCardComponent {
   onClick() {
     this.gamesPlayoffsFacade.getBoxScore(this.gameFile);
     this.display = true;
-    console.log('clicked');
   }
 
   onClose() {
