@@ -104,7 +104,8 @@
                   [winningTeam]="westernTeams[0]"
                   [losingTeam]="westernTeams[2]"
                   [seriesTied]="false"
-                  [seriesScore]="'3-1'"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-1'"
                   [isWest]="true"
                   [gameFile]="'2023-R3-W1'"
                 ></cha-front-games-playoffs-matchup-card>
@@ -119,6 +120,7 @@
               <img src="assets/images/libertycup.jpg" />
 
               <cha-front-games-playoffs-matchup-final-card
+                [homeTeam]="westernTeams[0]"
                 [visTeam]="easternTeams[0]"
               ></cha-front-games-playoffs-matchup-final-card>
             </div>
