@@ -28,6 +28,7 @@ export class HomeSummaryService {
     season: string,
     ratingsSeason: string
   ) {
+    console.log(season, ratingsSeason);
     return this._http
       .get(
         `${this.apiUrl}/salaries/user/${teamName}/players/${season}/${ratingsSeason}`

@@ -70,10 +70,10 @@ export class TeamsSummarySalariesComponent implements OnInit {
         this.forwardSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2022: salary.salaries.season_2022,
             2023: salary.salaries.season_2023,
             2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
+            2026: salary.salaries.season_2026,
           })
         );
       });
@@ -87,10 +87,10 @@ export class TeamsSummarySalariesComponent implements OnInit {
         this.defenseSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2022: salary.salaries.season_2022,
             2023: salary.salaries.season_2023,
             2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
+            2026: salary.salaries.season_2026,
           })
         );
       });
@@ -103,10 +103,10 @@ export class TeamsSummarySalariesComponent implements OnInit {
       .subscribe((salaries: SalariesAndRatingsDto[]) => {
         this.goalieSalaries = salaries.map((salary: SalariesAndRatingsDto) => ({
           Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-          2022: salary.salaries.season_2022,
           2023: salary.salaries.season_2023,
           2024: salary.salaries.season_2024,
           2025: salary.salaries.season_2025,
+          2026: salary.salaries.season_2026,
         }));
       });
   }

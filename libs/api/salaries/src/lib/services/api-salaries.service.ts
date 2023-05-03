@@ -201,10 +201,10 @@ export class ApiSalariesService {
       select: {
         id: true,
         player_id: true,
-        season_2022: true,
         season_2023: true,
         season_2024: true,
         season_2025: true,
+        season_2026: true,
       },
       where: {
         player_id: playerId.toString(),
@@ -320,11 +320,11 @@ export class ApiSalariesService {
         ...item,
         nhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20212022'
+          '20222023'
         ), //TODO CHANGE EVERY YEAR
         nextNhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20222023'
+          '20232024'
         ), //TODO CHANGE EVERY YEAR
       }))
     );

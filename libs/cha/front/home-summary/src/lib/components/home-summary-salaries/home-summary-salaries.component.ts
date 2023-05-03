@@ -34,12 +34,12 @@ export class HomeSummarySalariesComponent implements OnInit {
   defenseSalaries!: PlayerSalaryModel[];
   goalieSalaries!: PlayerSalaryModel[];
 
-  salaryHeaders = ['Name', 2022, 2023, 2024, 2025].map((x, i) => ({
+  salaryHeaders = ['Name', 2023, 2024, 2025, 2026].map((x, i) => ({
     key: x,
     index: i,
   }));
 
-  mobileSalaryHeaders = ['Name', 2022, 2023].map((x, i) => ({
+  mobileSalaryHeaders = ['Name', 2023, 2024].map((x, i) => ({
     key: x,
     index: i,
   }));
@@ -75,10 +75,10 @@ export class HomeSummarySalariesComponent implements OnInit {
         this.forwardSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2022: salary.salaries.season_2022,
             2023: salary.salaries.season_2023,
             2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
+            2026: salary.salaries.season_2026,
           })
         );
       });
@@ -92,10 +92,10 @@ export class HomeSummarySalariesComponent implements OnInit {
         this.defenseSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2022: salary.salaries.season_2022,
             2023: salary.salaries.season_2023,
             2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
+            2026: salary.salaries.season_2026,
           })
         );
       });
@@ -108,10 +108,10 @@ export class HomeSummarySalariesComponent implements OnInit {
       .subscribe((salaries: SalariesAndRatingsDto[]) => {
         this.goalieSalaries = salaries.map((salary: SalariesAndRatingsDto) => ({
           Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-          2022: salary.salaries.season_2022,
           2023: salary.salaries.season_2023,
           2024: salary.salaries.season_2024,
           2025: salary.salaries.season_2025,
+          2026: salary.salaries.season_2026,
         }));
       });
   }

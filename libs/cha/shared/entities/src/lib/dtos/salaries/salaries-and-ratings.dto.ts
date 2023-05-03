@@ -17,8 +17,9 @@ export interface SalariesAndRatingsDto {
 export interface SalaryDto {
   id: number;
   player_id: number;
-  season_2022: string | null;
+  season_2022?: string | null;
   season_2023: string | null;
   season_2024: string | null;
   season_2025: string | null;
+  season_2026: string | null;
 }
