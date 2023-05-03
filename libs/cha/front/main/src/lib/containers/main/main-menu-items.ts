@@ -70,10 +70,12 @@ export const mainMenuItems: MenuItem[] = [
           {
             label: 'Current Days',
             routerLink: ['/league/games/current'],
+            disabled: true,
           },
           {
             label: 'All Days',
             routerLink: ['/league/games/all'],
+            disabled: true,
           },
           {
             label: 'Playoffs',

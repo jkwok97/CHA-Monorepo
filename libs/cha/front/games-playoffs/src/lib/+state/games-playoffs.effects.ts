@@ -21,8 +21,7 @@ export class GamesPlayoffsEffects {
       exhaustMap(([action, data]) =>
         this.gamesPlayoffsService
           .getPlayoffStandings(
-            // data.offseason ? data.prev_year : data.current_year, // TODO SWITCH THIS
-            data.current_year,
+            data.offseason ? data.prev_year : data.current_year,
             'Regular'
           )
           .pipe(
@@ -46,7 +45,7 @@ export class GamesPlayoffsEffects {
           .getBoxScore(action.gameId, data.current_year)
           .pipe(
             map((game: File) =>
-            GamesPlayoffsActions.getBoxScoreSuccess({ game })
+              GamesPlayoffsActions.getBoxScoreSuccess({ game })
             ),
             catchError(() => of(GamesPlayoffsActions.getBoxScoreError()))
           )
