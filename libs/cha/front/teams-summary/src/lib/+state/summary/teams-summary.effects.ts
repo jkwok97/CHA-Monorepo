@@ -63,7 +63,7 @@ export class TeamsSummaryEffects {
         this.teamsSummaryService
           .getUserTeamRecordBySeasonAndSeasonType(
             action.teamId,
-            data.offseason ? data.prev_year : data.current_year,
+            data.current_year,
             data.current_season_type
           )
           .pipe(

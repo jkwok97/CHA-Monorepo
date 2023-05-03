@@ -110,6 +110,10 @@ export const mainMenuItems: MenuItem[] = [
                 label: 'Sacramento Storm',
                 routerLink: ['/league/teams/61'],
               },
+              {
+                label: 'Hawaii Lava',
+                routerLink: ['/league/teams/64'],
+              },
             ],
           },
           {
@@ -135,6 +139,10 @@ export const mainMenuItems: MenuItem[] = [
                 label: 'Wichita Wolfpack',
                 routerLink: ['/league/teams/21'],
               },
+              {
+                label: 'Utah Skinwalkers',
+                routerLink: ['/league/teams/65'],
+              },
             ],
           },
           {
@@ -145,10 +153,6 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/6'],
               },
               {
-                label: 'Indianapolis Goats',
-                routerLink: ['/league/teams/7'],
-              },
-              {
                 label: 'Milwaukee Ice Dragons',
                 routerLink: ['/league/teams/11'],
               },
@@ -157,8 +161,16 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/12'],
               },
               {
-                label: 'Peoria Prowlers',
-                routerLink: ['/league/teams/15'],
+                label: 'Staten Island Killer Bees',
+                routerLink: ['/league/teams/19'],
+              },
+              {
+                label: 'St.Johns Vikings',
+                routerLink: ['/league/teams/60'],
+              },
+              {
+                label: 'Torbay Ice Bears',
+                routerLink: ['/league/teams/66'],
               },
             ],
           },
@@ -174,16 +186,20 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/3'],
               },
               {
+                label: 'Indianapolis Goats',
+                routerLink: ['/league/teams/7'],
+              },
+              {
                 label: 'Cincinnati Cyclones',
                 routerLink: ['/league/teams/5'],
               },
               {
-                label: 'Staten Island Killer Bees',
-                routerLink: ['/league/teams/19'],
+                label: 'Peoria Prowlers',
+                routerLink: ['/league/teams/15'],
               },
               {
-                label: 'St.Johns Vikings',
-                routerLink: ['/league/teams/60'],
+                label: 'South Carolina Stingrays',
+                routerLink: ['/league/teams/18'],
               },
             ],
           },
