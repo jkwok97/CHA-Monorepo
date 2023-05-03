@@ -21,7 +21,7 @@ export class LeagueStatsGoaliesEffects {
       exhaustMap(([action, data]) =>
         this.goaliesStatsService
           .getAllGoalieLeaders(
-            data.current_year,
+            data.offseason ? data.prev_year : data.current_year,
             action.seasonType,
             data.min_games.toString()
           )
