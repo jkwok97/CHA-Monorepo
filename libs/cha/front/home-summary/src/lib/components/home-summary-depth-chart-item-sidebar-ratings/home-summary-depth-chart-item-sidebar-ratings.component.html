@@ -3,6 +3,7 @@
     <cha-front-home-summary-depth-chart-item-sidebar-ratings-nhl
       [ratings]="ratings"
       [isMobile]="isMobile"
+      *ngIf="(isOffSeason$ | async) === false"
     ></cha-front-home-summary-depth-chart-item-sidebar-ratings-nhl>
   </div>
 

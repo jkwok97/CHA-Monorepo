@@ -86,7 +86,7 @@ const selectForwardSalaries = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+          Number(b.salaries.season_2023) - Number(a.salaries.season_2023) //Adjust every year
       )
       .map((playerSalary: SalariesAndRatingsDto) => ({
         player_id: playerSalary.player_id,
@@ -105,7 +105,7 @@ const selectDefenseSalaries = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+          Number(b.salaries.season_2023) - Number(a.salaries.season_2023) //Adjust every year
       )
       .map((playerSalary: SalariesAndRatingsDto) => ({
         player_id: playerSalary.player_id,
@@ -333,7 +333,7 @@ const selectGoalieSalariesFiltered = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2022) - Number(a.salaries.season_2022)
+          Number(b.salaries.season_2023) - Number(a.salaries.season_2023) //Adjust every year
       )
       .map((goalieSalary: SalariesAndRatingsDto) => ({
         player_id: goalieSalary.player_id,

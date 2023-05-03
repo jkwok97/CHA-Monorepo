@@ -32,12 +32,12 @@ export class TeamsSummarySalariesComponent implements OnInit {
   defenseSalaries!: PlayerSalaryModel[];
   goalieSalaries!: PlayerSalaryModel[];
 
-  salaryHeaders = ['Name', 2022, 2023, 2024, 2025].map((x, i) => ({
+  salaryHeaders = ['Name', 2023, 2024, 2025, 2026].map((x, i) => ({
     key: x,
     index: i,
   }));
 
-  mobileSalaryHeaders = ['Name', 2022, 2023].map((x, i) => ({
+  mobileSalaryHeaders = ['Name', 2023, 2024].map((x, i) => ({
     key: x,
     index: i,
   }));

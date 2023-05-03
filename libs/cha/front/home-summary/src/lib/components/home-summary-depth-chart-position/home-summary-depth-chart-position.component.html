@@ -61,12 +61,13 @@
                   Sv%:
                   {{
                     isOffSeason
-                      ? player.nhlStats?.savePercentage
+                      ? player.nhlStats?.savePercentage.toFixed(3)
                       : player.ratings?.save_pct
                   }}
                 </div>
                 <div class="text-xs">
-                  Salary: {{ player.salaries.season_2022 }}
+                  <!-- Adjust every year -->
+                  Salary: {{ player.salaries.season_2023 }}
                 </div>
               </div>
             </div>

@@ -14,6 +14,7 @@ import {
 } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 import { HomeSummaryFacade } from '../../+state/home-summary.facade';
+import { LeagueDataFacade } from '@cha/domain/core';
 
 @Component({
   selector: 'cha-front-home-summary-depth-chart-item-sidebar',
@@ -29,9 +30,14 @@ export class HomeSummaryDepthChartItemSidebarComponent
   currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
   currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;
   statsLoading$: Observable<boolean>;
+  isOffSeason$: Observable<boolean>;
 
-  constructor(private homeSummaryFacade: HomeSummaryFacade) {
+  constructor(
+    private homeSummaryFacade: HomeSummaryFacade,
+    private leagueDataFacade: LeagueDataFacade
+  ) {
     this.statsLoading$ = this.homeSummaryFacade.statsLoading$;
+    this.isOffSeason$ = this.leagueDataFacade.isOffSeason$;
   }
 
   ngOnInit(): void {
