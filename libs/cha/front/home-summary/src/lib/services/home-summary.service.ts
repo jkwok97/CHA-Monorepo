@@ -16,7 +16,6 @@ export class HomeSummaryService {
     season: string,
     seasonType: string
   ) {
-    console.log(season, seasonType);
     return this._http
       .get(
         `${this.apiUrl}/team-stats/user/${teamId}/record/${season}/${seasonType}`

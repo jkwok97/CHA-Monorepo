@@ -14,6 +14,7 @@ import {
 } from '@cha/shared/entities';
 import { Observable } from 'rxjs';
 import { TeamsSummaryFacade } from '../../+state/summary/teams-summary.facade';
+import { LeagueDataFacade } from '@cha/domain/core';
 
 @Component({
   selector: 'cha-front-depth-chart-item-sidebar',
@@ -27,9 +28,14 @@ export class DepthChartItemSidebarComponent implements OnInit, OnChanges {
   currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
   currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;
   statsLoading$: Observable<boolean>;
+  isOffSeason$: Observable<boolean>;
 
-  constructor(private teamsSummaryFacade: TeamsSummaryFacade) {
+  constructor(
+    private teamsSummaryFacade: TeamsSummaryFacade,
+    private leagueDataFacade: LeagueDataFacade
+  ) {
     this.statsLoading$ = this.teamsSummaryFacade.statsLoading$;
+    this.isOffSeason$ = this.leagueDataFacade.isOffSeason$;
   }
 
   ngOnInit(): void {

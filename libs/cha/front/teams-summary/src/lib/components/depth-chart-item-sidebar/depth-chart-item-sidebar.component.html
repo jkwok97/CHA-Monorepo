@@ -21,10 +21,12 @@
           >
         </div>
         <div class="text-sm">
-          Current Salary: <i>{{ playerStats.salaries.season_2022 }}</i>
+          <!-- Adjust every year -->
+          Current Salary: <i>{{ playerStats.salaries.season_2023 }}</i>
         </div>
         <div class="text-sm">
-          Next Salary: <i>{{ playerStats.salaries.season_2023 }}</i>
+          <!-- Adjust every year -->
+          Next Salary: <i>{{ playerStats.salaries.season_2024 }}</i>
         </div>
       </div>
     </div>
@@ -53,6 +55,7 @@
       <cha-front-depth-chart-item-sidebar-stats-cha
         [currentStat]="currentStat"
         [isMobile]="isMobile"
+        *ngIf="(isOffSeason$ | async) === false"
       ></cha-front-depth-chart-item-sidebar-stats-cha>
     </ng-container>
   </div>

@@ -75,7 +75,7 @@
                     type === 'future'
                       ? player.nextNhlStats?.savePercentage.toFixed(3)
                       : isOffSeason
-                      ? player.nhlStats?.savePercentage
+                      ? player.nhlStats?.savePercentage.toFixed(3)
                       : player.ratings?.save_pct
                   }}
                 </div>
@@ -83,8 +83,8 @@
                   Salary:
                   {{
                     type === 'future'
-                      ? player.salaries.season_2023
-                      : player.salaries.season_2022
+                      ? player.salaries.season_2024
+                      : player.salaries.season_2023
                   }}
                 </div>
               </div>
