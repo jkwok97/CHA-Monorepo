@@ -15,6 +15,7 @@ export class LeagueSalariesComponent implements OnInit {
   isLoaded$: Observable<boolean>;
   season$: Observable<string | undefined>;
   salaries$: Observable<SalariesAndRatingsDto[]>;
+  offSeason$: Observable<boolean>;
 
   selectOptions = [
     { label: 'Players', value: 'players' },
@@ -31,6 +32,7 @@ export class LeagueSalariesComponent implements OnInit {
     this.isLoading$ = this.leagueSalariesRatingsFacade.isLoading$;
     this.season$ = this.leagueDataFacade.currentSeason$;
     this.salaries$ = this.leagueSalariesRatingsFacade.salaries$;
+    this.offSeason$ = this.leagueDataFacade.isOffSeason$;
   }
 
   ngOnInit(): void {

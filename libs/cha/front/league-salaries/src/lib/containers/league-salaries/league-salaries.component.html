@@ -10,6 +10,10 @@
       <div class="text-lg text-center" style="font-weight: 100">
         {{ season$ | async }} Salaries & Ratings
       </div>
+      <div *ngIf="offSeason$ | async" class="text-center">
+        It is currently offseason, salaries and rating are based off previous
+        season
+      </div>
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
       >
