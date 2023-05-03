@@ -16,6 +16,7 @@ export class HomeSummaryService {
     season: string,
     seasonType: string
   ) {
+    console.log(season, seasonType);
     return this._http
       .get(
         `${this.apiUrl}/team-stats/user/${teamId}/record/${season}/${seasonType}`
@@ -28,7 +29,6 @@ export class HomeSummaryService {
     season: string,
     ratingsSeason: string
   ) {
-    console.log(season, ratingsSeason);
     return this._http
       .get(
         `${this.apiUrl}/salaries/user/${teamName}/players/${season}/${ratingsSeason}`

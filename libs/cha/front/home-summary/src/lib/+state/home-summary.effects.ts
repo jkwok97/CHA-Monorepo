@@ -29,7 +29,7 @@ export class HomeSummaryEffects {
         this.homeSummaryService
           .getUserTeamRecordBySeasonAndSeasonType(
             action.teamId,
-            data.offseason ? data.prev_year : data.current_year,
+            data.current_year,
             data.current_season_type
           )
           .pipe(
@@ -53,7 +53,7 @@ export class HomeSummaryEffects {
           .getUserTeamPlayersSalariesBySeason(
             action.teamName,
             data.current_year,
-            data.offseason ? data.prev_year : data.current_year,
+            data.offseason ? data.prev_year : data.current_year
           )
           .pipe(
             map((playerSalaries: SalariesAndRatingsDto[]) =>
@@ -76,7 +76,7 @@ export class HomeSummaryEffects {
           .getUserTeamGoaliesSalariesBySeason(
             action.teamName,
             data.current_year,
-            data.offseason ? data.prev_year : data.current_year,
+            data.offseason ? data.prev_year : data.current_year
           )
           .pipe(
             map((goalieSalaries: SalariesAndRatingsDto[]) =>
