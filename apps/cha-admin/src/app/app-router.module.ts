@@ -21,9 +21,8 @@ const ROUTES: Route[] = [
 @NgModule({
   imports: [
     RouterModule.forRoot(ROUTES, {
-      relativeLinkResolution: 'legacy',
       preloadingStrategy: PreloadAllModules,
-      useHash: true
+      useHash: true,
     }),
   ],
   exports: [RouterModule],

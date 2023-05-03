@@ -73,7 +73,7 @@ export class TransactionsTradesService {
       teamTwoPicks,
       season,
     };
-    
+
     return this._http
       .put(`${this.apiUrl}/transactions/trade`, body)
       .pipe(map((result: any) => result));
