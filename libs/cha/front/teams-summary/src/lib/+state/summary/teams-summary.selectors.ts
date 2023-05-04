@@ -132,7 +132,11 @@ const selectCenterSalariesByNhlStats = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'C'
       )
-      .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+      .sort(
+        (a, b) =>
+          (b.nhlStats?.points != null ? b.nhlStats?.points : -Infinity) -
+          (a.nhlStats?.points != null ? a.nhlStats?.points : -Infinity)
+      )
 );
 
 const selectCenterSalariesByFutureNhlStats = createSelector(
@@ -171,7 +175,11 @@ const selectLeftWingSalariesByNhlStats = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'LW'
       )
-      .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+      .sort(
+        (a, b) =>
+          (b.nhlStats?.points != null ? b.nhlStats?.points : -Infinity) -
+          (a.nhlStats?.points != null ? a.nhlStats?.points : -Infinity)
+      )
 );
 
 const selectLeftWingSalariesByFutureNhlStats = createSelector(
@@ -253,7 +261,11 @@ const selectLeftDefenseSalariesByNhlStats = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'LD'
       )
-      .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+      .sort(
+        (a, b) =>
+          (b.nhlStats?.points != null ? b.nhlStats?.points : -Infinity) -
+          (a.nhlStats?.points != null ? a.nhlStats?.points : -Infinity)
+      )
 );
 
 const selectLeftDefenseSalariesByFutureNhlStats = createSelector(
@@ -292,7 +304,11 @@ const selectRightDefenseSalariesByNhlStats = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'RD'
       )
-      .sort((a, b) => Number(b.nhlStats?.points) - Number(a.nhlStats?.points))
+      .sort(
+        (a, b) =>
+          (b.nhlStats?.points != null ? b.nhlStats?.points : -Infinity) -
+          (a.nhlStats?.points != null ? a.nhlStats?.points : -Infinity)
+      )
 );
 
 const selectRightDefenseSalariesByFutureNhlStats = createSelector(
