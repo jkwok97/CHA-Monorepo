@@ -96,6 +96,12 @@ export class DraftCurrentComponent implements OnInit {
   }
 
   onOptionChanged(option: string) {
-    this.draftCurrentFacade.getDraftTable(Number(option));
+    if (option === '2023') {
+      this.draftCurrentFacade.getDraftTable(Number(option));
+    }
+
+    if (option === '2024') {
+      this.draftCurrentFacade.getNextDraftTable(Number(option));
+    }
   }
 }

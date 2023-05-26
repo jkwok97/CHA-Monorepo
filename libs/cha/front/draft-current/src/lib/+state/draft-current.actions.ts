@@ -14,10 +14,22 @@ const getDraftTableSuccess = createAction(
   props<{ draftTable: DraftTableDto[] }>()
 );
 
+const getNextDraftTable = createAction(
+  `${NAMESPACE} Get Next Draft Lottery`,
+  props<{ season: number }>()
+);
+
+const getNextDraftTableSuccess = createAction(
+  `${NAMESPACE} Get Next Draft Lottery Success`,
+  props<{ draftTable: DraftTableDto[] }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const DraftCurrentActions = {
   getDraftTable,
   getDraftTableSuccess,
+  getNextDraftTable,
+  getNextDraftTableSuccess,
   error,
 };

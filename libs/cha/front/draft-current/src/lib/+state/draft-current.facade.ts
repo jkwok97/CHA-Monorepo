@@ -25,4 +25,8 @@ export class DraftCurrentFacade {
   getDraftTable(season: number) {
     this.store.dispatch(DraftCurrentActions.getDraftTable({ season }));
   }
+
+  getNextDraftTable(season: number) {
+    this.store.dispatch(DraftCurrentActions.getNextDraftTable({ season }));
+  }
 }

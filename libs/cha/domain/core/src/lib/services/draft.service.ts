@@ -20,6 +20,12 @@ export class DraftService {
       .pipe(map((result: any) => result));
   }
 
+  getNextDraftTable(draftYear: number): Observable<DraftTableDto[]> {
+    return this._http
+      .get(`${this.apiUrl}/draft-table/${draftYear}`)
+      .pipe(map((result: any) => result));
+  }
+
   getDraftPicks(): Observable<DraftPickDto[]> {
     return this._http
       .get(`${this.apiUrl}/entry-draft/ordered`)

@@ -32,4 +32,18 @@ export class DraftCurrentEffects {
       )
     )
   );
+
+  getNextDraftTable$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DraftCurrentActions.getNextDraftTable),
+      exhaustMap((action) =>
+        this.draftService.getNextDraftTable(action.season).pipe(
+          map((draftTable: DraftTableDto[]) =>
+            DraftCurrentActions.getNextDraftTableSuccess({ draftTable })
+          ),
+          catchError(() => of(DraftCurrentActions.error()))
+        )
+      )
+    )
+  );
 }

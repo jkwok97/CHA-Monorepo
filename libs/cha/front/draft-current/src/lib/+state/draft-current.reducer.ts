@@ -17,18 +17,26 @@ const initialState: State = {
 const r = createReducer(
   initialState,
 
-  on(DraftCurrentActions.getDraftTable, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-  })),
+  on(
+    DraftCurrentActions.getDraftTable,
+    DraftCurrentActions.getNextDraftTable,
+    (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+    })
+  ),
 
-  on(DraftCurrentActions.getDraftTableSuccess, (state, action) => ({
-    ...state,
-    draftTable: action.draftTable,
-    loading: false,
-    loaded: true,
-  })),
+  on(
+    DraftCurrentActions.getDraftTableSuccess,
+    DraftCurrentActions.getNextDraftTableSuccess,
+    (state, action) => ({
+      ...state,
+      draftTable: action.draftTable,
+      loading: false,
+      loaded: true,
+    })
+  ),
 
   on(DraftCurrentActions.error, (state) => initialState)
 );
