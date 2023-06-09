@@ -32,7 +32,7 @@ export class LeagueTradesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.transactionsYear = this.fb.control(new Date('01/02/2023'));
+    this.transactionsYear = this.fb.control(new Date('01/02/2024'));
     this.search = this.fb.control('');
 
     this.transactionsYear.valueChanges
