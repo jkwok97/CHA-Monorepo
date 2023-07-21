@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ChaAdminMainDraftMgmtRoutingModule } from './cha-admin-main-draft-mgmt-routing.module';
 
 import { MainDraftMgmtComponent } from './containers';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
 @NgModule({
   imports: [
     CommonModule,
     ChaAdminMainDraftMgmtRoutingModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     BladeAngularUiLayoutModule,
   ],
   declarations: [MainDraftMgmtComponent],

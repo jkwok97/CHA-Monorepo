@@ -4,11 +4,11 @@
   </blade-card-header>
 
   <blade-card-body>
-    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+    <ng-scrollbar [style]="panelStyle" *ngIf="isMobile">
       <cha-admin-draft-mgmt-table-edit-form
         [draftTableItem]="draftTableItem"
       ></cha-admin-draft-mgmt-table-edit-form>
-    </perfect-scrollbar>
+    </ng-scrollbar>
 
     <cha-admin-draft-mgmt-table-edit-form
       [draftTableItem]="draftTableItem"

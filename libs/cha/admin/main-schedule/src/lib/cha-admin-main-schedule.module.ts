@@ -5,14 +5,14 @@ import { ChaAdminMainScheduleRoutingModule } from './cha-admin-main-schedule-rou
 
 import { MainScheduleComponent } from './containers';
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   imports: [
     CommonModule,
     ChaAdminMainScheduleRoutingModule,
     BladeAngularUiLayoutModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
   ],
   declarations: [MainScheduleComponent],
 })

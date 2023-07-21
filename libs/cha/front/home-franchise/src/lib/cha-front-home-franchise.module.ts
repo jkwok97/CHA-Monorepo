@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TooltipModule } from 'primeng/tooltip';
 import { SidebarModule } from 'primeng/sidebar';
@@ -34,7 +34,7 @@ import {
   imports: [
     CommonModule,
     ChaFrontHomeFranchiseRoutingModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     ProgressBarModule,
     TooltipModule,
     SidebarModule,

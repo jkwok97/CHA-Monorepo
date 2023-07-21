@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
@@ -12,7 +12,7 @@ import { MainTransactionsComponent } from './containers';
 @NgModule({
   imports: [
     CommonModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     BladeAngularUiLayoutModule,
     ChaAdminMainTransactionsRoutingModule,
   ],

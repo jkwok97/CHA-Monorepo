@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FormlyModule } from '@ngx-formly/core';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
@@ -37,14 +37,14 @@ import {
   PlayerMgmtInfoAddComponent,
   PlayerMgmtInfoAddInfoComponent,
   PlayerMgmtInfoAddSalaryComponent,
-  PlayerMgmtInfoAddSalaryFormComponent
+  PlayerMgmtInfoAddSalaryFormComponent,
 } from './components';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     ProgressBarModule,
     TableModule,
     SidebarModule,

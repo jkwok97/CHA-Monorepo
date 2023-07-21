@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 
@@ -13,7 +13,7 @@ import { MainLeagueComponent } from './containers';
   imports: [
     CommonModule,
     ChaAdminMainLeagueRoutingModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     BladeAngularUiLayoutModule,
   ],
   declarations: [MainLeagueComponent],

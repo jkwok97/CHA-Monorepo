@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { LogoComponent } from '@cha/domain/logo';
@@ -14,7 +14,7 @@ import { HomeComponent } from './containers';
   imports: [
     CommonModule,
     ChaAdminHomeRoutingModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     BladeAngularUiLayoutModule,
     LogoComponent,
   ],

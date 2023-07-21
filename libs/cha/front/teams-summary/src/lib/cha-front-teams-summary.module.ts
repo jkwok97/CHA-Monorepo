@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { CarouselModule } from 'primeng/carousel';
 import { AvatarModule } from 'primeng/avatar';
 import { SidebarModule } from 'primeng/sidebar';
@@ -81,7 +81,7 @@ import { TeamsSummaryFutureDepthComponent } from './containers/teams-summary-fut
     CommonModule,
     FormsModule,
     ChaFrontTeamsSummaryRoutingModule,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
     CarouselModule,
     AvatarModule,
     SidebarModule,

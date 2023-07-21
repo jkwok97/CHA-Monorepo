@@ -11,7 +11,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { FieldsetModule } from 'primeng/fieldset';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -58,7 +58,7 @@ import {
     BladeAngularUiCardModule,
     BladeDividerComponent,
     BladeListComponent,
-    PerfectScrollbarModule,
+    NgScrollbarModule,
 
     StoreModule.forFeature('home-summary', reducer),
     EffectsModule.forFeature([HomeSummaryEffects]),

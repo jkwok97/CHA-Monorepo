@@ -4,16 +4,16 @@
   </blade-card-header>
 
   <blade-card-body>
-    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
-        <cha-admin-player-mgmt-info-edit-form
-          [player]="player"
-        ></cha-admin-player-mgmt-info-edit-form>
-      </perfect-scrollbar>
-  
+    <ng-scrollbar [style]="panelStyle" *ngIf="isMobile">
       <cha-admin-player-mgmt-info-edit-form
         [player]="player"
-        *ngIf="!isMobile"
       ></cha-admin-player-mgmt-info-edit-form>
+    </ng-scrollbar>
+
+    <cha-admin-player-mgmt-info-edit-form
+      [player]="player"
+      *ngIf="!isMobile"
+    ></cha-admin-player-mgmt-info-edit-form>
   </blade-card-body>
 
   <blade-card-footer>

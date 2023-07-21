@@ -5,11 +5,11 @@
   </blade-card-header>
 
   <blade-card-body>
-    <perfect-scrollbar [style]="panelStyle" *ngIf="isMobile">
+    <ng-scrollbar [style]="panelStyle" *ngIf="isMobile">
       <cha-admin-player-mgmt-salaries-edit-form
         [salary]="salary"
       ></cha-admin-player-mgmt-salaries-edit-form>
-    </perfect-scrollbar>
+    </ng-scrollbar>
 
     <cha-admin-player-mgmt-salaries-edit-form
       [salary]="salary"
