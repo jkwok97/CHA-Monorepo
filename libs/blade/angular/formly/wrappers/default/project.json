@@ -1,11 +1,12 @@
 {
   "name": "blade-angular-formly-wrappers-default",
+  "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/formly/wrappers/default/src",
   "prefix": "blade",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": [
         "{workspaceRoot}/coverage/libs/blade/angular/formly/wrappers/default"
       ],
@@ -15,7 +16,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/blade/angular/formly/wrappers/default/**/*.ts",

@@ -1,11 +1,12 @@
 {
   "name": "cha-domain-auth",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/domain/auth/src",
   "prefix": "cha",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/domain/auth"],
       "options": {
         "jestConfig": "libs/cha/domain/auth/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/domain/auth/**/*.ts",

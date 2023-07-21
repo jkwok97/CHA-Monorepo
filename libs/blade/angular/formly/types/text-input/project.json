@@ -1,11 +1,12 @@
 {
   "name": "blade-angular-formly-types-text-input",
+  "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/formly/types/text-input/src",
   "prefix": "blade",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": [
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/text-input"
       ],
@@ -15,7 +16,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/blade/angular/formly/types/text-input/**/*.ts",

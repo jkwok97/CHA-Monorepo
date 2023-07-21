@@ -1,11 +1,12 @@
 {
   "name": "cha-admin-transactions-waivers",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/transactions-waivers/src",
   "prefix": "cha-admin",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": [
         "{workspaceRoot}/coverage/libs/cha/admin/transactions-waivers"
       ],
@@ -15,7 +16,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/admin/transactions-waivers/**/*.ts",

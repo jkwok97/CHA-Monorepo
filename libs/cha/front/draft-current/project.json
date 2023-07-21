@@ -1,11 +1,12 @@
 {
   "name": "cha-front-draft-current",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/draft-current/src",
   "prefix": "cha-front",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/draft-current"],
       "options": {
         "jestConfig": "libs/cha/front/draft-current/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/front/draft-current/**/*.ts",

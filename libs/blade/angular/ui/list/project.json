@@ -1,11 +1,12 @@
 {
   "name": "blade-angular-ui-list",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/ui/list/src",
   "prefix": "blade",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/list"],
       "options": {
         "jestConfig": "libs/blade/angular/ui/list/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/blade/angular/ui/list/**/*.ts",

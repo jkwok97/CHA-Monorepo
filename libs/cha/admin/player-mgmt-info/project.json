@@ -1,11 +1,12 @@
 {
   "name": "cha-admin-player-mgmt-info",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/admin/player-mgmt-info/src",
   "prefix": "cha-admin",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/player-mgmt-info"],
       "options": {
         "jestConfig": "libs/cha/admin/player-mgmt-info/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/admin/player-mgmt-info/**/*.ts",

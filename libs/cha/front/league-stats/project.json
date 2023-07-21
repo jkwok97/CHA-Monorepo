@@ -1,11 +1,12 @@
 {
   "name": "cha-front-league-stats",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/league-stats/src",
   "prefix": "cha-front",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/league-stats"],
       "options": {
         "jestConfig": "libs/cha/front/league-stats/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/front/league-stats/**/*.ts",

@@ -1,11 +1,12 @@
 {
   "name": "cha-front-awards-gm",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/awards-gm/src",
   "prefix": "cha-front",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/awards-gm"],
       "options": {
         "jestConfig": "libs/cha/front/awards-gm/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/front/awards-gm/**/*.ts",

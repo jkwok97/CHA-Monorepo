@@ -1,11 +1,12 @@
 {
   "name": "blade-angular-ui-menu",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/blade/angular/ui/menu/src",
   "prefix": "blade",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/menu"],
       "options": {
         "jestConfig": "libs/blade/angular/ui/menu/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/blade/angular/ui/menu/**/*.ts",

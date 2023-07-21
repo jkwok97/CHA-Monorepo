@@ -1,11 +1,12 @@
 {
   "name": "cha-front-teams-summary",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/cha/front/teams-summary/src",
   "prefix": "cha-front",
   "targets": {
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/teams-summary"],
       "options": {
         "jestConfig": "libs/cha/front/teams-summary/jest.config.ts",
@@ -13,7 +14,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/cha/front/teams-summary/**/*.ts",
