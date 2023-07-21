@@ -4,8 +4,11 @@
     "outDir": "../../../dist/out-tsc",
     "declaration": true,
     "types": [],
-    "target": "es6"
+    "target": "es2021"
   },
-  "include": ["**/*.ts", "../player-stats/src/lib/entities/player-stats.entity.ts"],
+  "include": [
+    "**/*.ts",
+    "../player-stats/src/lib/entities/player-stats.entity.ts"
+  ],
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

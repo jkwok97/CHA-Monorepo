@@ -4,11 +4,12 @@
     "outDir": "../../../dist/out-tsc",
     "declaration": true,
     "types": [],
-    "target": "es6"
+    "target": "es2021"
   },
   "include": [
     "**/*.ts",
-    "src/lib/entities/index.ts"
-, "../entities/src/lib/entities/user.entity.ts"  ],
+    "src/lib/entities/index.ts",
+    "../entities/src/lib/entities/user.entity.ts"
+  ],
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
