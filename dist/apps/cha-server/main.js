@@ -1,57 +1,47 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
+/***/ ((module) => {
 
-/***/ "./src/app/app.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let AppController = class AppController {
-    root() {
-        return { message: 'Hello world!' };
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)(),
-    (0, common_1.Render)('index'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], AppController.prototype, "root", null);
-AppController = tslib_1.__decorate([
-    (0, common_1.Controller)()
-], AppController);
-exports.AppController = AppController;
-
+module.exports = require("@nestjs/common");
 
 /***/ }),
+/* 2 */
+/***/ ((module) => {
 
-/***/ "./src/app/app.module.ts":
+module.exports = require("@nestjs/core");
+
+/***/ }),
+/* 3 */
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ }),
+/* 4 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const core_1 = __webpack_require__("../../libs/api/core/src/index.ts");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const config_1 = __webpack_require__("@nestjs/config");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const app_controller_1 = __webpack_require__("./src/app/app.controller.ts");
-const app_service_1 = __webpack_require__("./src/app/app.service.ts");
-let AppModule = class AppModule {
+const tslib_1 = __webpack_require__(5);
+const core_1 = __webpack_require__(6);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const config_1 = __webpack_require__(272);
+const typeorm_1 = __webpack_require__(32);
+const app_controller_1 = __webpack_require__(273);
+const app_service_1 = __webpack_require__(274);
+let AppModule = exports.AppModule = class AppModule {
 };
-AppModule = tslib_1.__decorate([
+exports.AppModule = AppModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
-                envFilePath: `.env.${"development"}`,
+                envFilePath: `.env.${process.env.NODE_ENV}`,
             }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
@@ -93,949 +83,55 @@ AppModule = tslib_1.__decorate([
         providers: [app_service_1.AppService],
     })
 ], AppModule);
-exports.AppModule = AppModule;
 
 
 /***/ }),
+/* 5 */
+/***/ ((module) => {
 
-/***/ "./src/app/app.service.ts":
+module.exports = require("tslib");
+
+/***/ }),
+/* 6 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AppService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let AppService = class AppService {
-    getData() {
-        return { message: 'Welcome to cha-server!' };
-    }
-    getViewName() {
-        return 'index.hbs';
-    }
-};
-AppService = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], AppService);
-exports.AppService = AppService;
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(7), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/awards/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/awards/src/lib/api-awards.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/api-awards.module.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiAwardsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/awards/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/awards/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/awards/src/lib/services/index.ts");
-let ApiAwardsModule = class ApiAwardsModule {
-    configure(consumer) {
-        consumer.apply(middlewares_1.AwardsMiddleware).forRoutes('*');
-    }
-};
-ApiAwardsModule = tslib_1.__decorate([
-    (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forFeature([
-                entities_1.Awards_V2,
-                entities_1.Players_Stats_V2,
-                entities_1.Goalies_Stats_V2,
-                entities_1.Team_Stats_V2,
-                entities_1.Award_Type_V2,
-            ]),
-        ],
-        controllers: [controllers_1.AwardsController],
-        providers: [services_1.ApiAwardsService, services_1.ApiUserAwardsService],
-    })
-], ApiAwardsModule);
-exports.ApiAwardsModule = ApiAwardsModule;
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/controllers/awards.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AwardsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/awards/src/lib/services/index.ts");
-const api_awards_service_1 = __webpack_require__("../../libs/api/awards/src/lib/services/api-awards.service.ts");
-let AwardsController = class AwardsController {
-    constructor(awardsService, userAwardsService) {
-        this.awardsService = awardsService;
-        this.userAwardsService = userAwardsService;
-    }
-    async getAll() {
-        const awards = await this.awardsService.getAll();
-        if (!awards || awards.length < 1) {
-            throw new common_1.NotFoundException('awards not found');
-        }
-        return awards;
-    }
-    updateAwardById(param, body) {
-        return this.awardsService.updateAwardById(parseInt(param.id), body);
-    }
-    addPlayer(body) {
-        return this.awardsService.addAward(body);
-    }
-    deletePlayer(param) {
-        return this.awardsService.deleteAward(parseInt(param.id));
-    }
-    async getChampions() {
-        const champions = await this.awardsService.getChampions();
-        if (!champions || champions.length < 1) {
-            throw new common_1.NotFoundException('Champions Awards not found');
-        }
-        return champions;
-    }
-    async getScorerAwards() {
-        const scorers = await this.awardsService.getScorerAwards();
-        if (!scorers || scorers.length < 1) {
-            throw new common_1.NotFoundException('Scorers Awards not found');
-        }
-        return scorers;
-    }
-    async getDefenseAwards() {
-        const defense = await this.awardsService.getDefenseAwards();
-        if (!defense || defense.length < 1) {
-            throw new common_1.NotFoundException('Defense Awards not found');
-        }
-        return defense;
-    }
-    async getRookieAwards() {
-        const rookies = await this.awardsService.getRookieAwards();
-        if (!rookies || rookies.length < 1) {
-            throw new common_1.NotFoundException('Rookie Awards not found');
-        }
-        return rookies;
-    }
-    async getGoalieAwards() {
-        const goalies = await this.awardsService.getGoalieAwards();
-        if (!goalies || goalies.length < 1) {
-            throw new common_1.NotFoundException('Goalie Awards not found');
-        }
-        return goalies;
-    }
-    async getGmAwards() {
-        const gms = await this.awardsService.getGmAwards();
-        if (!gms || gms.length < 1) {
-            throw new common_1.NotFoundException('GM Awards not found');
-        }
-        return gms;
-    }
-    async getSeasonAwards() {
-        const season = await this.awardsService.getSeasonAwards();
-        if (!season || season.length < 1) {
-            throw new common_1.NotFoundException('Season Awards not found');
-        }
-        return season;
-    }
-    async getTeamAwardsByUserId(param) {
-        const awardsByUser = await this.userAwardsService.getAwardsByUserId(param.userId);
-        if (!awardsByUser || awardsByUser.length < 1) {
-            throw new common_1.NotFoundException('Player Stats not found');
-        }
-        return awardsByUser;
-    }
-    async getAwardTypes() {
-        const awardTypes = await this.awardsService.getAwardTypes();
-        if (!awardTypes || awardTypes.length < 1) {
-            throw new common_1.NotFoundException('Award Types not found');
-        }
-        return awardTypes;
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], AwardsController.prototype, "getAll", null);
-tslib_1.__decorate([
-    (0, common_1.Put)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
-], AwardsController.prototype, "updateAwardById", null);
-tslib_1.__decorate([
-    (0, common_1.Post)('/add'),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.AwardCreateDto !== "undefined" && entities_1.AwardCreateDto) === "function" ? _e : Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], AwardsController.prototype, "addPlayer", null);
-tslib_1.__decorate([
-    (0, common_1.Delete)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], AwardsController.prototype, "deletePlayer", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/champions'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
-], AwardsController.prototype, "getChampions", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/scorers'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", Promise)
-], AwardsController.prototype, "getScorerAwards", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/defense'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
-], AwardsController.prototype, "getDefenseAwards", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/rookies'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
-], AwardsController.prototype, "getRookieAwards", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/goalies'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
-], AwardsController.prototype, "getGoalieAwards", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/gm'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
-], AwardsController.prototype, "getGmAwards", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/season'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
-], AwardsController.prototype, "getSeasonAwards", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/user/:userId'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
-], AwardsController.prototype, "getTeamAwardsByUserId", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/types'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
-], AwardsController.prototype, "getAwardTypes", null);
-AwardsController = tslib_1.__decorate([
-    (0, common_1.Controller)('awards'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof api_awards_service_1.ApiAwardsService !== "undefined" && api_awards_service_1.ApiAwardsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiUserAwardsService !== "undefined" && services_1.ApiUserAwardsService) === "function" ? _b : Object])
-], AwardsController);
-exports.AwardsController = AwardsController;
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/controllers/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/awards/src/lib/controllers/awards.controller.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/middlewares/awards.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AwardsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let AwardsMiddleware = class AwardsMiddleware {
-    use(req, res, next) {
-        console.log('Request Awards...');
-        next();
-    }
-};
-AwardsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], AwardsMiddleware);
-exports.AwardsMiddleware = AwardsMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/awards/src/lib/middlewares/awards.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/services/api-awards.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c, _d, _e;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiAwardsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const entities_2 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiAwardsService = class ApiAwardsService {
-    constructor(repo, awardTypeRepo, playerStatsRepo, goalieStatsRepo, teamStatsRepo) {
-        this.repo = repo;
-        this.awardTypeRepo = awardTypeRepo;
-        this.playerStatsRepo = playerStatsRepo;
-        this.goalieStatsRepo = goalieStatsRepo;
-        this.teamStatsRepo = teamStatsRepo;
-        this.selectUserOptions = {
-            id: true,
-            display_season: true,
-            cha_season: true,
-            award_type: {
-                display_name: true,
-                id: true,
-            },
-            team_id: {
-                id: true,
-                city: true,
-                nickname: true,
-                teamlogo: true,
-                teamcolor: true,
-            },
-            users_id: {
-                firstname: true,
-                lastname: true,
-            },
-        };
-        this.selectPlayerOptions = {
-            id: true,
-            display_season: true,
-            cha_season: true,
-            award_type: {
-                display_name: true,
-                id: true,
-            },
-            team_id: {
-                city: true,
-                nickname: true,
-                teamlogo: true,
-                teamcolor: true,
-            },
-            player_id: {
-                id: true,
-                nhl_id: true,
-                firstname: true,
-                lastname: true,
-            },
-            users_id: {
-                firstname: true,
-                lastname: true,
-            },
-        };
-    }
-    async getAll() {
-        return await this.repo.find({
-            relations: ['player_id', 'award_type', 'team_id', 'users_id'],
-            select: {
-                id: true,
-                display_season: true,
-                cha_season: true,
-                team_id: {
-                    id: true,
-                    city: true,
-                    nickname: true,
-                },
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                },
-                award_type: {
-                    id: true,
-                    display_name: true,
-                },
-                users_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                },
-            },
-            order: {
-                display_season: 'DESC',
-            },
-        });
-    }
-    async updateAwardById(id, attrs) {
-        const award = await this.repo.findOneByOrFail({ id });
-        if (!award) {
-            throw new common_1.NotFoundException('award not found');
-        }
-        Object.assign(award, attrs);
-        return this.repo.save(award);
-    }
-    async addAward(body) {
-        const award = await this.repo.create(body);
-        return this.repo.save(award);
-    }
-    async deleteAward(id) {
-        const award = await this.repo.findOneByOrFail({ id });
-        if (!award) {
-            throw new common_1.NotFoundException('award not found');
-        }
-        return this.repo.remove(award);
-    }
-    async getChampions() {
-        return await this.repo.find({
-            select: this.selectUserOptions,
-            relations: ['users_id', 'team_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.CHAMPION,
-                },
-            },
-        });
-    }
-    async getScorerAwards() {
-        const scorers = await this.repo.find({
-            select: this.selectPlayerOptions,
-            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.SCORER,
-                },
-            },
-        });
-        const scrorersWithStats = await this.setPlayerStats(scorers);
-        return scrorersWithStats;
-    }
-    async getDefenseAwards() {
-        const defense = await this.repo.find({
-            select: this.selectPlayerOptions,
-            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.DEFENSE,
-                },
-            },
-        });
-        const defenseWithStats = await this.setPlayerStats(defense);
-        return defenseWithStats;
-    }
-    async getRookieAwards() {
-        const rookies = await this.repo.find({
-            select: this.selectPlayerOptions,
-            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.ROOKIE,
-                },
-            },
-        });
-        const rookiesWithStats = await this.setPlayerStats(rookies);
-        return rookiesWithStats;
-    }
-    async getGoalieAwards() {
-        const goalies = await this.repo.find({
-            select: this.selectPlayerOptions,
-            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.GOALIE,
-                },
-            },
-        });
-        const goaliesWithStats = await this.setGoalieStats(goalies);
-        return goaliesWithStats;
-    }
-    async getGmAwards() {
-        return await this.repo.find({
-            select: this.selectUserOptions,
-            relations: ['users_id', 'team_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.GM,
-                },
-            },
-        });
-    }
-    async getSeasonAwards() {
-        const seasonAwards = await this.repo.find({
-            select: this.selectUserOptions,
-            relations: ['users_id', 'team_id', 'award_type'],
-            where: {
-                award_type: {
-                    id: entities_2.AwardTypeEnum.SEASON,
-                },
-            },
-        });
-        const seasonAwardsWithStats = await this.setSeasonStats(seasonAwards);
-        return seasonAwardsWithStats;
-    }
-    async getAwardTypes() {
-        return await this.awardTypeRepo.find({
-            where: {
-                id: (0, typeorm_2.Not)(1),
-            },
-        });
-    }
-    async setPlayerStats(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { stats: await this.getPlayerStats(item.player_id.id, item.cha_season) }))));
-    }
-    async getPlayerStats(playerId, chaSeason) {
-        return await this.playerStatsRepo.findOne({
-            select: {
-                id: true,
-                playing_year: true,
-                games_played: true,
-                goals: true,
-                assists: true,
-                points: true,
-            },
-            where: {
-                player_id: { id: playerId },
-                playing_year: chaSeason,
-                season_type: 'Regular',
-            },
-        });
-    }
-    async setGoalieStats(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { stats: await this.getGoalieStats(item.player_id.id, item.cha_season) }))));
-    }
-    async getGoalieStats(playerId, chaSeason) {
-        return await this.goalieStatsRepo.findOne({
-            select: {
-                id: true,
-                player_id: {
-                    id: true,
-                    nhl_id: true,
-                    firstname: true,
-                    lastname: true,
-                    isgoalie: true,
-                    is_protected: true,
-                    isactive: true,
-                    isdefense: true,
-                    isforward: true,
-                },
-                playing_year: true,
-                games_played: true,
-                wins: true,
-                goals_against_avg: true,
-                save_pct: true,
-            },
-            where: {
-                player_id: {
-                    id: playerId,
-                },
-                playing_year: chaSeason,
-                season_type: 'Regular',
-            },
-        });
-    }
-    async setSeasonStats(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { stats: await this.getSeasonStats(item.team_id.id, item.cha_season) }))));
-    }
-    async getSeasonStats(teamId, chaSeason) {
-        return await this.teamStatsRepo.findOne({
-            select: {
-                id: true,
-                playing_year: true,
-                games_played: true,
-                wins: true,
-                goals_for: true,
-                goals_against: true,
-                points: true,
-            },
-            where: {
-                team_id: { id: teamId },
-                playing_year: chaSeason,
-                season_type: 'Regular',
-            },
-        });
-    }
-};
-ApiAwardsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Award_Type_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
-    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
-    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object])
-], ApiAwardsService);
-exports.ApiAwardsService = ApiAwardsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/services/api-user-awards.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiUserAwardsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiUserAwardsService = class ApiUserAwardsService {
-    constructor(repo) {
-        this.repo = repo;
-    }
-    async getAwardsByUserId(userId) {
-        return await this.repo.find({
-            select: {
-                id: true,
-                display_season: true,
-                award_type: {
-                    id: true,
-                    display_name: true,
-                },
-                users_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                },
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                },
-                team_id: {
-                    id: true,
-                    teamlogo: true,
-                    teamcolor: true,
-                    teamtextcolor: true,
-                },
-            },
-            relations: ['users_id', 'player_id', 'award_type', 'team_id'],
-            where: {
-                users_id: {
-                    id: userId,
-                },
-            },
-            order: {
-                display_season: 'DESC',
-            },
-        });
-    }
-};
-ApiUserAwardsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
-], ApiUserAwardsService);
-exports.ApiUserAwardsService = ApiUserAwardsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/awards/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/awards/src/lib/services/api-awards.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/awards/src/lib/services/api-user-awards.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/conferences/src/lib/api-conferences.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/api-conferences.module.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiConferencesModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/conferences/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/conferences/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/conferences/src/lib/services/index.ts");
-let ApiConferencesModule = class ApiConferencesModule {
-    configure(consumer) {
-        consumer.apply(middlewares_1.ConferencesMiddleware).forRoutes('*');
-    }
-};
-ApiConferencesModule = tslib_1.__decorate([
-    (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Conferences_V2])],
-        controllers: [controllers_1.ConferencesController],
-        providers: [services_1.ApiConferencesService],
-    })
-], ApiConferencesModule);
-exports.ApiConferencesModule = ApiConferencesModule;
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/controllers/conferences.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c, _d;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ConferencesController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/conferences/src/lib/services/index.ts");
-let ConferencesController = class ConferencesController {
-    constructor(conferencesService) {
-        this.conferencesService = conferencesService;
-    }
-    async getAll() {
-        const conferences = await this.conferencesService.getAll();
-        if (!conferences || conferences.length < 1) {
-            throw new common_1.NotFoundException('Conferences not found');
-        }
-        return conferences;
-    }
-    updateConferenceById(param, body) {
-        return this.conferencesService.updateConferenceById(parseInt(param.id), body);
-    }
-    addConference(body) {
-        return this.conferencesService.addConference(body);
-    }
-    deleteConference(param) {
-        return this.conferencesService.deleteConference(parseInt(param.id));
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
-], ConferencesController.prototype, "getAll", null);
-tslib_1.__decorate([
-    (0, common_1.Put)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], ConferencesController.prototype, "updateConferenceById", null);
-tslib_1.__decorate([
-    (0, common_1.Post)('/add'),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.ConferenceCreateDto !== "undefined" && entities_1.ConferenceCreateDto) === "function" ? _d : Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], ConferencesController.prototype, "addConference", null);
-tslib_1.__decorate([
-    (0, common_1.Delete)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], ConferencesController.prototype, "deleteConference", null);
-ConferencesController = tslib_1.__decorate([
-    (0, common_1.Controller)('conferences'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiConferencesService !== "undefined" && services_1.ApiConferencesService) === "function" ? _a : Object])
-], ConferencesController);
-exports.ConferencesController = ConferencesController;
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/controllers/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/conferences/src/lib/controllers/conferences.controller.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/middlewares/conferences.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ConferencesMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let ConferencesMiddleware = class ConferencesMiddleware {
-    use(req, res, next) {
-        console.log('Request Conferences...');
-        next();
-    }
-};
-ConferencesMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], ConferencesMiddleware);
-exports.ConferencesMiddleware = ConferencesMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/conferences/src/lib/middlewares/conferences.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/services/api-conferences.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiConferencesService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiConferencesService = class ApiConferencesService {
-    constructor(repo) {
-        this.repo = repo;
-    }
-    async getAll() {
-        return await this.repo.find();
-    }
-    async updateConferenceById(id, attrs) {
-        const conference = await this.repo.findOneByOrFail({ id });
-        if (!conference) {
-            throw new common_1.NotFoundException('conference not found');
-        }
-        Object.assign(conference, attrs);
-        return this.repo.save(conference);
-    }
-    async addConference(body) {
-        const conference = await this.repo.create(body);
-        return this.repo.save(conference);
-    }
-    async deleteConference(id) {
-        const conference = await this.repo.findOneByOrFail({ id });
-        if (!conference) {
-            throw new common_1.NotFoundException('conference not found');
-        }
-        return this.repo.remove(conference);
-    }
-};
-ApiConferencesService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Conferences_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
-], ApiConferencesService);
-exports.ApiConferencesService = ApiConferencesService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/conferences/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/conferences/src/lib/services/api-conferences.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/core/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/core/src/lib/api-core.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/core/src/lib/api-core.module.ts":
+/* 7 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiCoreModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const awards_1 = __webpack_require__("../../libs/api/awards/src/index.ts");
-const users_1 = __webpack_require__("../../libs/api/users/src/index.ts");
-const draft_table_1 = __webpack_require__("../../libs/api/draft-table/src/index.ts");
-const entry_draft_1 = __webpack_require__("../../libs/api/entry-draft/src/index.ts");
-const goalie_stats_1 = __webpack_require__("../../libs/api/goalie-stats/src/index.ts");
-const league_1 = __webpack_require__("../../libs/api/league/src/index.ts");
-const nhl_1 = __webpack_require__("../../libs/api/nhl/src/index.ts");
-const player_info_1 = __webpack_require__("../../libs/api/player-info/src/index.ts");
-const player_ratings_1 = __webpack_require__("../../libs/api/player-ratings/src/index.ts");
-const player_stats_1 = __webpack_require__("../../libs/api/player-stats/src/index.ts");
-const salaries_1 = __webpack_require__("../../libs/api/salaries/src/index.ts");
-const schedule_1 = __webpack_require__("../../libs/api/schedule/src/index.ts");
-const team_stats_1 = __webpack_require__("../../libs/api/team-stats/src/index.ts");
-const teams_1 = __webpack_require__("../../libs/api/teams/src/index.ts");
-const transactions_1 = __webpack_require__("../../libs/api/transactions/src/index.ts");
-const waivers_1 = __webpack_require__("../../libs/api/waivers/src/index.ts");
-const divisions_1 = __webpack_require__("../../libs/api/divisions/src/index.ts");
-const goalie_ratings_1 = __webpack_require__("../../libs/api/goalie-ratings/src/index.ts");
-const conferences_1 = __webpack_require__("../../libs/api/conferences/src/index.ts");
-let ApiCoreModule = class ApiCoreModule {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const awards_1 = __webpack_require__(8);
+const users_1 = __webpack_require__(119);
+const draft_table_1 = __webpack_require__(127);
+const entry_draft_1 = __webpack_require__(135);
+const goalie_stats_1 = __webpack_require__(143);
+const league_1 = __webpack_require__(154);
+const nhl_1 = __webpack_require__(161);
+const player_info_1 = __webpack_require__(171);
+const player_ratings_1 = __webpack_require__(179);
+const player_stats_1 = __webpack_require__(187);
+const salaries_1 = __webpack_require__(198);
+const schedule_1 = __webpack_require__(206);
+const team_stats_1 = __webpack_require__(214);
+const teams_1 = __webpack_require__(224);
+const transactions_1 = __webpack_require__(231);
+const waivers_1 = __webpack_require__(240);
+const divisions_1 = __webpack_require__(248);
+const goalie_ratings_1 = __webpack_require__(256);
+const conferences_1 = __webpack_require__(264);
+let ApiCoreModule = exports.ApiCoreModule = class ApiCoreModule {
 };
-ApiCoreModule = tslib_1.__decorate([
+exports.ApiCoreModule = ApiCoreModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
             users_1.ApiUsersModule,
@@ -1063,541 +159,102 @@ ApiCoreModule = tslib_1.__decorate([
         exports: [],
     })
 ], ApiCoreModule);
-exports.ApiCoreModule = ApiCoreModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/divisions/src/index.ts":
+/* 8 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/divisions/src/lib/api-divisions.module.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(9), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/api-divisions.module.ts":
+/* 9 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiDivisionsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/divisions/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/divisions/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/divisions/src/lib/services/index.ts");
-let ApiDivisionsModule = class ApiDivisionsModule {
+exports.ApiAwardsModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(33);
+const middlewares_1 = __webpack_require__(117);
+const services_1 = __webpack_require__(114);
+let ApiAwardsModule = exports.ApiAwardsModule = class ApiAwardsModule {
     configure(consumer) {
-        consumer.apply(middlewares_1.DivisionsMiddleware).forRoutes('*');
+        consumer.apply(middlewares_1.AwardsMiddleware).forRoutes('*');
     }
 };
-ApiDivisionsModule = tslib_1.__decorate([
+exports.ApiAwardsModule = ApiAwardsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Divisions_V2])],
-        controllers: [controllers_1.DivisionsController],
-        providers: [services_1.ApiDivisionsService],
+        imports: [
+            typeorm_1.TypeOrmModule.forFeature([
+                entities_1.Awards_V2,
+                entities_1.Players_Stats_V2,
+                entities_1.Goalies_Stats_V2,
+                entities_1.Team_Stats_V2,
+                entities_1.Award_Type_V2,
+            ]),
+        ],
+        controllers: [controllers_1.AwardsController],
+        providers: [services_1.ApiAwardsService, services_1.ApiUserAwardsService],
     })
-], ApiDivisionsModule);
-exports.ApiDivisionsModule = ApiDivisionsModule;
+], ApiAwardsModule);
 
 
 /***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/controllers/divisions.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c, _d, _e;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DivisionsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/divisions/src/lib/services/index.ts");
-let DivisionsController = class DivisionsController {
-    constructor(divisionsService) {
-        this.divisionsService = divisionsService;
-    }
-    async getAll() {
-        const divisions = await this.divisionsService.getAll();
-        if (!divisions || divisions.length < 1) {
-            throw new common_1.NotFoundException('Divisions not found');
-        }
-        return divisions;
-    }
-    async getAllActive() {
-        const divisions = await this.divisionsService.getAllActive();
-        if (!divisions || divisions.length < 1) {
-            throw new common_1.NotFoundException('Divisions not found');
-        }
-        return divisions;
-    }
-    updateDivisionById(param, body) {
-        return this.divisionsService.updateDivisionById(parseInt(param.id), body);
-    }
-    addDivision(body) {
-        return this.divisionsService.addDivision(body);
-    }
-    deleteDivision(param) {
-        return this.divisionsService.deleteDivision(parseInt(param.id));
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
-], DivisionsController.prototype, "getAll", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/active'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], DivisionsController.prototype, "getAllActive", null);
-tslib_1.__decorate([
-    (0, common_1.Put)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
-], DivisionsController.prototype, "updateDivisionById", null);
-tslib_1.__decorate([
-    (0, common_1.Post)('/add'),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.DivisionCreateDto !== "undefined" && entities_1.DivisionCreateDto) === "function" ? _e : Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], DivisionsController.prototype, "addDivision", null);
-tslib_1.__decorate([
-    (0, common_1.Delete)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], DivisionsController.prototype, "deleteDivision", null);
-DivisionsController = tslib_1.__decorate([
-    (0, common_1.Controller)('divisions'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiDivisionsService !== "undefined" && services_1.ApiDivisionsService) === "function" ? _a : Object])
-], DivisionsController);
-exports.DivisionsController = DivisionsController;
-
-
-/***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/controllers/index.ts":
+/* 10 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/divisions/src/lib/controllers/divisions.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(11), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/middlewares/divisions.middleware.ts":
+/* 11 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DivisionsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let DivisionsMiddleware = class DivisionsMiddleware {
-    use(req, res, next) {
-        console.log('Request Divisions...');
-        next();
-    }
-};
-DivisionsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], DivisionsMiddleware);
-exports.DivisionsMiddleware = DivisionsMiddleware;
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(12), exports);
+tslib_1.__exportStar(__webpack_require__(14), exports);
+tslib_1.__exportStar(__webpack_require__(20), exports);
+tslib_1.__exportStar(__webpack_require__(26), exports);
+tslib_1.__exportStar(__webpack_require__(19), exports);
+tslib_1.__exportStar(__webpack_require__(27), exports);
+tslib_1.__exportStar(__webpack_require__(17), exports);
+tslib_1.__exportStar(__webpack_require__(21), exports);
+tslib_1.__exportStar(__webpack_require__(22), exports);
+tslib_1.__exportStar(__webpack_require__(23), exports);
+tslib_1.__exportStar(__webpack_require__(15), exports);
+tslib_1.__exportStar(__webpack_require__(16), exports);
+tslib_1.__exportStar(__webpack_require__(24), exports);
+tslib_1.__exportStar(__webpack_require__(28), exports);
+tslib_1.__exportStar(__webpack_require__(29), exports);
+tslib_1.__exportStar(__webpack_require__(18), exports);
+tslib_1.__exportStar(__webpack_require__(30), exports);
+tslib_1.__exportStar(__webpack_require__(25), exports);
+tslib_1.__exportStar(__webpack_require__(31), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/divisions/src/lib/middlewares/divisions.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/services/api-divisions.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiDivisionsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiDivisionsService = class ApiDivisionsService {
-    constructor(repo) {
-        this.repo = repo;
-    }
-    async getAllActive() {
-        return await this.repo.findBy({ isactive: true });
-    }
-    async getAll() {
-        return await this.repo.find({
-            relations: ['conference_id'],
-        });
-    }
-    async updateDivisionById(id, attrs) {
-        const division = await this.repo.findOneByOrFail({ id });
-        if (!division) {
-            throw new common_1.NotFoundException('division not found');
-        }
-        Object.assign(division, attrs);
-        return this.repo.save(division);
-    }
-    async addDivision(body) {
-        const division = await this.repo.create(body);
-        return this.repo.save(division);
-    }
-    async deleteDivision(id) {
-        const division = await this.repo.findOneByOrFail({ id });
-        if (!division) {
-            throw new common_1.NotFoundException('division not found');
-        }
-        return this.repo.remove(division);
-    }
-};
-ApiDivisionsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
-], ApiDivisionsService);
-exports.ApiDivisionsService = ApiDivisionsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/divisions/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/divisions/src/lib/services/api-divisions.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/draft-table/src/lib/api-draft-table.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/api-draft-table.module.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiDraftTableModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/draft-table/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/draft-table/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/draft-table/src/lib/services/index.ts");
-let ApiDraftTableModule = class ApiDraftTableModule {
-    configure(consumer) {
-        consumer.apply(middlewares_1.DraftTableMiddleware).forRoutes('*');
-    }
-};
-ApiDraftTableModule = tslib_1.__decorate([
-    (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Draft_Order_V2, entities_1.Team_Stats_V2])],
-        controllers: [controllers_1.DraftTableController],
-        providers: [services_1.ApiDraftTableService],
-    })
-], ApiDraftTableModule);
-exports.ApiDraftTableModule = ApiDraftTableModule;
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/controllers/draft-table.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c, _d;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DraftTableController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/draft-table/src/lib/services/index.ts");
-let DraftTableController = class DraftTableController {
-    constructor(draftTableService) {
-        this.draftTableService = draftTableService;
-    }
-    async getDraftTable(param) {
-        const teams = await this.draftTableService.getAll(param.draft_year);
-        if (!teams || teams.length < 1) {
-            throw new common_1.NotFoundException('teams not found');
-        }
-        return teams;
-    }
-    updateTableById(param, body) {
-        return this.draftTableService.updateTableById(parseInt(param.id), body);
-    }
-    async getDraftTableByYearByStandings(param) {
-        const draftTable = await this.draftTableService.getDraftTableByYearByStandings(param.draft_year, param.playing_year);
-        if (!draftTable || draftTable.length < 1) {
-            throw new common_1.NotFoundException('Draft Table not found');
-        }
-        return draftTable;
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)('/:draft_year'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
-], DraftTableController.prototype, "getDraftTable", null);
-tslib_1.__decorate([
-    (0, common_1.Put)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], DraftTableController.prototype, "updateTableById", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/:draft_year/:playing_year'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
-], DraftTableController.prototype, "getDraftTableByYearByStandings", null);
-DraftTableController = tslib_1.__decorate([
-    (0, common_1.Controller)('draft-table'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiDraftTableService !== "undefined" && services_1.ApiDraftTableService) === "function" ? _a : Object])
-], DraftTableController);
-exports.DraftTableController = DraftTableController;
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/controllers/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/draft-table/src/lib/controllers/draft-table.controller.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/middlewares/draft-table.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DraftTableMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let DraftTableMiddleware = class DraftTableMiddleware {
-    use(req, res, next) {
-        console.log('Request Draft Table...');
-        next();
-    }
-};
-DraftTableMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], DraftTableMiddleware);
-exports.DraftTableMiddleware = DraftTableMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/draft-table/src/lib/middlewares/draft-table.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/services/api-draft-table.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiDraftTableService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiDraftTableService = class ApiDraftTableService {
-    constructor(repo, teamStatsRepo) {
-        this.repo = repo;
-        this.teamStatsRepo = teamStatsRepo;
-        this.getDraftByStandings = (data) => {
-            return data
-                .sort((a, b) => {
-                if (b.stats.points === a.stats.points) {
-                    if (b.stats.wins === a.stats.wins) {
-                        if (b.stats.goals_for - b.stats.goals_against ===
-                            a.stats.goals_for - a.stats.goals_against) {
-                            return b.stats.goals_for - a.stats.goals_for;
-                        }
-                        else {
-                            return (b.stats.goals_for -
-                                b.stats.goals_against -
-                                (a.stats.goals_for - a.stats.goals_against));
-                        }
-                    }
-                    else {
-                        return b.stats.wins - a.stats.wins;
-                    }
-                }
-                else {
-                    return b.stats.points - a.stats.points;
-                }
-            })
-                .reverse();
-        };
-    }
-    async getAll(draftYear) {
-        return await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    shortname: true,
-                    city: true,
-                    nickname: true,
-                    teamlogo: true,
-                },
-            },
-            where: {
-                draft_year: draftYear,
-            },
-        });
-    }
-    async updateTableById(id, attrs) {
-        const item = await this.repo.findOneByOrFail({ id });
-        if (!item) {
-            throw new common_1.NotFoundException('item not found');
-        }
-        Object.assign(item, attrs);
-        return this.repo.save(item);
-    }
-    async getDraftTableByYearByStandings(draftYear, playingYear) {
-        const draftTable = await this.repo.find({
-            relations: ['team_id'],
-            where: {
-                draft_year: draftYear,
-            },
-            select: {
-                team_id: {
-                    id: true,
-                    shortname: true,
-                    city: true,
-                    nickname: true,
-                    teamlogo: true,
-                },
-            },
-        });
-        const draftTableWithStandings = await this.setTableStandings(draftTable, playingYear);
-        const draftTableByStandings = this.getDraftByStandings(draftTableWithStandings);
-        return draftTableByStandings;
-    }
-    async setTableStandings(array, playingYear) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { stats: await this.getTeamStats(item.team_id.id, playingYear) }))));
-    }
-    async getTeamStats(teamId, playingYear) {
-        return await this.teamStatsRepo.findOne({
-            relations: ['team_id'],
-            select: {
-                id: true,
-                wins: true,
-                goals_for: true,
-                goals_against: true,
-                points: true,
-            },
-            where: {
-                team_id: { id: teamId },
-                playing_year: playingYear,
-                season_type: 'Regular',
-            },
-        });
-    }
-};
-ApiDraftTableService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
-], ApiDraftTableService);
-exports.ApiDraftTableService = ApiDraftTableService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/draft-table/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/draft-table/src/lib/services/api-draft-table.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/index.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/award-type.entity.ts":
+/* 12 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Award_Type_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Award_Type_V2 = class Award_Type_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Award_Type_V2 = exports.Award_Type_V2 = class Award_Type_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -1611,29 +268,33 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Award_Type_V2.prototype, "display_name", void 0);
-Award_Type_V2 = tslib_1.__decorate([
+exports.Award_Type_V2 = Award_Type_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Award_Type_V2);
-exports.Award_Type_V2 = Award_Type_V2;
 
 
 /***/ }),
+/* 13 */
+/***/ ((module) => {
 
-/***/ "../../libs/api/entities/src/lib/entities/award.entity.ts":
+module.exports = require("typeorm");
+
+/***/ }),
+/* 14 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Awards_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const award_type_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/award-type.entity.ts");
-const player_stats_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player-stats.entity.ts");
-const player_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player.entity.ts");
-const team_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts");
-const user_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/user.entity.ts");
-let Awards_V2 = class Awards_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const award_type_entity_1 = __webpack_require__(12);
+const player_stats_entity_1 = __webpack_require__(15);
+const player_entity_1 = __webpack_require__(16);
+const team_entity_1 = __webpack_require__(18);
+const user_entity_1 = __webpack_require__(25);
+let Awards_V2 = exports.Awards_V2 = class Awards_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -1668,728 +329,28 @@ tslib_1.__decorate([
     (0, typeorm_1.JoinColumn)({ name: 'player_id' }),
     tslib_1.__metadata("design:type", typeof (_d = typeof player_entity_1.Players_V2 !== "undefined" && player_entity_1.Players_V2) === "function" ? _d : Object)
 ], Awards_V2.prototype, "player_id", void 0);
-Awards_V2 = tslib_1.__decorate([
+exports.Awards_V2 = Awards_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)({
         orderBy: {
             display_season: 'DESC',
         },
     })
 ], Awards_V2);
-exports.Awards_V2 = Awards_V2;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/conference.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Conferences_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Conferences_V2 = class Conferences_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Conferences_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Conferences_V2.prototype, "conferencename", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
-], Conferences_V2.prototype, "isactive", void 0);
-Conferences_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Conferences_V2);
-exports.Conferences_V2 = Conferences_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/current_season.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Current_Season_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Current_Season_V2 = class Current_Season_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Current_Season_V2.prototype, "current_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Current_Season_V2.prototype, "next_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Current_Season_V2.prototype, "prev_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Current_Season_V2.prototype, "nhl_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Current_Season_V2.prototype, "current_season_type", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "current_day", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "current_draft_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "next_draft_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "current_cap", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "next_cap", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Current_Season_V2.prototype, "min_games", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
-], Current_Season_V2.prototype, "offseason", void 0);
-Current_Season_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Current_Season_V2);
-exports.Current_Season_V2 = Current_Season_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/division.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Divisions_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const conference_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/conference.entity.ts");
-let Divisions_V2 = class Divisions_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Divisions_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Divisions_V2.prototype, "divisionname", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.OneToOne)(() => conference_entity_1.Conferences_V2, (conference) => conference.id, {
-        eager: true,
-    }),
-    (0, typeorm_1.JoinColumn)({ name: 'conference_id' }),
-    tslib_1.__metadata("design:type", Number)
-], Divisions_V2.prototype, "conference_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
-], Divisions_V2.prototype, "isactive", void 0);
-Divisions_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Divisions_V2);
-exports.Divisions_V2 = Divisions_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/draft-order.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Draft_Order_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const team_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts");
-let Draft_Order_V2 = class Draft_Order_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Draft_Order_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id, { eager: true }),
-    (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
-    tslib_1.__metadata("design:type", typeof (_a = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _a : Object)
-], Draft_Order_V2.prototype, "team_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Draft_Order_V2.prototype, "round_one", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Draft_Order_V2.prototype, "round_two", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Draft_Order_V2.prototype, "round_three", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Draft_Order_V2.prototype, "round_four", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Draft_Order_V2.prototype, "round_five", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Draft_Order_V2.prototype, "draft_year", void 0);
-Draft_Order_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Draft_Order_V2);
-exports.Draft_Order_V2 = Draft_Order_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/draft.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Drafts_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const player_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player.entity.ts");
-const team_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts");
-let Drafts_V2 = class Drafts_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Drafts_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => player_entity_1.Players_V2, (player) => player.id),
-    (0, typeorm_1.JoinColumn)({ name: 'player_id' }),
-    tslib_1.__metadata("design:type", typeof (_a = typeof typeorm_1.Relation !== "undefined" && typeorm_1.Relation) === "function" ? _a : Object)
-], Drafts_V2.prototype, "player_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Drafts_V2.prototype, "draft_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Drafts_V2.prototype, "draft_round", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Drafts_V2.prototype, "draft_overall", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
-    (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
-    tslib_1.__metadata("design:type", typeof (_b = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _b : Object)
-], Drafts_V2.prototype, "team_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
-    (0, typeorm_1.JoinColumn)({ name: 'pick_team_id' }),
-    tslib_1.__metadata("design:type", typeof (_c = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _c : Object)
-], Drafts_V2.prototype, "pick_team_id", void 0);
-Drafts_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Drafts_V2);
-exports.Drafts_V2 = Drafts_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/goalie-rating.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Goalie_Ratings_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Goalie_Ratings_V2 = class Goalie_Ratings_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "player_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "games_played", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "minutes_played", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalie_Ratings_V2.prototype, "goals_against_avg", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "wins", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "loss", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "ties", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "en_goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "shutouts", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "goals_against", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "saves", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "shots_for", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalie_Ratings_V2.prototype, "save_pct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "assists", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "points", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalie_Ratings_V2.prototype, "penalty_minutes", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalie_Ratings_V2.prototype, "skating", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalie_Ratings_V2.prototype, "speed", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalie_Ratings_V2.prototype, "passing", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalie_Ratings_V2.prototype, "playing_year", void 0);
-Goalie_Ratings_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Goalie_Ratings_V2);
-exports.Goalie_Ratings_V2 = Goalie_Ratings_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/goalie-stats.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Goalies_Stats_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const player_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player.entity.ts");
-const team_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts");
-let Goalies_Stats_V2 = class Goalies_Stats_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.ManyToOne)(() => player_entity_1.Players_V2, (player) => player.id, { eager: true }),
-    (0, typeorm_1.JoinColumn)({ name: 'player_id' }),
-    tslib_1.__metadata("design:type", typeof (_a = typeof player_entity_1.Players_V2 !== "undefined" && player_entity_1.Players_V2) === "function" ? _a : Object)
-], Goalies_Stats_V2.prototype, "player_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "team_name", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "games_played", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "minutes_played", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "goals_against_avg", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "wins", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "loss", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "ties", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "en_goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "shutouts", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "goals_against", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "saves", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "shots_for", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "save_pct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "assists", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "points", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_minutes", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "pass_complete", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "pass_incomplete", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "pass_attempts", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "pass_pct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_minor", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_minor_coincidental", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_major", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_fighting_major", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_match", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_misconduct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_game_misconduct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Goalies_Stats_V2.prototype, "penalty_gross_misconduct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "playing_year", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "season_type", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Goalies_Stats_V2.prototype, "player_status", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.OneToOne)(() => team_entity_1.Teams_V2, (team) => team.shortname),
-    tslib_1.__metadata("design:type", typeof (_b = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _b : Object)
-], Goalies_Stats_V2.prototype, "team", void 0);
-Goalies_Stats_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Goalies_Stats_V2);
-exports.Goalies_Stats_V2 = Goalies_Stats_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/award-type.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/award.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/conference.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/current_season.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/division.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/draft-order.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/draft.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/goalie-rating.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/goalie-stats.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/player-rating.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/player-stats.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/player.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/salary.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/schedule.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/team-stats.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/transactions.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/user.entity.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entities/src/lib/entities/waivers.entity.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/player-rating.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Player_Ratings_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Player_Ratings_V2 = class Player_Ratings_V2 {
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "player_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "games_played", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "assists", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "points", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "plus_minus", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "penalty_minutes", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "pp_goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "sh_goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "gw_goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "gt_goals", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Player_Ratings_V2.prototype, "shots", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "shooting_pct", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "game_fatigue", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "shift_fatigue", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "c_rate", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "l_rate", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "r_rate", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "ld_rate", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "rd_rate", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "shooting", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "skating", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "speed", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "passing", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "forecheck", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "physical", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "intimidation", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "clear_crease", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "rock", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "pk", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "shot_block", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "face_off", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "assist_rating", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Player_Ratings_V2.prototype, "playing_year", void 0);
-Player_Ratings_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Player_Ratings_V2);
-exports.Player_Ratings_V2 = Player_Ratings_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/player-stats.entity.ts":
+/* 15 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Players_Stats_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const award_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/award.entity.ts");
-const player_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player.entity.ts");
-let Players_Stats_V2 = class Players_Stats_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const award_entity_1 = __webpack_require__(14);
+const player_entity_1 = __webpack_require__(16);
+let Players_Stats_V2 = exports.Players_Stats_V2 = class Players_Stats_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -2597,30 +558,28 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Players_Stats_V2.prototype, "player_status", void 0);
-Players_Stats_V2 = tslib_1.__decorate([
+exports.Players_Stats_V2 = Players_Stats_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Players_Stats_V2);
-exports.Players_Stats_V2 = Players_Stats_V2;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/player.entity.ts":
+/* 16 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Players_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const draft_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/draft.entity.ts");
-const goalie_rating_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/goalie-rating.entity.ts");
-const goalie_stats_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/goalie-stats.entity.ts");
-const player_rating_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player-rating.entity.ts");
-const player_stats_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/player-stats.entity.ts");
-const salary_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/salary.entity.ts");
-let Players_V2 = class Players_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const draft_entity_1 = __webpack_require__(17);
+const goalie_rating_entity_1 = __webpack_require__(21);
+const goalie_stats_entity_1 = __webpack_require__(22);
+const player_rating_entity_1 = __webpack_require__(23);
+const player_stats_entity_1 = __webpack_require__(15);
+const salary_entity_1 = __webpack_require__(24);
+let Players_V2 = exports.Players_V2 = class Players_V2 {
     logInsert() {
         console.log('Inserted Player with id', this.id);
     }
@@ -2721,23 +680,645 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], Players_V2.prototype, "logRemove", null);
-Players_V2 = tslib_1.__decorate([
+exports.Players_V2 = Players_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Players_V2);
-exports.Players_V2 = Players_V2;
 
 
 /***/ }),
+/* 17 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/entities/src/lib/entities/salary.entity.ts":
+
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Drafts_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const player_entity_1 = __webpack_require__(16);
+const team_entity_1 = __webpack_require__(18);
+let Drafts_V2 = exports.Drafts_V2 = class Drafts_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Drafts_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.ManyToOne)(() => player_entity_1.Players_V2, (player) => player.id),
+    (0, typeorm_1.JoinColumn)({ name: 'player_id' }),
+    tslib_1.__metadata("design:type", typeof (_a = typeof typeorm_1.Relation !== "undefined" && typeorm_1.Relation) === "function" ? _a : Object)
+], Drafts_V2.prototype, "player_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Drafts_V2.prototype, "draft_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Drafts_V2.prototype, "draft_round", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Drafts_V2.prototype, "draft_overall", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
+    (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
+    tslib_1.__metadata("design:type", typeof (_b = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _b : Object)
+], Drafts_V2.prototype, "team_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
+    (0, typeorm_1.JoinColumn)({ name: 'pick_team_id' }),
+    tslib_1.__metadata("design:type", typeof (_c = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _c : Object)
+], Drafts_V2.prototype, "pick_team_id", void 0);
+exports.Drafts_V2 = Drafts_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Drafts_V2);
+
+
+/***/ }),
+/* 18 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Teams_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const division_entity_1 = __webpack_require__(19);
+let Teams_V2 = exports.Teams_V2 = class Teams_V2 {
+    logInsert() {
+        console.log('Inserted Team with id', this.id);
+    }
+    logUpdate() {
+        console.log('Updated Team with id', this.id);
+    }
+    logRemove() {
+        console.log('Removed Team');
+    }
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Teams_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "shortname", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "city", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "nickname", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Boolean)
+], Teams_V2.prototype, "isactive", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Teams_V2.prototype, "users_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "teamlogo", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "teamaltlogo", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "teamcolor", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Teams_V2.prototype, "teamtextcolor", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.OneToOne)(() => division_entity_1.Divisions_V2, (division) => division.id, { eager: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'divisions_id' }),
+    tslib_1.__metadata("design:type", typeof (_a = typeof division_entity_1.Divisions_V2 !== "undefined" && division_entity_1.Divisions_V2) === "function" ? _a : Object)
+], Teams_V2.prototype, "divisions_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterInsert)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Teams_V2.prototype, "logInsert", null);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterUpdate)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Teams_V2.prototype, "logUpdate", null);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterRemove)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Teams_V2.prototype, "logRemove", null);
+exports.Teams_V2 = Teams_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Teams_V2);
+
+
+/***/ }),
+/* 19 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Divisions_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const conference_entity_1 = __webpack_require__(20);
+let Divisions_V2 = exports.Divisions_V2 = class Divisions_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Divisions_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Divisions_V2.prototype, "divisionname", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.OneToOne)(() => conference_entity_1.Conferences_V2, (conference) => conference.id, {
+        eager: true,
+    }),
+    (0, typeorm_1.JoinColumn)({ name: 'conference_id' }),
+    tslib_1.__metadata("design:type", Number)
+], Divisions_V2.prototype, "conference_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Boolean)
+], Divisions_V2.prototype, "isactive", void 0);
+exports.Divisions_V2 = Divisions_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Divisions_V2);
+
+
+/***/ }),
+/* 20 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Conferences_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Conferences_V2 = exports.Conferences_V2 = class Conferences_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Conferences_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Conferences_V2.prototype, "conferencename", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Boolean)
+], Conferences_V2.prototype, "isactive", void 0);
+exports.Conferences_V2 = Conferences_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Conferences_V2);
+
+
+/***/ }),
+/* 21 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Goalie_Ratings_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Goalie_Ratings_V2 = exports.Goalie_Ratings_V2 = class Goalie_Ratings_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "player_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "games_played", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "minutes_played", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalie_Ratings_V2.prototype, "goals_against_avg", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "wins", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "loss", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "ties", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "en_goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "shutouts", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "goals_against", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "saves", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "shots_for", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalie_Ratings_V2.prototype, "save_pct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "assists", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "points", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalie_Ratings_V2.prototype, "penalty_minutes", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalie_Ratings_V2.prototype, "skating", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalie_Ratings_V2.prototype, "speed", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalie_Ratings_V2.prototype, "passing", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalie_Ratings_V2.prototype, "playing_year", void 0);
+exports.Goalie_Ratings_V2 = Goalie_Ratings_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Goalie_Ratings_V2);
+
+
+/***/ }),
+/* 22 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Goalies_Stats_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const player_entity_1 = __webpack_require__(16);
+const team_entity_1 = __webpack_require__(18);
+let Goalies_Stats_V2 = exports.Goalies_Stats_V2 = class Goalies_Stats_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.ManyToOne)(() => player_entity_1.Players_V2, (player) => player.id, { eager: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'player_id' }),
+    tslib_1.__metadata("design:type", typeof (_a = typeof player_entity_1.Players_V2 !== "undefined" && player_entity_1.Players_V2) === "function" ? _a : Object)
+], Goalies_Stats_V2.prototype, "player_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "team_name", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "games_played", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "minutes_played", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "goals_against_avg", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "wins", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "loss", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "ties", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "en_goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "shutouts", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "goals_against", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "saves", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "shots_for", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "save_pct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "assists", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "points", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_minutes", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "pass_complete", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "pass_incomplete", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "pass_attempts", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "pass_pct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_minor", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_minor_coincidental", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_major", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_fighting_major", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_match", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_misconduct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_game_misconduct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Goalies_Stats_V2.prototype, "penalty_gross_misconduct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "playing_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "season_type", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Goalies_Stats_V2.prototype, "player_status", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.OneToOne)(() => team_entity_1.Teams_V2, (team) => team.shortname),
+    tslib_1.__metadata("design:type", typeof (_b = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _b : Object)
+], Goalies_Stats_V2.prototype, "team", void 0);
+exports.Goalies_Stats_V2 = Goalies_Stats_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Goalies_Stats_V2);
+
+
+/***/ }),
+/* 23 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Player_Ratings_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Player_Ratings_V2 = exports.Player_Ratings_V2 = class Player_Ratings_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "player_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "games_played", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "assists", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "points", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "plus_minus", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "penalty_minutes", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "pp_goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "sh_goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "gw_goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "gt_goals", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Player_Ratings_V2.prototype, "shots", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "shooting_pct", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "game_fatigue", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "shift_fatigue", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "c_rate", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "l_rate", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "r_rate", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "ld_rate", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "rd_rate", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "shooting", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "skating", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "speed", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "passing", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "forecheck", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "physical", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "intimidation", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "clear_crease", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "rock", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "pk", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "shot_block", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "face_off", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "assist_rating", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Player_Ratings_V2.prototype, "playing_year", void 0);
+exports.Player_Ratings_V2 = Player_Ratings_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Player_Ratings_V2);
+
+
+/***/ }),
+/* 24 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Salaries_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Salaries_V2 = class Salaries_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Salaries_V2 = exports.Salaries_V2 = class Salaries_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -2831,23 +1412,207 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Salaries_V2.prototype, "season_2040", void 0);
-Salaries_V2 = tslib_1.__decorate([
+exports.Salaries_V2 = Salaries_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Salaries_V2);
-exports.Salaries_V2 = Salaries_V2;
 
 
 /***/ }),
+/* 25 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/entities/src/lib/entities/schedule.entity.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Users_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Users_V2 = exports.Users_V2 = class Users_V2 {
+    logInsert() {
+        console.log('Inserted User with id', this.id);
+    }
+    logUpdate() {
+        console.log('Updated User with id', this.id);
+    }
+    logRemove() {
+        console.log('Removed User');
+    }
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Users_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Users_V2.prototype, "firstname", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Users_V2.prototype, "lastname", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Users_V2.prototype, "email", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Boolean)
+], Users_V2.prototype, "isadmin", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Boolean)
+], Users_V2.prototype, "isactive", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterInsert)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Users_V2.prototype, "logInsert", null);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterUpdate)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Users_V2.prototype, "logUpdate", null);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterRemove)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Users_V2.prototype, "logRemove", null);
+exports.Users_V2 = Users_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Users_V2);
+
+
+/***/ }),
+/* 26 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Current_Season_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Current_Season_V2 = exports.Current_Season_V2 = class Current_Season_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Current_Season_V2.prototype, "current_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Current_Season_V2.prototype, "next_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Current_Season_V2.prototype, "prev_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Current_Season_V2.prototype, "nhl_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Current_Season_V2.prototype, "current_season_type", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "current_day", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "current_draft_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "next_draft_year", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "current_cap", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "next_cap", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Current_Season_V2.prototype, "min_games", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Boolean)
+], Current_Season_V2.prototype, "offseason", void 0);
+exports.Current_Season_V2 = Current_Season_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Current_Season_V2);
+
+
+/***/ }),
+/* 27 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Draft_Order_V2 = void 0;
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const team_entity_1 = __webpack_require__(18);
+let Draft_Order_V2 = exports.Draft_Order_V2 = class Draft_Order_V2 {
+};
+tslib_1.__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    tslib_1.__metadata("design:type", Number)
+], Draft_Order_V2.prototype, "id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.ManyToOne)(() => team_entity_1.Teams_V2, (team) => team.id, { eager: true }),
+    (0, typeorm_1.JoinColumn)({ name: 'team_id' }),
+    tslib_1.__metadata("design:type", typeof (_a = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _a : Object)
+], Draft_Order_V2.prototype, "team_id", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Draft_Order_V2.prototype, "round_one", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Draft_Order_V2.prototype, "round_two", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Draft_Order_V2.prototype, "round_three", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Draft_Order_V2.prototype, "round_four", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", Number)
+], Draft_Order_V2.prototype, "round_five", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.Column)(),
+    tslib_1.__metadata("design:type", String)
+], Draft_Order_V2.prototype, "draft_year", void 0);
+exports.Draft_Order_V2 = Draft_Order_V2 = tslib_1.__decorate([
+    (0, typeorm_1.Entity)()
+], Draft_Order_V2);
+
+
+/***/ }),
+/* 28 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Schedule_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Schedule_V2 = class Schedule_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Schedule_V2 = exports.Schedule_V2 = class Schedule_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -2885,25 +1650,23 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Schedule_V2.prototype, "playing_year", void 0);
-Schedule_V2 = tslib_1.__decorate([
+exports.Schedule_V2 = Schedule_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Schedule_V2);
-exports.Schedule_V2 = Schedule_V2;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/team-stats.entity.ts":
+/* 29 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Team_Stats_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const team_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts");
-let Team_Stats_V2 = class Team_Stats_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const team_entity_1 = __webpack_require__(18);
+let Team_Stats_V2 = exports.Team_Stats_V2 = class Team_Stats_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -3106,116 +1869,22 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Team_Stats_V2.prototype, "season_type", void 0);
-Team_Stats_V2 = tslib_1.__decorate([
+exports.Team_Stats_V2 = Team_Stats_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Team_Stats_V2);
-exports.Team_Stats_V2 = Team_Stats_V2;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/team.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Teams_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const division_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/division.entity.ts");
-let Teams_V2 = class Teams_V2 {
-    logInsert() {
-        console.log('Inserted Team with id', this.id);
-    }
-    logUpdate() {
-        console.log('Updated Team with id', this.id);
-    }
-    logRemove() {
-        console.log('Removed Team');
-    }
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Teams_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "shortname", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "city", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "nickname", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
-], Teams_V2.prototype, "isactive", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
-], Teams_V2.prototype, "users_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "teamlogo", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "teamaltlogo", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "teamcolor", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Teams_V2.prototype, "teamtextcolor", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.OneToOne)(() => division_entity_1.Divisions_V2, (division) => division.id, { eager: true }),
-    (0, typeorm_1.JoinColumn)({ name: 'divisions_id' }),
-    tslib_1.__metadata("design:type", typeof (_a = typeof division_entity_1.Divisions_V2 !== "undefined" && division_entity_1.Divisions_V2) === "function" ? _a : Object)
-], Teams_V2.prototype, "divisions_id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterInsert)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Teams_V2.prototype, "logInsert", null);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterUpdate)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Teams_V2.prototype, "logUpdate", null);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterRemove)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Teams_V2.prototype, "logRemove", null);
-Teams_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Teams_V2);
-exports.Teams_V2 = Teams_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/transactions.entity.ts":
+/* 30 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Transactions_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Transactions_V2 = class Transactions_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+let Transactions_V2 = exports.Transactions_V2 = class Transactions_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -3249,94 +1918,23 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)('int', { array: true }),
     tslib_1.__metadata("design:type", Array)
 ], Transactions_V2.prototype, "team_two_players", void 0);
-Transactions_V2 = tslib_1.__decorate([
+exports.Transactions_V2 = Transactions_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Transactions_V2);
-exports.Transactions_V2 = Transactions_V2;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/user.entity.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Users_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-let Users_V2 = class Users_V2 {
-    logInsert() {
-        console.log('Inserted User with id', this.id);
-    }
-    logUpdate() {
-        console.log('Updated User with id', this.id);
-    }
-    logRemove() {
-        console.log('Removed User');
-    }
-};
-tslib_1.__decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    tslib_1.__metadata("design:type", Number)
-], Users_V2.prototype, "id", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Users_V2.prototype, "firstname", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Users_V2.prototype, "lastname", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
-], Users_V2.prototype, "email", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
-], Users_V2.prototype, "isadmin", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
-], Users_V2.prototype, "isactive", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterInsert)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Users_V2.prototype, "logInsert", null);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterUpdate)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Users_V2.prototype, "logUpdate", null);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterRemove)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Users_V2.prototype, "logRemove", null);
-Users_V2 = tslib_1.__decorate([
-    (0, typeorm_1.Entity)()
-], Users_V2);
-exports.Users_V2 = Users_V2;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entities/src/lib/entities/waivers.entity.ts":
+/* 31 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Waivers_V2 = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const typeorm_1 = __webpack_require__("typeorm");
-const team_entity_1 = __webpack_require__("../../libs/api/entities/src/lib/entities/team.entity.ts");
-let Waivers_V2 = class Waivers_V2 {
+const tslib_1 = __webpack_require__(5);
+const typeorm_1 = __webpack_require__(13);
+const team_entity_1 = __webpack_require__(18);
+let Waivers_V2 = exports.Waivers_V2 = class Waivers_V2 {
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -3354,67 +1952,2107 @@ tslib_1.__decorate([
     (0, typeorm_1.OneToOne)(() => team_entity_1.Teams_V2, (team) => team.id),
     tslib_1.__metadata("design:type", typeof (_a = typeof team_entity_1.Teams_V2 !== "undefined" && team_entity_1.Teams_V2) === "function" ? _a : Object)
 ], Waivers_V2.prototype, "team", void 0);
-Waivers_V2 = tslib_1.__decorate([
+exports.Waivers_V2 = Waivers_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Waivers_V2);
-exports.Waivers_V2 = Waivers_V2;
 
 
 /***/ }),
+/* 32 */
+/***/ ((module) => {
 
-/***/ "../../libs/api/entry-draft/src/index.ts":
+module.exports = require("@nestjs/typeorm");
+
+/***/ }),
+/* 33 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entry-draft/src/lib/api-entry-draft.module.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(34), exports);
 
 
 /***/ }),
+/* 34 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/entry-draft/src/lib/api-entry-draft.module.ts":
+
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AwardsController = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(114);
+const api_awards_service_1 = __webpack_require__(115);
+let AwardsController = exports.AwardsController = class AwardsController {
+    constructor(awardsService, userAwardsService) {
+        this.awardsService = awardsService;
+        this.userAwardsService = userAwardsService;
+    }
+    async getAll() {
+        const awards = await this.awardsService.getAll();
+        if (!awards || awards.length < 1) {
+            throw new common_1.NotFoundException('awards not found');
+        }
+        return awards;
+    }
+    updateAwardById(param, body) {
+        return this.awardsService.updateAwardById(parseInt(param.id), body);
+    }
+    addPlayer(body) {
+        return this.awardsService.addAward(body);
+    }
+    deletePlayer(param) {
+        return this.awardsService.deleteAward(parseInt(param.id));
+    }
+    async getChampions() {
+        const champions = await this.awardsService.getChampions();
+        if (!champions || champions.length < 1) {
+            throw new common_1.NotFoundException('Champions Awards not found');
+        }
+        return champions;
+    }
+    async getScorerAwards() {
+        const scorers = await this.awardsService.getScorerAwards();
+        if (!scorers || scorers.length < 1) {
+            throw new common_1.NotFoundException('Scorers Awards not found');
+        }
+        return scorers;
+    }
+    async getDefenseAwards() {
+        const defense = await this.awardsService.getDefenseAwards();
+        if (!defense || defense.length < 1) {
+            throw new common_1.NotFoundException('Defense Awards not found');
+        }
+        return defense;
+    }
+    async getRookieAwards() {
+        const rookies = await this.awardsService.getRookieAwards();
+        if (!rookies || rookies.length < 1) {
+            throw new common_1.NotFoundException('Rookie Awards not found');
+        }
+        return rookies;
+    }
+    async getGoalieAwards() {
+        const goalies = await this.awardsService.getGoalieAwards();
+        if (!goalies || goalies.length < 1) {
+            throw new common_1.NotFoundException('Goalie Awards not found');
+        }
+        return goalies;
+    }
+    async getGmAwards() {
+        const gms = await this.awardsService.getGmAwards();
+        if (!gms || gms.length < 1) {
+            throw new common_1.NotFoundException('GM Awards not found');
+        }
+        return gms;
+    }
+    async getSeasonAwards() {
+        const season = await this.awardsService.getSeasonAwards();
+        if (!season || season.length < 1) {
+            throw new common_1.NotFoundException('Season Awards not found');
+        }
+        return season;
+    }
+    async getTeamAwardsByUserId(param) {
+        const awardsByUser = await this.userAwardsService.getAwardsByUserId(param.userId);
+        if (!awardsByUser || awardsByUser.length < 1) {
+            throw new common_1.NotFoundException('Player Stats not found');
+        }
+        return awardsByUser;
+    }
+    async getAwardTypes() {
+        const awardTypes = await this.awardsService.getAwardTypes();
+        if (!awardTypes || awardTypes.length < 1) {
+            throw new common_1.NotFoundException('Award Types not found');
+        }
+        return awardTypes;
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], AwardsController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+], AwardsController.prototype, "updateAwardById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.AwardCreateDto !== "undefined" && entities_1.AwardCreateDto) === "function" ? _e : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], AwardsController.prototype, "addPlayer", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], AwardsController.prototype, "deletePlayer", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/champions'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+], AwardsController.prototype, "getChampions", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/scorers'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", Promise)
+], AwardsController.prototype, "getScorerAwards", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/defense'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+], AwardsController.prototype, "getDefenseAwards", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/rookies'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+], AwardsController.prototype, "getRookieAwards", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/goalies'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+], AwardsController.prototype, "getGoalieAwards", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/gm'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
+], AwardsController.prototype, "getGmAwards", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/season'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
+], AwardsController.prototype, "getSeasonAwards", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/user/:userId'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
+], AwardsController.prototype, "getTeamAwardsByUserId", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/types'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
+], AwardsController.prototype, "getAwardTypes", null);
+exports.AwardsController = AwardsController = tslib_1.__decorate([
+    (0, common_1.Controller)('awards'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof api_awards_service_1.ApiAwardsService !== "undefined" && api_awards_service_1.ApiAwardsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiUserAwardsService !== "undefined" && services_1.ApiUserAwardsService) === "function" ? _b : Object])
+], AwardsController);
+
+
+/***/ }),
+/* 35 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(36), exports);
+tslib_1.__exportStar(__webpack_require__(97), exports);
+tslib_1.__exportStar(__webpack_require__(109), exports);
+
+
+/***/ }),
+/* 36 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(37), exports);
+tslib_1.__exportStar(__webpack_require__(40), exports);
+tslib_1.__exportStar(__webpack_require__(42), exports);
+tslib_1.__exportStar(__webpack_require__(46), exports);
+tslib_1.__exportStar(__webpack_require__(51), exports);
+tslib_1.__exportStar(__webpack_require__(53), exports);
+tslib_1.__exportStar(__webpack_require__(57), exports);
+tslib_1.__exportStar(__webpack_require__(62), exports);
+tslib_1.__exportStar(__webpack_require__(80), exports);
+tslib_1.__exportStar(__webpack_require__(83), exports);
+tslib_1.__exportStar(__webpack_require__(90), exports);
+tslib_1.__exportStar(__webpack_require__(95), exports);
+
+
+/***/ }),
+/* 37 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(38), exports);
+tslib_1.__exportStar(__webpack_require__(39), exports);
+
+
+/***/ }),
+/* 38 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UserDto = void 0;
+class UserDto {
+}
+exports.UserDto = UserDto;
+
+
+/***/ }),
+/* 39 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UserCreateDto = void 0;
+class UserCreateDto {
+}
+exports.UserCreateDto = UserCreateDto;
+
+
+/***/ }),
+/* 40 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(41), exports);
+
+
+/***/ }),
+/* 41 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 42 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(43), exports);
+tslib_1.__exportStar(__webpack_require__(44), exports);
+tslib_1.__exportStar(__webpack_require__(45), exports);
+
+
+/***/ }),
+/* 43 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 44 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 45 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 46 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(47), exports);
+tslib_1.__exportStar(__webpack_require__(48), exports);
+tslib_1.__exportStar(__webpack_require__(49), exports);
+tslib_1.__exportStar(__webpack_require__(50), exports);
+
+
+/***/ }),
+/* 47 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 48 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 49 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 50 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 51 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(52), exports);
+
+
+/***/ }),
+/* 52 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 53 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(54), exports);
+tslib_1.__exportStar(__webpack_require__(55), exports);
+tslib_1.__exportStar(__webpack_require__(56), exports);
+
+
+/***/ }),
+/* 54 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 55 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 56 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 57 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(58), exports);
+tslib_1.__exportStar(__webpack_require__(59), exports);
+tslib_1.__exportStar(__webpack_require__(60), exports);
+tslib_1.__exportStar(__webpack_require__(61), exports);
+
+
+/***/ }),
+/* 58 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 59 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 60 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 61 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 62 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(63), exports);
+tslib_1.__exportStar(__webpack_require__(64), exports);
+tslib_1.__exportStar(__webpack_require__(65), exports);
+tslib_1.__exportStar(__webpack_require__(66), exports);
+tslib_1.__exportStar(__webpack_require__(67), exports);
+tslib_1.__exportStar(__webpack_require__(68), exports);
+tslib_1.__exportStar(__webpack_require__(69), exports);
+tslib_1.__exportStar(__webpack_require__(70), exports);
+tslib_1.__exportStar(__webpack_require__(71), exports);
+tslib_1.__exportStar(__webpack_require__(72), exports);
+tslib_1.__exportStar(__webpack_require__(73), exports);
+tslib_1.__exportStar(__webpack_require__(74), exports);
+tslib_1.__exportStar(__webpack_require__(75), exports);
+tslib_1.__exportStar(__webpack_require__(76), exports);
+tslib_1.__exportStar(__webpack_require__(77), exports);
+tslib_1.__exportStar(__webpack_require__(78), exports);
+tslib_1.__exportStar(__webpack_require__(79), exports);
+
+
+/***/ }),
+/* 63 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 64 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 65 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 66 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 67 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 68 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 69 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 70 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 71 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 72 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 73 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 74 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 75 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 76 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 77 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 78 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 79 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 80 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(81), exports);
+tslib_1.__exportStar(__webpack_require__(82), exports);
+
+
+/***/ }),
+/* 81 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 82 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 83 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(84), exports);
+tslib_1.__exportStar(__webpack_require__(85), exports);
+tslib_1.__exportStar(__webpack_require__(86), exports);
+tslib_1.__exportStar(__webpack_require__(87), exports);
+tslib_1.__exportStar(__webpack_require__(88), exports);
+tslib_1.__exportStar(__webpack_require__(89), exports);
+
+
+/***/ }),
+/* 84 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 85 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 86 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 87 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 88 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 89 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 90 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(91), exports);
+tslib_1.__exportStar(__webpack_require__(92), exports);
+tslib_1.__exportStar(__webpack_require__(93), exports);
+tslib_1.__exportStar(__webpack_require__(94), exports);
+
+
+/***/ }),
+/* 91 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 92 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 93 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 94 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 95 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(96), exports);
+
+
+/***/ }),
+/* 96 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 97 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(98), exports);
+tslib_1.__exportStar(__webpack_require__(100), exports);
+tslib_1.__exportStar(__webpack_require__(102), exports);
+tslib_1.__exportStar(__webpack_require__(104), exports);
+tslib_1.__exportStar(__webpack_require__(106), exports);
+
+
+/***/ }),
+/* 98 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(99), exports);
+
+
+/***/ }),
+/* 99 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PrimeButtonClass = void 0;
+var PrimeButtonClass;
+(function (PrimeButtonClass) {
+    PrimeButtonClass["PRIMARY"] = "";
+    PrimeButtonClass["SECONDARY"] = "p-button-secondary";
+    PrimeButtonClass["SUCCESS"] = "p-button-success";
+    PrimeButtonClass["INFO"] = "p-button-info";
+    PrimeButtonClass["WARNING"] = "p-button-warning";
+    PrimeButtonClass["HELP"] = "p-button-help";
+    PrimeButtonClass["DANGER"] = "p-button-danger";
+})(PrimeButtonClass || (exports.PrimeButtonClass = PrimeButtonClass = {}));
+
+
+/***/ }),
+/* 100 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(101), exports);
+
+
+/***/ }),
+/* 101 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ChaLogoEnum = void 0;
+var ChaLogoEnum;
+(function (ChaLogoEnum) {
+    ChaLogoEnum["ASSASSINS"] = "Assassins.png";
+    ChaLogoEnum["BRAHMAS"] = "Brahams.png";
+    ChaLogoEnum["FIGHTING_COCKS"] = "Cocks.png";
+    ChaLogoEnum["CYCLONES"] = "Cyclones.png";
+    ChaLogoEnum["CHY_DESPERADO"] = "Desperado.png";
+    ChaLogoEnum["DRAGONS"] = "Dragons.png";
+    ChaLogoEnum["FLASHERS"] = "Flashers.png";
+    ChaLogoEnum["FREE_AGENT"] = "free_agent.png";
+    ChaLogoEnum["GLORY"] = "Glory.png";
+    ChaLogoEnum["GOATS"] = "Goats.png";
+    ChaLogoEnum["GREEN_JACKETS"] = "GreenJackets.png";
+    ChaLogoEnum["HOUND_DOGS"] = "HoundDogs.png";
+    ChaLogoEnum["STELLAR_JAYS"] = "jays-large.png";
+    ChaLogoEnum["KILLER_BEES"] = "KillerBees.png";
+    ChaLogoEnum["MOUNTAINEERS"] = "Mountaineers.png";
+    ChaLogoEnum["NORTH_STARS"] = "NorthStars.png";
+    ChaLogoEnum["OIL_BARONS"] = "OilBarons.png";
+    ChaLogoEnum["PROWLERS"] = "Prowlers.png";
+    ChaLogoEnum["SAC_STORM"] = "sac_storm.png";
+    ChaLogoEnum["VIKINGS"] = "vikings.png";
+    ChaLogoEnum["WOLFPACK"] = "Wolfpack.png";
+    ChaLogoEnum["ACES"] = "aces.png";
+    ChaLogoEnum["BADGERS"] = "badgers.png";
+    ChaLogoEnum["BANDITS"] = "bandits.png";
+    ChaLogoEnum["BARONS"] = "barons.png";
+    ChaLogoEnum["BEAVERS"] = "beavers.png";
+    ChaLogoEnum["CHA_STORM"] = "chastorm.png";
+    ChaLogoEnum["CHUPACABRAS"] = "chupacabras.png";
+    ChaLogoEnum["COMETS"] = "comets.png";
+    ChaLogoEnum["CONQUERERS"] = "conquerers.png";
+    ChaLogoEnum["CRIMSONTIDE"] = "crimsontide.png";
+    ChaLogoEnum["CRUSH"] = "crush.png";
+    ChaLogoEnum["GRAVEDIGGERS"] = "gravediggers.png";
+    ChaLogoEnum["HELLCATS"] = "hellcats.png";
+    ChaLogoEnum["MIS_INDIANS"] = "indians.png";
+    ChaLogoEnum["SAL_INDIANS"] = "indians.png";
+    ChaLogoEnum["JOKERS"] = "jokers.png";
+    ChaLogoEnum["LAS_DESPERADO"] = "lasdesperado.png";
+    ChaLogoEnum["LIONHEARTS"] = "lionheats.png";
+    ChaLogoEnum["LOGGERHEADS"] = "loggerheads.png";
+    ChaLogoEnum["MUDBUGS"] = "mudbugs.png";
+    ChaLogoEnum["OCEANUS"] = "oceanus.png";
+    ChaLogoEnum["OUTLAWS"] = "outlaws.png";
+    ChaLogoEnum["PREDATORS"] = "predators.png";
+    ChaLogoEnum["RAYS"] = "rays.png";
+    ChaLogoEnum["REDNECKS"] = "rednecks.png";
+    ChaLogoEnum["ROYALS"] = "royals.png";
+    ChaLogoEnum["SCHOONERS"] = "schooners.png";
+    ChaLogoEnum["SEA_STORM"] = "Storm.png";
+    ChaLogoEnum["SURGE"] = "surge.png";
+    ChaLogoEnum["THUNDERCATS"] = "thundercats.png";
+    ChaLogoEnum["VIPERS"] = "Vipers.png";
+    ChaLogoEnum["VOODOO"] = "voodoo.png";
+    ChaLogoEnum["WHISKEYJACKS"] = "whiskeyjacks.png";
+    ChaLogoEnum["RUSTLERS"] = "rustlers.png";
+    ChaLogoEnum["LEAGUE"] = "cha_logo.jpg";
+})(ChaLogoEnum || (exports.ChaLogoEnum = ChaLogoEnum = {}));
+
+
+/***/ }),
+/* 102 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(103), exports);
+
+
+/***/ }),
+/* 103 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TeamsEnum = void 0;
+var TeamsEnum;
+(function (TeamsEnum) {
+    TeamsEnum[TeamsEnum["FLASHERS"] = 2] = "FLASHERS";
+    TeamsEnum[TeamsEnum["GREEN_JACKETS"] = 3] = "GREEN_JACKETS";
+    TeamsEnum[TeamsEnum["CHY_DESPERADO"] = 4] = "CHY_DESPERADO";
+    TeamsEnum[TeamsEnum["CYCLONES"] = 5] = "CYCLONES";
+    TeamsEnum[TeamsEnum["GLORY"] = 6] = "GLORY";
+    TeamsEnum[TeamsEnum["GOATS"] = 7] = "GOATS";
+    TeamsEnum[TeamsEnum["MOUNTAINEERS"] = 8] = "MOUNTAINEERS";
+    TeamsEnum[TeamsEnum["BRAHMAS"] = 9] = "BRAHMAS";
+    TeamsEnum[TeamsEnum["HOUND_DOGS"] = 10] = "HOUND_DOGS";
+    TeamsEnum[TeamsEnum["ICE_DRAGONS"] = 11] = "ICE_DRAGONS";
+    TeamsEnum[TeamsEnum["NORTH_STARS"] = 12] = "NORTH_STARS";
+    TeamsEnum[TeamsEnum["ASSASSINS"] = 13] = "ASSASSINS";
+    TeamsEnum[TeamsEnum["OIL_BARONS"] = 14] = "OIL_BARONS";
+    TeamsEnum[TeamsEnum["PROWLERS"] = 15] = "PROWLERS";
+    TeamsEnum[TeamsEnum["FIGHTING_COCKS"] = 16] = "FIGHTING_COCKS";
+    TeamsEnum[TeamsEnum["SEA_STORM"] = 17] = "SEA_STORM";
+    TeamsEnum[TeamsEnum["STINGRAYS"] = 18] = "STINGRAYS";
+    TeamsEnum[TeamsEnum["KILLER_BEES"] = 19] = "KILLER_BEES";
+    TeamsEnum[TeamsEnum["VIPERS"] = 20] = "VIPERS";
+    TeamsEnum[TeamsEnum["WOLFPACK"] = 21] = "WOLFPACK";
+    TeamsEnum[TeamsEnum["MUDBUGS"] = 22] = "MUDBUGS";
+    TeamsEnum[TeamsEnum["CHA_STORM"] = 23] = "CHA_STORM";
+    TeamsEnum[TeamsEnum["SURGE"] = 24] = "SURGE";
+    TeamsEnum[TeamsEnum["LAS_DESPERADO"] = 25] = "LAS_DESPERADO";
+    TeamsEnum[TeamsEnum["OUTLAWS"] = 26] = "OUTLAWS";
+    TeamsEnum[TeamsEnum["OCEANUS"] = 27] = "OCEANUS";
+    TeamsEnum[TeamsEnum["ACES"] = 28] = "ACES";
+    TeamsEnum[TeamsEnum["HONEY_BADGERS"] = 29] = "HONEY_BADGERS";
+    TeamsEnum[TeamsEnum["BANDITS"] = 30] = "BANDITS";
+    TeamsEnum[TeamsEnum["BARONS"] = 31] = "BARONS";
+    TeamsEnum[TeamsEnum["CHUPACABRAS"] = 32] = "CHUPACABRAS";
+    TeamsEnum[TeamsEnum["CONQUERERS"] = 33] = "CONQUERERS";
+    TeamsEnum[TeamsEnum["CRUSH"] = 34] = "CRUSH";
+    TeamsEnum[TeamsEnum["HELLCATS"] = 35] = "HELLCATS";
+    TeamsEnum[TeamsEnum["MISS_INDIANS"] = 36] = "MISS_INDIANS";
+    TeamsEnum[TeamsEnum["SAL_INDIANS"] = 37] = "SAL_INDIANS";
+    TeamsEnum[TeamsEnum["JOKERS"] = 38] = "JOKERS";
+    TeamsEnum[TeamsEnum["LIONHEARTS"] = 39] = "LIONHEARTS";
+    TeamsEnum[TeamsEnum["LOGGERHEADS"] = 40] = "LOGGERHEADS";
+    TeamsEnum[TeamsEnum["PREDATORS"] = 41] = "PREDATORS";
+    TeamsEnum[TeamsEnum["REDNECKS"] = 42] = "REDNECKS";
+    TeamsEnum[TeamsEnum["ROYALS"] = 43] = "ROYALS";
+    TeamsEnum[TeamsEnum["RUSTLERS"] = 44] = "RUSTLERS";
+    TeamsEnum[TeamsEnum["SCHOONERS"] = 45] = "SCHOONERS";
+    TeamsEnum[TeamsEnum["THUNDERCATS"] = 46] = "THUNDERCATS";
+    TeamsEnum[TeamsEnum["VOODOO"] = 47] = "VOODOO";
+    TeamsEnum[TeamsEnum["WHISKEYJACKS"] = 48] = "WHISKEYJACKS";
+    TeamsEnum[TeamsEnum["CRIMSONTIDE"] = 49] = "CRIMSONTIDE";
+    TeamsEnum[TeamsEnum["BEAVERS"] = 50] = "BEAVERS";
+    TeamsEnum[TeamsEnum["COMETS"] = 51] = "COMETS";
+    TeamsEnum[TeamsEnum["GRAVE_DIGGERS"] = 52] = "GRAVE_DIGGERS";
+    TeamsEnum[TeamsEnum["STELLAR_JAYS"] = 53] = "STELLAR_JAYS";
+    TeamsEnum[TeamsEnum["FREE_AGENT"] = 54] = "FREE_AGENT";
+    TeamsEnum[TeamsEnum["VIKINGS"] = 60] = "VIKINGS";
+    TeamsEnum[TeamsEnum["SAC_STORM"] = 61] = "SAC_STORM";
+})(TeamsEnum || (exports.TeamsEnum = TeamsEnum = {}));
+
+
+/***/ }),
+/* 104 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(105), exports);
+
+
+/***/ }),
+/* 105 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AwardTypeEnum = void 0;
+var AwardTypeEnum;
+(function (AwardTypeEnum) {
+    AwardTypeEnum[AwardTypeEnum["GM"] = 2] = "GM";
+    AwardTypeEnum[AwardTypeEnum["CHAMPION"] = 3] = "CHAMPION";
+    AwardTypeEnum[AwardTypeEnum["SEASON"] = 4] = "SEASON";
+    AwardTypeEnum[AwardTypeEnum["ROOKIE"] = 5] = "ROOKIE";
+    AwardTypeEnum[AwardTypeEnum["SCORER"] = 6] = "SCORER";
+    AwardTypeEnum[AwardTypeEnum["GOALIE"] = 7] = "GOALIE";
+    AwardTypeEnum[AwardTypeEnum["DEFENSE"] = 8] = "DEFENSE";
+})(AwardTypeEnum || (exports.AwardTypeEnum = AwardTypeEnum = {}));
+
+
+/***/ }),
+/* 106 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(107), exports);
+tslib_1.__exportStar(__webpack_require__(108), exports);
+
+
+/***/ }),
+/* 107 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConferencesEnum = void 0;
+var ConferencesEnum;
+(function (ConferencesEnum) {
+    ConferencesEnum[ConferencesEnum["EASTERN"] = 2] = "EASTERN";
+    ConferencesEnum[ConferencesEnum["WESTERN"] = 3] = "WESTERN";
+})(ConferencesEnum || (exports.ConferencesEnum = ConferencesEnum = {}));
+
+
+/***/ }),
+/* 108 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DivisionsEnum = void 0;
+var DivisionsEnum;
+(function (DivisionsEnum) {
+    DivisionsEnum[DivisionsEnum["NORTH_WEST"] = 2] = "NORTH_WEST";
+    DivisionsEnum[DivisionsEnum["NORTH_EAST"] = 3] = "NORTH_EAST";
+    DivisionsEnum[DivisionsEnum["SOUTH_WEST"] = 4] = "SOUTH_WEST";
+    DivisionsEnum[DivisionsEnum["SOUTH_EAST"] = 5] = "SOUTH_EAST";
+})(DivisionsEnum || (exports.DivisionsEnum = DivisionsEnum = {}));
+
+
+/***/ }),
+/* 109 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(110), exports);
+tslib_1.__exportStar(__webpack_require__(112), exports);
+
+
+/***/ }),
+/* 110 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(111), exports);
+
+
+/***/ }),
+/* 111 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 112 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(113), exports);
+
+
+/***/ }),
+/* 113 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+/* 114 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(115), exports);
+tslib_1.__exportStar(__webpack_require__(116), exports);
+
+
+/***/ }),
+/* 115 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b, _c, _d, _e;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiAwardsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const entities_2 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiAwardsService = exports.ApiAwardsService = class ApiAwardsService {
+    constructor(repo, awardTypeRepo, playerStatsRepo, goalieStatsRepo, teamStatsRepo) {
+        this.repo = repo;
+        this.awardTypeRepo = awardTypeRepo;
+        this.playerStatsRepo = playerStatsRepo;
+        this.goalieStatsRepo = goalieStatsRepo;
+        this.teamStatsRepo = teamStatsRepo;
+        this.selectUserOptions = {
+            id: true,
+            display_season: true,
+            cha_season: true,
+            award_type: {
+                display_name: true,
+                id: true,
+            },
+            team_id: {
+                id: true,
+                city: true,
+                nickname: true,
+                teamlogo: true,
+                teamcolor: true,
+            },
+            users_id: {
+                firstname: true,
+                lastname: true,
+            },
+        };
+        this.selectPlayerOptions = {
+            id: true,
+            display_season: true,
+            cha_season: true,
+            award_type: {
+                display_name: true,
+                id: true,
+            },
+            team_id: {
+                city: true,
+                nickname: true,
+                teamlogo: true,
+                teamcolor: true,
+            },
+            player_id: {
+                id: true,
+                nhl_id: true,
+                firstname: true,
+                lastname: true,
+            },
+            users_id: {
+                firstname: true,
+                lastname: true,
+            },
+        };
+    }
+    async getAll() {
+        return await this.repo.find({
+            relations: ['player_id', 'award_type', 'team_id', 'users_id'],
+            select: {
+                id: true,
+                display_season: true,
+                cha_season: true,
+                team_id: {
+                    id: true,
+                    city: true,
+                    nickname: true,
+                },
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                award_type: {
+                    id: true,
+                    display_name: true,
+                },
+                users_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+            },
+            order: {
+                display_season: 'DESC',
+            },
+        });
+    }
+    async updateAwardById(id, attrs) {
+        const award = await this.repo.findOneByOrFail({ id });
+        if (!award) {
+            throw new common_1.NotFoundException('award not found');
+        }
+        Object.assign(award, attrs);
+        return this.repo.save(award);
+    }
+    async addAward(body) {
+        const award = await this.repo.create(body);
+        return this.repo.save(award);
+    }
+    async deleteAward(id) {
+        const award = await this.repo.findOneByOrFail({ id });
+        if (!award) {
+            throw new common_1.NotFoundException('award not found');
+        }
+        return this.repo.remove(award);
+    }
+    async getChampions() {
+        return await this.repo.find({
+            select: this.selectUserOptions,
+            relations: ['users_id', 'team_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.CHAMPION,
+                },
+            },
+        });
+    }
+    async getScorerAwards() {
+        const scorers = await this.repo.find({
+            select: this.selectPlayerOptions,
+            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.SCORER,
+                },
+            },
+        });
+        const scrorersWithStats = await this.setPlayerStats(scorers);
+        return scrorersWithStats;
+    }
+    async getDefenseAwards() {
+        const defense = await this.repo.find({
+            select: this.selectPlayerOptions,
+            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.DEFENSE,
+                },
+            },
+        });
+        const defenseWithStats = await this.setPlayerStats(defense);
+        return defenseWithStats;
+    }
+    async getRookieAwards() {
+        const rookies = await this.repo.find({
+            select: this.selectPlayerOptions,
+            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.ROOKIE,
+                },
+            },
+        });
+        const rookiesWithStats = await this.setPlayerStats(rookies);
+        return rookiesWithStats;
+    }
+    async getGoalieAwards() {
+        const goalies = await this.repo.find({
+            select: this.selectPlayerOptions,
+            relations: ['users_id', 'team_id', 'player_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.GOALIE,
+                },
+            },
+        });
+        const goaliesWithStats = await this.setGoalieStats(goalies);
+        return goaliesWithStats;
+    }
+    async getGmAwards() {
+        return await this.repo.find({
+            select: this.selectUserOptions,
+            relations: ['users_id', 'team_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.GM,
+                },
+            },
+        });
+    }
+    async getSeasonAwards() {
+        const seasonAwards = await this.repo.find({
+            select: this.selectUserOptions,
+            relations: ['users_id', 'team_id', 'award_type'],
+            where: {
+                award_type: {
+                    id: entities_2.AwardTypeEnum.SEASON,
+                },
+            },
+        });
+        const seasonAwardsWithStats = await this.setSeasonStats(seasonAwards);
+        return seasonAwardsWithStats;
+    }
+    async getAwardTypes() {
+        return await this.awardTypeRepo.find({
+            where: {
+                id: (0, typeorm_2.Not)(1),
+            },
+        });
+    }
+    async setPlayerStats(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            stats: await this.getPlayerStats(item.player_id.id, item.cha_season),
+        })));
+    }
+    async getPlayerStats(playerId, chaSeason) {
+        return await this.playerStatsRepo.findOne({
+            select: {
+                id: true,
+                playing_year: true,
+                games_played: true,
+                goals: true,
+                assists: true,
+                points: true,
+            },
+            where: {
+                player_id: { id: playerId },
+                playing_year: chaSeason,
+                season_type: 'Regular',
+            },
+        });
+    }
+    async setGoalieStats(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            stats: await this.getGoalieStats(item.player_id.id, item.cha_season),
+        })));
+    }
+    async getGoalieStats(playerId, chaSeason) {
+        return await this.goalieStatsRepo.findOne({
+            select: {
+                id: true,
+                player_id: {
+                    id: true,
+                    nhl_id: true,
+                    firstname: true,
+                    lastname: true,
+                    isgoalie: true,
+                    is_protected: true,
+                    isactive: true,
+                    isdefense: true,
+                    isforward: true,
+                },
+                playing_year: true,
+                games_played: true,
+                wins: true,
+                goals_against_avg: true,
+                save_pct: true,
+            },
+            where: {
+                player_id: {
+                    id: playerId,
+                },
+                playing_year: chaSeason,
+                season_type: 'Regular',
+            },
+        });
+    }
+    async setSeasonStats(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            stats: await this.getSeasonStats(item.team_id.id, item.cha_season),
+        })));
+    }
+    async getSeasonStats(teamId, chaSeason) {
+        return await this.teamStatsRepo.findOne({
+            select: {
+                id: true,
+                playing_year: true,
+                games_played: true,
+                wins: true,
+                goals_for: true,
+                goals_against: true,
+                points: true,
+            },
+            where: {
+                team_id: { id: teamId },
+                playing_year: chaSeason,
+                season_type: 'Regular',
+            },
+        });
+    }
+};
+exports.ApiAwardsService = ApiAwardsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Award_Type_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(4, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object])
+], ApiAwardsService);
+
+
+/***/ }),
+/* 116 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiUserAwardsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiUserAwardsService = exports.ApiUserAwardsService = class ApiUserAwardsService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async getAwardsByUserId(userId) {
+        return await this.repo.find({
+            select: {
+                id: true,
+                display_season: true,
+                award_type: {
+                    id: true,
+                    display_name: true,
+                },
+                users_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                },
+                team_id: {
+                    id: true,
+                    teamlogo: true,
+                    teamcolor: true,
+                    teamtextcolor: true,
+                },
+            },
+            relations: ['users_id', 'player_id', 'award_type', 'team_id'],
+            where: {
+                users_id: {
+                    id: userId,
+                },
+            },
+            order: {
+                display_season: 'DESC',
+            },
+        });
+    }
+};
+exports.ApiUserAwardsService = ApiUserAwardsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], ApiUserAwardsService);
+
+
+/***/ }),
+/* 117 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(118), exports);
+
+
+/***/ }),
+/* 118 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AwardsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let AwardsMiddleware = exports.AwardsMiddleware = class AwardsMiddleware {
+    use(req, res, next) {
+        console.log('Request Awards...');
+        next();
+    }
+};
+exports.AwardsMiddleware = AwardsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], AwardsMiddleware);
+
+
+/***/ }),
+/* 119 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(120), exports);
+
+
+/***/ }),
+/* 120 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiUsersModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(121);
+const middlewares_1 = __webpack_require__(125);
+const services_1 = __webpack_require__(123);
+let ApiUsersModule = exports.ApiUsersModule = class ApiUsersModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.UserMiddleware).forRoutes('*');
+    }
+};
+exports.ApiUsersModule = ApiUsersModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Users_V2])],
+        controllers: [controllers_1.UsersController],
+        providers: [services_1.UsersService],
+    })
+], ApiUsersModule);
+
+
+/***/ }),
+/* 121 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(122), exports);
+
+
+/***/ }),
+/* 122 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b, _c, _d, _e, _f, _g;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UsersController = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(123);
+const entities_1 = __webpack_require__(35);
+let UsersController = exports.UsersController = class UsersController {
+    constructor(usersService) {
+        this.usersService = usersService;
+    }
+    async getUsers() {
+        const users = await this.usersService.getAll();
+        if (!users || users.length < 1) {
+            throw new common_1.NotFoundException('users not found');
+        }
+        return users;
+    }
+    async getCurrentUsers() {
+        const users = await this.usersService.getCurrent();
+        if (!users || users.length < 1) {
+            throw new common_1.NotFoundException('users not found');
+        }
+        return users;
+    }
+    async getUserByEmail(param) {
+        const user = await this.usersService.findUserByEmail(param.email);
+        if (!user) {
+            throw new common_1.NotFoundException('user not found');
+        }
+        return user;
+    }
+    async getUserById(param) {
+        const user = await this.usersService.findUserById(parseInt(param.id));
+        if (!user) {
+            throw new common_1.NotFoundException('user not found');
+        }
+        return user;
+    }
+    updateUserById(param, body) {
+        return this.usersService.updateUserById(parseInt(param.id), body);
+    }
+    addUser(body) {
+        return this.usersService.addUser(body);
+    }
+    deleteUserById(param) {
+        return this.usersService.deleteUser(parseInt(param.id));
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], UsersController.prototype, "getUsers", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/current'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], UsersController.prototype, "getCurrentUsers", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/:email'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+], UsersController.prototype, "getUserByEmail", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/userId/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
+], UsersController.prototype, "getUserById", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/userId/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+], UsersController.prototype, "updateUserById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.UserCreateDto !== "undefined" && entities_1.UserCreateDto) === "function" ? _g : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], UsersController.prototype, "addUser", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/delete/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], UsersController.prototype, "deleteUserById", null);
+exports.UsersController = UsersController = tslib_1.__decorate([
+    (0, common_1.Controller)('users'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.UsersService !== "undefined" && services_1.UsersService) === "function" ? _a : Object])
+], UsersController);
+
+
+/***/ }),
+/* 123 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(124), exports);
+
+
+/***/ }),
+/* 124 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UsersService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let UsersService = exports.UsersService = class UsersService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async findUserByEmail(email) {
+        return await this.repo.findOneByOrFail({ email });
+    }
+    async getAll() {
+        return await this.repo.find();
+    }
+    async getCurrent() {
+        return await this.repo.find({
+            where: {
+                isactive: true,
+            },
+        });
+    }
+    async findUserById(id) {
+        return await this.repo.findOneByOrFail({ id });
+    }
+    async updateUserById(id, attrs) {
+        const user = await this.repo.findOneByOrFail({ id });
+        if (!user) {
+            throw new common_1.NotFoundException('user not found');
+        }
+        Object.assign(user, attrs);
+        return this.repo.save(user);
+    }
+    async addUser(body) {
+        const user = await this.repo.create(body);
+        return this.repo.save(user);
+    }
+    async deleteUser(id) {
+        const user = await this.repo.findOneByOrFail({ id });
+        if (!user) {
+            throw new common_1.NotFoundException('user not found');
+        }
+        return this.repo.remove(user);
+    }
+};
+exports.UsersService = UsersService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Users_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], UsersService);
+
+
+/***/ }),
+/* 125 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(126), exports);
+
+
+/***/ }),
+/* 126 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UserMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let UserMiddleware = exports.UserMiddleware = class UserMiddleware {
+    use(req, res, next) {
+        console.log('Request User...');
+        next();
+    }
+};
+exports.UserMiddleware = UserMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], UserMiddleware);
+
+
+/***/ }),
+/* 127 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(128), exports);
+
+
+/***/ }),
+/* 128 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiDraftTableModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(129);
+const middlewares_1 = __webpack_require__(133);
+const services_1 = __webpack_require__(131);
+let ApiDraftTableModule = exports.ApiDraftTableModule = class ApiDraftTableModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.DraftTableMiddleware).forRoutes('*');
+    }
+};
+exports.ApiDraftTableModule = ApiDraftTableModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Draft_Order_V2, entities_1.Team_Stats_V2])],
+        controllers: [controllers_1.DraftTableController],
+        providers: [services_1.ApiDraftTableService],
+    })
+], ApiDraftTableModule);
+
+
+/***/ }),
+/* 129 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(130), exports);
+
+
+/***/ }),
+/* 130 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b, _c, _d;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DraftTableController = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(131);
+let DraftTableController = exports.DraftTableController = class DraftTableController {
+    constructor(draftTableService) {
+        this.draftTableService = draftTableService;
+    }
+    async getDraftTable(param) {
+        const teams = await this.draftTableService.getAll(param.draft_year);
+        if (!teams || teams.length < 1) {
+            throw new common_1.NotFoundException('teams not found');
+        }
+        return teams;
+    }
+    updateTableById(param, body) {
+        return this.draftTableService.updateTableById(parseInt(param.id), body);
+    }
+    async getDraftTableByYearByStandings(param) {
+        const draftTable = await this.draftTableService.getDraftTableByYearByStandings(param.draft_year, param.playing_year);
+        if (!draftTable || draftTable.length < 1) {
+            throw new common_1.NotFoundException('Draft Table not found');
+        }
+        return draftTable;
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)('/:draft_year'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], DraftTableController.prototype, "getDraftTable", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], DraftTableController.prototype, "updateTableById", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/:draft_year/:playing_year'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+], DraftTableController.prototype, "getDraftTableByYearByStandings", null);
+exports.DraftTableController = DraftTableController = tslib_1.__decorate([
+    (0, common_1.Controller)('draft-table'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiDraftTableService !== "undefined" && services_1.ApiDraftTableService) === "function" ? _a : Object])
+], DraftTableController);
+
+
+/***/ }),
+/* 131 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(132), exports);
+
+
+/***/ }),
+/* 132 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiDraftTableService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiDraftTableService = exports.ApiDraftTableService = class ApiDraftTableService {
+    constructor(repo, teamStatsRepo) {
+        this.repo = repo;
+        this.teamStatsRepo = teamStatsRepo;
+        this.getDraftByStandings = (data) => {
+            return data
+                .sort((a, b) => {
+                if (b.stats.points === a.stats.points) {
+                    if (b.stats.wins === a.stats.wins) {
+                        if (b.stats.goals_for - b.stats.goals_against ===
+                            a.stats.goals_for - a.stats.goals_against) {
+                            return b.stats.goals_for - a.stats.goals_for;
+                        }
+                        else {
+                            return (b.stats.goals_for -
+                                b.stats.goals_against -
+                                (a.stats.goals_for - a.stats.goals_against));
+                        }
+                    }
+                    else {
+                        return b.stats.wins - a.stats.wins;
+                    }
+                }
+                else {
+                    return b.stats.points - a.stats.points;
+                }
+            })
+                .reverse();
+        };
+    }
+    async getAll(draftYear) {
+        return await this.repo.find({
+            relations: ['team_id'],
+            select: {
+                team_id: {
+                    id: true,
+                    shortname: true,
+                    city: true,
+                    nickname: true,
+                    teamlogo: true,
+                },
+            },
+            where: {
+                draft_year: draftYear,
+            },
+        });
+    }
+    async updateTableById(id, attrs) {
+        const item = await this.repo.findOneByOrFail({ id });
+        if (!item) {
+            throw new common_1.NotFoundException('item not found');
+        }
+        Object.assign(item, attrs);
+        return this.repo.save(item);
+    }
+    async getDraftTableByYearByStandings(draftYear, playingYear) {
+        const draftTable = await this.repo.find({
+            relations: ['team_id'],
+            where: {
+                draft_year: draftYear,
+            },
+            select: {
+                team_id: {
+                    id: true,
+                    shortname: true,
+                    city: true,
+                    nickname: true,
+                    teamlogo: true,
+                },
+            },
+        });
+        const draftTableWithStandings = await this.setTableStandings(draftTable, playingYear);
+        const draftTableByStandings = this.getDraftByStandings(draftTableWithStandings);
+        return draftTableByStandings;
+    }
+    async setTableStandings(array, playingYear) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            stats: await this.getTeamStats(item.team_id.id, playingYear),
+        })));
+    }
+    async getTeamStats(teamId, playingYear) {
+        return await this.teamStatsRepo.findOne({
+            relations: ['team_id'],
+            select: {
+                id: true,
+                wins: true,
+                goals_for: true,
+                goals_against: true,
+                points: true,
+            },
+            where: {
+                team_id: { id: teamId },
+                playing_year: playingYear,
+                season_type: 'Regular',
+            },
+        });
+    }
+};
+exports.ApiDraftTableService = ApiDraftTableService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
+], ApiDraftTableService);
+
+
+/***/ }),
+/* 133 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(134), exports);
+
+
+/***/ }),
+/* 134 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DraftTableMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let DraftTableMiddleware = exports.DraftTableMiddleware = class DraftTableMiddleware {
+    use(req, res, next) {
+        console.log('Request Draft Table...');
+        next();
+    }
+};
+exports.DraftTableMiddleware = DraftTableMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], DraftTableMiddleware);
+
+
+/***/ }),
+/* 135 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(136), exports);
+
+
+/***/ }),
+/* 136 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiEntryDraftModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/entry-draft/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/entry-draft/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/entry-draft/src/lib/services/index.ts");
-let ApiEntryDraftModule = class ApiEntryDraftModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(137);
+const middlewares_1 = __webpack_require__(141);
+const services_1 = __webpack_require__(139);
+let ApiEntryDraftModule = exports.ApiEntryDraftModule = class ApiEntryDraftModule {
     configure(consumer) {
         consumer.apply(middlewares_1.EntryDraftMiddleware).forRoutes('*');
     }
 };
-ApiEntryDraftModule = tslib_1.__decorate([
+exports.ApiEntryDraftModule = ApiEntryDraftModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Drafts_V2])],
         controllers: [controllers_1.EntryDraftController],
         providers: [services_1.ApiEntryDraftService],
     })
 ], ApiEntryDraftModule);
-exports.ApiEntryDraftModule = ApiEntryDraftModule;
 
 
 /***/ }),
+/* 137 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/entry-draft/src/lib/controllers/entry-draft.controller.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(138), exports);
+
+
+/***/ }),
+/* 138 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EntryDraftController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/entry-draft/src/lib/services/index.ts");
-let EntryDraftController = class EntryDraftController {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(139);
+let EntryDraftController = exports.EntryDraftController = class EntryDraftController {
     constructor(draftService) {
         this.draftService = draftService;
     }
@@ -3463,72 +4101,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], EntryDraftController.prototype, "deletePick", null);
-EntryDraftController = tslib_1.__decorate([
+exports.EntryDraftController = EntryDraftController = tslib_1.__decorate([
     (0, common_1.Controller)('entry-draft'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiEntryDraftService !== "undefined" && services_1.ApiEntryDraftService) === "function" ? _a : Object])
 ], EntryDraftController);
-exports.EntryDraftController = EntryDraftController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entry-draft/src/lib/controllers/index.ts":
+/* 139 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entry-draft/src/lib/controllers/entry-draft.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(140), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/entry-draft/src/lib/middlewares/entry-draft.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.EntryDraftMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let EntryDraftMiddleware = class EntryDraftMiddleware {
-    use(req, res, next) {
-        console.log('Request Entry Draft Table...');
-        next();
-    }
-};
-EntryDraftMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], EntryDraftMiddleware);
-exports.EntryDraftMiddleware = EntryDraftMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/entry-draft/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entry-draft/src/lib/middlewares/entry-draft.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/entry-draft/src/lib/services/api-entry-draft.service.ts":
+/* 140 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiEntryDraftService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiEntryDraftService = class ApiEntryDraftService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiEntryDraftService = exports.ApiEntryDraftService = class ApiEntryDraftService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -3583,268 +4185,73 @@ let ApiEntryDraftService = class ApiEntryDraftService {
         return this.repo.remove(pick);
     }
 };
-ApiEntryDraftService = tslib_1.__decorate([
+exports.ApiEntryDraftService = ApiEntryDraftService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Drafts_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
 ], ApiEntryDraftService);
-exports.ApiEntryDraftService = ApiEntryDraftService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/entry-draft/src/lib/services/index.ts":
+/* 141 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/entry-draft/src/lib/services/api-entry-draft.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(142), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/index.ts":
+/* 142 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-ratings/src/lib/api-goalie-ratings.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/api-goalie-ratings.module.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiGoalieRatingsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/goalie-ratings/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/goalie-ratings/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/goalie-ratings/src/lib/services/index.ts");
-let ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
-    configure(consumer) {
-        consumer.apply(middlewares_1.GoalieRatingsMiddleware).forRoutes('*');
-    }
-};
-ApiGoalieRatingsModule = tslib_1.__decorate([
-    (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalie_Ratings_V2, entities_1.Players_V2])],
-        controllers: [controllers_1.GoalieRatingsController],
-        providers: [services_1.ApiGoalieRatingsService],
-    })
-], ApiGoalieRatingsModule);
-exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule;
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/controllers/goalie-ratings.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GoalieRatingsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/goalie-ratings/src/lib/services/index.ts");
-let GoalieRatingsController = class GoalieRatingsController {
-    constructor(goalieRatingsService) {
-        this.goalieRatingsService = goalieRatingsService;
-    }
-    async getAllRatings(param) {
-        const players = await this.goalieRatingsService.getAll(param.season);
-        if (!players || players.length < 1) {
-            throw new common_1.NotFoundException('ratings not found');
-        }
-        return players;
-    }
-    updatePlayerById(param, body) {
-        return this.goalieRatingsService.updatePlayerById(parseInt(param.id), body);
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)('/:season'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
-], GoalieRatingsController.prototype, "getAllRatings", null);
-tslib_1.__decorate([
-    (0, common_1.Put)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], GoalieRatingsController.prototype, "updatePlayerById", null);
-GoalieRatingsController = tslib_1.__decorate([
-    (0, common_1.Controller)('goalie-ratings'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiGoalieRatingsService !== "undefined" && services_1.ApiGoalieRatingsService) === "function" ? _a : Object])
-], GoalieRatingsController);
-exports.GoalieRatingsController = GoalieRatingsController;
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/controllers/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-ratings/src/lib/controllers/goalie-ratings.controller.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/middlewares/goalie-ratings.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GoalieRatingsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let GoalieRatingsMiddleware = class GoalieRatingsMiddleware {
+exports.EntryDraftMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let EntryDraftMiddleware = exports.EntryDraftMiddleware = class EntryDraftMiddleware {
     use(req, res, next) {
-        console.log('Request Goalie Ratings...');
+        console.log('Request Entry Draft Table...');
         next();
     }
 };
-GoalieRatingsMiddleware = tslib_1.__decorate([
+exports.EntryDraftMiddleware = EntryDraftMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
-], GoalieRatingsMiddleware);
-exports.GoalieRatingsMiddleware = GoalieRatingsMiddleware;
+], EntryDraftMiddleware);
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/middlewares/index.ts":
+/* 143 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-ratings/src/lib/middlewares/goalie-ratings.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(144), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/services/api-goalie-ratings.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiGoalieRatingsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiGoalieRatingsService = class ApiGoalieRatingsService {
-    constructor(repo, playersRepo) {
-        this.repo = repo;
-        this.playersRepo = playersRepo;
-    }
-    async getAll(season) {
-        const ratings = await this.repo.find({
-            where: {
-                playing_year: season,
-            },
-        });
-        const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
-        return ratingsWithPlayerInfo;
-    }
-    async updatePlayerById(id, attrs) {
-        const player = await this.repo.findOneByOrFail({ id });
-        if (!player) {
-            throw new common_1.NotFoundException('player not found');
-        }
-        Object.assign(player, attrs);
-        return this.repo.save(player);
-    }
-    async setPlayerInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.player_id) }))));
-    }
-    async getPlayerInfo(playerId) {
-        if (playerId) {
-            return await this.playersRepo.findOne({
-                select: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                },
-                where: {
-                    id: playerId,
-                },
-            });
-        }
-        else {
-            return {};
-        }
-    }
-};
-ApiGoalieRatingsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalie_Ratings_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
-], ApiGoalieRatingsService);
-exports.ApiGoalieRatingsService = ApiGoalieRatingsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-ratings/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-ratings/src/lib/services/api-goalie-ratings.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/api-goalie-stats.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/api-goalie-stats.module.ts":
+/* 144 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiGoalieStatsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/goalie-stats/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/goalie-stats/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/goalie-stats/src/lib/services/index.ts");
-let ApiGoalieStatsModule = class ApiGoalieStatsModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(145);
+const middlewares_1 = __webpack_require__(152);
+const services_1 = __webpack_require__(147);
+let ApiGoalieStatsModule = exports.ApiGoalieStatsModule = class ApiGoalieStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.GoalieStatsMiddleware).forRoutes('*');
     }
 };
-ApiGoalieStatsModule = tslib_1.__decorate([
+exports.ApiGoalieStatsModule = ApiGoalieStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalies_Stats_V2, entities_1.Teams_V2])],
         controllers: [controllers_1.GoalieStatsController],
@@ -3856,22 +4263,30 @@ ApiGoalieStatsModule = tslib_1.__decorate([
         ],
     })
 ], ApiGoalieStatsModule);
-exports.ApiGoalieStatsModule = ApiGoalieStatsModule;
 
 
 /***/ }),
+/* 145 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/goalie-stats/src/lib/controllers/goalie-stats.controller.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(146), exports);
+
+
+/***/ }),
+/* 146 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GoalieStatsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/goalie-stats/src/lib/services/index.ts");
-let GoalieStatsController = class GoalieStatsController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(147);
+let GoalieStatsController = exports.GoalieStatsController = class GoalieStatsController {
     constructor(goalieStatsLeadersService, goalieStatsService, goalieAllTimeStatsService, userGoalieStatsService) {
         this.goalieStatsLeadersService = goalieStatsLeadersService;
         this.goalieStatsService = goalieStatsService;
@@ -4026,239 +4441,39 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
 ], GoalieStatsController.prototype, "getTeamPlayersByTeamName", null);
-GoalieStatsController = tslib_1.__decorate([
+exports.GoalieStatsController = GoalieStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('goalie-stats'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiGoalieStatsLeadersService !== "undefined" && services_1.ApiGoalieStatsLeadersService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiGoalieStatsService !== "undefined" && services_1.ApiGoalieStatsService) === "function" ? _b : Object, typeof (_c = typeof services_1.ApiGoalieAllTimeStatsService !== "undefined" && services_1.ApiGoalieAllTimeStatsService) === "function" ? _c : Object, typeof (_d = typeof services_1.ApiUserGoalieStatsService !== "undefined" && services_1.ApiUserGoalieStatsService) === "function" ? _d : Object])
 ], GoalieStatsController);
-exports.GoalieStatsController = GoalieStatsController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/controllers/index.ts":
+/* 147 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/controllers/goalie-stats.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(148), exports);
+tslib_1.__exportStar(__webpack_require__(149), exports);
+tslib_1.__exportStar(__webpack_require__(150), exports);
+tslib_1.__exportStar(__webpack_require__(151), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/middlewares/goalie-stats.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GoalieStatsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let GoalieStatsMiddleware = class GoalieStatsMiddleware {
-    use(req, res, next) {
-        console.log('Request Goalie Stats...');
-        next();
-    }
-};
-GoalieStatsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], GoalieStatsMiddleware);
-exports.GoalieStatsMiddleware = GoalieStatsMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/middlewares/goalie-stats.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/services/api-goalie-all-time-stats.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiGoalieAllTimeStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
-    constructor(repo, teamInfoRepo, dataSource) {
-        this.repo = repo;
-        this.teamInfoRepo = teamInfoRepo;
-        this.dataSource = dataSource;
-    }
-    async getAllTimeGoalieStatsBySeasonByType(seasonType) {
-        const allStats = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                playing_year: true,
-                season_type: true,
-                games_played: true,
-                minutes_played: true,
-                goals_against_avg: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                shutouts: true,
-                goals_against: true,
-                saves: true,
-                shots_for: true,
-                save_pct: true,
-                goals: true,
-                assists: true,
-                points: true,
-                penalty_minutes: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isdefense: true,
-                    isforward: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThan)(0),
-            },
-            order: {
-                wins: 'DESC',
-            },
-        });
-        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo, false);
-        return allStatsWithTeamInfoConverted;
-    }
-    async getAllTimeGoalieStatsSummedBySeasonByType(seasonType) {
-        const result = await this.dataSource.query(`select
-      b.firstname as firstname,
-      b.lastname as lastname,
-      b.isgoalie as isgoalie,
-      b.nhl_id as nhl_id,
-      a.player_id as player_id,
-      a.season_type as season_type, 
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(minutes_played) as minutes_played, 
-      sum(en_goals) as en_goals, 
-      sum(shutouts) as shutouts, 
-      sum(goals_against) as goals_against, 
-      sum(saves) as saves, 
-      sum(shots_for) as shots_for, 
-      sum(goals) as goals, 
-      sum(assists) as assists, 
-      sum(points) as points, 
-      sum(penalty_minutes) as penalty_minutes
-      from
-      goalies_stats_v2 as a
-      left join players_v2 as b
-      on b.id = a.player_id
-      where (a.player_id = b.id
-      and
-      a.games_played > '0'
-      and
-      a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
-      order by wins DESC`);
-        const allTimeStatsConverted = await this.convertStats(result, true);
-        return allTimeStatsConverted;
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    async convertStats(array, raw) {
-        return await Promise.all(array.map((stat) => ({
-            playing_year: stat.playing_year,
-            season_type: stat.season_type,
-            teamInfo: !raw ? stat['teamInfo'] : null,
-            player_id: !raw
-                ? stat.player_id
-                : {
-                    id: stat['player_id'],
-                    firstname: stat['firstname'],
-                    lastname: stat['lastname'],
-                    nhl_id: stat['nhl_id'],
-                    isactive: null,
-                    isgoalie: stat['isgoalie'],
-                    isdefense: null,
-                    isforward: null,
-                    is_protected: null,
-                },
-            games_played: Number(stat.games_played),
-            minutes_played: Number(stat.minutes_played),
-            goals_against_avg: !raw
-                ? Number(Number(stat.goals_against_avg).toFixed(2))
-                : Number(((Number(stat.goals_against) * 60) /
-                    Number(stat.minutes_played)).toFixed(2)),
-            wins: Number(stat.wins),
-            loss: Number(stat.loss),
-            ties: Number(stat.ties),
-            shutouts: Number(stat.shutouts),
-            goals_against: Number(stat.goals_against),
-            saves: Number(stat.saves),
-            shots_for: Number(stat.shots_for),
-            save_pct: !raw
-                ? Number(Number(stat.save_pct).toFixed(3))
-                : Number((Number(stat.saves) / Number(stat.shots_for)).toFixed(3)),
-            goals: Number(stat.goals),
-            assists: Number(stat.assists),
-            points: Number(stat.points),
-            penalty_minutes: Number(stat.penalty_minutes),
-        })));
-    }
-};
-ApiGoalieAllTimeStatsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
-], ApiGoalieAllTimeStatsService);
-exports.ApiGoalieAllTimeStatsService = ApiGoalieAllTimeStatsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/services/api-goalie-stats-leaders.service.ts":
+/* 148 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiGoalieStatsLeadersService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiGoalieStatsLeadersService = exports.ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -4426,7 +4641,10 @@ let ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
         return winLeadersWithTeamInfo;
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
     }
     async getTeamInfo(teamName) {
         return await this.teamInfoRepo.findOne({
@@ -4442,30 +4660,28 @@ let ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
         });
     }
 };
-ApiGoalieStatsLeadersService = tslib_1.__decorate([
+exports.ApiGoalieStatsLeadersService = ApiGoalieStatsLeadersService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiGoalieStatsLeadersService);
-exports.ApiGoalieStatsLeadersService = ApiGoalieStatsLeadersService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/services/api-goalie-stats.service.ts":
+/* 149 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiGoalieStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiGoalieStatsService = class ApiGoalieStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiGoalieStatsService = exports.ApiGoalieStatsService = class ApiGoalieStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -4596,7 +4812,10 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
         return goalieStatsWithTeamInfoConverted;
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
     }
     async getTeamInfo(teamName) {
         return await this.teamInfoRepo.findOne({
@@ -4613,33 +4832,218 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
         });
     }
     async convertStats(array) {
-        return await Promise.all(array.map((stat) => (Object.assign(Object.assign({}, stat), { games_played: Number(stat.games_played), minutes_played: Number(stat.minutes_played), goals_against_avg: Number(Number(stat.goals_against_avg).toFixed(2)), wins: Number(stat.wins), loss: Number(stat.loss), ties: Number(stat.ties), en_goals: Number(stat.en_goals), shutouts: Number(stat.shutouts), goals_against: Number(stat.goals_against), saves: Number(stat.saves), shots_for: Number(stat.shots_for), save_pct: Number(Number(stat.save_pct).toFixed(3)), goals: Number(stat.goals), assists: Number(stat.assists), points: Number(stat.points), penalty_minutes: Number(stat.penalty_minutes), pass_pct: Number(stat.pass_pct) }))));
+        return await Promise.all(array.map((stat) => ({
+            ...stat,
+            games_played: Number(stat.games_played),
+            minutes_played: Number(stat.minutes_played),
+            goals_against_avg: Number(Number(stat.goals_against_avg).toFixed(2)),
+            wins: Number(stat.wins),
+            loss: Number(stat.loss),
+            ties: Number(stat.ties),
+            en_goals: Number(stat.en_goals),
+            shutouts: Number(stat.shutouts),
+            goals_against: Number(stat.goals_against),
+            saves: Number(stat.saves),
+            shots_for: Number(stat.shots_for),
+            save_pct: Number(Number(stat.save_pct).toFixed(3)),
+            goals: Number(stat.goals),
+            assists: Number(stat.assists),
+            points: Number(stat.points),
+            penalty_minutes: Number(stat.penalty_minutes),
+            pass_pct: Number(stat.pass_pct),
+        })));
     }
 };
-ApiGoalieStatsService = tslib_1.__decorate([
+exports.ApiGoalieStatsService = ApiGoalieStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiGoalieStatsService);
-exports.ApiGoalieStatsService = ApiGoalieStatsService;
 
 
 /***/ }),
+/* 150 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/goalie-stats/src/lib/services/api-user-goalie-stats.service.ts":
+
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiGoalieAllTimeStatsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiGoalieAllTimeStatsService = exports.ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
+    constructor(repo, teamInfoRepo, dataSource) {
+        this.repo = repo;
+        this.teamInfoRepo = teamInfoRepo;
+        this.dataSource = dataSource;
+    }
+    async getAllTimeGoalieStatsBySeasonByType(seasonType) {
+        const allStats = await this.repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                playing_year: true,
+                season_type: true,
+                games_played: true,
+                minutes_played: true,
+                goals_against_avg: true,
+                wins: true,
+                loss: true,
+                ties: true,
+                shutouts: true,
+                goals_against: true,
+                saves: true,
+                shots_for: true,
+                save_pct: true,
+                goals: true,
+                assists: true,
+                points: true,
+                penalty_minutes: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isdefense: true,
+                    isforward: true,
+                },
+            },
+            relations: ['player_id'],
+            where: {
+                season_type: seasonType,
+                games_played: (0, typeorm_2.MoreThan)(0),
+            },
+            order: {
+                wins: 'DESC',
+            },
+        });
+        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
+        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo, false);
+        return allStatsWithTeamInfoConverted;
+    }
+    async getAllTimeGoalieStatsSummedBySeasonByType(seasonType) {
+        const result = await this.dataSource.query(`select
+      b.firstname as firstname,
+      b.lastname as lastname,
+      b.isgoalie as isgoalie,
+      b.nhl_id as nhl_id,
+      a.player_id as player_id,
+      a.season_type as season_type, 
+      sum(games_played) as games_played, 
+      sum(wins) as wins, 
+      sum(loss) as loss, 
+      sum(ties) as ties, 
+      sum(minutes_played) as minutes_played, 
+      sum(en_goals) as en_goals, 
+      sum(shutouts) as shutouts, 
+      sum(goals_against) as goals_against, 
+      sum(saves) as saves, 
+      sum(shots_for) as shots_for, 
+      sum(goals) as goals, 
+      sum(assists) as assists, 
+      sum(points) as points, 
+      sum(penalty_minutes) as penalty_minutes
+      from
+      goalies_stats_v2 as a
+      left join players_v2 as b
+      on b.id = a.player_id
+      where (a.player_id = b.id
+      and
+      a.games_played > '0'
+      and
+      a.season_type = '${seasonType}')
+      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
+      order by wins DESC`);
+        const allTimeStatsConverted = await this.convertStats(result, true);
+        return allTimeStatsConverted;
+    }
+    async setTeamInfo(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
+    }
+    async getTeamInfo(teamName) {
+        return await this.teamInfoRepo.findOne({
+            select: {
+                id: true,
+                city: true,
+                teamlogo: true,
+                nickname: true,
+            },
+            where: {
+                shortname: teamName,
+            },
+        });
+    }
+    async convertStats(array, raw) {
+        return await Promise.all(array.map((stat) => ({
+            playing_year: stat.playing_year,
+            season_type: stat.season_type,
+            teamInfo: !raw ? stat['teamInfo'] : null,
+            player_id: !raw
+                ? stat.player_id
+                : {
+                    id: stat['player_id'],
+                    firstname: stat['firstname'],
+                    lastname: stat['lastname'],
+                    nhl_id: stat['nhl_id'],
+                    isactive: null,
+                    isgoalie: stat['isgoalie'],
+                    isdefense: null,
+                    isforward: null,
+                    is_protected: null,
+                },
+            games_played: Number(stat.games_played),
+            minutes_played: Number(stat.minutes_played),
+            goals_against_avg: !raw
+                ? Number(Number(stat.goals_against_avg).toFixed(2))
+                : Number(((Number(stat.goals_against) * 60) /
+                    Number(stat.minutes_played)).toFixed(2)),
+            wins: Number(stat.wins),
+            loss: Number(stat.loss),
+            ties: Number(stat.ties),
+            shutouts: Number(stat.shutouts),
+            goals_against: Number(stat.goals_against),
+            saves: Number(stat.saves),
+            shots_for: Number(stat.shots_for),
+            save_pct: !raw
+                ? Number(Number(stat.save_pct).toFixed(3))
+                : Number((Number(stat.saves) / Number(stat.shots_for)).toFixed(3)),
+            goals: Number(stat.goals),
+            assists: Number(stat.assists),
+            points: Number(stat.points),
+            penalty_minutes: Number(stat.penalty_minutes),
+        })));
+    }
+};
+exports.ApiGoalieAllTimeStatsService = ApiGoalieAllTimeStatsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
+], ApiGoalieAllTimeStatsService);
+
+
+/***/ }),
+/* 151 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiUserGoalieStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiUserGoalieStatsService = exports.ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -4674,10 +5078,16 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
         });
     }
     async setGoalieStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { goalieStats: await this.getGoalieStats(item.shortname, seasonType) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            goalieStats: await this.getGoalieStats(item.shortname, seasonType),
+        })));
     }
     async setGoalieAllTimeStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { goalieStats: await this.getGoalieAllTimeStats(item.shortname, seasonType) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            goalieStats: await this.getGoalieAllTimeStats(item.shortname, seasonType),
+        })));
     }
     async getGoalieAllTimeStats(teamShortName, seasonType) {
         return await this.dataSource.query(`select
@@ -4759,7 +5169,10 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
         });
     }
     async setConvertedGoaliesStats(array, raw) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { goalieStats: await this.convertStats(item.goalieStats, raw, item) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            goalieStats: await this.convertStats(item.goalieStats, raw, item),
+        })));
     }
     async convertStats(array, raw, teamInfo) {
         return await Promise.all(array.map((stat) => ({
@@ -4810,95 +5223,105 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
         })));
     }
 };
-ApiUserGoalieStatsService = tslib_1.__decorate([
+exports.ApiUserGoalieStatsService = ApiUserGoalieStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
 ], ApiUserGoalieStatsService);
-exports.ApiUserGoalieStatsService = ApiUserGoalieStatsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/goalie-stats/src/lib/services/index.ts":
+/* 152 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/services/api-goalie-stats-leaders.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/services/api-goalie-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/services/api-goalie-all-time-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/goalie-stats/src/lib/services/api-user-goalie-stats.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(153), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/league/src/index.ts":
+/* 153 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/league/src/lib/api-league.module.ts"), exports);
+exports.GoalieStatsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let GoalieStatsMiddleware = exports.GoalieStatsMiddleware = class GoalieStatsMiddleware {
+    use(req, res, next) {
+        console.log('Request Goalie Stats...');
+        next();
+    }
+};
+exports.GoalieStatsMiddleware = GoalieStatsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], GoalieStatsMiddleware);
 
 
 /***/ }),
+/* 154 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/league/src/lib/api-league.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(155), exports);
+
+
+/***/ }),
+/* 155 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiLeagueModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/league/src/lib/controllers/index.ts");
-const league_middleware_1 = __webpack_require__("../../libs/api/league/src/lib/middlewares/league.middleware.ts");
-const services_1 = __webpack_require__("../../libs/api/league/src/lib/services/index.ts");
-let ApiLeagueModule = class ApiLeagueModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(156);
+const league_middleware_1 = __webpack_require__(160);
+const services_1 = __webpack_require__(158);
+let ApiLeagueModule = exports.ApiLeagueModule = class ApiLeagueModule {
     configure(consumer) {
         consumer.apply(league_middleware_1.LeagueMiddleware).forRoutes('*');
     }
 };
-ApiLeagueModule = tslib_1.__decorate([
+exports.ApiLeagueModule = ApiLeagueModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Current_Season_V2])],
         controllers: [controllers_1.LeagueController],
         providers: [services_1.LeagueService],
     })
 ], ApiLeagueModule);
-exports.ApiLeagueModule = ApiLeagueModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/league/src/lib/controllers/index.ts":
+/* 156 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/league/src/lib/controllers/league.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(157), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/league/src/lib/controllers/league.controller.ts":
+/* 157 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LeagueController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/league/src/lib/services/index.ts");
-let LeagueController = class LeagueController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(158);
+let LeagueController = exports.LeagueController = class LeagueController {
     constructor(leagueService) {
         this.leagueService = leagueService;
     }
@@ -4926,61 +5349,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], LeagueController.prototype, "updateUserById", null);
-LeagueController = tslib_1.__decorate([
+exports.LeagueController = LeagueController = tslib_1.__decorate([
     (0, common_1.Controller)('league'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.LeagueService !== "undefined" && services_1.LeagueService) === "function" ? _a : Object])
 ], LeagueController);
-exports.LeagueController = LeagueController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/league/src/lib/middlewares/league.middleware.ts":
+/* 158 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LeagueMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let LeagueMiddleware = class LeagueMiddleware {
-    use(req, res, next) {
-        console.log('Request League...');
-        next();
-    }
-};
-LeagueMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], LeagueMiddleware);
-exports.LeagueMiddleware = LeagueMiddleware;
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(159), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/league/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/league/src/lib/services/league.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/league/src/lib/services/league.service.ts":
+/* 159 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LeagueService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let LeagueService = class LeagueService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let LeagueService = exports.LeagueService = class LeagueService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -4996,47 +5394,64 @@ let LeagueService = class LeagueService {
         return this.repo.save(data);
     }
 };
-LeagueService = tslib_1.__decorate([
+exports.LeagueService = LeagueService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Current_Season_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
 ], LeagueService);
-exports.LeagueService = LeagueService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/nhl/src/index.ts":
+/* 160 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/nhl/src/lib/api-nhl.module.ts"), exports);
+exports.LeagueMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let LeagueMiddleware = exports.LeagueMiddleware = class LeagueMiddleware {
+    use(req, res, next) {
+        console.log('Request League...');
+        next();
+    }
+};
+exports.LeagueMiddleware = LeagueMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], LeagueMiddleware);
 
 
 /***/ }),
+/* 161 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/nhl/src/lib/api-nhl.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(162), exports);
+
+
+/***/ }),
+/* 162 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiNhlModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const axios_1 = __webpack_require__("@nestjs/axios");
-const controllers_1 = __webpack_require__("../../libs/api/nhl/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/nhl/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/nhl/src/lib/services/index.ts");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-let ApiNhlModule = class ApiNhlModule {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const axios_1 = __webpack_require__(163);
+const controllers_1 = __webpack_require__(164);
+const middlewares_1 = __webpack_require__(169);
+const services_1 = __webpack_require__(166);
+const entities_1 = __webpack_require__(10);
+const typeorm_1 = __webpack_require__(32);
+let ApiNhlModule = exports.ApiNhlModule = class ApiNhlModule {
     configure(consumer) {
         consumer.apply(middlewares_1.NhlMiddleware).forRoutes('*');
     }
 };
-ApiNhlModule = tslib_1.__decorate([
+exports.ApiNhlModule = ApiNhlModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
             axios_1.HttpModule,
@@ -5046,33 +5461,36 @@ ApiNhlModule = tslib_1.__decorate([
         providers: [services_1.ApiNhlService],
     })
 ], ApiNhlModule);
-exports.ApiNhlModule = ApiNhlModule;
 
 
 /***/ }),
+/* 163 */
+/***/ ((module) => {
 
-/***/ "../../libs/api/nhl/src/lib/controllers/index.ts":
+module.exports = require("@nestjs/axios");
+
+/***/ }),
+/* 164 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/nhl/src/lib/controllers/nhl.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(165), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/nhl/src/lib/controllers/nhl.controller.ts":
+/* 165 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NhlController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/nhl/src/lib/services/index.ts");
-let NhlController = class NhlController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(166);
+let NhlController = exports.NhlController = class NhlController {
     constructor(nhlService) {
         this.nhlService = nhlService;
     }
@@ -5175,63 +5593,38 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", Promise)
 ], NhlController.prototype, "getNhlPlayerStatsByPlayerId", null);
-NhlController = tslib_1.__decorate([
+exports.NhlController = NhlController = tslib_1.__decorate([
     (0, common_1.Controller)('nhl'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiNhlService !== "undefined" && services_1.ApiNhlService) === "function" ? _a : Object])
 ], NhlController);
-exports.NhlController = NhlController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/nhl/src/lib/middlewares/index.ts":
+/* 166 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/nhl/src/lib/middlewares/nhl.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(167), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/nhl/src/lib/middlewares/nhl.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NhlMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let NhlMiddleware = class NhlMiddleware {
-    use(req, res, next) {
-        console.log('Request Nhl...');
-        next();
-    }
-};
-NhlMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], NhlMiddleware);
-exports.NhlMiddleware = NhlMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/nhl/src/lib/services/api-nhl.service.ts":
+/* 167 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiNhlService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const axios_1 = __webpack_require__("@nestjs/axios");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const rxjs_1 = __webpack_require__("rxjs");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiNhlService = class ApiNhlService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const axios_1 = __webpack_require__(163);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const rxjs_1 = __webpack_require__(168);
+const typeorm_2 = __webpack_require__(13);
+let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     constructor(httpService, playerStatsRepo, goalieStatsRepo, teamsRepo) {
         this.httpService = httpService;
         this.playerStatsRepo = playerStatsRepo;
@@ -5289,8 +5682,14 @@ let ApiNhlService = class ApiNhlService {
         const newSeasonString = `${season}-${Number(string1) + 1}`;
         return (statObject = {
             player_stats: {
-                skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'p') })))),
-                goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => (Object.assign(Object.assign({}, skater), { chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'g') })))),
+                skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => ({
+                    ...skater,
+                    chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'p'),
+                }))),
+                goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => ({
+                    ...skater,
+                    chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'g'),
+                }))),
             },
         });
     }
@@ -5298,13 +5697,19 @@ let ApiNhlService = class ApiNhlService {
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString, type) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString, type),
+        })));
     }
     async setChaTeamInfoRookies(array, season) {
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { chaPlayerTeam: await this.getChaTeam(item.playerId, newSeasonString, 'p') }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            chaPlayerTeam: await this.getChaTeam(item.playerId, newSeasonString, 'p'),
+        })));
     }
     async getChaTeam(id, season, type) {
         let playerStatTeam;
@@ -5406,93 +5811,112 @@ let ApiNhlService = class ApiNhlService {
         });
     }
 };
-ApiNhlService = tslib_1.__decorate([
+exports.ApiNhlService = ApiNhlService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
     tslib_1.__param(3, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object])
 ], ApiNhlService);
-exports.ApiNhlService = ApiNhlService;
 
 
 /***/ }),
+/* 168 */
+/***/ ((module) => {
 
-/***/ "../../libs/api/nhl/src/lib/services/index.ts":
+module.exports = require("rxjs");
+
+/***/ }),
+/* 169 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/nhl/src/lib/services/api-nhl.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(170), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-info/src/index.ts":
+/* 170 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-info/src/lib/api-player-info.module.ts"), exports);
+exports.NhlMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let NhlMiddleware = exports.NhlMiddleware = class NhlMiddleware {
+    use(req, res, next) {
+        console.log('Request Nhl...');
+        next();
+    }
+};
+exports.NhlMiddleware = NhlMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], NhlMiddleware);
 
 
 /***/ }),
+/* 171 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/player-info/src/lib/api-player-info.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(172), exports);
+
+
+/***/ }),
+/* 172 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerInfoModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/player-info/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/player-info/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/player-info/src/lib/services/index.ts");
-let ApiPlayerInfoModule = class ApiPlayerInfoModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(173);
+const middlewares_1 = __webpack_require__(177);
+const services_1 = __webpack_require__(175);
+let ApiPlayerInfoModule = exports.ApiPlayerInfoModule = class ApiPlayerInfoModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerInfoMiddleware).forRoutes('*');
     }
 };
-ApiPlayerInfoModule = tslib_1.__decorate([
+exports.ApiPlayerInfoModule = ApiPlayerInfoModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Players_V2])],
         controllers: [controllers_1.PlayerInfoController],
         providers: [services_1.ApiPlayerInfoService],
     })
 ], ApiPlayerInfoModule);
-exports.ApiPlayerInfoModule = ApiPlayerInfoModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-info/src/lib/controllers/index.ts":
+/* 173 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-info/src/lib/controllers/player-info.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(174), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-info/src/lib/controllers/player-info.controller.ts":
+/* 174 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerInfoController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/player-info/src/lib/services/index.ts");
-let PlayerInfoController = class PlayerInfoController {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(175);
+let PlayerInfoController = exports.PlayerInfoController = class PlayerInfoController {
     constructor(playerInfoService) {
         this.playerInfoService = playerInfoService;
     }
@@ -5541,61 +5965,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], PlayerInfoController.prototype, "deletePlayer", null);
-PlayerInfoController = tslib_1.__decorate([
+exports.PlayerInfoController = PlayerInfoController = tslib_1.__decorate([
     (0, common_1.Controller)('player-info'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiPlayerInfoService !== "undefined" && services_1.ApiPlayerInfoService) === "function" ? _a : Object])
 ], PlayerInfoController);
-exports.PlayerInfoController = PlayerInfoController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-info/src/lib/middlewares/index.ts":
+/* 175 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-info/src/lib/middlewares/player-info.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(176), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-info/src/lib/middlewares/player-info.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PlayerInfoMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let PlayerInfoMiddleware = class PlayerInfoMiddleware {
-    use(req, res, next) {
-        console.log('Request Player Info...');
-        next();
-    }
-};
-PlayerInfoMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], PlayerInfoMiddleware);
-exports.PlayerInfoMiddleware = PlayerInfoMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/player-info/src/lib/services/api-player-info.service.ts":
+/* 176 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerInfoService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiPlayerInfoService = class ApiPlayerInfoService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiPlayerInfoService = exports.ApiPlayerInfoService = class ApiPlayerInfoService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -5626,90 +6025,103 @@ let ApiPlayerInfoService = class ApiPlayerInfoService {
         return this.repo.remove(player);
     }
 };
-ApiPlayerInfoService = tslib_1.__decorate([
+exports.ApiPlayerInfoService = ApiPlayerInfoService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
 ], ApiPlayerInfoService);
-exports.ApiPlayerInfoService = ApiPlayerInfoService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-info/src/lib/services/index.ts":
+/* 177 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-info/src/lib/services/api-player-info.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(178), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-ratings/src/index.ts":
+/* 178 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-ratings/src/lib/api-player-ratings.module.ts"), exports);
+exports.PlayerInfoMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let PlayerInfoMiddleware = exports.PlayerInfoMiddleware = class PlayerInfoMiddleware {
+    use(req, res, next) {
+        console.log('Request Player Info...');
+        next();
+    }
+};
+exports.PlayerInfoMiddleware = PlayerInfoMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], PlayerInfoMiddleware);
 
 
 /***/ }),
+/* 179 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/player-ratings/src/lib/api-player-ratings.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(180), exports);
+
+
+/***/ }),
+/* 180 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerRatingsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/player-ratings/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/player-ratings/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/player-ratings/src/lib/services/index.ts");
-let ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(181);
+const middlewares_1 = __webpack_require__(185);
+const services_1 = __webpack_require__(183);
+let ApiPlayerRatingsModule = exports.ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerRatingsMiddleware).forRoutes('*');
     }
 };
-ApiPlayerRatingsModule = tslib_1.__decorate([
+exports.ApiPlayerRatingsModule = ApiPlayerRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Player_Ratings_V2, entities_1.Players_V2])],
         controllers: [controllers_1.PlayerRatingsController],
         providers: [services_1.ApiPlayerRatingsService],
     })
 ], ApiPlayerRatingsModule);
-exports.ApiPlayerRatingsModule = ApiPlayerRatingsModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-ratings/src/lib/controllers/index.ts":
+/* 181 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-ratings/src/lib/controllers/player-ratings.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(182), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-ratings/src/lib/controllers/player-ratings.controller.ts":
+/* 182 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerRatingsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/player-ratings/src/lib/services/index.ts");
-let PlayerRatingsController = class PlayerRatingsController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(183);
+let PlayerRatingsController = exports.PlayerRatingsController = class PlayerRatingsController {
     constructor(playerRatingsService) {
         this.playerRatingsService = playerRatingsService;
     }
@@ -5739,61 +6151,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object, Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], PlayerRatingsController.prototype, "updatePlayerById", null);
-PlayerRatingsController = tslib_1.__decorate([
+exports.PlayerRatingsController = PlayerRatingsController = tslib_1.__decorate([
     (0, common_1.Controller)('player-ratings'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiPlayerRatingsService !== "undefined" && services_1.ApiPlayerRatingsService) === "function" ? _a : Object])
 ], PlayerRatingsController);
-exports.PlayerRatingsController = PlayerRatingsController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-ratings/src/lib/middlewares/index.ts":
+/* 183 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-ratings/src/lib/middlewares/player-ratings.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(184), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-ratings/src/lib/middlewares/player-ratings.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PlayerRatingsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let PlayerRatingsMiddleware = class PlayerRatingsMiddleware {
-    use(req, res, next) {
-        console.log('Request Player Ratings...');
-        next();
-    }
-};
-PlayerRatingsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], PlayerRatingsMiddleware);
-exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/player-ratings/src/lib/services/api-player-ratings.service.ts":
+/* 184 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerRatingsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiPlayerRatingsService = class ApiPlayerRatingsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiPlayerRatingsService = exports.ApiPlayerRatingsService = class ApiPlayerRatingsService {
     constructor(repo, playersRepo) {
         this.repo = repo;
         this.playersRepo = playersRepo;
@@ -5816,7 +6203,10 @@ let ApiPlayerRatingsService = class ApiPlayerRatingsService {
         return this.repo.save(player);
     }
     async setPlayerInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.player_id) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            playerInfo: await this.getPlayerInfo(item.player_id),
+        })));
     }
     async getPlayerInfo(playerId) {
         if (playerId) {
@@ -5836,58 +6226,74 @@ let ApiPlayerRatingsService = class ApiPlayerRatingsService {
         }
     }
 };
-ApiPlayerRatingsService = tslib_1.__decorate([
+exports.ApiPlayerRatingsService = ApiPlayerRatingsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Player_Ratings_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiPlayerRatingsService);
-exports.ApiPlayerRatingsService = ApiPlayerRatingsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-ratings/src/lib/services/index.ts":
+/* 185 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-ratings/src/lib/services/api-player-ratings.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(186), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/index.ts":
+/* 186 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/api-player-stats.module.ts"), exports);
+exports.PlayerRatingsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let PlayerRatingsMiddleware = exports.PlayerRatingsMiddleware = class PlayerRatingsMiddleware {
+    use(req, res, next) {
+        console.log('Request Player Ratings...');
+        next();
+    }
+};
+exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], PlayerRatingsMiddleware);
 
 
 /***/ }),
+/* 187 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/player-stats/src/lib/api-player-stats.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(188), exports);
+
+
+/***/ }),
+/* 188 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerStatsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/player-stats/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/player-stats/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/player-stats/src/lib/services/index.ts");
-let ApiPlayerStatsModule = class ApiPlayerStatsModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(189);
+const middlewares_1 = __webpack_require__(196);
+const services_1 = __webpack_require__(191);
+let ApiPlayerStatsModule = exports.ApiPlayerStatsModule = class ApiPlayerStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerStatsMiddleware).forRoutes('*');
     }
 };
-ApiPlayerStatsModule = tslib_1.__decorate([
+exports.ApiPlayerStatsModule = ApiPlayerStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2])],
         controllers: [controllers_1.PlayerStatsController],
@@ -5899,33 +6305,30 @@ ApiPlayerStatsModule = tslib_1.__decorate([
         ],
     })
 ], ApiPlayerStatsModule);
-exports.ApiPlayerStatsModule = ApiPlayerStatsModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/controllers/index.ts":
+/* 189 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/controllers/player-stats.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(190), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/controllers/player-stats.controller.ts":
+/* 190 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerStatsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/player-stats/src/lib/services/index.ts");
-let PlayerStatsController = class PlayerStatsController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(191);
+let PlayerStatsController = exports.PlayerStatsController = class PlayerStatsController {
     constructor(playerLeaderStatsService, playerStatsService, playerAllTimeStatsService, userPlayersStatsService) {
         this.playerLeaderStatsService = playerLeaderStatsService;
         this.playerStatsService = playerStatsService;
@@ -6080,238 +6483,39 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
 ], PlayerStatsController.prototype, "getTeamPlayersByTeamName", null);
-PlayerStatsController = tslib_1.__decorate([
+exports.PlayerStatsController = PlayerStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('player-stats'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiPlayerLeadersStatsService !== "undefined" && services_1.ApiPlayerLeadersStatsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiPlayerStatsService !== "undefined" && services_1.ApiPlayerStatsService) === "function" ? _b : Object, typeof (_c = typeof services_1.ApiPlayerAllTimeStatsService !== "undefined" && services_1.ApiPlayerAllTimeStatsService) === "function" ? _c : Object, typeof (_d = typeof services_1.ApiUserPlayerStatsService !== "undefined" && services_1.ApiUserPlayerStatsService) === "function" ? _d : Object])
 ], PlayerStatsController);
-exports.PlayerStatsController = PlayerStatsController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/middlewares/index.ts":
+/* 191 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/middlewares/player-stats.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(192), exports);
+tslib_1.__exportStar(__webpack_require__(193), exports);
+tslib_1.__exportStar(__webpack_require__(194), exports);
+tslib_1.__exportStar(__webpack_require__(195), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/middlewares/player-stats.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PlayerStatsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let PlayerStatsMiddleware = class PlayerStatsMiddleware {
-    use(req, res, next) {
-        console.log('Request Player Stats...');
-        next();
-    }
-};
-PlayerStatsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], PlayerStatsMiddleware);
-exports.PlayerStatsMiddleware = PlayerStatsMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/services/api-player-all-time-stats.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiPlayerAllTimeStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
-    constructor(repo, teamInfoRepo, dataSource) {
-        this.repo = repo;
-        this.teamInfoRepo = teamInfoRepo;
-        this.dataSource = dataSource;
-    }
-    async getAllTimePlayerStatsBySeasonByType(seasonType) {
-        const allStats = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                position: true,
-                games_played: true,
-                goals: true,
-                assists: true,
-                points: true,
-                plus_minus: true,
-                penalty_minutes: true,
-                pp_goals: true,
-                sh_goals: true,
-                gw_goals: true,
-                shots: true,
-                shooting_pct: true,
-                minutes_played: true,
-                minutes_per_game: true,
-                fo_pct: true,
-                pass_pct: true,
-                corner_pct: true,
-                hit_per_game: true,
-                blocked_shots: true,
-                playing_year: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isdefense: true,
-                    isforward: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                season_type: seasonType,
-            },
-            take: 1500,
-            order: {
-                points: 'DESC',
-            },
-        });
-        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo, false);
-        return allStatsWithTeamInfoConverted;
-    }
-    async getAllTimePlayerStatsSummedBySeasonByType(seasonType) {
-        const result = await this.dataSource.query(`select
-      b.firstname as firstname,
-      b.lastname as lastname,
-      b.isdefense as isdefense,
-      b.isforward as isforward,
-      b.isgoalie as isgoalie,
-      b.nhl_id as nhl_id,
-      a.player_id as player_id,
-      a.season_type as season_type, 
-      a.position as position,
-      sum(a.games_played) as games_played, 
-      sum(a.goals) as goals, 
-      sum(a.assists) as assists, 
-      sum(a.points) as points, 
-      sum(a.plus_minus) as plus_minus, 
-      sum(a.penalty_minutes) as penalty_minutes, 
-      sum(a.sh_goals) as sh_goals, 
-      sum(a.pp_goals) as pp_goals, 
-      sum(a.gw_goals) as gw_goals, 
-      sum(a.shots) as shots, 
-      sum(a.minutes_played) as minutes_played, 
-      sum(a.hits) as hits, 
-      sum(a.blocked_shots) as blocked_shots
-      from
-      players_stats_v2 as a
-      left join players_v2 as b
-      on b.id = a.player_id
-      where (a.player_id = b.id
-      and
-      a.points > '0'
-      and
-      a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
-      order by points DESC`);
-        const allTimeStatsConverted = await this.convertStats(result, true);
-        return allTimeStatsConverted;
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    async convertStats(array, raw) {
-        return await Promise.all(array.map((stat) => ({
-            playing_year: stat.playing_year,
-            season_type: stat.season_type,
-            teamInfo: !raw ? stat['teamInfo'] : null,
-            player_id: !raw
-                ? stat.player_id
-                : {
-                    id: stat['player_id'],
-                    firstname: stat['firstname'],
-                    lastname: stat['lastname'],
-                    nhl_id: stat['nhl_id'],
-                    isactive: null,
-                    isgoalie: null,
-                    isdefense: stat['isdefense'],
-                    isforward: stat['isforward'],
-                    is_protected: null,
-                },
-            position: stat.position,
-            games_played: Number(stat.games_played),
-            goals: Number(stat.goals),
-            assists: Number(stat.assists),
-            points: Number(stat.points),
-            pointsPerSixty: Number(((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)),
-            plus_minus: Number(stat.plus_minus),
-            penalty_minutes: Number(stat.penalty_minutes),
-            pp_goals: Number(stat.pp_goals),
-            sh_goals: Number(stat.sh_goals),
-            gw_goals: Number(stat.gw_goals),
-            shots: Number(stat.shots),
-            shooting_pct: !raw
-                ? Number(stat.shooting_pct)
-                : Number(((Number(stat.goals) / Number(stat.shots)) * 100).toFixed(1)),
-            minutes_per_game: !raw
-                ? Number(stat.minutes_per_game)
-                : Number((Number(stat.minutes_played) / Number(stat.games_played)).toFixed(1)),
-            fo_pct: !raw ? Number(stat.fo_pct) : null,
-            pass_pct: !raw ? Number(stat.pass_pct) : null,
-            corner_pct: !raw ? Number(stat.corner_pct) : null,
-            hit_per_game: !raw
-                ? Number(stat.hit_per_game)
-                : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
-            blocked_shots: Number(stat.blocked_shots),
-        })));
-    }
-};
-ApiPlayerAllTimeStatsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
-], ApiPlayerAllTimeStatsService);
-exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/services/api-player-leaders-stats.service.ts":
+/* 192 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerLeadersStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -6763,7 +6967,10 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
         return shotsLeadersWithTeamInfo;
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
     }
     async getTeamInfo(teamName) {
         return await this.teamInfoRepo.findOne({
@@ -6779,30 +6986,28 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
         });
     }
 };
-ApiPlayerLeadersStatsService = tslib_1.__decorate([
+exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiPlayerLeadersStatsService);
-exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/services/api-player-stats.service.ts":
+/* 193 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiPlayerStatsService = class ApiPlayerStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiPlayerStatsService = exports.ApiPlayerStatsService = class ApiPlayerStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -6937,7 +7142,10 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         return allStatsWithTeamInfoConverted;
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
     }
     async getTeamInfo(teamName) {
         return await this.teamInfoRepo.findOne({
@@ -6954,33 +7162,230 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         });
     }
     async convertStats(array) {
-        return await Promise.all(array.map((stat) => (Object.assign(Object.assign({}, stat), { games_played: Number(stat.games_played), goals: Number(stat.goals), assists: Number(stat.assists), points: Number(stat.points), plus_minus: Number(stat.plus_minus), penalty_minutes: Number(stat.penalty_minutes), pp_goals: Number(stat.pp_goals), sh_goals: Number(stat.sh_goals), gw_goals: Number(stat.gw_goals), gt_goals: Number(stat.gt_goals), shots: Number(stat.shots), shooting_pct: Number(stat.shooting_pct), minutes_played: Number(stat.minutes_played), minutes_per_game: Number(stat.minutes_per_game), fo_pct: Number(stat.fo_pct), pass_pct: Number(stat.pass_pct), corner_pct: Number(stat.corner_pct), hits: Number(stat.hits), blocked_shots: Number(stat.blocked_shots) }))));
+        return await Promise.all(array.map((stat) => ({
+            ...stat,
+            games_played: Number(stat.games_played),
+            goals: Number(stat.goals),
+            assists: Number(stat.assists),
+            points: Number(stat.points),
+            plus_minus: Number(stat.plus_minus),
+            penalty_minutes: Number(stat.penalty_minutes),
+            pp_goals: Number(stat.pp_goals),
+            sh_goals: Number(stat.sh_goals),
+            gw_goals: Number(stat.gw_goals),
+            gt_goals: Number(stat.gt_goals),
+            shots: Number(stat.shots),
+            shooting_pct: Number(stat.shooting_pct),
+            minutes_played: Number(stat.minutes_played),
+            minutes_per_game: Number(stat.minutes_per_game),
+            fo_pct: Number(stat.fo_pct),
+            pass_pct: Number(stat.pass_pct),
+            corner_pct: Number(stat.corner_pct),
+            hits: Number(stat.hits),
+            blocked_shots: Number(stat.blocked_shots),
+        })));
     }
 };
-ApiPlayerStatsService = tslib_1.__decorate([
+exports.ApiPlayerStatsService = ApiPlayerStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiPlayerStatsService);
-exports.ApiPlayerStatsService = ApiPlayerStatsService;
 
 
 /***/ }),
+/* 194 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/player-stats/src/lib/services/api-user-player-stats.service.ts":
+
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiPlayerAllTimeStatsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiPlayerAllTimeStatsService = exports.ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
+    constructor(repo, teamInfoRepo, dataSource) {
+        this.repo = repo;
+        this.teamInfoRepo = teamInfoRepo;
+        this.dataSource = dataSource;
+    }
+    async getAllTimePlayerStatsBySeasonByType(seasonType) {
+        const allStats = await this.repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                position: true,
+                games_played: true,
+                goals: true,
+                assists: true,
+                points: true,
+                plus_minus: true,
+                penalty_minutes: true,
+                pp_goals: true,
+                sh_goals: true,
+                gw_goals: true,
+                shots: true,
+                shooting_pct: true,
+                minutes_played: true,
+                minutes_per_game: true,
+                fo_pct: true,
+                pass_pct: true,
+                corner_pct: true,
+                hit_per_game: true,
+                blocked_shots: true,
+                playing_year: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isdefense: true,
+                    isforward: true,
+                },
+            },
+            relations: ['player_id'],
+            where: {
+                season_type: seasonType,
+            },
+            take: 1500,
+            order: {
+                points: 'DESC',
+            },
+        });
+        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
+        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo, false);
+        return allStatsWithTeamInfoConverted;
+    }
+    async getAllTimePlayerStatsSummedBySeasonByType(seasonType) {
+        const result = await this.dataSource.query(`select
+      b.firstname as firstname,
+      b.lastname as lastname,
+      b.isdefense as isdefense,
+      b.isforward as isforward,
+      b.isgoalie as isgoalie,
+      b.nhl_id as nhl_id,
+      a.player_id as player_id,
+      a.season_type as season_type, 
+      a.position as position,
+      sum(a.games_played) as games_played, 
+      sum(a.goals) as goals, 
+      sum(a.assists) as assists, 
+      sum(a.points) as points, 
+      sum(a.plus_minus) as plus_minus, 
+      sum(a.penalty_minutes) as penalty_minutes, 
+      sum(a.sh_goals) as sh_goals, 
+      sum(a.pp_goals) as pp_goals, 
+      sum(a.gw_goals) as gw_goals, 
+      sum(a.shots) as shots, 
+      sum(a.minutes_played) as minutes_played, 
+      sum(a.hits) as hits, 
+      sum(a.blocked_shots) as blocked_shots
+      from
+      players_stats_v2 as a
+      left join players_v2 as b
+      on b.id = a.player_id
+      where (a.player_id = b.id
+      and
+      a.points > '0'
+      and
+      a.season_type = '${seasonType}')
+      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
+      order by points DESC`);
+        const allTimeStatsConverted = await this.convertStats(result, true);
+        return allTimeStatsConverted;
+    }
+    async setTeamInfo(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
+    }
+    async getTeamInfo(teamName) {
+        return await this.teamInfoRepo.findOne({
+            select: {
+                id: true,
+                city: true,
+                teamlogo: true,
+                nickname: true,
+            },
+            where: {
+                shortname: teamName,
+            },
+        });
+    }
+    async convertStats(array, raw) {
+        return await Promise.all(array.map((stat) => ({
+            playing_year: stat.playing_year,
+            season_type: stat.season_type,
+            teamInfo: !raw ? stat['teamInfo'] : null,
+            player_id: !raw
+                ? stat.player_id
+                : {
+                    id: stat['player_id'],
+                    firstname: stat['firstname'],
+                    lastname: stat['lastname'],
+                    nhl_id: stat['nhl_id'],
+                    isactive: null,
+                    isgoalie: null,
+                    isdefense: stat['isdefense'],
+                    isforward: stat['isforward'],
+                    is_protected: null,
+                },
+            position: stat.position,
+            games_played: Number(stat.games_played),
+            goals: Number(stat.goals),
+            assists: Number(stat.assists),
+            points: Number(stat.points),
+            pointsPerSixty: Number(((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)),
+            plus_minus: Number(stat.plus_minus),
+            penalty_minutes: Number(stat.penalty_minutes),
+            pp_goals: Number(stat.pp_goals),
+            sh_goals: Number(stat.sh_goals),
+            gw_goals: Number(stat.gw_goals),
+            shots: Number(stat.shots),
+            shooting_pct: !raw
+                ? Number(stat.shooting_pct)
+                : Number(((Number(stat.goals) / Number(stat.shots)) * 100).toFixed(1)),
+            minutes_per_game: !raw
+                ? Number(stat.minutes_per_game)
+                : Number((Number(stat.minutes_played) / Number(stat.games_played)).toFixed(1)),
+            fo_pct: !raw ? Number(stat.fo_pct) : null,
+            pass_pct: !raw ? Number(stat.pass_pct) : null,
+            corner_pct: !raw ? Number(stat.corner_pct) : null,
+            hit_per_game: !raw
+                ? Number(stat.hit_per_game)
+                : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
+            blocked_shots: Number(stat.blocked_shots),
+        })));
+    }
+};
+exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
+], ApiPlayerAllTimeStatsService);
+
+
+/***/ }),
+/* 195 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiUserPlayerStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiUserPlayerStatsService = exports.ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -7015,10 +7420,16 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
         });
     }
     async setPlayerStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerStats: await this.getPlayerStats(item.shortname, seasonType) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            playerStats: await this.getPlayerStats(item.shortname, seasonType),
+        })));
     }
     async setPlayerAllTimeStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerStats: await this.getPlayerAllTimeStats(item.shortname, seasonType) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            playerStats: await this.getPlayerAllTimeStats(item.shortname, seasonType),
+        })));
     }
     async getPlayerAllTimeStats(teamShortName, seasonType) {
         return await this.dataSource.query(`select
@@ -7105,7 +7516,10 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
         });
     }
     async setConvertedPlayersStats(array, raw) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerStats: await this.convertStats(item.playerStats, raw, item) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            playerStats: await this.convertStats(item.playerStats, raw, item),
+        })));
     }
     async convertStats(array, raw, teamInfo) {
         return await Promise.all(array.map((stat) => ({
@@ -7161,63 +7575,76 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
         })));
     }
 };
-ApiUserPlayerStatsService = tslib_1.__decorate([
+exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
 ], ApiUserPlayerStatsService);
-exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/player-stats/src/lib/services/index.ts":
+/* 196 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/services/api-player-leaders-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/services/api-player-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/services/api-player-all-time-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/player-stats/src/lib/services/api-user-player-stats.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(197), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/salaries/src/index.ts":
+/* 197 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/salaries/src/lib/api-salaries.module.ts"), exports);
+exports.PlayerStatsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let PlayerStatsMiddleware = exports.PlayerStatsMiddleware = class PlayerStatsMiddleware {
+    use(req, res, next) {
+        console.log('Request Player Stats...');
+        next();
+    }
+};
+exports.PlayerStatsMiddleware = PlayerStatsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], PlayerStatsMiddleware);
 
 
 /***/ }),
+/* 198 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/salaries/src/lib/api-salaries.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(199), exports);
+
+
+/***/ }),
+/* 199 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiSalariesModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const axios_1 = __webpack_require__("@nestjs/axios");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/salaries/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/salaries/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/salaries/src/lib/services/index.ts");
-let ApiSalariesModule = class ApiSalariesModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const axios_1 = __webpack_require__(163);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(200);
+const middlewares_1 = __webpack_require__(204);
+const services_1 = __webpack_require__(202);
+let ApiSalariesModule = exports.ApiSalariesModule = class ApiSalariesModule {
     configure(consumer) {
         consumer.apply(middlewares_1.SalariesMiddleware).forRoutes('*');
     }
 };
-ApiSalariesModule = tslib_1.__decorate([
+exports.ApiSalariesModule = ApiSalariesModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
             axios_1.HttpModule,
@@ -7235,34 +7662,31 @@ ApiSalariesModule = tslib_1.__decorate([
         providers: [services_1.ApiSalariesService],
     })
 ], ApiSalariesModule);
-exports.ApiSalariesModule = ApiSalariesModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/salaries/src/lib/controllers/index.ts":
+/* 200 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/salaries/src/lib/controllers/salaries.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(201), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/salaries/src/lib/controllers/salaries.controller.ts":
+/* 201 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g, _h;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SalariesController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/salaries/src/lib/services/index.ts");
-let SalariesController = class SalariesController {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(202);
+let SalariesController = exports.SalariesController = class SalariesController {
     constructor(salariesService) {
         this.salariesService = salariesService;
     }
@@ -7357,63 +7781,38 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], SalariesController.prototype, "getUserTeamGoaliesSalaries", null);
-SalariesController = tslib_1.__decorate([
+exports.SalariesController = SalariesController = tslib_1.__decorate([
     (0, common_1.Controller)('salaries'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiSalariesService !== "undefined" && services_1.ApiSalariesService) === "function" ? _a : Object])
 ], SalariesController);
-exports.SalariesController = SalariesController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/salaries/src/lib/middlewares/index.ts":
+/* 202 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/salaries/src/lib/middlewares/salaries.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(203), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/salaries/src/lib/middlewares/salaries.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SalariesMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let SalariesMiddleware = class SalariesMiddleware {
-    use(req, res, next) {
-        console.log('Request Salaries...');
-        next();
-    }
-};
-SalariesMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], SalariesMiddleware);
-exports.SalariesMiddleware = SalariesMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/salaries/src/lib/services/api-salaries.service.ts":
+/* 203 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g, _h;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiSalariesService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-const axios_1 = __webpack_require__("@nestjs/axios");
-const rxjs_1 = __webpack_require__("rxjs");
-let ApiSalariesService = class ApiSalariesService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+const axios_1 = __webpack_require__(163);
+const rxjs_1 = __webpack_require__(168);
+let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
     constructor(repo, teamsRepo, playersRepo, playersStatsRepo, playerRatingsRepo, goaliesStatsRepo, goalieRatingsRepo, httpService) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
@@ -7519,7 +7918,10 @@ let ApiSalariesService = class ApiSalariesService {
         return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
     }
     async setPlayersSalaries(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { salaries: await this.getSalary(item.player_id.id) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            salaries: await this.getSalary(item.player_id.id),
+        })));
     }
     async getSalary(playerId) {
         return await this.repo.findOne({
@@ -7537,10 +7939,16 @@ let ApiSalariesService = class ApiSalariesService {
         });
     }
     async setPlayerRating(array, season) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { ratings: await this.getPlayerRating(item.player_id.id, season) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            ratings: await this.getPlayerRating(item.player_id.id, season),
+        })));
     }
     async setGoalieRating(array, season) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { ratings: await this.getGoalieRating(item.player_id.id, season) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            ratings: await this.getGoalieRating(item.player_id.id, season),
+        })));
     }
     async getGoalieRating(playerId, season) {
         return await this.goalieRatingsRepo.findOne({
@@ -7598,7 +8006,10 @@ let ApiSalariesService = class ApiSalariesService {
         });
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_name) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_name),
+        })));
     }
     async getTeamInfo(teamName) {
         if (teamName) {
@@ -7619,13 +8030,16 @@ let ApiSalariesService = class ApiSalariesService {
         }
     }
     async setNHLStats(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20222023'), nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20232024') }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20222023'),
+            nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20232024'), //TODO CHANGE EVERY YEAR
+        })));
     }
     async getNhlPlayerStatsByPlayerId(playerId, season) {
-        var _a;
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
-        return (_a = response.data.stats[0].splits[0]) === null || _a === void 0 ? void 0 : _a.stat;
+        return response.data.stats[0].splits[0]?.stat;
     }
     async getAll() {
         const salaries = await this.repo.find();
@@ -7633,7 +8047,10 @@ let ApiSalariesService = class ApiSalariesService {
         return salariesWithPlayerInfo;
     }
     async setPlayerInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { playerInfo: await this.getPlayerInfo(item.player_id) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            playerInfo: await this.getPlayerInfo(item.player_id),
+        })));
     }
     async getPlayerInfo(playerId) {
         if (playerId) {
@@ -7665,7 +8082,7 @@ let ApiSalariesService = class ApiSalariesService {
         return this.repo.save(salary);
     }
 };
-ApiSalariesService = tslib_1.__decorate([
+exports.ApiSalariesService = ApiSalariesService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Salaries_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
@@ -7676,85 +8093,98 @@ ApiSalariesService = tslib_1.__decorate([
     tslib_1.__param(6, (0, typeorm_1.InjectRepository)(entities_1.Goalie_Ratings_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object, typeof (_f = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _f : Object, typeof (_g = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _g : Object, typeof (_h = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _h : Object])
 ], ApiSalariesService);
-exports.ApiSalariesService = ApiSalariesService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/salaries/src/lib/services/index.ts":
+/* 204 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/salaries/src/lib/services/api-salaries.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(205), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/schedule/src/index.ts":
+/* 205 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/schedule/src/lib/api-schedule.module.ts"), exports);
+exports.SalariesMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let SalariesMiddleware = exports.SalariesMiddleware = class SalariesMiddleware {
+    use(req, res, next) {
+        console.log('Request Salaries...');
+        next();
+    }
+};
+exports.SalariesMiddleware = SalariesMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], SalariesMiddleware);
 
 
 /***/ }),
+/* 206 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/schedule/src/lib/api-schedule.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(207), exports);
+
+
+/***/ }),
+/* 207 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiScheduleModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/schedule/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/schedule/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/schedule/src/lib/services/index.ts");
-let ApiScheduleModule = class ApiScheduleModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(208);
+const middlewares_1 = __webpack_require__(212);
+const services_1 = __webpack_require__(210);
+let ApiScheduleModule = exports.ApiScheduleModule = class ApiScheduleModule {
     configure(consumer) {
         consumer.apply(middlewares_1.ScheduleMiddleware).forRoutes('*');
     }
 };
-ApiScheduleModule = tslib_1.__decorate([
+exports.ApiScheduleModule = ApiScheduleModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Schedule_V2, entities_1.Teams_V2, entities_1.Team_Stats_V2])],
         controllers: [controllers_1.ScheduleController],
         providers: [services_1.ApiScheduleService],
     })
 ], ApiScheduleModule);
-exports.ApiScheduleModule = ApiScheduleModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/schedule/src/lib/controllers/index.ts":
+/* 208 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/schedule/src/lib/controllers/schedule.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(209), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/schedule/src/lib/controllers/schedule.controller.ts":
+/* 209 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ScheduleController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/schedule/src/lib/services/index.ts");
-let ScheduleController = class ScheduleController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(210);
+let ScheduleController = exports.ScheduleController = class ScheduleController {
     constructor(scheduleService) {
         this.scheduleService = scheduleService;
     }
@@ -7798,61 +8228,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object, Object]),
     tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], ScheduleController.prototype, "updateGameById", null);
-ScheduleController = tslib_1.__decorate([
+exports.ScheduleController = ScheduleController = tslib_1.__decorate([
     (0, common_1.Controller)('schedule'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiScheduleService !== "undefined" && services_1.ApiScheduleService) === "function" ? _a : Object])
 ], ScheduleController);
-exports.ScheduleController = ScheduleController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/schedule/src/lib/middlewares/index.ts":
+/* 210 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/schedule/src/lib/middlewares/schedule.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(211), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/schedule/src/lib/middlewares/schedule.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ScheduleMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let ScheduleMiddleware = class ScheduleMiddleware {
-    use(req, res, next) {
-        console.log('Request Schedule...');
-        next();
-    }
-};
-ScheduleMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], ScheduleMiddleware);
-exports.ScheduleMiddleware = ScheduleMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/schedule/src/lib/services/api-schedule.service.ts":
+/* 211 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiScheduleService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiScheduleService = class ApiScheduleService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiScheduleService = exports.ApiScheduleService = class ApiScheduleService {
     constructor(repo, teamInfoRepo, teamStatsRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -7979,7 +8384,11 @@ let ApiScheduleService = class ApiScheduleService {
         })));
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { visTeamInfo: await this.getTeamInfo(item.vis_team_id), homeTeamInfo: await this.getTeamInfo(item.home_team_id) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            visTeamInfo: await this.getTeamInfo(item.vis_team_id),
+            homeTeamInfo: await this.getTeamInfo(item.home_team_id),
+        })));
     }
     async getTeamRecordVersus(teamOneId, teamTwoId, season) {
         const versus = await this.repo
@@ -8032,59 +8441,75 @@ let ApiScheduleService = class ApiScheduleService {
         });
     }
 };
-ApiScheduleService = tslib_1.__decorate([
+exports.ApiScheduleService = ApiScheduleService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Schedule_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
 ], ApiScheduleService);
-exports.ApiScheduleService = ApiScheduleService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/schedule/src/lib/services/index.ts":
+/* 212 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/schedule/src/lib/services/api-schedule.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(213), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/index.ts":
+/* 213 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/team-stats/src/lib/api-team-stats.module.ts"), exports);
+exports.ScheduleMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let ScheduleMiddleware = exports.ScheduleMiddleware = class ScheduleMiddleware {
+    use(req, res, next) {
+        console.log('Request Schedule...');
+        next();
+    }
+};
+exports.ScheduleMiddleware = ScheduleMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], ScheduleMiddleware);
 
 
 /***/ }),
+/* 214 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/team-stats/src/lib/api-team-stats.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(215), exports);
+
+
+/***/ }),
+/* 215 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTeamStatsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/team-stats/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/team-stats/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/team-stats/src/lib/services/index.ts");
-let ApiTeamStatsModule = class ApiTeamStatsModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(216);
+const middlewares_1 = __webpack_require__(222);
+const services_1 = __webpack_require__(218);
+let ApiTeamStatsModule = exports.ApiTeamStatsModule = class ApiTeamStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.TeamStatsMiddleware).forRoutes('*');
     }
 };
-ApiTeamStatsModule = tslib_1.__decorate([
+exports.ApiTeamStatsModule = ApiTeamStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Team_Stats_V2, entities_1.Teams_V2, entities_1.Divisions_V2])],
         controllers: [controllers_1.TeamStatsController],
@@ -8095,33 +8520,30 @@ ApiTeamStatsModule = tslib_1.__decorate([
         ],
     })
 ], ApiTeamStatsModule);
-exports.ApiTeamStatsModule = ApiTeamStatsModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/controllers/index.ts":
+/* 216 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/team-stats/src/lib/controllers/team-stats.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(217), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/controllers/team-stats.controller.ts":
+/* 217 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamStatsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/team-stats/src/lib/services/index.ts");
-let TeamStatsController = class TeamStatsController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(218);
+let TeamStatsController = exports.TeamStatsController = class TeamStatsController {
     constructor(teamsStatsService, allTimeTeamsStatsService, userTeamStatsService) {
         this.teamsStatsService = teamsStatsService;
         this.allTimeTeamsStatsService = allTimeTeamsStatsService;
@@ -8226,61 +8648,215 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
 ], TeamStatsController.prototype, "getUserTeamStatsBySeasonType", null);
-TeamStatsController = tslib_1.__decorate([
+exports.TeamStatsController = TeamStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('team-stats'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiTeamStatsService !== "undefined" && services_1.ApiTeamStatsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiAllTimeTeamStatsService !== "undefined" && services_1.ApiAllTimeTeamStatsService) === "function" ? _b : Object, typeof (_c = typeof services_1.ApiUserTeamStatsService !== "undefined" && services_1.ApiUserTeamStatsService) === "function" ? _c : Object])
 ], TeamStatsController);
-exports.TeamStatsController = TeamStatsController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/middlewares/index.ts":
+/* 218 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/team-stats/src/lib/middlewares/team-stats.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(219), exports);
+tslib_1.__exportStar(__webpack_require__(220), exports);
+tslib_1.__exportStar(__webpack_require__(221), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/middlewares/team-stats.middleware.ts":
+/* 219 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TeamStatsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let TeamStatsMiddleware = class TeamStatsMiddleware {
-    use(req, res, next) {
-        console.log('Request Team Stats...');
-        next();
+exports.ApiTeamStatsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiTeamStatsService = exports.ApiTeamStatsService = class ApiTeamStatsService {
+    constructor(repo, divisionsRepo) {
+        this.repo = repo;
+        this.divisionsRepo = divisionsRepo;
+        this.sortTeamStatsByStandings = (data) => {
+            return data.sort((a, b) => {
+                if (b.points === a.points) {
+                    if (b.wins === a.wins) {
+                        if (b.goals_for - b.goals_against === a.goals_for - a.goals_against) {
+                            return b.goals_for - a.goals_for;
+                        }
+                        else {
+                            return (b.goals_for - b.goals_against - (a.goals_for - a.goals_against));
+                        }
+                    }
+                    else {
+                        return b.wins - a.wins;
+                    }
+                }
+                else {
+                    return b.points - a.points;
+                }
+            });
+        };
+    }
+    async getTeamStatsBySeasonByType(season, seasonType) {
+        return await this.repo.find({
+            relations: ['team_id'],
+            select: {
+                team_id: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    shortname: true,
+                    nickname: true,
+                },
+                games_played: true,
+                points: true,
+                wins: true,
+                loss: true,
+                ties: true,
+                long_win_streak: true,
+                penalty_minutes: true,
+                goals_for: true,
+                goals_against: true,
+                pk_goals: true,
+                pk_attempts: true,
+                pp_goals: true,
+                pp_attempts: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+            },
+        });
+    }
+    async getAllTeamStatsBySeasonByType(season, seasonType) {
+        const teamStats = await this.repo.find({
+            relations: ['team_id'],
+            select: {
+                team_id: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    shortname: true,
+                    nickname: true,
+                    divisions_id: {
+                        id: true,
+                        divisionname: true,
+                        conference_id: true,
+                    },
+                },
+                div_loss: true,
+                div_tie: true,
+                div_win: true,
+                games_played: true,
+                goals_against: true,
+                goals_for: true,
+                home_loss: true,
+                home_ties: true,
+                home_wins: true,
+                loss: true,
+                penalty_minutes: true,
+                pk_attempts: true,
+                pk_goals: true,
+                pk_min: true,
+                playing_year: true,
+                points: true,
+                pp_attempts: true,
+                pp_goals: true,
+                road_loss: true,
+                road_ties: true,
+                road_wins: true,
+                season_type: true,
+                ties: true,
+                trail_after_two_loss: true,
+                trail_after_two_ties: true,
+                trail_after_two_wins: true,
+                wins: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+            },
+        });
+        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
+        return teamStatsWithDivision;
+    }
+    async getTeamStandingsForPlayoffs(season, seasonType) {
+        const teamStats = await this.repo.find({
+            relations: ['team_id'],
+            select: {
+                team_id: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    teamcolor: true,
+                    shortname: true,
+                    nickname: true,
+                    divisions_id: {
+                        id: true,
+                        divisionname: true,
+                        conference_id: true,
+                    },
+                },
+                goals_against: true,
+                goals_for: true,
+                playing_year: true,
+                points: true,
+                season_type: true,
+                wins: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+            },
+        });
+        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
+        const teamStatsWithDivisionSorted = await this.sortTeamStatsByStandings(teamStatsWithDivision);
+        return teamStatsWithDivisionSorted;
+    }
+    async setDivisionInfo(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            division: await this.getDivisionInfo(item.team_id.divisions_id.id),
+        })));
+    }
+    async getDivisionInfo(divisionId) {
+        return await this.divisionsRepo.findOne({
+            relations: ['conference_id'],
+            where: {
+                id: divisionId,
+            },
+        });
     }
 };
-TeamStatsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], TeamStatsMiddleware);
-exports.TeamStatsMiddleware = TeamStatsMiddleware;
+exports.ApiTeamStatsService = ApiTeamStatsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
+], ApiTeamStatsService);
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/services/api-all-time-team-stats.service.ts":
+/* 220 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiAllTimeTeamStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiAllTimeTeamStatsService = exports.ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
     constructor(repo, dataSource) {
         this.repo = repo;
         this.dataSource = dataSource;
@@ -8427,206 +9003,28 @@ let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
         return (high / total) * 100;
     }
 };
-ApiAllTimeTeamStatsService = tslib_1.__decorate([
+exports.ApiAllTimeTeamStatsService = ApiAllTimeTeamStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectDataSource)()),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _b : Object])
 ], ApiAllTimeTeamStatsService);
-exports.ApiAllTimeTeamStatsService = ApiAllTimeTeamStatsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/services/api-team-stats.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiTeamStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiTeamStatsService = class ApiTeamStatsService {
-    constructor(repo, divisionsRepo) {
-        this.repo = repo;
-        this.divisionsRepo = divisionsRepo;
-        this.sortTeamStatsByStandings = (data) => {
-            return data.sort((a, b) => {
-                if (b.points === a.points) {
-                    if (b.wins === a.wins) {
-                        if (b.goals_for - b.goals_against === a.goals_for - a.goals_against) {
-                            return b.goals_for - a.goals_for;
-                        }
-                        else {
-                            return (b.goals_for - b.goals_against - (a.goals_for - a.goals_against));
-                        }
-                    }
-                    else {
-                        return b.wins - a.wins;
-                    }
-                }
-                else {
-                    return b.points - a.points;
-                }
-            });
-        };
-    }
-    async getTeamStatsBySeasonByType(season, seasonType) {
-        return await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                },
-                games_played: true,
-                points: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                long_win_streak: true,
-                penalty_minutes: true,
-                goals_for: true,
-                goals_against: true,
-                pk_goals: true,
-                pk_attempts: true,
-                pp_goals: true,
-                pp_attempts: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-        });
-    }
-    async getAllTeamStatsBySeasonByType(season, seasonType) {
-        const teamStats = await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                    divisions_id: {
-                        id: true,
-                        divisionname: true,
-                        conference_id: true,
-                    },
-                },
-                div_loss: true,
-                div_tie: true,
-                div_win: true,
-                games_played: true,
-                goals_against: true,
-                goals_for: true,
-                home_loss: true,
-                home_ties: true,
-                home_wins: true,
-                loss: true,
-                penalty_minutes: true,
-                pk_attempts: true,
-                pk_goals: true,
-                pk_min: true,
-                playing_year: true,
-                points: true,
-                pp_attempts: true,
-                pp_goals: true,
-                road_loss: true,
-                road_ties: true,
-                road_wins: true,
-                season_type: true,
-                ties: true,
-                trail_after_two_loss: true,
-                trail_after_two_ties: true,
-                trail_after_two_wins: true,
-                wins: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-        });
-        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
-        return teamStatsWithDivision;
-    }
-    async getTeamStandingsForPlayoffs(season, seasonType) {
-        const teamStats = await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    teamcolor: true,
-                    shortname: true,
-                    nickname: true,
-                    divisions_id: {
-                        id: true,
-                        divisionname: true,
-                        conference_id: true,
-                    },
-                },
-                goals_against: true,
-                goals_for: true,
-                playing_year: true,
-                points: true,
-                season_type: true,
-                wins: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-        });
-        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
-        const teamStatsWithDivisionSorted = await this.sortTeamStatsByStandings(teamStatsWithDivision);
-        return teamStatsWithDivisionSorted;
-    }
-    async setDivisionInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { division: await this.getDivisionInfo(item.team_id.divisions_id.id) }))));
-    }
-    async getDivisionInfo(divisionId) {
-        return await this.divisionsRepo.findOne({
-            relations: ['conference_id'],
-            where: {
-                id: divisionId,
-            },
-        });
-    }
-};
-ApiTeamStatsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
-], ApiTeamStatsService);
-exports.ApiTeamStatsService = ApiTeamStatsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/services/api-user-team-stats.service.ts":
+/* 221 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiUserTeamStatsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiUserTeamStatsService = class ApiUserTeamStatsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiUserTeamStatsService = exports.ApiUserTeamStatsService = class ApiUserTeamStatsService {
     constructor(repo, teamsRepo) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
@@ -8673,10 +9071,16 @@ let ApiUserTeamStatsService = class ApiUserTeamStatsService {
         return userTeamsWithTeamStatsConverted;
     }
     async setConvertedTeamStats(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamStats: await this.convertStats(item.teamStats) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamStats: await this.convertStats(item.teamStats),
+        })));
     }
     async setTeamStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamStats: await this.getTeamStats(item.id, seasonType) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamStats: await this.getTeamStats(item.id, seasonType),
+        })));
     }
     async getTeamStats(teamId, seasonType) {
         return await this.repo.find({
@@ -8773,94 +9177,105 @@ let ApiUserTeamStatsService = class ApiUserTeamStatsService {
         return (high / total) * 100;
     }
 };
-ApiUserTeamStatsService = tslib_1.__decorate([
+exports.ApiUserTeamStatsService = ApiUserTeamStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiUserTeamStatsService);
-exports.ApiUserTeamStatsService = ApiUserTeamStatsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/team-stats/src/lib/services/index.ts":
+/* 222 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/team-stats/src/lib/services/api-team-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/team-stats/src/lib/services/api-all-time-team-stats.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/team-stats/src/lib/services/api-user-team-stats.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(223), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/teams/src/index.ts":
+/* 223 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/teams/src/lib/api-teams.module.ts"), exports);
+exports.TeamStatsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let TeamStatsMiddleware = exports.TeamStatsMiddleware = class TeamStatsMiddleware {
+    use(req, res, next) {
+        console.log('Request Team Stats...');
+        next();
+    }
+};
+exports.TeamStatsMiddleware = TeamStatsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], TeamStatsMiddleware);
 
 
 /***/ }),
+/* 224 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/teams/src/lib/api-teams.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(225), exports);
+
+
+/***/ }),
+/* 225 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTeamsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/teams/src/lib/controllers/index.ts");
-const teams_middleware_1 = __webpack_require__("../../libs/api/teams/src/lib/middlewares/teams.middleware.ts");
-const services_1 = __webpack_require__("../../libs/api/teams/src/lib/services/index.ts");
-let ApiTeamsModule = class ApiTeamsModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(226);
+const teams_middleware_1 = __webpack_require__(230);
+const services_1 = __webpack_require__(228);
+let ApiTeamsModule = exports.ApiTeamsModule = class ApiTeamsModule {
     configure(consumer) {
         consumer.apply(teams_middleware_1.TeamsMiddleware).forRoutes('*');
     }
 };
-ApiTeamsModule = tslib_1.__decorate([
+exports.ApiTeamsModule = ApiTeamsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Teams_V2, entities_1.Users_V2])],
         controllers: [controllers_1.TeamsController],
         providers: [services_1.TeamsService],
     })
 ], ApiTeamsModule);
-exports.ApiTeamsModule = ApiTeamsModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/teams/src/lib/controllers/index.ts":
+/* 226 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/teams/src/lib/controllers/teams.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(227), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/teams/src/lib/controllers/teams.controller.ts":
+/* 227 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/teams/src/lib/services/index.ts");
-let TeamsController = class TeamsController {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(228);
+let TeamsController = exports.TeamsController = class TeamsController {
     constructor(teamsService) {
         this.teamsService = teamsService;
     }
@@ -8950,61 +9365,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], TeamsController.prototype, "deleteUserById", null);
-TeamsController = tslib_1.__decorate([
+exports.TeamsController = TeamsController = tslib_1.__decorate([
     (0, common_1.Controller)('teams'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.TeamsService !== "undefined" && services_1.TeamsService) === "function" ? _a : Object])
 ], TeamsController);
-exports.TeamsController = TeamsController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/teams/src/lib/middlewares/teams.middleware.ts":
+/* 228 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TeamsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let TeamsMiddleware = class TeamsMiddleware {
-    use(req, res, next) {
-        console.log('Request Teams...');
-        next();
-    }
-};
-TeamsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], TeamsMiddleware);
-exports.TeamsMiddleware = TeamsMiddleware;
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(229), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/teams/src/lib/services/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/teams/src/lib/services/teams.service.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/teams/src/lib/services/teams.service.ts":
+/* 229 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let TeamsService = class TeamsService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let TeamsService = exports.TeamsService = class TeamsService {
     constructor(repo, userRepo) {
         this.repo = repo;
         this.userRepo = userRepo;
@@ -9059,48 +9449,65 @@ let TeamsService = class TeamsService {
         return this.repo.remove(team);
     }
 };
-TeamsService = tslib_1.__decorate([
+exports.TeamsService = TeamsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Users_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], TeamsService);
-exports.TeamsService = TeamsService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/index.ts":
+/* 230 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/transactions/src/lib/api-transactions.module.ts"), exports);
+exports.TeamsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let TeamsMiddleware = exports.TeamsMiddleware = class TeamsMiddleware {
+    use(req, res, next) {
+        console.log('Request Teams...');
+        next();
+    }
+};
+exports.TeamsMiddleware = TeamsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], TeamsMiddleware);
 
 
 /***/ }),
+/* 231 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/api/transactions/src/lib/api-transactions.module.ts":
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(232), exports);
+
+
+/***/ }),
+/* 232 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTransactionsModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const axios_1 = __webpack_require__("@nestjs/axios");
-const controllers_1 = __webpack_require__("../../libs/api/transactions/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/transactions/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/transactions/src/lib/services/index.ts");
-let ApiTransactionsModule = class ApiTransactionsModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const axios_1 = __webpack_require__(163);
+const controllers_1 = __webpack_require__(233);
+const middlewares_1 = __webpack_require__(238);
+const services_1 = __webpack_require__(235);
+let ApiTransactionsModule = exports.ApiTransactionsModule = class ApiTransactionsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.TransactionsMiddleware).forRoutes('*');
     }
 };
-ApiTransactionsModule = tslib_1.__decorate([
+exports.ApiTransactionsModule = ApiTransactionsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
             axios_1.HttpModule,
@@ -9117,34 +9524,31 @@ ApiTransactionsModule = tslib_1.__decorate([
         providers: [services_1.ApiTransactionsService, services_1.ApiTransactionsTradesService],
     })
 ], ApiTransactionsModule);
-exports.ApiTransactionsModule = ApiTransactionsModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/controllers/index.ts":
+/* 233 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/transactions/src/lib/controllers/transactions.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(234), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/controllers/transactions.controller.ts":
+/* 234 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/transactions/src/lib/services/index.ts");
-let TransactionsController = class TransactionsController {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(235);
+let TransactionsController = exports.TransactionsController = class TransactionsController {
     constructor(transactionsService, transactionsTradesService) {
         this.transactionsService = transactionsService;
         this.transactionsTradesService = transactionsTradesService;
@@ -9233,63 +9637,161 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [typeof (_k = typeof entities_1.TradeDto !== "undefined" && entities_1.TradeDto) === "function" ? _k : Object]),
     tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
 ], TransactionsController.prototype, "trade", null);
-TransactionsController = tslib_1.__decorate([
+exports.TransactionsController = TransactionsController = tslib_1.__decorate([
     (0, common_1.Controller)('transactions'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiTransactionsService !== "undefined" && services_1.ApiTransactionsService) === "function" ? _a : Object, typeof (_b = typeof services_1.ApiTransactionsTradesService !== "undefined" && services_1.ApiTransactionsTradesService) === "function" ? _b : Object])
 ], TransactionsController);
-exports.TransactionsController = TransactionsController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/middlewares/index.ts":
+/* 235 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/transactions/src/lib/middlewares/transactions.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(236), exports);
+tslib_1.__exportStar(__webpack_require__(237), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/middlewares/transactions.middleware.ts":
+/* 236 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TransactionsMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let TransactionsMiddleware = class TransactionsMiddleware {
-    use(req, res, next) {
-        console.log('Request Transactions...');
-        next();
+exports.ApiTransactionsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiTransactionsService = exports.ApiTransactionsService = class ApiTransactionsService {
+    constructor(repo, teamInfoRepo, playersRepo) {
+        this.repo = repo;
+        this.teamInfoRepo = teamInfoRepo;
+        this.playersRepo = playersRepo;
+    }
+    async getAllTransactions() {
+        const transactions = await this.repo.find({
+            order: {
+                transaction_date: 'DESC',
+            },
+        });
+        const transactionsWithInfo = await this.setInfo(transactions);
+        return transactionsWithInfo;
+    }
+    async getTransactionsBySeason(year) {
+        const season = this.findSeasonDates(year);
+        const transactions = await this.repo.find({
+            where: {
+                transaction_date: (0, typeorm_2.Between)(new Date(season.start), new Date(season.end)),
+            },
+            order: {
+                transaction_date: 'DESC',
+            },
+        });
+        const transactionsTeamInfo = await this.setTransactionInfo(transactions);
+        return transactionsTeamInfo;
+    }
+    async updateTradeById(id, attrs) {
+        const trade = await this.repo.findOneByOrFail({ id });
+        if (!trade) {
+            throw new common_1.NotFoundException('trade not found');
+        }
+        Object.assign(trade, attrs);
+        return this.repo.save(trade);
+    }
+    async setTransactionInfo(transactions) {
+        return await Promise.all(transactions.map(async (transaction) => ({
+            id: transaction.id,
+            transactionDate: transaction.transaction_date,
+            teamOneInfo: await this.getTeamInfo(transaction.team_one_id),
+            teamOnePlayers: await this.setPlayersInfo(transaction.team_one_players),
+            teamOnePicks: transaction.team_one_picks,
+            teamTwoInfo: await this.getTeamInfo(transaction.team_two_id),
+            teamTwoPlayers: await this.setPlayersInfo(transaction.team_two_players),
+            teamTwoPicks: transaction.team_two_picks,
+        })));
+    }
+    async setPlayersInfo(array) {
+        return await Promise.all(array.map(async (item) => ({
+            player: await this.getPlayerInfo(item),
+        })));
+    }
+    async setInfo(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            team_one_id: await this.getTeamInfo(item.team_one_id),
+            team_two_id: await this.getTeamInfo(item.team_two_id),
+            team_one_players: await this.setPlayersInfo(item.team_one_players),
+            team_two_players: await this.setPlayersInfo(item.team_two_players),
+        })));
+    }
+    async getTeamInfo(teamId) {
+        return await this.teamInfoRepo.findOne({
+            select: {
+                id: true,
+                city: true,
+                teamlogo: true,
+                nickname: true,
+                teamcolor: true,
+                teamtextcolor: true,
+            },
+            where: {
+                id: teamId,
+            },
+        });
+    }
+    async getPlayerInfo(playerId) {
+        return await this.playersRepo.findOne({
+            select: {
+                id: true,
+                firstname: true,
+                lastname: true,
+                nhl_id: true,
+            },
+            where: {
+                id: playerId,
+            },
+        });
+    }
+    findSeasonDates(year) {
+        const seasons = [
+            { year: '24', start: '2023-06-02', end: '2024-06-01' },
+            { year: '23', start: '2022-06-02', end: '2023-06-01' },
+            { year: '22', start: '2021-07-15', end: '2022-06-01' },
+            { year: '21', start: '2020-04-27', end: '2021-07-15' },
+        ];
+        return seasons.find((season) => season.year === year);
     }
 };
-TransactionsMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], TransactionsMiddleware);
-exports.TransactionsMiddleware = TransactionsMiddleware;
+exports.ApiTransactionsService = ApiTransactionsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
+    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
+], ApiTransactionsService);
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/services/api-transactions-trades.service.ts":
+/* 237 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTransactionsTradesService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-const axios_1 = __webpack_require__("@nestjs/axios");
-const rxjs_1 = __webpack_require__("rxjs");
-let ApiTransactionsTradesService = class ApiTransactionsTradesService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+const axios_1 = __webpack_require__(163);
+const rxjs_1 = __webpack_require__(168);
+let ApiTransactionsTradesService = exports.ApiTransactionsTradesService = class ApiTransactionsTradesService {
     constructor(httpService, repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo, playersRepo) {
         this.httpService = httpService;
         this.repo = repo;
@@ -9400,7 +9902,10 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         };
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getPlayerTeamInfo(item.team_name) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getPlayerTeamInfo(item.team_name),
+        })));
     }
     async getPlayerTeamInfo(teamName) {
         return await this.teamInfoRepo.findOne({
@@ -9748,7 +10253,7 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         });
     }
 };
-ApiTransactionsTradesService = tslib_1.__decorate([
+exports.ApiTransactionsTradesService = ApiTransactionsTradesService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
@@ -9758,472 +10263,98 @@ ApiTransactionsTradesService = tslib_1.__decorate([
     tslib_1.__param(6, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object, typeof (_d = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _d : Object, typeof (_e = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _e : Object, typeof (_f = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _f : Object, typeof (_g = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _g : Object])
 ], ApiTransactionsTradesService);
-exports.ApiTransactionsTradesService = ApiTransactionsTradesService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/services/api-transactions.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiTransactionsService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiTransactionsService = class ApiTransactionsService {
-    constructor(repo, teamInfoRepo, playersRepo) {
-        this.repo = repo;
-        this.teamInfoRepo = teamInfoRepo;
-        this.playersRepo = playersRepo;
-    }
-    async getAllTransactions() {
-        const transactions = await this.repo.find({
-            order: {
-                transaction_date: 'DESC',
-            },
-        });
-        const transactionsWithInfo = await this.setInfo(transactions);
-        return transactionsWithInfo;
-    }
-    async getTransactionsBySeason(year) {
-        const season = this.findSeasonDates(year);
-        const transactions = await this.repo.find({
-            where: {
-                transaction_date: (0, typeorm_2.Between)(new Date(season.start), new Date(season.end)),
-            },
-            order: {
-                transaction_date: 'DESC',
-            },
-        });
-        const transactionsTeamInfo = await this.setTransactionInfo(transactions);
-        return transactionsTeamInfo;
-    }
-    async updateTradeById(id, attrs) {
-        const trade = await this.repo.findOneByOrFail({ id });
-        if (!trade) {
-            throw new common_1.NotFoundException('trade not found');
-        }
-        Object.assign(trade, attrs);
-        return this.repo.save(trade);
-    }
-    async setTransactionInfo(transactions) {
-        return await Promise.all(transactions.map(async (transaction) => ({
-            id: transaction.id,
-            transactionDate: transaction.transaction_date,
-            teamOneInfo: await this.getTeamInfo(transaction.team_one_id),
-            teamOnePlayers: await this.setPlayersInfo(transaction.team_one_players),
-            teamOnePicks: transaction.team_one_picks,
-            teamTwoInfo: await this.getTeamInfo(transaction.team_two_id),
-            teamTwoPlayers: await this.setPlayersInfo(transaction.team_two_players),
-            teamTwoPicks: transaction.team_two_picks,
-        })));
-    }
-    async setPlayersInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            player: await this.getPlayerInfo(item),
-        })));
-    }
-    async setInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { team_one_id: await this.getTeamInfo(item.team_one_id), team_two_id: await this.getTeamInfo(item.team_two_id), team_one_players: await this.setPlayersInfo(item.team_one_players), team_two_players: await this.setPlayersInfo(item.team_two_players) }))));
-    }
-    async getTeamInfo(teamId) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-                teamcolor: true,
-                teamtextcolor: true,
-            },
-            where: {
-                id: teamId,
-            },
-        });
-    }
-    async getPlayerInfo(playerId) {
-        return await this.playersRepo.findOne({
-            select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                nhl_id: true,
-            },
-            where: {
-                id: playerId,
-            },
-        });
-    }
-    findSeasonDates(year) {
-        const seasons = [
-            { year: '24', start: '2023-06-02', end: '2024-06-01' },
-            { year: '23', start: '2022-06-02', end: '2023-06-01' },
-            { year: '22', start: '2021-07-15', end: '2022-06-01' },
-            { year: '21', start: '2020-04-27', end: '2021-07-15' },
-        ];
-        return seasons.find((season) => season.year === year);
-    }
-};
-ApiTransactionsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
-    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
-    tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _c : Object])
-], ApiTransactionsService);
-exports.ApiTransactionsService = ApiTransactionsService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/transactions/src/lib/services/index.ts":
+/* 238 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/transactions/src/lib/services/api-transactions.service.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/api/transactions/src/lib/services/api-transactions-trades.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(239), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/users/src/index.ts":
+/* 239 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/users/src/lib/api-users.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/users/src/lib/api-users.module.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiUsersModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/users/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/users/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/users/src/lib/services/index.ts");
-let ApiUsersModule = class ApiUsersModule {
-    configure(consumer) {
-        consumer.apply(middlewares_1.UserMiddleware).forRoutes('*');
-    }
-};
-ApiUsersModule = tslib_1.__decorate([
-    (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Users_V2])],
-        controllers: [controllers_1.UsersController],
-        providers: [services_1.UsersService],
-    })
-], ApiUsersModule);
-exports.ApiUsersModule = ApiUsersModule;
-
-
-/***/ }),
-
-/***/ "../../libs/api/users/src/lib/controllers/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/users/src/lib/controllers/users.controller.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/users/src/lib/controllers/users.controller.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a, _b, _c, _d, _e, _f, _g;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UsersController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/users/src/lib/services/index.ts");
-const entities_1 = __webpack_require__("../../libs/cha/shared/entities/src/index.ts");
-let UsersController = class UsersController {
-    constructor(usersService) {
-        this.usersService = usersService;
-    }
-    async getUsers() {
-        const users = await this.usersService.getAll();
-        if (!users || users.length < 1) {
-            throw new common_1.NotFoundException('users not found');
-        }
-        return users;
-    }
-    async getCurrentUsers() {
-        const users = await this.usersService.getCurrent();
-        if (!users || users.length < 1) {
-            throw new common_1.NotFoundException('users not found');
-        }
-        return users;
-    }
-    async getUserByEmail(param) {
-        const user = await this.usersService.findUserByEmail(param.email);
-        if (!user) {
-            throw new common_1.NotFoundException('user not found');
-        }
-        return user;
-    }
-    async getUserById(param) {
-        const user = await this.usersService.findUserById(parseInt(param.id));
-        if (!user) {
-            throw new common_1.NotFoundException('user not found');
-        }
-        return user;
-    }
-    updateUserById(param, body) {
-        return this.usersService.updateUserById(parseInt(param.id), body);
-    }
-    addUser(body) {
-        return this.usersService.addUser(body);
-    }
-    deleteUserById(param) {
-        return this.usersService.deleteUser(parseInt(param.id));
-    }
-};
-tslib_1.__decorate([
-    (0, common_1.Get)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
-], UsersController.prototype, "getUsers", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/current'),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
-], UsersController.prototype, "getCurrentUsers", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/:email'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
-], UsersController.prototype, "getUserByEmail", null);
-tslib_1.__decorate([
-    (0, common_1.Get)('/userId/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
-], UsersController.prototype, "getUserById", null);
-tslib_1.__decorate([
-    (0, common_1.Put)('/userId/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
-], UsersController.prototype, "updateUserById", null);
-tslib_1.__decorate([
-    (0, common_1.Post)('/add'),
-    tslib_1.__param(0, (0, common_1.Body)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_g = typeof entities_1.UserCreateDto !== "undefined" && entities_1.UserCreateDto) === "function" ? _g : Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], UsersController.prototype, "addUser", null);
-tslib_1.__decorate([
-    (0, common_1.Delete)('/delete/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
-], UsersController.prototype, "deleteUserById", null);
-UsersController = tslib_1.__decorate([
-    (0, common_1.Controller)('users'),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.UsersService !== "undefined" && services_1.UsersService) === "function" ? _a : Object])
-], UsersController);
-exports.UsersController = UsersController;
-
-
-/***/ }),
-
-/***/ "../../libs/api/users/src/lib/middlewares/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/users/src/lib/middlewares/user.middleware.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/users/src/lib/middlewares/user.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UserMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let UserMiddleware = class UserMiddleware {
+exports.TransactionsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let TransactionsMiddleware = exports.TransactionsMiddleware = class TransactionsMiddleware {
     use(req, res, next) {
-        console.log('Request User...');
+        console.log('Request Transactions...');
         next();
     }
 };
-UserMiddleware = tslib_1.__decorate([
+exports.TransactionsMiddleware = TransactionsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
-], UserMiddleware);
-exports.UserMiddleware = UserMiddleware;
+], TransactionsMiddleware);
 
 
 /***/ }),
-
-/***/ "../../libs/api/users/src/lib/services/index.ts":
+/* 240 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/users/src/lib/services/users.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(241), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/users/src/lib/services/users.service.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UsersService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let UsersService = class UsersService {
-    constructor(repo) {
-        this.repo = repo;
-    }
-    async findUserByEmail(email) {
-        return await this.repo.findOneByOrFail({ email });
-    }
-    async getAll() {
-        return await this.repo.find();
-    }
-    async getCurrent() {
-        return await this.repo.find({
-            where: {
-                isactive: true,
-            },
-        });
-    }
-    async findUserById(id) {
-        return await this.repo.findOneByOrFail({ id });
-    }
-    async updateUserById(id, attrs) {
-        const user = await this.repo.findOneByOrFail({ id });
-        if (!user) {
-            throw new common_1.NotFoundException('user not found');
-        }
-        Object.assign(user, attrs);
-        return this.repo.save(user);
-    }
-    async addUser(body) {
-        const user = await this.repo.create(body);
-        return this.repo.save(user);
-    }
-    async deleteUser(id) {
-        const user = await this.repo.findOneByOrFail({ id });
-        if (!user) {
-            throw new common_1.NotFoundException('user not found');
-        }
-        return this.repo.remove(user);
-    }
-};
-UsersService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Users_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
-], UsersService);
-exports.UsersService = UsersService;
-
-
-/***/ }),
-
-/***/ "../../libs/api/waivers/src/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/waivers/src/lib/api-waivers.module.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/api-waivers.module.ts":
+/* 241 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiWaiversModule = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const controllers_1 = __webpack_require__("../../libs/api/waivers/src/lib/controllers/index.ts");
-const middlewares_1 = __webpack_require__("../../libs/api/waivers/src/lib/middlewares/index.ts");
-const services_1 = __webpack_require__("../../libs/api/waivers/src/lib/services/index.ts");
-let ApiWaiversModule = class ApiWaiversModule {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(242);
+const middlewares_1 = __webpack_require__(246);
+const services_1 = __webpack_require__(244);
+let ApiWaiversModule = exports.ApiWaiversModule = class ApiWaiversModule {
     configure(consumer) {
         consumer.apply(middlewares_1.WaiversMiddleware).forRoutes('*');
     }
 };
-ApiWaiversModule = tslib_1.__decorate([
+exports.ApiWaiversModule = ApiWaiversModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Waivers_V2, entities_1.Teams_V2])],
         controllers: [controllers_1.WaiversController],
         providers: [services_1.ApiWaiversService],
     })
 ], ApiWaiversModule);
-exports.ApiWaiversModule = ApiWaiversModule;
 
 
 /***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/controllers/index.ts":
+/* 242 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/waivers/src/lib/controllers/waivers.controller.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(243), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/controllers/waivers.controller.ts":
+/* 243 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WaiversController = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-const services_1 = __webpack_require__("../../libs/api/waivers/src/lib/services/index.ts");
-let WaiversController = class WaiversController {
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(244);
+let WaiversController = exports.WaiversController = class WaiversController {
     constructor(waiversService) {
         this.waiversService = waiversService;
     }
@@ -10251,61 +10382,36 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], WaiversController.prototype, "updateWaiverById", null);
-WaiversController = tslib_1.__decorate([
+exports.WaiversController = WaiversController = tslib_1.__decorate([
     (0, common_1.Controller)('waivers'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiWaiversService !== "undefined" && services_1.ApiWaiversService) === "function" ? _a : Object])
 ], WaiversController);
-exports.WaiversController = WaiversController;
 
 
 /***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/middlewares/index.ts":
+/* 244 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/waivers/src/lib/middlewares/waivers.middleware.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(245), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/middlewares/waivers.middleware.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.WaiversMiddleware = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const common_1 = __webpack_require__("@nestjs/common");
-let WaiversMiddleware = class WaiversMiddleware {
-    use(req, res, next) {
-        console.log('Request Waivers...');
-        next();
-    }
-};
-WaiversMiddleware = tslib_1.__decorate([
-    (0, common_1.Injectable)()
-], WaiversMiddleware);
-exports.WaiversMiddleware = WaiversMiddleware;
-
-
-/***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/services/api-waivers.service.ts":
+/* 245 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiWaiversService = void 0;
-const tslib_1 = __webpack_require__("tslib");
-const entities_1 = __webpack_require__("../../libs/api/entities/src/index.ts");
-const common_1 = __webpack_require__("@nestjs/common");
-const typeorm_1 = __webpack_require__("@nestjs/typeorm");
-const typeorm_2 = __webpack_require__("typeorm");
-let ApiWaiversService = class ApiWaiversService {
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiWaiversService = exports.ApiWaiversService = class ApiWaiversService {
     constructor(repo, teamsRepo) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
@@ -10331,7 +10437,10 @@ let ApiWaiversService = class ApiWaiversService {
         return this.repo.save(team);
     }
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => (Object.assign(Object.assign({}, item), { teamInfo: await this.getTeamInfo(item.team_id) }))));
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            teamInfo: await this.getTeamInfo(item.team_id),
+        })));
     }
     async getTeamInfo(teamId) {
         if (teamId) {
@@ -10352,1067 +10461,724 @@ let ApiWaiversService = class ApiWaiversService {
         }
     }
 };
-ApiWaiversService = tslib_1.__decorate([
+exports.ApiWaiversService = ApiWaiversService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Waivers_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
 ], ApiWaiversService);
-exports.ApiWaiversService = ApiWaiversService;
 
 
 /***/ }),
-
-/***/ "../../libs/api/waivers/src/lib/services/index.ts":
+/* 246 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/api/waivers/src/lib/services/api-waivers.service.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(247), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/index.ts":
+/* 247 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/models/index.ts"), exports);
+exports.WaiversMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let WaiversMiddleware = exports.WaiversMiddleware = class WaiversMiddleware {
+    use(req, res, next) {
+        console.log('Request Waivers...');
+        next();
+    }
+};
+exports.WaiversMiddleware = WaiversMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], WaiversMiddleware);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/awards/award-award-type.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/awards/award-stats.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/awards/award.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/awards/index.ts":
+/* 248 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/awards/award.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/awards/award-stats.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/awards/award-award-type.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/awards/user-award.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(249), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/awards/user-award.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/drafts/draft-pick.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/drafts/draft-table-stat.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/drafts/draft-table.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/drafts/index.ts":
+/* 249 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/drafts/draft-table-stat.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/drafts/draft-table.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/drafts/draft-pick.dto.ts"), exports);
+exports.ApiDivisionsModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(250);
+const middlewares_1 = __webpack_require__(254);
+const services_1 = __webpack_require__(252);
+let ApiDivisionsModule = exports.ApiDivisionsModule = class ApiDivisionsModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.DivisionsMiddleware).forRoutes('*');
+    }
+};
+exports.ApiDivisionsModule = ApiDivisionsModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Divisions_V2])],
+        controllers: [controllers_1.DivisionsController],
+        providers: [services_1.ApiDivisionsService],
+    })
+], ApiDivisionsModule);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/index.ts":
+/* 250 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/user/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/teams/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/league/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/awards/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/player/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/drafts/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/nhl/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/schedule/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/salaries/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/waivers/index.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(251), exports);
 
 
 /***/ }),
+/* 251 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/league/conference.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
 
-
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DivisionsController = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(252);
+let DivisionsController = exports.DivisionsController = class DivisionsController {
+    constructor(divisionsService) {
+        this.divisionsService = divisionsService;
+    }
+    async getAll() {
+        const divisions = await this.divisionsService.getAll();
+        if (!divisions || divisions.length < 1) {
+            throw new common_1.NotFoundException('Divisions not found');
+        }
+        return divisions;
+    }
+    async getAllActive() {
+        const divisions = await this.divisionsService.getAllActive();
+        if (!divisions || divisions.length < 1) {
+            throw new common_1.NotFoundException('Divisions not found');
+        }
+        return divisions;
+    }
+    updateDivisionById(param, body) {
+        return this.divisionsService.updateDivisionById(parseInt(param.id), body);
+    }
+    addDivision(body) {
+        return this.divisionsService.addDivision(body);
+    }
+    deleteDivision(param) {
+        return this.divisionsService.deleteDivision(parseInt(param.id));
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], DivisionsController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Get)('/active'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], DivisionsController.prototype, "getAllActive", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
+], DivisionsController.prototype, "updateDivisionById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.DivisionCreateDto !== "undefined" && entities_1.DivisionCreateDto) === "function" ? _e : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], DivisionsController.prototype, "addDivision", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], DivisionsController.prototype, "deleteDivision", null);
+exports.DivisionsController = DivisionsController = tslib_1.__decorate([
+    (0, common_1.Controller)('divisions'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiDivisionsService !== "undefined" && services_1.ApiDivisionsService) === "function" ? _a : Object])
+], DivisionsController);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/league/division.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/league/index.ts":
+/* 252 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/league/leagueData.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/league/conference.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/league/division.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(253), exports);
 
 
 /***/ }),
+/* 253 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/league/leagueData.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
 
-
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiDivisionsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiDivisionsService = exports.ApiDivisionsService = class ApiDivisionsService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async getAllActive() {
+        return await this.repo.findBy({ isactive: true });
+    }
+    async getAll() {
+        return await this.repo.find({
+            relations: ['conference_id'],
+        });
+    }
+    async updateDivisionById(id, attrs) {
+        const division = await this.repo.findOneByOrFail({ id });
+        if (!division) {
+            throw new common_1.NotFoundException('division not found');
+        }
+        Object.assign(division, attrs);
+        return this.repo.save(division);
+    }
+    async addDivision(body) {
+        const division = await this.repo.create(body);
+        return this.repo.save(division);
+    }
+    async deleteDivision(id) {
+        const division = await this.repo.findOneByOrFail({ id });
+        if (!division) {
+            throw new common_1.NotFoundException('division not found');
+        }
+        return this.repo.remove(division);
+    }
+};
+exports.ApiDivisionsService = ApiDivisionsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], ApiDivisionsService);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/nhl/index.ts":
+/* 254 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-leaders.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-player.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-goalie-stat.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-player-stat.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(255), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-goalie-stat.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-leaders.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-player-stat.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/nhl/nhl-player.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/player/index.ts":
+/* 255 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/player/player.dto.ts"), exports);
+exports.DivisionsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let DivisionsMiddleware = exports.DivisionsMiddleware = class DivisionsMiddleware {
+    use(req, res, next) {
+        console.log('Request Divisions...');
+        next();
+    }
+};
+exports.DivisionsMiddleware = DivisionsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], DivisionsMiddleware);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/player/player.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/salaries/goalie-rating.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/salaries/index.ts":
+/* 256 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/salaries/goalie-rating.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/salaries/player-rating.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/salaries/salaries-and-ratings.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/salaries/salary.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(257), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/salaries/player-rating.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/salaries/salaries-and-ratings.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/salaries/salary.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/schedule/games.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/schedule/index.ts":
+/* 257 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/schedule/schedule-all.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/schedule/games.dto.ts"), exports);
+exports.ApiGoalieRatingsModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(258);
+const middlewares_1 = __webpack_require__(262);
+const services_1 = __webpack_require__(260);
+let ApiGoalieRatingsModule = exports.ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.GoalieRatingsMiddleware).forRoutes('*');
+    }
+};
+exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalie_Ratings_V2, entities_1.Players_V2])],
+        controllers: [controllers_1.GoalieRatingsController],
+        providers: [services_1.ApiGoalieRatingsService],
+    })
+], ApiGoalieRatingsModule);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/schedule/schedule-all.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/index.ts":
+/* 258 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-team.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leader.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leaders.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalie-leader.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalie-leaders.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-team-all.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-all.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalie-all.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-team-playoffs.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-teams-history.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-players-history.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalies-history.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-team-record.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-teams-history.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-players-history.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-goalies-history.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-award.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(259), exports);
 
 
 /***/ }),
+/* 259 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalie-all.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
 
-
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GoalieRatingsController = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(260);
+let GoalieRatingsController = exports.GoalieRatingsController = class GoalieRatingsController {
+    constructor(goalieRatingsService) {
+        this.goalieRatingsService = goalieRatingsService;
+    }
+    async getAllRatings(param) {
+        const players = await this.goalieRatingsService.getAll(param.season);
+        if (!players || players.length < 1) {
+            throw new common_1.NotFoundException('ratings not found');
+        }
+        return players;
+    }
+    updatePlayerById(param, body) {
+        return this.goalieRatingsService.updatePlayerById(parseInt(param.id), body);
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)('/:season'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], GoalieRatingsController.prototype, "getAllRatings", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], GoalieRatingsController.prototype, "updatePlayerById", null);
+exports.GoalieRatingsController = GoalieRatingsController = tslib_1.__decorate([
+    (0, common_1.Controller)('goalie-ratings'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiGoalieRatingsService !== "undefined" && services_1.ApiGoalieRatingsService) === "function" ? _a : Object])
+], GoalieRatingsController);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalie-leader.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalie-leaders.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-goalies-history.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-all.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-award.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leader.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leaders.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-players-history.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-team-all.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-team-playoffs.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-team.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-teams-history.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-goalies-history.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-players-history.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-team-record.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/stats/stat-user-teams-history.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/teams/index.ts":
+/* 260 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/teams/team.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(261), exports);
 
 
 /***/ }),
+/* 261 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/teams/team.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
 
-
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiGoalieRatingsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiGoalieRatingsService = exports.ApiGoalieRatingsService = class ApiGoalieRatingsService {
+    constructor(repo, playersRepo) {
+        this.repo = repo;
+        this.playersRepo = playersRepo;
+    }
+    async getAll(season) {
+        const ratings = await this.repo.find({
+            where: {
+                playing_year: season,
+            },
+        });
+        const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
+        return ratingsWithPlayerInfo;
+    }
+    async updatePlayerById(id, attrs) {
+        const player = await this.repo.findOneByOrFail({ id });
+        if (!player) {
+            throw new common_1.NotFoundException('player not found');
+        }
+        Object.assign(player, attrs);
+        return this.repo.save(player);
+    }
+    async setPlayerInfo(array) {
+        return await Promise.all(array.map(async (item) => ({
+            ...item,
+            playerInfo: await this.getPlayerInfo(item.player_id),
+        })));
+    }
+    async getPlayerInfo(playerId) {
+        if (playerId) {
+            return await this.playersRepo.findOne({
+                select: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                },
+                where: {
+                    id: playerId,
+                },
+            });
+        }
+        else {
+            return {};
+        }
+    }
+};
+exports.ApiGoalieRatingsService = ApiGoalieRatingsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalie_Ratings_V2)),
+    tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object])
+], ApiGoalieRatingsService);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/edit-trade.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/get-trade.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/get-transaction.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/index.ts":
+/* 262 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/get-transaction.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/get-team-transaction.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/waiver-acquisition.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/trade.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/get-trade.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/transactions/edit-trade.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(263), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/trade.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/transactions/waiver-acquisition.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/user/index.ts":
+/* 263 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/user/user.dto.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/user/user.create.dto.ts"), exports);
+exports.GoalieRatingsMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let GoalieRatingsMiddleware = exports.GoalieRatingsMiddleware = class GoalieRatingsMiddleware {
+    use(req, res, next) {
+        console.log('Request Goalie Ratings...');
+        next();
+    }
+};
+exports.GoalieRatingsMiddleware = GoalieRatingsMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], GoalieRatingsMiddleware);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/user/user.create.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UserCreateDto = void 0;
-class UserCreateDto {
-}
-exports.UserCreateDto = UserCreateDto;
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/user/user.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.UserDto = void 0;
-class UserDto {
-}
-exports.UserDto = UserDto;
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/waivers/index.ts":
+/* 264 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/dtos/waivers/waivers.dto.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(265), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/dtos/waivers/waivers.dto.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/award/awardType.enum.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AwardTypeEnum = void 0;
-var AwardTypeEnum;
-(function (AwardTypeEnum) {
-    AwardTypeEnum[AwardTypeEnum["GM"] = 2] = "GM";
-    AwardTypeEnum[AwardTypeEnum["CHAMPION"] = 3] = "CHAMPION";
-    AwardTypeEnum[AwardTypeEnum["SEASON"] = 4] = "SEASON";
-    AwardTypeEnum[AwardTypeEnum["ROOKIE"] = 5] = "ROOKIE";
-    AwardTypeEnum[AwardTypeEnum["SCORER"] = 6] = "SCORER";
-    AwardTypeEnum[AwardTypeEnum["GOALIE"] = 7] = "GOALIE";
-    AwardTypeEnum[AwardTypeEnum["DEFENSE"] = 8] = "DEFENSE";
-})(AwardTypeEnum = exports.AwardTypeEnum || (exports.AwardTypeEnum = {}));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/award/index.ts":
+/* 265 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/award/awardType.enum.ts"), exports);
+exports.ApiConferencesModule = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const controllers_1 = __webpack_require__(266);
+const middlewares_1 = __webpack_require__(270);
+const services_1 = __webpack_require__(268);
+let ApiConferencesModule = exports.ApiConferencesModule = class ApiConferencesModule {
+    configure(consumer) {
+        consumer.apply(middlewares_1.ConferencesMiddleware).forRoutes('*');
+    }
+};
+exports.ApiConferencesModule = ApiConferencesModule = tslib_1.__decorate([
+    (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Conferences_V2])],
+        controllers: [controllers_1.ConferencesController],
+        providers: [services_1.ApiConferencesService],
+    })
+], ApiConferencesModule);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/button/index.ts":
+/* 266 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/button/primeButtonClass.enum.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(267), exports);
 
 
 /***/ }),
+/* 267 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/cha/shared/entities/src/lib/enums/button/primeButtonClass.enum.ts":
-/***/ ((__unused_webpack_module, exports) => {
 
-
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PrimeButtonClass = void 0;
-var PrimeButtonClass;
-(function (PrimeButtonClass) {
-    PrimeButtonClass["PRIMARY"] = "";
-    PrimeButtonClass["SECONDARY"] = "p-button-secondary";
-    PrimeButtonClass["SUCCESS"] = "p-button-success";
-    PrimeButtonClass["INFO"] = "p-button-info";
-    PrimeButtonClass["WARNING"] = "p-button-warning";
-    PrimeButtonClass["HELP"] = "p-button-help";
-    PrimeButtonClass["DANGER"] = "p-button-danger";
-})(PrimeButtonClass = exports.PrimeButtonClass || (exports.PrimeButtonClass = {}));
+exports.ConferencesController = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(35);
+const common_1 = __webpack_require__(1);
+const services_1 = __webpack_require__(268);
+let ConferencesController = exports.ConferencesController = class ConferencesController {
+    constructor(conferencesService) {
+        this.conferencesService = conferencesService;
+    }
+    async getAll() {
+        const conferences = await this.conferencesService.getAll();
+        if (!conferences || conferences.length < 1) {
+            throw new common_1.NotFoundException('Conferences not found');
+        }
+        return conferences;
+    }
+    updateConferenceById(param, body) {
+        return this.conferencesService.updateConferenceById(parseInt(param.id), body);
+    }
+    addConference(body) {
+        return this.conferencesService.addConference(body);
+    }
+    deleteConference(param) {
+        return this.conferencesService.deleteConference(parseInt(param.id));
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", typeof (_b = typeof Promise !== "undefined" && Promise) === "function" ? _b : Object)
+], ConferencesController.prototype, "getAll", null);
+tslib_1.__decorate([
+    (0, common_1.Put)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Object]),
+    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+], ConferencesController.prototype, "updateConferenceById", null);
+tslib_1.__decorate([
+    (0, common_1.Post)('/add'),
+    tslib_1.__param(0, (0, common_1.Body)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.ConferenceCreateDto !== "undefined" && entities_1.ConferenceCreateDto) === "function" ? _d : Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], ConferencesController.prototype, "addConference", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], ConferencesController.prototype, "deleteConference", null);
+exports.ConferencesController = ConferencesController = tslib_1.__decorate([
+    (0, common_1.Controller)('conferences'),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiConferencesService !== "undefined" && services_1.ApiConferencesService) === "function" ? _a : Object])
+], ConferencesController);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/index.ts":
+/* 268 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/button/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/logo/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/teams/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/award/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/league/index.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(269), exports);
 
 
 /***/ }),
+/* 269 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "../../libs/cha/shared/entities/src/lib/enums/league/conferences.enum.ts":
-/***/ ((__unused_webpack_module, exports) => {
 
-
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ConferencesEnum = void 0;
-var ConferencesEnum;
-(function (ConferencesEnum) {
-    ConferencesEnum[ConferencesEnum["EASTERN"] = 2] = "EASTERN";
-    ConferencesEnum[ConferencesEnum["WESTERN"] = 3] = "WESTERN";
-})(ConferencesEnum = exports.ConferencesEnum || (exports.ConferencesEnum = {}));
+exports.ApiConferencesService = void 0;
+const tslib_1 = __webpack_require__(5);
+const entities_1 = __webpack_require__(10);
+const common_1 = __webpack_require__(1);
+const typeorm_1 = __webpack_require__(32);
+const typeorm_2 = __webpack_require__(13);
+let ApiConferencesService = exports.ApiConferencesService = class ApiConferencesService {
+    constructor(repo) {
+        this.repo = repo;
+    }
+    async getAll() {
+        return await this.repo.find();
+    }
+    async updateConferenceById(id, attrs) {
+        const conference = await this.repo.findOneByOrFail({ id });
+        if (!conference) {
+            throw new common_1.NotFoundException('conference not found');
+        }
+        Object.assign(conference, attrs);
+        return this.repo.save(conference);
+    }
+    async addConference(body) {
+        const conference = await this.repo.create(body);
+        return this.repo.save(conference);
+    }
+    async deleteConference(id) {
+        const conference = await this.repo.findOneByOrFail({ id });
+        if (!conference) {
+            throw new common_1.NotFoundException('conference not found');
+        }
+        return this.repo.remove(conference);
+    }
+};
+exports.ApiConferencesService = ApiConferencesService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Conferences_V2)),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object])
+], ApiConferencesService);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/league/divisions.enum.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DivisionsEnum = void 0;
-var DivisionsEnum;
-(function (DivisionsEnum) {
-    DivisionsEnum[DivisionsEnum["NORTH_WEST"] = 2] = "NORTH_WEST";
-    DivisionsEnum[DivisionsEnum["NORTH_EAST"] = 3] = "NORTH_EAST";
-    DivisionsEnum[DivisionsEnum["SOUTH_WEST"] = 4] = "SOUTH_WEST";
-    DivisionsEnum[DivisionsEnum["SOUTH_EAST"] = 5] = "SOUTH_EAST";
-})(DivisionsEnum = exports.DivisionsEnum || (exports.DivisionsEnum = {}));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/league/index.ts":
+/* 270 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/league/conferences.enum.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/league/divisions.enum.ts"), exports);
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(271), exports);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/logo/cha-logo.enum.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ChaLogoEnum = void 0;
-var ChaLogoEnum;
-(function (ChaLogoEnum) {
-    ChaLogoEnum["ASSASSINS"] = "Assassins.png";
-    ChaLogoEnum["BRAHMAS"] = "Brahams.png";
-    ChaLogoEnum["FIGHTING_COCKS"] = "Cocks.png";
-    ChaLogoEnum["CYCLONES"] = "Cyclones.png";
-    ChaLogoEnum["CHY_DESPERADO"] = "Desperado.png";
-    ChaLogoEnum["DRAGONS"] = "Dragons.png";
-    ChaLogoEnum["FLASHERS"] = "Flashers.png";
-    ChaLogoEnum["FREE_AGENT"] = "free_agent.png";
-    ChaLogoEnum["GLORY"] = "Glory.png";
-    ChaLogoEnum["GOATS"] = "Goats.png";
-    ChaLogoEnum["GREEN_JACKETS"] = "GreenJackets.png";
-    ChaLogoEnum["HOUND_DOGS"] = "HoundDogs.png";
-    ChaLogoEnum["STELLAR_JAYS"] = "jays-large.png";
-    ChaLogoEnum["KILLER_BEES"] = "KillerBees.png";
-    ChaLogoEnum["MOUNTAINEERS"] = "Mountaineers.png";
-    ChaLogoEnum["NORTH_STARS"] = "NorthStars.png";
-    ChaLogoEnum["OIL_BARONS"] = "OilBarons.png";
-    ChaLogoEnum["PROWLERS"] = "Prowlers.png";
-    ChaLogoEnum["SAC_STORM"] = "sac_storm.png";
-    ChaLogoEnum["VIKINGS"] = "vikings.png";
-    ChaLogoEnum["WOLFPACK"] = "Wolfpack.png";
-    ChaLogoEnum["ACES"] = "aces.png";
-    ChaLogoEnum["BADGERS"] = "badgers.png";
-    ChaLogoEnum["BANDITS"] = "bandits.png";
-    ChaLogoEnum["BARONS"] = "barons.png";
-    ChaLogoEnum["BEAVERS"] = "beavers.png";
-    ChaLogoEnum["CHA_STORM"] = "chastorm.png";
-    ChaLogoEnum["CHUPACABRAS"] = "chupacabras.png";
-    ChaLogoEnum["COMETS"] = "comets.png";
-    ChaLogoEnum["CONQUERERS"] = "conquerers.png";
-    ChaLogoEnum["CRIMSONTIDE"] = "crimsontide.png";
-    ChaLogoEnum["CRUSH"] = "crush.png";
-    ChaLogoEnum["GRAVEDIGGERS"] = "gravediggers.png";
-    ChaLogoEnum["HELLCATS"] = "hellcats.png";
-    ChaLogoEnum["MIS_INDIANS"] = "indians.png";
-    ChaLogoEnum["SAL_INDIANS"] = "indians.png";
-    ChaLogoEnum["JOKERS"] = "jokers.png";
-    ChaLogoEnum["LAS_DESPERADO"] = "lasdesperado.png";
-    ChaLogoEnum["LIONHEARTS"] = "lionheats.png";
-    ChaLogoEnum["LOGGERHEADS"] = "loggerheads.png";
-    ChaLogoEnum["MUDBUGS"] = "mudbugs.png";
-    ChaLogoEnum["OCEANUS"] = "oceanus.png";
-    ChaLogoEnum["OUTLAWS"] = "outlaws.png";
-    ChaLogoEnum["PREDATORS"] = "predators.png";
-    ChaLogoEnum["RAYS"] = "rays.png";
-    ChaLogoEnum["REDNECKS"] = "rednecks.png";
-    ChaLogoEnum["ROYALS"] = "royals.png";
-    ChaLogoEnum["SCHOONERS"] = "schooners.png";
-    ChaLogoEnum["SEA_STORM"] = "Storm.png";
-    ChaLogoEnum["SURGE"] = "surge.png";
-    ChaLogoEnum["THUNDERCATS"] = "thundercats.png";
-    ChaLogoEnum["VIPERS"] = "Vipers.png";
-    ChaLogoEnum["VOODOO"] = "voodoo.png";
-    ChaLogoEnum["WHISKEYJACKS"] = "whiskeyjacks.png";
-    ChaLogoEnum["RUSTLERS"] = "rustlers.png";
-    ChaLogoEnum["LEAGUE"] = "cha_logo.jpg";
-})(ChaLogoEnum = exports.ChaLogoEnum || (exports.ChaLogoEnum = {}));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/logo/index.ts":
+/* 271 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/logo/cha-logo.enum.ts"), exports);
+exports.ConferencesMiddleware = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let ConferencesMiddleware = exports.ConferencesMiddleware = class ConferencesMiddleware {
+    use(req, res, next) {
+        console.log('Request Conferences...');
+        next();
+    }
+};
+exports.ConferencesMiddleware = ConferencesMiddleware = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], ConferencesMiddleware);
 
 
 /***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/teams/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/enums/teams/team.enum.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/enums/teams/team.enum.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TeamsEnum = void 0;
-var TeamsEnum;
-(function (TeamsEnum) {
-    TeamsEnum[TeamsEnum["FLASHERS"] = 2] = "FLASHERS";
-    TeamsEnum[TeamsEnum["GREEN_JACKETS"] = 3] = "GREEN_JACKETS";
-    TeamsEnum[TeamsEnum["CHY_DESPERADO"] = 4] = "CHY_DESPERADO";
-    TeamsEnum[TeamsEnum["CYCLONES"] = 5] = "CYCLONES";
-    TeamsEnum[TeamsEnum["GLORY"] = 6] = "GLORY";
-    TeamsEnum[TeamsEnum["GOATS"] = 7] = "GOATS";
-    TeamsEnum[TeamsEnum["MOUNTAINEERS"] = 8] = "MOUNTAINEERS";
-    TeamsEnum[TeamsEnum["BRAHMAS"] = 9] = "BRAHMAS";
-    TeamsEnum[TeamsEnum["HOUND_DOGS"] = 10] = "HOUND_DOGS";
-    TeamsEnum[TeamsEnum["ICE_DRAGONS"] = 11] = "ICE_DRAGONS";
-    TeamsEnum[TeamsEnum["NORTH_STARS"] = 12] = "NORTH_STARS";
-    TeamsEnum[TeamsEnum["ASSASSINS"] = 13] = "ASSASSINS";
-    TeamsEnum[TeamsEnum["OIL_BARONS"] = 14] = "OIL_BARONS";
-    TeamsEnum[TeamsEnum["PROWLERS"] = 15] = "PROWLERS";
-    TeamsEnum[TeamsEnum["FIGHTING_COCKS"] = 16] = "FIGHTING_COCKS";
-    TeamsEnum[TeamsEnum["SEA_STORM"] = 17] = "SEA_STORM";
-    TeamsEnum[TeamsEnum["STINGRAYS"] = 18] = "STINGRAYS";
-    TeamsEnum[TeamsEnum["KILLER_BEES"] = 19] = "KILLER_BEES";
-    TeamsEnum[TeamsEnum["VIPERS"] = 20] = "VIPERS";
-    TeamsEnum[TeamsEnum["WOLFPACK"] = 21] = "WOLFPACK";
-    TeamsEnum[TeamsEnum["MUDBUGS"] = 22] = "MUDBUGS";
-    TeamsEnum[TeamsEnum["CHA_STORM"] = 23] = "CHA_STORM";
-    TeamsEnum[TeamsEnum["SURGE"] = 24] = "SURGE";
-    TeamsEnum[TeamsEnum["LAS_DESPERADO"] = 25] = "LAS_DESPERADO";
-    TeamsEnum[TeamsEnum["OUTLAWS"] = 26] = "OUTLAWS";
-    TeamsEnum[TeamsEnum["OCEANUS"] = 27] = "OCEANUS";
-    TeamsEnum[TeamsEnum["ACES"] = 28] = "ACES";
-    TeamsEnum[TeamsEnum["HONEY_BADGERS"] = 29] = "HONEY_BADGERS";
-    TeamsEnum[TeamsEnum["BANDITS"] = 30] = "BANDITS";
-    TeamsEnum[TeamsEnum["BARONS"] = 31] = "BARONS";
-    TeamsEnum[TeamsEnum["CHUPACABRAS"] = 32] = "CHUPACABRAS";
-    TeamsEnum[TeamsEnum["CONQUERERS"] = 33] = "CONQUERERS";
-    TeamsEnum[TeamsEnum["CRUSH"] = 34] = "CRUSH";
-    TeamsEnum[TeamsEnum["HELLCATS"] = 35] = "HELLCATS";
-    TeamsEnum[TeamsEnum["MISS_INDIANS"] = 36] = "MISS_INDIANS";
-    TeamsEnum[TeamsEnum["SAL_INDIANS"] = 37] = "SAL_INDIANS";
-    TeamsEnum[TeamsEnum["JOKERS"] = 38] = "JOKERS";
-    TeamsEnum[TeamsEnum["LIONHEARTS"] = 39] = "LIONHEARTS";
-    TeamsEnum[TeamsEnum["LOGGERHEADS"] = 40] = "LOGGERHEADS";
-    TeamsEnum[TeamsEnum["PREDATORS"] = 41] = "PREDATORS";
-    TeamsEnum[TeamsEnum["REDNECKS"] = 42] = "REDNECKS";
-    TeamsEnum[TeamsEnum["ROYALS"] = 43] = "ROYALS";
-    TeamsEnum[TeamsEnum["RUSTLERS"] = 44] = "RUSTLERS";
-    TeamsEnum[TeamsEnum["SCHOONERS"] = 45] = "SCHOONERS";
-    TeamsEnum[TeamsEnum["THUNDERCATS"] = 46] = "THUNDERCATS";
-    TeamsEnum[TeamsEnum["VOODOO"] = 47] = "VOODOO";
-    TeamsEnum[TeamsEnum["WHISKEYJACKS"] = 48] = "WHISKEYJACKS";
-    TeamsEnum[TeamsEnum["CRIMSONTIDE"] = 49] = "CRIMSONTIDE";
-    TeamsEnum[TeamsEnum["BEAVERS"] = 50] = "BEAVERS";
-    TeamsEnum[TeamsEnum["COMETS"] = 51] = "COMETS";
-    TeamsEnum[TeamsEnum["GRAVE_DIGGERS"] = 52] = "GRAVE_DIGGERS";
-    TeamsEnum[TeamsEnum["STELLAR_JAYS"] = 53] = "STELLAR_JAYS";
-    TeamsEnum[TeamsEnum["FREE_AGENT"] = 54] = "FREE_AGENT";
-    TeamsEnum[TeamsEnum["VIKINGS"] = 60] = "VIKINGS";
-    TeamsEnum[TeamsEnum["SAC_STORM"] = 61] = "SAC_STORM";
-})(TeamsEnum = exports.TeamsEnum || (exports.TeamsEnum = {}));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/models/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/models/playoffs/index.ts"), exports);
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/models/salaries/index.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/models/playoffs/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/models/playoffs/playoff-standings.model.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/models/playoffs/playoff-standings.model.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/models/salaries/index.ts":
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __webpack_require__("tslib");
-tslib_1.__exportStar(__webpack_require__("../../libs/cha/shared/entities/src/lib/models/salaries/player-salary.model.ts"), exports);
-
-
-/***/ }),
-
-/***/ "../../libs/cha/shared/entities/src/lib/models/salaries/player-salary.model.ts":
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-
-/***/ }),
-
-/***/ "@nestjs/axios":
-/***/ ((module) => {
-
-module.exports = require("@nestjs/axios");
-
-/***/ }),
-
-/***/ "@nestjs/common":
-/***/ ((module) => {
-
-module.exports = require("@nestjs/common");
-
-/***/ }),
-
-/***/ "@nestjs/config":
+/* 272 */
 /***/ ((module) => {
 
 module.exports = require("@nestjs/config");
 
 /***/ }),
+/* 273 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "@nestjs/core":
-/***/ ((module) => {
 
-module.exports = require("@nestjs/core");
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AppController = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let AppController = exports.AppController = class AppController {
+    root() {
+        return { message: 'Hello world!' };
+    }
+};
+tslib_1.__decorate([
+    (0, common_1.Get)(),
+    (0, common_1.Render)('index'),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], AppController.prototype, "root", null);
+exports.AppController = AppController = tslib_1.__decorate([
+    (0, common_1.Controller)()
+], AppController);
 
-/***/ }),
-
-/***/ "@nestjs/typeorm":
-/***/ ((module) => {
-
-module.exports = require("@nestjs/typeorm");
-
-/***/ }),
-
-/***/ "rxjs":
-/***/ ((module) => {
-
-module.exports = require("rxjs");
-
-/***/ }),
-
-/***/ "tslib":
-/***/ ((module) => {
-
-module.exports = require("tslib");
 
 /***/ }),
+/* 274 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/***/ "typeorm":
-/***/ ((module) => {
 
-module.exports = require("typeorm");
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AppService = void 0;
+const tslib_1 = __webpack_require__(5);
+const common_1 = __webpack_require__(1);
+let AppService = exports.AppService = class AppService {
+    getData() {
+        return { message: 'Welcome to cha-server!' };
+    }
+    getViewName() {
+        return 'index.hbs';
+    }
+};
+exports.AppService = AppService = tslib_1.__decorate([
+    (0, common_1.Injectable)()
+], AppService);
 
-/***/ }),
-
-/***/ "path":
-/***/ ((module) => {
-
-module.exports = require("path");
 
 /***/ })
-
-/******/ 	});
+/******/ 	]);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -11449,10 +11215,10 @@ var exports = __webpack_exports__;
  * This is only a minimal backend to get started.
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const common_1 = __webpack_require__("@nestjs/common");
-const core_1 = __webpack_require__("@nestjs/core");
-const path_1 = __webpack_require__("path");
-const app_module_1 = __webpack_require__("./src/app/app.module.ts");
+const common_1 = __webpack_require__(1);
+const core_1 = __webpack_require__(2);
+const path_1 = __webpack_require__(3);
+const app_module_1 = __webpack_require__(4);
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const globalPrefix = 'api';
