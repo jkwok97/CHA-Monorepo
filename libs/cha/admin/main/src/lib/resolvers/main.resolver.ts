@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthFacade } from '@cha/domain/auth';
 import { UserDto } from '@cha/shared/entities';
 import { MessageService } from 'primeng/api';
@@ -12,7 +7,7 @@ import { Observable } from 'rxjs';
 import { finalize, first, tap } from 'rxjs/operators';
 
 @Injectable()
-export class MainResolver implements Resolve<boolean> {
+export class MainResolver  {
   loading = false;
 
   constructor(
