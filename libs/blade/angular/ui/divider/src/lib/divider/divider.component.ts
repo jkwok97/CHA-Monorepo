@@ -11,7 +11,8 @@ import { DividerModule } from 'primeng/divider';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BladeDividerComponent {
-  @Input() type = 'solid';
-  @Input() layout = 'horizontal';
-  @Input() align = 'center';
+  @Input() type: 'solid' | 'dashed' | 'dotted' | undefined = 'solid';
+  @Input() layout: 'horizontal' | 'vertical' | undefined = 'horizontal';
+  @Input() align: 'left' | 'center' | 'right' | 'top' | 'bottom' | undefined =
+    'center';
 }
