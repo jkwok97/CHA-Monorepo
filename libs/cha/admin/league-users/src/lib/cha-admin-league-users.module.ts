@@ -9,7 +9,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
-import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 
 import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
@@ -40,7 +40,7 @@ import {
     ProgressBarModule,
     TableModule,
     InputTextModule,
-    SidebarModule,
+    DialogModule,
     ButtonModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,

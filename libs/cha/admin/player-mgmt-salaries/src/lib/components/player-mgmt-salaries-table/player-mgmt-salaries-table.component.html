@@ -4,7 +4,6 @@
   [value]="salariesForTable"
   [columns]="!isMobile ? salaryTableColumns : mobileSalaryTableColumns"
   styleClass="p-datatable-sm p-datatable-striped"
-  class="table"
   [rows]="rows"
   [showCurrentPageReport]="true"
   [rowsPerPageOptions]="[10, 20, 25, 50, 100]"
@@ -147,11 +146,13 @@
   </ng-template>
 </p-table>
 
-<p-sidebar
+<p-dialog
   [(visible)]="display"
-  [fullScreen]="true"
-  [showCloseIcon]="false"
-  [dismissible]="false"
+  [style]="{ width: '90%' }"
+  [draggable]="false"
+  [resizable]="false"
+  [modal]="true"
+  appendTo="body"
   *ngIf="display"
 >
   <cha-admin-player-mgmt-salaries-edit
@@ -159,4 +160,4 @@
     [isMobile]="isMobile"
     (closeSidebar)="onClose()"
   ></cha-admin-player-mgmt-salaries-edit>
-</p-sidebar>
+</p-dialog>

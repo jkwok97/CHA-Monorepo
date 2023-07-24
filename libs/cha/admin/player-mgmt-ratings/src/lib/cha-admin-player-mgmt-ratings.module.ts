@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { FormlyModule } from '@ngx-formly/core';
 
 import { ProgressBarModule } from 'primeng/progressbar';
-import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -40,7 +40,7 @@ import {
     CommonModule,
     ReactiveFormsModule,
     ProgressBarModule,
-    SidebarModule,
+    DialogModule,
     TableModule,
     InputTextModule,
     ButtonModule,
@@ -64,7 +64,6 @@ import {
           component: TextInputTypeComponent,
           wrappers: ['control-wrapper'],
         },
-        
       ],
     }),
   ],

@@ -4262,7 +4262,9 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 }
 
 .p-organizationchart
-  .p-organizationchart-node-content.p-organizationchart-selectable-node:not(.p-highlight):hover {
+  .p-organizationchart-node-content.p-organizationchart-selectable-node:not(
+    .p-highlight
+  ):hover {
   background: #e9ecef;
   color: #495057;
 }
@@ -5443,8 +5445,8 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 
 .p-dialog .p-dialog-header {
   border-bottom: 0 none;
-  background: #fff;
-  color: #343a40;
+  background: rgba(57, 61, 71);
+  color: whitesmoke;
   padding: 1.5rem;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
@@ -5483,8 +5485,8 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 }
 
 .p-dialog .p-dialog-content {
-  background: #fff;
-  color: #495057;
+  background: rgba(57, 61, 71);
+  color: whitesmoke;
   padding: 0 1.5rem 2rem 1.5rem;
 }
 

@@ -78,11 +78,13 @@
   </ng-template>
 </p-table>
 
-<p-sidebar
+<p-dialog
   [(visible)]="display"
-  [fullScreen]="true"
-  [showCloseIcon]="false"
-  [dismissible]="false"
+  [style]="{ width: '90%' }"
+  [draggable]="false"
+  [resizable]="false"
+  [modal]="true"
+  appendTo="body"
   *ngIf="display"
 >
   <cha-admin-league-awards-edit
@@ -90,4 +92,4 @@
     [isMobile]="isMobile"
     (closeSidebar)="onClose()"
   ></cha-admin-league-awards-edit>
-</p-sidebar>
+</p-dialog>

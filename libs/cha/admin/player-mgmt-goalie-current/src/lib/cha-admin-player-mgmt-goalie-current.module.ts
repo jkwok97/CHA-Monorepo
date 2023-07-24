@@ -9,7 +9,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 
 import { SingleSelectTypeComponent } from '@blade/angular/formly/types/single-select';
@@ -37,7 +37,7 @@ import {
     CommonModule,
     ReactiveFormsModule,
     ProgressBarModule,
-    SidebarModule,
+    DialogModule,
     TableModule,
     ButtonModule,
     InputTextModule,

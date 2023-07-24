@@ -10,7 +10,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
 import { TableModule } from 'primeng/table';
 
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
@@ -42,7 +42,7 @@ import {
     ProgressBarModule,
     TableModule,
     InputTextModule,
-    SidebarModule,
+    DialogModule,
     ButtonModule,
     BladeAngularUiLayoutModule,
     BladeAngularUiCardModule,

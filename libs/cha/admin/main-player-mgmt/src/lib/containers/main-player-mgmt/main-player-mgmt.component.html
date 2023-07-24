@@ -1,5 +1,6 @@
 <ng-scrollbar
   [style]="(isMobile$ | async) ? panelStyleMobile : panelStyleDesktop"
+  [autoHeightDisabled]="true"
 >
   <blade-layout-feature>
     <router-outlet></router-outlet>
