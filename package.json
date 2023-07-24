@@ -64,7 +64,7 @@
     "@angular/platform-browser": "16.1.6",
     "@angular/platform-browser-dynamic": "16.1.6",
     "@angular/router": "16.1.6",
-    "@nestjs/axios": "^0.1.0",
+    "@nestjs/axios": "^3.0.0",
     "@nestjs/common": "9.4.3",
     "@nestjs/config": "^2.3.4",
     "@nestjs/core": "9.4.3",
