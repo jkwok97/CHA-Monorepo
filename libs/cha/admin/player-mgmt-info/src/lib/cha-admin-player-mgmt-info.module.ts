@@ -9,7 +9,7 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
-import { DialogModule } from 'primeng/dialog';
+import { SidebarModule } from 'primeng/sidebar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { StepsModule } from 'primeng/steps';
@@ -47,7 +47,7 @@ import {
     NgScrollbarModule,
     ProgressBarModule,
     TableModule,
-    DialogModule,
+    SidebarModule,
     InputTextModule,
     ButtonModule,
     StepsModule,

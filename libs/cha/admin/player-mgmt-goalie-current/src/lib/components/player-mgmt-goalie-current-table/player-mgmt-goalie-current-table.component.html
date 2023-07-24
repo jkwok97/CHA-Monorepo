@@ -144,17 +144,16 @@
   </ng-template>
 </p-table>
 
-<p-dialog
+<p-sidebar
   [(visible)]="display"
-  [style]="{ width: '90%' }"
-  [draggable]="false"
-  [resizable]="false"
-  [modal]="true"
-  appendTo="body"
+  [fullScreen]="true"
+  [showCloseIcon]="false"
+  [dismissible]="false"
   *ngIf="display"
+  appendTo="body"
 >
   <cha-admin-player-mgmt-goalie-current-edit
     [goalie]="goalie"
     (closeSidebar)="onClose()"
   ></cha-admin-player-mgmt-goalie-current-edit>
-</p-dialog>
+</p-sidebar>

@@ -112,18 +112,17 @@
   </ng-template>
 </p-table>
 
-<p-dialog
+<p-sidebar
   [(visible)]="display"
-  [style]="{ width: '90%' }"
-  [draggable]="false"
-  [resizable]="false"
-  [modal]="true"
-  appendTo="body"
+  [fullScreen]="true"
+  [showCloseIcon]="false"
+  [dismissible]="false"
   *ngIf="display"
+  appendTo="body"
 >
   <cha-admin-draft-mgmt-entry-edit
     [pick]="pick"
     [isMobile]="isMobile"
     (closeSidebar)="onClose()"
   ></cha-admin-draft-mgmt-entry-edit>
-</p-dialog>
+</p-sidebar>
