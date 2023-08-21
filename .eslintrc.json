@@ -43,7 +43,7 @@
               },
               {
                 "sourceTag": "app:front",
-                "onlyDependOnLibsWithTags": ["front", "domain"]
+                "onlyDependOnLibsWithTags": ["front", "domain", "angular:ui"]
               },
               {
                 "sourceTag": "domain",
