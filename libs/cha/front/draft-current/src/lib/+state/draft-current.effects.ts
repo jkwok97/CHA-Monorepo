@@ -21,7 +21,7 @@ export class DraftCurrentEffects {
         this.draftService
           .getDraftTable(
             action.season,
-            data.offseason ? data.prev_year : data.current_year
+            '2023-24' //THIS CHANGES
           )
           .pipe(
             map((draftTable: DraftTableDto[]) =>

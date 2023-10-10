@@ -62,7 +62,6 @@ export class BladeTableComponent {
   }
 
   onImageError(event: any) {
-    console.log(event);
     event.target.src = 'assets/images/skater.jpg';
   }
 }

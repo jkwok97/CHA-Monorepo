@@ -18,8 +18,9 @@ export class DraftCurrentComponent implements OnInit {
   teams!: TeamDto[];
 
   selectOptions = [
-    { label: '2023', value: '2023' },
+    // { label: '2023', value: '2023' },
     { label: '2024', value: '2024' },
+    // { label: '2025', value: '2025' },
   ];
 
   tableColumns = [
@@ -55,8 +56,8 @@ export class DraftCurrentComponent implements OnInit {
     this.leagueDataFacade.leagueData$
       .pipe(
         first(),
-        tap((data: LeagueDataDto) =>
-          this.draftCurrentFacade.getDraftTable(data.current_draft_year)
+        tap(
+          (data: LeagueDataDto) => this.draftCurrentFacade.getDraftTable(2024) // THIS CHANGES
         )
       )
       .subscribe();
@@ -96,11 +97,11 @@ export class DraftCurrentComponent implements OnInit {
   }
 
   onOptionChanged(option: string) {
-    if (option === '2023') {
+    if (option === '2024') {
       this.draftCurrentFacade.getDraftTable(Number(option));
     }
 
-    if (option === '2024') {
+    if (option === '2025') {
       this.draftCurrentFacade.getNextDraftTable(Number(option));
     }
   }
