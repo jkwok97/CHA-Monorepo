@@ -5674,7 +5674,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService
             .get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`)
-            .pipe((0, rxjs_1.map)((response) => response.data.stats[0].splits));
+            .pipe((0, rxjs_1.map)((response) => response.data.featuredStats.regularSeason.subSeason));
         return stats;
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
@@ -8032,14 +8032,15 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
     async setNHLStats(array) {
         return await Promise.all(array.map(async (item) => ({
             ...item,
-            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20222023'),
-            nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20232024'), //TODO CHANGE EVERY YEAR
+            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20232024'),
+            nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20242025'), //TODO CHANGE EVERY YEAR
         })));
     }
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
-        return response.data.stats[0].splits[0]?.stat;
+        console.log(response);
+        return response.data.featuredStats.regularSeason.subSeason;
     }
     async getAll() {
         const salaries = await this.repo.find();

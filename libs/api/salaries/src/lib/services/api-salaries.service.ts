@@ -320,11 +320,11 @@ export class ApiSalariesService {
         ...item,
         nhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20222023'
+          '20232024'
         ), //TODO CHANGE EVERY YEAR
         nextNhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20232024'
+          '20242025'
         ), //TODO CHANGE EVERY YEAR
       }))
     );
@@ -340,7 +340,9 @@ export class ApiSalariesService {
 
     const response = await firstValueFrom(stats);
 
-    return response.data.stats[0].splits[0]?.stat;
+    console.log(response);
+
+    return response.data.featuredStats.regularSeason.subSeason;
   }
 
   async getAll(): Promise<Salaries_V2[]> {

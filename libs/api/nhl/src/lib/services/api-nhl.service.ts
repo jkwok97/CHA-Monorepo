@@ -141,7 +141,7 @@ export class ApiNhlService {
       .get(
         `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`
       )
-      .pipe(map((response) => response.data.stats[0].splits));
+      .pipe(map((response) => response.data.featuredStats.regularSeason.subSeason));
 
     return stats;
   }
