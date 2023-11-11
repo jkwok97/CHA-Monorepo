@@ -16,7 +16,7 @@ import { SalaryAllDto } from '@cha/shared/entities';
 
 @Injectable()
 export class ApiSalariesService {
-  nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
+  nhlAPI = 'https://api-web.nhle.com/v1/player';
 
   constructor(
     @InjectRepository(Salaries_V2)
@@ -335,7 +335,7 @@ export class ApiSalariesService {
     season: string
   ): Promise<Observable<any>> {
     const stats = this.httpService.get(
-      `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`
+      `${this.nhlAPI}/${playerId}/landing`
     );
 
     const response = await firstValueFrom(stats);

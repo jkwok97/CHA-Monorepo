@@ -5631,7 +5631,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         this.goalieStatsRepo = goalieStatsRepo;
         this.teamsRepo = teamsRepo;
         this.nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
-        this.nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
+        this.nhlAPI = 'https://api-web.nhle.com/v1/player';
         this.nhlComSummary = 'https://api.nhle.com/stats/rest/en';
         this.sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
     }
@@ -5673,7 +5673,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     }
     getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService
-            .get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`)
+            .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data.featuredStats.regularSeason.subSeason));
         return stats;
     }
@@ -7822,7 +7822,7 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         this.goaliesStatsRepo = goaliesStatsRepo;
         this.goalieRatingsRepo = goalieRatingsRepo;
         this.httpService = httpService;
-        this.nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
+        this.nhlAPI = 'https://api-web.nhle.com/v1/player';
     }
     async getAllPlayerSalaries(season, ratingSeason) {
         const allPlayersInSeason = await this.playersStatsRepo.find({
@@ -8037,7 +8037,7 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         })));
     }
     async getNhlPlayerStatsByPlayerId(playerId, season) {
-        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`);
+        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
         console.log(response);
         return response.data.featuredStats.regularSeason.subSeason;

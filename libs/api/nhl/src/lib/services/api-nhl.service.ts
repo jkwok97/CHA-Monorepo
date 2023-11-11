@@ -19,7 +19,7 @@ export class ApiNhlService {
   ) {}
 
   nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
-  nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
+  nhlAPI = 'https://api-web.nhle.com/v1/player';
   nhlComSummary = 'https://api.nhle.com/stats/rest/en';
   sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
 
@@ -139,7 +139,7 @@ export class ApiNhlService {
   ): Observable<AxiosResponse<any[]>> {
     const stats = this.httpService
       .get(
-        `${this.nhlAPI}/${playerId}/stats?stats=statsSingleSeason&season=${season}`
+        `${this.nhlAPI}/${playerId}/landing`
       )
       .pipe(map((response) => response.data.featuredStats.regularSeason.subSeason));
 
