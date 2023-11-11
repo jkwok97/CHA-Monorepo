@@ -144,7 +144,7 @@ export class HomeSummaryEffects {
         this.homeSummaryService
           .getNHLCurrentStatsByPlayerId(action.playerId, data.nhl_year)
           .pipe(
-            map((stats: NhlGoalieStatDto[] | NhlPlayerStatDto[]) =>
+            map((stats: NhlGoalieStatDto | NhlPlayerStatDto | null) =>
               HomeSummaryActions.getNHLCurrentStatsSuccess({
                 stats,
               })

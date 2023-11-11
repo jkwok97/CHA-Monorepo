@@ -4,109 +4,97 @@
   [collapsed]="isMobile ? true : false"
 >
   <div class="w-full flex-column column-gap-4 text-sm md:text-md">
-    <div *ngIf="nhlStat.stat.games" class="flex justify-content-between">
+    <div *ngIf="nhlStat.gamesPlayed" class="flex justify-content-between">
       Games Played:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.games }}</i>
+        <i>{{ nhlStat.gamesPlayed }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.goals" class="flex justify-content-between">
+    <div *ngIf="nhlStat.goals" class="flex justify-content-between">
       Goals:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.goals }}</i>
+        <i>{{ nhlStat.goals }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.assists" class="flex justify-content-between">
+    <div *ngIf="nhlStat.assists" class="flex justify-content-between">
       Assists:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.assists }}</i>
+        <i>{{ nhlStat.assists }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.points" class="flex justify-content-between">
+    <div *ngIf="nhlStat.points" class="flex justify-content-between">
       Points:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.points }}</i>
+        <i>{{ nhlStat.points }}</i>
       </span>
     </div>
-    <div
-      *ngIf="nhlStat.stat.powerPlayPoints"
-      class="flex justify-content-between"
-    >
+    <div *ngIf="nhlStat.powerPlayPoints" class="flex justify-content-between">
       PP Points:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.powerPlayPoints }}</i>
+        <i>{{ nhlStat.powerPlayPoints }}</i>
       </span>
     </div>
-    <div
-      *ngIf="nhlStat.stat.shortHandedPoints"
-      class="flex justify-content-between"
-    >
+    <div *ngIf="nhlStat.shortHandedPoints" class="flex justify-content-between">
       SH Points:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.shortHandedPoints }}</i>
+        <i>{{ nhlStat.shortHandedPoints }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.shots" class="flex justify-content-between">
+    <div *ngIf="nhlStat.shots" class="flex justify-content-between">
       Shots:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.shots }}</i>
+        <i>{{ nhlStat.shots }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.shotPct" class="flex justify-content-between">
+    <div *ngIf="nhlStat.shootingPctg" class="flex justify-content-between">
       Shooting Pct:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.shotPct }}%</i>
+        <i>{{ (nhlStat.shootingPctg * 100).toFixed(2) }}%</i>
       </span>
     </div>
-    <div
-      *ngIf="nhlStat.stat.penaltyMinutes"
-      class="flex justify-content-between"
-    >
+    <div *ngIf="nhlStat.penaltyMinutes" class="flex justify-content-between">
       PIM:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.penaltyMinutes }}</i>
+        <i>{{ nhlStat.penaltyMinutes }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.wins" class="flex justify-content-between">
+    <div *ngIf="nhlStat.wins" class="flex justify-content-between">
       Wins:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.wins }}</i>
+        <i>{{ nhlStat.wins }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.losses" class="flex justify-content-between">
+    <div *ngIf="nhlStat.losses" class="flex justify-content-between">
       Loss:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.losses }}</i>
+        <i>{{ nhlStat.losses }}</i>
       </span>
     </div>
     <div
-      *ngIf="nhlStat.stat.goalAgainstAverage"
+      *ngIf="nhlStat.goalsAgainstAvg"
       class="flex justify-content-between"
     >
       GAA:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.goalAgainstAverage.toFixed(2) }}</i>
+        <i>{{ nhlStat.goalsAgainstAvg.toFixed(2) }}</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.saves" class="flex justify-content-between">
+    <div *ngIf="nhlStat.saves" class="flex justify-content-between">
       Saves:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.saves }}</i>
+        <i>{{ nhlStat.saves }}</i>
       </span>
     </div>
-    <div
-      *ngIf="nhlStat.stat.savePercentage"
-      class="flex justify-content-between"
-    >
+    <div *ngIf="nhlStat.savePctg" class="flex justify-content-between">
       Save Pct:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.savePercentage.toFixed(3) }}%</i>
+        <i>{{ nhlStat.savePctg.toFixed(3) }}%</i>
       </span>
     </div>
-    <div *ngIf="nhlStat.stat.shotsAgainst" class="flex justify-content-between">
+    <div *ngIf="nhlStat.shotsAgainst" class="flex justify-content-between">
       Shots Faced:
       <span style="font-weight: 100">
-        <i>{{ nhlStat.stat.shotsAgainst }}</i>
+        <i>{{ nhlStat.shotsAgainst }}</i>
       </span>
     </div>
   </div>

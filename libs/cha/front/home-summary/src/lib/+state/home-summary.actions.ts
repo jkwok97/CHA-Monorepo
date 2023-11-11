@@ -67,7 +67,7 @@ const getNHLCurrentStats = createAction(
 
 const getNHLCurrentStatsSuccess = createAction(
   `${NAMESPACE} Get Current NHL stats Success`,
-  props<{ stats: NhlGoalieStatDto[] | NhlPlayerStatDto[] }>()
+  props<{ stats: NhlGoalieStatDto | NhlPlayerStatDto | null }>()
 );
 
 const error = createAction(`${NAMESPACE} Error`);

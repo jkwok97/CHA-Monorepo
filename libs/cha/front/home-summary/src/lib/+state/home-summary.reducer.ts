@@ -21,7 +21,7 @@ export interface State {
   goalieSalaryLoaded: boolean;
   currentPlayerStat: StatPlayerAllDto[];
   currentGoalieStat: StatGoalieAllDto[];
-  currentNhlStat: NhlGoalieStatDto[] | NhlPlayerStatDto[];
+  currentNhlStat: NhlGoalieStatDto | NhlPlayerStatDto | null;
   statsLoading: boolean;
 }
 
@@ -37,7 +37,7 @@ const initialState: State = {
   goalieSalaryLoaded: false,
   currentPlayerStat: [],
   currentGoalieStat: [],
-  currentNhlStat: [],
+  currentNhlStat: null,
   statsLoading: false,
 };
 
@@ -149,6 +149,6 @@ export const getCurrentPlayerStat = (state: State) =>
 export const getCurrentGoalieStat = (state: State) =>
   state.currentGoalieStat[0];
 
-export const getCurrentNHLStat = (state: State) => state.currentNhlStat[0];
+export const getCurrentNHLStat = (state: State) => state.currentNhlStat;
 
 export const getStatsLoading = (state: State) => state.statsLoading;

@@ -28,7 +28,7 @@ export class HomeSummaryDepthChartItemSidebarComponent
   @Input() isMobile!: boolean;
 
   currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
-  currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;
+  currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto | null>;
   statsLoading$: Observable<boolean>;
   isOffSeason$: Observable<boolean>;
 

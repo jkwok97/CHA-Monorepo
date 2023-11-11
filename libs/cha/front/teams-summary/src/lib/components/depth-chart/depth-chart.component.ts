@@ -38,27 +38,39 @@ export class DepthChartComponent implements OnInit {
   ngOnInit(): void {
     this.leftWingers$ =
       this.type === 'current'
-        ? this.teamsSummaryFacade.leftWingersByNhlStats$
+        ? this.isOffSeason
+          ? this.teamsSummaryFacade.leftWingersByNhlStats$
+          : this.teamsSummaryFacade.leftWingersByRating$
         : this.teamsSummaryFacade.leftWingersByNextNhlStats$;
     this.centers$ =
       this.type === 'current'
-        ? this.teamsSummaryFacade.centersByNhlStats$
+        ? this.isOffSeason
+          ? this.teamsSummaryFacade.centersByNhlStats$
+          : this.teamsSummaryFacade.centersByRating$
         : this.teamsSummaryFacade.centersByNextNhlStats$;
     this.rightWingers$ =
       this.type === 'current'
-        ? this.teamsSummaryFacade.rightWingersByNhlStats$
+        ? this.isOffSeason
+          ? this.teamsSummaryFacade.rightWingersByNhlStats$
+          : this.teamsSummaryFacade.rightWingersByRating$
         : this.teamsSummaryFacade.rightWingersByNextNhlStats$;
     this.leftDefense$ =
       this.type === 'current'
-        ? this.teamsSummaryFacade.leftDefensemanByNhlStats$
+        ? this.isOffSeason
+          ? this.teamsSummaryFacade.leftDefensemanByNhlStats$
+          : this.teamsSummaryFacade.leftDefensemanByRating$
         : this.teamsSummaryFacade.leftDefensemanByNextNhlStats$;
     this.rightDefense$ =
       this.type === 'current'
-        ? this.teamsSummaryFacade.rightDefensemanByNhlStats$
+        ? this.isOffSeason
+          ? this.teamsSummaryFacade.rightDefensemanByNhlStats$
+          : this.teamsSummaryFacade.rightDefensemanByRating$
         : this.teamsSummaryFacade.rightDefensemanByNextNhlStats$;
     this.goalies$ =
       this.type === 'current'
-        ? this.teamsSummaryFacade.goaliesByNhlStats$
+        ? this.isOffSeason
+          ? this.teamsSummaryFacade.goaliesByNhlStats$
+          : this.teamsSummaryFacade.goaliesByRating$
         : this.teamsSummaryFacade.goaliesByNextNhlStats$;
 
     this.loadedSalaries$ = combineLatest([

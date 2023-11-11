@@ -160,7 +160,7 @@ export class TeamsSummaryFacade {
     TeamsSummarySelectors.selectCurrentGoalieStat
   );
 
-  currentNHLStats$: Observable<NhlGoalieStatDto | NhlPlayerStatDto> =
+  currentNHLStats$: Observable<NhlGoalieStatDto | NhlPlayerStatDto | null> =
     this.store.select(TeamsSummarySelectors.selectCurrentNHLStat);
 
   statsLoading$: Observable<boolean> = this.store.select(

@@ -180,7 +180,7 @@ export class TeamsSummaryEffects {
         this.teamsSummaryService
           .getNHLCurrentStatsByPlayerId(action.playerId, data.nhl_year)
           .pipe(
-            map((stats: NhlGoalieStatDto[] | NhlPlayerStatDto[]) =>
+            map((stats: NhlGoalieStatDto | NhlPlayerStatDto | null) =>
               TeamsSummaryActions.getNHLCurrentStatsSuccess({
                 stats,
               })

@@ -25,8 +25,8 @@ export class DepthChartItemSidebarComponent implements OnInit, OnChanges {
   @Input() playerStats: any;
   @Input() isMobile!: boolean;
 
-  currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto>;
-  currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto>;
+  currentStat$!: Observable<StatPlayerAllDto | StatGoalieAllDto | null>;
+  currentNhlStat$!: Observable<NhlGoalieStatDto | NhlPlayerStatDto | null>;
   statsLoading$: Observable<boolean>;
   isOffSeason$: Observable<boolean>;
 
