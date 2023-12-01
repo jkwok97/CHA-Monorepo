@@ -25,7 +25,7 @@ export class TeamsSummaryComponent implements OnDestroy {
   pages = [
     { page: 1, name: 'Depth Chart' },
     { page: 2, name: 'Salaries' },
-    // { page: 3, name: 'Future Depth Chart' },
+    { page: 3, name: 'Future Depth Chart' },
     { page: 4, name: 'Team Stats' },
     { page: 5, name: 'Player Stats' },
     { page: 6, name: 'Goalie Stats' },
