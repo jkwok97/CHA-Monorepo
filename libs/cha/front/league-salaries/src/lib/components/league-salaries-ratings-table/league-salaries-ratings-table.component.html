@@ -70,9 +70,6 @@
         <th pSortableColumn="ratings.rd_rate" *ngIf="type !== 'goalies'">
           RD <p-sortIcon field="ratings.rd_rate"></p-sortIcon>
         </th>
-        <th pSortableColumn="salaries.season_2022">
-          21-22 <p-sortIcon field="salaries.season_2022"></p-sortIcon>
-        </th>
         <th pSortableColumn="salaries.season_2023">
           22-23 <p-sortIcon field="salaries.season_2023"></p-sortIcon>
         </th>
@@ -81,6 +78,9 @@
         </th>
         <th pSortableColumn="salaries.season_2025">
           24-25 <p-sortIcon field="salaries.season_2025"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2026">
+          25-26 <p-sortIcon field="salaries.season_2026"></p-sortIcon>
         </th>
       </tr>
     </ng-template>
@@ -104,8 +104,8 @@
           <span class="p-column-title">Player</span>{{ salary.playerName }}
         </td>
         <td>
-          <span class="p-column-title">21-22</span
-          >{{ salary.salaries?.season_2022 }}
+          <span class="p-column-title">22-23</span
+          >{{ salary.salaries?.season_2023 }}
         </td>
         <td>
           <ng-container>
@@ -161,10 +161,6 @@
           {{ salary.ratings?.rd_rate ? salary.ratings?.rd_rate : 0 }}
         </td>
         <td>
-          <span class="p-column-title">21-22</span
-          >{{ salary.salaries?.season_2022 }}
-        </td>
-        <td>
           <span class="p-column-title">22-23</span
           >{{ salary.salaries?.season_2023 }}
         </td>
@@ -175,6 +171,10 @@
         <td>
           <span class="p-column-title">24-25</span
           >{{ salary.salaries?.season_2025 }}
+        </td>
+        <td>
+          <span class="p-column-title">25-26</span
+          >{{ salary.salaries?.season_2026 }}
         </td>
       </tr>
     </ng-template>
