@@ -18,7 +18,7 @@ export class ApiNhlService {
     private teamsRepo: Repository<Teams_V2>
   ) {}
 
-  nhlCOM = 'https://api.nhle.com/stats/rest/en';
+  nhlCOM = 'https://api.nhle.com/stats/rest/en/season';
   nhlAPI = 'https://api-web.nhle.com/v1/player';
   nhlComSummary = 'https://api.nhle.com/stats/rest/en';
   sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
@@ -65,7 +65,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlCOM}/season?sort=[]"property":"id","direction":"DESC"%7D%5D`
+        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`
       )
       .pipe(
         map((response) => response.data),
@@ -121,7 +121,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D%5D&start=${start}&limit=${pageSize}&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`
+        `${this.nhlComSummary}/skater/summary?isAggregate=false&isGame=false&sort=%5B%7B"property":"points","direction":"DESC"%7D,%7B"property":"gamesPlayed","direction":"ASC"%7D,%7B"property":"playerId","direction":"ASC"%7D%5D&start=0&limit=50&factCayenneExp=gamesPlayed>=1&cayenneExp=gameTypeId=2%20and%20isRookie="1"%20and%20seasonId<=20232024%20and%20seasonId>=20232024`
       )
       .pipe(
         map((response) => response.data),
@@ -138,10 +138,10 @@ export class ApiNhlService {
     season: string
   ): Observable<AxiosResponse<any[]>> {
     const stats = this.httpService
-      .get(
-        `${this.nhlAPI}/${playerId}/landing`
-      )
-      .pipe(map((response) => response.data.featuredStats.regularSeason.subSeason));
+      .get(`${this.nhlAPI}/${playerId}/landing`)
+      .pipe(
+        map((response) => response.data.featuredStats.regularSeason.subSeason)
+      );
 
     return stats;
   }

@@ -5630,7 +5630,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         this.playerStatsRepo = playerStatsRepo;
         this.goalieStatsRepo = goalieStatsRepo;
         this.teamsRepo = teamsRepo;
-        this.nhlCOM = 'https://api.nhle.com/stats/rest/en';
+        this.nhlCOM = 'https://api.nhle.com/stats/rest/en/season';
         this.nhlAPI = 'https://api-web.nhle.com/v1/player';
         this.nhlComSummary = 'https://api.nhle.com/stats/rest/en';
         this.sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
@@ -5649,7 +5649,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     }
     getNhlRookieLeaders(playerType, statType, season) {
         const leaders = this.httpService
-            .get(`${this.nhlCOM}/season?sort=[]"property":"id","direction":"DESC"%7D%5D`)
+            .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
@@ -5667,7 +5667,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     }
     getNhlRookieSummary(season, player, statsType, sort, start, pageSize) {
         const leaders = this.httpService
-            .get(`${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D%5D&start=${start}&limit=${pageSize}&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`)
+            .get(`${this.nhlComSummary}/skater/summary?isAggregate=false&isGame=false&sort=%5B%7B"property":"points","direction":"DESC"%7D,%7B"property":"gamesPlayed","direction":"ASC"%7D,%7B"property":"playerId","direction":"ASC"%7D%5D&start=0&limit=50&factCayenneExp=gamesPlayed>=1&cayenneExp=gameTypeId=2%20and%20isRookie="1"%20and%20seasonId<=20232024%20and%20seasonId>=20232024`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoRookies(response.data, season)));
         return leaders;
     }
