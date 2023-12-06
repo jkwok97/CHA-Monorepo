@@ -24,7 +24,7 @@ export class NhlStatsComponent {
   constructor(private nhlStatsFacade: NhlStatsFacade) {
     this.isLoading$ = this.nhlStatsFacade.isLoading$;
     this.isLoaded$ = this.nhlStatsFacade.isAllStatsLoaded$;
-    this.nhlStatsFacade.getSportsnetStats('2022', 'reg');
+    this.nhlStatsFacade.getSportsnetStats('2023', 'reg');
     this.nhlStatsFacade.getRookieStats('skater', 'points', 'DESC', 0, 100);
   }
 

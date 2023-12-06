@@ -18,7 +18,7 @@ export class ApiNhlService {
     private teamsRepo: Repository<Teams_V2>
   ) {}
 
-  nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
+  nhlCOM = 'https://api.nhle.com/stats/rest/en';
   nhlAPI = 'https://api-web.nhle.com/v1/player';
   nhlComSummary = 'https://api.nhle.com/stats/rest/en';
   sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
@@ -65,7 +65,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`
+        `${this.nhlCOM}/season?sort=[]"property":"id","direction":"DESC"%7D%5D`
       )
       .pipe(
         map((response) => response.data),
