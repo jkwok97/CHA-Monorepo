@@ -35,6 +35,7 @@ export class NhlStatsService {
     start: number,
     pageSize: number
   ) {
+    console.log(season);
     return this._http
       .get(
         `${this.apiUrl}/nhl/nhl-summary/rookies/${season}/${player}/${statsType}/${sort}/${start}/${pageSize}`

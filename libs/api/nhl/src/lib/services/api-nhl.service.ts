@@ -97,6 +97,8 @@ export class ApiNhlService {
     season: string,
     seasonType: string
   ): Observable<{ player_stats: { skaters: any[]; goalies: any[] } }> {
+    console.log(season);
+    console.log(seasonType);
     const leaders = this.httpService
       .get(
         `${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`
@@ -121,7 +123,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlComSummary}/skater/summary?isAggregate=false&isGame=false&sort=%5B%7B"property":"points","direction":"DESC"%7D,%7B"property":"gamesPlayed","direction":"ASC"%7D,%7B"property":"playerId","direction":"ASC"%7D%5D&start=0&limit=50&factCayenneExp=gamesPlayed>=1&cayenneExp=gameTypeId=2%20and%20isRookie="1"%20and%20seasonId<=20232024%20and%20seasonId>=20232024`
+        `${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D,%7B%22property%22:%22gamesPlayed%22,%22direction%22:%22ASC%22%7D,%7B%22property%22:%22playerId%22,%22direction%22:%22ASC%22%7D%5D&start=${start}&limit=${pageSize}&factCayenneExp=gamesPlayed%3E=1&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`
       )
       .pipe(
         map((response) => response.data),
