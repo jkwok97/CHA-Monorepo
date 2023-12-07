@@ -25,7 +25,7 @@ export class NhlStatsComponent {
     this.isLoading$ = this.nhlStatsFacade.isLoading$;
     this.isLoaded$ = this.nhlStatsFacade.isAllStatsLoaded$;
     this.nhlStatsFacade.getSportsnetStats('2023', 'reg');
-    this.nhlStatsFacade.getRookieStats('skater', 'points', 'DESC', 0, 100);
+    // this.nhlStatsFacade.getRookieStats('skater', 'points', 'DESC', 0, 100);
   }
 
   onOptionChanged(option: string) {

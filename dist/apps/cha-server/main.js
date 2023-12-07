@@ -5660,11 +5660,9 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         return leaders;
     }
     getNhlSummaryFromSportsnet(season, seasonType) {
-        console.log(season);
-        console.log(seasonType);
         const leaders = this.httpService
             .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoForSportsnet(response.data, season)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoForSportsnet(response.data, season)));
         console.log(leaders);
         return leaders;
     }
