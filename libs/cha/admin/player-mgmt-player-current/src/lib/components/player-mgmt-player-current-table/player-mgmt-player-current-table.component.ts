@@ -22,6 +22,8 @@ export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {
   tableColumns = [
     { field: 'id', header: 'Player Stats Id', visible: true },
     { field: 'playerId', header: 'Player Id', visible: true },
+    { field: 'sportsnetId', header: 'Sportsnet Id', visible: true },
+    { field: 'nhlId', header: 'NHL Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'team_name', header: 'Team', visible: true },
     { field: 'player_status', header: 'Status', visible: true },
@@ -57,6 +59,8 @@ export class PlayerMgmtPlayerCurrentTableComponent implements OnInit {
     return players.map((player: StatPlayerAllDto) => ({
       ...player,
       playerId: `${player.player_id.id}`,
+      nhlId: `${player.player_id.nhl_id}`,
+      sportsnetId: `${player.player_id.sportsnet_id}`,
       full_name: `${player.player_id?.firstname} ${player.player_id?.lastname}`,
       team_name: `${player.teamInfo.city} ${player.teamInfo.nickname}`,
     }));

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { StatGoalieAllDto } from '@cha/shared/entities';
 import { Table } from 'primeng/table';
 
@@ -16,6 +22,8 @@ export class PlayerMgmtGoalieCurrentTableComponent implements OnInit {
   tableColumns = [
     { field: 'id', header: 'Player Stats Id', visible: true },
     { field: 'playerId', header: 'Player Id', visible: true },
+    { field: 'sportsnetId', header: 'Sportsnet Id', visible: true },
+    { field: 'nhlId', header: 'NHL Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
     { field: 'team_name', header: 'Team', visible: true },
     { field: 'player_status', header: 'Status', visible: true },
@@ -51,6 +59,8 @@ export class PlayerMgmtGoalieCurrentTableComponent implements OnInit {
     return goalies.map((goalie: StatGoalieAllDto) => ({
       ...goalie,
       playerId: `${goalie.player_id.id}`,
+      nhlId: `${goalie.player_id.nhl_id}`,
+      sportsnetId: `${goalie.player_id.sportsnet_id}`,
       full_name: `${goalie.player_id?.firstname} ${goalie.player_id?.lastname}`,
       team_name: `${goalie.teamInfo.city} ${goalie.teamInfo.nickname}`,
     }));

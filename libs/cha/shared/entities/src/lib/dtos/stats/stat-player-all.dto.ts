@@ -6,6 +6,7 @@ export interface StatPlayerAllDto {
     nhl_id: string;
     isdefense: boolean;
     isforward: boolean;
+    sportsnet_id: string;
   };
   teamInfo: {
     id: number;
