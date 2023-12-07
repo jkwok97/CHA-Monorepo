@@ -110,6 +110,8 @@ export class ApiNhlService {
         )
       );
 
+    console.log(leaders);
+
     return leaders;
   }
 
@@ -131,6 +133,8 @@ export class ApiNhlService {
           this.setChaTeamInfoRookies(response.data, season)
         )
       );
+
+    console.log(leaders);
 
     return leaders;
   }
@@ -160,6 +164,8 @@ export class ApiNhlService {
     const string1 = season.slice(2, 4);
 
     const newSeasonString = `${season}-${Number(string1) + 1}`;
+
+    console.log(newSeasonString);
 
     return (statObject = {
       player_stats: {
@@ -210,6 +216,8 @@ export class ApiNhlService {
     const string2 = season.slice(6, 8);
 
     const newSeasonString = `${string1}-${string2}`;
+
+    console.log(newSeasonString);
 
     return await Promise.all(
       array.map(async (item) => ({

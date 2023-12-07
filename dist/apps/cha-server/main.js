@@ -5665,12 +5665,14 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         const leaders = this.httpService
             .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoForSportsnet(response.data, season)));
+        console.log(leaders);
         return leaders;
     }
     getNhlRookieSummary(season, player, statsType, sort, start, pageSize) {
         const leaders = this.httpService
             .get(`${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D,%7B%22property%22:%22gamesPlayed%22,%22direction%22:%22ASC%22%7D,%7B%22property%22:%22playerId%22,%22direction%22:%22ASC%22%7D%5D&start=${start}&limit=${pageSize}&factCayenneExp=gamesPlayed%3E=1&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoRookies(response.data, season)));
+        console.log(leaders);
         return leaders;
     }
     getNhlPlayerStatsByPlayerId(playerId, season) {
@@ -5682,6 +5684,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
         const newSeasonString = `${season}-${Number(string1) + 1}`;
+        console.log(newSeasonString);
         return (statObject = {
             player_stats: {
                 skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => ({
@@ -5708,6 +5711,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
+        console.log(newSeasonString);
         return await Promise.all(array.map(async (item) => ({
             ...item,
             chaPlayerTeam: await this.getChaTeam(item.playerId, newSeasonString, 'p'),
