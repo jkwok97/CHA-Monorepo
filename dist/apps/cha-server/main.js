@@ -5798,7 +5798,10 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
                 },
             });
         }
+        console.log(id);
+        console.log(playerStatTeam);
         const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
+        console.log(playerStatTeamWithInfo);
         return playerStatTeamWithInfo;
     }
     async getChaTeamInfo(playerStatTeam) {
