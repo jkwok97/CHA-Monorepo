@@ -5682,7 +5682,6 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
         const newSeasonString = `${season}-${Number(string1) + 1}`;
-        console.log(newSeasonString);
         return (statObject = {
             player_stats: {
                 skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => ({
@@ -5798,10 +5797,10 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
                 },
             });
         }
-        console.log(id);
-        console.log(playerStatTeam);
+        console.log("line 320", id);
+        console.log("line 321", playerStatTeam);
         const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
-        console.log(playerStatTeamWithInfo);
+        console.log("line 325", playerStatTeamWithInfo);
         return playerStatTeamWithInfo;
     }
     async getChaTeamInfo(playerStatTeam) {

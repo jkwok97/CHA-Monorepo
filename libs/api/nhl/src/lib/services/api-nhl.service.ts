@@ -164,8 +164,6 @@ export class ApiNhlService {
 
     const newSeasonString = `${season}-${Number(string1) + 1}`;
 
-    console.log(newSeasonString);
-
     return (statObject = {
       player_stats: {
         skaters: await Promise.all(
@@ -317,12 +315,12 @@ export class ApiNhlService {
       });
     }
 
-    console.log(id);
-    console.log(playerStatTeam);
+    console.log("line 320", id);
+    console.log("line 321", playerStatTeam);
 
     const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
 
-    console.log(playerStatTeamWithInfo);
+    console.log("line 325", playerStatTeamWithInfo);
 
     return playerStatTeamWithInfo;
   }
