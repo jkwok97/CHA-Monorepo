@@ -65,7 +65,7 @@ export const mainMenuItems: MenuItem[] = [
         ],
       },
       {
-        label: 'Game Updates',
+        label: 'Schedule',
         items: [
           {
             label: 'Current Days',

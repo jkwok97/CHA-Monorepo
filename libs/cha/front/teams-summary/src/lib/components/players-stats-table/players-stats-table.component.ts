@@ -51,7 +51,7 @@ export class PlayersStatsTableComponent
   }
 
   ngAfterViewInit(): void {
-    this.filterInput.nativeElement.value = '23';
+    this.filterInput.nativeElement.value = '24';
 
     this.applyFilterGlobal(
       { target: { value: this.filterInput.nativeElement.value } },
