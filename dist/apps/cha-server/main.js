@@ -5633,29 +5633,30 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         this.nhlCOM = 'https://api.nhle.com/stats/rest/en/season';
         this.nhlAPI = 'https://api-web.nhle.com/v1/player';
         this.nhlComSummary = 'https://api.nhle.com/stats/rest/en';
+        this.nhlComLeaders = 'https://api.nhle.com/stats/rest/en/leaders';
         this.sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
     }
     getNhlLeaders(playerType, statType, season) {
         const leaders = this.httpService
-            .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`)
+            .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
     getNhlGoalieLeaders(playerType, statType, season, minGames) {
         const leaders = this.httpService
-            .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%20${minGames}`)
+            .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%20${minGames}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'g')));
         return leaders;
     }
     getNhlRookieLeaders(playerType, statType, season) {
         const leaders = this.httpService
-            .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
+            .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
     getNhlDefenseLeaders(playerType, statType, season) {
         const leaders = this.httpService
-            .get(`${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`)
+            .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }

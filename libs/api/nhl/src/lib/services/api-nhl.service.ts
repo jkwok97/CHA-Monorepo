@@ -21,6 +21,7 @@ export class ApiNhlService {
   nhlCOM = 'https://api.nhle.com/stats/rest/en/season';
   nhlAPI = 'https://api-web.nhle.com/v1/player';
   nhlComSummary = 'https://api.nhle.com/stats/rest/en';
+  nhlComLeaders = 'https://api.nhle.com/stats/rest/en/leaders'
   sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
 
   getNhlLeaders(
@@ -30,7 +31,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
+        `${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
       )
       .pipe(
         map((response) => response.data),
@@ -48,7 +49,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%20${minGames}`
+        `${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%20${minGames}`
       )
       .pipe(
         map((response) => response.data),
@@ -65,7 +66,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`
+        `${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`
       )
       .pipe(
         map((response) => response.data),
@@ -83,7 +84,7 @@ export class ApiNhlService {
   ): Observable<any[]> {
     const leaders = this.httpService
       .get(
-        `${this.nhlCOM}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`
+        `${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`
       )
       .pipe(
         map((response) => response.data),
