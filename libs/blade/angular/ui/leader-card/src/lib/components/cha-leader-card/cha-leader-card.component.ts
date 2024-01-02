@@ -109,9 +109,9 @@ export class BladeChaLeaderCardComponent implements OnInit {
           return this.selected.shots;
         case 'minutes':
           return this.selected.minutes_played;
-        case 'pp goals':
+        case 'PP Goals':
           return this.selected.pp_goals;
-        case 'sh goals':
+        case 'SH Goals':
           return this.selected.sh_goals;
         case 'hits':
           return this.selected.hits;

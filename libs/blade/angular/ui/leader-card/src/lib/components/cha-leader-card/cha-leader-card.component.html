@@ -3,7 +3,11 @@
     <div class="leader-card-highlighted-player">
       <div class="leader-card-highlighted-player-avatar">
         <div class="leader-card-highlighted-player-avatar-name">
-          {{ type | titlecase }}
+          {{
+            type === 'PP Goals' || type === 'SH Goals'
+              ? type
+              : (type | titlecase)
+          }}
           <span
             class="text-xs text-center"
             *ngIf="type === 'Save Pct' || type === 'Goals Against Avg'"
@@ -56,8 +60,8 @@
         <div *ngIf="type === 'assists'">{{ item.assists }}</div>
         <div *ngIf="type === 'shots'">{{ item.shots }}</div>
         <div *ngIf="type === 'minutes'">{{ item.minutes_played }}</div>
-        <div *ngIf="type === 'pp goals'">{{ item.pp_goals }}</div>
-        <div *ngIf="type === 'sh goals'">{{ item.sh_goals }}</div>
+        <div *ngIf="type === 'PP Goals'">{{ item.pp_goals }}</div>
+        <div *ngIf="type === 'SH Goals'">{{ item.sh_goals }}</div>
         <div *ngIf="type === 'hits'">{{ item.hits }}</div>
         <div *ngIf="type === 'blocked shots'">{{ item.blocked_shots }}</div>
         <div *ngIf="type === 'penalty minutes'">{{ item.penalty_minutes }}</div>
