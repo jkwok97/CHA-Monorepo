@@ -49,7 +49,10 @@ export class ApiPlayerLeadersStatsService {
     const rookieLeaders = await this.getRookieLeaders(season, seasonType);
     const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
     const shotsLeaders = await this.getShotsLeaders(season, seasonType);
-    const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
+    const defenseGoalLeaders = await this.getDefenseGoalLeaders(
+      season,
+      seasonType
+    );
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
@@ -312,8 +315,6 @@ export class ApiPlayerLeadersStatsService {
     );
 
     return currStreakLeadersWithTeamInfo;
-
-
   }
 
   private async getDefenseGoalLeaders(
@@ -343,12 +344,14 @@ export class ApiPlayerLeadersStatsService {
         },
       },
       order: {
-        points: 'DESC',
+        goals: 'DESC',
       },
       take: 10,
     });
 
-    const defenseLeadersWithTeamInfo = await this.setTeamInfo(defenseGoalLeaders);
+    const defenseLeadersWithTeamInfo = await this.setTeamInfo(
+      defenseGoalLeaders
+    );
 
     return defenseLeadersWithTeamInfo;
   }

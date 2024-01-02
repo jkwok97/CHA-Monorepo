@@ -6782,7 +6782,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
                 },
             },
             order: {
-                points: 'DESC',
+                goals: 'DESC',
             },
             take: 10,
         });
