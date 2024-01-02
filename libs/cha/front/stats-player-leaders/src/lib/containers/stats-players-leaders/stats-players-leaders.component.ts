@@ -16,12 +16,14 @@ export class StatsPlayersLeadersComponent implements OnInit {
 
   pointsLeaders$: Observable<StatPlayerLeaderDto[]>;
   defenseLeaders$: Observable<StatPlayerLeaderDto[]>;
+  defenseGoalLeaders$: Observable<StatPlayerLeaderDto[]>;
   rookieLeaders$: Observable<StatPlayerLeaderDto[]>;
   goalsLeaders$: Observable<StatPlayerLeaderDto[]>;
   assistsLeaders$: Observable<StatPlayerLeaderDto[]>;
   shotsLeaders$: Observable<StatPlayerLeaderDto[]>;
   minutesLeaders$: Observable<StatPlayerLeaderDto[]>;
   ppGoalsLeaders$: Observable<StatPlayerLeaderDto[]>;
+  gwGoalsLeaders$: Observable<StatPlayerLeaderDto[]>;
   shGoalsLeaders$: Observable<StatPlayerLeaderDto[]>;
   penaltyLeaders$: Observable<StatPlayerLeaderDto[]>;
   blockedShotsLeaders$: Observable<StatPlayerLeaderDto[]>;
@@ -29,6 +31,7 @@ export class StatsPlayersLeadersComponent implements OnInit {
   currStreakLeaders$: Observable<StatPlayerLeaderDto[]>;
   longStreakLeaders$: Observable<StatPlayerLeaderDto[]>;
   bestPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]>;
+  worstPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]>;
   currentTeam$: Observable<TeamDto | undefined>;
 
   backgroundColor!: string;
@@ -46,12 +49,15 @@ export class StatsPlayersLeadersComponent implements OnInit {
 
     this.pointsLeaders$ = this.leagueStatsPlayersFacade.pointsLeaders$;
     this.defenseLeaders$ = this.leagueStatsPlayersFacade.defenseLeaders$;
+    this.defenseGoalLeaders$ =
+      this.leagueStatsPlayersFacade.defenseGoalLeaders$;
     this.rookieLeaders$ = this.leagueStatsPlayersFacade.rookieLeaders$;
     this.goalsLeaders$ = this.leagueStatsPlayersFacade.goalsLeaders$;
     this.assistsLeaders$ = this.leagueStatsPlayersFacade.assistsLeaders$;
     this.shotsLeaders$ = this.leagueStatsPlayersFacade.shotsLeaders$;
     this.minutesLeaders$ = this.leagueStatsPlayersFacade.minutesLeaders$;
     this.ppGoalsLeaders$ = this.leagueStatsPlayersFacade.ppGoalsLeaders$;
+    this.gwGoalsLeaders$ = this.leagueStatsPlayersFacade.gwGoalsLeaders$;
     this.shGoalsLeaders$ = this.leagueStatsPlayersFacade.shGoalsLeaders$;
     this.penaltyLeaders$ = this.leagueStatsPlayersFacade.penaltiesLeaders$;
     this.blockedShotsLeaders$ =
@@ -61,6 +67,8 @@ export class StatsPlayersLeadersComponent implements OnInit {
     this.longStreakLeaders$ = this.leagueStatsPlayersFacade.longStreakLeaders$;
     this.bestPlusMinusLeaders$ =
       this.leagueStatsPlayersFacade.bestPlusMinusLeaders$;
+    this.worstPlusMinusLeaders$ =
+      this.leagueStatsPlayersFacade.worstPlusMinusLeaders$;
 
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
 

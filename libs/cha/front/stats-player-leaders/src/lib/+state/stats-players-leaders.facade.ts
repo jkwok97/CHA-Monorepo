@@ -39,6 +39,10 @@ export class LeagueStatsPlayersFacade {
     LeagueStatsPlayersSelectors.selectBestPlusMinusLeaders
   );
 
+  worstPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectWorstPlusMinusLeaders
+  );
+
   minutesLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
     LeagueStatsPlayersSelectors.selectMinutesLeaders
   );
@@ -63,6 +67,10 @@ export class LeagueStatsPlayersFacade {
     LeagueStatsPlayersSelectors.selectPpGoalsLeaders
   );
 
+  gwGoalsLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectGwGoalsLeaders
+  );
+
   goalsLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
     LeagueStatsPlayersSelectors.selectGoalsLeaders
   );
@@ -77,6 +85,10 @@ export class LeagueStatsPlayersFacade {
 
   defenseLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
     LeagueStatsPlayersSelectors.selectDefenseLeaders
+  );
+
+  defenseGoalLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectDefenseGoalLeaders
   );
 
   pointsLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(

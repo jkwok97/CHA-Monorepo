@@ -22,20 +22,36 @@
             [type]="'points'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
-            [leaders]="defenseLeaders$ | async"
-            [type]="'defense points'"
+            [leaders]="goalsLeaders$ | async"
+            [type]="'goals'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
-            [leaders]="rookieLeaders$ | async"
-            [type]="'rookie points'"
+            [leaders]="assistsLeaders$ | async"
+            [type]="'assists'"
           ></blade-cha-leader-card>
         </div>
 
         <div class="league-stats-players-section-body">
           <blade-cha-leader-card
-            [leaders]="goalsLeaders$ | async"
-            [type]="'goals'"
+            [leaders]="defenseLeaders$ | async"
+            [type]="'defense points'"
           ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="defenseGoalLeaders$ | async"
+            [type]="'defense goals'"
+          ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="shotsLeaders$ | async"
+            [type]="'shots'"
+          ></blade-cha-leader-card>
+        </div>
+
+        <div class="league-stats-players-section-body">
+          <blade-cha-leader-card
+            [leaders]="rookieLeaders$ | async"
+            [type]="'rookie points'"
+          ></blade-cha-leader-card>
+
           <blade-cha-leader-card
             [leaders]="assistsLeaders$ | async"
             [type]="'assists'"

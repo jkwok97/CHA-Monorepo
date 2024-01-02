@@ -51,6 +51,7 @@
       >
         <div>{{ item.player_id.firstname }} {{ item.player_id.lastname }}</div>
         <div *ngIf="type === 'goals'">{{ item.goals }}</div>
+        <div *ngIf="type === 'defense goals'">{{ item.goals }}</div>
         <div *ngIf="type.includes('points')">{{ item.points }}</div>
         <div *ngIf="type === 'assists'">{{ item.assists }}</div>
         <div *ngIf="type === 'shots'">{{ item.shots }}</div>

@@ -97,6 +97,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
     if (this.selected) {
       switch (this.type) {
         case 'goals':
+        case 'defense goals':
           return this.selected.goals;
         case 'points':
         case 'defense points':
