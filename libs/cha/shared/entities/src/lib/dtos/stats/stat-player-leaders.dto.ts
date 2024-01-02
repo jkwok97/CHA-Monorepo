@@ -8,6 +8,7 @@ export interface StatPlayerLeadersDto {
   currStreak: StatPlayerLeaderDto[];
   defense: StatPlayerLeaderDto[];
   defenseGoals: StatPlayerLeaderDto[];
+  rookieGoals: StatPlayerLeaderDto[];
   goals: StatPlayerLeaderDto[];
   hits: StatPlayerLeaderDto[];
   longStreak: StatPlayerLeaderDto[];

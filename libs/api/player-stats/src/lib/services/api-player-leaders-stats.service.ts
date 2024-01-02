@@ -47,6 +47,10 @@ export class ApiPlayerLeadersStatsService {
     const ppGoalsLeaders = await this.getPpgoalsLeaders(season, seasonType);
     const gwGoalsLeaders = await this.getGwgoalsLeaders(season, seasonType);
     const rookieLeaders = await this.getRookieLeaders(season, seasonType);
+    const rookieGoalLeaders = await this.getRookieGoalsLeaders(
+      season,
+      seasonType
+    );
     const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
     const shotsLeaders = await this.getShotsLeaders(season, seasonType);
     const defenseGoalLeaders = await this.getDefenseGoalLeaders(
@@ -71,6 +75,7 @@ export class ApiPlayerLeadersStatsService {
       ppGoals: ppGoalsLeaders as unknown as StatPlayerLeaderDto[],
       gwGoals: gwGoalsLeaders as unknown as StatPlayerLeaderDto[],
       rookies: rookieLeaders as unknown as StatPlayerLeaderDto[],
+      rookieGoals: rookieGoalLeaders as unknown as StatPlayerLeaderDto[],
       shGoals: shGoalsLeaders as unknown as StatPlayerLeaderDto[],
       shots: shotsLeaders as unknown as StatPlayerLeaderDto[],
     };
@@ -591,6 +596,40 @@ export class ApiPlayerLeadersStatsService {
     const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
 
     return ppGoalsLeadersWithTeamInfo;
+  }
+
+  private async getRookieGoalsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const rookieLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        goals: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        player_status: 'Rookie',
+      },
+      order: {
+        goals: 'DESC',
+      },
+      take: 10,
+    });
+
+    const rookieLeadersWithTeamInfo = await this.setTeamInfo(rookieLeaders);
+
+    return rookieLeadersWithTeamInfo;
   }
 
   private async getRookieLeaders(

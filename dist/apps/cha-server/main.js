@@ -6543,6 +6543,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const ppGoalsLeaders = await this.getPpgoalsLeaders(season, seasonType);
         const gwGoalsLeaders = await this.getGwgoalsLeaders(season, seasonType);
         const rookieLeaders = await this.getRookieLeaders(season, seasonType);
+        const rookieGoalLeaders = await this.getRookieGoalsLeaders(season, seasonType);
         const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
         const shotsLeaders = await this.getShotsLeaders(season, seasonType);
         const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
@@ -6563,6 +6564,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             ppGoals: ppGoalsLeaders,
             gwGoals: gwGoalsLeaders,
             rookies: rookieLeaders,
+            rookieGoals: rookieGoalLeaders,
             shGoals: shGoalsLeaders,
             shots: shotsLeaders,
         };
@@ -6981,6 +6983,34 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         });
         const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
         return ppGoalsLeadersWithTeamInfo;
+    }
+    async getRookieGoalsLeaders(season, seasonType) {
+        const rookieLeaders = await this.repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                goals: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: ['player_id'],
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+                player_status: 'Rookie',
+            },
+            order: {
+                goals: 'DESC',
+            },
+            take: 10,
+        });
+        const rookieLeadersWithTeamInfo = await this.setTeamInfo(rookieLeaders);
+        return rookieLeadersWithTeamInfo;
     }
     async getRookieLeaders(season, seasonType) {
         const rookieLeaders = await this.repo.find({
