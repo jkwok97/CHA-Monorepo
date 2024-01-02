@@ -42,6 +42,12 @@ const selectBestPlusMinusLeaders = createSelector(
     leaders ? leaders.bestPlusMinus : []
 );
 
+const selectWorstPlusMinusLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) =>
+    leaders ? leaders.worstPlusMinus : []
+);
+
 const selectMinutesLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.minutes : [])
@@ -73,6 +79,11 @@ const selectPpGoalsLeaders = createSelector(
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.ppGoals : [])
 );
 
+const selectGwGoalsLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.gwGoals : [])
+);
+
 const selectGoalsLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.goals : [])
@@ -91,6 +102,11 @@ const selectRookiesLeaders = createSelector(
 const selectDefenseLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.defense : [])
+);
+
+const selectDefenseGoalLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.defenseGoals : [])
 );
 
 const selectPointsLeaders = createSelector(
@@ -117,4 +133,7 @@ export const LeagueStatsPlayersSelectors = {
   selectRookiesLeaders,
   selectDefenseLeaders,
   selectPointsLeaders,
+  selectWorstPlusMinusLeaders,
+  selectDefenseGoalLeaders,
+  selectGwGoalsLeaders
 };
