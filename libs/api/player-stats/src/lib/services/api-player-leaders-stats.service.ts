@@ -27,6 +27,10 @@ export class ApiPlayerLeadersStatsService {
       season,
       seasonType
     );
+    const worstPlusMinusLeaders = await this.getWorstPlusMinusLeaders(
+      season,
+      seasonType
+    );
     const blockedShotLeaders = await this.getblockedShotLeaders(
       season,
       seasonType
@@ -41,23 +45,28 @@ export class ApiPlayerLeadersStatsService {
     const minutesLeaders = await this.getMinutesLeaders(season, seasonType);
     const penaltyLeaders = await this.getPenaltyLeaders(season, seasonType);
     const ppGoalsLeaders = await this.getPpgoalsLeaders(season, seasonType);
+    const gwGoalsLeaders = await this.getGwgoalsLeaders(season, seasonType);
     const rookieLeaders = await this.getRookieLeaders(season, seasonType);
     const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
     const shotsLeaders = await this.getShotsLeaders(season, seasonType);
+    const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
       points: pointsLeaders as unknown as StatPlayerLeaderDto[],
       assists: assistLeaders as unknown as StatPlayerLeaderDto[],
       bestPlusMinus: bestPlusMinusLeaders as unknown as StatPlayerLeaderDto[],
+      worstPlusMinus: worstPlusMinusLeaders as unknown as StatPlayerLeaderDto[],
       blockedShots: blockedShotLeaders as unknown as StatPlayerLeaderDto[],
       currStreak: currSteakLeaders as unknown as StatPlayerLeaderDto[],
       defense: defenseLeaders as unknown as StatPlayerLeaderDto[],
+      defenseGoals: defenseGoalLeaders as unknown as StatPlayerLeaderDto[],
       goals: goalLeaders as unknown as StatPlayerLeaderDto[],
       longStreak: longStreakLeaders as unknown as StatPlayerLeaderDto[],
       minutes: minutesLeaders as unknown as StatPlayerLeaderDto[],
       penalties: penaltyLeaders as unknown as StatPlayerLeaderDto[],
       ppGoals: ppGoalsLeaders as unknown as StatPlayerLeaderDto[],
+      gwGoals: gwGoalsLeaders as unknown as StatPlayerLeaderDto[],
       rookies: rookieLeaders as unknown as StatPlayerLeaderDto[],
       shGoals: shGoalsLeaders as unknown as StatPlayerLeaderDto[],
       shots: shotsLeaders as unknown as StatPlayerLeaderDto[],
@@ -165,6 +174,41 @@ export class ApiPlayerLeadersStatsService {
     return assistLeadersWithTeamInfo;
   }
 
+  private async getWorstPlusMinusLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const bestPlusMinusLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        plus_minus: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        plus_minus: 'ASC',
+      },
+      take: 10,
+    });
+
+    const bestPlusMinusLeadersWithTeamInfo = await this.setTeamInfo(
+      bestPlusMinusLeaders
+    );
+
+    return bestPlusMinusLeadersWithTeamInfo;
+  }
+
   private async getBestPlusMinusLeaders(
     season: string,
     seasonType: 'Regular' | 'Playoffs'
@@ -268,6 +312,45 @@ export class ApiPlayerLeadersStatsService {
     );
 
     return currStreakLeadersWithTeamInfo;
+
+
+  }
+
+  private async getDefenseGoalLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const defenseGoalLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        goals: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+          isdefense: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        player_id: {
+          isdefense: true,
+        },
+      },
+      order: {
+        points: 'DESC',
+      },
+      take: 10,
+    });
+
+    const defenseLeadersWithTeamInfo = await this.setTeamInfo(defenseGoalLeaders);
+
+    return defenseLeadersWithTeamInfo;
   }
 
   private async getDefenseLeaders(
@@ -439,6 +522,39 @@ export class ApiPlayerLeadersStatsService {
     const penaltyLeadersWithTeamInfo = await this.setTeamInfo(penaltyLeaders);
 
     return penaltyLeadersWithTeamInfo;
+  }
+
+  private async getGwgoalsLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
+    const ppGoalsLeaders = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        gw_goals: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+      },
+      order: {
+        gw_goals: 'DESC',
+      },
+      take: 10,
+    });
+
+    const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
+
+    return ppGoalsLeadersWithTeamInfo;
   }
 
   private async getPpgoalsLeaders(

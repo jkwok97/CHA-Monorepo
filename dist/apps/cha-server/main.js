@@ -6532,6 +6532,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const pointsLeaders = await this.getPointsLeaders(season, seasonType);
         const assistLeaders = await this.getAssistLeaders(season, seasonType);
         const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(season, seasonType);
+        const worstPlusMinusLeaders = await this.getWorstPlusMinusLeaders(season, seasonType);
         const blockedShotLeaders = await this.getblockedShotLeaders(season, seasonType);
         const currSteakLeaders = await this.getCurrSteakLeaders(season, seasonType);
         const defenseLeaders = await this.getDefenseLeaders(season, seasonType);
@@ -6540,22 +6541,27 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const minutesLeaders = await this.getMinutesLeaders(season, seasonType);
         const penaltyLeaders = await this.getPenaltyLeaders(season, seasonType);
         const ppGoalsLeaders = await this.getPpgoalsLeaders(season, seasonType);
+        const gwGoalsLeaders = await this.getGwgoalsLeaders(season, seasonType);
         const rookieLeaders = await this.getRookieLeaders(season, seasonType);
         const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
         const shotsLeaders = await this.getShotsLeaders(season, seasonType);
+        const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
         return {
             hits: hitsLeaders,
             points: pointsLeaders,
             assists: assistLeaders,
             bestPlusMinus: bestPlusMinusLeaders,
+            worstPlusMinus: worstPlusMinusLeaders,
             blockedShots: blockedShotLeaders,
             currStreak: currSteakLeaders,
             defense: defenseLeaders,
+            defenseGoals: defenseGoalLeaders,
             goals: goalLeaders,
             longStreak: longStreakLeaders,
             minutes: minutesLeaders,
             penalties: penaltyLeaders,
             ppGoals: ppGoalsLeaders,
+            gwGoals: gwGoalsLeaders,
             rookies: rookieLeaders,
             shGoals: shGoalsLeaders,
             shots: shotsLeaders,
@@ -6644,6 +6650,33 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const assistLeadersWithTeamInfo = await this.setTeamInfo(assistLeaders);
         return assistLeadersWithTeamInfo;
     }
+    async getWorstPlusMinusLeaders(season, seasonType) {
+        const bestPlusMinusLeaders = await this.repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                plus_minus: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: ['player_id'],
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+            },
+            order: {
+                plus_minus: 'ASC',
+            },
+            take: 10,
+        });
+        const bestPlusMinusLeadersWithTeamInfo = await this.setTeamInfo(bestPlusMinusLeaders);
+        return bestPlusMinusLeadersWithTeamInfo;
+    }
     async getBestPlusMinusLeaders(season, seasonType) {
         const bestPlusMinusLeaders = await this.repo.find({
             select: {
@@ -6724,6 +6757,37 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         });
         const currStreakLeadersWithTeamInfo = await this.setTeamInfo(currStreakLeaders);
         return currStreakLeadersWithTeamInfo;
+    }
+    async getDefenseGoalLeaders(season, seasonType) {
+        const defenseGoalLeaders = await this.repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                goals: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                    isdefense: true,
+                },
+            },
+            relations: ['player_id'],
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+                player_id: {
+                    isdefense: true,
+                },
+            },
+            order: {
+                points: 'DESC',
+            },
+            take: 10,
+        });
+        const defenseLeadersWithTeamInfo = await this.setTeamInfo(defenseGoalLeaders);
+        return defenseLeadersWithTeamInfo;
     }
     async getDefenseLeaders(season, seasonType) {
         const defenseLeaders = await this.repo.find({
@@ -6863,6 +6927,33 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         });
         const penaltyLeadersWithTeamInfo = await this.setTeamInfo(penaltyLeaders);
         return penaltyLeadersWithTeamInfo;
+    }
+    async getGwgoalsLeaders(season, seasonType) {
+        const ppGoalsLeaders = await this.repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                gw_goals: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: ['player_id'],
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+            },
+            order: {
+                gw_goals: 'DESC',
+            },
+            take: 10,
+        });
+        const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
+        return ppGoalsLeadersWithTeamInfo;
     }
     async getPpgoalsLeaders(season, seasonType) {
         const ppGoalsLeaders = await this.repo.find({
