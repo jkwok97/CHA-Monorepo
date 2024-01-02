@@ -18,6 +18,7 @@ export class StatsPlayersLeadersComponent implements OnInit {
   defenseLeaders$: Observable<StatPlayerLeaderDto[]>;
   defenseGoalLeaders$: Observable<StatPlayerLeaderDto[]>;
   rookieLeaders$: Observable<StatPlayerLeaderDto[]>;
+  rookieGoalsLeaders$: Observable<StatPlayerLeaderDto[]>;
   goalsLeaders$: Observable<StatPlayerLeaderDto[]>;
   assistsLeaders$: Observable<StatPlayerLeaderDto[]>;
   shotsLeaders$: Observable<StatPlayerLeaderDto[]>;
@@ -52,6 +53,8 @@ export class StatsPlayersLeadersComponent implements OnInit {
     this.defenseGoalLeaders$ =
       this.leagueStatsPlayersFacade.defenseGoalLeaders$;
     this.rookieLeaders$ = this.leagueStatsPlayersFacade.rookieLeaders$;
+    this.rookieGoalsLeaders$ =
+      this.leagueStatsPlayersFacade.rookieGoalsLeaders$;
     this.goalsLeaders$ = this.leagueStatsPlayersFacade.goalsLeaders$;
     this.assistsLeaders$ = this.leagueStatsPlayersFacade.assistsLeaders$;
     this.shotsLeaders$ = this.leagueStatsPlayersFacade.shotsLeaders$;

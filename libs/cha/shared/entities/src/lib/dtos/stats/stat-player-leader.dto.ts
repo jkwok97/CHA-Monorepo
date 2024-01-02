@@ -12,6 +12,7 @@ export interface StatPlayerLeaderDto {
   games_played?: string;
   pp_goals?: string;
   sh_goals?: string;
+  gw_goals?: string;
   shots?: string;
   player_id: {
     id: number;

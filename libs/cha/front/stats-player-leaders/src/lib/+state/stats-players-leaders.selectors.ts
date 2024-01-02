@@ -114,6 +114,11 @@ const selectPointsLeaders = createSelector(
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.points : [])
 );
 
+const selectRookieGoalsLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.rookieGoals : [])
+);
+
 export const LeagueStatsPlayersSelectors = {
   selectLoaded,
   selectLoading,
@@ -135,5 +140,6 @@ export const LeagueStatsPlayersSelectors = {
   selectPointsLeaders,
   selectWorstPlusMinusLeaders,
   selectDefenseGoalLeaders,
-  selectGwGoalsLeaders
+  selectGwGoalsLeaders,
+  selectRookieGoalsLeaders
 };

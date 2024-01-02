@@ -98,6 +98,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
       switch (this.type) {
         case 'goals':
         case 'defense goals':
+        case 'rookie goals':
           return this.selected.goals;
         case 'points':
         case 'defense points':
@@ -113,13 +114,16 @@ export class BladeChaLeaderCardComponent implements OnInit {
           return this.selected.pp_goals;
         case 'SH Goals':
           return this.selected.sh_goals;
+        case 'GW Goals':
+          return this.selected.gw_goals;
         case 'hits':
           return this.selected.hits;
         case 'blocked shots':
           return this.selected.blocked_shots;
         case 'penalty minutes':
           return this.selected.penalty_minutes;
-        case '+/-':
+        case 'best +/-':
+        case 'worst +/-':
           return this.selected.plus_minus;
         case 'current streak':
           return this.selected.current_points_streak;

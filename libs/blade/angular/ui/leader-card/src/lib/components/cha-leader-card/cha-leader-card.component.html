@@ -4,7 +4,7 @@
       <div class="leader-card-highlighted-player-avatar">
         <div class="leader-card-highlighted-player-avatar-name">
           {{
-            type === 'PP Goals' || type === 'SH Goals'
+            type === 'PP Goals' || type === 'SH Goals' || type === 'GW Goals'
               ? type
               : (type | titlecase)
           }}
@@ -56,16 +56,19 @@
         <div>{{ item.player_id.firstname }} {{ item.player_id.lastname }}</div>
         <div *ngIf="type === 'goals'">{{ item.goals }}</div>
         <div *ngIf="type === 'defense goals'">{{ item.goals }}</div>
+        <div *ngIf="type === 'rookie goals'">{{ item.goals }}</div>
         <div *ngIf="type.includes('points')">{{ item.points }}</div>
         <div *ngIf="type === 'assists'">{{ item.assists }}</div>
         <div *ngIf="type === 'shots'">{{ item.shots }}</div>
         <div *ngIf="type === 'minutes'">{{ item.minutes_played }}</div>
         <div *ngIf="type === 'PP Goals'">{{ item.pp_goals }}</div>
         <div *ngIf="type === 'SH Goals'">{{ item.sh_goals }}</div>
+        <div *ngIf="type === 'GW Goals'">{{ item.gw_goals }}</div>
         <div *ngIf="type === 'hits'">{{ item.hits }}</div>
         <div *ngIf="type === 'blocked shots'">{{ item.blocked_shots }}</div>
         <div *ngIf="type === 'penalty minutes'">{{ item.penalty_minutes }}</div>
-        <div *ngIf="type === '+/-'">{{ item.plus_minus }}</div>
+        <div *ngIf="type === 'best +/-'">{{ item.plus_minus }}</div>
+        <div *ngIf="type === 'worst +/-'">{{ item.plus_minus }}</div>
         <div *ngIf="type === 'current streak'">
           {{ item.current_points_streak }}
         </div>

@@ -41,32 +41,27 @@
             [type]="'defense goals'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
-            [leaders]="shotsLeaders$ | async"
-            [type]="'shots'"
+            [leaders]="rookieGoalsLeaders$ | async"
+            [type]="'rookie goals'"
           ></blade-cha-leader-card>
         </div>
 
         <div class="league-stats-players-section-body">
           <blade-cha-leader-card
-            [leaders]="assistsLeaders$ | async"
-            [type]="'assists'"
-          ></blade-cha-leader-card>
-
-          <blade-cha-leader-card
-            [leaders]="assistsLeaders$ | async"
-            [type]="'assists'"
-          ></blade-cha-leader-card>
-          <blade-cha-leader-card
             [leaders]="shotsLeaders$ | async"
             [type]="'shots'"
           ></blade-cha-leader-card>
-        </div>
-
-        <div class="league-stats-players-section-body">
+          <blade-cha-leader-card
+            [leaders]="assistsLeaders$ | async"
+            [type]="'assists'"
+          ></blade-cha-leader-card>
           <blade-cha-leader-card
             [leaders]="minutesLeaders$ | async"
             [type]="'minutes'"
           ></blade-cha-leader-card>
+        </div>
+
+        <div class="league-stats-players-section-body">
           <blade-cha-leader-card
             [leaders]="ppGoalsLeaders$ | async"
             [type]="'PP Goals'"
@@ -74,6 +69,10 @@
           <blade-cha-leader-card
             [leaders]="shGoalsLeaders$ | async"
             [type]="'SH Goals'"
+          ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="gwGoalsLeaders$ | async"
+            [type]="'GW Goals'"
           ></blade-cha-leader-card>
         </div>
 
@@ -95,7 +94,11 @@
         <div class="league-stats-players-section-body">
           <blade-cha-leader-card
             [leaders]="bestPlusMinusLeaders$ | async"
-            [type]="'+/-'"
+            [type]="'best +/-'"
+          ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="worstPlusMinusLeaders$ | async"
+            [type]="'worst +/-'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
             [leaders]="currStreakLeaders$ | async"

@@ -83,6 +83,10 @@ export class LeagueStatsPlayersFacade {
     LeagueStatsPlayersSelectors.selectRookiesLeaders
   );
 
+  rookieGoalsLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectRookieGoalsLeaders
+  );
+
   defenseLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
     LeagueStatsPlayersSelectors.selectDefenseLeaders
   );
