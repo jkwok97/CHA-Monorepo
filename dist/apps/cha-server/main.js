@@ -6552,6 +6552,9 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const shotsLeaders = await this.getShotsLeaders(season, seasonType);
         const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
         const faceOffLeaders = await this.getFaceOffLeaders(season, seasonType, minGamesStats);
+        const shootingLeaders = await this.getShootingLeaders(season, seasonType, minGamesStats);
+        const passingLeaders = await this.getPassingLeaders(season, seasonType, minGamesStats);
+        const cornersLeaders = await this.getCornersLeaders(season, seasonType, minGamesStats);
         return {
             hits: hitsLeaders,
             points: pointsLeaders,
@@ -6573,7 +6576,100 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             shGoals: shGoalsLeaders,
             shots: shotsLeaders,
             faceoffs: faceOffLeaders,
+            shooting: shootingLeaders,
+            passing: passingLeaders,
+            corners: cornersLeaders,
         };
+    }
+    async getCornersLeaders(season, seasonType, minGamesStats) {
+        const cornersLeaders = await this.repo.find({
+            select: {
+                id: true,
+                corner_pct: true,
+                team_name: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: {
+                player_id: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+                corner_total: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+            },
+            order: {
+                corner_pct: 'DESC',
+            },
+            take: 10,
+        });
+        const cornersLeadersWithTeamInfo = await this.setTeamInfo(cornersLeaders);
+        return cornersLeadersWithTeamInfo;
+    }
+    async getPassingLeaders(season, seasonType, minGamesStats) {
+        const passingLeaders = await this.repo.find({
+            select: {
+                id: true,
+                pass_pct: true,
+                team_name: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: {
+                player_id: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+                pass_attempts: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+            },
+            order: {
+                pass_pct: 'DESC',
+            },
+            take: 10,
+        });
+        const passingLeadersWithTeamInfo = await this.setTeamInfo(passingLeaders);
+        return passingLeadersWithTeamInfo;
+    }
+    async getShootingLeaders(season, seasonType, minGamesStats) {
+        const shootingLeaders = await this.repo.find({
+            select: {
+                id: true,
+                shooting_pct: true,
+                team_name: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: {
+                player_id: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+                shots: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+            },
+            order: {
+                shooting_pct: 'DESC',
+            },
+            take: 10,
+        });
+        const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
+        return shootingLeadersWithTeamInfo;
     }
     async getFaceOffLeaders(season, seasonType, minGamesStats) {
         const faceOffLeaders = await this.repo.find({

@@ -63,6 +63,23 @@ export class ApiPlayerLeadersStatsService {
       seasonType,
       minGamesStats
     );
+    const shootingLeaders = await this.getShootingLeaders(
+      season,
+      seasonType,
+      minGamesStats
+    );
+
+    const passingLeaders = await this.getPassingLeaders(
+      season,
+      seasonType,
+      minGamesStats
+    );
+
+    const cornersLeaders = await this.getCornersLeaders(
+      season,
+      seasonType,
+      minGamesStats
+    );
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
@@ -85,7 +102,121 @@ export class ApiPlayerLeadersStatsService {
       shGoals: shGoalsLeaders as unknown as StatPlayerLeaderDto[],
       shots: shotsLeaders as unknown as StatPlayerLeaderDto[],
       faceoffs: faceOffLeaders as unknown as StatPlayerLeaderDto[],
+      shooting: shootingLeaders as unknown as StatPlayerLeaderDto[],
+      passing: passingLeaders as unknown as StatPlayerLeaderDto[],
+      corners: cornersLeaders as unknown as StatPlayerLeaderDto[],
     };
+  }
+
+  private async getCornersLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    minGamesStats: number
+  ) {
+    const cornersLeaders = await this.repo.find({
+      select: {
+        id: true,
+        corner_pct: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        corner_total: MoreThan(minGamesStats - 1),
+      },
+      order: {
+        corner_pct: 'DESC',
+      },
+      take: 10,
+    });
+
+    const cornersLeadersWithTeamInfo = await this.setTeamInfo(cornersLeaders);
+
+    return cornersLeadersWithTeamInfo;
+  }
+
+  private async getPassingLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    minGamesStats: number
+  ) {
+    const passingLeaders = await this.repo.find({
+      select: {
+        id: true,
+        pass_pct: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        pass_attempts: MoreThan(minGamesStats - 1),
+      },
+      order: {
+        pass_pct: 'DESC',
+      },
+      take: 10,
+    });
+
+    const passingLeadersWithTeamInfo = await this.setTeamInfo(passingLeaders);
+
+    return passingLeadersWithTeamInfo;
+  }
+
+  private async getShootingLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    minGamesStats: number
+  ) {
+    const shootingLeaders = await this.repo.find({
+      select: {
+        id: true,
+        shooting_pct: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        shots: MoreThan(minGamesStats - 1),
+      },
+      order: {
+        shooting_pct: 'DESC',
+      },
+      take: 10,
+    });
+
+    const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
+
+    return shootingLeadersWithTeamInfo;
   }
 
   private async getFaceOffLeaders(

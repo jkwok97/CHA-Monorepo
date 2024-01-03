@@ -21,4 +21,7 @@ export interface StatPlayerLeadersDto {
   shots: StatPlayerLeaderDto[];
   gwGoals: StatPlayerLeaderDto[];
   faceoffs: StatPlayerLeaderDto[];
+  shooting: StatPlayerLeaderDto[];
+  passing: StatPlayerLeaderDto[];
+  corners: StatPlayerLeaderDto[];
 }
