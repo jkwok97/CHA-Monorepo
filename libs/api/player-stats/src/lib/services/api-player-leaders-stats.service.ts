@@ -209,15 +209,13 @@ export class ApiPlayerLeadersStatsService {
       },
     });
 
-    console.log('qualified', qualifiedShootingLeaders);
-
     const shootingLeaders = await this.setShootingLeaders(
       qualifiedShootingLeaders
     );
 
-    const shootingLeadersSorted = shootingLeaders.sort().slice(0, 10);
-
-    console.log('leaders', shootingLeadersSorted);
+    const shootingLeadersSorted = shootingLeaders
+      .sort((a, b) => b.shooting_pct - a.shooting_pct)
+      .slice(0, 10);
 
     const shootingLeadersWithTeamInfo = await this.setTeamInfo(
       shootingLeadersSorted
