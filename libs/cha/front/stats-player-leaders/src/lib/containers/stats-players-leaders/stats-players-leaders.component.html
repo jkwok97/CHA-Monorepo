@@ -48,12 +48,12 @@
 
         <div class="league-stats-players-section-body">
           <blade-cha-leader-card
-            [leaders]="shotsLeaders$ | async"
-            [type]="'shots'"
-          ></blade-cha-leader-card>
-          <blade-cha-leader-card
             [leaders]="assistsLeaders$ | async"
             [type]="'assists'"
+          ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="passingLeaders$ | async"
+            [type]="'pass %'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
             [leaders]="minutesLeaders$ | async"
@@ -73,6 +73,22 @@
           <blade-cha-leader-card
             [leaders]="gwGoalsLeaders$ | async"
             [type]="'GW Goals'"
+          ></blade-cha-leader-card>
+        </div>
+
+        <div class="league-stats-players-section-body">
+          <blade-cha-leader-card
+            [leaders]="shotsLeaders$ | async"
+            [type]="'shots'"
+          ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="shootingLeaders$ | async"
+            [type]="'shot %'"
+          ></blade-cha-leader-card>
+
+          <blade-cha-leader-card
+            [leaders]="faceOffLeaders$ | async"
+            [type]="'faceoff %'"
           ></blade-cha-leader-card>
         </div>
 
@@ -100,6 +116,13 @@
             [leaders]="worstPlusMinusLeaders$ | async"
             [type]="'worst +/-'"
           ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="cornerLeaders$ | async"
+            [type]="'corner %'"
+          ></blade-cha-leader-card>
+        </div>
+
+        <div class="league-stats-players-section-body">
           <blade-cha-leader-card
             [leaders]="currStreakLeaders$ | async"
             [type]="'current streak'"

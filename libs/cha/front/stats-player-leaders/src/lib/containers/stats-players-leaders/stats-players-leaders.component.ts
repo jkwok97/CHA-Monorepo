@@ -33,6 +33,10 @@ export class StatsPlayersLeadersComponent implements OnInit {
   longStreakLeaders$: Observable<StatPlayerLeaderDto[]>;
   bestPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]>;
   worstPlusMinusLeaders$: Observable<StatPlayerLeaderDto[]>;
+  faceOffLeaders$: Observable<StatPlayerLeaderDto[]>;
+  shootingLeaders$: Observable<StatPlayerLeaderDto[]>;
+  cornerLeaders$: Observable<StatPlayerLeaderDto[]>;
+  passingLeaders$: Observable<StatPlayerLeaderDto[]>;
   currentTeam$: Observable<TeamDto | undefined>;
 
   backgroundColor!: string;
@@ -63,6 +67,10 @@ export class StatsPlayersLeadersComponent implements OnInit {
     this.gwGoalsLeaders$ = this.leagueStatsPlayersFacade.gwGoalsLeaders$;
     this.shGoalsLeaders$ = this.leagueStatsPlayersFacade.shGoalsLeaders$;
     this.penaltyLeaders$ = this.leagueStatsPlayersFacade.penaltiesLeaders$;
+    this.faceOffLeaders$ = this.leagueStatsPlayersFacade.faceOffLeaders$;
+    this.shootingLeaders$ = this.leagueStatsPlayersFacade.shootingLeaders$;
+    this.cornerLeaders$ = this.leagueStatsPlayersFacade.cornerLeaders$;
+    this.passingLeaders$ = this.leagueStatsPlayersFacade.passingLeaders$;
     this.blockedShotsLeaders$ =
       this.leagueStatsPlayersFacade.blockedShotsLeaders$;
     this.hitsLeaders$ = this.leagueStatsPlayersFacade.hitsLeaders$;

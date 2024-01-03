@@ -119,6 +119,26 @@ const selectRookieGoalsLeaders = createSelector(
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.rookieGoals : [])
 );
 
+const selectFaceOffLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.faceoffs : [])
+)
+
+const selectShootingLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.shooting : [])
+)
+
+const selectCornerLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.corners : [])
+)
+
+const selectPassingLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.passing : [])
+)
+
 export const LeagueStatsPlayersSelectors = {
   selectLoaded,
   selectLoading,
@@ -141,5 +161,9 @@ export const LeagueStatsPlayersSelectors = {
   selectWorstPlusMinusLeaders,
   selectDefenseGoalLeaders,
   selectGwGoalsLeaders,
-  selectRookieGoalsLeaders
+  selectRookieGoalsLeaders,
+  selectFaceOffLeaders,
+  selectShootingLeaders,
+  selectCornerLeaders,
+  selectPassingLeaders
 };

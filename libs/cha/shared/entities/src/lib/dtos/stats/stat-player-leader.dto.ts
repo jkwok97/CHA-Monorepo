@@ -14,6 +14,10 @@ export interface StatPlayerLeaderDto {
   sh_goals?: string;
   gw_goals?: string;
   shots?: string;
+  pass_pct?: string;
+  shooting_pct?: string;
+  fo_pct?: string;
+  corner_pct?: string;
   player_id: {
     id: number;
     isgoalie: boolean;

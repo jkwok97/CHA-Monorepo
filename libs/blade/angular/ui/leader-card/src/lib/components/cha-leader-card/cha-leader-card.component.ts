@@ -139,6 +139,14 @@ export class BladeChaLeaderCardComponent implements OnInit {
           return this.selected.wins;
         case 'shots faced':
           return this.selected.shots_for;
+        case 'pass %':
+          return this.selected.pass_pct;
+        case 'shot %':
+          return this.selected.shooting_pct;
+        case 'faceoff %':
+          return this.selected.fo_pct;
+        case 'corner %':
+          return this.selected.corner_pct;
         default:
           return '';
       }

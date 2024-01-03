@@ -69,6 +69,10 @@
         <div *ngIf="type === 'penalty minutes'">{{ item.penalty_minutes }}</div>
         <div *ngIf="type === 'best +/-'">{{ item.plus_minus }}</div>
         <div *ngIf="type === 'worst +/-'">{{ item.plus_minus }}</div>
+        <div *ngIf="type === 'pass %'">{{ item.pass_pct }}</div>
+        <div *ngIf="type === 'shot %'">{{ item.shooting_pct }}</div>
+        <div *ngIf="type === 'faceoff %'">{{ item.fo_pct }}</div>
+        <div *ngIf="type === 'corner %'">{{ item.corner_pct }}</div>
         <div *ngIf="type === 'current streak'">
           {{ item.current_points_streak }}
         </div>

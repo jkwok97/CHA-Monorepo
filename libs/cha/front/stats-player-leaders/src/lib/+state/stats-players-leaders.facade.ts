@@ -99,6 +99,22 @@ export class LeagueStatsPlayersFacade {
     LeagueStatsPlayersSelectors.selectPointsLeaders
   );
 
+  faceOffLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectFaceOffLeaders
+  );
+
+  cornerLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectCornerLeaders
+  );
+
+  shootingLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectShootingLeaders
+  );
+
+  passingLeaders$: Observable<StatPlayerLeaderDto[]> = this.store.select(
+    LeagueStatsPlayersSelectors.selectPassingLeaders
+  );
+
   constructor(private store: Store<State>) {}
 
   getLeagueTeamStats(seasonType: string) {
