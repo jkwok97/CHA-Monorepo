@@ -6360,7 +6360,7 @@ let PlayerStatsController = exports.PlayerStatsController = class PlayerStatsCon
         return this.playerStatsService.deletePlayer(parseInt(param.id), param.season);
     }
     async getPlayerStatsLeaders(param) {
-        const stats = await this.playerLeaderStatsService.getPlayerStatsLeaders(param.season, param.seasonType);
+        const stats = await this.playerLeaderStatsService.getPlayerStatsLeaders(param.season, param.seasonType, param.minGamesStats);
         if (!stats) {
             throw new common_1.NotFoundException('Player Leader Stats not found');
         }
@@ -6439,7 +6439,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:returntype", void 0)
 ], PlayerStatsController.prototype, "deletePlayer", null);
 tslib_1.__decorate([
-    (0, common_1.Get)('/leaders/:season/:seasonType'),
+    (0, common_1.Get)('/leaders/:season/:seasonType/:minGamesStats'),
     tslib_1.__param(0, (0, common_1.Param)()),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
@@ -6531,7 +6531,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
     }
-    async getPlayerStatsLeaders(season, seasonType) {
+    async getPlayerStatsLeaders(season, seasonType, minGamesStats) {
         const hitsLeaders = await this.getHitsLeaders(season, seasonType);
         const pointsLeaders = await this.getPointsLeaders(season, seasonType);
         const assistLeaders = await this.getAssistLeaders(season, seasonType);

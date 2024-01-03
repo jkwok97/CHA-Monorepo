@@ -58,11 +58,12 @@ export class PlayerStatsController {
     );
   }
 
-  @Get('/leaders/:season/:seasonType')
+  @Get('/leaders/:season/:seasonType/:minGamesStats')
   async getPlayerStatsLeaders(@Param() param): Promise<StatPlayerLeadersDto> {
     const stats = await this.playerLeaderStatsService.getPlayerStatsLeaders(
       param.season,
-      param.seasonType
+      param.seasonType,
+      param.minGamesStats
     );
 
     if (!stats) {
@@ -164,11 +165,10 @@ export class PlayerStatsController {
   async getTeamPlayersByTeamName(
     @Param() param
   ): Promise<StatPlayerAwardDto[]> {
-    const record =
-      await this.userPlayersStatsService.getTeamPlayersByTeamName(
-        param.teamName,
-        param.season
-      );
+    const record = await this.userPlayersStatsService.getTeamPlayersByTeamName(
+      param.teamName,
+      param.season
+    );
 
     if (!record) {
       throw new NotFoundException('Team Players Stats not found');

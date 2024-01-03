@@ -11,9 +11,9 @@ export class StatsPlayersLeadersService {
     @Inject('apiUrl') private apiUrl: string
   ) {}
 
-  getAllPlayerLeaders(season: string, seasonType: string) {
+  getAllPlayerLeaders(season: string, seasonType: string, minGamesStats: number) {
     return this._http
-      .get(`${this.apiUrl}/player-stats/leaders/${season}/${seasonType}`)
+      .get(`${this.apiUrl}/player-stats/leaders/${season}/${seasonType}/${minGamesStats}`)
       .pipe(map((result: any) => result));
   }
 }

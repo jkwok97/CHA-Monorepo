@@ -18,7 +18,8 @@ export class ApiPlayerLeadersStatsService {
 
   async getPlayerStatsLeaders(
     season: string,
-    seasonType: 'Regular' | 'Playoffs'
+    seasonType: 'Regular' | 'Playoffs',
+    minGamesStats: number
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);

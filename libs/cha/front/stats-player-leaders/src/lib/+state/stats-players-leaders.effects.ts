@@ -22,7 +22,8 @@ export class LeagueStatsPlayersEffects {
         this.playerStatsService
           .getAllPlayerLeaders(
             data.offseason ? data.prev_year : data.current_year,
-            action.seasonType
+            action.seasonType,
+            data.min_games_stats
           )
           .pipe(
             map((leaders: StatPlayerLeadersDto) =>
