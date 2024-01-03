@@ -351,11 +351,6 @@ const typeorm_1 = __webpack_require__(13);
 const award_entity_1 = __webpack_require__(14);
 const player_entity_1 = __webpack_require__(16);
 let Players_Stats_V2 = exports.Players_Stats_V2 = class Players_Stats_V2 {
-    // @OneToOne(() => Teams_V2, (team) => team.shortname)
-    // team!: Teams_V2;
-    setFaceOffsTaken() {
-        this.fo_taken = this.fo_taken + this.fo_tied + this.fo_won;
-    }
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -563,12 +558,6 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Players_Stats_V2.prototype, "player_status", void 0);
-tslib_1.__decorate([
-    (0, typeorm_1.AfterLoad)(),
-    tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", []),
-    tslib_1.__metadata("design:returntype", void 0)
-], Players_Stats_V2.prototype, "setFaceOffsTaken", null);
 exports.Players_Stats_V2 = Players_Stats_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Players_Stats_V2);
@@ -6606,7 +6595,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                fo_taken: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+                fo_won: (0, typeorm_2.MoreThan)(minGamesStats - 1),
             },
             order: {
                 fo_pct: 'DESC',
