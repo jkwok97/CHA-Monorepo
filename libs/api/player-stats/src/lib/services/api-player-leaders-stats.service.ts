@@ -208,7 +208,7 @@ export class ApiPlayerLeadersStatsService {
         shots: MoreThan(minGamesStats - 1),
       },
       order: {
-        shooting_pct: 'ASC',
+        shooting_pct: 'DESC',
       },
       take: 10,
     });

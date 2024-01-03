@@ -415,7 +415,7 @@ tslib_1.__decorate([
 ], Players_Stats_V2.prototype, "shots", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
+    tslib_1.__metadata("design:type", Number)
 ], Players_Stats_V2.prototype, "shooting_pct", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
@@ -6664,7 +6664,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
                 shots: (0, typeorm_2.MoreThan)(minGamesStats - 1),
             },
             order: {
-                shooting_pct: 'ASC',
+                shooting_pct: 'DESC',
             },
             take: 10,
         });

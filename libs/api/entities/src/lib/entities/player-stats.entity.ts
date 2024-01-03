@@ -5,7 +5,6 @@ import {
   OneToOne,
   ManyToOne,
   JoinColumn,
-  AfterLoad,
 } from 'typeorm';
 import { Awards_V2 } from './award.entity';
 import { Players_V2 } from './player.entity';
@@ -59,7 +58,7 @@ export class Players_Stats_V2 {
   shots!: number;
 
   @Column()
-  shooting_pct!: string;
+  shooting_pct!: number;
 
   @Column()
   minutes_played!: number;
