@@ -415,7 +415,7 @@ tslib_1.__decorate([
 ], Players_Stats_V2.prototype, "shots", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
+    tslib_1.__metadata("design:type", String)
 ], Players_Stats_V2.prototype, "shooting_pct", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
@@ -6663,10 +6663,10 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
                 season_type: seasonType,
                 shots: (0, typeorm_2.MoreThan)(minGamesStats - 1),
             },
-            order: {
-                shooting_pct: 'DESC',
-            },
-            take: 10,
+            // order: {
+            //   shooting_pct: 'DESC',
+            // },
+            take: 100,
         });
         const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
         return shootingLeadersWithTeamInfo;

@@ -207,10 +207,10 @@ export class ApiPlayerLeadersStatsService {
         season_type: seasonType,
         shots: MoreThan(minGamesStats - 1),
       },
-      order: {
-        shooting_pct: 'DESC',
-      },
-      take: 10,
+      // order: {
+      //   shooting_pct: 'DESC',
+      // },
+      take: 100,
     });
 
     const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
