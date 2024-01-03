@@ -1549,7 +1549,7 @@ tslib_1.__decorate([
 ], Current_Season_V2.prototype, "offseason", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Boolean)
+    tslib_1.__metadata("design:type", Number)
 ], Current_Season_V2.prototype, "min_games_stats", void 0);
 exports.Current_Season_V2 = Current_Season_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
