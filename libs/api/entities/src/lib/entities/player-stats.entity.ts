@@ -167,7 +167,7 @@ export class Players_Stats_V2 {
   @Column()
   player_status!: 'Veteran' | 'Rookie';
 
-  fo_taken?: number;
+  fo_taken!: number;
 
   // @OneToOne(() => Teams_V2, (team) => team.shortname)
   // team!: Teams_V2;
