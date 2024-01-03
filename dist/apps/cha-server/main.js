@@ -415,7 +415,7 @@ tslib_1.__decorate([
 ], Players_Stats_V2.prototype, "shots", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
+    tslib_1.__metadata("design:type", String)
 ], Players_Stats_V2.prototype, "shooting_pct", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
@@ -6664,10 +6664,10 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
                 shots: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
             },
         });
-        console.log(qualifiedShootingLeaders);
+        console.log('qualified', qualifiedShootingLeaders);
         const shootingLeaders = await this.setShootingLeaders(qualifiedShootingLeaders);
         const shootingLeadersSorted = shootingLeaders.sort().slice(0, 10);
-        console.log(shootingLeadersSorted);
+        console.log('leaders', shootingLeadersSorted);
         const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeadersSorted);
         return shootingLeadersWithTeamInfo;
     }
@@ -7229,7 +7229,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
     async setShootingLeaders(array) {
         return await Promise.all(array.map(async (item) => ({
             ...item,
-            shooting_pct: Number(item.shooting_pct.toFixed(1))
+            shooting_pct: Number(item.shooting_pct),
         })));
     }
     async setTeamInfo(array) {

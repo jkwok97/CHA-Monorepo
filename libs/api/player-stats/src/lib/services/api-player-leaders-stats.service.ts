@@ -209,15 +209,19 @@ export class ApiPlayerLeadersStatsService {
       },
     });
 
-    console.log(qualifiedShootingLeaders);
+    console.log('qualified', qualifiedShootingLeaders);
 
-    const shootingLeaders = await this.setShootingLeaders(qualifiedShootingLeaders);
+    const shootingLeaders = await this.setShootingLeaders(
+      qualifiedShootingLeaders
+    );
 
-    const shootingLeadersSorted = shootingLeaders.sort().slice(0,10);
+    const shootingLeadersSorted = shootingLeaders.sort().slice(0, 10);
 
-    console.log(shootingLeadersSorted);
+    console.log('leaders', shootingLeadersSorted);
 
-    const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeadersSorted);
+    const shootingLeadersWithTeamInfo = await this.setTeamInfo(
+      shootingLeadersSorted
+    );
 
     return shootingLeadersWithTeamInfo;
   }
@@ -914,12 +918,12 @@ export class ApiPlayerLeadersStatsService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
-        shooting_pct: Number(item.shooting_pct.toFixed(1))
+        shooting_pct: Number(item.shooting_pct),
       }))
-    )
+    );
   }
 
-  private async setTeamInfo(array: Players_Stats_V2[]) {
+  private async setTeamInfo(array: any[]) {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
