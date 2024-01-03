@@ -195,7 +195,7 @@ export class ApiPlayerStatsService {
     });
   }
 
-  private async convertStats(array: Players_Stats_V2[]) {
+  private async convertStats(array: any[]) {
     return await Promise.all(
       array.map((stat: Players_Stats_V2) => ({
         ...stat,

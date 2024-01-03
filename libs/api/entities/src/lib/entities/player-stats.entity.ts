@@ -5,6 +5,7 @@ import {
   OneToOne,
   ManyToOne,
   JoinColumn,
+  AfterLoad,
 } from 'typeorm';
 import { Awards_V2 } from './award.entity';
 import { Players_V2 } from './player.entity';
@@ -166,6 +167,13 @@ export class Players_Stats_V2 {
   @Column()
   player_status!: 'Veteran' | 'Rookie';
 
+  fo_taken?: number;
+
   // @OneToOne(() => Teams_V2, (team) => team.shortname)
   // team!: Teams_V2;
+
+  @AfterLoad()
+  setFaceOffsTaken() {
+    this.fo_taken = this.fo_taken + this.fo_tied + this.fo_won;
+  }
 }

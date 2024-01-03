@@ -112,7 +112,7 @@ export class ApiPlayerLeadersStatsService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        games_played: MoreThan(Number(minGamesStats) - 1),
+        fo_taken: MoreThan(minGamesStats - 1),
       },
       order: {
         fo_pct: 'DESC',
