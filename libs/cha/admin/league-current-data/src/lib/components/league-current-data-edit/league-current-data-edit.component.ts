@@ -7,7 +7,6 @@ import {
 import { LeagueDataFacade } from '@cha/domain/core';
 import { LeagueDataDto } from '@cha/shared/entities';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { filter } from 'rxjs';
 import { LeagueCurrentDataEditFormComponent } from '../league-current-data-edit-form';
 
 @UntilDestroy()

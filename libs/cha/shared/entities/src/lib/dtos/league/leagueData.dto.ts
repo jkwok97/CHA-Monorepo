@@ -11,4 +11,5 @@ export interface LeagueDataDto {
   next_cap: number;
   min_games: number;
   offseason: boolean;
+  min_games_stats: number;
 }

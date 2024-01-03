@@ -69,6 +69,10 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectMinGames
   );
 
+  minGamesStats$: Observable<number> = this.store.select(
+    LeagueDataSelectors.selectMinGamesStats
+  );
+
   constructor(private store: Store<State>) {}
 
   getLeagueData() {

@@ -53,6 +53,7 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
           this.currentCapField(),
           this.nextCapField(),
           this.minGamesField(),
+          this.minGamesStatsField(),
         ],
       },
     ];
@@ -72,6 +73,7 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
       next_cap: this.data?.next_cap,
       min_games: this.data?.min_games,
       offseason: this.data?.offseason,
+      min_games_stats: this.data?.min_games_stats,
     };
   }
 
@@ -235,6 +237,23 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
       type: 'text-input',
       templateOptions: {
         label: 'Next Cap',
+        required: true,
+      },
+      validation: {
+        messages: {
+          required: () => 'required',
+        },
+      },
+    };
+  }
+
+  minGamesStatsField(): FormlyFieldConfig {
+    return {
+      key: 'min_games_stats',
+      className: 'w-full md:w-2',
+      type: 'text-input',
+      templateOptions: {
+        label: 'Min Games For Stats',
         required: true,
       },
       validation: {
