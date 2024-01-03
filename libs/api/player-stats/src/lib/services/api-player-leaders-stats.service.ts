@@ -186,7 +186,7 @@ export class ApiPlayerLeadersStatsService {
     seasonType: 'Regular' | 'Playoffs',
     minGamesStats: number
   ) {
-    const shootingLeaders = await this.repo.find({
+    const qualifiedShootingLeaders = await this.repo.find({
       select: {
         id: true,
         shooting_pct: true,
@@ -206,15 +206,18 @@ export class ApiPlayerLeadersStatsService {
         playing_year: season,
         season_type: seasonType,
         shots: MoreThanOrEqual(minGamesStats),
-        // shooting_pct: Between('15.0', '75.0'),
       },
-      order: {
-        shooting_pct: 'DESC',
-      },
-      take: 10,
     });
 
-    const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
+    console.log(qualifiedShootingLeaders);
+
+    const shootingLeaders = await this.setShootingLeaders(qualifiedShootingLeaders);
+
+    const shootingLeadersSorted = shootingLeaders.sort().slice(0,10);
+
+    console.log(shootingLeadersSorted);
+
+    const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeadersSorted);
 
     return shootingLeadersWithTeamInfo;
   }
@@ -905,6 +908,15 @@ export class ApiPlayerLeadersStatsService {
     const shotsLeadersWithTeamInfo = await this.setTeamInfo(shotsLeaders);
 
     return shotsLeadersWithTeamInfo;
+  }
+
+  private async setShootingLeaders(array: Players_Stats_V2[]) {
+    return await Promise.all(
+      array.map(async (item) => ({
+        ...item,
+        shooting_pct: Number(item.shooting_pct.toFixed(1))
+      }))
+    )
   }
 
   private async setTeamInfo(array: Players_Stats_V2[]) {
