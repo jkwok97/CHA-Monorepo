@@ -206,12 +206,12 @@ export class ApiPlayerLeadersStatsService {
         playing_year: season,
         season_type: seasonType,
         shots: MoreThanOrEqual(minGamesStats),
-        shooting_pct: Between('15.0', '75.0'),
+        // shooting_pct: Between('15.0', '75.0'),
       },
       order: {
         shooting_pct: 'DESC',
       },
-      take: 100,
+      take: 10,
     });
 
     const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);

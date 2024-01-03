@@ -351,6 +351,11 @@ const typeorm_1 = __webpack_require__(13);
 const award_entity_1 = __webpack_require__(14);
 const player_entity_1 = __webpack_require__(16);
 let Players_Stats_V2 = exports.Players_Stats_V2 = class Players_Stats_V2 {
+    // @OneToOne(() => Teams_V2, (team) => team.shortname)
+    // team!: Teams_V2;
+    setShootingPctToNumber() {
+        this.shooting_pct = Number(this.shooting_pct.toFixed(1));
+    }
 };
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
@@ -415,7 +420,7 @@ tslib_1.__decorate([
 ], Players_Stats_V2.prototype, "shots", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
+    tslib_1.__metadata("design:type", Number)
 ], Players_Stats_V2.prototype, "shooting_pct", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
@@ -558,6 +563,12 @@ tslib_1.__decorate([
     (0, typeorm_1.Column)(),
     tslib_1.__metadata("design:type", String)
 ], Players_Stats_V2.prototype, "player_status", void 0);
+tslib_1.__decorate([
+    (0, typeorm_1.AfterLoad)(),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
+], Players_Stats_V2.prototype, "setShootingPctToNumber", null);
 exports.Players_Stats_V2 = Players_Stats_V2 = tslib_1.__decorate([
     (0, typeorm_1.Entity)()
 ], Players_Stats_V2);
@@ -6662,12 +6673,12 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
                 playing_year: season,
                 season_type: seasonType,
                 shots: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
-                shooting_pct: (0, typeorm_2.Between)('15.0', '75.0'),
+                // shooting_pct: Between('15.0', '75.0'),
             },
             order: {
                 shooting_pct: 'DESC',
             },
-            take: 100,
+            take: 10,
         });
         const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
         return shootingLeadersWithTeamInfo;
