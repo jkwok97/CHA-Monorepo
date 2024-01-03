@@ -6664,7 +6664,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
                 shots: (0, typeorm_2.MoreThan)(minGamesStats - 1),
             },
             order: {
-                shooting_pct: 'DESC',
+                shooting_pct: 'ASC',
             },
             take: 10,
         });

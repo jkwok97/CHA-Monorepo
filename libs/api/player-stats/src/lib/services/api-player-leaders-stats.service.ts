@@ -68,7 +68,6 @@ export class ApiPlayerLeadersStatsService {
       seasonType,
       minGamesStats
     );
-
     const passingLeaders = await this.getPassingLeaders(
       season,
       seasonType,
@@ -209,7 +208,7 @@ export class ApiPlayerLeadersStatsService {
         shots: MoreThan(minGamesStats - 1),
       },
       order: {
-        shooting_pct: 'DESC',
+        shooting_pct: 'ASC',
       },
       take: 10,
     });
