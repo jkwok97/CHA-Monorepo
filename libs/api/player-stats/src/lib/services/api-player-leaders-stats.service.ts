@@ -5,7 +5,7 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -58,6 +58,11 @@ export class ApiPlayerLeadersStatsService {
       season,
       seasonType
     );
+    const faceOffLeaders = await this.getFaceOffLeaders(
+      season,
+      seasonType,
+      minGamesStats
+    );
 
     return {
       hits: hitsLeaders as unknown as StatPlayerLeaderDto[],
@@ -79,7 +84,45 @@ export class ApiPlayerLeadersStatsService {
       rookieGoals: rookieGoalLeaders as unknown as StatPlayerLeaderDto[],
       shGoals: shGoalsLeaders as unknown as StatPlayerLeaderDto[],
       shots: shotsLeaders as unknown as StatPlayerLeaderDto[],
+      faceoffs: faceOffLeaders as unknown as StatPlayerLeaderDto[],
     };
+  }
+
+  private async getFaceOffLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs',
+    minGamesStats: number
+  ) {
+    const faceOffLeaders = await this.repo.find({
+      select: {
+        id: true,
+        fo_pct: true,
+        team_name: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: {
+        player_id: true,
+      },
+      where: {
+        playing_year: season,
+        season_type: seasonType,
+        games_played: MoreThan(Number(minGamesStats) - 1),
+      },
+      order: {
+        fo_pct: 'DESC',
+      },
+      take: 10,
+    });
+
+    const faceOffLeadersWithTeamInfo = await this.setTeamInfo(faceOffLeaders);
+
+    return faceOffLeadersWithTeamInfo;
   }
 
   private async getHitsLeaders(

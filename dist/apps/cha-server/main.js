@@ -6551,6 +6551,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
         const shotsLeaders = await this.getShotsLeaders(season, seasonType);
         const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
+        const faceOffLeaders = await this.getFaceOffLeaders(season, seasonType, minGamesStats);
         return {
             hits: hitsLeaders,
             points: pointsLeaders,
@@ -6571,7 +6572,38 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             rookieGoals: rookieGoalLeaders,
             shGoals: shGoalsLeaders,
             shots: shotsLeaders,
+            faceoffs: faceOffLeaders,
         };
+    }
+    async getFaceOffLeaders(season, seasonType, minGamesStats) {
+        const faceOffLeaders = await this.repo.find({
+            select: {
+                id: true,
+                fo_pct: true,
+                team_name: true,
+                player_id: {
+                    id: true,
+                    firstname: true,
+                    lastname: true,
+                    nhl_id: true,
+                    isgoalie: true,
+                },
+            },
+            relations: {
+                player_id: true,
+            },
+            where: {
+                playing_year: season,
+                season_type: seasonType,
+                games_played: (0, typeorm_2.MoreThan)(Number(minGamesStats) - 1),
+            },
+            order: {
+                fo_pct: 'DESC',
+            },
+            take: 10,
+        });
+        const faceOffLeadersWithTeamInfo = await this.setTeamInfo(faceOffLeaders);
+        return faceOffLeadersWithTeamInfo;
     }
     async getHitsLeaders(season, seasonType) {
         const hitsLeaders = await this.repo.find({
