@@ -343,7 +343,7 @@ exports.Awards_V2 = Awards_V2 = tslib_1.__decorate([
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Players_Stats_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
@@ -415,7 +415,7 @@ tslib_1.__decorate([
 ], Players_Stats_V2.prototype, "shots", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", String)
+    tslib_1.__metadata("design:type", typeof (_b = typeof typeorm_1.IntegerType !== "undefined" && typeorm_1.IntegerType) === "function" ? _b : Object)
 ], Players_Stats_V2.prototype, "shooting_pct", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
