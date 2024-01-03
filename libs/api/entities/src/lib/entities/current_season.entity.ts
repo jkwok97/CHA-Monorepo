@@ -42,5 +42,5 @@ export class Current_Season_V2 {
   offseason!: boolean;
 
   @Column()
-  min_games_stats!: boolean;
+  min_games_stats!: number;
 }
