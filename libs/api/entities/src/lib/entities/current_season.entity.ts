@@ -40,4 +40,7 @@ export class Current_Season_V2 {
 
   @Column()
   offseason!: boolean;
+
+  @Column()
+  min_games_stats!: boolean;
 }
