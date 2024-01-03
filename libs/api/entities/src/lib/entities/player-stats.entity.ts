@@ -59,7 +59,7 @@ export class Players_Stats_V2 {
   shots!: number;
 
   @Column()
-  shooting_pct!: IntegerType;
+  shooting_pct!: string;
 
   @Column()
   minutes_played!: number;

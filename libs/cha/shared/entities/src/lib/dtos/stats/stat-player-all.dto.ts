@@ -1,5 +1,3 @@
-import { IntegerType } from 'typeorm';
-
 export interface StatPlayerAllDto {
   player_id: {
     id: number;
@@ -29,7 +27,7 @@ export interface StatPlayerAllDto {
   gw_goals: number;
   gt_goals: number;
   shots: number;
-  shooting_pct: IntegerType;
+  shooting_pct: string;
   minutes_played: number;
   minutes_per_game: string;
   fo_pct: string;
