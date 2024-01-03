@@ -6601,7 +6601,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                corner_total: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+                corner_total: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
             },
             order: {
                 corner_pct: 'DESC',
@@ -6631,7 +6631,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                pass_attempts: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+                pass_attempts: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
             },
             order: {
                 pass_pct: 'DESC',
@@ -6661,11 +6661,12 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                shots: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+                shots: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
+                shooting_pct: (0, typeorm_2.Between)('15.0', '75.0'),
             },
-            // order: {
-            //   shooting_pct: 'DESC',
-            // },
+            order: {
+                shooting_pct: 'DESC',
+            },
             take: 100,
         });
         const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeaders);
@@ -6691,7 +6692,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                fo_won: (0, typeorm_2.MoreThan)(minGamesStats - 1),
+                fo_won: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
             },
             order: {
                 fo_pct: 'DESC',

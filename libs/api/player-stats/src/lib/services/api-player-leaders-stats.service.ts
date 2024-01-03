@@ -5,7 +5,7 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MoreThan, Repository } from 'typeorm';
+import { Between, MoreThan, MoreThanOrEqual, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -131,7 +131,7 @@ export class ApiPlayerLeadersStatsService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        corner_total: MoreThan(minGamesStats - 1),
+        corner_total: MoreThanOrEqual(minGamesStats),
       },
       order: {
         corner_pct: 'DESC',
@@ -168,7 +168,7 @@ export class ApiPlayerLeadersStatsService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        pass_attempts: MoreThan(minGamesStats - 1),
+        pass_attempts: MoreThanOrEqual(minGamesStats),
       },
       order: {
         pass_pct: 'DESC',
@@ -205,11 +205,12 @@ export class ApiPlayerLeadersStatsService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        shots: MoreThan(minGamesStats - 1),
+        shots: MoreThanOrEqual(minGamesStats),
+        shooting_pct: Between('15.0', '75.0'),
       },
-      // order: {
-      //   shooting_pct: 'DESC',
-      // },
+      order: {
+        shooting_pct: 'DESC',
+      },
       take: 100,
     });
 
@@ -242,7 +243,7 @@ export class ApiPlayerLeadersStatsService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        fo_won: MoreThan(minGamesStats - 1),
+        fo_won: MoreThanOrEqual(minGamesStats),
       },
       order: {
         fo_pct: 'DESC',
