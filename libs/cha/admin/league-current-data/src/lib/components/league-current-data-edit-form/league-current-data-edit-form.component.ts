@@ -253,7 +253,7 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
       className: 'w-full md:w-2',
       type: 'text-input',
       templateOptions: {
-        label: 'Min Games For Stats',
+        label: 'Min No. For Stats',
         required: true,
       },
       validation: {

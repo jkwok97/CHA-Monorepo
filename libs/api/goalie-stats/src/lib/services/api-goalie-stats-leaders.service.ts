@@ -5,7 +5,7 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, MoreThan } from 'typeorm';
+import { Repository, MoreThanOrEqual } from 'typeorm';
 
 @Injectable()
 export class ApiGoalieStatsLeadersService {
@@ -68,7 +68,7 @@ export class ApiGoalieStatsLeadersService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        games_played: MoreThan(Number(minGames)),
+        games_played: MoreThanOrEqual(Number(minGames)),
       },
       order: {
         shots_for: 'DESC',
@@ -107,7 +107,7 @@ export class ApiGoalieStatsLeadersService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        games_played: MoreThan(Number(minGames)),
+        games_played: MoreThanOrEqual(Number(minGames)),
       },
       order: {
         goals_against_avg: 'ASC',
@@ -144,7 +144,7 @@ export class ApiGoalieStatsLeadersService {
       where: {
         playing_year: season,
         season_type: seasonType,
-        games_played: MoreThan(Number(minGames)),
+        games_played: MoreThanOrEqual(Number(minGames)),
       },
       order: {
         save_pct: 'DESC',

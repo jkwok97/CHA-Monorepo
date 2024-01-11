@@ -4516,7 +4516,7 @@ let ApiGoalieStatsLeadersService = exports.ApiGoalieStatsLeadersService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThan)(Number(minGames)),
+                games_played: (0, typeorm_2.MoreThanOrEqual)(Number(minGames)),
             },
             order: {
                 shots_for: 'DESC',
@@ -4546,7 +4546,7 @@ let ApiGoalieStatsLeadersService = exports.ApiGoalieStatsLeadersService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThan)(Number(minGames)),
+                games_played: (0, typeorm_2.MoreThanOrEqual)(Number(minGames)),
             },
             order: {
                 goals_against_avg: 'ASC',
@@ -4576,7 +4576,7 @@ let ApiGoalieStatsLeadersService = exports.ApiGoalieStatsLeadersService = class 
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThan)(Number(minGames)),
+                games_played: (0, typeorm_2.MoreThanOrEqual)(Number(minGames)),
             },
             order: {
                 save_pct: 'DESC',
