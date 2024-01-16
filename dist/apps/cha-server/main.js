@@ -8995,6 +8995,12 @@ let ApiTeamStatsService = exports.ApiTeamStatsService = class ApiTeamStatsServic
                 pk_attempts: true,
                 pp_goals: true,
                 pp_attempts: true,
+                shots_for: true,
+                shots_against: true,
+                face_off_won: true,
+                face_off_lost: true,
+                pass_complete: true,
+                pass_incomplete: true,
             },
             where: {
                 playing_year: season,
