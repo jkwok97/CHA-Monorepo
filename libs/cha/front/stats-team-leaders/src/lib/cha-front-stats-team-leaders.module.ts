@@ -30,6 +30,7 @@ import { StatsTeamLeadersTableComponent } from './components/stats-team-leaders-
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
 import {
   StatsTeamLeadersFaceoffsComponent,
+  StatsTeamLeadersPassingComponent,
   StatsTeamLeadersShotsComponent,
 } from './components';
 
@@ -60,6 +61,7 @@ import {
     StatsTeamLeadersTableComponent,
     StatsTeamLeadersShotsComponent,
     StatsTeamLeadersFaceoffsComponent,
+    StatsTeamLeadersPassingComponent,
   ],
   providers: [
     LeagueStatsTeamEffects,

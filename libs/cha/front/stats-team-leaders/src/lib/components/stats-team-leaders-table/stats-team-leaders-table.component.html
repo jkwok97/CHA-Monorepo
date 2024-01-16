@@ -55,6 +55,16 @@
               {{ data.shots_for - data.shots_against }}
             </div>
 
+            <div class="table-body-cell" *ngIf="column.field === 'pass_pct'">
+              {{
+                (
+                  (data.pass_complete /
+                    (data.pass_complete + data.pass_incomplete)) *
+                  100
+                ).toFixed(1)
+              }}
+            </div>
+
             <div
               class="table-body-cell"
               *ngIf="column.field === 'face_off_pct'"

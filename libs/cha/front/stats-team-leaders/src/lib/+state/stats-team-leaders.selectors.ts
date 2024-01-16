@@ -50,6 +50,10 @@ const selectLeagueTeamStatsFaceoffs = createSelector(
   selectLeagueTeamStats,
   (teamStats: statTeamDto[]) => sortFaceoffs(teamStats)
 );
+const selectLeagueTeamStatsPassing = createSelector(
+  selectLeagueTeamStats,
+  (teamStats: statTeamDto[]) => sortPassing(teamStats)
+);
 
 const selectLeagueTeamStatsPp = createSelector(
   selectLeagueTeamStats,
@@ -73,6 +77,7 @@ export const LeagueStatsTeamSelectors = {
   selectLeagueTeamStatsPk,
   selectLeagueTeamStatsShotsDiff,
   selectLeagueTeamStatsFaceoffs,
+  selectLeagueTeamStatsPassing,
 };
 
 function sortStandings(teamStats: statTeamDto[]): statTeamDto[] {
@@ -191,6 +196,22 @@ function sortFaceoffs(teamStats: statTeamDto[]): statTeamDto[] {
         100 -
       ((Number(a.face_off_won) - Number(a.face_off_lost)) /
         (Number(a.face_off_won) + Number(a.face_off_lost))) *
+        100
+  );
+  return sortedData;
+}
+
+function sortPassing(teamStats: statTeamDto[]): statTeamDto[] {
+  const data = teamStats.filter(
+    (stat: statTeamDto) => Number(stat.games_played) > 0
+  );
+  const sortedData = data.sort(
+    (a, b) =>
+      ((Number(b.pass_complete) - Number(b.pass_incomplete)) /
+        (Number(b.pass_complete) + Number(b.pass_incomplete))) *
+        100 -
+      ((Number(a.pass_complete) - Number(a.pass_incomplete)) /
+        (Number(a.pass_complete) + Number(a.pass_incomplete))) *
         100
   );
   return sortedData;

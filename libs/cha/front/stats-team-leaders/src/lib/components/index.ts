@@ -7,3 +7,4 @@ export * from './stats-team-leaders-streak';
 export * from './stats-team-leaders-table';
 export * from './stats-team-leaders-shots';
 export * from './stats-team-leaders-faceoffs';
+export * from './stats-team-leaders-passing';
