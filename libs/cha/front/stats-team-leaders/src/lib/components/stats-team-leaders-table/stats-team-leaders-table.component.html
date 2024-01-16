@@ -55,6 +55,19 @@
               {{ data.shots_for - data.shots_against }}
             </div>
 
+            <div
+              class="table-body-cell"
+              *ngIf="column.field === 'face_off_pct'"
+            >
+              {{
+                (
+                  (data.face_off_won /
+                    (data.face_off_won + data.face_off_lost)) *
+                  100
+                ).toFixed(1)
+              }}
+            </div>
+
             <div class="table-body-cell" *ngIf="column.field === 'pp_pct'">
               {{ ((data.pp_goals / data.pp_attempts) * 100).toFixed(1) }}%
             </div>

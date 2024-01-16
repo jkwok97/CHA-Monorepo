@@ -17,7 +17,7 @@ export interface statTeamDto {
   shots_for: number;
   shots_against: number;
   face_off_won: number;
-  face_off_lose: number;
+  face_off_lost: number;
   pass_complete: number;
   pass_incomplete: number;
   team_id: {
