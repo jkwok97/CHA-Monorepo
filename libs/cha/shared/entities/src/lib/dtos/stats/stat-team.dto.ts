@@ -14,6 +14,12 @@ export interface statTeamDto {
   pk_goals: string;
   penalty_minutes: string;
   long_win_streak: string;
+  shots_for: number;
+  shots_against: number;
+  face_off_won: number;
+  face_off_lose: number;
+  pass_complete: number;
+  pass_incomplete: number;
   team_id: {
     id: TeamsEnum;
     shortname: string;

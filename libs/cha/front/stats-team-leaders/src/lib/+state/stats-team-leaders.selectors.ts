@@ -41,6 +41,11 @@ const selectLeagueTeamStatsGoalDiff = createSelector(
   (teamStats: statTeamDto[]) => sortGoalDiff(teamStats)
 );
 
+const selectLeagueTeamStatsShotsDiff = createSelector(
+  selectLeagueTeamStats,
+  (teamStats: statTeamDto[]) => sortShotDiff(teamStats)
+);
+
 const selectLeagueTeamStatsPp = createSelector(
   selectLeagueTeamStats,
   (teamStats: statTeamDto[]) => sortPp(teamStats)
@@ -60,7 +65,8 @@ export const LeagueStatsTeamSelectors = {
   selectLeagueTeamStatsPenalties,
   selectLeagueTeamStatsGoalDiff,
   selectLeagueTeamStatsPp,
-  selectLeagueTeamStatsPk
+  selectLeagueTeamStatsPk,
+  selectLeagueTeamStatsShotsDiff
 };
 
 function sortStandings(teamStats: statTeamDto[]): statTeamDto[] {
@@ -125,6 +131,19 @@ function sortGoalDiff(teamStats: statTeamDto[]): statTeamDto[] {
       Number(b.goals_for) -
       Number(b.goals_against) -
       (Number(a.goals_for) - Number(a.goals_against))
+  );
+  return sortedData;
+}
+
+function sortShotDiff(teamStats: statTeamDto[]): statTeamDto[] {
+  const data = teamStats.filter(
+    (stat: statTeamDto) => Number(stat.games_played) > 0
+  );
+  const sortedData = data.sort(
+    (a, b) =>
+      Number(b.shots_for) -
+      Number(b.shots_against) -
+      (Number(a.shots_for) - Number(a.shots_against))
   );
   return sortedData;
 }

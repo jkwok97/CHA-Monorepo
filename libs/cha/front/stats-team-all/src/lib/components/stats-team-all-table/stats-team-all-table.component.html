@@ -83,6 +83,10 @@
               {{ data.goals_for - data.goals_against }}
             </ng-container>
 
+            <ng-container *ngIf="column.field === 'shot_diff'">
+              {{ data.shots_for - data.shots_against }}
+            </ng-container>
+
             <ng-container *ngIf="column.field === 'win_efficiency'">
               {{ ((data.wins / data.games_played) * 100).toFixed(1) }}%
             </ng-container>

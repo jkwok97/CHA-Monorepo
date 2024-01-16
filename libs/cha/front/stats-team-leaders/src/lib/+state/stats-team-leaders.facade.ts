@@ -35,6 +35,9 @@ export class LeagueStatsTeamFacade {
   leagueTeamGoalDiff$: Observable<statTeamDto[]> = this.store.select(
     LeagueStatsTeamSelectors.selectLeagueTeamStatsGoalDiff
   );
+  leagureTeamShotDiff$: Observable<statTeamDto[]> = this.store.select(
+    LeagueStatsTeamSelectors.selectLeagueTeamStatsShotsDiff
+  )
 
   leagueTeamPp$: Observable<statTeamDto[]> = this.store.select(
     LeagueStatsTeamSelectors.selectLeagueTeamStatsPp

@@ -28,6 +28,7 @@ import { StatsTeamLeadersStandingsComponent } from './components/stats-team-lead
 import { StatsTeamLeadersStreakComponent } from './components/stats-team-leaders-streak/stats-team-leaders-streak.component';
 import { StatsTeamLeadersTableComponent } from './components/stats-team-leaders-table/stats-team-leaders-table.component';
 import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
+import { StatsTeamLeadersShotsComponent } from './components';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { BladeButtonSelectComponent } from '@blade/angular/ui/button-select';
     StatsTeamLeadersStandingsComponent,
     StatsTeamLeadersStreakComponent,
     StatsTeamLeadersTableComponent,
+    StatsTeamLeadersShotsComponent,
   ],
   providers: [
     LeagueStatsTeamEffects,
