@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx run cha-server:build:production",
+    "startTime": "2024-01-24T20:23:31.430Z",
+    "endTime": "2024-01-24T20:23:38.988Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "cha-server:build:production",
+      "target": "build",
+      "projectName": "cha-server",
+      "hash": "9699943162794787531",
+      "startTime": "2024-01-24T20:23:31.435Z",
+      "endTime": "2024-01-24T20:23:38.988Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}
