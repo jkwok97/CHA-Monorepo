@@ -1,0 +1,421 @@
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[36m⠋[39m Generating browser application bundles (phase: setup)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: setup)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                                                                    [2m | [22m[1mNames[22m                            [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mvendor.js[39m[37m                                                                                              [2m | [22mvendor                           [2m | [22m  [96m3.46 MB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mstyles.css, styles.js[39m[37m                                                                                  [2m | [22mstyles                           [2m | [22m  [96m1.08 MB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mpolyfills.js[39m[37m                                                                                           [2m | [22mpolyfills                        [2m | [22m[96m336.04 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mmain.js[39m[37m                                                                                                [2m | [22mmain                             [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                                                             [2m | [22mruntime                          [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1m [22m                                                                                                      [2m | [22m[1mInitial Total[22m                    [2m | [22m  [1m5.16 MB[22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                                                                       [2m | [22m[1mNames[22m                            [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-table_mjs.js[39m[37m                                             [2m | [22mcha-front-home-franchise         [2m | [22m[96m711.40 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_teams-summary_src_index_ts.js[39m[37m                                                [39m[37m           [2m | [22mcha-front-teams-summary          [2m | [22m[96m546.30 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-dropdown_mjs.js[39m[37m                                          [2m | [22mcha-front-home-summary           [2m | [22m[96m270.57 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-home-summary           [2m | [22m[96m254.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-calendar_mjs-node_modules_primeng_fesm2022_prim-66cee8.js[39m[37m[2m | [22mcha-front-home-franchise         [2m | [22m[96m253.25 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_main_src_index_ts.js[39m[37m                                                                    [2m | [22mcha-front-main                   [2m | [22m[96m229.69 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_ngx-scrollbar_fesm2022_ngx-scrollbar_mjs.js[39m[37m                                       [2m | [22mcha-front-main-league            [2m | [22m[96m206.46 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-salaries_src_index_ts.js[39m[37m                                                         [2m | [22mcha-front-league-salaries        [2m | [22m[96m175.42 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-team-leaders_src_index_ts.js[39m[37m                                                      [2m | [22mcha-front-stats-team-leaders     [2m | [22m[96m171.39 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-multiselect_mjs.js[39m[37m                                       [2m | [22mcha-front-nhl-stats              [2m | [22m[96m160.27 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_nhl-stats_src_index_ts.js[39m[37m                                                               [2m | [22mcha-front-nhl-stats              [2m | [22m[96m150.46 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[[39m[37m92mlibs_cha_front_games-playoffs_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-games-playoffs         [2m | [22m[96m123.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_list_src_index_ts-node_modules_primeng_fesm2022_primeng-carouse-53a67c.js[39m[37m[2m | [22mcha-front-home-summary           [2m | [22m[96m114.11 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-team-all_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-stats-team-all         [2m | [22m[96m108.11 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_games-current_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-games-current          [2m | [22m[96m100.24 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_history-players_src_index_ts.js[39m[37m                                                         [2m | [22mcha-front-history-players        [2m | [22m [96m91.57 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-players_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-home-players           [2m | [22m [96m88.91 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-player-all_src_index_ts.js[39m[37m                                                        [2m | [22mcha-front-stats-player-all       [2m | [22m [96m88.80 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-franchise_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-home-franchise         [2m | [22m [96m84.68 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-goalies_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-home-goalies           [2m | [22m [96m83.95 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_games-all_src_index_ts.js[39m[37m                                                              [39m[37m [2m | [22mcha-front-games-all              [2m | [22m [96m83.64 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_history-goalies_src_index_ts.js[39m[37m                                                         [2m | [22mcha-front-history-goalies        [2m | [22m [96m81.01 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_history-teams_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-history-teams          [2m | [22m [96m80.51 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-goalie-all_src_index_ts.js[39m[37m                                                        [2m | [22mcha-front-stats-goalie-all       [2m | [22m [96m80.48 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_leader-card_src_index_ts.js[39m[37m                                              [2m | [22mcha-front-nhl-leaders            [2m | [22m [96m69.70 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-player-leaders_src_index_ts.js[39m[37m                                                    [2m | [22mcha-front-stats-player-leaders   [2m | [22m [96m52.37 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-trades_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-league-trades          [2m | [22m [96m51.58 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-waivers_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-league-waivers         [2m | [22m [96m50.49 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-awards_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-home-awards            [2m | [22m [96m44.32 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_nhl-leaders_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-nhl-leaders            [2m | [22m [96m41.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_ch[39m[37ma_front_stats-goalie-leaders_src_index_ts.js[39m[37m                                                    [2m | [22mcha-front-stats-goalie-leaders   [2m | [22m [96m40.83 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_award-card_src_index_ts.js[39m[37m                                               [2m | [22mcha-front-home-awards            [2m | [22m [96m39.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-sidebar_mjs.js[39m[37m                                           [2m | [22mcha-front-home-summary           [2m | [22m [96m37.27 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_draft-current_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-draft-current          [2m | [22m [96m34.02 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_draft-summary_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-draft-summary          [2m | [22m [96m29.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-avatar_mjs-node_modules_primeng_fesm2022_primen-bbce2c.js[39m[37m[2m | [22mcha-front-home-summary           [2m | [22m [96m26.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_table_src_index_ts.js[39m[37m                                                    [2m | [22mcha-front-draft-current          [2m | [22m [96m25.72 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-node_modules_primeng_fesm2022_primeng-selectbutton_mjs.js[39m[37m                                      [2m | [22mcha-front-home-franchise         [2m | [22m [96m25.29 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-champions_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m      [2m | [22mcha-front-awards-champions       [2m | [22m [96m24.83 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-defense_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m        [2m | [[39m[37m22mcha-front-awards-defense         [2m | [22m [96m24.64 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-scorer_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-scorer          [2m | [22m [96m24.56 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-goalie_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-goalie          [2m | [22m [96m24.56 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-rookie_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-rookie          [2m | [22m [96m24.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-season_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-season          [2m | [22m [96m24.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-gm_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m             [2m | [22mcha-front-awards-gm              [2m | [22m [96m24.19 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_divider_src_index_ts-node_modules_primeng_fesm2022_primeng-icon-775964.js[39m[37m[2m | [22mcha-front-home-summary           [2m | [22m [96m23.14 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-waivers_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-rules-waivers          [2m | [22m [96m22.62 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-equalization_src_index_ts.js[39m[37m                                                      [2m | [22mcha-front-rules-equalization     [2m | [22m [96m22.50 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-lottery_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-rules-lottery          [2m | [22m [96m22.10 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_ru[39m[37mles-winnings_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-rules-winnings         [2m | [22m [96m21.60 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-player-protection_src_index_ts.js[39m[37m                                                 [2m | [22mcha-front-rules-player-protection[2m | [22m [96m21.59 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-egr_src_index_ts.js[39m[37m                                                               [2m | [22mcha-front-rules-egr              [2m | [22m [96m21.45 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-rosters_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-rules-rosters          [2m | [22m [96m21.05 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_main-awards_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-main-awards            [2m | [22m [96m14.21 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_main-league_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-main-league            [2m | [22m [96m13.72 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-stats_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-league-stats           [2m | [22m [96m13.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home_src_index_ts.js[39m[37m                                                                    [2m | [22mcha-front-home                   [2m | [22m [96m12.40 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_main-draft_src_index_ts.js[39m[37m                                                              [2m | [22mcha-front-main-draft             [2m | [22m [96m12.31 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_main-rules_src_index_ts.js[39m[37m                                                              [2m | [22mcha-fro[39m[37mnt-main-rules             [2m | [22m [96m12.06 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_main-nhl_src_index_ts.js[39m[37m                                                                [2m | [22mcha-front-main-nhl               [2m | [22m [96m11.57 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-history_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-league-history         [2m | [22m [96m11.15 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-games_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-league-games           [2m | [22m  [96m9.76 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-teams_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-league-teams           [2m | [22m  [96m9.22 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mcommon.js[39m[37m                                                                                              [2m | [22mcommon                           [2m | [22m  [96m5.74 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-logout_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-home-logout            [2m | [22m  [96m4.22 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:05:22.466Z[39m[37m[22m - Hash: [1m[37mbf9363114e8b7426[39m[37m[22m - Time: [1m[37m19015[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m** Angular Live Development Server is listening on localhost:4000, open your browser on http://localhost:4000/ **[39m
+[37m[39m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:10:26.053Z[39m[37m[22m - Hash: [1m[37mf8511882312fa1ee[39m[37m[22m - Time: [1m[37m3509[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠇[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠏[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠋[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠙[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                                                                                    [2m | [22m[1mNames[22m                            [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                                                                             [2m | [22mruntime                          [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                                                                                       [2m | [22m[1mNames[22m                            [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_teams-summary_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-teams-summary          [2m | [22m[96m546.30 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-salaries_src_index_ts.js[39m[37m                                                         [2m | [22mcha-front-league-salaries        [2m | [22m[96m175.42 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-team-leaders_src_index_ts.js[39m[37m                                                      [2m | [22mcha-front-stats-team-leaders     [2m | [22m[96m171.39 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_nhl-stats_src_index_ts.js[39m[37m                                                               [2m | [22mcha-front-nhl-stats              [2m | [22m[96m150.46 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_games-playoffs_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-games-playoffs         [2m | [22m[96m123.28 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_list_src_index_ts-node_modules_primeng_fesm2022_primeng-carouse-53a67c.js[39m[37m[2m | [22mcha-front-home-summary           [2m | [22m[96m114.11 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-team-all_src_index_ts.js[39m[37m                                                   [39m[37m       [2m | [22mcha-front-stats-team-all         [2m | [22m[96m108.11 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_games-current_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-games-current          [2m | [22m[96m100.24 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_history-players_src_index_ts.js[39m[37m                                                         [2m | [22mcha-front-history-players        [2m | [22m [96m91.57 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-players_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-home-players           [2m | [22m [96m88.91 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-player-all_src_index_ts.js[39m[37m                                                        [2m | [22mcha-front-stats-player-all       [2m | [22m [96m88.80 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-franchise_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-home-franchise         [2m | [22m [96m84.68 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-goalies_src_index_ts.js[39m[37m                                                            [2m | [22mcha-front-home-goalies           [2m | [22m [96m83.95 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_games-all_src_index_ts.js[39m[37m                                                               [2m | [22mcha-front-games-all              [2m | [22m [96m83.64 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_history-goalies_src_index_ts.js[39m[37m                                                         [2m | [22mcha-front-history-goalies        [2m | [22m [96m81.01 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_history-teams_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-history-teams          [2m | [22m [96m80.51 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92ml[39m[37mibs_cha_front_stats-goalie-all_src_index_ts.js[39m[37m                                                        [2m | [22mcha-front-stats-goalie-all       [2m | [22m [96m80.48 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_leader-card_src_index_ts.js[39m[37m                                              [2m | [22mcha-front-nhl-leaders            [2m | [22m [96m69.70 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-player-leaders_src_index_ts.js[39m[37m                                                    [2m | [22mcha-front-stats-player-leaders   [2m | [22m [96m52.37 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-trades_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-league-trades          [2m | [22m [96m51.58 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_league-waivers_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-league-waivers         [2m | [22m [96m50.49 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-awards_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-home-awards            [2m | [22m [96m44.32 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_nhl-leaders_src_index_ts.js[39m[37m                                                             [2m | [22mcha-front-nhl-leaders            [2m | [22m [96m41.33 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_stats-goalie-leaders_src_index_ts.js[39m[37m                                                    [2m | [22mcha-front-stats-goalie-leaders   [2m | [22m [96m40.83 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mdefault-libs_blade_angular_ui_award-card_src_index_ts.js[39m[37m                                               [2m | [22mcha-front-home-awards            [2m | [22m [96m39.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-champions_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m      [2[39m[37mm | [22mcha-front-awards-champions       [2m | [22m [96m24.83 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-defense_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m        [2m | [22mcha-front-awards-defense         [2m | [22m [96m24.64 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-scorer_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-scorer          [2m | [22m [96m24.56 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-goalie_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-goalie          [2m | [22m [96m24.56 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-rookie_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-rookie          [2m | [22m [96m24.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-season_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m         [2m | [22mcha-front-awards-season          [2m | [22m [96m24.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_awards-gm_src_index_ts-node_modules_primeng_fesm2022_primeng-divider_mjs.js[39m[37m             [2m | [22mcha-front-awards-gm              [2m | [22m [96m24.19 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-waivers_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-rules-waivers          [2m | [22m [96m22.62 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-equalization_src_index_ts.js[39m[37m                                                      [2m | [22mcha-front-rules-equalization     [2m | [22m [96m22.50 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-lottery_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-rules-lottery          [2m | [22m [96m22.10 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_fr[39m[37mont_rules-winnings_src_index_ts.js[39m[37m                                                          [2m | [22mcha-front-rules-winnings         [2m | [22m [96m21.60 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-player-protection_src_index_ts.js[39m[37m                                                 [2m | [22mcha-front-rules-player-protection[2m | [22m [96m21.59 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-egr_src_index_ts.js[39m[37m                                                               [2m | [22mcha-front-rules-egr              [2m | [22m [96m21.45 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mlibs_cha_front_rules-rosters_src_index_ts.js[39m[37m                                                           [2m | [22mcha-front-rules-rosters          [2m | [22m [96m21.05 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m30 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:10:33.321Z[39m[37m[22m - Hash: [1m[37mcb3cc98318604d49[39m[37m[22m - Time: [1m[37m7109[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m

@@ -318,6 +318,9 @@ export class ApiSalariesService {
     return await Promise.all(
       array.map(async (item) => ({
         ...item,
+        nhlHeadShot: await this.getNhlPlayerHeadShotByPlayerId(
+          item.player_id.nhl_id
+        ),
         nhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
           '20232024'
@@ -330,6 +333,16 @@ export class ApiSalariesService {
     );
   }
 
+  async getNhlPlayerHeadShotByPlayerId(
+    playerId: number
+  ): Promise<Observable<any>> {
+    const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
+
+    const response = await firstValueFrom(stats);
+
+    return response.data.headshot;
+  }
+
   async getNhlPlayerStatsByPlayerId(
     playerId: number,
     season: string
@@ -340,10 +353,7 @@ export class ApiSalariesService {
 
     console.log(response);
 
-    return of({
-      nhlStats: response.data.featuredStats.regularSeason.subSeason,
-      nhlPlayerShot: response.data.headshot,
-    });
+    return response.data.featuredStats.regularSeason.subSeason;
   }
 
   async getAll(): Promise<Salaries_V2[]> {
