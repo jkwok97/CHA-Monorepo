@@ -200,7 +200,7 @@
   </ng-template>
 </p-table>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true">
+<p-sidebar [(visible)]="display" [fullScreen]="true" appendTo="body">
   <ng-container *ngIf="salariesData as data">
     <cha-front-league-salaries-ratings-sidebar
       [data]="data"

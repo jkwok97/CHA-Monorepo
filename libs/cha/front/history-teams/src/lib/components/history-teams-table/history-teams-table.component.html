@@ -128,7 +128,7 @@
   </ng-template>
 </p-table>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true">
+<p-sidebar [(visible)]="display" [fullScreen]="true" appendTo="body">
   <ng-container *ngIf="teamStats as teamStats">
     <cha-front-history-teams-table-sidebar
       [teamStats]="teamStats"

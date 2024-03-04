@@ -419,3 +419,1614 @@ Browserslist: caniuse-lite is outdated. Please run:
 [1m[33m[39m[22m
 [37m[39m
 [37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mmain.js[39m[37m            [2m | [22mmain   [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:13:43.303Z[39m[37m[22m - Hash: [1m[37mbdd4d97e490241ff[39m[37m[22m - Time: [1m[37m5398[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mmain.js[39m[37m            [2m | [22mmain   [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:13:46.058Z[39m[37m[22m - Hash: [1m[37m7dfa3e0b1a5cd0d4[39m[37m[22m - Time: [1m[37m1791[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mmain.js[39m[37m            [2m | [22mmain   [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:13:49.902Z[39m[37m[22m - Hash: [1m[37m42b1d20f28b711cd[39m[37m[22m - Time: [1m[37m1524[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠧[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:16:56.962Z[39m[37m[22m - Hash: [1m[37mcb3cb9e8eb4d3798[39m[37m[22m - Time: [1m[37m1437[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m43[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m43[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m51[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m51[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m57[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m57[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m65[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m65[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[36m⠦[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.13 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:17:42.038Z[39m[37m[22m - Hash: [1m[37m59e62b8988cebfee[39m[37m[22m - Time: [1m[37m1022[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.35 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:17:44.665Z[39m[37m[22m - Hash: [1m[37mef3e4d8beb0c8005[39m[37m[22m - Time: [1m[37m805[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.54 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:17:51.748Z[39m[37m[22m - Hash: [1m[37m6e3661ec3f94e354[39m[37m[22m - Time: [1m[37m735[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠴[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:04.828Z[39m[37m[22m - Hash: [1m[37mdbf955702441f91b[39m[37m[22m - Time: [1m[37m765[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: emitting)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.54 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:13.701Z[39m[37m[22m - Hash: [1m[37ma653c17a5faca600[39m[37m[22m - Time: [1m[37m701[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[37m[39m
+[37m[92m√[39m[37m Compiled successfully.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.55 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:24.136Z[39m[37m[22m - Hash: [1m[37mc7ac6aa2b5f35c77[39m[37m[22m - Time: [1m[37m677[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'nhlHeadShot' does not exist on type 'SalariesAndRatingsDto'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m15[0m             {{ player.nhlHeadShot | json }}[39m[22m
+[1m[31m[7m  [0m [91m                      ~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[31m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[31m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m×[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:31.472Z[39m[37m[22m - Hash: [1m[37m25cf7e66edde9872[39m[37m[22m - Time: [1m[37m651[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'nhlHeadShot' does not exist on type 'SalariesAndRatingsDto'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m15[0m             {{ player.nhlHeadShot }}[39m[22m
+[1m[31m[7m  [0m [91m                      ~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[31m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[31m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m×[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m                        [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m                                 [2m | [22mruntime               [2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m[1mLazy Chunk Files[22m                           [2m | [22m[1mNames[22m                 [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mlibs_cha_front_home-summary_src_index_ts.js[39m[37m[2m | [22mcha-front-home-summary[2m | [22m[96m254.36 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:32.168Z[39m[37m[22m - Hash: [1m[37mb9b61c31aa710f53[39m[37m[22m - Time: [1m[37m592[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'nhlHeadShot' does not exist on type 'SalariesAndRatingsDto'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m15[0m             {{ player.nhlHeadShot }}[39m[22m
+[1m[31m[7m  [0m [91m                      ~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[31m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[31m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m×[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠼[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mmain.js[39m[37m            [2m | [22mmain   [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:54.516Z[39m[37m[22m - Hash: [1m[37ma363575eadf8d187[39m[37m[22m - Time: [1m[37m1651[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'nhlHeadShot' does not exist on type 'SalariesAndRatingsDto'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m15[0m             {{ player.nhlHeadShot }}[39m[22m
+[1m[31m[7m  [0m [91m                      ~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[31m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[31m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m×[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mmain.js[39m[37m            [2m | [22mmain   [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:18:55.147Z[39m[37m[22m - Hash: [1m[37m0859fe1d4c8d0b5e[39m[37m[22m - Time: [1m[37m516[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'nhlHeadShot' does not exist on type 'SalariesAndRatingsDto'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m15[0m             {{ player.nhlHeadShot }}[39m[22m
+[1m[31m[7m  [0m [91m                      ~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[31m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[31m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m×[39m[37m Failed to compile.[39m
+[36m⠋[39m Generating browser application bundles...[2K[1G[36m⠙[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠹[39m Generating browser application bundles (phase: building)...[2K[1G[36m⠸[39m Generating browser application bundles (phase: sealing)...[2K[1G[32m✔[39m Browser application bundle generation complete.
+[37m[39m
+[37m[0m[1mInitial Chunk Files[22m[2m | [22m[1mNames[22m  [2m | [22m [1mRaw Size[22m[0m[39m
+[37m[0m[92mmain.js[39m[37m            [2m | [22mmain   [2m | [22m[96m286.98 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[92mruntime.js[39m[37m         [2m | [22mruntime[2m | [22m [96m12.63 kB[39m[37m[2m | [22m[0m[39m
+[37m[0m[0m[39m
+[37m[0m68 unchanged chunks[0m[39m
+[37m[0m[0m[39m
+[37m[0mBuild at: [1m[37m2024-03-04T16:19:32.740Z[39m[37m[22m - Hash: [1m[37mad25ae7e6e7b7215[39m[37m[22m - Time: [1m[37m609[39m[37m[22mms[0m[39m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m44[0m:[93m76[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m44[0m                     isOffSeason ? player.nhlStats?.goals : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                                                           ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m52[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m52[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[39m[22m[1m[33m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m58[0m:[93m75[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m58[0m                     isOffSeason ? player.nhlStats?.wins : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                                                          ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m66[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m66[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[33m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-su[39m[22m[1m[33mmmary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m49[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m49[0m                       : player.ratings?.goals[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m59[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m59[0m                       : player.ratings?.points[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m69[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' op[39m[22m[1m[33merator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m69[0m                       : player.ratings?.wins[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[0m[33mWarning: [39m[33m[0m[96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html[0m:[93m79[0m:[93m41[0m - [93mwarning[0m[90m NG8107: [0mThe left side of this optional chain operation does not include 'null' or 'undefined' in its type, therefore the '?.' operator can be replaced with the '.' operator.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[7m79[0m                       : player.ratings?.save_pct[39m[22m
+[1m[33m[7m  [0m [93m                                        ~~~~~~~~[0m[39m[22m
+[1m[33m[39m[22m
+[1m[33m  [96mlibs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts[0m:[93m14[0m:[93m16[0m[39m[22m
+[1m[33m    [7m14[0m   templateUrl: './depth-chart-position.component.html',[39m[22m
+[1m[33m    [7m  [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[33m    Error occurs in the template of component DepthChartPositionComponent.[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[33m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[0m[91mError: [39m[31m[0m[96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.html[0m:[93m15[0m:[93m23[0m - [91merror[0m[90m TS2339: [0mProperty 'nhlHeadShot' does not exist on type 'SalariesAndRatingsDto'.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[7m15[0m             {{ player.nhlHeadShot }}[39m[22m
+[1m[31m[7m  [0m [91m                      ~~~~~~~~~~~[0m[39m[22m
+[1m[31m[39m[22m
+[1m[31m  [96mlibs/cha/front/home-summary/src/lib/components/home-summary-depth-chart-position/home-summary-depth-chart-position.component.ts[0m:[93m8[0m:[93m16[0m[39m[22m
+[1m[31m    [7m8[0m   templateUrl: './home-summary-depth-chart-position.component.html',[39m[22m
+[1m[31m    [7m [0m [96m               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[39m[22m
+[1m[31m    Error occurs in the template of component HomeSummaryDepthChartPositionComponent.[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31m[39m[22m
+[37m[39m
+[37m[91m×[39m[37m Failed to compile.[39m

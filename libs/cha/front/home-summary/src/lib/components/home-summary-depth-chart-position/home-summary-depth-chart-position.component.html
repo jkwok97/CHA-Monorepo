@@ -13,9 +13,10 @@
         <div class="w-full flex justify-content-between p-2 align-items-center">
           <div class="flex column-gap-3 align-items-center">
             <p-avatar
-              [image]="getPlayerPicture(player.player_id.nhl_id)"
+              [image]="player.nhlHeadShot"
               shape="circle"
               size="large"
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             <div class="flex flex-wrap align-items-center justify-content-left">
               <div class="w-full">

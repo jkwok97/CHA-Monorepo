@@ -140,7 +140,7 @@
   </ng-template>
 </p-table>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true">
+<p-sidebar [(visible)]="display" [fullScreen]="true" appendTo="body">
   <ng-container *ngIf="playerStats as playerStats">
     <div class="flex align-items-center column-gap-3">
       <p-avatar

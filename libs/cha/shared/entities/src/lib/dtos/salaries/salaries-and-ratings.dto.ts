@@ -12,6 +12,7 @@ export interface SalariesAndRatingsDto {
   teamInfo: TeamDto;
   nhlStats: any;
   nextNhlStats?: any;
+  nhlHeadShot: string;
 }
 
 export interface SalaryDto {

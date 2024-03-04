@@ -95,8 +95,10 @@
               <span *ngIf="statType === 'all'">{{ data.team_string }}</span>
             </ng-container>
             <p-avatar
-              [image]="getPlayerPicture(data.player_id?.nhl_id)"
+              [image]="data.nhlHeadShot"
               shape="circle"
+              size="xlarge"
+              [style]="{ 'background-color': 'white' }"
               *ngIf="
                 column.field.includes('full_name') && data.player_id.nhl_id
               "
@@ -143,7 +145,7 @@
   </ng-template>
 </p-table>
 
-<p-sidebar [(visible)]="display" [fullScreen]="true">
+<p-sidebar [(visible)]="display" [fullScreen]="true" appendTo="body">
   <ng-container *ngIf="playerStats as playerStats">
     <cha-front-goalie-stats-table-sider
       [goalieStats]="playerStats"
