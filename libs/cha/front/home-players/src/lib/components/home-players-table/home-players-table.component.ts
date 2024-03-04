@@ -124,7 +124,7 @@ export class HomePlayersTableComponent implements OnInit, OnChanges {
 
   getPlayerPicture(id: string | undefined) {
     if (id) {
-      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`;
+      return `https://assets.nhle.com/mugs/nhl/latest/${id}.png`;
     } else {
       return '';
     }

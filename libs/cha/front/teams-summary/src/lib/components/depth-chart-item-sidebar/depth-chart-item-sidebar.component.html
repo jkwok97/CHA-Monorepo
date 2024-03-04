@@ -1,8 +1,9 @@
 <div class="flex align-items-center column-gap-3">
   <p-avatar
-    [image]="getPlayerPicture(playerStats.player_id?.nhl_id)"
+    [image]="playerStats.nhlHeadShot"
     shape="circle"
-    size="xlarge"
+    size="large"
+    [style]="{ 'background-color': 'white' }"
   ></p-avatar>
   <div>
     <div class="text-xl font-light">

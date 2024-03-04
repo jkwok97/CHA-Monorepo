@@ -94,7 +94,7 @@
 
               <span *ngIf="statType === 'all'">{{ data.team_string }}</span>
             </ng-container>
-            <p-avatar
+            <!-- <p-avatar
               [image]="data.nhlHeadShot"
               shape="circle"
               size="xlarge"
@@ -102,7 +102,7 @@
               *ngIf="
                 column.field.includes('full_name') && data.player_id.nhl_id
               "
-            ></p-avatar>
+            ></p-avatar> -->
             <ng-container>{{ data[column.field] }}</ng-container>
             <ng-container *ngIf="column.field === 'action'">
               <button

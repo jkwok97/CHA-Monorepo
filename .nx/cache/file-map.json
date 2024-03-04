@@ -2088,7 +2088,7 @@
       },
       {
         "file": "libs/cha/front/league-trades/src/lib/components/league-trades-team-card/league-trades-team-card.component.ts",
-        "hash": "11037933839876891028",
+        "hash": "5006205644751247828",
         "deps": [
           "npm:@angular/core",
           "cha-shared-entities"
@@ -2433,7 +2433,7 @@
       },
       {
         "file": "libs/cha/front/history-players/src/lib/components/history-players-all-sidebar/history-players-all-sidebar.component.ts",
-        "hash": "8121087815226242779",
+        "hash": "13775289594523022698",
         "deps": [
           "npm:@angular/core"
         ]
@@ -2459,7 +2459,7 @@
       },
       {
         "file": "libs/cha/front/history-players/src/lib/components/history-players-table/history-players-table.component.ts",
-        "hash": "7480194296561836697",
+        "hash": "7038415711585855108",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -3784,7 +3784,7 @@
       },
       {
         "file": "libs/blade/angular/ui/leader-card/src/lib/components/cha-leader-card/cha-leader-card.component.ts",
-        "hash": "9533637831426426571",
+        "hash": "4543509082349657843",
         "deps": [
           "npm:@angular/core",
           "npm:@angular/common",
@@ -3821,7 +3821,7 @@
       },
       {
         "file": "libs/blade/angular/ui/leader-card/src/lib/components/nhl-leader-card/nhl-leader-card.component.ts",
-        "hash": "1363431019781302413",
+        "hash": "16636444009439220603",
         "deps": [
           "npm:@angular/core",
           "npm:@angular/common",
@@ -5535,7 +5535,7 @@
       },
       {
         "file": "libs/cha/front/home-goalies/src/lib/components/home-goalies-table-sidebar/home-goalies-table-sidebar.component.ts",
-        "hash": "8688639007448054026",
+        "hash": "1003015991885123269",
         "deps": [
           "npm:@angular/core"
         ]
@@ -5561,7 +5561,7 @@
       },
       {
         "file": "libs/cha/front/home-goalies/src/lib/components/home-goalies-table/home-goalies-table.component.ts",
-        "hash": "7512816844548152881",
+        "hash": "4180180079883022521",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -5678,7 +5678,7 @@
       },
       {
         "file": "libs/blade/angular/ui/award-card/src/lib/award-card/award-card.component.ts",
-        "hash": "40195925217705938",
+        "hash": "11369315053450257859",
         "deps": [
           "npm:@angular/core",
           "npm:@angular/common",
@@ -5711,7 +5711,7 @@
       },
       {
         "file": "libs/blade/angular/ui/award-card/src/lib/user-award-card/user-award-card.component.ts",
-        "hash": "1464348819422548828",
+        "hash": "162345990763521109",
         "deps": [
           "npm:@angular/core",
           "npm:@angular/common",
@@ -6919,7 +6919,7 @@
       },
       {
         "file": "libs/cha/front/draft-summary/src/lib/containers/draft-summary/draft-summary.component.ts",
-        "hash": "2766076508441585740",
+        "hash": "9433649023053945925",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -7527,7 +7527,7 @@
       },
       {
         "file": "libs/cha/front/stats-goalie-all/src/lib/components/stats-goalie-all-sidebar/stats-goalie-all-sidebar.component.html",
-        "hash": "8702647923459043957"
+        "hash": "14522104609925514226"
       },
       {
         "file": "libs/cha/front/stats-goalie-all/src/lib/components/stats-goalie-all-sidebar/stats-goalie-all-sidebar.component.spec.ts",
@@ -7538,7 +7538,7 @@
       },
       {
         "file": "libs/cha/front/stats-goalie-all/src/lib/components/stats-goalie-all-sidebar/stats-goalie-all-sidebar.component.ts",
-        "hash": "12979101749203750952",
+        "hash": "2367472862187232665",
         "deps": [
           "npm:@angular/core"
         ]
@@ -9129,7 +9129,7 @@
       },
       {
         "file": "libs/cha/front/home-players/src/lib/components/home-players-table-sidebar/home-players-table-sidebar.component.ts",
-        "hash": "3495075845331617696",
+        "hash": "13591934720541439877",
         "deps": [
           "npm:@angular/core"
         ]
@@ -9155,7 +9155,7 @@
       },
       {
         "file": "libs/cha/front/home-players/src/lib/components/home-players-table/home-players-table.component.ts",
-        "hash": "2937182282852396923",
+        "hash": "9961159532146228959",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -10226,7 +10226,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-all/src/lib/components/stats-player-all-sidebar/stats-player-all-sidebar.component.html",
-        "hash": "11158236267521565979"
+        "hash": "7371182160210242505"
       },
       {
         "file": "libs/cha/front/stats-player-all/src/lib/components/stats-player-all-sidebar/stats-player-all-sidebar.component.spec.ts",
@@ -10237,7 +10237,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-all/src/lib/components/stats-player-all-sidebar/stats-player-all-sidebar.component.ts",
-        "hash": "5866598108663332427",
+        "hash": "15337548123947730797",
         "deps": [
           "npm:@angular/core"
         ]
@@ -10248,7 +10248,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-all/src/lib/components/stats-player-all-table/stats-player-all-table.component.html",
-        "hash": "2542253509391838878"
+        "hash": "10139111953266692893"
       },
       {
         "file": "libs/cha/front/stats-player-all/src/lib/components/stats-player-all-table/stats-player-all-table.component.scss",
@@ -10263,7 +10263,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-all/src/lib/components/stats-player-all-table/stats-player-all-table.component.ts",
-        "hash": "17692451837959555586",
+        "hash": "4426763667967801440",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -14737,7 +14737,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/depth-chart-item-sidebar/depth-chart-item-sidebar.component.html",
-        "hash": "827269699071157724"
+        "hash": "14189234873458780616"
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/depth-chart-item-sidebar/depth-chart-item-sidebar.component.spec.ts",
@@ -14748,7 +14748,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/depth-chart-item-sidebar/depth-chart-item-sidebar.component.ts",
-        "hash": "4614670827095173085",
+        "hash": "1318173796803903823",
         "deps": [
           "npm:@angular/core",
           "cha-shared-entities",
@@ -14762,7 +14762,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.html",
-        "hash": "804270538907784391"
+        "hash": "12408543879141305537"
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.spec.ts",
@@ -14773,7 +14773,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/depth-chart-position/depth-chart-position.component.ts",
-        "hash": "11758238458462990676",
+        "hash": "6124417541950767549",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -14827,7 +14827,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/goalie-stats-table-sider/goalie-stats-table-sider.component.ts",
-        "hash": "3069558771248562397",
+        "hash": "8212823360375826428",
         "deps": [
           "npm:@angular/core"
         ]
@@ -14838,7 +14838,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/goalie-stats-table/goalie-stats-table.component.html",
-        "hash": "4505977662681242984"
+        "hash": "1649046458970735273"
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/goalie-stats-table/goalie-stats-table.component.scss",
@@ -14913,7 +14913,7 @@
       },
       {
         "file": "libs/cha/front/teams-summary/src/lib/components/players-stats-table/players-stats-table.component.ts",
-        "hash": "17030725017031637395",
+        "hash": "4922328722463604504",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -18159,7 +18159,7 @@
       },
       {
         "file": "libs/cha/front/history-goalies/src/lib/components/history-goalie-sidebar/history-goalie-sidebar.component.ts",
-        "hash": "107113143306738373",
+        "hash": "17534768716148478245",
         "deps": [
           "npm:@angular/core"
         ]
@@ -18961,7 +18961,7 @@
       },
       {
         "file": "libs/cha/front/nhl-stats/src/lib/components/nhl-stats-rookie-table/nhl-stats-rookie-table.component.ts",
-        "hash": "14828964429862731521",
+        "hash": "11970820485415235035",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -19769,7 +19769,7 @@
       },
       {
         "file": "libs/cha/front/league-salaries/src/lib/components/league-salaries-ratings-sidebar/league-salaries-ratings-sidebar.component.ts",
-        "hash": "4069246592848295208",
+        "hash": "9831363049845149076",
         "deps": [
           "npm:@angular/core",
           "cha-shared-entities"

@@ -49,7 +49,7 @@ export class BladeChaLeaderCardComponent implements OnInit {
 
   getPlayerPicture() {
     if (this.selected) {
-      return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${this.selected.player_id.nhl_id}@2x.jpg`;
+      return `https://assets.nhle.com/mugs/nhl/latest/${this.selected.player_id.nhl_id}.png`;
     } else {
       return;
     }

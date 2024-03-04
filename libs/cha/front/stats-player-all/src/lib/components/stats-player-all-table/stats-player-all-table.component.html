@@ -104,13 +104,13 @@
               <img [src]="data.teamLogo" height="30px" />
               {{ data.team_name }}
             </ng-container>
-            <p-avatar
+            <!-- <p-avatar
               [image]="getPlayerPicture(data.player_id?.nhl_id)"
               shape="circle"
               *ngIf="
                 column.field.includes('full_name') && data.player_id.nhl_id
               "
-            ></p-avatar>
+            ></p-avatar> -->
             <ng-container *ngIf="column.field === 'action'">
               <button
                 pButton
