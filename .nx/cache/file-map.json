@@ -6188,7 +6188,7 @@
       },
       {
         "file": "libs/api/salaries/src/lib/services/api-salaries.service.ts",
-        "hash": "5005567394224140682",
+        "hash": "13148277741493983355",
         "deps": [
           "api-entities",
           "npm:@nestjs/common",
