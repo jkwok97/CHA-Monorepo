@@ -11,7 +11,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
 import { SalaryAllDto } from '@cha/shared/entities';
 
 @Injectable()
@@ -334,15 +334,16 @@ export class ApiSalariesService {
     playerId: number,
     season: string
   ): Promise<Observable<any>> {
-    const stats = this.httpService.get(
-      `${this.nhlAPI}/${playerId}/landing`
-    );
+    const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
 
     const response = await firstValueFrom(stats);
 
     console.log(response);
 
-    return response.data.featuredStats.regularSeason.subSeason;
+    return of({
+      nhlStats: response.data.featuredStats.regularSeason.subSeason,
+      nhlPlayerShot: response.data.headshot,
+    });
   }
 
   async getAll(): Promise<Salaries_V2[]> {

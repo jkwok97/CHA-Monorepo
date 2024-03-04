@@ -8307,7 +8307,10 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
         console.log(response);
-        return response.data.featuredStats.regularSeason.subSeason;
+        return (0, rxjs_1.of)({
+            nhlStats: response.data.featuredStats.regularSeason.subSeason,
+            nhlPlayerShot: response.data.headshot,
+        });
     }
     async getAll() {
         const salaries = await this.repo.find();
