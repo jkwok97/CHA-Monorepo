@@ -75,6 +75,7 @@
               [image]="data.playerImg"
               shape="circle"
               *ngIf="column.field.includes('Name') && data.playerImg"
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             <ng-container *ngIf="column.field === 'skaterFullName'"
               >{{ data.first_name + ' ' + data.last_name }}
@@ -102,6 +103,7 @@
               [image]="data.playerImg"
               shape="circle"
               *ngIf="column.field.includes('Name') && data.playerImg"
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             <ng-container *ngIf="column.field === 'skaterFullName'"
               >{{ data.first_name + ' ' + data.last_name }}
@@ -121,6 +123,7 @@
         [image]="goalieStats['playerImg']"
         shape="circle"
         size="xlarge"
+        [style]="{ 'background-color': 'white' }"
       ></p-avatar>
       <div>
         <div class="text-xl font-light">

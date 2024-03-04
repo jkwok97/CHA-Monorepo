@@ -75,6 +75,7 @@
               [image]="data.playerImg"
               shape="circle"
               *ngIf="column.field.includes('Name') && data.playerImg"
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             <ng-container *ngIf="column.field === 'pointsPerGame'"
               >{{ data[column.field].toFixed(2) }}
@@ -115,6 +116,7 @@
               [image]="data.playerImg"
               shape="circle"
               *ngIf="column.field.includes('Name') && data.playerImg"
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             <ng-container *ngIf="column.field === 'pointsPerGame'"
               >{{ data[column.field].toFixed(2) }}
@@ -147,6 +149,7 @@
         [image]="playerStats['playerImg']"
         shape="circle"
         size="xlarge"
+        [style]="{ 'background-color': 'white' }"
       ></p-avatar>
       <div>
         <div class="text-xl font-light">

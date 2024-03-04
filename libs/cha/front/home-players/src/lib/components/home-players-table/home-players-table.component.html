@@ -98,6 +98,7 @@
               *ngIf="
                 column.field.includes('full_name') && data.player_id.nhl_id
               "
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             <ng-container>{{ data[column.field] }}</ng-container>
             <ng-container *ngIf="column.field === 'action'">

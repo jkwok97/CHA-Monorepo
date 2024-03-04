@@ -111,6 +111,7 @@
               shape="circle"
               *ngIf="column.field === 'player' && data.playerImg"
               (onImageError)="onImageError($event)"
+              [style]="{ 'background-color': 'white' }"
             ></p-avatar>
             {{ data[column.field] }}
           </div>

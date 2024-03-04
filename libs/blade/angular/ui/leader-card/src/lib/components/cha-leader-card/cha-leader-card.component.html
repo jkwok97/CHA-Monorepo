@@ -20,6 +20,7 @@
           [src]="getPlayerPicture()"
           #avatar
           (error)="onImageError($event)"
+          [style]="{ 'background-color': 'white' }"
         />
         <p-avatar
           [image]="getTeamPicture()"
