@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable()
 export class ApiPlayerNhlStatsService {
@@ -35,7 +35,8 @@ export class ApiPlayerNhlStatsService {
             response.data.seasonTotals.find(
               (findSeason) => findSeason.season === Number(playingYear)
             ).points
-        )
+        ),
+        tap(() => console.log)
       );
 
     return stats;
