@@ -6791,6 +6791,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const stats = await this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data));
+        stats.subscribe((v) => console.log(v));
         return stats;
     }
     async getLastSeasonNhlStats(pointsLeaders) {

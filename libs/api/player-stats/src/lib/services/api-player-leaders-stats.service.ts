@@ -383,6 +383,8 @@ export class ApiPlayerLeadersStatsService {
       .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(map((response) => response.data));
 
+    stats.subscribe((v) => console.log(v));
+
     return stats;
   }
 
