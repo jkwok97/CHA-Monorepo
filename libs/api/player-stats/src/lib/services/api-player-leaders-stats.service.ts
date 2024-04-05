@@ -394,7 +394,9 @@ export class ApiPlayerLeadersStatsService {
       pointsLeaders.map(async (leader) => ({
         ...leader,
         nhlPoints: await Promise.resolve(
-          this.getNhlStatByPlayerId(leader.player_id.nhl_id)
+          (
+            await this.getNhlStatByPlayerId(leader.player_id.nhl_id)
+          ).pipe(map((response) => response))
         ),
       }))
     );

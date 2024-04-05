@@ -6798,7 +6798,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
     async getLastSeasonNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({
             ...leader,
-            nhlPoints: await Promise.resolve(this.getNhlStatByPlayerId(leader.player_id.nhl_id)),
+            nhlPoints: await Promise.resolve((await this.getNhlStatByPlayerId(leader.player_id.nhl_id)).pipe((0, rxjs_1.map)((response) => response))),
         })));
     }
     async getAssistLeaders(season, seasonType) {
