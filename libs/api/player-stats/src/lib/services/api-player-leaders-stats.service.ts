@@ -373,13 +373,21 @@ export class ApiPlayerLeadersStatsService {
   }
 
   private async getLastSeasonNhlStats(pointsLeaders) {
-    return await Promise.all(
+    await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
         nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(
           Number(leader.player_id.nhl_id),
           '20222023'
         ),
+      }))
+    );
+
+    return await Promise.all(
+      pointsLeaders.map(async (leader) => ({
+        ...leader,
+        nhlPoints: leader.nhlPoints.find((stat) => stat.season === 20222023)
+          .points,
       }))
     );
   }
