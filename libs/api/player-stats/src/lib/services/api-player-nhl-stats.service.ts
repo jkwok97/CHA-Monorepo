@@ -33,7 +33,7 @@ export class ApiPlayerNhlStatsService {
         map(
           (response) =>
             response.data.seasonTotals.find(
-              (findSeason) => findSeason.season === playingYear
+              (findSeason) => findSeason.season === Number(playingYear)
             ).points
         )
       );

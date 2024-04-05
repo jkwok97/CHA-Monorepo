@@ -7328,7 +7328,7 @@ let ApiPlayerNhlStatsService = exports.ApiPlayerNhlStatsService = class ApiPlaye
     getNhlPlayerPointsByPlayerId(playerId, playingYear) {
         const stats = this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
-            .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals.find((findSeason) => findSeason.season === playingYear).points));
+            .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals.find((findSeason) => findSeason.season === Number(playingYear)).points));
         return stats;
     }
 };
