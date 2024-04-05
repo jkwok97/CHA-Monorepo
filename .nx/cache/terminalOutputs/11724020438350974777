@@ -1,0 +1,99 @@
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 400 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (11741a38fad2c8d1)
+[1m[31mDebugger listening on ws://localhost:9229/d1907916-0fab-4450-a5d5-917bcc3856cd[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/d1907916-0fab-4450-a5d5-917bcc3856cd[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 20928  - [39m[31m04/05/2024, 11:31:29 AM [31m  ERROR[39m[31m [38;5;3m[ExceptionHandler] [39m[31m[31mNest can't resolve dependencies of the ApiPlayerNhlStatsService (?). Please make sure that the argument HttpService at index [0] is available in the ApiPlayerStatsModule context.[39m[22m
+[1m[31m[39m[22m
+[1m[31mPotential solutions:[39m[22m
+[1m[31m- Is ApiPlayerStatsModule a valid NestJS module?[39m[22m
+[1m[31m- If HttpService is a provider, is it part of the current ApiPlayerStatsModule?[39m[22m
+[1m[31m- If HttpService is exported from a separate @Module, is that module imported within ApiPlayerStatsModule?[39m[22m
+[1m[31m  @Module({[39m[22m
+[1m[31m    imports: [ /* the Module containing HttpService */ ][39m[22m
+[1m[31m  })[39m[22m
+[1m[31m[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mError: Nest can't resolve dependencies of the ApiPlayerNhlStatsService (?). Please make sure that the argument HttpService at index [0] is available in the ApiPlayerStatsModule context.[39m[22m
+[1m[31m[39m[22m
+[1m[31mPotential solutions:[39m[22m
+[1m[31m- Is ApiPlayerStatsModule a valid NestJS module?[39m[22m
+[1m[31m- If HttpService is a provider, is it part of the current ApiPlayerStatsModule?[39m[22m
+[1m[31m- If HttpService is exported from a separate @Module, is that module imported within ApiPlayerStatsModule?[39m[22m
+[1m[31m  @Module({[39m[22m
+[1m[31m    imports: [ /* the Module containing HttpService */ ][39m[22m
+[1m[31m  })[39m[22m
+[1m[31m[39m[22m
+[1m[31m    at Injector.lookupComponentInParentModules (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\injector.js:247:19)[39m[22m
+[1m[31m    at Injector.resolveComponentInstance (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\injector.js:200:33)[39m[22m
+[1m[31m    at resolveParam (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\injector.js:120:38)[39m[22m
+[1m[31m    at async Promise.all (index 0)[39m[22m
+[1m[31m    at Injector.resolveConstructorParams (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\injector.js:135:27)[39m[22m
+[1m[31m    at Injector.loadInstance (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\injector.js:61:13)[39m[22m
+[1m[31m    at Injector.loadProvider (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\injector.js:88:9)[39m[22m
+[1m[31m    at C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\instance-loader.js:56:13[39m[22m
+[1m[31m    at async Promise.all (index 7)[39m[22m
+[1m[31m    at InstanceLoader.createInstancesOfProviders (C:\Users\JeffKwok\Desktop\Tutorials\cha-hockey\node_modules\@nestjs\core\injector\instance-loader.js:55:9)[39m[22m
+[1m[31m[39m[22m
+
+[36m>[39m [7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m
+
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 400 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./libs/api/player-stats/src/lib/api-player-stats.module.ts:[32m[1m15:69[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'HttpModule'.
+  [0m [90m 13 |[39m[0m
+  [0m [90m 14 |[39m [33m@[39m[33mModule[39m({[0m
+  [0m[31m[1m>[22m[39m[90m 15 |[39m   imports[33m:[39m [[33mTypeOrmModule[39m[33m.[39mforFeature([[33mPlayers_Stats_V2[39m[33m,[39m [33mTeams_V2[39m])[33m,[39m [33mHttpModule[39m][33m,[39m[0m
+  [0m [90m    |[39m                                                                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 16 |[39m   controllers[33m:[39m [[33mPlayerStatsController[39m][33m,[39m[0m
+  [0m [90m 17 |[39m   providers[33m:[39m [[0m
+  [0m [90m 18 |[39m     [33mApiPlayerStatsService[39m[33m,[39m[0m
+
+webpack compiled with [1m[31m1 error[39m[22m (5c63132c4fc65d05)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 400 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+
+[1m[31mERROR[39m[22m in [1m./libs/api/player-stats/src/lib/api-player-stats.module.ts:[32m[1m16:69[22m[39m[1m[39m[22m
+[90mTS2304: [39mCannot find name 'HttpModule'.
+  [0m [90m 14 |[39m[0m
+  [0m [90m 15 |[39m [33m@[39m[33mModule[39m({[0m
+  [0m[31m[1m>[22m[39m[90m 16 |[39m   imports[33m:[39m [[33mTypeOrmModule[39m[33m.[39mforFeature([[33mPlayers_Stats_V2[39m[33m,[39m [33mTeams_V2[39m])[33m,[39m [33mHttpModule[39m][33m,[39m[0m
+  [0m [90m    |[39m                                                                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[0m
+  [0m [90m 17 |[39m   controllers[33m:[39m [[33mPlayerStatsController[39m][33m,[39m[0m
+  [0m [90m 18 |[39m   providers[33m:[39m [[0m
+  [0m [90m 19 |[39m     [33mApiPlayerStatsService[39m[33m,[39m[0m
+
+webpack compiled with [1m[31m1 error[39m[22m (8304cf63c35f5c33)
+[1m[31mBuild failed, waiting for changes to restart...[39m[22m
+chunk (runtime: main) [1m[32mmain.js[39m[22m (main) 400 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+webpack compiled [1m[32msuccessfully[39m[22m (75c78f7d34c61f21)
+[1m[31mDebugger listening on ws://localhost:9229/1d396fd1-26fd-47b9-8866-c9a2737aa88b[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/1d396fd1-26fd-47b9-8866-c9a2737aa88b[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 24300  - [39m[31m04/05/2024, 11:33:03 AM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (1)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mAggregateError: [39m[22m
+[1m[31m    at internalConnectMultiple (node:net:1114:18)[39m[22m
+[1m[31m    at afterConnectMultiple (node:net:1667:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 24300  - [39m[31m04/05/2024, 11:33:06 AM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (2)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mAggregateError: [39m[22m
+[1m[31m    at internalConnectMultiple (node:net:1114:18)[39m[22m
+[1m[31m    at afterConnectMultiple (node:net:1667:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 24300  - [39m[31m04/05/2024, 11:33:09 AM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (3)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mAggregateError: [39m[22m
+[1m[31m    at internalConnectMultiple (node:net:1114:18)[39m[22m
+[1m[31m    at afterConnectMultiple (node:net:1667:5)[39m[22m
+[1m[31m[39m[22m
+[1m[31m[31m[Nest] 24300  - [39m[31m04/05/2024, 11:33:12 AM [31m  ERROR[39m[31m [38;5;3m[TypeOrmModule] [39m[31m[31mUnable to connect to the database. Retrying (4)...[39m[31m[39m[22m
+[1m[31m[39m[22m
+[1m[31mAggregateError: [39m[22m
+[1m[31m    at internalConnectMultiple (node:net:1114:18)[39m[22m
+[1m[31m    at afterConnectMultiple (node:net:1667:5)[39m[22m
+[1m[31m[39m[22m
