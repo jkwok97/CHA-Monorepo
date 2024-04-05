@@ -6505,10 +6505,10 @@ exports.PlayerStatsController = PlayerStatsController = tslib_1.__decorate([
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
 tslib_1.__exportStar(__webpack_require__(192), exports);
+tslib_1.__exportStar(__webpack_require__(193), exports);
 tslib_1.__exportStar(__webpack_require__(194), exports);
 tslib_1.__exportStar(__webpack_require__(195), exports);
 tslib_1.__exportStar(__webpack_require__(196), exports);
-tslib_1.__exportStar(__webpack_require__(193), exports);
 
 
 /***/ }),
@@ -6524,13 +6524,14 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-const api_player_nhl_stats_service_1 = __webpack_require__(193);
 const rxjs_1 = __webpack_require__(168);
+const axios_1 = __webpack_require__(163);
 let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
-    constructor(repo, teamInfoRepo, nhlStatsService) {
+    constructor(repo, teamInfoRepo, httpService) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
-        this.nhlStatsService = nhlStatsService;
+        this.httpService = httpService;
+        this.nhlAPI = 'https://api-web.nhle.com/v1/player';
     }
     async getPlayerStatsLeaders(season, seasonType, minGamesStats) {
         const hitsLeaders = await this.getHitsLeaders(season, seasonType);
@@ -6789,23 +6790,16 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         return pointsLeaderWithNhlStats;
     }
     async getNhlStatByPlayerId(playerId) {
-        const stat = await this.nhlStatsService
-            .getNhlPlayerPointsByPlayerId(Number(playerId), '20222023')
+        const stats = this.httpService
+            .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data));
-        return stat;
+        return stats;
     }
     async getLastSeasonNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({
             ...leader,
-            nhlPoints: await this.getNhlStatByPlayerId(leader.player_id.nhl_id),
+            nhlPoints: (await this.getNhlStatByPlayerId(leader.player_id.nhl_id)).pipe((0, rxjs_1.map)((response) => response)),
         })));
-        // return await Promise.all(
-        //   pointsLeaders.map(async (leader) => ({
-        //     ...leader,
-        //     nhlPoints: leader.nhlPoints.find((stat) => stat.season === 20222023)
-        //       .points,
-        //   }))
-        // );
     }
     async getAssistLeaders(season, seasonType) {
         const assistLeaders = await this.repo.find({
@@ -7306,49 +7300,12 @@ exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService = tslib_1.__
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof api_player_nhl_stats_service_1.ApiPlayerNhlStatsService !== "undefined" && api_player_nhl_stats_service_1.ApiPlayerNhlStatsService) === "function" ? _c : Object])
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _c : Object])
 ], ApiPlayerLeadersStatsService);
 
 
 /***/ }),
 /* 193 */
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApiPlayerNhlStatsService = void 0;
-const tslib_1 = __webpack_require__(5);
-const axios_1 = __webpack_require__(163);
-const common_1 = __webpack_require__(1);
-const rxjs_1 = __webpack_require__(168);
-let ApiPlayerNhlStatsService = exports.ApiPlayerNhlStatsService = class ApiPlayerNhlStatsService {
-    constructor(httpService) {
-        this.httpService = httpService;
-        this.nhlAPI = 'https://api-web.nhle.com/v1/player';
-        this.sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
-    }
-    getNhlSummaryFromSportsnet(season, seasonType) {
-        const leaders = this.httpService
-            .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
-        return leaders;
-    }
-    getNhlPlayerPointsByPlayerId(playerId, playingYear) {
-        const stats = this.httpService
-            .get(`${this.nhlAPI}/${playerId}/landing`)
-            .pipe((0, rxjs_1.map)((response) => response.data));
-        return stats;
-    }
-};
-exports.ApiPlayerNhlStatsService = ApiPlayerNhlStatsService = tslib_1.__decorate([
-    (0, common_1.Injectable)(),
-    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
-], ApiPlayerNhlStatsService);
-
-
-/***/ }),
-/* 194 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7548,7 +7505,7 @@ exports.ApiPlayerStatsService = ApiPlayerStatsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 195 */
+/* 194 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7726,7 +7683,7 @@ exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService = tslib_1.__
 
 
 /***/ }),
-/* 196 */
+/* 195 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7935,6 +7892,43 @@ exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService = tslib_1.__decora
     tslib_1.__param(2, (0, typeorm_1.InjectDataSource)()),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _a : Object, typeof (_b = typeof typeorm_2.Repository !== "undefined" && typeorm_2.Repository) === "function" ? _b : Object, typeof (_c = typeof typeorm_2.DataSource !== "undefined" && typeorm_2.DataSource) === "function" ? _c : Object])
 ], ApiUserPlayerStatsService);
+
+
+/***/ }),
+/* 196 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApiPlayerNhlStatsService = void 0;
+const tslib_1 = __webpack_require__(5);
+const axios_1 = __webpack_require__(163);
+const common_1 = __webpack_require__(1);
+const rxjs_1 = __webpack_require__(168);
+let ApiPlayerNhlStatsService = exports.ApiPlayerNhlStatsService = class ApiPlayerNhlStatsService {
+    constructor(httpService) {
+        this.httpService = httpService;
+        this.nhlAPI = 'https://api-web.nhle.com/v1/player';
+        this.sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
+    }
+    getNhlSummaryFromSportsnet(season, seasonType) {
+        const leaders = this.httpService
+            .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
+            .pipe((0, rxjs_1.map)((response) => response.data));
+        return leaders;
+    }
+    getNhlPlayerPointsByPlayerId(playerId, playingYear) {
+        const stats = this.httpService
+            .get(`${this.nhlAPI}/${playerId}/landing`)
+            .pipe((0, rxjs_1.map)((response) => response.data));
+        return stats;
+    }
+};
+exports.ApiPlayerNhlStatsService = ApiPlayerNhlStatsService = tslib_1.__decorate([
+    (0, common_1.Injectable)(),
+    tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
+], ApiPlayerNhlStatsService);
 
 
 /***/ }),

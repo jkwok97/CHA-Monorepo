@@ -6,8 +6,8 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
-import { ApiPlayerNhlStatsService } from './api-player-nhl-stats.service';
 import { map, tap } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -16,8 +16,10 @@ export class ApiPlayerLeadersStatsService {
     private repo: Repository<Players_Stats_V2>,
     @InjectRepository(Teams_V2)
     private teamInfoRepo: Repository<Teams_V2>,
-    private nhlStatsService: ApiPlayerNhlStatsService
+    private httpService: HttpService
   ) {}
+
+  nhlAPI = 'https://api-web.nhle.com/v1/player';
 
   async getPlayerStatsLeaders(
     season: string,
@@ -374,28 +376,22 @@ export class ApiPlayerLeadersStatsService {
   }
 
   private async getNhlStatByPlayerId(playerId) {
-    const stat = await this.nhlStatsService
-      .getNhlPlayerPointsByPlayerId(Number(playerId), '20222023')
+    const stats = this.httpService
+      .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(map((response) => response.data));
-      
-    return stat;
+
+    return stats;
   }
 
   private async getLastSeasonNhlStats(pointsLeaders) {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        nhlPoints: await this.getNhlStatByPlayerId(leader.player_id.nhl_id),
+        nhlPoints: (
+          await this.getNhlStatByPlayerId(leader.player_id.nhl_id)
+        ).pipe(map((response) => response)),
       }))
     );
-
-    // return await Promise.all(
-    //   pointsLeaders.map(async (leader) => ({
-    //     ...leader,
-    //     nhlPoints: leader.nhlPoints.find((stat) => stat.season === 20222023)
-    //       .points,
-    //   }))
-    // );
   }
 
   private async getAssistLeaders(
