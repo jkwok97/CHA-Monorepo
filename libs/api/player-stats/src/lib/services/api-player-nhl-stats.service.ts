@@ -38,8 +38,6 @@ export class ApiPlayerNhlStatsService {
         )
       );
 
-    console.log(stats);
-
     return stats;
   }
 }
