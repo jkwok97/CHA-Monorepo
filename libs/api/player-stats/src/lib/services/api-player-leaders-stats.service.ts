@@ -355,6 +355,7 @@ export class ApiPlayerLeadersStatsService {
       order: {
         points: 'DESC',
       },
+      take: 300,
     });
 
     await chaPlayerPoints.map(async (player) => {

@@ -6785,6 +6785,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             order: {
                 points: 'DESC',
             },
+            take: 300,
         });
         await chaPlayerPoints.map(async (player) => {
             return {

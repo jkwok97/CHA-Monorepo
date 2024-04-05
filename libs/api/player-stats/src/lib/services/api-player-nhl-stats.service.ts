@@ -27,8 +27,6 @@ export class ApiPlayerNhlStatsService {
     return leaders;
   }
 
- 
-
   getNhlPlayerPointsByPlayerId(
     playerId: number,
     playingYear: string
