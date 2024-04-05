@@ -32,7 +32,7 @@ export class ApiPlayerNhlStatsService {
       .pipe(
         map(
           (response) =>
-            response.data.featuredStats.seasonTotals.find(
+            response.data.seasonTotals.find(
               (findSeason) => findSeason.season === playingYear
             ).points
         )

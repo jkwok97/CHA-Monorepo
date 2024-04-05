@@ -6788,7 +6788,12 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             },
             take: 300,
         });
-        return await chaPlayerPoints.map(async (player) => {
+        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(chaPlayerPoints);
+        const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPointsLeadersWithTeamInfo);
+        return pointsLeaderWithNhlStats;
+    }
+    async getLastSeasonNhlStats(pointsLeaders) {
+        return await pointsLeaders.map(async (player) => {
             return {
                 ...player,
                 nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(Number(player.player_id.nhl_id), '20222023'),
@@ -7325,7 +7330,7 @@ let ApiPlayerNhlStatsService = exports.ApiPlayerNhlStatsService = class ApiPlaye
     getNhlPlayerPointsByPlayerId(playerId, playingYear) {
         const stats = this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
-            .pipe((0, rxjs_1.map)((response) => response.data.featuredStats.seasonTotals.find((findSeason) => findSeason.season === playingYear).points));
+            .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals.find((findSeason) => findSeason.season === playingYear).points));
         console.log(stats);
         return stats;
     }

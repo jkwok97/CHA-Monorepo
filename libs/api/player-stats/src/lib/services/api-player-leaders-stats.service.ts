@@ -361,7 +361,19 @@ export class ApiPlayerLeadersStatsService {
       take: 300,
     });
 
-    return await chaPlayerPoints.map(async (player) => {
+    const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(
+      chaPlayerPoints
+    );
+
+    const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(
+      chaPointsLeadersWithTeamInfo
+    );
+
+    return pointsLeaderWithNhlStats;
+  }
+
+  private async getLastSeasonNhlStats(pointsLeaders) {
+    return await pointsLeaders.map(async (player) => {
       return {
         ...player,
         nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(
