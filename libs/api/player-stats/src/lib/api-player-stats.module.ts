@@ -7,7 +7,6 @@ import { PlayerStatsMiddleware } from './middlewares';
 import {
   ApiPlayerAllTimeStatsService,
   ApiPlayerLeadersStatsService,
-  ApiPlayerNhlStatsService,
   ApiPlayerStatsService,
   ApiUserPlayerStatsService,
 } from './services';
@@ -20,7 +19,6 @@ import {
     ApiPlayerLeadersStatsService,
     ApiPlayerAllTimeStatsService,
     ApiUserPlayerStatsService,
-    ApiPlayerNhlStatsService,
   ],
 })
 export class ApiPlayerStatsModule {

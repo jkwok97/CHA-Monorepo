@@ -383,6 +383,8 @@ export class ApiPlayerLeadersStatsService {
       .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(map((response) => response.data));
 
+    console.log(stats);
+
     return stats;
   }
 
@@ -390,9 +392,7 @@ export class ApiPlayerLeadersStatsService {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        nhlPoints: this.getNhlStatByPlayerId(leader.player_id.nhl_id).pipe(
-          map((response) => response)
-        ),
+        nhlPoints: this.getNhlStatByPlayerId(leader.player_id.nhl_id)
       }))
     );
   }
