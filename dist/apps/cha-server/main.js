@@ -6781,17 +6781,18 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             order: {
                 points: 'DESC',
             },
-            take: 300,
+            take: 1,
         });
-        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(chaPlayerPoints);
-        const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPointsLeadersWithTeamInfo);
-        return pointsLeaderWithNhlStats;
+        const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPlayerPoints);
+        console.log(pointsLeaderWithNhlStats);
+        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(pointsLeaderWithNhlStats);
+        return chaPointsLeadersWithTeamInfo;
     }
     async getNhlStatByPlayerId(playerId) {
+        console.log(playerId);
         const stats = await this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data));
-        stats.subscribe((v) => console.log(v));
         return stats;
     }
     async getLastSeasonNhlStats(pointsLeaders) {

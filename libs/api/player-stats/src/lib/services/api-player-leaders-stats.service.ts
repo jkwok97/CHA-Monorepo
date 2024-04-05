@@ -362,28 +362,29 @@ export class ApiPlayerLeadersStatsService {
       order: {
         points: 'DESC',
       },
-      take: 300,
+      take: 1,
     });
 
-    const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(
+    const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(
       chaPlayerPoints
     );
 
-    const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(
-      chaPointsLeadersWithTeamInfo
+    console.log(pointsLeaderWithNhlStats);
+
+    const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(
+      pointsLeaderWithNhlStats
     );
 
-    return pointsLeaderWithNhlStats;
+    return chaPointsLeadersWithTeamInfo;
   }
 
   private async getNhlStatByPlayerId(
     playerId
   ): Promise<Observable<AxiosResponse<any[], any>>> {
+    console.log(playerId);
     const stats = await this.httpService
       .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(map((response) => response.data));
-
-    stats.subscribe((v) => console.log(v));
 
     return stats;
   }
