@@ -6585,7 +6585,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             shooting: shootingLeaders,
             passing: passingLeaders,
             corners: cornersLeaders,
-            pointsAboveExpected: pointsAboveExpectedLeaders
+            pointsAboveExpected: pointsAboveExpectedLeaders,
         };
     }
     async getCornersLeaders(season, seasonType, minGamesStats) {
@@ -6788,13 +6788,12 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             },
             take: 300,
         });
-        await chaPlayerPoints.map(async (player) => {
+        return await chaPlayerPoints.map(async (player) => {
             return {
                 ...player,
-                nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(Number(player.player_id.nhl_id), '20222023')
+                nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(Number(player.player_id.nhl_id), '20222023'),
             };
         });
-        return chaPlayerPoints;
     }
     async getAssistLeaders(season, seasonType) {
         const assistLeaders = await this.repo.find({
@@ -7327,6 +7326,7 @@ let ApiPlayerNhlStatsService = exports.ApiPlayerNhlStatsService = class ApiPlaye
         const stats = this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data.featuredStats.seasonTotals.find((findSeason) => findSeason.season === playingYear).points));
+        console.log(stats);
         return stats;
     }
 };

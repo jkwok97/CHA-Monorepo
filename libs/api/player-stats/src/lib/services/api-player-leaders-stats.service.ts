@@ -25,7 +25,9 @@ export class ApiPlayerLeadersStatsService {
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
-    const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(season);
+    const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
+      season
+    );
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
     const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(
       season,
@@ -107,7 +109,8 @@ export class ApiPlayerLeadersStatsService {
       shooting: shootingLeaders as unknown as StatPlayerLeaderDto[],
       passing: passingLeaders as unknown as StatPlayerLeaderDto[],
       corners: cornersLeaders as unknown as StatPlayerLeaderDto[],
-      pointsAboveExpected: pointsAboveExpectedLeaders as unknown as StatPlayerLeaderDto[]
+      pointsAboveExpected:
+        pointsAboveExpectedLeaders as unknown as StatPlayerLeaderDto[],
     };
   }
 
@@ -358,14 +361,15 @@ export class ApiPlayerLeadersStatsService {
       take: 300,
     });
 
-    await chaPlayerPoints.map(async (player) => {
+    return await chaPlayerPoints.map(async (player) => {
       return {
         ...player,
-        nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(Number(player.player_id.nhl_id), '20222023')
-      }
-    })
-
-    return chaPlayerPoints;
+        nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(
+          Number(player.player_id.nhl_id),
+          '20222023'
+        ),
+      };
+    });
   }
 
   private async getAssistLeaders(
