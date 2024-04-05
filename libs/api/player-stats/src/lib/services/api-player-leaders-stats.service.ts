@@ -382,12 +382,7 @@ export class ApiPlayerLeadersStatsService {
             Number(leader.player_id.nhl_id),
             '20222023'
           )
-          .pipe(
-            tap(console.log),
-            map((seasonTotals) =>
-              seasonTotals.find((playingSeason) => playingSeason === 20222023)
-            )
-          ),
+          .pipe(map((response) => response.data)),
       }))
     );
 
