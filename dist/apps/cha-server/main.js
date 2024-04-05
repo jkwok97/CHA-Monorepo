@@ -6294,6 +6294,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerStatsModule = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
+const axios_1 = __webpack_require__(163);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(189);
@@ -6306,7 +6307,7 @@ let ApiPlayerStatsModule = exports.ApiPlayerStatsModule = class ApiPlayerStatsMo
 };
 exports.ApiPlayerStatsModule = ApiPlayerStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2]), axios_1.HttpModule],
         controllers: [controllers_1.PlayerStatsController],
         providers: [
             services_1.ApiPlayerStatsService,

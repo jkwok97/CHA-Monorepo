@@ -1,4 +1,5 @@
 import { Players_Stats_V2, Teams_V2 } from '@api/entities';
+import { HttpModule } from '@nestjs/axios';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PlayerStatsController } from './controllers';
@@ -12,7 +13,7 @@ import {
 } from './services';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Players_Stats_V2, Teams_V2])],
+  imports: [TypeOrmModule.forFeature([Players_Stats_V2, Teams_V2]), HttpModule],
   controllers: [PlayerStatsController],
   providers: [
     ApiPlayerStatsService,
