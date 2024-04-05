@@ -7,6 +7,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
 import { ApiPlayerNhlStatsService } from './api-player-nhl-stats.service';
+import { map, tap } from 'rxjs';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -376,10 +377,17 @@ export class ApiPlayerLeadersStatsService {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(
-          Number(leader.player_id.nhl_id),
-          '20222023'
-        ),
+        nhlPoints: await this.nhlStatsService
+          .getNhlPlayerPointsByPlayerId(
+            Number(leader.player_id.nhl_id),
+            '20222023'
+          )
+          .pipe(
+            tap(console.log),
+            map((seasonTotals) =>
+              seasonTotals.find((playingSeason) => playingSeason === 20222023)
+            )
+          ),
       }))
     );
 

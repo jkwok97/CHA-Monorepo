@@ -5656,7 +5656,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
     getNhlRookieLeaders(playerType, statType, season) {
         const leaders = this.httpService
             .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.tap)(console.log), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
         return leaders;
     }
     getNhlDefenseLeaders(playerType, statType, season) {
@@ -5675,7 +5675,6 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         const leaders = this.httpService
             .get(`${this.nhlComSummary}/${player}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${statsType}%22,%22direction%22:%22${sort}%22%7D,%7B%22property%22:%22gamesPlayed%22,%22direction%22:%22ASC%22%7D,%7B%22property%22:%22playerId%22,%22direction%22:%22ASC%22%7D%5D&start=${start}&limit=${pageSize}&factCayenneExp=gamesPlayed%3E=1&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${season}%20and%20seasonId%3E=${season}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoRookies(response.data, season)));
-        console.log(leaders);
         return leaders;
     }
     getNhlPlayerStatsByPlayerId(playerId, season) {
@@ -5713,7 +5712,6 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         const string1 = season.slice(0, 4);
         const string2 = season.slice(6, 8);
         const newSeasonString = `${string1}-${string2}`;
-        console.log(newSeasonString);
         return await Promise.all(array.map(async (item) => ({
             ...item,
             chaPlayerTeam: await this.getChaTeam(item.playerId, newSeasonString, 'p'),
@@ -5802,10 +5800,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
                 },
             });
         }
-        console.log("line 320", id);
-        console.log("line 321", playerStatTeam);
         const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
-        console.log("line 325", playerStatTeamWithInfo);
         return playerStatTeamWithInfo;
     }
     async getChaTeamInfo(playerStatTeam) {
@@ -6530,6 +6525,7 @@ const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
 const api_player_nhl_stats_service_1 = __webpack_require__(193);
+const rxjs_1 = __webpack_require__(168);
 let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
     constructor(repo, teamInfoRepo, nhlStatsService) {
         this.repo = repo;
@@ -6795,7 +6791,9 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
     async getLastSeasonNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({
             ...leader,
-            nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(Number(leader.player_id.nhl_id), '20222023'),
+            nhlPoints: await this.nhlStatsService
+                .getNhlPlayerPointsByPlayerId(Number(leader.player_id.nhl_id), '20222023')
+                .pipe((0, rxjs_1.tap)(console.log), (0, rxjs_1.map)((seasonTotals) => seasonTotals.find((playingSeason) => playingSeason === 20222023))),
         })));
         // return await Promise.all(
         //   pointsLeaders.map(async (leader) => ({
@@ -7333,9 +7331,11 @@ let ApiPlayerNhlStatsService = exports.ApiPlayerNhlStatsService = class ApiPlaye
         return leaders;
     }
     getNhlPlayerPointsByPlayerId(playerId, playingYear) {
+        console.log(playerId);
         const stats = this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals));
+        console.log(stats);
         return stats;
     }
 };

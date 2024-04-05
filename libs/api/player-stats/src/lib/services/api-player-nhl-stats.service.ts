@@ -27,9 +27,12 @@ export class ApiPlayerNhlStatsService {
     playerId: number,
     playingYear: string
   ): Observable<AxiosResponse<any[]>> {
+    console.log(playerId);
     const stats = this.httpService
       .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(map((response) => response.data.seasonTotals));
+
+    console.log(stats);
 
     return stats;
   }

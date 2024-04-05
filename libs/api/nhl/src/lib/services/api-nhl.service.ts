@@ -3,7 +3,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AxiosResponse } from 'axios';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -70,7 +70,6 @@ export class ApiNhlService {
       )
       .pipe(
         map((response) => response.data),
-        tap(console.log),
         switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
       );
 
@@ -130,8 +129,6 @@ export class ApiNhlService {
           this.setChaTeamInfoRookies(response.data, season)
         )
       );
-
-    console.log(leaders);
 
     return leaders;
   }
@@ -211,8 +208,6 @@ export class ApiNhlService {
     const string2 = season.slice(6, 8);
 
     const newSeasonString = `${string1}-${string2}`;
-
-    console.log(newSeasonString);
 
     return await Promise.all(
       array.map(async (item) => ({
@@ -313,12 +308,7 @@ export class ApiNhlService {
       });
     }
 
-    console.log("line 320", id);
-    console.log("line 321", playerStatTeam);
-
     const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
-
-    console.log("line 325", playerStatTeamWithInfo);
 
     return playerStatTeamWithInfo;
   }
