@@ -6789,7 +6789,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPointsLeadersWithTeamInfo);
         return pointsLeaderWithNhlStats;
     }
-    async getNhlStatByPlayerId(playerId) {
+    getNhlStatByPlayerId(playerId) {
         const stats = this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
             .pipe((0, rxjs_1.map)((response) => response.data));
@@ -6798,7 +6798,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
     async getLastSeasonNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({
             ...leader,
-            nhlPoints: (await this.getNhlStatByPlayerId(leader.player_id.nhl_id)).pipe((0, rxjs_1.map)((response) => response)),
+            nhlPoints: this.getNhlStatByPlayerId(leader.player_id.nhl_id).pipe((0, rxjs_1.map)((response) => response)),
         })));
     }
     async getAssistLeaders(season, seasonType) {

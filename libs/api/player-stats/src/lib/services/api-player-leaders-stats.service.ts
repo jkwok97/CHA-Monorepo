@@ -6,8 +6,9 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
-import { map, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -375,7 +376,9 @@ export class ApiPlayerLeadersStatsService {
     return pointsLeaderWithNhlStats;
   }
 
-  private async getNhlStatByPlayerId(playerId) {
+  private getNhlStatByPlayerId(
+    playerId
+  ): Observable<AxiosResponse<any[], any>> {
     const stats = this.httpService
       .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(map((response) => response.data));
@@ -387,9 +390,9 @@ export class ApiPlayerLeadersStatsService {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        nhlPoints: (
-          await this.getNhlStatByPlayerId(leader.player_id.nhl_id)
-        ).pipe(map((response) => response)),
+        nhlPoints: this.getNhlStatByPlayerId(leader.player_id.nhl_id).pipe(
+          map((response) => response)
+        ),
       }))
     );
   }
