@@ -373,7 +373,7 @@ export class ApiPlayerLeadersStatsService {
   }
 
   private async getLastSeasonNhlStats(pointsLeaders) {
-    await Promise.all(
+    return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
         nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(
@@ -383,13 +383,13 @@ export class ApiPlayerLeadersStatsService {
       }))
     );
 
-    return await Promise.all(
-      pointsLeaders.map(async (leader) => ({
-        ...leader,
-        nhlPoints: leader.nhlPoints.find((stat) => stat.season === 20222023)
-          .points,
-      }))
-    );
+    // return await Promise.all(
+    //   pointsLeaders.map(async (leader) => ({
+    //     ...leader,
+    //     nhlPoints: leader.nhlPoints.find((stat) => stat.season === 20222023)
+    //       .points,
+    //   }))
+    // );
   }
 
   private async getAssistLeaders(
