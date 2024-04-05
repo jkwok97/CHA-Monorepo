@@ -373,16 +373,19 @@ export class ApiPlayerLeadersStatsService {
     return pointsLeaderWithNhlStats;
   }
 
+  private async getNhlStatByPlayerId(playerId) {
+    const stat = await this.nhlStatsService
+      .getNhlPlayerPointsByPlayerId(Number(playerId), '20222023')
+      .pipe(map((response) => response.data));
+      
+    return stat;
+  }
+
   private async getLastSeasonNhlStats(pointsLeaders) {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        nhlPoints: await this.nhlStatsService
-          .getNhlPlayerPointsByPlayerId(
-            Number(leader.player_id.nhl_id),
-            '20222023'
-          )
-          .pipe(map((response) => response.data)),
+        nhlPoints: await this.getNhlStatByPlayerId(leader.player_id.nhl_id),
       }))
     );
 
