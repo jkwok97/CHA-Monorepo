@@ -5,7 +5,8 @@ import {
 } from '@cha/shared/entities';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, MoreThan, MoreThanOrEqual, Repository } from 'typeorm';
+import { MoreThanOrEqual, Repository } from 'typeorm';
+import { ApiPlayerNhlStatsService } from './api-player-nhl-stats.service';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -13,7 +14,8 @@ export class ApiPlayerLeadersStatsService {
     @InjectRepository(Players_Stats_V2)
     private repo: Repository<Players_Stats_V2>,
     @InjectRepository(Teams_V2)
-    private teamInfoRepo: Repository<Teams_V2>
+    private teamInfoRepo: Repository<Teams_V2>,
+    private nhlStatsService: ApiPlayerNhlStatsService
   ) {}
 
   async getPlayerStatsLeaders(
@@ -23,6 +25,7 @@ export class ApiPlayerLeadersStatsService {
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
+    const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(season);
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
     const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(
       season,
@@ -104,6 +107,7 @@ export class ApiPlayerLeadersStatsService {
       shooting: shootingLeaders as unknown as StatPlayerLeaderDto[],
       passing: passingLeaders as unknown as StatPlayerLeaderDto[],
       corners: cornersLeaders as unknown as StatPlayerLeaderDto[],
+      pointsAboveExpected: pointsAboveExpectedLeaders as unknown as StatPlayerLeaderDto[]
     };
   }
 
@@ -327,6 +331,40 @@ export class ApiPlayerLeadersStatsService {
     const pointsLeadersWithTeamInfo = await this.setTeamInfo(pointsLeaders);
 
     return pointsLeadersWithTeamInfo;
+  }
+
+  private async getPointsAboveExpectedLeaders(season: string) {
+    const chaPlayerPoints = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        points: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: 'Regular',
+      },
+      order: {
+        points: 'DESC',
+      },
+    });
+
+    await chaPlayerPoints.map(async (player) => {
+      return {
+        ...player,
+        nhlPoints: await this.nhlStatsService.getNhlPlayerPointsByPlayerId(Number(player.player_id.nhl_id), '20222023')
+      }
+    })
+
+    return chaPlayerPoints;
   }
 
   private async getAssistLeaders(

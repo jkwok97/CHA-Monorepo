@@ -18,6 +18,7 @@ export interface StatPlayerLeaderDto {
   shooting_pct?: string;
   fo_pct?: string;
   corner_pct?: string;
+  pointsAboveExpected?: string;
   player_id: {
     id: number;
     isgoalie: boolean;

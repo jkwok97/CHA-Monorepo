@@ -104,13 +104,10 @@ export class ApiNhlService {
       )
       .pipe(
         map((response) => response.data),
-        tap(console.log),
         switchMap((response) =>
           this.setChaTeamInfoForSportsnet(response.data, season)
         )
       );
-
-    console.log(leaders);
 
     return leaders;
   }
