@@ -15,6 +15,8 @@ export class StatsPlayersLeadersComponent implements OnInit {
   isLoaded$: Observable<boolean>;
 
   pointsLeaders$: Observable<StatPlayerLeaderDto[]>;
+  pointsAboveExpectedLeaders$: Observable<StatPlayerLeaderDto[]>;
+  pointsBelowExpectedLeaders$: Observable<StatPlayerLeaderDto[]>;
   defenseLeaders$: Observable<StatPlayerLeaderDto[]>;
   defenseGoalLeaders$: Observable<StatPlayerLeaderDto[]>;
   rookieLeaders$: Observable<StatPlayerLeaderDto[]>;
@@ -80,6 +82,10 @@ export class StatsPlayersLeadersComponent implements OnInit {
       this.leagueStatsPlayersFacade.bestPlusMinusLeaders$;
     this.worstPlusMinusLeaders$ =
       this.leagueStatsPlayersFacade.worstPlusMinusLeaders$;
+    this.pointsAboveExpectedLeaders$ =
+      this.leagueStatsPlayersFacade.pointsAboveExpectedLeaders$;
+    this.pointsBelowExpectedLeaders$ =
+      this.leagueStatsPlayersFacade.pointsBelowExpectedLeaders$;
 
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
 

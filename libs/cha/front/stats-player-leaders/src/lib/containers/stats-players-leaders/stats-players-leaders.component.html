@@ -33,6 +33,17 @@
 
         <div class="league-stats-players-section-body">
           <blade-cha-leader-card
+            [leaders]="pointsAboveExpectedLeaders$ | async"
+            [type]="'points above expected'"
+          ></blade-cha-leader-card>
+          <blade-cha-leader-card
+            [leaders]="pointsBelowExpectedLeaders$ | async"
+            [type]="'points below expected'"
+          ></blade-cha-leader-card>
+        </div>
+
+        <div class="league-stats-players-section-body">
+          <blade-cha-leader-card
             [leaders]="goalsLeaders$ | async"
             [type]="'goals'"
           ></blade-cha-leader-card>

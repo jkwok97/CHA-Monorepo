@@ -58,7 +58,15 @@
         <div *ngIf="type === 'goals'">{{ item.goals }}</div>
         <div *ngIf="type === 'defense goals'">{{ item.goals }}</div>
         <div *ngIf="type === 'rookie goals'">{{ item.goals }}</div>
-        <div *ngIf="type.includes('points')">{{ item.points }}</div>
+        <div *ngIf="type.includes('points') && !type.includes('expected')">
+          {{ item.points }}
+        </div>
+        <div *ngIf="type === 'points above expected'">
+          {{ item.pointsAboveExpected }}
+        </div>
+        <div *ngIf="type === 'points below expected'">
+          {{ item.pointsBelowExpected }}
+        </div>
         <div *ngIf="type === 'assists'">{{ item.assists }}</div>
         <div *ngIf="type === 'shots'">{{ item.shots }}</div>
         <div *ngIf="type === 'minutes'">{{ item.minutes_played }}</div>

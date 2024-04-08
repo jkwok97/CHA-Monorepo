@@ -6785,7 +6785,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             },
             take: 500,
         });
-        const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPlayerPoints);
+        const pointsLeaderWithNhlStats = await this.getPointsBelowNhlStats(chaPlayerPoints);
         const topPointsBelowExpectedLeaders = await pointsLeaderWithNhlStats
             .sort((a, b) => a.pointsAboveExpected - b.pointsAboveExpected)
             .slice(0, 10);
@@ -6816,7 +6816,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             },
             take: 500,
         });
-        const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPlayerPoints);
+        const pointsLeaderWithNhlStats = await this.getPointsAboveNhlStats(chaPlayerPoints);
         const topPointsAboveExpectedLeaders = await pointsLeaderWithNhlStats
             .sort((a, b) => b.pointsAboveExpected - a.pointsAboveExpected)
             .slice(0, 10);
@@ -6834,7 +6834,14 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             });
         });
     }
-    async getLastSeasonNhlStats(pointsLeaders) {
+    async getPointsBelowNhlStats(pointsLeaders) {
+        return await Promise.all(pointsLeaders.map(async (leader) => ({
+            ...leader,
+            pointsBelowExpected: await (leader.points -
+                Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id))),
+        })));
+    }
+    async getPointsAboveNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({
             ...leader,
             pointsAboveExpected: await (leader.points -

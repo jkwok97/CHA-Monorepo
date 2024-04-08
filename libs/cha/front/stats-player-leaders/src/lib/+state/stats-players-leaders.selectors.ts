@@ -106,12 +106,25 @@ const selectDefenseLeaders = createSelector(
 
 const selectDefenseGoalLeaders = createSelector(
   selectAllLeaders,
-  (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.defenseGoals : [])
+  (leaders: StatPlayerLeadersDto | null) =>
+    leaders ? leaders.defenseGoals : []
 );
 
 const selectPointsLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.points : [])
+);
+
+const selectPointsAboveExpectedLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) =>
+    leaders ? leaders.pointsAboveExpected : []
+);
+
+const selectPointsBelowExpectedLeaders = createSelector(
+  selectAllLeaders,
+  (leaders: StatPlayerLeadersDto | null) =>
+    leaders ? leaders.pointsBelowExpected : []
 );
 
 const selectRookieGoalsLeaders = createSelector(
@@ -122,22 +135,22 @@ const selectRookieGoalsLeaders = createSelector(
 const selectFaceOffLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.faceoffs : [])
-)
+);
 
 const selectShootingLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.shooting : [])
-)
+);
 
 const selectCornerLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.corners : [])
-)
+);
 
 const selectPassingLeaders = createSelector(
   selectAllLeaders,
   (leaders: StatPlayerLeadersDto | null) => (leaders ? leaders.passing : [])
-)
+);
 
 export const LeagueStatsPlayersSelectors = {
   selectLoaded,
@@ -165,5 +178,7 @@ export const LeagueStatsPlayersSelectors = {
   selectFaceOffLeaders,
   selectShootingLeaders,
   selectCornerLeaders,
-  selectPassingLeaders
+  selectPassingLeaders,
+  selectPointsAboveExpectedLeaders,
+  selectPointsBelowExpectedLeaders,
 };

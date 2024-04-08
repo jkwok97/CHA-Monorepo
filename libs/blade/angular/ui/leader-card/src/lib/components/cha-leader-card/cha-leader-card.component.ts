@@ -147,6 +147,11 @@ export class BladeChaLeaderCardComponent implements OnInit {
           return this.selected.fo_pct;
         case 'corner %':
           return this.selected.corner_pct;
+        case 'points above expected':
+          return this.selected.pointsAboveExpected;
+        case 'points below expected':
+          console.log(this.selected);
+          return this.selected.pointsBelowExpected;
         default:
           return '';
       }

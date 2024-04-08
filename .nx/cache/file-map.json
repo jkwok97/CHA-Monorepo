@@ -972,7 +972,7 @@
       },
       {
         "file": "libs/api/player-stats/src/lib/services/api-player-leaders-stats.service.ts",
-        "hash": "57156729696470",
+        "hash": "2585924383594605544",
         "deps": [
           "api-entities",
           "cha-shared-entities",
@@ -6261,7 +6261,7 @@
       },
       {
         "file": "libs/blade/angular/ui/leader-card/src/lib/components/cha-leader-card/cha-leader-card.component.html",
-        "hash": "5560001643578125656"
+        "hash": "17831681303959155001"
       },
       {
         "file": "libs/blade/angular/ui/leader-card/src/lib/components/cha-leader-card/cha-leader-card.component.scss",
@@ -6276,7 +6276,7 @@
       },
       {
         "file": "libs/blade/angular/ui/leader-card/src/lib/components/cha-leader-card/cha-leader-card.component.ts",
-        "hash": "4543509082349657843",
+        "hash": "1330790361494063567",
         "deps": [
           "npm:@angular/core",
           "npm:@angular/common",
@@ -11539,7 +11539,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-leaders/src/lib/+state/stats-players-leaders.facade.ts",
-        "hash": "14906601016997851976",
+        "hash": "16029248030264275529",
         "deps": [
           "npm:@angular/core",
           "cha-shared-entities",
@@ -11557,7 +11557,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-leaders/src/lib/+state/stats-players-leaders.selectors.ts",
-        "hash": "16290864822266514764",
+        "hash": "1937640012944053399",
         "deps": [
           "cha-shared-entities",
           "npm:@ngrx/store"
@@ -11595,7 +11595,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-leaders/src/lib/containers/stats-players-leaders/stats-players-leaders.component.html",
-        "hash": "6789685967852755189"
+        "hash": "4158627059278269821"
       },
       {
         "file": "libs/cha/front/stats-player-leaders/src/lib/containers/stats-players-leaders/stats-players-leaders.component.scss",
@@ -11610,7 +11610,7 @@
       },
       {
         "file": "libs/cha/front/stats-player-leaders/src/lib/containers/stats-players-leaders/stats-players-leaders.component.ts",
-        "hash": "11357892392119409492",
+        "hash": "18437225228589768365",
         "deps": [
           "npm:@angular/core",
           "cha-domain-core",
@@ -15960,11 +15960,11 @@
       },
       {
         "file": "libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leader.dto.ts",
-        "hash": "102645603725955585"
+        "hash": "5014347023472945694"
       },
       {
         "file": "libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leaders.dto.ts",
-        "hash": "10525010498486597654"
+        "hash": "1305779724270174722"
       },
       {
         "file": "libs/cha/shared/entities/src/lib/dtos/stats/stat-players-history.dto.ts",
