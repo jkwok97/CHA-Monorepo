@@ -378,26 +378,22 @@ export class ApiPlayerLeadersStatsService {
     return chaPointsLeadersWithTeamInfo;
   }
 
-  private async getNhlStatByPlayerId(
-    playerId
-  ): Promise<Observable<AxiosResponse<any[], any>>> {
-    console.log(playerId);
-    const stats = await this.httpService
-      .get(`${this.nhlAPI}/${playerId}/landing`)
-      .pipe(map((response) => response.data));
-
-    return stats;
+  private getNhlStatByPlayerId(playerId) {
+    return new Promise((resolve) => {
+      this.httpService
+        .get(`${this.nhlAPI}/${playerId}/landing`)
+        .pipe(map((response) => response.data))
+        .subscribe((data) => {
+          resolve(data);
+        });
+    });
   }
 
   private async getLastSeasonNhlStats(pointsLeaders) {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        nhlPoints: await Promise.resolve(
-          (
-            await this.getNhlStatByPlayerId(leader.player_id.nhl_id)
-          ).pipe(map((response) => response))
-        ),
+        nhlPoints: await this.getNhlStatByPlayerId(leader.player_id.nhl_id),
       }))
     );
   }
