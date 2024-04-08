@@ -6,9 +6,8 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
-import { Observable, map, tap } from 'rxjs';
+import { map } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { AxiosResponse } from 'axios';
 
 @Injectable()
 export class ApiPlayerLeadersStatsService {
@@ -30,6 +29,9 @@ export class ApiPlayerLeadersStatsService {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
     const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
+      season
+    );
+    const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
       season
     );
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
@@ -115,6 +117,8 @@ export class ApiPlayerLeadersStatsService {
       corners: cornersLeaders as unknown as StatPlayerLeaderDto[],
       pointsAboveExpected:
         pointsAboveExpectedLeaders as unknown as StatPlayerLeaderDto[],
+      pointsBelowExpected:
+        pointsBelowExpectedLeaders as unknown as StatPlayerLeaderDto[],
     };
   }
 
@@ -340,6 +344,46 @@ export class ApiPlayerLeadersStatsService {
     return pointsLeadersWithTeamInfo;
   }
 
+  private async getPointsBelowExpectedLeaders(season: string) {
+    const chaPlayerPoints = await this.repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        points: true,
+        player_id: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          nhl_id: true,
+          isgoalie: true,
+        },
+      },
+      relations: ['player_id'],
+      where: {
+        playing_year: season,
+        season_type: 'Regular',
+      },
+      order: {
+        points: 'DESC',
+      },
+      take: 500,
+    });
+
+    const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(
+      chaPlayerPoints
+    );
+
+    const topPointsBelowExpectedLeaders = await pointsLeaderWithNhlStats
+      .sort((a, b) => a.pointsAboveExpected - b.pointsAboveExpected)
+      .slice(0, 10);
+
+    const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(
+      topPointsBelowExpectedLeaders
+    );
+
+    return chaPointsLeadersWithTeamInfo;
+  }
+
   private async getPointsAboveExpectedLeaders(season: string) {
     const chaPlayerPoints = await this.repo.find({
       select: {
@@ -362,7 +406,7 @@ export class ApiPlayerLeadersStatsService {
       order: {
         points: 'DESC',
       },
-      take: 300,
+      take: 500,
     });
 
     const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(
@@ -370,7 +414,7 @@ export class ApiPlayerLeadersStatsService {
     );
 
     const topPointsAboveExpectedLeaders = await pointsLeaderWithNhlStats
-      .sort((a, b) => a.pointsAboveExpected - b.pointsAboveExpected)
+      .sort((a, b) => b.pointsAboveExpected - a.pointsAboveExpected)
       .slice(0, 10);
 
     const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(
@@ -388,7 +432,7 @@ export class ApiPlayerLeadersStatsService {
           map(
             (response) =>
               response.data.seasonTotals.find(
-                (season) => season.season === 20222023
+                (playingSeason) => playingSeason.season === 20222023 // NEED TO UPDATE EVERY YEAR
               ).points
           )
         )

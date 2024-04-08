@@ -972,7 +972,7 @@
       },
       {
         "file": "libs/api/player-stats/src/lib/services/api-player-leaders-stats.service.ts",
-        "hash": "15127146823077179871",
+        "hash": "57156729696470",
         "deps": [
           "api-entities",
           "cha-shared-entities",
@@ -980,8 +980,7 @@
           "npm:@nestjs/typeorm",
           "npm:typeorm",
           "npm:rxjs",
-          "npm:@nestjs/axios",
-          "npm:axios"
+          "npm:@nestjs/axios"
         ]
       },
       {
@@ -15965,7 +15964,7 @@
       },
       {
         "file": "libs/cha/shared/entities/src/lib/dtos/stats/stat-player-leaders.dto.ts",
-        "hash": "9328931030025049026"
+        "hash": "10525010498486597654"
       },
       {
         "file": "libs/cha/shared/entities/src/lib/dtos/stats/stat-players-history.dto.ts",
