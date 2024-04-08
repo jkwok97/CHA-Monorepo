@@ -369,12 +369,12 @@ export class ApiPlayerLeadersStatsService {
       chaPlayerPoints
     );
 
-    await pointsLeaderWithNhlStats
+    const topPointsAboveExpectedLeaders = await pointsLeaderWithNhlStats
       .sort((a, b) => a.pointsAboveExpected - b.pointsAboveExpected)
       .slice(0, 10);
 
     const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(
-      pointsLeaderWithNhlStats
+      topPointsAboveExpectedLeaders
     );
 
     return chaPointsLeadersWithTeamInfo;
@@ -402,9 +402,8 @@ export class ApiPlayerLeadersStatsService {
     return await Promise.all(
       pointsLeaders.map(async (leader) => ({
         ...leader,
-        pointsAboveExpected:
-          Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id)) -
-          leader.points,
+        pointsAboveExpected: await (leader.points -
+          Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id))),
       }))
     );
   }

@@ -6784,10 +6784,10 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             take: 300,
         });
         const pointsLeaderWithNhlStats = await this.getLastSeasonNhlStats(chaPlayerPoints);
-        await pointsLeaderWithNhlStats
+        const topPointsAboveExpectedLeaders = await pointsLeaderWithNhlStats
             .sort((a, b) => a.pointsAboveExpected - b.pointsAboveExpected)
             .slice(0, 10);
-        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(pointsLeaderWithNhlStats);
+        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(topPointsAboveExpectedLeaders);
         return chaPointsLeadersWithTeamInfo;
     }
     getNhlStatByPlayerId(playerId) {
@@ -6803,8 +6803,8 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
     async getLastSeasonNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({
             ...leader,
-            pointsAboveExpected: Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id)) -
-                leader.points,
+            pointsAboveExpected: await (leader.points -
+                Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id))),
         })));
     }
     async getAssistLeaders(season, seasonType) {
