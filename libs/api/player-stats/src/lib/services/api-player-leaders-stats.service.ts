@@ -382,7 +382,14 @@ export class ApiPlayerLeadersStatsService {
     return new Promise((resolve) => {
       this.httpService
         .get(`${this.nhlAPI}/${playerId}/landing`)
-        .pipe(map((response) => response.data))
+        .pipe(
+          map(
+            (response) =>
+              response.data.seasonTotals.find(
+                (season) => season.season === 20222023
+              ).points
+          )
+        )
         .subscribe((data) => {
           resolve(data);
         });
