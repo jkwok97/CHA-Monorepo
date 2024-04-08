@@ -972,7 +972,7 @@
       },
       {
         "file": "libs/api/player-stats/src/lib/services/api-player-leaders-stats.service.ts",
-        "hash": "2585924383594605544",
+        "hash": "9821445607499263007",
         "deps": [
           "api-entities",
           "cha-shared-entities",
@@ -6276,7 +6276,7 @@
       },
       {
         "file": "libs/blade/angular/ui/leader-card/src/lib/components/cha-leader-card/cha-leader-card.component.ts",
-        "hash": "1330790361494063567",
+        "hash": "15337097026052030098",
         "deps": [
           "npm:@angular/core",
           "npm:@angular/common",

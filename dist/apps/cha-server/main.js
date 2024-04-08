@@ -6787,7 +6787,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         });
         const pointsLeaderWithNhlStats = await this.getPointsBelowNhlStats(chaPlayerPoints);
         const topPointsBelowExpectedLeaders = await pointsLeaderWithNhlStats
-            .sort((a, b) => a.pointsAboveExpected - b.pointsAboveExpected)
+            .sort((a, b) => a.pointsBelowExpected - b.pointsBelowExpected)
             .slice(0, 10);
         const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(topPointsBelowExpectedLeaders);
         return chaPointsLeadersWithTeamInfo;

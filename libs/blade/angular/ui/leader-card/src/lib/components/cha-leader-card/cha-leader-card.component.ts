@@ -150,7 +150,6 @@ export class BladeChaLeaderCardComponent implements OnInit {
         case 'points above expected':
           return this.selected.pointsAboveExpected;
         case 'points below expected':
-          console.log(this.selected);
           return this.selected.pointsBelowExpected;
         default:
           return '';
