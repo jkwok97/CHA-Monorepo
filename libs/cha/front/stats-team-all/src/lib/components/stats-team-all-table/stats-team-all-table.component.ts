@@ -59,9 +59,28 @@ export class StatsTeamAllTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stats = this.mapItems(this.stats).sort(
-      (a, b) => Number(b.points) - Number(a.points)
-    );
+    this.stats = this.mapItems(this.stats).sort((a, b) => {
+      if (b.points === a.points) {
+        if (b.wins === a.wins) {
+          if (
+            Number(b.goals_for) - Number(b.goals_against) ===
+            Number(a.goals_for) - Number(a.goals_against)
+          ) {
+            return Number(b.goals_for) - Number(a.goals_for);
+          } else {
+            return (
+              Number(b.goals_for) -
+              Number(b.goals_against) -
+              (Number(a.goals_for) - Number(a.goals_against))
+            );
+          }
+        } else {
+          return Number(b.wins) - Number(a.wins);
+        }
+      } else {
+        return Number(b.points) - Number(a.points);
+      }
+    });
   }
 
   // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
