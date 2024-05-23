@@ -1,7 +1,7 @@
 <div
   class="p-3 mb-3 border-round-lg"
   style="background-color: var(--team-100)"
-  *ngIf="dayGames"
+  *ngIf="dayGames.length > 0"
 >
   <div class="text-xl pb-4" style="font-weight: 100">
     Day - {{ dayGames[0].gameDay }}
