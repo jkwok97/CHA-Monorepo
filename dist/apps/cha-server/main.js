@@ -6534,8 +6534,8 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
     async getPlayerStatsLeaders(season, seasonType, minGamesStats) {
         const hitsLeaders = await this.getHitsLeaders(season, seasonType);
         const pointsLeaders = await this.getPointsLeaders(season, seasonType);
-        const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(season);
-        const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(season);
+        const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(season, seasonType);
+        const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(season, seasonType);
         const assistLeaders = await this.getAssistLeaders(season, seasonType);
         const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(season, seasonType);
         const worstPlusMinusLeaders = await this.getWorstPlusMinusLeaders(season, seasonType);
@@ -6761,7 +6761,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const pointsLeadersWithTeamInfo = await this.setTeamInfo(pointsLeaders);
         return pointsLeadersWithTeamInfo;
     }
-    async getPointsBelowExpectedLeaders(season) {
+    async getPointsBelowExpectedLeaders(season, seasonType) {
         const chaPlayerPoints = await this.repo.find({
             select: {
                 id: true,
@@ -6778,7 +6778,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             relations: ['player_id'],
             where: {
                 playing_year: season,
-                season_type: 'Regular',
+                season_type: seasonType,
             },
             order: {
                 points: 'DESC',
@@ -6792,7 +6792,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(topPointsBelowExpectedLeaders);
         return chaPointsLeadersWithTeamInfo;
     }
-    async getPointsAboveExpectedLeaders(season) {
+    async getPointsAboveExpectedLeaders(season, seasonType) {
         const chaPlayerPoints = await this.repo.find({
             select: {
                 id: true,
@@ -6809,7 +6809,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
             relations: ['player_id'],
             where: {
                 playing_year: season,
-                season_type: 'Regular',
+                season_type: seasonType,
             },
             order: {
                 points: 'DESC',

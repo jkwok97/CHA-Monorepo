@@ -29,10 +29,12 @@ export class ApiPlayerLeadersStatsService {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
     const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
-      season
+      season,
+      seasonType
     );
     const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
-      season
+      season,
+      seasonType
     );
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
     const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(
@@ -344,7 +346,10 @@ export class ApiPlayerLeadersStatsService {
     return pointsLeadersWithTeamInfo;
   }
 
-  private async getPointsBelowExpectedLeaders(season: string) {
+  private async getPointsBelowExpectedLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
     const chaPlayerPoints = await this.repo.find({
       select: {
         id: true,
@@ -361,7 +366,7 @@ export class ApiPlayerLeadersStatsService {
       relations: ['player_id'],
       where: {
         playing_year: season,
-        season_type: 'Regular',
+        season_type: seasonType,
       },
       order: {
         points: 'DESC',
@@ -384,7 +389,10 @@ export class ApiPlayerLeadersStatsService {
     return chaPointsLeadersWithTeamInfo;
   }
 
-  private async getPointsAboveExpectedLeaders(season: string) {
+  private async getPointsAboveExpectedLeaders(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ) {
     const chaPlayerPoints = await this.repo.find({
       select: {
         id: true,
@@ -401,7 +409,7 @@ export class ApiPlayerLeadersStatsService {
       relations: ['player_id'],
       where: {
         playing_year: season,
-        season_type: 'Regular',
+        season_type: seasonType,
       },
       order: {
         points: 'DESC',
