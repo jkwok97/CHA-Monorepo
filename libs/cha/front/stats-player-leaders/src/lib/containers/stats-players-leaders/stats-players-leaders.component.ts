@@ -41,6 +41,8 @@ export class StatsPlayersLeadersComponent implements OnInit {
   passingLeaders$: Observable<StatPlayerLeaderDto[]>;
   currentTeam$: Observable<TeamDto | undefined>;
 
+  isPlayoffs = false;
+
   backgroundColor!: string;
   selectSeasonOptions = [
     { label: 'Regular', value: 'Regular' },
@@ -103,6 +105,7 @@ export class StatsPlayersLeadersComponent implements OnInit {
   }
 
   onSeasonOptionChanged(seasonType: string) {
+    this.isPlayoffs = seasonType === 'Playoffs';
     this.leagueStatsPlayersFacade.getLeagueTeamStats(seasonType);
   }
 }

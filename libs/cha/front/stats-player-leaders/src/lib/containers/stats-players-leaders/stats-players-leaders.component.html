@@ -28,10 +28,14 @@
           <blade-cha-leader-card
             [leaders]="rookieLeaders$ | async"
             [type]="'rookie points'"
+            *ngIf="isPlayoffs === false"
           ></blade-cha-leader-card>
         </div>
 
-        <div class="league-stats-players-section-body">
+        <div
+          class="league-stats-players-section-body"
+          *ngIf="isPlayoffs === false"
+        >
           <blade-cha-leader-card
             [leaders]="pointsAboveExpectedLeaders$ | async"
             [type]="'points above expected'"
@@ -54,6 +58,7 @@
           <blade-cha-leader-card
             [leaders]="rookieGoalsLeaders$ | async"
             [type]="'rookie goals'"
+            *ngIf="isPlayoffs === false"
           ></blade-cha-leader-card>
         </div>
 
