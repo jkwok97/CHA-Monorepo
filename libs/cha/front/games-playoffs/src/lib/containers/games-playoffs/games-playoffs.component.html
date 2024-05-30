@@ -36,7 +36,8 @@
                   [winningTeam]="westernTeams[4]"
                   [losingTeam]="westernTeams[3]"
                   [seriesTied]="false"
-                  [seriesScore]="'3-1'"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-1'"
                   [gameFile]="'2024-R1-W2'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -45,10 +46,11 @@
                   [homeTeam]="westernTeams[2]"
                   [visTeam]="westernTeams[5]"
                   [isWest]="true"
-                  [winningTeam]="westernTeams[5]"
-                  [losingTeam]="westernTeams[2]"
-                  [seriesTied]="true"
-                  [seriesScore]="'2-2'"
+                  [winningTeam]="westernTeams[2]"
+                  [losingTeam]="westernTeams[5]"
+                  [seriesTied]="false"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-3'"
                   [gameFile]="'2024-R1-W3'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -59,19 +61,24 @@
                   [isWest]="true"
                   [winningTeam]="westernTeams[1]"
                   [losingTeam]="westernTeams[6]"
-                  [seriesTied]="true"
-                  [seriesScore]="'2-2'"
+                  [seriesTied]="false"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-2'"
                   [gameFile]="'2024-R1-W4'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
-                <!-- LSB / CHY -->
+                <!-- SFC / CHY -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
+                  [visTeam]="westernTeams[4]"
                 ></cha-front-games-playoffs-matchup-card>
                 <!-- WIT / OAK -->
-                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card
+                  [homeTeam]="westernTeams[1]"
+                  [visTeam]="westernTeams[2]"
+                ></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
@@ -108,9 +115,15 @@
 
               <div class="round-container">
                 <!-- CIN / MSG -->
-                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card
+                  [homeTeam]="easternTeams[0]"
+                  [visTeam]="easternTeams[3]"
+                ></cha-front-games-playoffs-matchup-card>
                 <!--  IND / ATL -->
-                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card
+                  [homeTeam]="easternTeams[1]"
+                  [visTeam]="easternTeams[2]"
+                ></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
@@ -121,8 +134,9 @@
                   [isEast]="true"
                   [winningTeam]="easternTeams[0]"
                   [losingTeam]="easternTeams[7]"
-                  [seriesTied]="true"
-                  [seriesScore]="'2-2'"
+                  [seriesTied]="false"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-3'"
                   [gameFile]="'2024-R1-E1'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -134,7 +148,8 @@
                   [winningTeam]="easternTeams[3]"
                   [losingTeam]="easternTeams[4]"
                   [seriesTied]="false"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
+                  [seriesDone]="true"
                   [gameFile]="'2024-R1-E2'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -146,7 +161,8 @@
                   [winningTeam]="easternTeams[2]"
                   [losingTeam]="easternTeams[5]"
                   [seriesTied]="false"
-                  [seriesScore]="'3-1'"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-1'"
                   [gameFile]="'2024-R1-E3'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -157,7 +173,8 @@
                   [isEast]="true"
                   [winningTeam]="easternTeams[1]"
                   [losingTeam]="easternTeams[6]"
-                  [seriesScore]="'3-1'"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-1'"
                   [gameFile]="'2024-R1-E4'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
