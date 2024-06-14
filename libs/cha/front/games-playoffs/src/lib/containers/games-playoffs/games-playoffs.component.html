@@ -121,11 +121,18 @@
               <cha-front-games-playoffs-matchup-final-card
                 [homeTeam]="easternTeams[2]"
                 [visTeam]="westernTeams[0]"
+                [winningTeam]="westernTeams[0]"
+                [losingTeam]="easternTeams[2]"
+                [seriesDone]="true"
+                [seriesScore]="'4-3'"
+                [gameFile]="'2024-R4'"
               ></cha-front-games-playoffs-matchup-final-card>
             </div>
 
             <div>
-              <cha-front-games-playoffs-final-champion-card></cha-front-games-playoffs-final-champion-card>
+              <cha-front-games-playoffs-final-champion-card
+                [champion]="westernTeams[0]"
+              ></cha-front-games-playoffs-final-champion-card>
 
               <h2>CHAMPION</h2>
             </div>
