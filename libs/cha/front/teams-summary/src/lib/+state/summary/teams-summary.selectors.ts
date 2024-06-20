@@ -519,11 +519,11 @@ function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
   // Adjust Every Season
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2023 &&
-      !isNaN(Number(salary.salaries.season_2023)) &&
+      salary.salaries.season_2024 && //Adjust every year
+      !isNaN(Number(salary.salaries.season_2024)) && //Adjust every year
       !salary.player_id.is_protected
     ) {
-      total += Number(salary.salaries.season_2023);
+      total += Number(salary.salaries.season_2024); //Adjust every year
     }
   });
 
@@ -535,11 +535,11 @@ function getNextTotal(salaries: SalariesAndRatingsDto[]) {
   // Adjust Every Season
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2024 &&
-      !isNaN(Number(salary.salaries.season_2024)) &&
+      salary.salaries.season_2025 && //Adjust every year
+      !isNaN(Number(salary.salaries.season_2025)) && //Adjust every year
       !salary.player_id.is_protected
     ) {
-      total += Number(salary.salaries.season_2024);
+      total += Number(salary.salaries.season_2025); //Adjust every year
     }
   });
 
