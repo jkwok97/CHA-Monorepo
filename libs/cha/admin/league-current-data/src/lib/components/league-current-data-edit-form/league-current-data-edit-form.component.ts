@@ -219,7 +219,7 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
       className: 'w-full md:w-2',
       type: 'number-input',
       templateOptions: {
-        label: 'number-input',
+        label: 'Current Cap',
         required: true,
         minFractionDigits: 1,
       },

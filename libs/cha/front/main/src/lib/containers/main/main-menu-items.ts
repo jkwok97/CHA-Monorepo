@@ -138,8 +138,8 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/21'],
               },
               {
-                label: 'Utah Skinwalkers',
-                routerLink: ['/league/teams/65'],
+                label: 'Santa Fe Skinwalkers',
+                routerLink: ['/league/teams/67'],
               },
             ],
           },
@@ -167,7 +167,7 @@ export const mainMenuItems: MenuItem[] = [
                 routerLink: ['/league/teams/60'],
               },
               {
-                label: 'Torbay Ice Bears',
+                label: 'Torbay Tidesman',
                 routerLink: ['/league/teams/66'],
               },
             ],

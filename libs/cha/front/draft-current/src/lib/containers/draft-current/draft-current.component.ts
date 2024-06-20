@@ -20,7 +20,7 @@ export class DraftCurrentComponent implements OnInit {
   selectOptions = [
     // { label: '2023', value: '2023' },
     { label: '2024', value: '2024' },
-    // { label: '2025', value: '2025' },
+    { label: '2025', value: '2025' },
   ];
 
   tableColumns = [
@@ -98,10 +98,30 @@ export class DraftCurrentComponent implements OnInit {
 
   onOptionChanged(option: string) {
     if (option === '2024') {
+      this.tableColumns = [
+        { field: 'pickNumber', header: 'Pick #' },
+        { field: 'team', header: 'Team' },
+        { field: 'round_one', header: 'Round 1' },
+        { field: 'round_two', header: 'Round 2' },
+        { field: 'round_three', header: 'Round 3' },
+        { field: 'round_four', header: 'Round 4' },
+        { field: 'round_five', header: 'Round 5' },
+      ];
+
       this.draftCurrentFacade.getDraftTable(Number(option));
     }
 
     if (option === '2025') {
+      this.tableColumns = [
+        { field: 'pickNumber', header: 'Pick #' },
+        { field: 'team', header: 'Team' },
+        { field: 'round_one', header: 'Round 1' },
+        { field: 'round_two', header: 'Round 2' },
+        { field: 'round_three', header: 'Round 3' },
+        { field: 'round_four', header: 'Round 4' },
+        // { field: 'round_five', header: 'Round 5' },
+      ];
+
       this.draftCurrentFacade.getNextDraftTable(Number(option));
     }
   }
