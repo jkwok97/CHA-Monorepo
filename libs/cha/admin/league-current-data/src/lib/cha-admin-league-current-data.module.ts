@@ -11,7 +11,10 @@ import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
 import { BladeDividerComponent } from '@blade/angular/ui/divider';
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
 import { CheckboxTypeComponent } from '@blade/angular/formly/types/checkbox';
-import { TextInputTypeComponent } from '@blade/angular/formly/types/text-input';
+import {
+  TextInputTypeComponent,
+  NumberInputTypeComponent,
+} from '@blade/angular/formly/types/text-input';
 import { DefaultFormFieldWrapperComponent } from '@blade/angular/formly/wrappers/default';
 
 import { ChaAdminLeagueCurrentDataRoutingModule } from './cha-admin-league-current-data-routing.module';
@@ -43,6 +46,11 @@ import {
         {
           name: 'text-input',
           component: TextInputTypeComponent,
+          wrappers: ['control-wrapper'],
+        },
+        {
+          name: 'number-input',
+          component: NumberInputTypeComponent,
           wrappers: ['control-wrapper'],
         },
         {

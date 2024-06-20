@@ -197,14 +197,15 @@ export class ApiSalariesService {
   }
 
   private async getSalary(playerId: number) {
+    // TODO UPDATE EVERY SEASON
     return await this.repo.findOne({
       select: {
         id: true,
         player_id: true,
-        season_2023: true,
         season_2024: true,
         season_2025: true,
         season_2026: true,
+        season_2027: true,
       },
       where: {
         player_id: playerId.toString(),
@@ -323,12 +324,12 @@ export class ApiSalariesService {
         ),
         nhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20232024'
-        ), //TODO CHANGE EVERY YEAR
+          '20242025'
+        ), // TODO UPDATE EVERY SEASON
         nextNhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20242025'
-        ), //TODO CHANGE EVERY YEAR
+          '20252026'
+        ), // TODO UPDATE EVERY SEASON
       }))
     );
   }

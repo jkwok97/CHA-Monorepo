@@ -32,12 +32,14 @@ export class TeamsSummarySalariesComponent implements OnInit {
   defenseSalaries!: PlayerSalaryModel[];
   goalieSalaries!: PlayerSalaryModel[];
 
-  salaryHeaders = ['Name', 2023, 2024, 2025, 2026].map((x, i) => ({
+  // TODO UPDATE EVERY SEASON
+
+  salaryHeaders = ['Name', 2024, 2025, 2026, 2027].map((x, i) => ({
     key: x,
     index: i,
   }));
 
-  mobileSalaryHeaders = ['Name', 2023, 2024].map((x, i) => ({
+  mobileSalaryHeaders = ['Name', 2024, 2025].map((x, i) => ({
     key: x,
     index: i,
   }));
@@ -61,6 +63,8 @@ export class TeamsSummarySalariesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // TODO UPDATE EVERY SEASON
+
     this.forwardSalaries$
       .pipe(
         filter((salaries: SalariesAndRatingsDto[]) => salaries.length > 0),
@@ -70,10 +74,10 @@ export class TeamsSummarySalariesComponent implements OnInit {
         this.forwardSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2023: salary.salaries.season_2023,
             2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
             2026: salary.salaries.season_2026,
+            2027: salary.salaries.season_2027,
           })
         );
       });
@@ -87,10 +91,10 @@ export class TeamsSummarySalariesComponent implements OnInit {
         this.defenseSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2023: salary.salaries.season_2023,
             2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
             2026: salary.salaries.season_2026,
+            2027: salary.salaries.season_2027,
           })
         );
       });
@@ -103,10 +107,10 @@ export class TeamsSummarySalariesComponent implements OnInit {
       .subscribe((salaries: SalariesAndRatingsDto[]) => {
         this.goalieSalaries = salaries.map((salary: SalariesAndRatingsDto) => ({
           Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-          2023: salary.salaries.season_2023,
           2024: salary.salaries.season_2024,
           2025: salary.salaries.season_2025,
           2026: salary.salaries.season_2026,
+          2027: salary.salaries.season_2027,
         }));
       });
   }
