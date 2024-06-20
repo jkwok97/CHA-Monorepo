@@ -14,7 +14,7 @@ export class StatsTeamLeadersComponent implements OnInit {
 
   selectSeasonOptions = [
     { label: 'Regular', value: 'Regular' },
-    { label: 'Playoffs', value: 'Playoffs', disabled: false },
+    { label: 'Playoffs', value: 'Playoffs', disabled: true },
   ];
 
   constructor(private leagueStatsTeamFacade: LeagueStatsTeamFacade) {
