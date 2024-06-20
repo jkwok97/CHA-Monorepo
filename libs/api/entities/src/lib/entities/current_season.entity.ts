@@ -30,10 +30,10 @@ export class Current_Season_V2 {
   next_draft_year!: number;
 
   @Column()
-  current_cap!: number;
+  current_cap!: string;
 
   @Column()
-  next_cap!: number;
+  next_cap!: string;
 
   @Column()
   min_games!: number;

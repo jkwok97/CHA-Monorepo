@@ -217,11 +217,11 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
     return {
       key: 'current_cap',
       className: 'w-full md:w-2',
-      type: 'number-input',
+      type: 'text-input',
       templateOptions: {
         label: 'Current Cap',
         required: true,
-        minFractionDigits: 1,
+        // minFractionDigits: 1,
       },
       validation: {
         messages: {
@@ -235,11 +235,11 @@ export class LeagueCurrentDataEditFormComponent implements OnInit {
     return {
       key: 'next_cap',
       className: 'w-full md:w-2',
-      type: 'number-input',
+      type: 'text-input',
       templateOptions: {
         label: 'Next Cap',
         required: true,
-        minFractionDigits: 1,
+        // minFractionDigits: 1,
       },
       validation: {
         messages: {

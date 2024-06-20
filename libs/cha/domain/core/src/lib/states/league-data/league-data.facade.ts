@@ -57,11 +57,11 @@ export class LeagueDataFacade {
     LeagueDataSelectors.selectCurrentSeason
   );
 
-  currentCapHit$: Observable<number> = this.store.select(
+  currentCapHit$: Observable<string> = this.store.select(
     LeagueDataSelectors.selectCurrentCapHit
   );
 
-  nextCapHit$: Observable<number> = this.store.select(
+  nextCapHit$: Observable<string> = this.store.select(
     LeagueDataSelectors.selectNextYearCapHit
   );
 

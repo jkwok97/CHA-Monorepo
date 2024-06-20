@@ -7,8 +7,8 @@ export interface LeagueDataDto {
   current_day: number;
   current_draft_year: number;
   next_draft_year: number;
-  current_cap: number;
-  next_cap: number;
+  current_cap: string;
+  next_cap: string;
   min_games: number;
   offseason: boolean;
   min_games_stats: number;

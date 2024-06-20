@@ -1533,11 +1533,11 @@ tslib_1.__decorate([
 ], Current_Season_V2.prototype, "next_draft_year", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
+    tslib_1.__metadata("design:type", String)
 ], Current_Season_V2.prototype, "current_cap", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
-    tslib_1.__metadata("design:type", Number)
+    tslib_1.__metadata("design:type", String)
 ], Current_Season_V2.prototype, "next_cap", void 0);
 tslib_1.__decorate([
     (0, typeorm_1.Column)(),
