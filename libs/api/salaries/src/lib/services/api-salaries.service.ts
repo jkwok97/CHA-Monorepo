@@ -352,8 +352,6 @@ export class ApiSalariesService {
 
     const response = await firstValueFrom(stats);
 
-    console.log(response);
-
     return response.data.featuredStats.regularSeason.subSeason;
   }
 

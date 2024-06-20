@@ -6828,7 +6828,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         return new Promise((resolve) => {
             this.httpService
                 .get(`${this.nhlAPI}/${playerId}/landing`)
-                .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals.find((playingSeason) => playingSeason.season === 20222023 // NEED TO UPDATE EVERY YEAR
+                .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals.find((playingSeason) => playingSeason.season === 20232024 // NEED TO UPDATE EVERY YEAR
             ).points))
                 .subscribe((data) => {
                 resolve(data);
@@ -8404,7 +8404,6 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
-        console.log(response);
         return response.data.featuredStats.regularSeason.subSeason;
     }
     async getAll() {

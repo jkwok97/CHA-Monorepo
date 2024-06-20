@@ -23,19 +23,19 @@ export class PlayerMgmtSalariesTableComponent implements OnInit {
   salaryTableColumns = [
     { field: 'id', header: 'Salary Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'season_2021', header: '2020-21', visible: true },
-    { field: 'season_2022', header: '2021-22', visible: true },
-    { field: 'season_2023', header: '2022-23', visible: true },
     { field: 'season_2024', header: '2023-24', visible: true },
     { field: 'season_2025', header: '2024-25', visible: true },
+    { field: 'season_2026', header: '2025-26', visible: true },
+    { field: 'season_2027', header: '2026-27', visible: true },
+    { field: 'season_2028', header: '2027-28', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 
   mobileSalaryTableColumns = [
     { field: 'id', header: 'Salary Id', visible: true },
     { field: 'full_name', header: 'Name', visible: true },
-    { field: 'season_2021', header: '2020-21', visible: true },
-    { field: 'season_2022', header: '2021-22', visible: true },
+    { field: 'season_2024', header: '2023-24', visible: true },
+    { field: 'season_2025', header: '2024-25', visible: true },
     { field: 'action', header: 'Edit', visible: true },
   ];
 

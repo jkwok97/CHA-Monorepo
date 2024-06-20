@@ -440,7 +440,7 @@ export class ApiPlayerLeadersStatsService {
           map(
             (response) =>
               response.data.seasonTotals.find(
-                (playingSeason) => playingSeason.season === 20222023 // NEED TO UPDATE EVERY YEAR
+                (playingSeason) => playingSeason.season === 20232024 // NEED TO UPDATE EVERY YEAR
               ).points
           )
         )
