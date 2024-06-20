@@ -3058,6 +3058,7 @@ tslib_1.__exportStar(__webpack_require__(113), exports);
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+// TODO UPDATE EVERY SEASON
 
 
 /***/ }),
@@ -8281,14 +8282,15 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         })));
     }
     async getSalary(playerId) {
+        // TODO UPDATE EVERY SEASON
         return await this.repo.findOne({
             select: {
                 id: true,
                 player_id: true,
-                season_2023: true,
                 season_2024: true,
                 season_2025: true,
                 season_2026: true,
+                season_2027: true,
             },
             where: {
                 player_id: playerId.toString(),
@@ -8390,8 +8392,8 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         return await Promise.all(array.map(async (item) => ({
             ...item,
             nhlHeadShot: await this.getNhlPlayerHeadShotByPlayerId(item.player_id.nhl_id),
-            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20232024'),
-            nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20242025'), //TODO CHANGE EVERY YEAR
+            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20242025'),
+            nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20252026'), // TODO UPDATE EVERY SEASON
         })));
     }
     async getNhlPlayerHeadShotByPlayerId(playerId) {
