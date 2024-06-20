@@ -24,6 +24,6 @@ export interface StatPlayerLeadersDto {
   shooting: StatPlayerLeaderDto[];
   passing: StatPlayerLeaderDto[];
   corners: StatPlayerLeaderDto[];
-  pointsAboveExpected: StatPlayerLeaderDto[];
-  pointsBelowExpected: StatPlayerLeaderDto[];
+  pointsAboveExpected?: StatPlayerLeaderDto[];
+  pointsBelowExpected?: StatPlayerLeaderDto[];
 }

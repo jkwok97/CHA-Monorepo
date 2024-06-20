@@ -15,8 +15,8 @@ export class StatsPlayersLeadersComponent implements OnInit {
   isLoaded$: Observable<boolean>;
 
   pointsLeaders$: Observable<StatPlayerLeaderDto[]>;
-  pointsAboveExpectedLeaders$: Observable<StatPlayerLeaderDto[]>;
-  pointsBelowExpectedLeaders$: Observable<StatPlayerLeaderDto[]>;
+  pointsAboveExpectedLeaders$: Observable<StatPlayerLeaderDto[] | undefined>;
+  pointsBelowExpectedLeaders$: Observable<StatPlayerLeaderDto[] | undefined>;
   defenseLeaders$: Observable<StatPlayerLeaderDto[]>;
   defenseGoalLeaders$: Observable<StatPlayerLeaderDto[]>;
   rookieLeaders$: Observable<StatPlayerLeaderDto[]>;

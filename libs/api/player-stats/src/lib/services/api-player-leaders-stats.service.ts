@@ -28,14 +28,14 @@ export class ApiPlayerLeadersStatsService {
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
-    const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
-      season,
-      seasonType
-    );
-    const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
-      season,
-      seasonType
-    );
+    // const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
+    //   season,
+    //   seasonType
+    // );
+    // const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
+    //   season,
+    //   seasonType
+    // );
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
     const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(
       season,
@@ -117,10 +117,10 @@ export class ApiPlayerLeadersStatsService {
       shooting: shootingLeaders as unknown as StatPlayerLeaderDto[],
       passing: passingLeaders as unknown as StatPlayerLeaderDto[],
       corners: cornersLeaders as unknown as StatPlayerLeaderDto[],
-      pointsAboveExpected:
-        pointsAboveExpectedLeaders as unknown as StatPlayerLeaderDto[],
-      pointsBelowExpected:
-        pointsBelowExpectedLeaders as unknown as StatPlayerLeaderDto[],
+      // pointsAboveExpected:
+      //   pointsAboveExpectedLeaders as unknown as StatPlayerLeaderDto[],
+      // pointsBelowExpected:
+      //   pointsBelowExpectedLeaders as unknown as StatPlayerLeaderDto[],
     };
   }
 

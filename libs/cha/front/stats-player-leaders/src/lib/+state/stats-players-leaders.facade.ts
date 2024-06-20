@@ -99,12 +99,12 @@ export class LeagueStatsPlayersFacade {
     LeagueStatsPlayersSelectors.selectPointsLeaders
   );
 
-  pointsAboveExpectedLeaders$: Observable<StatPlayerLeaderDto[]> =
+  pointsAboveExpectedLeaders$: Observable<StatPlayerLeaderDto[] | undefined> =
     this.store.select(
       LeagueStatsPlayersSelectors.selectPointsAboveExpectedLeaders
     );
 
-  pointsBelowExpectedLeaders$: Observable<StatPlayerLeaderDto[]> =
+  pointsBelowExpectedLeaders$: Observable<StatPlayerLeaderDto[] | undefined> =
     this.store.select(
       LeagueStatsPlayersSelectors.selectPointsBelowExpectedLeaders
     );

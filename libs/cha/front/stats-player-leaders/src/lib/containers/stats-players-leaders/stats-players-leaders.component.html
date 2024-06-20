@@ -34,14 +34,24 @@
 
         <div
           class="league-stats-players-section-body"
-          *ngIf="isPlayoffs === false"
+          *ngIf="
+            isPlayoffs === false &&
+            (pointsAboveExpectedLeaders$ | async) &&
+            (pointsBelowExpectedLeaders$ | async)
+          "
         >
           <blade-cha-leader-card
-            [leaders]="pointsAboveExpectedLeaders$ | async"
+            *ngIf="
+              pointsAboveExpectedLeaders$ | async as pointsAboveExpectedLeaders
+            "
+            [leaders]="pointsAboveExpectedLeaders"
             [type]="'points above expected'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
-            [leaders]="pointsBelowExpectedLeaders$ | async"
+            *ngIf="
+              pointsBelowExpectedLeaders$ | async as pointsBelowExpectedLeaders
+            "
+            [leaders]="pointsBelowExpectedLeaders"
             [type]="'points below expected'"
           ></blade-cha-leader-card>
         </div>
