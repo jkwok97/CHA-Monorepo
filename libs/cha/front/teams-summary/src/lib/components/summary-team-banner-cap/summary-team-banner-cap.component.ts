@@ -12,11 +12,15 @@ export class SummaryTeamBannerCapComponent {
   @Input() nextTotalSalary!: number;
   @Input() totalPlayers!: number;
 
-  currentCapHit$: Observable<number>;
-  nextCapHit$: Observable<number>;
+  currentCapHit$: Observable<string>;
+  nextCapHit$: Observable<string>;
 
   constructor(private leagueDataFacade: LeagueDataFacade) {
     this.currentCapHit$ = this.leagueDataFacade.currentCapHit$;
     this.nextCapHit$ = this.leagueDataFacade.nextCapHit$;
+  }
+
+  getCapNumber(capNumber: string): number {
+    return Number(capNumber);
   }
 }

@@ -10,10 +10,10 @@
     </div>
     <div class="flex flex-wrap column-gap-2">
       Current Cap Overage:
-      <span>{{ (totalSalary - currentCap).toFixed(3) }}</span>
+      <span>{{ (totalSalary - getCapNumber(currentCap)).toFixed(3) }}</span>
       <div
         class="text-red-600 font-semibold"
-        *ngIf="totalSalary - currentCap > 0"
+        *ngIf="totalSalary - getCapNumber(currentCap) > 0"
       >
         Over Cap Limit
       </div>
@@ -24,10 +24,10 @@
     </div>
     <div class="flex flex-wrap column-gap-2">
       Next Cap Overage:
-      <span>{{ (nextTotalSalary - nextCapHit).toFixed(3) }}</span>
+      <span>{{ (nextTotalSalary - getCapNumber(nextCapHit)).toFixed(3) }}</span>
       <div
         class="text-red-600 font-semibold"
-        *ngIf="nextTotalSalary - nextCapHit > 0"
+        *ngIf="nextTotalSalary - getCapNumber(nextCapHit) > 0"
       >
         Over Cap Limit
       </div>
