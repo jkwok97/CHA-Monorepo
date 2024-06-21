@@ -385,7 +385,15 @@ const selectGoalieSalariesSortedByRating = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'G'
       )
-      .sort((a, b) => Number(b.ratings?.wins) - Number(a.ratings?.wins))
+      .sort(
+        (a, b) => 
+          (Number(b.ratings?.wins) != null
+            ? Number(b.ratings?.wins)
+            : -Infinity) -
+          (Number(a.ratings?.wins) != null
+            ? Number(a.ratings?.wins)
+            : -Infinity)
+      )
 );
 
 const selectGoalieSalariesSortedByNhlStats = createSelector(
@@ -396,7 +404,15 @@ const selectGoalieSalariesSortedByNhlStats = createSelector(
         (playerSalaries: SalariesAndRatingsDto) =>
           playerSalaries.player_id.primary_position === 'G'
       )
-      .sort((a, b) => Number(b.nhlStats?.wins) - Number(a.nhlStats?.wins))
+      .sort(
+        (a, b) =>
+          (Number(b.nhlStats?.wins) != null
+            ? Number(b.nhlStats?.wins)
+            : -Infinity) -
+          (Number(a.nhlStats?.wins) != null
+            ? Number(a.nhlStats?.wins)
+            : -Infinity)
+      )
 );
 
 const selectGoalieSalariesSortedByFutureNhlStats = createSelector(
@@ -409,8 +425,12 @@ const selectGoalieSalariesSortedByFutureNhlStats = createSelector(
       )
       .sort(
         (a, b) =>
-          (b.nextNhlStats?.wins != null ? b.nextNhlStats?.wins : -Infinity) -
-          (a.nextNhlStats?.wins != null ? a.nextNhlStats?.wins : -Infinity)
+          (Number(b.nextNhlStats?.wins) != null
+            ? Number(b.nextNhlStats?.wins)
+            : -Infinity) -
+          (Number(a.nextNhlStats?.wins) != null
+            ? Number(a.nextNhlStats?.wins)
+            : -Infinity)
       )
 );
 
