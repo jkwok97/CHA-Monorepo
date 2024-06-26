@@ -122,6 +122,7 @@ export class ApiTransactionsService {
 
   private findSeasonDates(year: string) {
     const seasons = [
+      { year: '25', start: '2024-06-02', end: '2025-06-01' },
       { year: '24', start: '2023-06-02', end: '2024-06-01' },
       { year: '23', start: '2022-06-02', end: '2023-06-01' },
       { year: '22', start: '2021-07-15', end: '2022-06-01' },
