@@ -33,6 +33,27 @@
         <ng-container *ngIf="isLoaded$ | async">
           <ng-container *ngIf="draftTableItems$ | async as items">
             <ng-container *ngIf="teams$ | async as teams">
+              <div class="text-center pb-4">
+                ** Mississauga Has Won the lottery and will pick first overall
+                **
+              </div>
+
+              <div class="text-center pb-4">
+                ** Top 7 picks are as follows for 1st round only **
+              </div>
+
+              <div class="text-center">1st - Mississauga North Stars</div>
+              <div class="text-center">2nd - Santa Fe Skinwalkers</div>
+              <div class="text-center">3rd - Torbay Tidesman</div>
+              <div class="text-center">4th - St. Johns Vikings</div>
+              <div class="text-center">5th - Victoria Stellar's Jays</div>
+              <div class="text-center">6th - Hawaii Lava</div>
+              <div class="text-center pb-4">7th - Kelowna Mountaineers</div>
+
+              <div class="text-center pb-4">
+                ** All other picks are unchanged **
+              </div>
+
               <blade-table
                 [layout]="'stack'"
                 [data]="mapItems(items)"
