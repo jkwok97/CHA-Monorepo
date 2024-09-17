@@ -69,7 +69,6 @@ export class PlayerMgmtRatingsPlayerEditFormComponent implements OnInit {
   }
 
   patchForm() {
-    console.log(this.player);
     this.model = {
       player_id: this.player?.player_id,
       game_fatigue: this.player?.game_fatigue,
