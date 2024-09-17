@@ -37,6 +37,15 @@ const editGoaliesuccess = createAction(
   props<{ goalie: GoalieRatingDto }>()
 );
 
+const deletePlayerRating = createAction(
+  `${NAMESPACE} Delete Player Rating`,
+  props<{ ratingId: number }>()
+);
+
+const deletePlayerRatingSuccess = createAction(
+  `${NAMESPACE} Delete Player Rating Success`
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const PlayerMgmtRatingsActions = {
@@ -48,5 +57,7 @@ export const PlayerMgmtRatingsActions = {
   editPlayersuccess,
   editGoalie,
   editGoaliesuccess,
+  deletePlayerRating,
+  deletePlayerRatingSuccess,
   error,
 };

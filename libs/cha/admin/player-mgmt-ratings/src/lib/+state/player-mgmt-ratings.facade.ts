@@ -57,4 +57,8 @@ export class PlayerMgmtRatingsFacade {
   editGoalie(goalie: GoalieRatingDto) {
     this.store.dispatch(PlayerMgmtRatingsActions.editGoalie({ goalie }));
   }
+
+  deletePlayerRating(ratingId: number) {
+    this.store.dispatch(PlayerMgmtRatingsActions.deletePlayerRating({ ratingId }));
+  }
 }

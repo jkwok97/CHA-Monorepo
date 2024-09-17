@@ -45,4 +45,17 @@ export class PlayerMgmtRatingsPlayerEditComponent {
       )
       .subscribe(() => this.closeSidebar.emit(true));
   }
+
+  onDelete() {
+    if (this.player && this.player.id) {
+      this.playerMgmtRatingsFacade.deletePlayerRating(this.player.id);
+
+      this.playerMgmtRatingsFacade.isSaving$
+        .pipe(
+          untilDestroyed(this),
+          filter((isSaving: boolean) => !isSaving)
+        )
+        .subscribe(() => this.closeSidebar.emit(true));
+    }
+  }
 }

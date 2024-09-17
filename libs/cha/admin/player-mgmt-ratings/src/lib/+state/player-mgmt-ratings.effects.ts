@@ -129,4 +129,34 @@ export class PlayerMgmtRatingsEffects {
       ),
     { dispatch: false }
   );
+
+  deletePlayerRating$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PlayerMgmtRatingsActions.deletePlayerRating),
+      exhaustMap((action) =>
+        this.playerMgmtRatingsService.deletePlayerRating(action.ratingId).pipe(
+          map(() =>
+            PlayerMgmtRatingsActions.deletePlayerRatingSuccess()
+          ),
+          catchError(() => of(PlayerMgmtRatingsActions.error()))
+        )
+      )
+    )
+  );
+
+  deletePlayerRatingSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(PlayerMgmtRatingsActions.deletePlayerRatingSuccess),
+        tap(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Delete Player Rating',
+            detail: 'Player Rating has been deleted',
+          });
+          this.playerMgmtRatingsFacade.getPlayers();
+        })
+      ),
+    { dispatch: false }
+  );
 }

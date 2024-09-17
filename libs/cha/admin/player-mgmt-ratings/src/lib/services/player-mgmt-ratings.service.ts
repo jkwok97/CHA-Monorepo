@@ -36,4 +36,10 @@ export class PlayerMgmtRatingsService {
       .put(`${this.apiUrl}/goalie-ratings/${player.id}`, player)
       .pipe(map((result: any) => result));
   }
+
+  deletePlayerRating(ratingId: number): Observable<any> {
+    return this._http
+      .delete(`${this.apiUrl}/player-ratings/${ratingId}`)
+      .pipe(map((result: any) => result));
+  }
 }
