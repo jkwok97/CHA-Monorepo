@@ -61,4 +61,13 @@ export class ApiPlayerRatingsService {
       return {};
     }
   }
+
+  async deleteRating(id: number): Promise<Player_Ratings_V2> {
+    const rating = await this.repo.findOneByOrFail({ id });
+
+    if (!rating) {
+      throw new NotFoundException('rating not found');
+    }
+    return this.repo.remove(rating);
+  }
 }

@@ -6142,6 +6142,9 @@ let PlayerRatingsController = exports.PlayerRatingsController = class PlayerRati
     updatePlayerById(param, body) {
         return this.playerRatingsService.updatePlayerById(parseInt(param.id), body);
     }
+    deleteRating(param) {
+        return this.playerRatingsService.deleteRating(parseInt(param.id));
+    }
 };
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
@@ -6158,6 +6161,13 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object, Object]),
     tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
 ], PlayerRatingsController.prototype, "updatePlayerById", null);
+tslib_1.__decorate([
+    (0, common_1.Delete)('/:id'),
+    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
+], PlayerRatingsController.prototype, "deleteRating", null);
 exports.PlayerRatingsController = PlayerRatingsController = tslib_1.__decorate([
     (0, common_1.Controller)('player-ratings'),
     tslib_1.__metadata("design:paramtypes", [typeof (_a = typeof services_1.ApiPlayerRatingsService !== "undefined" && services_1.ApiPlayerRatingsService) === "function" ? _a : Object])
@@ -6231,6 +6241,13 @@ let ApiPlayerRatingsService = exports.ApiPlayerRatingsService = class ApiPlayerR
         else {
             return {};
         }
+    }
+    async deleteRating(id) {
+        const rating = await this.repo.findOneByOrFail({ id });
+        if (!rating) {
+            throw new common_1.NotFoundException('rating not found');
+        }
+        return this.repo.remove(rating);
     }
 };
 exports.ApiPlayerRatingsService = ApiPlayerRatingsService = tslib_1.__decorate([

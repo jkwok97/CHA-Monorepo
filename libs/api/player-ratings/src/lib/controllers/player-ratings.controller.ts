@@ -2,6 +2,7 @@ import { Player_Ratings_V2 } from '@api/entities';
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -26,5 +27,10 @@ export class PlayerRatingsController {
   @Put('/:id')
   updatePlayerById(@Param() param, @Body() body): Promise<Player_Ratings_V2> {
     return this.playerRatingsService.updatePlayerById(parseInt(param.id), body);
+  }
+
+  @Delete('/:id')
+  deleteRating(@Param() param) {
+    return this.playerRatingsService.deleteRating(parseInt(param.id));
   }
 }
