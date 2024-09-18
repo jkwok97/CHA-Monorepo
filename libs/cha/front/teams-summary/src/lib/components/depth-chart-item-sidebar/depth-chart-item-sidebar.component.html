@@ -62,6 +62,7 @@
   </div>
 
   <cha-front-depth-chart-item-sidebar-ratings
+    *ngIf="playerStats.ratings"
     [ratings]="playerStats.ratings"
     [isMobile]="isMobile"
     class="w-full"
