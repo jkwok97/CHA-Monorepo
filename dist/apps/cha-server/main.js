@@ -7824,7 +7824,6 @@ let ApiUserPlayerStatsService = exports.ApiUserPlayerStatsService = class ApiUse
       b.nhl_id as nhl_id,
       a.player_id as player_id,
       a.season_type as season_type, 
-      a.position as position,
       a.team_name as team_name,
       sum(a.games_played) as games_played, 
       sum(a.goals) as goals, 
@@ -7850,7 +7849,7 @@ let ApiUserPlayerStatsService = exports.ApiUserPlayerStatsService = class ApiUse
       and
       a.season_type = '${seasonType}'
       and a.team_name = '${teamShortName}')
-      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position, a.team_name
+      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.team_name
       order by points DESC`);
     }
     async getPlayerStats(teamShortName, seasonType) {
