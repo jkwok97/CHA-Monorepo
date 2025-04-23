@@ -11,8 +11,7 @@
         "{workspaceRoot}/coverage/libs/blade/angular/ui/button-toggle"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/button-toggle/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/button-toggle/jest.config.ts"
       }
     },
     "lint": {

@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/draft-mgmt-table"],
       "options": {
-        "jestConfig": "libs/cha/admin/draft-mgmt-table/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/draft-mgmt-table/jest.config.ts"
       }
     },
     "lint": {

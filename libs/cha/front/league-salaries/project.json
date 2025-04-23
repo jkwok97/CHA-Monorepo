@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/league-salaries"],
       "options": {
-        "jestConfig": "libs/cha/front/league-salaries/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/league-salaries/jest.config.ts"
       }
     },
     "lint": {

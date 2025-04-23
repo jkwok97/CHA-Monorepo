@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/history-players"],
       "options": {
-        "jestConfig": "libs/cha/front/history-players/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/history-players/jest.config.ts"
       }
     },
     "lint": {

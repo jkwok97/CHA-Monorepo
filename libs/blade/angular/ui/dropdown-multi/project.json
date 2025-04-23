@@ -11,8 +11,7 @@
         "{workspaceRoot}/coverage/libs/blade/angular/ui/dropdown-multi"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/dropdown-multi/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/dropdown-multi/jest.config.ts"
       }
     },
     "lint": {

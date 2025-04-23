@@ -11,8 +11,7 @@
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/email-input"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/formly/types/email-input/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/formly/types/email-input/jest.config.ts"
       }
     },
     "lint": {

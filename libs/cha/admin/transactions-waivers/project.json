@@ -11,8 +11,7 @@
         "{workspaceRoot}/coverage/libs/cha/admin/transactions-waivers"
       ],
       "options": {
-        "jestConfig": "libs/cha/admin/transactions-waivers/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/transactions-waivers/jest.config.ts"
       }
     },
     "lint": {

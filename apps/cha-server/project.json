@@ -51,8 +51,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/cha-server"],
       "options": {
-        "jestConfig": "apps/cha-server/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/cha-server/jest.config.ts"
       }
     }
   },

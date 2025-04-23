@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/domain/url-router"],
       "options": {
-        "jestConfig": "libs/cha/domain/url-router/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/domain/url-router/jest.config.ts"
       }
     },
     "lint": {

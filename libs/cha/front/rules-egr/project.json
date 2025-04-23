@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/rules-egr"],
       "options": {
-        "jestConfig": "libs/cha/front/rules-egr/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/rules-egr/jest.config.ts"
       }
     },
     "lint": {

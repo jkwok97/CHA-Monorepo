@@ -15,8 +15,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/teams"],
       "options": {
-        "jestConfig": "libs/api/teams/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/api/teams/jest.config.ts"
       }
     }
   },

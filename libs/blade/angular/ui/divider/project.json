@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/divider"],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/divider/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/divider/jest.config.ts"
       }
     },
     "lint": {

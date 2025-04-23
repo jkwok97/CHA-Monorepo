@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/main-transactions"],
       "options": {
-        "jestConfig": "libs/cha/admin/main-transactions/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/main-transactions/jest.config.ts"
       }
     },
     "lint": {

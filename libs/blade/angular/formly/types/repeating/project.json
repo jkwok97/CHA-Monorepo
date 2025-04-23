@@ -11,8 +11,7 @@
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/repeating"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/formly/types/repeating/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/formly/types/repeating/jest.config.ts"
       }
     },
     "lint": {

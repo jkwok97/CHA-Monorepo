@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/league-awards"],
       "options": {
-        "jestConfig": "libs/cha/admin/league-awards/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/league-awards/jest.config.ts"
       }
     },
     "lint": {

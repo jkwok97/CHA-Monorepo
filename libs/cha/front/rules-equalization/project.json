@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/rules-equalization"],
       "options": {
-        "jestConfig": "libs/cha/front/rules-equalization/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/rules-equalization/jest.config.ts"
       }
     },
     "lint": {

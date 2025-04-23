@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/card"],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/card/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/card/jest.config.ts"
       }
     },
     "lint": {

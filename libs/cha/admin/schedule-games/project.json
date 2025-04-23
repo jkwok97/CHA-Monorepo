@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/schedule-games"],
       "options": {
-        "jestConfig": "libs/cha/admin/schedule-games/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/schedule-games/jest.config.ts"
       }
     },
     "lint": {

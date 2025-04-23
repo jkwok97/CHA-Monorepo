@@ -15,8 +15,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/api/player-ratings"],
       "options": {
-        "jestConfig": "libs/api/player-ratings/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/api/player-ratings/jest.config.ts"
       }
     }
   },

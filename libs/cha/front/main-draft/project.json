@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/main-draft"],
       "options": {
-        "jestConfig": "libs/cha/front/main-draft/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/main-draft/jest.config.ts"
       }
     },
     "lint": {

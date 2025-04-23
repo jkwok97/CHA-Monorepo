@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/domain/logo"],
       "options": {
-        "jestConfig": "libs/cha/domain/logo/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/domain/logo/jest.config.ts"
       }
     },
     "lint": {

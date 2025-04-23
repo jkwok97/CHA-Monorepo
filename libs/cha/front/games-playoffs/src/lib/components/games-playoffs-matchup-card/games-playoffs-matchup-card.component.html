@@ -16,7 +16,7 @@
     ></cha-front-games-playoffs-team-avatar>
 
     <div *ngIf="visTeam && homeTeam && !(winningTeam && losingTeam)">
-      {{ visTeam.team_id.shortname }} @ {{ homeTeam.team_id.shortname }}
+      {{ visTeam.team_id.shortname }} &#64; {{ homeTeam.team_id.shortname }}
     </div>
 
     <div *ngIf="winningTeam && losingTeam && !seriesTied && !seriesDone">

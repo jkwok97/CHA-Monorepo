@@ -9,8 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/home-goalies"],
       "options": {
-        "jestConfig": "libs/cha/front/home-goalies/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/home-goalies/jest.config.ts"
       }
     },
     "lint": {
