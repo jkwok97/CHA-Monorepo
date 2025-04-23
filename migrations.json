@@ -1,18 +1,20 @@
 {
   "migrations": [
     {
-      "description": "As of NgRx v18, the `TypedAction` has been removed in favor of `Action`.",
-      "version": "18-beta",
-      "factory": "./18_0_0-beta/index",
-      "package": "@ngrx/store",
-      "name": "ngrx-store-migration-18-beta"
+      "cli": "nx",
+      "version": "19.5.0-beta.1",
+      "requires": { "@angular/core": ">=18.1.0" },
+      "description": "Update the @angular/cli package version to ~18.1.0.",
+      "factory": "./src/migrations/update-19-5-0/update-angular-cli",
+      "package": "@nx/angular",
+      "name": "update-angular-cli-version-18-1-0"
     },
     {
-      "description": "As of NgRx v18, the `concatLatestFrom` import has been removed from `@ngrx/effects` in favor of the `@ngrx/operators` package.",
-      "version": "18-beta",
-      "factory": "./18_0_0-beta/index",
-      "package": "@ngrx/effects",
-      "name": "ngrx-effects-migration-18-beta"
+      "version": "18.1.0",
+      "description": "Updates calls to afterRender with an explicit phase to the new API",
+      "factory": "./migrations/after-render-phase/bundle",
+      "package": "@angular/core",
+      "name": "migration-after-render-phase"
     }
   ]
 }
