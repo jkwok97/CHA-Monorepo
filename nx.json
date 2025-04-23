@@ -1,8 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "affected": {
-    "defaultBase": "master"
-  },
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
@@ -59,5 +56,6 @@
       "!{projectRoot}/src/test-setup.[jt]s"
     ]
   },
-  "nxCloudAccessToken": "MzI3ZGFkMzgtMGZkOC00YTI4LWE4OTQtYjk0ZDA4YjE0NWUxfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MzI3ZGFkMzgtMGZkOC00YTI4LWE4OTQtYjk0ZDA4YjE0NWUxfHJlYWQtd3JpdGU=",
+  "defaultBase": "master"
 }
