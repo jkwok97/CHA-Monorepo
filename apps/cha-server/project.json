@@ -5,7 +5,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "target": "node",
@@ -13,7 +13,9 @@
         "outputPath": "dist/apps/cha-server",
         "main": "apps/cha-server/src/main.ts",
         "tsConfig": "apps/cha-server/tsconfig.app.json",
-        "assets": ["apps/cha-server/src/assets"]
+        "assets": ["apps/cha-server/src/assets"],
+        "isolatedConfig": false,
+        "webpackConfig": "apps/cha-server/webpack.config.js"
       },
       "configurations": {
         "production": {

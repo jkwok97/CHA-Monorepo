@@ -34,8 +34,9 @@ const config_1 = __webpack_require__(272);
 const typeorm_1 = __webpack_require__(32);
 const app_controller_1 = __webpack_require__(273);
 const app_service_1 = __webpack_require__(274);
-let AppModule = exports.AppModule = class AppModule {
+let AppModule = class AppModule {
 };
+exports.AppModule = AppModule;
 exports.AppModule = AppModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
@@ -129,8 +130,9 @@ const waivers_1 = __webpack_require__(240);
 const divisions_1 = __webpack_require__(248);
 const goalie_ratings_1 = __webpack_require__(256);
 const conferences_1 = __webpack_require__(264);
-let ApiCoreModule = exports.ApiCoreModule = class ApiCoreModule {
+let ApiCoreModule = class ApiCoreModule {
 };
+exports.ApiCoreModule = ApiCoreModule;
 exports.ApiCoreModule = ApiCoreModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
@@ -185,11 +187,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(33);
 const middlewares_1 = __webpack_require__(117);
 const services_1 = __webpack_require__(114);
-let ApiAwardsModule = exports.ApiAwardsModule = class ApiAwardsModule {
+let ApiAwardsModule = class ApiAwardsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.AwardsMiddleware).forRoutes('*');
     }
 };
+exports.ApiAwardsModule = ApiAwardsModule;
 exports.ApiAwardsModule = ApiAwardsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
@@ -254,8 +257,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Award_Type_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Award_Type_V2 = exports.Award_Type_V2 = class Award_Type_V2 {
+let Award_Type_V2 = class Award_Type_V2 {
 };
+exports.Award_Type_V2 = Award_Type_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -294,8 +298,9 @@ const player_stats_entity_1 = __webpack_require__(15);
 const player_entity_1 = __webpack_require__(16);
 const team_entity_1 = __webpack_require__(18);
 const user_entity_1 = __webpack_require__(25);
-let Awards_V2 = exports.Awards_V2 = class Awards_V2 {
+let Awards_V2 = class Awards_V2 {
 };
+exports.Awards_V2 = Awards_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -350,8 +355,9 @@ const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const award_entity_1 = __webpack_require__(14);
 const player_entity_1 = __webpack_require__(16);
-let Players_Stats_V2 = exports.Players_Stats_V2 = class Players_Stats_V2 {
+let Players_Stats_V2 = class Players_Stats_V2 {
 };
+exports.Players_Stats_V2 = Players_Stats_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -579,7 +585,7 @@ const goalie_stats_entity_1 = __webpack_require__(22);
 const player_rating_entity_1 = __webpack_require__(23);
 const player_stats_entity_1 = __webpack_require__(15);
 const salary_entity_1 = __webpack_require__(24);
-let Players_V2 = exports.Players_V2 = class Players_V2 {
+let Players_V2 = class Players_V2 {
     logInsert() {
         console.log('Inserted Player with id', this.id);
     }
@@ -590,6 +596,7 @@ let Players_V2 = exports.Players_V2 = class Players_V2 {
         console.log('Removed Player');
     }
 };
+exports.Players_V2 = Players_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -697,8 +704,9 @@ const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const player_entity_1 = __webpack_require__(16);
 const team_entity_1 = __webpack_require__(18);
-let Drafts_V2 = exports.Drafts_V2 = class Drafts_V2 {
+let Drafts_V2 = class Drafts_V2 {
 };
+exports.Drafts_V2 = Drafts_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -746,7 +754,7 @@ exports.Teams_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const division_entity_1 = __webpack_require__(19);
-let Teams_V2 = exports.Teams_V2 = class Teams_V2 {
+let Teams_V2 = class Teams_V2 {
     logInsert() {
         console.log('Inserted Team with id', this.id);
     }
@@ -757,6 +765,7 @@ let Teams_V2 = exports.Teams_V2 = class Teams_V2 {
         console.log('Removed Team');
     }
 };
+exports.Teams_V2 = Teams_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -835,8 +844,9 @@ exports.Divisions_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const conference_entity_1 = __webpack_require__(20);
-let Divisions_V2 = exports.Divisions_V2 = class Divisions_V2 {
+let Divisions_V2 = class Divisions_V2 {
 };
+exports.Divisions_V2 = Divisions_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -870,8 +880,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Conferences_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Conferences_V2 = exports.Conferences_V2 = class Conferences_V2 {
+let Conferences_V2 = class Conferences_V2 {
 };
+exports.Conferences_V2 = Conferences_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -898,8 +909,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Goalie_Ratings_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Goalie_Ratings_V2 = exports.Goalie_Ratings_V2 = class Goalie_Ratings_V2 {
+let Goalie_Ratings_V2 = class Goalie_Ratings_V2 {
 };
+exports.Goalie_Ratings_V2 = Goalie_Ratings_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1005,8 +1017,9 @@ const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const player_entity_1 = __webpack_require__(16);
 const team_entity_1 = __webpack_require__(18);
-let Goalies_Stats_V2 = exports.Goalies_Stats_V2 = class Goalies_Stats_V2 {
+let Goalies_Stats_V2 = class Goalies_Stats_V2 {
 };
+exports.Goalies_Stats_V2 = Goalies_Stats_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1162,8 +1175,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Player_Ratings_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Player_Ratings_V2 = exports.Player_Ratings_V2 = class Player_Ratings_V2 {
+let Player_Ratings_V2 = class Player_Ratings_V2 {
 };
+exports.Player_Ratings_V2 = Player_Ratings_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1318,8 +1332,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Salaries_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Salaries_V2 = exports.Salaries_V2 = class Salaries_V2 {
+let Salaries_V2 = class Salaries_V2 {
 };
+exports.Salaries_V2 = Salaries_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1426,7 +1441,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Users_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Users_V2 = exports.Users_V2 = class Users_V2 {
+let Users_V2 = class Users_V2 {
     logInsert() {
         console.log('Inserted User with id', this.id);
     }
@@ -1437,6 +1452,7 @@ let Users_V2 = exports.Users_V2 = class Users_V2 {
         console.log('Removed User');
     }
 };
+exports.Users_V2 = Users_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1493,8 +1509,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Current_Season_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Current_Season_V2 = exports.Current_Season_V2 = class Current_Season_V2 {
+let Current_Season_V2 = class Current_Season_V2 {
 };
+exports.Current_Season_V2 = Current_Season_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1567,8 +1584,9 @@ exports.Draft_Order_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const team_entity_1 = __webpack_require__(18);
-let Draft_Order_V2 = exports.Draft_Order_V2 = class Draft_Order_V2 {
+let Draft_Order_V2 = class Draft_Order_V2 {
 };
+exports.Draft_Order_V2 = Draft_Order_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1616,8 +1634,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Schedule_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Schedule_V2 = exports.Schedule_V2 = class Schedule_V2 {
+let Schedule_V2 = class Schedule_V2 {
 };
+exports.Schedule_V2 = Schedule_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1670,8 +1689,9 @@ exports.Team_Stats_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const team_entity_1 = __webpack_require__(18);
-let Team_Stats_V2 = exports.Team_Stats_V2 = class Team_Stats_V2 {
+let Team_Stats_V2 = class Team_Stats_V2 {
 };
+exports.Team_Stats_V2 = Team_Stats_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1888,8 +1908,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Transactions_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
-let Transactions_V2 = exports.Transactions_V2 = class Transactions_V2 {
+let Transactions_V2 = class Transactions_V2 {
 };
+exports.Transactions_V2 = Transactions_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1938,8 +1959,9 @@ exports.Waivers_V2 = void 0;
 const tslib_1 = __webpack_require__(5);
 const typeorm_1 = __webpack_require__(13);
 const team_entity_1 = __webpack_require__(18);
-let Waivers_V2 = exports.Waivers_V2 = class Waivers_V2 {
+let Waivers_V2 = class Waivers_V2 {
 };
+exports.Waivers_V2 = Waivers_V2;
 tslib_1.__decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     tslib_1.__metadata("design:type", Number)
@@ -1990,7 +2012,7 @@ const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(114);
 const api_awards_service_1 = __webpack_require__(115);
-let AwardsController = exports.AwardsController = class AwardsController {
+let AwardsController = class AwardsController {
     constructor(awardsService, userAwardsService) {
         this.awardsService = awardsService;
         this.userAwardsService = userAwardsService;
@@ -2075,6 +2097,7 @@ let AwardsController = exports.AwardsController = class AwardsController {
         return awardTypes;
     }
 };
+exports.AwardsController = AwardsController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
@@ -3086,7 +3109,7 @@ const entities_2 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiAwardsService = exports.ApiAwardsService = class ApiAwardsService {
+let ApiAwardsService = class ApiAwardsService {
     constructor(repo, awardTypeRepo, playerStatsRepo, goalieStatsRepo, teamStatsRepo) {
         this.repo = repo;
         this.awardTypeRepo = awardTypeRepo;
@@ -3368,6 +3391,7 @@ let ApiAwardsService = exports.ApiAwardsService = class ApiAwardsService {
         });
     }
 };
+exports.ApiAwardsService = ApiAwardsService;
 exports.ApiAwardsService = ApiAwardsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
@@ -3392,7 +3416,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiUserAwardsService = exports.ApiUserAwardsService = class ApiUserAwardsService {
+let ApiUserAwardsService = class ApiUserAwardsService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -3435,6 +3459,7 @@ let ApiUserAwardsService = exports.ApiUserAwardsService = class ApiUserAwardsSer
         });
     }
 };
+exports.ApiUserAwardsService = ApiUserAwardsService;
 exports.ApiUserAwardsService = ApiUserAwardsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Awards_V2)),
@@ -3461,12 +3486,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AwardsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let AwardsMiddleware = exports.AwardsMiddleware = class AwardsMiddleware {
+let AwardsMiddleware = class AwardsMiddleware {
     use(req, res, next) {
         console.log('Request Awards...');
         next();
     }
 };
+exports.AwardsMiddleware = AwardsMiddleware;
 exports.AwardsMiddleware = AwardsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], AwardsMiddleware);
@@ -3496,11 +3522,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(121);
 const middlewares_1 = __webpack_require__(125);
 const services_1 = __webpack_require__(123);
-let ApiUsersModule = exports.ApiUsersModule = class ApiUsersModule {
+let ApiUsersModule = class ApiUsersModule {
     configure(consumer) {
         consumer.apply(middlewares_1.UserMiddleware).forRoutes('*');
     }
 };
+exports.ApiUsersModule = ApiUsersModule;
 exports.ApiUsersModule = ApiUsersModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Users_V2])],
@@ -3532,7 +3559,7 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(123);
 const entities_1 = __webpack_require__(35);
-let UsersController = exports.UsersController = class UsersController {
+let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
@@ -3574,6 +3601,7 @@ let UsersController = exports.UsersController = class UsersController {
         return this.usersService.deleteUser(parseInt(param.id));
     }
 };
+exports.UsersController = UsersController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
@@ -3651,7 +3679,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let UsersService = exports.UsersService = class UsersService {
+let UsersService = class UsersService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -3692,6 +3720,7 @@ let UsersService = exports.UsersService = class UsersService {
         return this.repo.remove(user);
     }
 };
+exports.UsersService = UsersService;
 exports.UsersService = UsersService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Users_V2)),
@@ -3718,12 +3747,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UserMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let UserMiddleware = exports.UserMiddleware = class UserMiddleware {
+let UserMiddleware = class UserMiddleware {
     use(req, res, next) {
         console.log('Request User...');
         next();
     }
 };
+exports.UserMiddleware = UserMiddleware;
 exports.UserMiddleware = UserMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], UserMiddleware);
@@ -3753,11 +3783,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(129);
 const middlewares_1 = __webpack_require__(133);
 const services_1 = __webpack_require__(131);
-let ApiDraftTableModule = exports.ApiDraftTableModule = class ApiDraftTableModule {
+let ApiDraftTableModule = class ApiDraftTableModule {
     configure(consumer) {
         consumer.apply(middlewares_1.DraftTableMiddleware).forRoutes('*');
     }
 };
+exports.ApiDraftTableModule = ApiDraftTableModule;
 exports.ApiDraftTableModule = ApiDraftTableModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Draft_Order_V2, entities_1.Team_Stats_V2])],
@@ -3788,7 +3819,7 @@ exports.DraftTableController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(131);
-let DraftTableController = exports.DraftTableController = class DraftTableController {
+let DraftTableController = class DraftTableController {
     constructor(draftTableService) {
         this.draftTableService = draftTableService;
     }
@@ -3810,6 +3841,7 @@ let DraftTableController = exports.DraftTableController = class DraftTableContro
         return draftTable;
     }
 };
+exports.DraftTableController = DraftTableController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:draft_year'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -3861,7 +3893,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiDraftTableService = exports.ApiDraftTableService = class ApiDraftTableService {
+let ApiDraftTableService = class ApiDraftTableService {
     constructor(repo, teamStatsRepo) {
         this.repo = repo;
         this.teamStatsRepo = teamStatsRepo;
@@ -3960,6 +3992,7 @@ let ApiDraftTableService = exports.ApiDraftTableService = class ApiDraftTableSer
         });
     }
 };
+exports.ApiDraftTableService = ApiDraftTableService;
 exports.ApiDraftTableService = ApiDraftTableService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Draft_Order_V2)),
@@ -3987,12 +4020,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DraftTableMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let DraftTableMiddleware = exports.DraftTableMiddleware = class DraftTableMiddleware {
+let DraftTableMiddleware = class DraftTableMiddleware {
     use(req, res, next) {
         console.log('Request Draft Table...');
         next();
     }
 };
+exports.DraftTableMiddleware = DraftTableMiddleware;
 exports.DraftTableMiddleware = DraftTableMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], DraftTableMiddleware);
@@ -4022,11 +4056,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(137);
 const middlewares_1 = __webpack_require__(141);
 const services_1 = __webpack_require__(139);
-let ApiEntryDraftModule = exports.ApiEntryDraftModule = class ApiEntryDraftModule {
+let ApiEntryDraftModule = class ApiEntryDraftModule {
     configure(consumer) {
         consumer.apply(middlewares_1.EntryDraftMiddleware).forRoutes('*');
     }
 };
+exports.ApiEntryDraftModule = ApiEntryDraftModule;
 exports.ApiEntryDraftModule = ApiEntryDraftModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Drafts_V2])],
@@ -4058,7 +4093,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(139);
-let EntryDraftController = exports.EntryDraftController = class EntryDraftController {
+let EntryDraftController = class EntryDraftController {
     constructor(draftService) {
         this.draftService = draftService;
     }
@@ -4079,6 +4114,7 @@ let EntryDraftController = exports.EntryDraftController = class EntryDraftContro
         return this.draftService.deletePick(parseInt(param.id));
     }
 };
+exports.EntryDraftController = EntryDraftController;
 tslib_1.__decorate([
     (0, common_1.Get)('/ordered'),
     tslib_1.__metadata("design:type", Function),
@@ -4136,7 +4172,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiEntryDraftService = exports.ApiEntryDraftService = class ApiEntryDraftService {
+let ApiEntryDraftService = class ApiEntryDraftService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -4191,6 +4227,7 @@ let ApiEntryDraftService = exports.ApiEntryDraftService = class ApiEntryDraftSer
         return this.repo.remove(pick);
     }
 };
+exports.ApiEntryDraftService = ApiEntryDraftService;
 exports.ApiEntryDraftService = ApiEntryDraftService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Drafts_V2)),
@@ -4217,12 +4254,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EntryDraftMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let EntryDraftMiddleware = exports.EntryDraftMiddleware = class EntryDraftMiddleware {
+let EntryDraftMiddleware = class EntryDraftMiddleware {
     use(req, res, next) {
         console.log('Request Entry Draft Table...');
         next();
     }
 };
+exports.EntryDraftMiddleware = EntryDraftMiddleware;
 exports.EntryDraftMiddleware = EntryDraftMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], EntryDraftMiddleware);
@@ -4252,11 +4290,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(145);
 const middlewares_1 = __webpack_require__(152);
 const services_1 = __webpack_require__(147);
-let ApiGoalieStatsModule = exports.ApiGoalieStatsModule = class ApiGoalieStatsModule {
+let ApiGoalieStatsModule = class ApiGoalieStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.GoalieStatsMiddleware).forRoutes('*');
     }
 };
+exports.ApiGoalieStatsModule = ApiGoalieStatsModule;
 exports.ApiGoalieStatsModule = ApiGoalieStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalies_Stats_V2, entities_1.Teams_V2])],
@@ -4292,7 +4331,7 @@ exports.GoalieStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(147);
-let GoalieStatsController = exports.GoalieStatsController = class GoalieStatsController {
+let GoalieStatsController = class GoalieStatsController {
     constructor(goalieStatsLeadersService, goalieStatsService, goalieAllTimeStatsService, userGoalieStatsService) {
         this.goalieStatsLeadersService = goalieStatsLeadersService;
         this.goalieStatsService = goalieStatsService;
@@ -4369,6 +4408,7 @@ let GoalieStatsController = exports.GoalieStatsController = class GoalieStatsCon
         return record;
     }
 };
+exports.GoalieStatsController = GoalieStatsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -4479,7 +4519,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiGoalieStatsLeadersService = exports.ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
+let ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -4666,6 +4706,7 @@ let ApiGoalieStatsLeadersService = exports.ApiGoalieStatsLeadersService = class 
         });
     }
 };
+exports.ApiGoalieStatsLeadersService = ApiGoalieStatsLeadersService;
 exports.ApiGoalieStatsLeadersService = ApiGoalieStatsLeadersService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
@@ -4687,7 +4728,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiGoalieStatsService = exports.ApiGoalieStatsService = class ApiGoalieStatsService {
+let ApiGoalieStatsService = class ApiGoalieStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -4860,6 +4901,7 @@ let ApiGoalieStatsService = exports.ApiGoalieStatsService = class ApiGoalieStats
         })));
     }
 };
+exports.ApiGoalieStatsService = ApiGoalieStatsService;
 exports.ApiGoalieStatsService = ApiGoalieStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
@@ -4881,7 +4923,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiGoalieAllTimeStatsService = exports.ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
+let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -5027,6 +5069,7 @@ let ApiGoalieAllTimeStatsService = exports.ApiGoalieAllTimeStatsService = class 
         })));
     }
 };
+exports.ApiGoalieAllTimeStatsService = ApiGoalieAllTimeStatsService;
 exports.ApiGoalieAllTimeStatsService = ApiGoalieAllTimeStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
@@ -5049,7 +5092,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiUserGoalieStatsService = exports.ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
+let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -5229,6 +5272,7 @@ let ApiUserGoalieStatsService = exports.ApiUserGoalieStatsService = class ApiUse
         })));
     }
 };
+exports.ApiUserGoalieStatsService = ApiUserGoalieStatsService;
 exports.ApiUserGoalieStatsService = ApiUserGoalieStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalies_Stats_V2)),
@@ -5257,12 +5301,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GoalieStatsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let GoalieStatsMiddleware = exports.GoalieStatsMiddleware = class GoalieStatsMiddleware {
+let GoalieStatsMiddleware = class GoalieStatsMiddleware {
     use(req, res, next) {
         console.log('Request Goalie Stats...');
         next();
     }
 };
+exports.GoalieStatsMiddleware = GoalieStatsMiddleware;
 exports.GoalieStatsMiddleware = GoalieStatsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], GoalieStatsMiddleware);
@@ -5292,11 +5337,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(156);
 const league_middleware_1 = __webpack_require__(160);
 const services_1 = __webpack_require__(158);
-let ApiLeagueModule = exports.ApiLeagueModule = class ApiLeagueModule {
+let ApiLeagueModule = class ApiLeagueModule {
     configure(consumer) {
         consumer.apply(league_middleware_1.LeagueMiddleware).forRoutes('*');
     }
 };
+exports.ApiLeagueModule = ApiLeagueModule;
 exports.ApiLeagueModule = ApiLeagueModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Current_Season_V2])],
@@ -5327,7 +5373,7 @@ exports.LeagueController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(158);
-let LeagueController = exports.LeagueController = class LeagueController {
+let LeagueController = class LeagueController {
     constructor(leagueService) {
         this.leagueService = leagueService;
     }
@@ -5342,6 +5388,7 @@ let LeagueController = exports.LeagueController = class LeagueController {
         return this.leagueService.updateCurrentLeagueData(body);
     }
 };
+exports.LeagueController = LeagueController;
 tslib_1.__decorate([
     (0, common_1.Get)('/current-data'),
     tslib_1.__metadata("design:type", Function),
@@ -5384,7 +5431,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let LeagueService = exports.LeagueService = class LeagueService {
+let LeagueService = class LeagueService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -5400,6 +5447,7 @@ let LeagueService = exports.LeagueService = class LeagueService {
         return this.repo.save(data);
     }
 };
+exports.LeagueService = LeagueService;
 exports.LeagueService = LeagueService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Current_Season_V2)),
@@ -5416,12 +5464,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LeagueMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let LeagueMiddleware = exports.LeagueMiddleware = class LeagueMiddleware {
+let LeagueMiddleware = class LeagueMiddleware {
     use(req, res, next) {
         console.log('Request League...');
         next();
     }
 };
+exports.LeagueMiddleware = LeagueMiddleware;
 exports.LeagueMiddleware = LeagueMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], LeagueMiddleware);
@@ -5452,11 +5501,12 @@ const middlewares_1 = __webpack_require__(169);
 const services_1 = __webpack_require__(166);
 const entities_1 = __webpack_require__(10);
 const typeorm_1 = __webpack_require__(32);
-let ApiNhlModule = exports.ApiNhlModule = class ApiNhlModule {
+let ApiNhlModule = class ApiNhlModule {
     configure(consumer) {
         consumer.apply(middlewares_1.NhlMiddleware).forRoutes('*');
     }
 };
+exports.ApiNhlModule = ApiNhlModule;
 exports.ApiNhlModule = ApiNhlModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
@@ -5496,7 +5546,7 @@ exports.NhlController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(166);
-let NhlController = exports.NhlController = class NhlController {
+let NhlController = class NhlController {
     constructor(nhlService) {
         this.nhlService = nhlService;
     }
@@ -5550,6 +5600,7 @@ let NhlController = exports.NhlController = class NhlController {
         return stats;
     }
 };
+exports.NhlController = NhlController;
 tslib_1.__decorate([
     (0, common_1.Get)('/nhl-leaders/:season/:playerType/:statType'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -5630,7 +5681,7 @@ const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const rxjs_1 = __webpack_require__(168);
 const typeorm_2 = __webpack_require__(13);
-let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
+let ApiNhlService = class ApiNhlService {
     constructor(httpService, playerStatsRepo, goalieStatsRepo, teamsRepo) {
         this.httpService = httpService;
         this.playerStatsRepo = playerStatsRepo;
@@ -5818,6 +5869,7 @@ let ApiNhlService = exports.ApiNhlService = class ApiNhlService {
         });
     }
 };
+exports.ApiNhlService = ApiNhlService;
 exports.ApiNhlService = ApiNhlService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
@@ -5852,12 +5904,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NhlMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let NhlMiddleware = exports.NhlMiddleware = class NhlMiddleware {
+let NhlMiddleware = class NhlMiddleware {
     use(req, res, next) {
         console.log('Request Nhl...');
         next();
     }
 };
+exports.NhlMiddleware = NhlMiddleware;
 exports.NhlMiddleware = NhlMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], NhlMiddleware);
@@ -5887,11 +5940,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(173);
 const middlewares_1 = __webpack_require__(177);
 const services_1 = __webpack_require__(175);
-let ApiPlayerInfoModule = exports.ApiPlayerInfoModule = class ApiPlayerInfoModule {
+let ApiPlayerInfoModule = class ApiPlayerInfoModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerInfoMiddleware).forRoutes('*');
     }
 };
+exports.ApiPlayerInfoModule = ApiPlayerInfoModule;
 exports.ApiPlayerInfoModule = ApiPlayerInfoModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Players_V2])],
@@ -5923,7 +5977,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(175);
-let PlayerInfoController = exports.PlayerInfoController = class PlayerInfoController {
+let PlayerInfoController = class PlayerInfoController {
     constructor(playerInfoService) {
         this.playerInfoService = playerInfoService;
     }
@@ -5944,6 +5998,7 @@ let PlayerInfoController = exports.PlayerInfoController = class PlayerInfoContro
         return this.playerInfoService.deletePlayer(parseInt(param.id));
     }
 };
+exports.PlayerInfoController = PlayerInfoController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
@@ -6001,7 +6056,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiPlayerInfoService = exports.ApiPlayerInfoService = class ApiPlayerInfoService {
+let ApiPlayerInfoService = class ApiPlayerInfoService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -6032,6 +6087,7 @@ let ApiPlayerInfoService = exports.ApiPlayerInfoService = class ApiPlayerInfoSer
         return this.repo.remove(player);
     }
 };
+exports.ApiPlayerInfoService = ApiPlayerInfoService;
 exports.ApiPlayerInfoService = ApiPlayerInfoService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_V2)),
@@ -6058,12 +6114,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerInfoMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let PlayerInfoMiddleware = exports.PlayerInfoMiddleware = class PlayerInfoMiddleware {
+let PlayerInfoMiddleware = class PlayerInfoMiddleware {
     use(req, res, next) {
         console.log('Request Player Info...');
         next();
     }
 };
+exports.PlayerInfoMiddleware = PlayerInfoMiddleware;
 exports.PlayerInfoMiddleware = PlayerInfoMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], PlayerInfoMiddleware);
@@ -6093,11 +6150,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(181);
 const middlewares_1 = __webpack_require__(185);
 const services_1 = __webpack_require__(183);
-let ApiPlayerRatingsModule = exports.ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
+let ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerRatingsMiddleware).forRoutes('*');
     }
 };
+exports.ApiPlayerRatingsModule = ApiPlayerRatingsModule;
 exports.ApiPlayerRatingsModule = ApiPlayerRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Player_Ratings_V2, entities_1.Players_V2])],
@@ -6128,7 +6186,7 @@ exports.PlayerRatingsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(183);
-let PlayerRatingsController = exports.PlayerRatingsController = class PlayerRatingsController {
+let PlayerRatingsController = class PlayerRatingsController {
     constructor(playerRatingsService) {
         this.playerRatingsService = playerRatingsService;
     }
@@ -6146,6 +6204,7 @@ let PlayerRatingsController = exports.PlayerRatingsController = class PlayerRati
         return this.playerRatingsService.deleteRating(parseInt(param.id));
     }
 };
+exports.PlayerRatingsController = PlayerRatingsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -6197,7 +6256,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiPlayerRatingsService = exports.ApiPlayerRatingsService = class ApiPlayerRatingsService {
+let ApiPlayerRatingsService = class ApiPlayerRatingsService {
     constructor(repo, playersRepo) {
         this.repo = repo;
         this.playersRepo = playersRepo;
@@ -6250,6 +6309,7 @@ let ApiPlayerRatingsService = exports.ApiPlayerRatingsService = class ApiPlayerR
         return this.repo.remove(rating);
     }
 };
+exports.ApiPlayerRatingsService = ApiPlayerRatingsService;
 exports.ApiPlayerRatingsService = ApiPlayerRatingsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Player_Ratings_V2)),
@@ -6277,12 +6337,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerRatingsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let PlayerRatingsMiddleware = exports.PlayerRatingsMiddleware = class PlayerRatingsMiddleware {
+let PlayerRatingsMiddleware = class PlayerRatingsMiddleware {
     use(req, res, next) {
         console.log('Request Player Ratings...');
         next();
     }
 };
+exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware;
 exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], PlayerRatingsMiddleware);
@@ -6313,11 +6374,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(189);
 const middlewares_1 = __webpack_require__(196);
 const services_1 = __webpack_require__(191);
-let ApiPlayerStatsModule = exports.ApiPlayerStatsModule = class ApiPlayerStatsModule {
+let ApiPlayerStatsModule = class ApiPlayerStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerStatsMiddleware).forRoutes('*');
     }
 };
+exports.ApiPlayerStatsModule = ApiPlayerStatsModule;
 exports.ApiPlayerStatsModule = ApiPlayerStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Players_Stats_V2, entities_1.Teams_V2]), axios_1.HttpModule],
@@ -6353,7 +6415,7 @@ exports.PlayerStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(191);
-let PlayerStatsController = exports.PlayerStatsController = class PlayerStatsController {
+let PlayerStatsController = class PlayerStatsController {
     constructor(playerLeaderStatsService, playerStatsService, playerAllTimeStatsService, userPlayersStatsService) {
         this.playerLeaderStatsService = playerLeaderStatsService;
         this.playerStatsService = playerStatsService;
@@ -6430,6 +6492,7 @@ let PlayerStatsController = exports.PlayerStatsController = class PlayerStatsCon
         return record;
     }
 };
+exports.PlayerStatsController = PlayerStatsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -6542,7 +6605,7 @@ const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
 const rxjs_1 = __webpack_require__(168);
 const axios_1 = __webpack_require__(163);
-let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
+let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
     constructor(repo, teamInfoRepo, httpService) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -7361,6 +7424,7 @@ let ApiPlayerLeadersStatsService = exports.ApiPlayerLeadersStatsService = class 
         });
     }
 };
+exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService;
 exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
@@ -7382,7 +7446,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiPlayerStatsService = exports.ApiPlayerStatsService = class ApiPlayerStatsService {
+let ApiPlayerStatsService = class ApiPlayerStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -7561,6 +7625,7 @@ let ApiPlayerStatsService = exports.ApiPlayerStatsService = class ApiPlayerStats
         })));
     }
 };
+exports.ApiPlayerStatsService = ApiPlayerStatsService;
 exports.ApiPlayerStatsService = ApiPlayerStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
@@ -7582,7 +7647,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiPlayerAllTimeStatsService = exports.ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
+let ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -7738,6 +7803,7 @@ let ApiPlayerAllTimeStatsService = exports.ApiPlayerAllTimeStatsService = class 
         })));
     }
 };
+exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService;
 exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
@@ -7760,7 +7826,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiUserPlayerStatsService = exports.ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
+let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -7949,6 +8015,7 @@ let ApiUserPlayerStatsService = exports.ApiUserPlayerStatsService = class ApiUse
         })));
     }
 };
+exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService;
 exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
@@ -7977,12 +8044,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerStatsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let PlayerStatsMiddleware = exports.PlayerStatsMiddleware = class PlayerStatsMiddleware {
+let PlayerStatsMiddleware = class PlayerStatsMiddleware {
     use(req, res, next) {
         console.log('Request Player Stats...');
         next();
     }
 };
+exports.PlayerStatsMiddleware = PlayerStatsMiddleware;
 exports.PlayerStatsMiddleware = PlayerStatsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], PlayerStatsMiddleware);
@@ -8013,11 +8081,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(200);
 const middlewares_1 = __webpack_require__(204);
 const services_1 = __webpack_require__(202);
-let ApiSalariesModule = exports.ApiSalariesModule = class ApiSalariesModule {
+let ApiSalariesModule = class ApiSalariesModule {
     configure(consumer) {
         consumer.apply(middlewares_1.SalariesMiddleware).forRoutes('*');
     }
 };
+exports.ApiSalariesModule = ApiSalariesModule;
 exports.ApiSalariesModule = ApiSalariesModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
@@ -8060,7 +8129,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(202);
-let SalariesController = exports.SalariesController = class SalariesController {
+let SalariesController = class SalariesController {
     constructor(salariesService) {
         this.salariesService = salariesService;
     }
@@ -8106,6 +8175,7 @@ let SalariesController = exports.SalariesController = class SalariesController {
         return salaries;
     }
 };
+exports.SalariesController = SalariesController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
@@ -8186,7 +8256,7 @@ const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
 const axios_1 = __webpack_require__(163);
 const rxjs_1 = __webpack_require__(168);
-let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
+let ApiSalariesService = class ApiSalariesService {
     constructor(repo, teamsRepo, playersRepo, playersStatsRepo, playerRatingsRepo, goaliesStatsRepo, goalieRatingsRepo, httpService) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
@@ -8408,7 +8478,7 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         return await Promise.all(array.map(async (item) => ({
             ...item,
             nhlHeadShot: await this.getNhlPlayerHeadShotByPlayerId(item.player_id.nhl_id),
-            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20242025'),
+            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20242025'), // TODO UPDATE EVERY SEASON
             nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20252026'), // TODO UPDATE EVERY SEASON
         })));
     }
@@ -8463,6 +8533,7 @@ let ApiSalariesService = exports.ApiSalariesService = class ApiSalariesService {
         return this.repo.save(salary);
     }
 };
+exports.ApiSalariesService = ApiSalariesService;
 exports.ApiSalariesService = ApiSalariesService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Salaries_V2)),
@@ -8495,12 +8566,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SalariesMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let SalariesMiddleware = exports.SalariesMiddleware = class SalariesMiddleware {
+let SalariesMiddleware = class SalariesMiddleware {
     use(req, res, next) {
         console.log('Request Salaries...');
         next();
     }
 };
+exports.SalariesMiddleware = SalariesMiddleware;
 exports.SalariesMiddleware = SalariesMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], SalariesMiddleware);
@@ -8530,11 +8602,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(208);
 const middlewares_1 = __webpack_require__(212);
 const services_1 = __webpack_require__(210);
-let ApiScheduleModule = exports.ApiScheduleModule = class ApiScheduleModule {
+let ApiScheduleModule = class ApiScheduleModule {
     configure(consumer) {
         consumer.apply(middlewares_1.ScheduleMiddleware).forRoutes('*');
     }
 };
+exports.ApiScheduleModule = ApiScheduleModule;
 exports.ApiScheduleModule = ApiScheduleModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Schedule_V2, entities_1.Teams_V2, entities_1.Team_Stats_V2])],
@@ -8565,7 +8638,7 @@ exports.ScheduleController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(210);
-let ScheduleController = exports.ScheduleController = class ScheduleController {
+let ScheduleController = class ScheduleController {
     constructor(scheduleService) {
         this.scheduleService = scheduleService;
     }
@@ -8587,6 +8660,7 @@ let ScheduleController = exports.ScheduleController = class ScheduleController {
         return this.scheduleService.updateGameById(parseInt(param.id), body);
     }
 };
+exports.ScheduleController = ScheduleController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -8638,7 +8712,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiScheduleService = exports.ApiScheduleService = class ApiScheduleService {
+let ApiScheduleService = class ApiScheduleService {
     constructor(repo, teamInfoRepo, teamStatsRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -8822,6 +8896,7 @@ let ApiScheduleService = exports.ApiScheduleService = class ApiScheduleService {
         });
     }
 };
+exports.ApiScheduleService = ApiScheduleService;
 exports.ApiScheduleService = ApiScheduleService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Schedule_V2)),
@@ -8850,12 +8925,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ScheduleMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let ScheduleMiddleware = exports.ScheduleMiddleware = class ScheduleMiddleware {
+let ScheduleMiddleware = class ScheduleMiddleware {
     use(req, res, next) {
         console.log('Request Schedule...');
         next();
     }
 };
+exports.ScheduleMiddleware = ScheduleMiddleware;
 exports.ScheduleMiddleware = ScheduleMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], ScheduleMiddleware);
@@ -8885,11 +8961,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(216);
 const middlewares_1 = __webpack_require__(222);
 const services_1 = __webpack_require__(218);
-let ApiTeamStatsModule = exports.ApiTeamStatsModule = class ApiTeamStatsModule {
+let ApiTeamStatsModule = class ApiTeamStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.TeamStatsMiddleware).forRoutes('*');
     }
 };
+exports.ApiTeamStatsModule = ApiTeamStatsModule;
 exports.ApiTeamStatsModule = ApiTeamStatsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Team_Stats_V2, entities_1.Teams_V2, entities_1.Divisions_V2])],
@@ -8924,7 +9001,7 @@ exports.TeamStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(218);
-let TeamStatsController = exports.TeamStatsController = class TeamStatsController {
+let TeamStatsController = class TeamStatsController {
     constructor(teamsStatsService, allTimeTeamsStatsService, userTeamStatsService) {
         this.teamsStatsService = teamsStatsService;
         this.allTimeTeamsStatsService = allTimeTeamsStatsService;
@@ -8980,6 +9057,7 @@ let TeamStatsController = exports.TeamStatsController = class TeamStatsControlle
         return record;
     }
 };
+exports.TeamStatsController = TeamStatsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season/:seasonType'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -9060,7 +9138,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiTeamStatsService = exports.ApiTeamStatsService = class ApiTeamStatsService {
+let ApiTeamStatsService = class ApiTeamStatsService {
     constructor(repo, divisionsRepo) {
         this.repo = repo;
         this.divisionsRepo = divisionsRepo;
@@ -9222,6 +9300,7 @@ let ApiTeamStatsService = exports.ApiTeamStatsService = class ApiTeamStatsServic
         });
     }
 };
+exports.ApiTeamStatsService = ApiTeamStatsService;
 exports.ApiTeamStatsService = ApiTeamStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
@@ -9243,7 +9322,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiAllTimeTeamStatsService = exports.ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
+let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
     constructor(repo, dataSource) {
         this.repo = repo;
         this.dataSource = dataSource;
@@ -9390,6 +9469,7 @@ let ApiAllTimeTeamStatsService = exports.ApiAllTimeTeamStatsService = class ApiA
         return (high / total) * 100;
     }
 };
+exports.ApiAllTimeTeamStatsService = ApiAllTimeTeamStatsService;
 exports.ApiAllTimeTeamStatsService = ApiAllTimeTeamStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
@@ -9411,7 +9491,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiUserTeamStatsService = exports.ApiUserTeamStatsService = class ApiUserTeamStatsService {
+let ApiUserTeamStatsService = class ApiUserTeamStatsService {
     constructor(repo, teamsRepo) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
@@ -9564,6 +9644,7 @@ let ApiUserTeamStatsService = exports.ApiUserTeamStatsService = class ApiUserTea
         return (high / total) * 100;
     }
 };
+exports.ApiUserTeamStatsService = ApiUserTeamStatsService;
 exports.ApiUserTeamStatsService = ApiUserTeamStatsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Team_Stats_V2)),
@@ -9591,12 +9672,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamStatsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let TeamStatsMiddleware = exports.TeamStatsMiddleware = class TeamStatsMiddleware {
+let TeamStatsMiddleware = class TeamStatsMiddleware {
     use(req, res, next) {
         console.log('Request Team Stats...');
         next();
     }
 };
+exports.TeamStatsMiddleware = TeamStatsMiddleware;
 exports.TeamStatsMiddleware = TeamStatsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], TeamStatsMiddleware);
@@ -9626,11 +9708,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(226);
 const teams_middleware_1 = __webpack_require__(230);
 const services_1 = __webpack_require__(228);
-let ApiTeamsModule = exports.ApiTeamsModule = class ApiTeamsModule {
+let ApiTeamsModule = class ApiTeamsModule {
     configure(consumer) {
         consumer.apply(teams_middleware_1.TeamsMiddleware).forRoutes('*');
     }
 };
+exports.ApiTeamsModule = ApiTeamsModule;
 exports.ApiTeamsModule = ApiTeamsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Teams_V2, entities_1.Users_V2])],
@@ -9662,7 +9745,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(228);
-let TeamsController = exports.TeamsController = class TeamsController {
+let TeamsController = class TeamsController {
     constructor(teamsService) {
         this.teamsService = teamsService;
     }
@@ -9704,6 +9787,7 @@ let TeamsController = exports.TeamsController = class TeamsController {
         return this.teamsService.deleteTeam(parseInt(param.id));
     }
 };
+exports.TeamsController = TeamsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:id'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -9781,7 +9865,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let TeamsService = exports.TeamsService = class TeamsService {
+let TeamsService = class TeamsService {
     constructor(repo, userRepo) {
         this.repo = repo;
         this.userRepo = userRepo;
@@ -9836,6 +9920,7 @@ let TeamsService = exports.TeamsService = class TeamsService {
         return this.repo.remove(team);
     }
 };
+exports.TeamsService = TeamsService;
 exports.TeamsService = TeamsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
@@ -9853,12 +9938,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let TeamsMiddleware = exports.TeamsMiddleware = class TeamsMiddleware {
+let TeamsMiddleware = class TeamsMiddleware {
     use(req, res, next) {
         console.log('Request Teams...');
         next();
     }
 };
+exports.TeamsMiddleware = TeamsMiddleware;
 exports.TeamsMiddleware = TeamsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], TeamsMiddleware);
@@ -9889,11 +9975,12 @@ const axios_1 = __webpack_require__(163);
 const controllers_1 = __webpack_require__(233);
 const middlewares_1 = __webpack_require__(238);
 const services_1 = __webpack_require__(235);
-let ApiTransactionsModule = exports.ApiTransactionsModule = class ApiTransactionsModule {
+let ApiTransactionsModule = class ApiTransactionsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.TransactionsMiddleware).forRoutes('*');
     }
 };
+exports.ApiTransactionsModule = ApiTransactionsModule;
 exports.ApiTransactionsModule = ApiTransactionsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [
@@ -9935,7 +10022,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(235);
-let TransactionsController = exports.TransactionsController = class TransactionsController {
+let TransactionsController = class TransactionsController {
     constructor(transactionsService, transactionsTradesService) {
         this.transactionsService = transactionsService;
         this.transactionsTradesService = transactionsTradesService;
@@ -9974,6 +10061,7 @@ let TransactionsController = exports.TransactionsController = class Transactions
         return this.transactionsTradesService.trade(body);
     }
 };
+exports.TransactionsController = TransactionsController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -10054,7 +10142,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiTransactionsService = exports.ApiTransactionsService = class ApiTransactionsService {
+let ApiTransactionsService = class ApiTransactionsService {
     constructor(repo, teamInfoRepo, playersRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
@@ -10155,6 +10243,7 @@ let ApiTransactionsService = exports.ApiTransactionsService = class ApiTransacti
         return seasons.find((season) => season.year === year);
     }
 };
+exports.ApiTransactionsService = ApiTransactionsService;
 exports.ApiTransactionsService = ApiTransactionsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
@@ -10179,7 +10268,7 @@ const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
 const axios_1 = __webpack_require__(163);
 const rxjs_1 = __webpack_require__(168);
-let ApiTransactionsTradesService = exports.ApiTransactionsTradesService = class ApiTransactionsTradesService {
+let ApiTransactionsTradesService = class ApiTransactionsTradesService {
     constructor(httpService, repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo, playersRepo) {
         this.httpService = httpService;
         this.repo = repo;
@@ -10641,6 +10730,7 @@ let ApiTransactionsTradesService = exports.ApiTransactionsTradesService = class 
         });
     }
 };
+exports.ApiTransactionsTradesService = ApiTransactionsTradesService;
 exports.ApiTransactionsTradesService = ApiTransactionsTradesService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
@@ -10672,12 +10762,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TransactionsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let TransactionsMiddleware = exports.TransactionsMiddleware = class TransactionsMiddleware {
+let TransactionsMiddleware = class TransactionsMiddleware {
     use(req, res, next) {
         console.log('Request Transactions...');
         next();
     }
 };
+exports.TransactionsMiddleware = TransactionsMiddleware;
 exports.TransactionsMiddleware = TransactionsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], TransactionsMiddleware);
@@ -10707,11 +10798,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(242);
 const middlewares_1 = __webpack_require__(246);
 const services_1 = __webpack_require__(244);
-let ApiWaiversModule = exports.ApiWaiversModule = class ApiWaiversModule {
+let ApiWaiversModule = class ApiWaiversModule {
     configure(consumer) {
         consumer.apply(middlewares_1.WaiversMiddleware).forRoutes('*');
     }
 };
+exports.ApiWaiversModule = ApiWaiversModule;
 exports.ApiWaiversModule = ApiWaiversModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Waivers_V2, entities_1.Teams_V2])],
@@ -10742,7 +10834,7 @@ exports.WaiversController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(244);
-let WaiversController = exports.WaiversController = class WaiversController {
+let WaiversController = class WaiversController {
     constructor(waiversService) {
         this.waiversService = waiversService;
     }
@@ -10757,6 +10849,7 @@ let WaiversController = exports.WaiversController = class WaiversController {
         return this.waiversService.updateWaiverPriority(body);
     }
 };
+exports.WaiversController = WaiversController;
 tslib_1.__decorate([
     (0, common_1.Get)('/all'),
     tslib_1.__metadata("design:type", Function),
@@ -10799,7 +10892,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiWaiversService = exports.ApiWaiversService = class ApiWaiversService {
+let ApiWaiversService = class ApiWaiversService {
     constructor(repo, teamsRepo) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
@@ -10849,6 +10942,7 @@ let ApiWaiversService = exports.ApiWaiversService = class ApiWaiversService {
         }
     }
 };
+exports.ApiWaiversService = ApiWaiversService;
 exports.ApiWaiversService = ApiWaiversService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Waivers_V2)),
@@ -10876,12 +10970,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WaiversMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let WaiversMiddleware = exports.WaiversMiddleware = class WaiversMiddleware {
+let WaiversMiddleware = class WaiversMiddleware {
     use(req, res, next) {
         console.log('Request Waivers...');
         next();
     }
 };
+exports.WaiversMiddleware = WaiversMiddleware;
 exports.WaiversMiddleware = WaiversMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], WaiversMiddleware);
@@ -10911,11 +11006,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(250);
 const middlewares_1 = __webpack_require__(254);
 const services_1 = __webpack_require__(252);
-let ApiDivisionsModule = exports.ApiDivisionsModule = class ApiDivisionsModule {
+let ApiDivisionsModule = class ApiDivisionsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.DivisionsMiddleware).forRoutes('*');
     }
 };
+exports.ApiDivisionsModule = ApiDivisionsModule;
 exports.ApiDivisionsModule = ApiDivisionsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Divisions_V2])],
@@ -10947,7 +11043,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(252);
-let DivisionsController = exports.DivisionsController = class DivisionsController {
+let DivisionsController = class DivisionsController {
     constructor(divisionsService) {
         this.divisionsService = divisionsService;
     }
@@ -10975,6 +11071,7 @@ let DivisionsController = exports.DivisionsController = class DivisionsControlle
         return this.divisionsService.deleteDivision(parseInt(param.id));
     }
 };
+exports.DivisionsController = DivisionsController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
@@ -11038,7 +11135,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiDivisionsService = exports.ApiDivisionsService = class ApiDivisionsService {
+let ApiDivisionsService = class ApiDivisionsService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -11070,6 +11167,7 @@ let ApiDivisionsService = exports.ApiDivisionsService = class ApiDivisionsServic
         return this.repo.remove(division);
     }
 };
+exports.ApiDivisionsService = ApiDivisionsService;
 exports.ApiDivisionsService = ApiDivisionsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Divisions_V2)),
@@ -11096,12 +11194,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DivisionsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let DivisionsMiddleware = exports.DivisionsMiddleware = class DivisionsMiddleware {
+let DivisionsMiddleware = class DivisionsMiddleware {
     use(req, res, next) {
         console.log('Request Divisions...');
         next();
     }
 };
+exports.DivisionsMiddleware = DivisionsMiddleware;
 exports.DivisionsMiddleware = DivisionsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], DivisionsMiddleware);
@@ -11131,11 +11230,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(258);
 const middlewares_1 = __webpack_require__(262);
 const services_1 = __webpack_require__(260);
-let ApiGoalieRatingsModule = exports.ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
+let ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.GoalieRatingsMiddleware).forRoutes('*');
     }
 };
+exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule;
 exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Goalie_Ratings_V2, entities_1.Players_V2])],
@@ -11166,7 +11266,7 @@ exports.GoalieRatingsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(260);
-let GoalieRatingsController = exports.GoalieRatingsController = class GoalieRatingsController {
+let GoalieRatingsController = class GoalieRatingsController {
     constructor(goalieRatingsService) {
         this.goalieRatingsService = goalieRatingsService;
     }
@@ -11181,6 +11281,7 @@ let GoalieRatingsController = exports.GoalieRatingsController = class GoalieRati
         return this.goalieRatingsService.updatePlayerById(parseInt(param.id), body);
     }
 };
+exports.GoalieRatingsController = GoalieRatingsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
     tslib_1.__param(0, (0, common_1.Param)()),
@@ -11225,7 +11326,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiGoalieRatingsService = exports.ApiGoalieRatingsService = class ApiGoalieRatingsService {
+let ApiGoalieRatingsService = class ApiGoalieRatingsService {
     constructor(repo, playersRepo) {
         this.repo = repo;
         this.playersRepo = playersRepo;
@@ -11271,6 +11372,7 @@ let ApiGoalieRatingsService = exports.ApiGoalieRatingsService = class ApiGoalieR
         }
     }
 };
+exports.ApiGoalieRatingsService = ApiGoalieRatingsService;
 exports.ApiGoalieRatingsService = ApiGoalieRatingsService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Goalie_Ratings_V2)),
@@ -11298,12 +11400,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GoalieRatingsMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let GoalieRatingsMiddleware = exports.GoalieRatingsMiddleware = class GoalieRatingsMiddleware {
+let GoalieRatingsMiddleware = class GoalieRatingsMiddleware {
     use(req, res, next) {
         console.log('Request Goalie Ratings...');
         next();
     }
 };
+exports.GoalieRatingsMiddleware = GoalieRatingsMiddleware;
 exports.GoalieRatingsMiddleware = GoalieRatingsMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], GoalieRatingsMiddleware);
@@ -11333,11 +11436,12 @@ const typeorm_1 = __webpack_require__(32);
 const controllers_1 = __webpack_require__(266);
 const middlewares_1 = __webpack_require__(270);
 const services_1 = __webpack_require__(268);
-let ApiConferencesModule = exports.ApiConferencesModule = class ApiConferencesModule {
+let ApiConferencesModule = class ApiConferencesModule {
     configure(consumer) {
         consumer.apply(middlewares_1.ConferencesMiddleware).forRoutes('*');
     }
 };
+exports.ApiConferencesModule = ApiConferencesModule;
 exports.ApiConferencesModule = ApiConferencesModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [typeorm_1.TypeOrmModule.forFeature([entities_1.Conferences_V2])],
@@ -11369,7 +11473,7 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(35);
 const common_1 = __webpack_require__(1);
 const services_1 = __webpack_require__(268);
-let ConferencesController = exports.ConferencesController = class ConferencesController {
+let ConferencesController = class ConferencesController {
     constructor(conferencesService) {
         this.conferencesService = conferencesService;
     }
@@ -11390,6 +11494,7 @@ let ConferencesController = exports.ConferencesController = class ConferencesCon
         return this.conferencesService.deleteConference(parseInt(param.id));
     }
 };
+exports.ConferencesController = ConferencesController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     tslib_1.__metadata("design:type", Function),
@@ -11447,7 +11552,7 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(32);
 const typeorm_2 = __webpack_require__(13);
-let ApiConferencesService = exports.ApiConferencesService = class ApiConferencesService {
+let ApiConferencesService = class ApiConferencesService {
     constructor(repo) {
         this.repo = repo;
     }
@@ -11474,6 +11579,7 @@ let ApiConferencesService = exports.ApiConferencesService = class ApiConferences
         return this.repo.remove(conference);
     }
 };
+exports.ApiConferencesService = ApiConferencesService;
 exports.ApiConferencesService = ApiConferencesService = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Conferences_V2)),
@@ -11500,12 +11606,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ConferencesMiddleware = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let ConferencesMiddleware = exports.ConferencesMiddleware = class ConferencesMiddleware {
+let ConferencesMiddleware = class ConferencesMiddleware {
     use(req, res, next) {
         console.log('Request Conferences...');
         next();
     }
 };
+exports.ConferencesMiddleware = ConferencesMiddleware;
 exports.ConferencesMiddleware = ConferencesMiddleware = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], ConferencesMiddleware);
@@ -11526,11 +11633,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let AppController = exports.AppController = class AppController {
+let AppController = class AppController {
     root() {
         return { message: 'Hello world!' };
     }
 };
+exports.AppController = AppController;
 tslib_1.__decorate([
     (0, common_1.Get)(),
     (0, common_1.Render)('index'),
@@ -11552,7 +11660,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppService = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-let AppService = exports.AppService = class AppService {
+let AppService = class AppService {
     getData() {
         return { message: 'Welcome to cha-server!' };
     }
@@ -11560,6 +11668,7 @@ let AppService = exports.AppService = class AppService {
         return 'index.hbs';
     }
 };
+exports.AppService = AppService;
 exports.AppService = AppService = tslib_1.__decorate([
     (0, common_1.Injectable)()
 ], AppService);
@@ -11594,7 +11703,7 @@ exports.AppService = AppService = tslib_1.__decorate([
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
 
@@ -11628,8 +11737,7 @@ bootstrap();
 })();
 
 var __webpack_export_target__ = exports;
-for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_exports__[i];
+for(var __webpack_i__ in __webpack_exports__) __webpack_export_target__[__webpack_i__] = __webpack_exports__[__webpack_i__];
 if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });
 /******/ })()
 ;
-//# sourceMappingURL=main.js.map
