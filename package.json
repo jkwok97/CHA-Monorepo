@@ -73,7 +73,7 @@
     "@angular/platform-browser-dynamic": "18.2.13",
     "@angular/router": "18.2.13",
     "@nestjs/axios": "^3.0.0",
-    "@nestjs/common": "9.4.3",
+    "@nestjs/common": "11.0.16",
     "@nestjs/config": "^2.3.4",
     "@nestjs/core": "9.4.3",
     "@nestjs/platform-express": "9.4.3",
