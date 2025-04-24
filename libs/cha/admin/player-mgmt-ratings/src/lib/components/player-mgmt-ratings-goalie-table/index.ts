@@ -1,1 +1,1 @@
-export * from './player-mgmt-ratings-goalie-table.component'
+export * from './player-mgmt-ratings-goalie-table.component';

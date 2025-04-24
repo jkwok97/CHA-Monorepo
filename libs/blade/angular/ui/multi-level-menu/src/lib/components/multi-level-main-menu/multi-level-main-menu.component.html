@@ -1,0 +1,108 @@
+<div
+  [ngClass]="{ 'pt-3 pr-0': !showMenu }"
+  class="py-3 pl-3 pr-1 h-full multi-level-main-menu"
+  [ngStyle]="{
+    width: getWidth()
+  }"
+>
+  <button
+    class="multi-level-main-menu-collapse-button"
+    [ngClass]="{ 'multi-level-main-menu-collapse-button-show': isCollapsed}"
+    [ngStyle]="{'z-index': 2000 }"
+    pButton
+    size="small"
+    [text]="true"
+    [icon]="isCollapsed ? 'pi pi-angle-right' : 'pi pi-angle-left'"
+    [rounded]="true"
+    [outlined]="true"
+    [severity]="'secondary'"
+    data-ele="nav-button"
+    *ngIf="level === 1 && !showMobileMenu"
+    (click)="onCollapse()"
+  ></button>
+
+  <div
+    *ngIf="!isCollapsed"
+    class="multi-level-menu-header flex flex-row column-gap-3"
+    [ngClass]="{ 'cursor-pointer': inSubMenu, 'multi-level-menu-header-long': _title && _title.length >= 20 }"
+    (click)="onNavigateBack()"
+  >
+    <div *ngIf="inSubMenu">
+      <i class="material-icons-outlined">
+        keyboard_arrow_left
+      </i>
+    </div>
+
+    @if (_title) {
+      {{ _title }}
+    } @else if (logo) {
+      <a [routerLink]="['/']" class="text-white logo-link">
+        <svg-icon [src]="logo"/>
+      </a>
+    }
+
+  </div>
+
+  <div *ngIf="customHeightClassName && showMenu && !isCollapsed" [@fadeInOut]>
+    <ng-content></ng-content>
+  </div>
+
+  <div
+    *ngIf="showMenu && !isCollapsed"
+    [@fadeInOut]
+    class="flex flex-column row-gap-1 pb-3 multi-level-main-menu-item-container"
+    [class]="customHeightClassName ? 'multi-level-main-menu-item-container-' + customHeightClassName : ''"
+    [ngClass]="{
+      'multi-level-main-menu-item-container-with-footer': footerTmpl,
+      'multi-level-main-menu-item-container-with-footer-short': footerTmpl && _title && _title.length >= 20,
+      'multi-level-main-menu-item-container-short': _title && _title.length >= 20,
+    }"
+  >
+    @for (menuItem of menuList; track menuItem.key) {
+      <blade-multi-level-menu-item
+        *ngIf="menuItem.key !== 'divider'"
+        [attr.data-side-menu-ele]="menuItem.key"
+        [menuItem]="menuItem"
+        [routerLink]="menuItem.routerLink"
+        [inSubMenu]="inSubMenu"
+        (click)="routeToLink(menuItem)"
+        (subMenuItemClicked)="onSubMenuItemClicked($event)"
+        (subMenuTitle)="onSubMenuTitleChange($event)"
+      />
+
+      <hr *ngIf="menuItem.key === 'divider'"/>
+    }
+  </div>
+
+  <div *ngIf="footerTmpl && showMenu && !isCollapsed" [@fadeInOut]>
+
+    <blade-multi-level-menu-footer>
+      <ng-container *ngTemplateOutlet="footerTmpl"/>
+    </blade-multi-level-menu-footer>
+
+  </div>
+
+  <div
+    *ngIf="!showMenu"
+    (click)="onNavigateBackByIcon()"
+    [@fadeInOut]
+    class="flex flex-row justify-content-end cursor-pointer multi-level-main-menu-navigate"
+  >
+
+    @if (level === 1) {
+      <div class="multi-level-main-menu-icon-material">
+        <i class="material-icons-outlined">home</i>
+      </div>
+    } @else {
+      @if (iconToShow) {
+        <div class="multi-level-main-menu-icon-material">
+          <i class="material-icons-outlined">
+            {{ iconToShow }}
+          </i>
+        </div>
+      }
+    }
+
+  </div>
+
+</div>

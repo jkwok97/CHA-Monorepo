@@ -49,7 +49,7 @@ export class TeamsSummaryTeamComponent implements OnInit {
         }
       });
 
-      this.displayFacade.isMobile$
+    this.displayFacade.isMobile$
       .pipe(first())
       .subscribe((isMobile: boolean) => {
         this.isMobile = isMobile;

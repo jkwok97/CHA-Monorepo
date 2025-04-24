@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/rules-lottery"],
       "options": {
-        "jestConfig": "libs/cha/front/rules-lottery/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/rules-lottery/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/rules-lottery/**/*.ts",
-          "libs/cha/front/rules-lottery/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

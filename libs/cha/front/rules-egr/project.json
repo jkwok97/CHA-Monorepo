@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/rules-egr"],
       "options": {
-        "jestConfig": "libs/cha/front/rules-egr/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/rules-egr/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/rules-egr/**/*.ts",
-          "libs/cha/front/rules-egr/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

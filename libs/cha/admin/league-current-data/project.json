@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/cha/admin/league-current-data"
       ],
       "options": {
-        "jestConfig": "libs/cha/admin/league-current-data/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/league-current-data/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/admin/league-current-data/**/*.ts",
-          "libs/cha/admin/league-current-data/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "admin"]

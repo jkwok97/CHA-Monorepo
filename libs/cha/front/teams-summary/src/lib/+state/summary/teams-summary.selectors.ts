@@ -386,7 +386,7 @@ const selectGoalieSalariesSortedByRating = createSelector(
           playerSalaries.player_id.primary_position === 'G'
       )
       .sort(
-        (a, b) => 
+        (a, b) =>
           (Number(b.ratings?.wins) != null
             ? Number(b.ratings?.wins)
             : -Infinity) -

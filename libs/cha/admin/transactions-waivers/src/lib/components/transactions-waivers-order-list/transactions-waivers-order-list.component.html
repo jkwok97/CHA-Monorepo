@@ -4,11 +4,7 @@
   [dragdrop]="true"
   (onReorder)="onReorder($event)"
 >
-
-  <ng-template
-    let-waiver
-    pTemplate="item"
-  >
+  <ng-template let-waiver pTemplate="item">
     <div class="flex column-gap-3 align-items-center">
       <img
         [src]="this.getString(waiver.teamInfo.teamlogo)"

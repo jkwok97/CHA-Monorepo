@@ -1,12 +1,10 @@
 @mixin screen($breakpoint) {
-    @if map-has_key($breakpoints, $breakpoint) {
-      @media (max-width: map-get($breakpoints, $breakpoint)) {
-        @content;
-      }
+  @if map-has_key($breakpoints, $breakpoint) {
+    @media (max-width: map-get($breakpoints, $breakpoint)) {
+      @content;
     }
-    @else {
-      @warn "Unfortunaly, `#{$breakpoint}` can not be found. "
+  } @else {
+    @warn "Unfortunaly, `#{$breakpoint}` can not be found. "
       + "Available breakpoints are: #{map_keys(($breakpoints))}";
-    }
   }
-  
+}

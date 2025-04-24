@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/repeating"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/formly/types/repeating/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/formly/types/repeating/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/formly/types/repeating/**/*.ts",
-          "libs/blade/angular/formly/types/repeating/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:forms"]

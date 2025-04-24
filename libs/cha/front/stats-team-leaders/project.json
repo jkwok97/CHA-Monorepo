@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/stats-team-leaders"],
       "options": {
-        "jestConfig": "libs/cha/front/stats-team-leaders/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/stats-team-leaders/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/stats-team-leaders/**/*.ts",
-          "libs/cha/front/stats-team-leaders/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

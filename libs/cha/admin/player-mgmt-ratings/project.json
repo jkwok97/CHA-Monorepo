@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/cha/admin/player-mgmt-ratings"
       ],
       "options": {
-        "jestConfig": "libs/cha/admin/player-mgmt-ratings/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/player-mgmt-ratings/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/admin/player-mgmt-ratings/**/*.ts",
-          "libs/cha/admin/player-mgmt-ratings/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "admin"]

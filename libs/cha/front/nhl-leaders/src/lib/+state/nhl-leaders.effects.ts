@@ -18,10 +18,12 @@ export class NhlLeadersEffects {
       ofType(NhlLeadersActions.getLeaders),
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
-        this.nhlService.getAllLeaders(data.nhl_year, data.min_games.toString()).pipe(
-          map((leaders) => NhlLeadersActions.getLeadersSuccess({ leaders })),
-          catchError(() => of(NhlLeadersActions.error()))
-        )
+        this.nhlService
+          .getAllLeaders(data.nhl_year, data.min_games.toString())
+          .pipe(
+            map((leaders) => NhlLeadersActions.getLeadersSuccess({ leaders })),
+            catchError(() => of(NhlLeadersActions.error()))
+          )
       )
     )
   );

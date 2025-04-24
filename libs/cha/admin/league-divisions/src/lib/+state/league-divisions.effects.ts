@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ConferenceDto, DivisionDto, GetDivisionDto } from '@cha/shared/entities';
+import {
+  ConferenceDto,
+  DivisionDto,
+  GetDivisionDto,
+} from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { MessageService } from 'primeng/api';
 import { exhaustMap, map, catchError, of, tap } from 'rxjs';

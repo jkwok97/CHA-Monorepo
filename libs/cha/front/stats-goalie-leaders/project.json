@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/cha/front/stats-goalie-leaders"
       ],
       "options": {
-        "jestConfig": "libs/cha/front/stats-goalie-leaders/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/stats-goalie-leaders/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/stats-goalie-leaders/**/*.ts",
-          "libs/cha/front/stats-goalie-leaders/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/divider"],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/divider/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/divider/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/ui/divider/**/*.ts",
-          "libs/blade/angular/ui/divider/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:ui"]

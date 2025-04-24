@@ -39,6 +39,6 @@ export class ScheduleGamesFacade {
   }
 
   saveGame(game: any) {
-    this.store.dispatch(ScheduleGamesActions.saveGame({game}))
+    this.store.dispatch(ScheduleGamesActions.saveGame({ game }));
   }
 }

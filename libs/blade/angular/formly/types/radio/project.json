@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/radio"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/formly/types/radio/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/formly/types/radio/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/formly/types/radio/**/*.ts",
-          "libs/blade/angular/formly/types/radio/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:forms"]

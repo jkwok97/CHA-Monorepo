@@ -110,11 +110,10 @@ export class TeamStatsController {
   async getUserTeamStatsBySeasonType(
     @Param() param
   ): Promise<StatUserTeamRecordDto> {
-    const record =
-      await this.userTeamStatsService.getUserTeamStatsBySeasonType(
-        param.userId,
-        param.seasonType
-      );
+    const record = await this.userTeamStatsService.getUserTeamStatsBySeasonType(
+      param.userId,
+      param.seasonType
+    );
 
     if (!record) {
       throw new NotFoundException('User Team Stats not found');

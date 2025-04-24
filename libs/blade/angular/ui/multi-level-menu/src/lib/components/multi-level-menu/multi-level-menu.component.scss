@@ -1,0 +1,31 @@
+@import 'core/variables';
+
+.multi-level-menu {
+  //border: 1px solid green;
+  //background-color: $gray-50;
+
+  &-item {
+    height: calc(100% - 60px);
+    left: 0;
+
+    &-height {
+      height: 100vh;
+    }
+  }
+
+  &-overlay {
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+
+    &-height {
+      margin-top: 0px;
+      height: 100vh;
+    }
+    //border: 1px solid red;
+  }
+
+  &-nav-button {
+    position: fixed;
+    z-index: 1000;
+  }
+}

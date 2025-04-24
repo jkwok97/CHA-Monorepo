@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/blade/angular/ui/button-select"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/button-select/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/button-select/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/ui/button-select/**/*.ts",
-          "libs/blade/angular/ui/button-select/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:ui"]

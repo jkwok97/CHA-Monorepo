@@ -3,9 +3,7 @@ import { createAction, props } from '@ngrx/store';
 
 const NAMESPACE = '[DRAFT MGMT TABLE]';
 
-const getDraftTable = createAction(
-  `${NAMESPACE} Get Draft Table`,
-);
+const getDraftTable = createAction(`${NAMESPACE} Get Draft Table`);
 
 const getDraftTableSuccess = createAction(
   `${NAMESPACE} Get Draft Table Success`,

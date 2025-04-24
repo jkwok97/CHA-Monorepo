@@ -19,7 +19,6 @@ import { DraftCurrentFacade } from './+state/draft-current.facade';
 
 import { DraftCurrentComponent } from './containers';
 
-
 @NgModule({
   imports: [
     CommonModule,

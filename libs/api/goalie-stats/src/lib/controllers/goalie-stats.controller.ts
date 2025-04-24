@@ -165,11 +165,10 @@ export class GoalieStatsController {
   async getTeamPlayersByTeamName(
     @Param() param
   ): Promise<StatPlayerAwardDto[]> {
-    const record =
-      await this.userGoalieStatsService.getTeamPlayersByTeamName(
-        param.teamName,
-        param.season
-      );
+    const record = await this.userGoalieStatsService.getTeamPlayersByTeamName(
+      param.teamName,
+      param.season
+    );
 
     if (!record) {
       throw new NotFoundException('Team Players Stats not found');

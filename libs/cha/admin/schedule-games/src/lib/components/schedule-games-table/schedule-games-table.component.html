@@ -95,7 +95,7 @@
           <span class="p-column-title">{{ column.header }}</span>
           <div class="table-body-cell">
             <ng-container>{{ data[column.field] }}</ng-container>
-            <ng-container *ngIf="column.field === 'vs'">@</ng-container>
+            <ng-container *ngIf="column.field === 'vs'">&#64;</ng-container>
             <ng-container *ngIf="column.field === 'action'">
               <button
                 pButton

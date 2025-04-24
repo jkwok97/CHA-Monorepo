@@ -1,6 +1,15 @@
 import { Awards_V2, Award_Type_V2 } from '@api/entities';
 import { AwardCreateDto, AwardDto, UserAwardDto } from '@cha/shared/entities';
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiUserAwardsService } from '../services';
 import { ApiAwardsService } from '../services/api-awards.service';
 

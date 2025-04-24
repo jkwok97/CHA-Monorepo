@@ -135,9 +135,7 @@ export class PlayerMgmtRatingsEffects {
       ofType(PlayerMgmtRatingsActions.deletePlayerRating),
       exhaustMap((action) =>
         this.playerMgmtRatingsService.deletePlayerRating(action.ratingId).pipe(
-          map(() =>
-            PlayerMgmtRatingsActions.deletePlayerRatingSuccess()
-          ),
+          map(() => PlayerMgmtRatingsActions.deletePlayerRatingSuccess()),
           catchError(() => of(PlayerMgmtRatingsActions.error()))
         )
       )

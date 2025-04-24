@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/cha/admin/player-mgmt-salaries"
       ],
       "options": {
-        "jestConfig": "libs/cha/admin/player-mgmt-salaries/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/player-mgmt-salaries/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/admin/player-mgmt-salaries/**/*.ts",
-          "libs/cha/admin/player-mgmt-salaries/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "admin"]

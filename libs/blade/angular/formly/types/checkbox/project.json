@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/checkbox"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/formly/types/checkbox/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/formly/types/checkbox/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/formly/types/checkbox/**/*.ts",
-          "libs/blade/angular/formly/types/checkbox/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:forms"]

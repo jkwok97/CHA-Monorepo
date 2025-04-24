@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/league-conferences"],
       "options": {
-        "jestConfig": "libs/cha/admin/league-conferences/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/league-conferences/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/admin/league-conferences/**/*.ts",
-          "libs/cha/admin/league-conferences/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "admin"]

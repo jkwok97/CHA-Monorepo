@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/home-goalies"],
       "options": {
-        "jestConfig": "libs/cha/front/home-goalies/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/home-goalies/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/home-goalies/**/*.ts",
-          "libs/cha/front/home-goalies/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

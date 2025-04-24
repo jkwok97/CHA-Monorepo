@@ -9,6 +9,4 @@ import { StatTeamPlayoffsDto } from '@cha/shared/entities';
 })
 export class GamesPlayoffsFinalChampionCardComponent {
   @Input() champion!: StatTeamPlayoffsDto;
-
-  
 }

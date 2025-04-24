@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/domain/logo"],
       "options": {
-        "jestConfig": "libs/cha/domain/logo/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/domain/logo/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/domain/logo/**/*.ts",
-          "libs/cha/domain/logo/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["domain"]

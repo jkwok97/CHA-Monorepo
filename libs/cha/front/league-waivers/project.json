@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/league-waivers"],
       "options": {
-        "jestConfig": "libs/cha/front/league-waivers/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/league-waivers/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/league-waivers/**/*.ts",
-          "libs/cha/front/league-waivers/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

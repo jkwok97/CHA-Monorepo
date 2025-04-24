@@ -129,13 +129,22 @@ export class ApiAllTimeTeamStatsService {
           ).toFixed(1)
         ),
         foPct: Number(
-          this.getPct(Number(stat.face_off_won), Number(stat.face_off_lost)).toFixed(1)
+          this.getPct(
+            Number(stat.face_off_won),
+            Number(stat.face_off_lost)
+          ).toFixed(1)
         ),
         passPct: Number(
-          this.getPct(Number(stat.pass_complete), Number(stat.pass_incomplete)).toFixed(1)
+          this.getPct(
+            Number(stat.pass_complete),
+            Number(stat.pass_incomplete)
+          ).toFixed(1)
         ),
         cornerPct: Number(
-          this.getPct(Number(stat.corner_won), Number(stat.corner_lost)).toFixed(1)
+          this.getPct(
+            Number(stat.corner_won),
+            Number(stat.corner_lost)
+          ).toFixed(1)
         ),
         pimPerGame: Number(
           (stat.penalty_minutes / stat.games_played).toFixed(1)

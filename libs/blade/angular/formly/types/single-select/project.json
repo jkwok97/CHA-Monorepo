@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/blade/angular/formly/types/single-select"
       ],
       "options": {
-        "jestConfig": "libs/blade/angular/formly/types/single-select/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/formly/types/single-select/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/formly/types/single-select/**/*.ts",
-          "libs/blade/angular/formly/types/single-select/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:forms"]

@@ -23,7 +23,8 @@ const selectWesternTeams = createSelector(
   selectAll,
   (teams: StatTeamAllDto[]) =>
     teams.filter(
-      (team: StatTeamAllDto) => team.division.conference_id.id === ConferencesEnum.WESTERN
+      (team: StatTeamAllDto) =>
+        team.division.conference_id.id === ConferencesEnum.WESTERN
     )
 );
 
@@ -31,7 +32,8 @@ const selectEasternTeams = createSelector(
   selectAll,
   (teams: StatTeamAllDto[]) =>
     teams.filter(
-      (team: StatTeamAllDto) => team.division.conference_id.id === ConferencesEnum.EASTERN
+      (team: StatTeamAllDto) =>
+        team.division.conference_id.id === ConferencesEnum.EASTERN
     )
 );
 

@@ -1,12 +1,6 @@
 import { Waivers_V2 } from '@api/entities';
 import { WaiversDto } from '@cha/shared/entities';
-import {
-  Body,
-  Controller,
-  Get,
-  NotFoundException,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Put } from '@nestjs/common';
 import { ApiWaiversService } from '../services';
 
 @Controller('waivers')

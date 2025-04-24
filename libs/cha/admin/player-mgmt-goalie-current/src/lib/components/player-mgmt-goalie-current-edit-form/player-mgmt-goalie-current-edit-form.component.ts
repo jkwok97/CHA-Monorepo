@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { LeagueDataFacade } from '@cha/domain/core';
 import { StatGoalieAllDto } from '@cha/shared/entities';

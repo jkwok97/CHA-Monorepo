@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/league-trades"],
       "options": {
-        "jestConfig": "libs/cha/front/league-trades/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/league-trades/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/league-trades/**/*.ts",
-          "libs/cha/front/league-trades/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

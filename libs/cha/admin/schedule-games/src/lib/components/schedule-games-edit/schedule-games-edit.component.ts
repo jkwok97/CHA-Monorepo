@@ -37,7 +37,7 @@ export class ScheduleGamesEditComponent {
     const game = {
       ...this.game,
       vis_team_score: this.gameFormRef?.form.value.vis_team_score,
-      home_team_score: this.gameFormRef?.form.value.home_team_score
+      home_team_score: this.gameFormRef?.form.value.home_team_score,
     };
 
     this.scheduleGamesFacade.saveGame(game);

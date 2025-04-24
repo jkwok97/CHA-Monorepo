@@ -72,10 +72,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "cha-admin:build:production"
+          "buildTarget": "cha-admin:build:production"
         },
         "development": {
-          "browserTarget": "cha-admin:build:development"
+          "buildTarget": "cha-admin:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -83,24 +83,17 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "cha-admin:build"
+        "buildTarget": "cha-admin:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/cha-admin/**/*.ts",
-          "apps/cha-admin/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/cha-admin"],
       "options": {
-        "jestConfig": "apps/cha-admin/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/cha-admin/jest.config.ts"
       }
     }
   },

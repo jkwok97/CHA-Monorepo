@@ -26,10 +26,7 @@ const selectSaving = createSelector(
   ScheduleGamesReducer.getSaving
 );
 
-const selectSaved = createSelector(
-  selectState,
-  ScheduleGamesReducer.getSaved
-);
+const selectSaved = createSelector(selectState, ScheduleGamesReducer.getSaved);
 
 const selectSeason = createSelector(
   selectSchedule,

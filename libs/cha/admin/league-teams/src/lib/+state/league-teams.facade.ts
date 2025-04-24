@@ -34,7 +34,7 @@ export class LeagueTeamsFacade {
 
   divisions$: Observable<any[]> = this.store.select(
     LeagueTeamsSelectors.selectDivisionsOptions
-  )
+  );
 
   constructor(private store: Store<State>) {}
 

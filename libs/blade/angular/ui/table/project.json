@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/blade/angular/ui/table"],
       "options": {
-        "jestConfig": "libs/blade/angular/ui/table/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/blade/angular/ui/table/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/blade/angular/ui/table/**/*.ts",
-          "libs/blade/angular/ui/table/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:ui"]

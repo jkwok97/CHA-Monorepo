@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/rules-rosters"],
       "options": {
-        "jestConfig": "libs/cha/front/rules-rosters/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/rules-rosters/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/rules-rosters/**/*.ts",
-          "libs/cha/front/rules-rosters/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

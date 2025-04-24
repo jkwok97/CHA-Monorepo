@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/front/nhl-leaders"],
       "options": {
-        "jestConfig": "libs/cha/front/nhl-leaders/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/nhl-leaders/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/nhl-leaders/**/*.ts",
-          "libs/cha/front/nhl-leaders/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]

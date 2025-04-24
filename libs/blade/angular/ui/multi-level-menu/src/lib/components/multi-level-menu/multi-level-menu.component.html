@@ -1,0 +1,86 @@
+<div class="h-full multi-level-menu" [ngStyle]="{ width: getWidth() }">
+  <ng-container *ngIf="mode === 'push'">
+    @for (menu of menuItemList; track menu.level) {
+      <blade-multi-level-main-menu
+        class="absolute multi-level-menu-item"
+        [ngClass]="{ 'multi-level-menu-item-height': !hasTopNav }"
+        [ngStyle]="{ 'z-index': menu.zIndex }"
+        [menuItemList]="menuItemList"
+        [showMobileMenu]="false"
+        [level]="menu.level"
+        [title]="menu.title"
+        [customHeightClassName]="customHeightClassName"
+        [logo]="menu.logo"
+        [menuList]="menu.items"
+        [numberOfItemsToShow]="menuItemList.length"
+        [showMenu]="menuItemList.length === menu.level"
+        [footerTmpl]="footerTmpl"
+        [inSubMenu]="inSubMenu"
+        (menuItemClicked)="onMenuItemClicked($event)"
+        (navigateBackByIcon)="onNavigateBackByIcon($event)"
+        (navigateBackByName)="onNavigateBackByName($event)"
+        (currentSubMenu)="onCurrentSubMenu($event)"
+        (isMenuCollapsed)="onMenuCollapsed($event)"
+        (titleChanged)="onTitleChanged($event)"
+        [@slideInLeft]
+      >
+        <ng-content
+          select=".new-chat-button-container"
+        ></ng-content>
+      </blade-multi-level-main-menu
+      >
+    }
+  </ng-container>
+
+  <ng-container *ngIf="mode === 'over'">
+    <div class="multi-level-menu-nav-button">
+      <button
+        pButton
+        [text]="true"
+        [severity]="'secondary'"
+        data-ele="nav-button"
+        (click)="handleOver()"
+      >
+        <i class="material-icons-outlined"> menu </i>
+      </button>
+    </div>
+
+    <ng-template #overlayTmpl>
+      <div
+        class="multi-level-menu-overlay"
+        [ngClass]="{ 'multi-level-menu-overlay-height': !hasTopNav }"
+      >
+        @for (menu of menuItemList; track menu.level) {
+          <blade-multi-level-main-menu
+            class="absolute multi-level-menu-item"
+            [ngClass]="{ 'multi-level-menu-item-height': !hasTopNav }"
+            [ngStyle]="{ 'z-index': menu.zIndex }"
+            [menuItemList]="menuItemList"
+            [showMobileMenu]="true"
+            [level]="menu.level"
+            [title]="menu.title"
+            [customHeightClassName]="customHeightClassName"
+            [logo]="menu.logo"
+            [menuList]="menu.items"
+            [numberOfItemsToShow]="menuItemList.length"
+            [showMenu]="menuItemList.length === menu.level"
+            [footerTmpl]="footerTmpl"
+            [inSubMenu]="inSubMenu"
+            (menuItemClicked)="onMenuItemClicked($event)"
+            (navigateBackByIcon)="onNavigateBackByIcon($event)"
+            (navigateBackByName)="onNavigateBackByName($event)"
+            (currentSubMenu)="onCurrentSubMenu($event)"
+            (isMenuCollapsed)="onMenuCollapsed($event)"
+            (titleChanged)="onTitleChanged($event)"
+            [@slideInLeft]
+          >
+            <ng-content
+              select=".new-chat-button-container-overlay"
+            ></ng-content>
+          </blade-multi-level-main-menu
+          >>
+        }
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

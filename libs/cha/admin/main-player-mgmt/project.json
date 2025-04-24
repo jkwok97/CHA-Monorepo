@@ -9,18 +9,11 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/cha/admin/main-player-mgmt"],
       "options": {
-        "jestConfig": "libs/cha/admin/main-player-mgmt/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/admin/main-player-mgmt/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/admin/main-player-mgmt/**/*.ts",
-          "libs/cha/admin/main-player-mgmt/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "admin"]

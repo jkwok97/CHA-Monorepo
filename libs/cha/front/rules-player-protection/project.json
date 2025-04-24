@@ -11,18 +11,11 @@
         "{workspaceRoot}/coverage/libs/cha/front/rules-player-protection"
       ],
       "options": {
-        "jestConfig": "libs/cha/front/rules-player-protection/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "libs/cha/front/rules-player-protection/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/cha/front/rules-player-protection/**/*.ts",
-          "libs/cha/front/rules-player-protection/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
   },
   "tags": ["angular:feature", "front"]
