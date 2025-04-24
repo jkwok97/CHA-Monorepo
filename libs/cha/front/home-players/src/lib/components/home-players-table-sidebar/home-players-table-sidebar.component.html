@@ -1,109 +1,108 @@
 <div class="flex align-items-center column-gap-3">
-    <p-avatar
-      [image]="getPlayerPicture(playerStats.player_id?.nhl_id)"
-      shape="circle"
-      size="xlarge"
-      [style]="{ 'background-color': 'white' }"
-    ></p-avatar>
-    <div>
-      <div class="text-xl font-light">
-        {{ playerStats.full_name }}
-      </div>
-  
-      <div
-        class="text-md flex column-gap-2 align-items-center"
-        style="font-weight: 100"
-      >
+  <p-avatar
+    [image]="getPlayerPicture(playerStats.player_id?.nhl_id)"
+    shape="circle"
+    size="xlarge"
+    [style]="{ 'background-color': 'white' }"
+  ></p-avatar>
+  <div>
+    <div class="text-xl font-light">
+      {{ playerStats.full_name }}
+    </div>
+
+    <div
+      class="text-md flex column-gap-2 align-items-center"
+      style="font-weight: 100"
+    >
+      <div>
+        <div *ngIf="statType === 'season'">
+          <i>{{ playerStats.team_name }}</i>
+        </div>
         <div>
-          <div *ngIf="statType === 'season'">
-            <i>{{ playerStats.team_name }}</i>
-          </div>
-          <div>
-            <i>{{ playerStats.position }}</i>
-          </div>
+          <i>{{ playerStats.position }}</i>
         </div>
       </div>
     </div>
   </div>
-  
-  <blade-divider></blade-divider>
-  
-  <div class="text-md font-light flex justify-content-between">
+</div>
+
+<blade-divider></blade-divider>
+
+<div class="text-md font-light flex justify-content-between">
+  <div>
+    <div>Games Played:</div>
+    <div>Goals:</div>
+    <div>Assists:</div>
+    <div>Points:</div>
+    <div>Points Per Sixty:</div>
+    <div>Plus/Minus:</div>
+    <div>Penalty Minutes:</div>
+    <div>Power Play Goals:</div>
+    <div>Short Handed Goals:</div>
+    <div>Game Winning Goals:</div>
+    <div>Shots:</div>
+    <div>Shooting Pct:</div>
+    <div>Minutes Per Game:</div>
+    <div *ngIf="statType === 'season'">Face Off Pct:</div>
+    <div *ngIf="statType === 'season'">Passing Pct:</div>
+    <div *ngIf="statType === 'season'">Corner Battle Pct:</div>
+    <div>Hits Per Game:</div>
+    <div>Blocked Shots:</div>
+  </div>
+  <div style="font-weight: 100" class="text-right">
     <div>
-      <div>Games Played:</div>
-      <div>Goals:</div>
-      <div>Assists:</div>
-      <div>Points:</div>
-      <div>Points Per Sixty:</div>
-      <div>Plus/Minus:</div>
-      <div>Penalty Minutes:</div>
-      <div>Power Play Goals:</div>
-      <div>Short Handed Goals:</div>
-      <div>Game Winning Goals:</div>
-      <div>Shots:</div>
-      <div>Shooting Pct:</div>
-      <div>Minutes Per Game:</div>
-      <div *ngIf="statType === 'season'">Face Off Pct:</div>
-      <div *ngIf="statType === 'season'">Passing Pct:</div>
-      <div *ngIf="statType === 'season'">Corner Battle Pct:</div>
-      <div>Hits Per Game:</div>
-      <div>Blocked Shots:</div>
+      <i>{{ playerStats.games_played }}</i>
     </div>
-    <div style="font-weight: 100" class="text-right">
-      <div>
-        <i>{{ playerStats.games_played }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.goals }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.assists }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.points }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.pointsPerSixty }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.plus_minus }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.penalty_minutes }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.pp_goals }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.sh_goals }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.gw_goals }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.shots }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.shooting_pct }}%</i>
-      </div>
-      <div>
-        <i>{{ playerStats.minutes_per_game }}</i>
-      </div>
-      <div *ngIf="statType === 'season'">
-        <i>{{ playerStats.fo_pct }}%</i>
-      </div>
-      <div *ngIf="statType === 'season'">
-        <i>{{ playerStats.pass_pct }}%</i>
-      </div>
-      <div *ngIf="statType === 'season'">
-        <i>{{ playerStats.corner_pct }}%</i>
-      </div>
-      <div>
-        <i>{{ playerStats.hit_per_game }}</i>
-      </div>
-      <div>
-        <i>{{ playerStats.blocked_shots }}</i>
-      </div>
+    <div>
+      <i>{{ playerStats.goals }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.assists }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.points }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.pointsPerSixty }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.plus_minus }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.penalty_minutes }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.pp_goals }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.sh_goals }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.gw_goals }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.shots }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.shooting_pct }}%</i>
+    </div>
+    <div>
+      <i>{{ playerStats.minutes_per_game }}</i>
+    </div>
+    <div *ngIf="statType === 'season'">
+      <i>{{ playerStats.fo_pct }}%</i>
+    </div>
+    <div *ngIf="statType === 'season'">
+      <i>{{ playerStats.pass_pct }}%</i>
+    </div>
+    <div *ngIf="statType === 'season'">
+      <i>{{ playerStats.corner_pct }}%</i>
+    </div>
+    <div>
+      <i>{{ playerStats.hit_per_game }}</i>
+    </div>
+    <div>
+      <i>{{ playerStats.blocked_shots }}</i>
     </div>
   </div>
-  
+</div>

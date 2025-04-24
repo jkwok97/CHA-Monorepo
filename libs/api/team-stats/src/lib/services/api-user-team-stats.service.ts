@@ -130,7 +130,7 @@ export class ApiUserTeamStatsService {
         pass_complete: true,
         pass_incomplete: true,
         shots_against: true,
-        shots_for: true
+        shots_for: true,
       },
       where: {
         team_id: {
@@ -140,8 +140,8 @@ export class ApiUserTeamStatsService {
         season_type: seasonType,
       },
       order: {
-        playing_year: 'DESC'
-      }
+        playing_year: 'DESC',
+      },
     });
   }
 

@@ -5,6 +5,16 @@
     "declaration": true,
     "types": []
   },
-  "include": ["**/*.ts", "../../domain/url-router/src/lib/models/url-router-custom-serializer.ts", "../../../api/team-stats/src/lib/entities/goalie-stats.entity.ts", "../../../api/schedule/src/lib/entities/index.ts", "../../../api/salaries/src/lib/entities/index.ts", "../../../api/player-ratings/src/lib/entities/goalie-rating.entity.ts", "../../../api/player-info/src/lib/entities/index.ts", "../../../api/league/src/lib/entities/conference.entity.ts", "../../../api/draft-table/src/lib/entities/draft-order.entity.ts"],
+  "include": [
+    "**/*.ts",
+    "../../domain/url-router/src/lib/models/url-router-custom-serializer.ts",
+    "../../../api/team-stats/src/lib/entities/goalie-stats.entity.ts",
+    "../../../api/schedule/src/lib/entities/index.ts",
+    "../../../api/salaries/src/lib/entities/index.ts",
+    "../../../api/player-ratings/src/lib/entities/goalie-rating.entity.ts",
+    "../../../api/player-info/src/lib/entities/index.ts",
+    "../../../api/league/src/lib/entities/conference.entity.ts",
+    "../../../api/draft-table/src/lib/entities/draft-order.entity.ts"
+  ],
   "exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }

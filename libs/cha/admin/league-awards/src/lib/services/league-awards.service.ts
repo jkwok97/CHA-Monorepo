@@ -52,13 +52,13 @@ export class LeagueAwardsService {
 
   getPlayers(season: string, teamName: string) {
     return this._http
-    .get(`${this.apiUrl}/player-stats/team/${teamName}/${season}`)
-    .pipe(map((result: any) => result));
+      .get(`${this.apiUrl}/player-stats/team/${teamName}/${season}`)
+      .pipe(map((result: any) => result));
   }
 
   getGoalies(season: string, teamName: string) {
     return this._http
-    .get(`${this.apiUrl}/goalie-stats/team/${teamName}/${season}`)
-    .pipe(map((result: any) => result));
+      .get(`${this.apiUrl}/goalie-stats/team/${teamName}/${season}`)
+      .pipe(map((result: any) => result));
   }
 }

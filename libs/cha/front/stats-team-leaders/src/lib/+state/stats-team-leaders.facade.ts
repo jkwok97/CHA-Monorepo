@@ -37,13 +37,13 @@ export class LeagueStatsTeamFacade {
   );
   leagureTeamShotDiff$: Observable<statTeamDto[]> = this.store.select(
     LeagueStatsTeamSelectors.selectLeagueTeamStatsShotsDiff
-  )
+  );
   leagueTeamFaceoffs$: Observable<statTeamDto[]> = this.store.select(
     LeagueStatsTeamSelectors.selectLeagueTeamStatsFaceoffs
-  )
+  );
   leagueTeamPassing$: Observable<statTeamDto[]> = this.store.select(
     LeagueStatsTeamSelectors.selectLeagueTeamStatsPassing
-  )
+  );
   leagueTeamPp$: Observable<statTeamDto[]> = this.store.select(
     LeagueStatsTeamSelectors.selectLeagueTeamStatsPp
   );

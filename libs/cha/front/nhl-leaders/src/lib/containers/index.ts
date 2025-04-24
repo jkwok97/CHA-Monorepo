@@ -1,1 +1,1 @@
-export * from './nhl-leaders'
+export * from './nhl-leaders';

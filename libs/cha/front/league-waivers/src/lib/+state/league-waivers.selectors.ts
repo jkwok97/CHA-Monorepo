@@ -10,13 +10,15 @@ const selectLoading = createSelector(
   LeagueWaiversReducer.getLoading
 );
 
-const selectLoaded = createSelector(selectState, LeagueWaiversReducer.getLoaded);
+const selectLoaded = createSelector(
+  selectState,
+  LeagueWaiversReducer.getLoaded
+);
 
 const selectWaivers = createSelector(
   selectState,
   LeagueWaiversReducer.getWaivers
 );
-
 
 export const LeagueWaiversSelectors = {
   selectLoaded,

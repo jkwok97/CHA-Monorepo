@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   templateUrl: './main-nhl.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainNhlComponent  {
+export class MainNhlComponent {
   panelStyleMobile = {
     width: '100%',
     height: '88vh',

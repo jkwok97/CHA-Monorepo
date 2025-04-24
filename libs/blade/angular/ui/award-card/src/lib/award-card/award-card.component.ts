@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Avatar, AvatarModule } from 'primeng/avatar';

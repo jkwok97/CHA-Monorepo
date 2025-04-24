@@ -33,5 +33,5 @@ export const GamesPlayoffsActions = {
   getBoxScore,
   getBoxScoreSuccess,
   resetBoxScore,
-  getBoxScoreError
+  getBoxScoreError,
 };

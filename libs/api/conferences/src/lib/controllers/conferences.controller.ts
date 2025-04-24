@@ -1,6 +1,15 @@
 import { Conferences_V2 } from '@api/entities';
 import { ConferenceCreateDto, ConferenceDto } from '@cha/shared/entities';
-import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiConferencesService } from '../services';
 
 @Controller('conferences')
@@ -19,7 +28,10 @@ export class ConferencesController {
 
   @Put('/:id')
   updateConferenceById(@Param() param, @Body() body): Promise<ConferenceDto> {
-    return this.conferencesService.updateConferenceById(parseInt(param.id), body);
+    return this.conferencesService.updateConferenceById(
+      parseInt(param.id),
+      body
+    );
   }
 
   @Post('/add')

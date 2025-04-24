@@ -65,7 +65,7 @@ const selectMinGames = createSelector(
 const selectMinGamesStats = createSelector(
   selectLeagueData,
   (data: LeagueDataDto) => data.min_games_stats
-)
+);
 
 const selectCurrentCapHit = createSelector(
   selectLeagueData,
@@ -194,7 +194,7 @@ export const LeagueDataSelectors = {
   selectUsersOptions,
   selectTeamsByDivision,
   selectMinGames,
-  selectMinGamesStats
+  selectMinGamesStats,
 };
 
 function getTeamMenuItem(teams: TeamDto[]) {

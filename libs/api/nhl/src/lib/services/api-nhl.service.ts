@@ -21,7 +21,7 @@ export class ApiNhlService {
   nhlCOM = 'https://api.nhle.com/stats/rest/en/season';
   nhlAPI = 'https://api-web.nhle.com/v1/player';
   nhlComSummary = 'https://api.nhle.com/stats/rest/en';
-  nhlComLeaders = 'https://api.nhle.com/stats/rest/en/leaders'
+  nhlComLeaders = 'https://api.nhle.com/stats/rest/en/leaders';
   sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
 
   getNhlLeaders(

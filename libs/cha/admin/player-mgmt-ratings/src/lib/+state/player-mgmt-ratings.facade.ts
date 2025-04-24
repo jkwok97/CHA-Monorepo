@@ -59,6 +59,8 @@ export class PlayerMgmtRatingsFacade {
   }
 
   deletePlayerRating(ratingId: number) {
-    this.store.dispatch(PlayerMgmtRatingsActions.deletePlayerRating({ ratingId }));
+    this.store.dispatch(
+      PlayerMgmtRatingsActions.deletePlayerRating({ ratingId })
+    );
   }
 }

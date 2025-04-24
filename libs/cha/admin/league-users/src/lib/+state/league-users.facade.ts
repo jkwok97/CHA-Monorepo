@@ -18,11 +18,11 @@ export class LeagueUsersFacade {
 
   isSaving$: Observable<boolean> = this.store.select(
     LeagueUsersSelectors.selectSaving
-  )
+  );
 
   isSaved$: Observable<boolean> = this.store.select(
     LeagueUsersSelectors.selectSaved
-  )
+  );
 
   users$: Observable<UserDto[]> = this.store.select(
     LeagueUsersSelectors.selectUsers

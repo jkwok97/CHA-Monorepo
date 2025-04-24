@@ -42,5 +42,5 @@ export const HistoryPlayersSelectors = {
   selectLoading,
   selectAll,
   selectForwards,
-  selectDefense
+  selectDefense,
 };

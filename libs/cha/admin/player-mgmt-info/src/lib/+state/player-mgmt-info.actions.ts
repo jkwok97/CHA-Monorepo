@@ -43,12 +43,12 @@ const deletePlayersuccess = createAction(
 const addSalary = createAction(
   `${NAMESPACE} Add Salary`,
   props<{ salary: SalaryAllDto }>()
-)
+);
 
 const addSalarySuccess = createAction(
   `${NAMESPACE} Add Salary Success`,
   props<{ salary: SalaryAllDto }>()
-)
+);
 
 const error = createAction(`${NAMESPACE} Error`);
 

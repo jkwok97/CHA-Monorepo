@@ -70,10 +70,7 @@
         <i>{{ nhlStat.losses }}</i>
       </span>
     </div>
-    <div
-      *ngIf="nhlStat.goalsAgainstAvg"
-      class="flex justify-content-between"
-    >
+    <div *ngIf="nhlStat.goalsAgainstAvg" class="flex justify-content-between">
       GAA:
       <span style="font-weight: 100">
         <i>{{ nhlStat.goalsAgainstAvg.toFixed(2) }}</i>

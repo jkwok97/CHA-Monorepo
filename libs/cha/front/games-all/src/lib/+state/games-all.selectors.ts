@@ -14,7 +14,10 @@ const selectSchedule = createSelector(selectState, GamesAllReducer.getSchedule);
 
 const selectBoxScore = createSelector(selectState, GamesAllReducer.getGame);
 
-const selectGameLoading = createSelector(selectState, GamesAllReducer.getGameLoading);
+const selectGameLoading = createSelector(
+  selectState,
+  GamesAllReducer.getGameLoading
+);
 
 const selectSeason = createSelector(
   selectSchedule,
@@ -27,5 +30,5 @@ export const GamesAllSelectors = {
   selectSchedule,
   selectBoxScore,
   selectSeason,
-  selectGameLoading
+  selectGameLoading,
 };

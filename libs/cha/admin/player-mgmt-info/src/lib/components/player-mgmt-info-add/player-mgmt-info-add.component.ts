@@ -7,5 +7,8 @@ import { MenuItem } from 'primeng/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerMgmtInfoAddComponent {
-  items: MenuItem[] = [{ label: 'Player Info', routerLink: 'info' }, { label: 'Salaries', routerLink: 'salary' }];
+  items: MenuItem[] = [
+    { label: 'Player Info', routerLink: 'info' },
+    { label: 'Salaries', routerLink: 'salary' },
+  ];
 }

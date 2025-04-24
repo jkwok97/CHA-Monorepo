@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FieldType, FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 import { InputNumberModule } from 'primeng/inputnumber';
 
-
 @Component({
   selector: 'blade-number-input-type',
   standalone: true,

@@ -76,7 +76,8 @@ const getFileUrl = (appConfig: AppConfigService) => {
       maxAge: 10,
       name: 'Continental Hockey Association Administration',
       logOnly: environment.production,
-    connectInZone: true}),
+      connectInZone: true,
+    }),
   ],
   declarations: [AppComponent],
   providers: [
