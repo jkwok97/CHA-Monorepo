@@ -4262,9 +4262,7 @@ p-treeselect.ng-invalid.ng-dirty > .p-treeselect {
 }
 
 .p-organizationchart
-  .p-organizationchart-node-content.p-organizationchart-selectable-node:not(
-    .p-highlight
-  ):hover {
+  .p-organizationchart-node-content.p-organizationchart-selectable-node:not(.p-highlight):hover {
   background: #e9ecef;
   color: #495057;
 }
