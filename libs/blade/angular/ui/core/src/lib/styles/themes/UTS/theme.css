@@ -5123,6 +5123,7 @@ p-togglebutton.ng-dirty.ng-invalid > .p-togglebutton.p-button {
 }
 
 .p-avatar.p-avatar-circle {
+  border-radius: 50%;
   background-color: white !important;
 }
 
