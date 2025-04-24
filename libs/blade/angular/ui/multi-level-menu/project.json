@@ -1,0 +1,20 @@
+{
+  "name": "blade-angular-ui-multi-level-menu",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/blade/angular/ui/multi-level-menu/src",
+  "prefix": "blade",
+  "projectType": "library",
+  "tags": ["angular:ui"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/blade/angular/ui/multi-level-menu/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

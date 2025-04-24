@@ -1,0 +1,85 @@
+@import 'core/variables';
+
+.multi-level-main-menu {
+  width: 265px;
+  background-color: $gray-50;
+  border-right: 1px solid $gray-100;
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    button {
+      opacity: 1;
+    }
+  }
+
+  &-collapse-button {
+    z-index: 3000;
+    position: absolute;
+    top: 60px;
+    right: -12px;
+    border: 1px solid $purple-300 !important;
+    background-color: $white-100 !important;
+    padding: 2px !important;
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    opacity: 0;
+
+    &-show {
+      opacity: 1;
+    }
+  }
+
+  &-item-container {
+    height: calc(100% - 50px);
+    overflow-y: auto;
+
+    &-short {
+      height: calc(100% - 85px);
+    }
+
+    &-with-footer {
+      height: calc(100% - 155px);
+      overflow-y: auto;
+      &-short {
+        height: calc(100% - 200px);
+      }
+    }
+  }
+
+  &-navigate {
+    position: absolute;
+    top: 15px;
+    right: 2px;
+  }
+
+  &-icon {
+    color: $purple-200;
+    width: 22px;
+
+    &-material {
+      color: $purple-200;
+      margin-top: 5px;
+      margin-right: 2px;
+
+      i.material-icons-outlined {
+        font-size: 26px;
+      }
+    }
+  }
+}
+
+.multi-level-menu-header {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 25px;
+  color: $purple-300;
+  padding: 5px;
+  height: 35px;
+  margin-bottom: 15px;
+
+  &-long {
+    height: 70px;
+  }
+}

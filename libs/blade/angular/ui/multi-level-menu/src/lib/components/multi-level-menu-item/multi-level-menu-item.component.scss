@@ -1,0 +1,27 @@
+@import 'core/variables';
+
+.multi-level-menu-item {
+  min-height: 40px;
+  width: 100%;
+  padding: 8px 3px 8px 8px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 25px;
+  color: $dark-100;
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    width: 35px;
+  }
+
+  &-forward {
+    color: $gray-200;
+  }
+
+  &-active, &-related-active {
+    background-color: $purple-100;
+    color: $purple-300;
+    font-weight: 500;
+  }
+}
