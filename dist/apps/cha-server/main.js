@@ -5730,10 +5730,9 @@ let ApiNhlService = class ApiNhlService {
         return leaders;
     }
     getNhlPlayerStatsByPlayerId(playerId, season) {
-        const stats = this.httpService
+        return this.httpService
             .get(`${this.nhlAPI}/${playerId}/landing`)
-            .pipe((0, rxjs_1.map)((response) => response.data.featuredStats.regularSeason.subSeason));
-        return stats;
+            .pipe((0, rxjs_1.map)((response) => response.data.featuredStats.regularSeason?.subSeason));
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
@@ -8490,7 +8489,7 @@ let ApiSalariesService = class ApiSalariesService {
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
-        return response.data.featuredStats.regularSeason.subSeason;
+        return response.data.featuredStats.regularSeason?.subSeason;
     }
     async getAll() {
         const salaries = await this.repo.find();
@@ -9584,7 +9583,7 @@ let ApiUserTeamStatsService = class ApiUserTeamStatsService {
                 pass_complete: true,
                 pass_incomplete: true,
                 shots_against: true,
-                shots_for: true
+                shots_for: true,
             },
             where: {
                 team_id: {
@@ -9594,8 +9593,8 @@ let ApiUserTeamStatsService = class ApiUserTeamStatsService {
                 season_type: seasonType,
             },
             order: {
-                playing_year: 'DESC'
-            }
+                playing_year: 'DESC',
+            },
         });
     }
     async convertStats(array) {

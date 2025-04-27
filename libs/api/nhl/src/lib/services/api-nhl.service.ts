@@ -137,13 +137,11 @@ export class ApiNhlService {
     playerId: number,
     season: string
   ): Observable<AxiosResponse<any[]>> {
-    const stats = this.httpService
+    return this.httpService
       .get(`${this.nhlAPI}/${playerId}/landing`)
       .pipe(
-        map((response) => response.data.featuredStats.regularSeason.subSeason)
+        map((response) => response.data.featuredStats.regularSeason?.subSeason)
       );
-
-    return stats;
   }
 
   private async setChaTeamInfoForSportsnet(

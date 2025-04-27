@@ -352,7 +352,7 @@ export class ApiSalariesService {
 
     const response = await firstValueFrom(stats);
 
-    return response.data.featuredStats.regularSeason.subSeason;
+    return response.data.featuredStats.regularSeason?.subSeason;
   }
 
   async getAll(): Promise<Salaries_V2[]> {
