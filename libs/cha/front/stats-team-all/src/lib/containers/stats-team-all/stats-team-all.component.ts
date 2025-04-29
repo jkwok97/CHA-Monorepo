@@ -47,7 +47,7 @@ export class StatsTeamAllComponent implements OnInit {
         // ];
         this.selectSeasonOptions = [
           { label: 'Regular', value: 'Regular' },
-          { label: 'Playoffs', value: 'Playoffs', disabled: true },
+          { label: 'Playoffs', value: 'Playoffs' },
         ];
       });
   }

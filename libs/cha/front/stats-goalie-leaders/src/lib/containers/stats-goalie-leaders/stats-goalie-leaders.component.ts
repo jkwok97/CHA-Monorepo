@@ -25,7 +25,7 @@ export class StatsGoalieLeadersComponent implements OnInit {
   backgroundColor!: string;
   selectSeasonOptions = [
     { label: 'Regular', value: 'Regular' },
-    { label: 'Playoffs', value: 'Playoffs', disabled: true },
+    { label: 'Playoffs', value: 'Playoffs' },
   ];
 
   constructor(
