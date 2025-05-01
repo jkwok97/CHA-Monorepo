@@ -35,7 +35,8 @@
                   [isWest]="true"
                   [winningTeam]="westernTeams[3]"
                   [losingTeam]="westernTeams[4]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-2'"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R1-W2'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -46,7 +47,8 @@
                   [isWest]="true"
                   [winningTeam]="westernTeams[2]"
                   [losingTeam]="westernTeams[5]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R1-W3'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -57,8 +59,9 @@
                   [isWest]="true"
                   [winningTeam]="westernTeams[1]"
                   [losingTeam]="westernTeams[6]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-2'"
                   [seriesTied]="false"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R1-W4'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
@@ -67,9 +70,13 @@
                 <!-- WIT / CHY -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[0]"
+                  [visTeam]="westernTeams[3]"
                 ></cha-front-games-playoffs-matchup-card>
                 <!-- WIT / OAK -->
-                <cha-front-games-playoffs-matchup-card></cha-front-games-playoffs-matchup-card>
+                <cha-front-games-playoffs-matchup-card
+                  [homeTeam]="westernTeams[1]"
+                  [visTeam]="westernTeams[2]"
+                ></cha-front-games-playoffs-matchup-card>
               </div>
 
               <div class="round-container">
@@ -105,13 +112,15 @@
               </div>
 
               <div class="round-container">
-                <!-- MIL / GB -->
+                <!-- MIL / MSG -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
+                  [visTeam]="easternTeams[4]"
                 ></cha-front-games-playoffs-matchup-card>
-                <!--  GB / MIL -->
+                <!--  GB / CIN -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
+                  [visTeam]="easternTeams[2]"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
 
@@ -135,8 +144,9 @@
                   [isEast]="true"
                   [winningTeam]="easternTeams[4]"
                   [losingTeam]="easternTeams[3]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
                   [seriesTied]="false"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R1-E2'"
                 ></cha-front-games-playoffs-matchup-card>
 
@@ -147,7 +157,8 @@
                   [isEast]="true"
                   [winningTeam]="easternTeams[2]"
                   [losingTeam]="easternTeams[5]"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R1-E3'"
                 ></cha-front-games-playoffs-matchup-card>
 
