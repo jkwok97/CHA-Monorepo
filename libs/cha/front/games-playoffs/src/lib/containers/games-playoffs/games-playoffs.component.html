@@ -99,7 +99,8 @@
                   [winningTeam]="westernTeams[1]"
                   [losingTeam]="westernTeams[0]"
                   [isWest]="true"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-3'"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R3-W1'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
@@ -112,7 +113,10 @@
             <div class="playoff-tree-games-final-matchup">
               <img src="assets/images/libertycup.jpg" />
 
-              <cha-front-games-playoffs-matchup-final-card></cha-front-games-playoffs-matchup-final-card>
+              <cha-front-games-playoffs-matchup-final-card
+                [homeTeam]="easternTeams[1]"
+                [visTeam]="westernTeams[1]"
+              ></cha-front-games-playoffs-matchup-final-card>
             </div>
 
             <div>
@@ -134,8 +138,9 @@
                   [winningTeam]="easternTeams[1]"
                   [losingTeam]="easternTeams[0]"
                   [isEast]="true"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-2'"
                   [seriesTied]="false"
+                  [seriesDone]="true"
                   [gameFile]="'2025-R3-E1'"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
