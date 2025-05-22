@@ -118,14 +118,16 @@
                 [visTeam]="westernTeams[1]"
                 [winningTeam]="easternTeams[1]"
                 [losingTeam]="westernTeams[1]"
-                [seriesScore]="'2-2'"
-                [seriesTied]="true"
+                [seriesScore]="'4-3'"
+                [seriesDone]="true"
                 [gameFile]="'2025-R4'"
               ></cha-front-games-playoffs-matchup-final-card>
             </div>
 
             <div>
-              <cha-front-games-playoffs-final-champion-card></cha-front-games-playoffs-final-champion-card>
+              <cha-front-games-playoffs-final-champion-card
+                [champion]="easternTeams[1]"
+              ></cha-front-games-playoffs-final-champion-card>
 
               <h2>CHAMPION</h2>
             </div>
