@@ -202,10 +202,10 @@ export class ApiSalariesService {
       select: {
         id: true,
         player_id: true,
-        season_2024: true,
         season_2025: true,
         season_2026: true,
         season_2027: true,
+        season_2028: true,
       },
       where: {
         player_id: playerId.toString(),

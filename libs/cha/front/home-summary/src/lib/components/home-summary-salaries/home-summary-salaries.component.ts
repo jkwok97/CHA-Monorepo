@@ -36,12 +36,12 @@ export class HomeSummarySalariesComponent implements OnInit {
 
   // TODO UPDATE EVERY SEASON
 
-  salaryHeaders = ['Name', 2024, 2025, 2026, 2027].map((x, i) => ({
+  salaryHeaders = ['Name', 2025, 2026, 2027, 2028].map((x, i) => ({
     key: x,
     index: i,
   }));
 
-  mobileSalaryHeaders = ['Name', 2024, 2025].map((x, i) => ({
+  mobileSalaryHeaders = ['Name', 2025, 2026].map((x, i) => ({
     key: x,
     index: i,
   }));
@@ -79,10 +79,10 @@ export class HomeSummarySalariesComponent implements OnInit {
         this.forwardSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
             2026: salary.salaries.season_2026,
             2027: salary.salaries.season_2027,
+            2028: salary.salaries.season_2028,
           })
         );
       });
@@ -96,10 +96,10 @@ export class HomeSummarySalariesComponent implements OnInit {
         this.defenseSalaries = salaries.map(
           (salary: SalariesAndRatingsDto) => ({
             Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-            2024: salary.salaries.season_2024,
             2025: salary.salaries.season_2025,
             2026: salary.salaries.season_2026,
             2027: salary.salaries.season_2027,
+            2028: salary.salaries.season_2028,
           })
         );
       });
@@ -112,10 +112,10 @@ export class HomeSummarySalariesComponent implements OnInit {
       .subscribe((salaries: SalariesAndRatingsDto[]) => {
         this.goalieSalaries = salaries.map((salary: SalariesAndRatingsDto) => ({
           Name: `${salary.player_id.firstname} ${salary.player_id.lastname}`,
-          2024: salary.salaries.season_2024,
           2025: salary.salaries.season_2025,
           2026: salary.salaries.season_2026,
           2027: salary.salaries.season_2027,
+          2028: salary.salaries.season_2028,
         }));
       });
   }
