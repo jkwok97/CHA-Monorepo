@@ -124,7 +124,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'player_id',
       className: 'w-full md:w-3',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'Player Id',
         required: true,
         readonly: true,
@@ -142,7 +142,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2020',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2019-20',
       },
     };
@@ -153,7 +153,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2021',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2020-21',
       },
     };
@@ -164,7 +164,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2022',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2021-22',
       },
     };
@@ -175,7 +175,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2023',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2022-23',
       },
     };
@@ -186,7 +186,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2024',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2023-24',
       },
     };
@@ -197,7 +197,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2025',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2024-25',
       },
     };
@@ -208,7 +208,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2026',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2025-26',
       },
     };
@@ -219,7 +219,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2027',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2026-27',
       },
     };
@@ -230,7 +230,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2028',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2027-28',
       },
     };
@@ -241,7 +241,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2029',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2028-29',
       },
     };
@@ -252,7 +252,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2030',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2029-30',
       },
     };
@@ -263,7 +263,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2031',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2030-31',
       },
     };
@@ -274,7 +274,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2032',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2031-32',
       },
     };
@@ -285,7 +285,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2033',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2032-33',
       },
     };
@@ -296,7 +296,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2034',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2033-34',
       },
     };
@@ -307,7 +307,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2035',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2034-35',
       },
     };
@@ -318,7 +318,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2036',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2035-36',
       },
     };
@@ -329,7 +329,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2037',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2036-37',
       },
     };
@@ -340,7 +340,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2038',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2037-38',
       },
     };
@@ -351,7 +351,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2039',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2038-39',
       },
     };
@@ -362,7 +362,7 @@ export class PlayerMgmtSalariesEditFormComponent implements OnInit {
       key: 'season_2040',
       className: 'w-5 md:w-1',
       type: 'text-input',
-      templateOptions: {
+      props: {
         label: 'NHL 2039-40',
       },
     };
