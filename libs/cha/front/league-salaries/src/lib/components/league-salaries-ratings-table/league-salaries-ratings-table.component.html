@@ -72,9 +72,6 @@
           RD <p-sortIcon field="ratings.rd_rate"></p-sortIcon>
         </th>
         <!-- TODO UPDATE EVERY SEASON -->
-        <th pSortableColumn="salaries.season_2024">
-          23-24 <p-sortIcon field="salaries.season_2024"></p-sortIcon>
-        </th>
         <th pSortableColumn="salaries.season_2025">
           24-25 <p-sortIcon field="salaries.season_2025"></p-sortIcon>
         </th>
@@ -82,7 +79,10 @@
           25-26 <p-sortIcon field="salaries.season_2026"></p-sortIcon>
         </th>
         <th pSortableColumn="salaries.season_2027">
-          27-28 <p-sortIcon field="salaries.season_2027"></p-sortIcon>
+          26-27 <p-sortIcon field="salaries.season_2027"></p-sortIcon>
+        </th>
+        <th pSortableColumn="salaries.season_2028">
+          27-28 <p-sortIcon field="salaries.season_2028"></p-sortIcon>
         </th>
       </tr>
     </ng-template>
@@ -107,8 +107,8 @@
         </td>
         <td>
           <!-- TODO UPDATE EVERY SEASON -->
-          <span class="p-column-title">23-24</span
-          >{{ salary.salaries?.season_2024 }}
+          <span class="p-column-title">24-25</span
+          >{{ salary.salaries?.season_2025 }}
         </td>
         <td>
           <ng-container>
@@ -165,10 +165,6 @@
         </td>
         <!-- TODO UPDATE EVERY SEASON -->
         <td>
-          <span class="p-column-title">23-24</span
-          >{{ salary.salaries?.season_2024 }}
-        </td>
-        <td>
           <span class="p-column-title">24-25</span
           >{{ salary.salaries?.season_2025 }}
         </td>
@@ -179,6 +175,10 @@
         <td>
           <span class="p-column-title">26-27</span
           >{{ salary.salaries?.season_2027 }}
+        </td>
+        <td>
+          <span class="p-column-title">27-28</span
+          >{{ salary.salaries?.season_2028 }}
         </td>
       </tr>
     </ng-template>

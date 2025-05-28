@@ -86,85 +86,56 @@ export const mainMenuItems: MenuItem[] = [
         label: 'Teams',
         items: [
           {
-            label: 'North West Division',
+            label: 'Norris Division',
             items: [
               {
-                label: 'Kelowna Mountaineers',
-                routerLink: ['/league/teams/8'],
+                label: 'Wichita Wolfpack',
+                routerLink: ['/league/teams/21'],
               },
               {
                 label: 'Oakland Assassins',
                 routerLink: ['/league/teams/13'],
               },
               {
-                label: 'San Francisco Fighting Cocks',
-                routerLink: ['/league/teams/16'],
-              },
-              {
-                label: "Victoria Stellar's Jays",
-                routerLink: ['/league/teams/53'],
-              },
-              {
-                label: 'Sacramento Storm',
-                routerLink: ['/league/teams/61'],
-              },
-              {
-                label: 'Hawaii Lava',
-                routerLink: ['/league/teams/64'],
-              },
-            ],
-          },
-          {
-            label: 'South West Division',
-            items: [
-              {
-                label: 'Cheyenne Desperado',
-                routerLink: ['/league/teams/4'],
-              },
-              {
-                label: 'Lone Star Brahmas',
-                routerLink: ['/league/teams/9'],
-              },
-              {
-                label: 'Memphis Hound Dogs',
-                routerLink: ['/league/teams/10'],
+                label: 'Peoria Prowlers',
+                routerLink: ['/league/teams/15'],
               },
               {
                 label: 'Oklahoma City Oil Barons',
                 routerLink: ['/league/teams/14'],
               },
               {
-                label: 'Wichita Wolfpack',
-                routerLink: ['/league/teams/21'],
+                label: 'Sacramento Storm',
+                routerLink: ['/league/teams/61'],
               },
               {
-                label: 'Santa Fe Skinwalkers',
-                routerLink: ['/league/teams/67'],
+                label: 'Quebec City Flying Canoes',
+                routerLink: ['/league/teams/69'],
               },
             ],
           },
           {
-            label: 'North East Division',
+            label: 'Smythe Division',
             items: [
               {
                 label: 'Green Bay Glory',
                 routerLink: ['/league/teams/6'],
               },
               {
-                label: 'Milwaukee Ice Dragons',
-                routerLink: ['/league/teams/11'],
-              },
-              {
-                label: 'Mississauga North Stars',
-                routerLink: ['/league/teams/12'],
+                label: 'Augusta Green Jackets',
+                routerLink: ['/league/teams/3'],
               },
               {
                 label: 'Staten Island Killer Bees',
                 routerLink: ['/league/teams/19'],
               },
               {
-                label: 'St.Johns Vikings',
-                routerLink: ['/league/teams/60'],
+                label: 'Lone Star Brahmas',
+                routerLink: ['/league/teams/9'],
+              },
+              {
+                label: 'Santa Fe Skinwalkers',
+                routerLink: ['/league/teams/67'],
               },
               {
                 label: 'Torbay Tidesman',
@@ -173,31 +144,60 @@ export const mainMenuItems: MenuItem[] = [
             ],
           },
           {
-            label: 'South East Division',
+            label: 'Adams Division',
             items: [
               {
-                label: 'Atlanta Flashers',
-                routerLink: ['/league/teams/2'],
+                label: 'Milwaukee Ice Dragons',
+                routerLink: ['/league/teams/11'],
               },
               {
-                label: 'Augusta Green Jackets',
-                routerLink: ['/league/teams/3'],
+                label: 'Cheyenne Desperado',
+                routerLink: ['/league/teams/4'],
+              },
+              {
+                label: 'Memphis Hound Dogs',
+                routerLink: ['/league/teams/10'],
               },
               {
                 label: 'Indianapolis Goats',
                 routerLink: ['/league/teams/7'],
               },
               {
+                label: 'Kelowna Mountaineers',
+                routerLink: ['/league/teams/8'],
+              },
+              {
+                label: 'Atlanta Flashers',
+                routerLink: ['/league/teams/2'],
+              },
+            ],
+          },
+          {
+            label: 'Patrick Division',
+            items: [
+              {
                 label: 'Cincinnati Cyclones',
                 routerLink: ['/league/teams/5'],
               },
               {
-                label: 'Peoria Prowlers',
-                routerLink: ['/league/teams/15'],
+                label: 'Mississauga North Stars',
+                routerLink: ['/league/teams/12'],
               },
               {
                 label: 'South Carolina Stingrays',
                 routerLink: ['/league/teams/18'],
+              },
+              {
+                label: 'St.Johns Vikings',
+                routerLink: ['/league/teams/60'],
+              },
+              {
+                label: 'Kitchener Bliztkrieg',
+                routerLink: ['/league/teams/68'],
+              },
+              {
+                label: "Victoria Stellar's Jays",
+                routerLink: ['/league/teams/53'],
               },
             ],
           },
