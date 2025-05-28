@@ -18,8 +18,8 @@ export class DraftCurrentComponent implements OnInit {
   teams!: TeamDto[];
 
   selectOptions = [
-    // { label: '2024', value: '2024' },
     { label: '2025', value: '2025' },
+    { label: '2026', value: '2026' },
   ];
 
   tableColumns = [
@@ -46,10 +46,12 @@ export class DraftCurrentComponent implements OnInit {
     this.isLoading$ = this.draftCurrentFacade.isLoading$;
     this.isLoaded$ = this.draftCurrentFacade.isLoaded$;
     this.draftTableItems$ = this.draftCurrentFacade.draftTable$;
-    this.teams$ = this.leagueDataFacade.leagueTeams$;
+    this.teams$ = this.draftCurrentFacade.allTeams$;
   }
 
   ngOnInit(): void {
+    this.draftCurrentFacade.getAllTeams();
+
     this.leagueDataFacade.leagueData$
       .pipe(
         first(),

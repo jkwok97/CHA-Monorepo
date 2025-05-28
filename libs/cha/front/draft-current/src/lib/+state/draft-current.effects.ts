@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LeagueDataFacade, DraftService } from '@cha/domain/core';
 import { catchError, exhaustMap, map, of, withLatestFrom } from 'rxjs';
 import { DraftCurrentActions } from './draft-current.actions';
-import { DraftTableDto } from '@cha/shared/entities';
+import { DraftTableDto, TeamDto } from '@cha/shared/entities';
 
 @Injectable()
 export class DraftCurrentEffects {
@@ -21,7 +21,7 @@ export class DraftCurrentEffects {
         this.draftService
           .getDraftTable(
             action.season,
-            '2024-25' //THIS CHANGES
+            action.season === 2025 ? '2024-25' : '2025-26' // TODO UPDATE EVERY SEASON
           )
           .pipe(
             map((draftTable: DraftTableDto[]) =>
@@ -40,6 +40,20 @@ export class DraftCurrentEffects {
         this.draftService.getNextDraftTable(action.season).pipe(
           map((draftTable: DraftTableDto[]) =>
             DraftCurrentActions.getNextDraftTableSuccess({ draftTable })
+          ),
+          catchError(() => of(DraftCurrentActions.error()))
+        )
+      )
+    )
+  );
+
+  getAllTeams$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DraftCurrentActions.getAllTeams),
+      exhaustMap(() =>
+        this.draftService.getAllTeams().pipe(
+          map((teams: TeamDto[]) =>
+            DraftCurrentActions.getAllTeamsSuccess({ teams })
           ),
           catchError(() => of(DraftCurrentActions.error()))
         )

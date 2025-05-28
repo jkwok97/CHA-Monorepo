@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { DraftTableDto } from '@cha/shared/entities';
+import { DraftTableDto, TeamDto } from '@cha/shared/entities';
 
 const NAMESPACE = '[Draft Current]';
 
@@ -24,6 +24,13 @@ const getNextDraftTableSuccess = createAction(
   props<{ draftTable: DraftTableDto[] }>()
 );
 
+const getAllTeams = createAction(`${NAMESPACE} Get All Teams`);
+
+const getAllTeamsSuccess = createAction(
+  `${NAMESPACE} Get All Teams Success`,
+  props<{ teams: TeamDto[] }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const DraftCurrentActions = {
@@ -31,5 +38,7 @@ export const DraftCurrentActions = {
   getDraftTableSuccess,
   getNextDraftTable,
   getNextDraftTableSuccess,
+  getAllTeams,
+  getAllTeamsSuccess,
   error,
 };
