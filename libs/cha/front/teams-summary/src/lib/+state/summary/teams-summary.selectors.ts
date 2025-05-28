@@ -86,7 +86,7 @@ const selectForwardSalaries = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2024) - Number(a.salaries.season_2024) //Adjust every year
+          Number(b.salaries.season_2025) - Number(a.salaries.season_2025) // TODO UPDATE EVERY SEASON
       )
       .map((playerSalary: SalariesAndRatingsDto) => ({
         player_id: playerSalary.player_id,
@@ -105,7 +105,7 @@ const selectDefenseSalaries = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2024) - Number(a.salaries.season_2024) //Adjust every year
+          Number(b.salaries.season_2025) - Number(a.salaries.season_2025) // TODO UPDATE EVERY SEASON
       )
       .map((playerSalary: SalariesAndRatingsDto) => ({
         player_id: playerSalary.player_id,
@@ -369,7 +369,7 @@ const selectGoalieSalariesFiltered = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2024) - Number(a.salaries.season_2024) //Adjust every year
+          Number(b.salaries.season_2025) - Number(a.salaries.season_2025) // TODO UPDATE EVERY SEASON
       )
       .map((goalieSalary: SalariesAndRatingsDto) => ({
         player_id: goalieSalary.player_id,
@@ -536,14 +536,14 @@ export const TeamsSummarySelectors = {
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
   let total = 0;
-  // Adjust Every Season
+
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2024 && //Adjust every year
-      !isNaN(Number(salary.salaries.season_2024)) && //Adjust every year
+      salary.salaries.season_2025 && // TODO UPDATE EVERY SEASON
+      !isNaN(Number(salary.salaries.season_2025)) && // TODO UPDATE EVERY SEASON
       !salary.player_id.is_protected
     ) {
-      total += Number(salary.salaries.season_2024); //Adjust every year
+      total += Number(salary.salaries.season_2025); // TODO UPDATE EVERY SEASON
     }
   });
 
@@ -552,14 +552,14 @@ function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
 
 function getNextTotal(salaries: SalariesAndRatingsDto[]) {
   let total = 0;
-  // Adjust Every Season
+
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2025 && //Adjust every year
-      !isNaN(Number(salary.salaries.season_2025)) && //Adjust every year
+      salary.salaries.season_2026 && // TODO UPDATE EVERY SEASON
+      !isNaN(Number(salary.salaries.season_2026)) && // TODO UPDATE EVERY SEASON
       !salary.player_id.is_protected
     ) {
-      total += Number(salary.salaries.season_2025); //Adjust every year
+      total += Number(salary.salaries.season_2026); // TODO UPDATE EVERY SEASON
     }
   });
 
