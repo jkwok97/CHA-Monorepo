@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { State } from './draft-current.reducer';
 import { DraftCurrentActions } from './draft-current.actions';
 import { DraftCurrentSelectors } from './draft-current.selectors';
-import { DraftTableDto } from '@cha/shared/entities';
+import { DraftTableDto, TeamDto } from '@cha/shared/entities';
 
 @Injectable()
 export class DraftCurrentFacade {
@@ -20,13 +20,21 @@ export class DraftCurrentFacade {
     DraftCurrentSelectors.selectDraftTable
   );
 
+  allTeams$: Observable<TeamDto[]> = this.store.select(
+    DraftCurrentSelectors.selectAllTeams
+  );
+
   constructor(private store: Store<State>) {}
 
-  getDraftTable(season: number) {
+  getDraftTable(season: number): void {
     this.store.dispatch(DraftCurrentActions.getDraftTable({ season }));
   }
 
-  getNextDraftTable(season: number) {
+  getNextDraftTable(season: number): void {
     this.store.dispatch(DraftCurrentActions.getNextDraftTable({ season }));
+  }
+
+  getAllTeams(): void {
+    this.store.dispatch(DraftCurrentActions.getAllTeams());
   }
 }

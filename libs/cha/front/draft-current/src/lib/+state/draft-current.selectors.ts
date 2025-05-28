@@ -17,8 +17,14 @@ const selectLoading = createSelector(
 
 const selectLoaded = createSelector(selectState, DraftCurrentReducer.getLoaded);
 
+const selectAllTeams = createSelector(
+  selectState,
+  DraftCurrentReducer.getAllTeams
+);
+
 export const DraftCurrentSelectors = {
   selectDraftTable,
   selectLoaded,
   selectLoading,
+  selectAllTeams,
 };
