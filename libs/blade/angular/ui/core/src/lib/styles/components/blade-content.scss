@@ -1,0 +1,22 @@
+$blade-main-menu-width: 265px;
+$blade-sub-menu-level-width: 35px;
+
+.blade-content-container {
+  color: white;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  aside {
+    transition: all 0.5s ease-in-out;
+  }
+
+  article {
+    background-color: white;
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}

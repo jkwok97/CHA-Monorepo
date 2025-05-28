@@ -4,3 +4,25 @@
     border-radius: 5px;
   }
 }
+
+.layout {
+  //background-color: white;
+
+  .sersi-content-container article {
+    padding: unset !important;
+    border: 1px solid red;
+  }
+
+  .sersi-content-container.add-padding article {
+    padding: 30px 20px !important;
+  }
+
+  .content-container.sub-nav-container {
+    transition: all 0.2s ease-in-out;
+    padding: 0 0 0 10px;
+
+    @media (max-width: 768px) {
+      display: unset;
+    }
+  }
+}

@@ -2,13 +2,14 @@
   [ngClass]="{ 'pt-3 pr-0': !showMenu }"
   class="py-3 pl-3 pr-1 h-full multi-level-main-menu"
   [ngStyle]="{
-    width: getWidth()
+    width: getWidth(),
+    'background-color': teamColor
   }"
 >
   <button
     class="multi-level-main-menu-collapse-button"
     [ngClass]="{ 'multi-level-main-menu-collapse-button-show': isCollapsed}"
-    [ngStyle]="{'z-index': 2000 }"
+    [ngStyle]="{'z-index': 2000, color: teamColor }"
     pButton
     size="small"
     [text]="true"
@@ -16,7 +17,6 @@
     [rounded]="true"
     [outlined]="true"
     [severity]="'secondary'"
-    data-ele="nav-button"
     *ngIf="level === 1 && !showMobileMenu"
     (click)="onCollapse()"
   ></button>
@@ -28,13 +28,17 @@
     (click)="onNavigateBack()"
   >
     <div *ngIf="inSubMenu">
-      <i class="material-icons-outlined">
-        keyboard_arrow_left
-      </i>
+      <i class="pi pi-chevron-left"></i>
     </div>
 
     @if (_title) {
-      {{ _title }}
+      <div class="flex flex-row column-gap-2">
+        @if (teamLogo) {
+          <img [ngSrc]="teamLogo" alt="" height="25" width="25"/>
+        }
+        {{ _title }}
+      </div>
+
     } @else if (logo) {
       <a [routerLink]="['/']" class="text-white logo-link">
         <svg-icon [src]="logo"/>
@@ -65,6 +69,8 @@
         [menuItem]="menuItem"
         [routerLink]="menuItem.routerLink"
         [inSubMenu]="inSubMenu"
+        [teamColor]="teamColor"
+        [teamTextColor]="teamTextColor"
         (click)="routeToLink(menuItem)"
         (subMenuItemClicked)="onSubMenuItemClicked($event)"
         (subMenuTitle)="onSubMenuTitleChange($event)"
@@ -91,7 +97,7 @@
 
     @if (level === 1) {
       <div class="multi-level-main-menu-icon-material">
-        <i class="material-icons-outlined">home</i>
+        <i class="pi pi-home"></i>
       </div>
     } @else {
       @if (iconToShow) {

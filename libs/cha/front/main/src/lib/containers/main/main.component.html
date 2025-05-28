@@ -1,17 +1,52 @@
-<section *ngIf="currentTeam$ | async">
-  <div class="pt-3 pb-3">
-    <div class="main-menu">
-      <blade-menu
-        [items]="items"
-        [logo]="teamLogo"
-        [isMobile]="isMobile$ | async"
-      ></blade-menu>
+<section *ngIf="currentTeam$ | async as currentTeam">
+
+  <div class="layout">
+
+    <div class="blade-content-container m-0 h-full">
+
+      <aside [ngStyle]="{ width: getWidth() }">
+        <blade-multi-level-menu
+          [menuList]="menuItems"
+          [homeTitle]="currentTeam.nickname"
+          [teamColor]="currentTeam.teamcolor"
+          [teamTextColor]="currentTeam.teamtextcolor"
+          [teamLogo]="currentTeam.teamlogo"
+          (numberOfSubMenusShown)="onShowSubMenu($event)"
+          (isMenuOpen)="onIsMenuOpen($event)"
+          (isMenuCollapsed)="onIsMenuCollapsed($event)"
+
+        >
+          HELLO
+        </blade-multi-level-menu>
+      </aside>
+
+      <article>
+
+<!--        <div>-->
+
+<!--        </div>-->
+
+        <blade-layout-feature>
+          <router-outlet></router-outlet>
+        </blade-layout-feature>
+
+<!--        <div class="pt-3 pb-3">-->
+<!--          <div class="main-menu">-->
+<!--            <blade-menu-->
+<!--              [items]="items"-->
+<!--              [logo]="teamLogo"-->
+<!--              [isMobile]="isMobile$ | async"-->
+<!--            ></blade-menu>-->
+<!--          </div>-->
+
+<!--          -->
+<!--        </div>-->
+      </article>
+
     </div>
 
-    <blade-layout-feature>
-      <router-outlet></router-outlet>
-    </blade-layout-feature>
   </div>
+
 </section>
 
 <ng-template #teamLogo>

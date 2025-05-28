@@ -15,7 +15,7 @@ export class MainLeagueComponent {
 
   panelStyleDesktop = {
     width: '100%',
-    height: '90vh',
+    height: '100',
   };
 
   isMobile$: Observable<boolean>;

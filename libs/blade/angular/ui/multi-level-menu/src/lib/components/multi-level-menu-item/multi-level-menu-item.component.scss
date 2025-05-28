@@ -1,5 +1,3 @@
-@import 'core/variables';
-
 .multi-level-menu-item {
   min-height: 40px;
   width: 100%;
@@ -7,7 +5,7 @@
   font-size: 17px;
   font-weight: 400;
   line-height: 25px;
-  color: $dark-100;
+  color: white;
 
   &-icon {
     display: flex;
@@ -16,12 +14,12 @@
   }
 
   &-forward {
-    color: $gray-200;
+    color: white;
   }
 
   &-active, &-related-active {
-    background-color: $purple-100;
-    color: $purple-300;
+    background-color: darkgrey;
+    color: white;
     font-weight: 500;
   }
 }

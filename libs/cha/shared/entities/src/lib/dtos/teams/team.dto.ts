@@ -1,5 +1,5 @@
 import { TeamsEnum } from '../../enums';
-import { DivisionDto } from '../league/division.dto';
+import { DivisionDto } from '../league';
 
 export interface TeamDto {
   id: TeamsEnum;

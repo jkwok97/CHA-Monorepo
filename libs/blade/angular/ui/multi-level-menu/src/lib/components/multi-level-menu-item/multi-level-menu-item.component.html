@@ -1,5 +1,6 @@
 <div
   class="flex flex-row column-gap-2 justify-content-between align-items-center multi-level-menu-item cursor-pointer"
+  [ngStyle]="{ color: teamTextColor }"
   routerLinkActive="multi-level-menu-item-active"
   [class.multi-level-menu-item-related-active]="menuItem.relatedRoutes | hasRelatedActiveRoute | async"
   #itemActive="routerLinkActive"
@@ -28,9 +29,7 @@
     *ngIf="menuItem.subItems && menuItem.subItems.length > 0"
     class="flex align-items-center multi-level-menu-item-forward"
   >
-    <i class="material-icons-outlined">
-      keyboard_arrow_right
-    </i>
+    <i class="pi pi-angle-right"></i>
   </div>
 
 </div>

@@ -1,4 +1,4 @@
-<div class="h-full multi-level-menu" [ngStyle]="{ width: getWidth() }">
+<div class="h-full multi-level-menu" [ngStyle]="{ width: getWidth(), 'background-color': teamColor }">
   <ng-container *ngIf="mode === 'push'">
     @for (menu of menuItemList; track menu.level) {
       <blade-multi-level-main-menu
@@ -9,6 +9,9 @@
         [showMobileMenu]="false"
         [level]="menu.level"
         [title]="menu.title"
+        [teamColor]="teamColor"
+        [teamTextColor]="teamTextColor"
+        [teamLogo]="teamLogo"
         [customHeightClassName]="customHeightClassName"
         [logo]="menu.logo"
         [menuList]="menu.items"
@@ -23,12 +26,7 @@
         (isMenuCollapsed)="onMenuCollapsed($event)"
         (titleChanged)="onTitleChanged($event)"
         [@slideInLeft]
-      >
-        <ng-content
-          select=".new-chat-button-container"
-        ></ng-content>
-      </blade-multi-level-main-menu
-      >
+      />
     }
   </ng-container>
 
@@ -41,7 +39,7 @@
         data-ele="nav-button"
         (click)="handleOver()"
       >
-        <i class="material-icons-outlined"> menu </i>
+        <i class="pi pi-bars"></i>
       </button>
     </div>
 
@@ -73,12 +71,7 @@
             (isMenuCollapsed)="onMenuCollapsed($event)"
             (titleChanged)="onTitleChanged($event)"
             [@slideInLeft]
-          >
-            <ng-content
-              select=".new-chat-button-container-overlay"
-            ></ng-content>
-          </blade-multi-level-main-menu
-          >>
+          />
         }
       </div>
     </ng-template>
