@@ -1,87 +1,82 @@
-<ng-scrollbar>
-
-  <blade-card
-    *ngIf="userTeam$ | async as userTeam"
-    [ngStyle]="{
-    'background-color': userTeam.teamcolor,
-    'font-weight': 100
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  [ngStyle]="{
+  'background-color': userTeam.teamcolor,
+  'font-weight': 100
   }"
-    class="w-full"
-  >
-    <blade-card-header>
-      <div class="text-xl text-center">Depth Chart</div>
-      <div *ngIf="isOffSeason" class="text-sm text-center">
-        ** It is currently the offseason, depth chart is based on previous
-        season's NHL stats & positions based on latest CHA Ratings **
+>
+  <blade-card-header>
+    <div class="text-xl text-center">Depth Chart</div>
+    <div *ngIf="isOffSeason" class="text-sm text-center">
+      ** It is currently the offseason, depth chart is based on previous
+      season's NHL stats & positions based on latest CHA Ratings **
+    </div>
+    <ng-container *ngIf="protectedPlayerCount$ | async as protectedPlayerCount">
+      <div class="text-sm text-center" *ngIf="protectedPlayerCount > 0">
+        ** Protected Players do not count towards player count or cap usage **
       </div>
-      <ng-container *ngIf="protectedPlayerCount$ | async as protectedPlayerCount">
-        <div class="text-sm text-center" *ngIf="protectedPlayerCount > 0">
-          ** Protected Players do not count towards player count or cap usage **
+    </ng-container>
+  </blade-card-header>
+  <blade-card-body>
+    <ng-container *ngIf="loadedSalaries$ | async">
+      <div class="flex flex-wrap flex-column row-gap-3 column-gap-3 overflow-y-auto">
+        <div class="w-full flex flex-wrap row-gap-3 justify-content-around">
+          <ng-container *ngIf="leftWingers$ | async as leftWingers">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'LW'"
+              [players]="leftWingers"
+              [isOffSeason]="isOffSeason"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+          <ng-container *ngIf="centers$ | async as centers">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'C'"
+              [players]="centers"
+              [isOffSeason]="isOffSeason"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+          <ng-container *ngIf="rightWingers$ | async as rightWingers">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'RW'"
+              [players]="rightWingers"
+              [isOffSeason]="isOffSeason"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
         </div>
-      </ng-container>
-    </blade-card-header>
-    <blade-card-body>
-      <ng-container *ngIf="loadedSalaries$ | async">
-        <div class="flex flex-wrap flex-column row-gap-3 column-gap-3">
-          <div class="w-full flex flex-wrap row-gap-3 justify-content-around">
-            <ng-container *ngIf="leftWingers$ | async as leftWingers">
-              <cha-front-home-summary-depth-chart-position
-                [title]="'LW'"
-                [players]="leftWingers"
-                [isOffSeason]="isOffSeason"
-                class="w-full sm:w-max"
-              ></cha-front-home-summary-depth-chart-position>
-            </ng-container>
-            <ng-container *ngIf="centers$ | async as centers">
-              <cha-front-home-summary-depth-chart-position
-                [title]="'C'"
-                [players]="centers"
-                [isOffSeason]="isOffSeason"
-                class="w-full sm:w-max"
-              ></cha-front-home-summary-depth-chart-position>
-            </ng-container>
-            <ng-container *ngIf="rightWingers$ | async as rightWingers">
-              <cha-front-home-summary-depth-chart-position
-                [title]="'RW'"
-                [players]="rightWingers"
-                [isOffSeason]="isOffSeason"
-                class="w-full sm:w-max"
-              ></cha-front-home-summary-depth-chart-position>
-            </ng-container>
-          </div>
 
-          <div class="w-full flex flex-wrap row-gap-3 justify-content-evenly">
-            <ng-container *ngIf="leftDefense$ | async as leftDefense">
-              <cha-front-home-summary-depth-chart-position
-                [title]="'LD'"
-                [players]="leftDefense"
-                [isOffSeason]="isOffSeason"
-                class="w-full sm:w-max"
-              ></cha-front-home-summary-depth-chart-position>
-            </ng-container>
-            <ng-container *ngIf="rightDefense$ | async as rightDefense">
-              <cha-front-home-summary-depth-chart-position
-                [title]="'RD'"
-                [players]="rightDefense"
-                [isOffSeason]="isOffSeason"
-                class="w-full sm:w-max"
-              ></cha-front-home-summary-depth-chart-position>
-            </ng-container>
-          </div>
-
-          <div class="w-full flex justify-content-center">
-            <ng-container *ngIf="goalies$ | async as goalies">
-              <cha-front-home-summary-depth-chart-position
-                [title]="'G'"
-                [players]="goalies"
-                [isOffSeason]="isOffSeason"
-                class="w-full sm:w-max"
-              ></cha-front-home-summary-depth-chart-position>
-            </ng-container>
-          </div>
+        <div class="w-full flex flex-wrap row-gap-3 justify-content-evenly">
+          <ng-container *ngIf="leftDefense$ | async as leftDefense">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'LD'"
+              [players]="leftDefense"
+              [isOffSeason]="isOffSeason"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+          <ng-container *ngIf="rightDefense$ | async as rightDefense">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'RD'"
+              [players]="rightDefense"
+              [isOffSeason]="isOffSeason"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
         </div>
-      </ng-container>
-    </blade-card-body>
-  </blade-card>
 
-</ng-scrollbar>
+        <div class="w-full flex justify-content-center">
+          <ng-container *ngIf="goalies$ | async as goalies">
+            <cha-front-home-summary-depth-chart-position
+              [title]="'G'"
+              [players]="goalies"
+              [isOffSeason]="isOffSeason"
+              class="w-full sm:w-max"
+            ></cha-front-home-summary-depth-chart-position>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </blade-card-body>
+</blade-card>

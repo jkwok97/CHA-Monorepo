@@ -7,6 +7,22 @@ export const menuItems: BladeNavListItemModel[] = [
     routerLink: ['/home/summary'],
     subItems: [
       {
+        key: 'summary',
+        label: 'Summary',
+        subItems: [
+          {
+            key: 'depth-chart',
+            label: 'Depth Chart',
+            routerLink: ['/home/summary/depth-chart'],
+          },
+          {
+            key: 'salaries',
+            label: 'Salaries',
+            routerLink: ['/home/summary/salaries'],
+          },
+        ],
+      },
+      {
         key: 'history',
         label: 'History',
         subItems: [
