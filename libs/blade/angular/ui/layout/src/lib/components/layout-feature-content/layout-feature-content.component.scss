@@ -1,3 +1,5 @@
+@import 'apps/cha-front/src/scss/variables';
+
 .feature-content {
   display: flex;
   flex-direction: column;
@@ -6,4 +8,5 @@
   height: 100%;
   overflow-y: hidden;
   padding-bottom: 20px;
+  background: $cha-gray-2;
 }
