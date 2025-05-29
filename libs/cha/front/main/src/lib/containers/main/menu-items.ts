@@ -117,148 +117,124 @@ export const menuItems: BladeNavListItemModel[] = [
         label: 'Teams',
         subItems: [
           {
-            key: 'norris',
-            label: 'Norris Division',
-            subItems: [
-              {
-                key: '21',
-                label: 'Wichita Wolfpack',
-                routerLink: ['/league/teams/21'],
-              },
-              {
-                key: '13',
-                label: 'Oakland Assassins',
-                routerLink: ['/league/teams/13'],
-              },
-              {
-                key: '15',
-                label: 'Peoria Prowlers',
-                routerLink: ['/league/teams/15'],
-              },
-              {
-                key: '14',
-                label: 'Oklahoma City Oil Barons',
-                routerLink: ['/league/teams/14'],
-              },
-              {
-                key: '61',
-                label: 'Sacramento Storm',
-                routerLink: ['/league/teams/61'],
-              },
-              {
-                key: '69',
-                label: 'Quebec City Flying Canoes',
-                routerLink: ['/league/teams/69'],
-              },
-            ],
+            key: '2',
+            label: 'Atlanta Flashers',
+            routerLink: ['/league/teams/2'],
           },
           {
-            key: 'smythe',
-            label: 'Smythe Division',
-            subItems: [
-              {
-                key: '6',
-                label: 'Green Bay Glory',
-                routerLink: ['/league/teams/6'],
-              },
-              {
-                key: '3',
-                label: 'Augusta Green Jackets',
-                routerLink: ['/league/teams/3'],
-              },
-              {
-                key: '19',
-                label: 'Staten Island Killer Bees',
-                routerLink: ['/league/teams/19'],
-              },
-              {
-                key: '9',
-                label: 'Lone Star Brahmas',
-                routerLink: ['/league/teams/9'],
-              },
-              {
-                key: '67',
-                label: 'Santa Fe Skinwalkers',
-                routerLink: ['/league/teams/67'],
-              },
-              {
-                key: '66',
-                label: 'Torbay Tidesman',
-                routerLink: ['/league/teams/66'],
-              },
-            ],
+            key: '3',
+            label: 'Augusta Green Jackets',
+            routerLink: ['/league/teams/3'],
           },
           {
-            key: 'adams',
-            label: 'Adams Division',
-            subItems: [
-              {
-                key: '11',
-                label: 'Milwaukee Ice Dragons',
-                routerLink: ['/league/teams/11'],
-              },
-              {
-                key: '4',
-                label: 'Cheyenne Desperado',
-                routerLink: ['/league/teams/4'],
-              },
-              {
-                key: '10',
-                label: 'Memphis Hound Dogs',
-                routerLink: ['/league/teams/10'],
-              },
-              {
-                key: '7',
-                label: 'Indianapolis Goats',
-                routerLink: ['/league/teams/7'],
-              },
-              {
-                key: '8',
-                label: 'Kelowna Mountaineers',
-                routerLink: ['/league/teams/8'],
-              },
-              {
-                key: '2',
-                label: 'Atlanta Flashers',
-                routerLink: ['/league/teams/2'],
-              },
-            ],
+            key: '4',
+            label: 'Cheyenne Desperado',
+            routerLink: ['/league/teams/4'],
           },
           {
-            key: 'patrick',
-            label: 'Patrick Division',
-            subItems: [
-              {
-                key: '5',
-                label: 'Cincinnati Cyclones',
-                routerLink: ['/league/teams/5'],
-              },
-              {
-                key: '12',
-                label: 'Mississauga North Stars',
-                routerLink: ['/league/teams/12'],
-              },
-              {
-                key: '18',
-                label: 'South Carolina Stingrays',
-                routerLink: ['/league/teams/18'],
-              },
-              {
-                key: '60',
-                label: 'St.Johns Vikings',
-                routerLink: ['/league/teams/60'],
-              },
-              {
-                key: '68',
-                label: 'Kitchener Bliztkrieg',
-                routerLink: ['/league/teams/68'],
-              },
-              {
-                key: '53',
-                label: "Victoria Stellar's Jays",
-                routerLink: ['/league/teams/53'],
-              },
-            ],
+            key: '5',
+            label: 'Cincinnati Cyclones',
+            routerLink: ['/league/teams/5'],
+          },
+          {
+            key: '6',
+            label: 'Green Bay Glory',
+            routerLink: ['/league/teams/6'],
+          },
+          {
+            key: '7',
+            label: 'Indianapolis Goats',
+            routerLink: ['/league/teams/7'],
+          },
+          {
+            key: '8',
+            label: 'Kelowna Mountaineers',
+            routerLink: ['/league/teams/8'],
+          },
+          {
+            key: '68',
+            label: 'Kitchener Bliztkrieg',
+            routerLink: ['/league/teams/68'],
+          },
+          {
+            key: '9',
+            label: 'Lone Star Brahmas',
+            routerLink: ['/league/teams/9'],
+          },
+          {
+            key: '10',
+            label: 'Memphis Hound Dogs',
+            routerLink: ['/league/teams/10'],
+          },
+          {
+            key: '11',
+            label: 'Milwaukee Ice Dragons',
+            routerLink: ['/league/teams/11'],
+          },
+          {
+            key: '12',
+            label: 'Mississauga North Stars',
+            routerLink: ['/league/teams/12'],
+          },
+          {
+            key: '13',
+            label: 'Oakland Assassins',
+            routerLink: ['/league/teams/13'],
+          },
+          {
+            key: '14',
+            label: 'Oklahoma City Oil Barons',
+            routerLink: ['/league/teams/14'],
+          },
+          {
+            key: '15',
+            label: 'Peoria Prowlers',
+            routerLink: ['/league/teams/15'],
+          },
+          {
+            key: '69',
+            label: 'Quebec City Flying Canoes',
+            routerLink: ['/league/teams/69'],
+          },
+          {
+            key: '61',
+            label: 'Sacramento Storm',
+            routerLink: ['/league/teams/61'],
+          },
+          {
+            key: '67',
+            label: 'Santa Fe Skinwalkers',
+            routerLink: ['/league/teams/67'],
+          },
+          {
+            key: '18',
+            label: 'South Carolina Stingrays',
+            routerLink: ['/league/teams/18'],
+          },
+          {
+            key: '19',
+            label: 'Staten Island Killer Bees',
+            routerLink: ['/league/teams/19'],
+          },
+          {
+            key: '60',
+            label: 'St.Johns Vikings',
+            routerLink: ['/league/teams/60'],
+          },
+          {
+            key: '66',
+            label: 'Torbay Tidesman',
+            routerLink: ['/league/teams/66'],
+          },
+          {
+            key: '53',
+            label: "Victoria Stellar's Jays",
+            routerLink: ['/league/teams/53'],
+          },
+          {
+            key: '21',
+            label: 'Wichita Wolfpack',
+            routerLink: ['/league/teams/21'],
           },
         ],
       },

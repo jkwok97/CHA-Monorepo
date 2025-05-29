@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@cha/domain/auth';
 import { DisplayFacade, UserTeamFacade } from '@cha/domain/core';
 import { TeamDto, UserDto } from '@cha/shared/entities';
-import { MenuItem } from 'primeng/api';
 import { Observable, filter, first } from 'rxjs';
-import { mainMenuItems } from './main-menu-items';
 import { menuItems } from './menu-items';
 import { BladeNavListItemModel } from '@blade/angular/ui/multi-level-menu';
 
@@ -20,7 +18,6 @@ export class MainComponent implements OnInit {
   currentUser$: Observable<UserDto | null>;
   isMobile$: Observable<boolean>;
 
-  items: MenuItem[] = mainMenuItems;
   menuItems: BladeNavListItemModel[] = menuItems;
   numberOfSubMenusToShow = 0;
   isMenuOpen = false;
