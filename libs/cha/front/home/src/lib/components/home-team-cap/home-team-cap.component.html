@@ -1,0 +1,49 @@
+<div
+  *ngIf="currentCapHit$ | async as currentCap"
+  class="text-sm md:text-md p-2 border-round"
+  style="background-color: var(--background-100); color: whitesmoke"
+>
+  <ng-container *ngIf="nextCapHit$ | async as nextCapHit">
+    <div class="flex flex-wrap column-gap-2">
+      Current Cap Number:
+      <span>{{ currentCap }}</span>
+    </div>
+    <div class="flex flex-wrap column-gap-2">
+      Current Cap Overage:
+      <span>{{ (totalSalary - getCapNumber(currentCap)).toFixed(3) }}</span>
+      <div
+        class="text-red-600 font-semibold"
+        *ngIf="totalSalary - getCapNumber(currentCap) > 0"
+      >
+        Over Cap Limit
+      </div>
+    </div>
+    <div class="flex flex-wrap column-gap-2">
+      Next Cap Number:
+      <span>{{ nextCapHit }}</span>
+    </div>
+    <div class="flex flex-wrap column-gap-2">
+      Next Cap Overage:
+      <span>{{ (nextTotalSalary - getCapNumber(nextCapHit)).toFixed(3) }}</span>
+      <div
+        class="text-red-600 font-semibold"
+        *ngIf="nextTotalSalary - getCapNumber(nextCapHit) > 0"
+      >
+        Over Cap Limit
+      </div>
+    </div>
+
+    <div class="flex flex-wrap column-gap-2">
+      Total Players:
+      <span>
+        {{ totalPlayers }}
+      </span>
+      <div *ngIf="totalPlayers > 30" class="text-red-600 font-semibold">
+        Over Player Limit
+      </div>
+      <div *ngIf="totalPlayers < 24" class="text-red-600 font-semibold">
+        Under Player Limit
+      </div>
+    </div>
+  </ng-container>
+</div>

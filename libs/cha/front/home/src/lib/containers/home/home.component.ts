@@ -1,8 +1,60 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { combineLatest, first, map, Observable } from 'rxjs';
+import { HomeFacade } from '../../+state/home.facade';
+import { UserTeamFacade } from '@cha/domain/core';
+import { TeamDto } from '@cha/shared/entities';
 
 @Component({
   selector: 'cha-front-home',
-  template: `<router-outlet></router-outlet>`,
+  templateUrl: 'home.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  isLoaded$: Observable<boolean>;
+  isLoading$: Observable<boolean>;
+  userTeam$: Observable<TeamDto | undefined> =
+    this.userTeamFacade.currentUserTeam$;
+
+  constructor(
+    private homeFacade: HomeFacade,
+    private userTeamFacade: UserTeamFacade
+  ) {
+    this.isLoaded$ = combineLatest([
+      this.homeFacade.goalieSalaryLoaded$,
+      this.homeFacade.playerSalaryLoaded$,
+      this.homeFacade.teamRecordLoaded$,
+    ]).pipe(
+      map(
+        ([goalieLoaded, playerLoaded, recordLoaded]: [
+          boolean,
+          boolean,
+          boolean
+        ]) => goalieLoaded && playerLoaded && recordLoaded
+      )
+    );
+
+    this.isLoading$ = combineLatest([
+      this.homeFacade.goalieSalaryLoaded$,
+      this.homeFacade.playerSalaryLoaded$,
+      this.homeFacade.teamRecordLoaded$,
+    ]).pipe(
+      map(
+        ([goalieLoaded, playerLoaded, recordLoaded]: [
+          boolean,
+          boolean,
+          boolean
+        ]) => !goalieLoaded && !playerLoaded && !recordLoaded
+      )
+    );
+  }
+
+  ngOnInit(): void {
+    this.userTeam$.pipe(first()).subscribe((userTeam: TeamDto | undefined) => {
+      if (userTeam) {
+        this.homeFacade.getUserTeamRecord(userTeam.id);
+        this.homeFacade.getPlayerSalaries(userTeam.shortname);
+        this.homeFacade.getGoalieSalaries(userTeam.shortname);
+      }
+    });
+  }
+}

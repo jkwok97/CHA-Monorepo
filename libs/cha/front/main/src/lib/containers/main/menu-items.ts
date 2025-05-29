@@ -4,7 +4,7 @@ export const menuItems: BladeNavListItemModel[] = [
   {
     key: 'home',
     label: 'Home',
-    routerLink: ['/home/summary'],
+    routerLink: ['/home'],
     subItems: [
       {
         key: 'summary',
