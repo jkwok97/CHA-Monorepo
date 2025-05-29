@@ -2,11 +2,13 @@
   [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
 >
   <div class="nhl-leaders">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
+
     <ng-container *ngIf="isLoaded$ | async">
       <div class="nhl-leaders-section">
         <div class="nhl-leaders-section-header">Skaters</div>

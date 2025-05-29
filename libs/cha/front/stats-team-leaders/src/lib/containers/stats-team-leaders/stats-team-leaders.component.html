@@ -1,20 +1,24 @@
 <blade-layout-feature-content>
+
   <div class="league-stats-team">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <blade-card>
-      <blade-card-header>
+    <blade-card class="h-full overflow-hidden">
+
+      <blade-card-header [ngStyle]="{ height: '100px'}">
         <blade-button-select
           class="flex justify-content-center"
           [options]="selectSeasonOptions"
           (optionChanged)="onSeasonOptionChanged($event)"
         ></blade-button-select>
       </blade-card-header>
-      <blade-card-body *ngIf="isLoaded$ | async">
+
+      <blade-card-body *ngIf="isLoaded$ | async" [ngStyle]="{ height: 'calc(100% - 100px'}" class="overflow-y-auto">
         <div class="league-stats-team-container">
           <cha-front-stats-team-leaders-standings></cha-front-stats-team-leaders-standings>
           <cha-front-stats-team-leaders-streak></cha-front-stats-team-leaders-streak>
@@ -31,6 +35,9 @@
           <cha-front-stats-team-leaders-passing></cha-front-stats-team-leaders-passing>
         </div>
       </blade-card-body>
+
     </blade-card>
+
   </div>
+
 </blade-layout-feature-content>

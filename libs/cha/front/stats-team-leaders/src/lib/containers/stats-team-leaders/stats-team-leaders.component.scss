@@ -1,4 +1,12 @@
 .league-stats-team {
+  height: 100%;
+  overflow: hidden;
+
+  &-content {
+    height: 100%;
+    overflow-y: auto;
+  }
+
   &-container {
     display: grid;
     grid-row-gap: 20px;
