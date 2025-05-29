@@ -136,6 +136,7 @@ export class MultiLevelMenuComponent implements OnInit {
     if (!this._overlayRef) {
       this._overlayRef = this._overlay.create({
         hasBackdrop: true,
+        panelClass: 'overlay-backdrop',
       });
 
       this._overlayRef

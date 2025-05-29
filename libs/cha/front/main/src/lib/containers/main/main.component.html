@@ -1,4 +1,4 @@
-<section *ngIf="currentTeam$ | async as currentTeam">
+<ng-container *ngIf="currentTeam$ | async as currentTeam">
 
   <div class="layout">
 
@@ -14,10 +14,7 @@
           (numberOfSubMenusShown)="onShowSubMenu($event)"
           (isMenuOpen)="onIsMenuOpen($event)"
           (isMenuCollapsed)="onIsMenuCollapsed($event)"
-
-        >
-          HELLO
-        </blade-multi-level-menu>
+        />
       </aside>
 
       <article>
@@ -30,20 +27,4 @@
 
   </div>
 
-</section>
-
-<ng-template #teamLogo>
-  <ng-container *ngIf="currentTeam$ | async as team">
-    <div class="flex align-items-center w-full">
-      <cha-logo
-        class="pl-2"
-        [height]="40"
-        [width]="40"
-        [userTeamLogo]="team.teamlogo"
-      ></cha-logo>
-      <div *ngIf="isMobile$ | async" class="pl-2 pr-2">
-        {{ team.city }} {{ team.nickname }}
-      </div>
-    </div>
-  </ng-container>
-</ng-template>
+</ng-container>

@@ -6,6 +6,13 @@
   outline: none;
 }
 
+html, body {
+  height: 100%;
+  overflow: visible; /* or auto */
+  position: static; /* avoid position: relative unless necessary */
+}
+
+
 html {
   -webkit-text-size-adjust: 100%;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -25,7 +32,6 @@ body {
   padding: 0;
   background-color: black;
   color: whitesmoke;
-  overflow: hidden;
 }
 
 /*

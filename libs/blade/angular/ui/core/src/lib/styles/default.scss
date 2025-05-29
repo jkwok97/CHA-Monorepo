@@ -2,6 +2,7 @@
 @import 'primeng/resources/primeng.min.css';
 @import 'primeflex/primeflex.scss';
 @import 'components/index';
+@import '@angular/cdk/overlay-prebuilt.css';
 
 .p-menubar-end {
   margin-left: unset !important;
