@@ -1,64 +1,57 @@
 <blade-layout-feature-content>
-  <div
-    [ngClass]="{
-      'rules-equalization': (isMobile$ | async) === false,
-      'rules-equalization-mobile': (isMobile$ | async) === true
-    }"
-  >
-    <div *ngIf="(isMobile$ | async) === false" class="rules-equalization-image">
-      <img [src]="background" />
-    </div>
-    <blade-card class="rules-equalization-card">
-      <blade-card-header class="rules-equalization-card-header"
-        >Player Equalization</blade-card-header
-      >
 
-      <blade-card-body class="rules-equalization-card-content">
-        <ul>
-          <li>
-            Any skater under 41 (40 or less) NHL games played or any goaltender
-            under 35 (34 or less) NHL games played is subject to the player
-            equalization rules(PER), also known as the 110% rule.
-          </li>
-          <li>
-            Subject players may only play the number the number of their
-            previous season's NHL games played total plus 10% during the CHA's
-            regular season (ex. a player who appeared in 25 NHL games is
-            eligible to play 28 CHA regular season games. Fractions will be
-            rounded up)
-          </li>
-          <li>
-            Any G.M. who violated the 'PER' will have the offending player
-            returned into the free agent pool. That player would not be
-            available until the following Entry draft
-          </li>
-          <li>
-            Subject players will also be limited in their playoff availability
-            <ul>
-              <li>
-                Skaters under 41 NHL games played are not eligible until the 2nd
-                round
-              </li>
-              <li>
-                Skaters under 31 NHL games played are not eligible until the 3rd
-                round
-              </li>
-              <li>
-                Skaters under 21 NHL games played are not eligible until the
-                finals
-              </li>
-              <li>
-                Starting goaltenders in the playoffs must have a minimum of 35
-                NHL games played
-              </li>
-              <li>
-                Goalies under the 35 NHL games played are available in any/all
-                rounds of the playoffs as an injury replacement only
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </blade-card-body>
-    </blade-card>
+  <div class="rules-equalization">
+
+    <div class="rules-equalization-header">
+      <span><u>Player Equalization</u></span>
+    </div>
+
+    <div class="rules-equalization-content">
+      <ul>
+        <li>
+          Any skater under 41 (40 or less) NHL games played or any goaltender
+          under 35 (34 or less) NHL games played is subject to the player
+          equalization rules(PER), also known as the 110% rule.
+        </li>
+        <li>
+          Subject players may only play the number the number of their
+          previous season's NHL games played total plus 10% during the CHA's
+          regular season (ex. a player who appeared in 25 NHL games is
+          eligible to play 28 CHA regular season games. Fractions will be
+          rounded up)
+        </li>
+        <li>
+          Any G.M. who violated the 'PER' will have the offending player
+          returned into the free agent pool. That player would not be
+          available until the following Entry draft
+        </li>
+        <li>
+          Subject players will also be limited in their playoff availability
+          <ul>
+            <li>
+              Skaters under 41 NHL games played are not eligible until the 2nd
+              round
+            </li>
+            <li>
+              Skaters under 31 NHL games played are not eligible until the 3rd
+              round
+            </li>
+            <li>
+              Skaters under 21 NHL games played are not eligible until the
+              finals
+            </li>
+            <li>
+              Starting goaltenders in the playoffs must have a minimum of 35
+              NHL games played
+            </li>
+            <li>
+              Goalies under the 35 NHL games played are available in any/all
+              rounds of the playoffs as an injury replacement only
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
+
 </blade-layout-feature-content>

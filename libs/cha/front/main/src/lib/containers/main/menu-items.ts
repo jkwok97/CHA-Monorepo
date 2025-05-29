@@ -5,54 +5,55 @@ export const menuItems: BladeNavListItemModel[] = [
     key: 'home',
     label: 'Home',
     routerLink: ['/home'],
-    subItems: [
-      {
-        key: 'summary',
-        label: 'Summary',
-        subItems: [
-          {
-            key: 'depth-chart',
-            label: 'Depth Chart',
-            routerLink: ['/home/summary/depth-chart'],
-          },
-          {
-            key: 'salaries',
-            label: 'Salaries',
-            routerLink: ['/home/summary/salaries'],
-          },
-        ],
-      },
-      {
-        key: 'history',
-        label: 'History',
-        subItems: [
-          {
-            key: 'franchise',
-            label: 'Franchise',
-            routerLink: ['/home/franchise'],
-          },
-          {
-            key: 'players',
-            label: 'Players',
-            routerLink: ['/home/current-players'],
-          },
-          {
-            key: 'goalies',
-            label: 'Goalies',
-            routerLink: ['/home/current-goalies'],
-          },
-          {
-            key: 'awards',
-            label: 'Awards',
-            routerLink: ['/home/awards'],
-          },
-        ],
-      },
-    ],
+    // subItems: [
+    //   {
+    //     key: 'summary',
+    //     label: 'Summary',
+    //     subItems: [
+    //       {
+    //         key: 'depth-chart',
+    //         label: 'Depth Chart',
+    //         routerLink: ['/home/summary/depth-chart'],
+    //       },
+    //       {
+    //         key: 'salaries',
+    //         label: 'Salaries',
+    //         routerLink: ['/home/summary/salaries'],
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     key: 'history',
+    //     label: 'History',
+    //     subItems: [
+    //       {
+    //         key: 'franchise',
+    //         label: 'Franchise',
+    //         routerLink: ['/home/franchise'],
+    //       },
+    //       {
+    //         key: 'players',
+    //         label: 'Players',
+    //         routerLink: ['/home/current-players'],
+    //       },
+    //       {
+    //         key: 'goalies',
+    //         label: 'Goalies',
+    //         routerLink: ['/home/current-goalies'],
+    //       },
+    //       {
+    //         key: 'awards',
+    //         label: 'Awards',
+    //         routerLink: ['/home/awards'],
+    //       },
+    //     ],
+    //   },
+    // ],
   },
   {
     key: 'league',
     label: 'League',
+    icon: 'pi pi-qrcode',
     subItems: [
       {
         key: 'stats',

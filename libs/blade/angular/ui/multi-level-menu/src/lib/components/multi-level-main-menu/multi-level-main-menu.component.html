@@ -38,11 +38,6 @@
         }
         {{ _title }}
       </div>
-
-    } @else if (logo) {
-      <a [routerLink]="['/']" class="text-white logo-link">
-        <svg-icon [src]="logo"/>
-      </a>
     }
 
   </div>
@@ -102,9 +97,7 @@
     } @else {
       @if (iconToShow) {
         <div class="multi-level-main-menu-icon-material">
-          <i class="material-icons-outlined">
-            {{ iconToShow }}
-          </i>
+          <i [class]="iconToShow"></i>
         </div>
       }
     }
