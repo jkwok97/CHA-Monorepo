@@ -1,34 +1,28 @@
 <blade-layout-feature-content>
-  <div
-    [ngClass]="{
-      'rules-winnings': (isMobile$ | async) === false,
-      'rules-winnings-mobile': (isMobile$ | async) === true
-    }"
-  >
-    <div *ngIf="(isMobile$ | async) === false" class="rules-winnings-image">
-      <img [src]="background" />
+
+  <div class="rules-winnings">
+
+    <div class="rules-winnings-header">
+      <span><u>CHA Winnings Allotment</u></span>
     </div>
 
-    <blade-card class="rules-winnings-card">
-      <blade-card-header class="rules-winnings-card-header"
-        >CHA Winnings Allotment</blade-card-header
-      >
-      <blade-card-body>
-        <ul>
-          <li>Liberty Cup Champion - $400</li>
-          <li>Liberty Cup Runner Up - $150</li>
-          <li>Conference Runner Up - $50/ea.</li>
-          <li>Regular Season Winner - $50</li>
-          <li>Division Champion - $50/ea.</li>
-          <li>CHA Leading Scorer - $50</li>
-          <li>CHA Top Defenseman - $50</li>
-          <li>CHA Top Goalie - $50</li>
-          <li>CHA Top Rookie - $50</li>
-          <li>CHA Top G.M. - $50</li>
-          <li>Website Maintenance - $25</li>
-          <li>League Administration - $25</li>
-        </ul>
-      </blade-card-body>
-    </blade-card>
+    <div class="rules-winnings-content">
+      <ul>
+        <li>Liberty Cup Champion - $400</li>
+        <li>Liberty Cup Runner Up - $150</li>
+        <li>Conference Runner Up - $50/ea.</li>
+        <li>Regular Season Winner - $50</li>
+        <li>Division Champion - $50/ea.</li>
+        <li>CHA Leading Scorer - $50</li>
+        <li>CHA Top Defenseman - $50</li>
+        <li>CHA Top Goalie - $50</li>
+        <li>CHA Top Rookie - $50</li>
+        <li>CHA Top G.M. - $50</li>
+        <li>Website Maintenance - $25</li>
+        <li>League Administration - $25</li>
+      </ul>
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

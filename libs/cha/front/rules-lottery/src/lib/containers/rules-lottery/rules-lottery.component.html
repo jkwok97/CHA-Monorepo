@@ -1,44 +1,37 @@
 <blade-layout-feature-content>
-  <div
-    [ngClass]="{
-      'rules-lottery': (isMobile$ | async) === false,
-      'rules-lottery-mobile': (isMobile$ | async) === true
-    }"
-  >
-    <div *ngIf="(isMobile$ | async) === false" class="rules-lottery-image">
-      <img [src]="background" />
-    </div>
-    <blade-card class="rules-lottery-card">
-      <blade-card-header class="rules-lottery-card-header"
-        >Draft Lottery</blade-card-header
-      >
 
-      <blade-card-body class="rules-lottery-card-content">
-        <ul>
-          <li>
-            The bottom 9 teams in the regular season standings qualify for the
-            draft lottery (the number of team eligible is base on the percentage
-            of total NHL teams eliglbe for the NHL draft lottery)
-          </li>
-          <li>All eligible teams qualify for the 1st overal selection</li>
-          <li>No team can worsen their draft position by more than one spot</li>
-          <li>
-            Odds of improving one's draft position are based upon final regular
-            season positioning. Odds of obtaining the 1st overall selection are
-            as follows:
-            <ul>
-              <li>24th - 36%</li>
-              <li>23th - 23%</li>
-              <li>22th - 13%</li>
-              <li>21th - 9%</li>
-              <li>20th - 7%</li>
-              <li>19th - 5%</li>
-              <li>18th - 4%</li>
-              <li>17th - 3%</li>
-            </ul>
-          </li>
-        </ul>
-      </blade-card-body>
-    </blade-card>
+  <div class="rules-lottery">
+
+    <div class="rules-lottery-header">
+      <span><u>Draft Lottery</u></span>
+    </div>
+
+    <div class="rules-lottery-content">
+      <ul>
+        <li>
+          The bottom 9 teams in the regular season standings qualify for the
+          draft lottery (the number of team eligible is base on the percentage
+          of total NHL teams eliglbe for the NHL draft lottery)
+        </li>
+        <li>All eligible teams qualify for the 1st overal selection</li>
+        <li>No team can worsen their draft position by more than one spot</li>
+        <li>
+          Odds of improving one's draft position are based upon final regular
+          season positioning. Odds of obtaining the 1st overall selection are
+          as follows:
+          <ul>
+            <li>24th - 36%</li>
+            <li>23th - 23%</li>
+            <li>22th - 13%</li>
+            <li>21th - 9%</li>
+            <li>20th - 7%</li>
+            <li>19th - 5%</li>
+            <li>18th - 4%</li>
+            <li>17th - 3%</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
+
 </blade-layout-feature-content>
