@@ -66,8 +66,6 @@ const r = createReducer(
   on(HomeActions.getTradesSuccess, (state, action) => ({
     ...state,
     trades: action.transactions,
-    loading: false,
-    loaded: true,
   })),
 
   on(HomeActions.getUserTeamGoaliesSalaries, (state) => ({

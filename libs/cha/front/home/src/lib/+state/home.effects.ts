@@ -97,7 +97,7 @@ export class HomeEffects {
               transactions,
             })
           ),
-          catchError(() => of(HomeActions.error()))
+          catchError(() => of(HomeActions.getTradesError()))
         )
       )
     )

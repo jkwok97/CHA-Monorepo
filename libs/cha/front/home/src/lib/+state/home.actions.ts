@@ -81,6 +81,8 @@ const getTradesSuccess = createAction(
   props<{ transactions: GetTransactionDto[] }>()
 );
 
+const getTradesError = createAction(`${NAMESPACE} Get Trades For Season Error`);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const HomeActions = {
@@ -95,5 +97,6 @@ export const HomeActions = {
   getNHLCurrentStatsSuccess,
   getTrades,
   getTradesSuccess,
+  getTradesError,
   error,
 };
