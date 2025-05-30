@@ -5,6 +5,7 @@ import { TeamDto, UserDto } from '@cha/shared/entities';
 import { Observable, filter, first } from 'rxjs';
 import { menuItems } from './menu-items';
 import { BladeNavListItemModel } from '@blade/angular/ui/multi-level-menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cha-front-main',
@@ -26,7 +27,8 @@ export class MainComponent implements OnInit {
   constructor(
     private authFacade: AuthFacade,
     private userTeamFacade: UserTeamFacade,
-    private displayFacade: DisplayFacade
+    private displayFacade: DisplayFacade,
+    private router: Router
   ) {
     this.isLoading$ = this.userTeamFacade.isLoading$;
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
@@ -77,5 +79,9 @@ export class MainComponent implements OnInit {
 
   onIsMenuCollapsed(event: boolean): void {
     this.isMenuCollapsed = event;
+  }
+
+  onLogout(): void {
+    this.router.navigate(['/logout']);
   }
 }

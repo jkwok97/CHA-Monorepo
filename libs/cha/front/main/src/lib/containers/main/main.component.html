@@ -14,7 +14,17 @@
           (numberOfSubMenusShown)="onShowSubMenu($event)"
           (isMenuOpen)="onIsMenuOpen($event)"
           (isMenuCollapsed)="onIsMenuCollapsed($event)"
+          [footerTmpl]="bottomTmpl"
         />
+
+        <ng-template #bottomTmpl>
+          <p-button
+            icon="pi pi-sign-out"
+            [rounded]="true"
+            [outlined]="true"
+            (click)="onLogout()"
+          />
+        </ng-template>
       </aside>
 
       <article>
