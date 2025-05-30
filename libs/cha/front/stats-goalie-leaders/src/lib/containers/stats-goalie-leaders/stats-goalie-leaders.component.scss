@@ -1,13 +1,18 @@
 .league-stats-goalies {
-  display: grid;
-  padding: 20px;
-  grid-row-gap: 20px;
   height: 100%;
   width: 100%;
 
+  &-header {
+    padding: 20px;
+    height: 100px;
+  }
+
   &-section {
     display: grid;
+    padding: 20px;
     grid-row-gap: 20px;
+    height: calc(100% - 100px);
+    overflow-y: auto;
 
     &-body {
       display: grid;

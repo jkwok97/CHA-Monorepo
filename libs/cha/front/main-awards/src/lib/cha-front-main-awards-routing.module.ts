@@ -20,42 +20,42 @@ const ROUTES: Route[] = [
           ),
       },
       {
-        path: 'scorer',
+        path: 'leading-scorer',
         loadChildren: () =>
           import('@cha/front/awards-scorer').then(
             (mod) => mod.ChaFrontAwardsScorerModule
           ),
       },
       {
-        path: 'defense',
+        path: 'best-defense',
         loadChildren: () =>
           import('@cha/front/awards-defense').then(
             (mod) => mod.ChaFrontAwardsDefenseModule
           ),
       },
       {
-        path: 'rookie',
+        path: 'best-rookie',
         loadChildren: () =>
           import('@cha/front/awards-rookie').then(
             (mod) => mod.ChaFrontAwardsRookieModule
           ),
       },
       {
-        path: 'goalie',
+        path: 'best-goalie',
         loadChildren: () =>
           import('@cha/front/awards-goalie').then(
             (mod) => mod.ChaFrontAwardsGoalieModule
           ),
       },
       {
-        path: 'gm',
+        path: 'best-gm',
         loadChildren: () =>
           import('@cha/front/awards-gm').then(
             (mod) => mod.ChaFrontAwardsGmModule
           ),
       },
       {
-        path: 'season',
+        path: 'best-season',
         loadChildren: () =>
           import('@cha/front/awards-season').then(
             (mod) => mod.ChaFrontAwardsSeasonModule
