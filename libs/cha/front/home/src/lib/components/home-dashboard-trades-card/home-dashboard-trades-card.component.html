@@ -6,7 +6,7 @@
     >
       <p-avatar
         [image]="getString(teamInfo.teamlogo)"
-        size="xlarge"
+        size="large"
         shape="square"
       ></p-avatar>
 
@@ -26,7 +26,7 @@
       <div
         *ngFor="let player of teamPlayers"
         [style.color]="teamInfo.teamtextcolor"
-        class="flex align-items-center column-gap-2"
+        class="flex align-items-center column-gap-2 text-sm"
       >
         <p-avatar
           [image]="getPlayerPicture(player?.player?.nhl_id)"
