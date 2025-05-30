@@ -5,11 +5,11 @@
 >
   <ng-container *ngIf="nextCapHit$ | async as nextCapHit">
     <div class="flex flex-wrap column-gap-2">
-      Current Cap Number:
+      Curr. Cap Number:
       <span>{{ currentCap }}</span>
     </div>
     <div class="flex flex-wrap column-gap-2">
-      Current Cap Overage:
+      Curr. Cap +\-:
       <span>{{ (totalSalary - getCapNumber(currentCap)).toFixed(3) }}</span>
       <div
         class="text-red-600 font-semibold"
@@ -23,7 +23,7 @@
       <span>{{ nextCapHit }}</span>
     </div>
     <div class="flex flex-wrap column-gap-2">
-      Next Cap Overage:
+      Next Cap +\-:
       <span>{{ (nextTotalSalary - getCapNumber(nextCapHit)).toFixed(3) }}</span>
       <div
         class="text-red-600 font-semibold"

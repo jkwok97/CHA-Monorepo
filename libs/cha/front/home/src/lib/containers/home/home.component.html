@@ -10,11 +10,11 @@
         *ngIf="isLoading$ | async"
       ></p-progressBar>
 
-      <div class="p-2" [ngStyle]="{ height: (isMobile$ | async) ? '370px' : '170px' }">
+      <div class="p-2" [ngStyle]="{ height: (isMobile$ | async) ? '260px' : '170px' }">
         <cha-front-home-team-banner />
       </div>
 
-      <div class="px-2 overflow-y-auto" [ngStyle]="{ height: (isMobile$ | async) ? 'calc(100% - 370px)' : 'calc(100% - 170px)' }">
+      <div class="px-2 overflow-y-auto" [ngStyle]="{ height: (isMobile$ | async) ? 'calc(100% - 260px)' : 'calc(100% - 170px)' }">
         <cha-front-home-dashboard />
       </div>
 
