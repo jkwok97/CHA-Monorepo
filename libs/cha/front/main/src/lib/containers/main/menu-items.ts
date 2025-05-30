@@ -391,4 +391,10 @@ export const menuItems: BladeNavListItemModel[] = [
       },
     ],
   },
+  {
+    key: 'logout',
+    label: 'Logout',
+    icon: 'pi pi-sign-out',
+    routerLink: ['/logout'],
+  },
 ];

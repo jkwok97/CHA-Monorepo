@@ -14,12 +14,12 @@
   }
 
   &-forward {
-    color: white;
+    //color: white;
   }
 
   &-active, &-related-active {
     background-color: darkgrey;
-    color: white;
+    color: white !important;
     font-weight: 500;
   }
 }
