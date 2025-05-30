@@ -1,0 +1,18 @@
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  [ngStyle]="{ 'background-color': userTeam.teamcolor, 'font-weight': 100 }"
+  class="w-full"
+>
+  <blade-card-body>
+
+    <div class="flex flex-row column-gap-2 row-gap-2">
+
+      <div class="w-full md:w-3">
+        <cha-front-home-dashboard-trades />
+      </div>
+
+    </div>
+
+  </blade-card-body>
+
+</blade-card>

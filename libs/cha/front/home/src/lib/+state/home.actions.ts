@@ -1,4 +1,5 @@
 import {
+  GetTransactionDto,
   NhlGoalieStatDto,
   NhlPlayerStatDto,
   SalariesAndRatingsDto,
@@ -70,6 +71,16 @@ const getNHLCurrentStatsSuccess = createAction(
   props<{ stats: NhlGoalieStatDto | NhlPlayerStatDto | null }>()
 );
 
+const getTrades = createAction(
+  `${NAMESPACE} Get Trades For Season`,
+  props<{ season: string }>()
+);
+
+const getTradesSuccess = createAction(
+  `${NAMESPACE} Get Trades For Season Success`,
+  props<{ transactions: GetTransactionDto[] }>()
+);
+
 const error = createAction(`${NAMESPACE} Error`);
 
 export const HomeActions = {
@@ -82,5 +93,7 @@ export const HomeActions = {
   getCHACurrentPlayerStatsSuccess,
   getCHACurrentGoalieStatsSuccess,
   getNHLCurrentStatsSuccess,
+  getTrades,
+  getTradesSuccess,
   error,
 };

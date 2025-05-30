@@ -4,14 +4,7 @@ import { State } from './home.reducer';
 import { HomeActions } from './home.actions';
 import { Observable } from 'rxjs';
 import { HomeSelectors } from './home.selectors';
-import {
-  NhlGoalieStatDto,
-  NhlPlayerStatDto,
-  SalariesAndRatingsDto,
-  StatGoalieAllDto,
-  StatPlayerAllDto,
-  StatUserTeamRecordDto,
-} from '@cha/shared/entities';
+import { GetTransactionDto, StatUserTeamRecordDto } from '@cha/shared/entities';
 
 @Injectable()
 export class HomeFacade {
@@ -51,6 +44,10 @@ export class HomeFacade {
     HomeSelectors.selectProtectedPlayerCount
   );
 
+  recentTrades$: Observable<GetTransactionDto[]> = this.store.select(
+    HomeSelectors.selectRecentTrades
+  );
+
   constructor(private store: Store<State>) {}
 
   getUserTeamRecord(teamId: number) {
@@ -65,5 +62,9 @@ export class HomeFacade {
 
   getGoalieSalaries(teamName: string) {
     this.store.dispatch(HomeActions.getUserTeamGoaliesSalaries({ teamName }));
+  }
+
+  getTransactions(season: string) {
+    this.store.dispatch(HomeActions.getTrades({ season }));
   }
 }

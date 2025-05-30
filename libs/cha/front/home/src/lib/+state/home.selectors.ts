@@ -1,4 +1,4 @@
-import { SalariesAndRatingsDto } from '@cha/shared/entities';
+import { GetTransactionDto, SalariesAndRatingsDto } from '@cha/shared/entities';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as HomeReducer from './home.reducer';
@@ -175,6 +175,13 @@ const selectPlayerSalaryLoading = createSelector(
   HomeReducer.getPlayerSalaryLoading
 );
 
+const selectTrades = createSelector(selectState, HomeReducer.getTrades);
+
+const selectRecentTrades = createSelector(
+  selectTrades,
+  (trades: GetTransactionDto[]) => trades.filter((e, i) => i < 5)
+);
+
 export const HomeSelectors = {
   selectTeamRecordLoading,
   selectTeamRecordLoaded,
@@ -194,6 +201,7 @@ export const HomeSelectors = {
   selectForwardSalaries,
   selectGoalieSalariesFiltered,
   selectPlayerSalaryLoading,
+  selectRecentTrades,
 };
 
 function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {

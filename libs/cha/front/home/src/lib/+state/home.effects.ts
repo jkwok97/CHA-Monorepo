@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LeagueDataFacade } from '@cha/domain/core';
 import {
-  NhlGoalieStatDto,
-  NhlPlayerStatDto,
+  GetTransactionDto,
   SalariesAndRatingsDto,
-  StatGoalieAllDto,
-  StatPlayerAllDto,
   StatUserTeamRecordDto,
 } from '@cha/shared/entities';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -18,7 +15,7 @@ export class HomeEffects {
   constructor(
     private actions$: Actions,
     private leagueDataFacade: LeagueDataFacade,
-    private homeSummaryService: HomeService
+    private homeService: HomeService
   ) {}
 
   getUserTeamRecord$ = createEffect(() =>
@@ -26,7 +23,7 @@ export class HomeEffects {
       ofType(HomeActions.getUserTeamRecordBySeasonAndSeasonType),
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
-        this.homeSummaryService
+        this.homeService
           .getUserTeamRecordBySeasonAndSeasonType(
             action.teamId,
             data.current_year,
@@ -49,7 +46,7 @@ export class HomeEffects {
       ofType(HomeActions.getUserTeamPlayerSalaries),
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
-        this.homeSummaryService
+        this.homeService
           .getUserTeamPlayersSalariesBySeason(
             action.teamName,
             data.current_year,
@@ -72,7 +69,7 @@ export class HomeEffects {
       ofType(HomeActions.getUserTeamGoaliesSalaries),
       withLatestFrom(this.leagueDataFacade.leagueData$),
       exhaustMap(([action, data]) =>
-        this.homeSummaryService
+        this.homeService
           .getUserTeamGoaliesSalariesBySeason(
             action.teamName,
             data.current_year,
@@ -86,6 +83,22 @@ export class HomeEffects {
             ),
             catchError(() => of(HomeActions.error()))
           )
+      )
+    )
+  );
+
+  getTrades$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeActions.getTrades),
+      exhaustMap((action) =>
+        this.homeService.getTransactions(action.season).pipe(
+          map((transactions: GetTransactionDto[]) =>
+            HomeActions.getTradesSuccess({
+              transactions,
+            })
+          ),
+          catchError(() => of(HomeActions.error()))
+        )
       )
     )
   );
