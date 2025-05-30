@@ -1,11 +1,14 @@
 <blade-layout-feature-content>
-  <div>
+
+  <div class="h-full overflow-x-hidden">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
-    <div class="grid pt-2">
+
+    <div class="grid pt-2" [ngStyle]="{ height: '150px'}">
       <div
         class="text-lg text-center col-12"
         [style]="{ 'font-weight': '100' }"
@@ -26,24 +29,28 @@
       </div>
     </div>
 
-    <blade-divider></blade-divider>
+    <div [ngStyle]="{ height: 'calc(100% - 150px'}" class="overflow-y-auto">
 
-    <blade-card>
-      <blade-card-body>
-        <ng-container *ngIf="isLoaded$ | async">
-          <ng-container *ngIf="draftTableItems$ | async as items">
-            <ng-container *ngIf="teams$ | async as teams">
-              <blade-table
-                [layout]="'stack'"
-                [data]="mapItems(items)"
-                [tableColumns]="tableColumns"
-                [teams]="teams"
-                [filteringOptions]="filteringOptions"
-              ></blade-table
-            ></ng-container>
+      <blade-card>
+        <blade-card-body>
+          <ng-container *ngIf="isLoaded$ | async">
+            <ng-container *ngIf="draftTableItems$ | async as items">
+              <ng-container *ngIf="teams$ | async as teams">
+                <blade-table
+                  [layout]="'stack'"
+                  [data]="mapItems(items)"
+                  [tableColumns]="tableColumns"
+                  [teams]="teams"
+                  [filteringOptions]="filteringOptions"
+                ></blade-table
+                ></ng-container>
+            </ng-container>
           </ng-container>
-        </ng-container>
-      </blade-card-body>
-    </blade-card>
+        </blade-card-body>
+      </blade-card>
+
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

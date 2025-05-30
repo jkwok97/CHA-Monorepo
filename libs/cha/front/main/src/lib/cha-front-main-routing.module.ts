@@ -54,6 +54,13 @@ const ROUTES: Route[] = [
             (mod) => mod.ChaFrontMainRulesModule
           ),
       },
+      {
+        path: 'logout',
+        loadComponent: () =>
+          import('@cha/front/home-logout').then(
+            (mod) => mod.HomeLogoutComponent
+          ),
+      },
     ],
   },
 ];

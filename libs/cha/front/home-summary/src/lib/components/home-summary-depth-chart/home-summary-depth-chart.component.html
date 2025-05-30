@@ -1,10 +1,9 @@
 <blade-card
   *ngIf="userTeam$ | async as userTeam"
   [ngStyle]="{
-    'background-color': userTeam.teamcolor,
-    'font-weight': 100
+  'background-color': userTeam.teamcolor,
+  'font-weight': 100
   }"
-  class="w-full"
 >
   <blade-card-header>
     <div class="text-xl text-center">Depth Chart</div>
@@ -20,7 +19,7 @@
   </blade-card-header>
   <blade-card-body>
     <ng-container *ngIf="loadedSalaries$ | async">
-      <div class="flex flex-wrap flex-column row-gap-3 column-gap-3">
+      <div class="flex flex-wrap flex-column row-gap-3 column-gap-3 overflow-y-auto">
         <div class="w-full flex flex-wrap row-gap-3 justify-content-around">
           <ng-container *ngIf="leftWingers$ | async as leftWingers">
             <cha-front-home-summary-depth-chart-position

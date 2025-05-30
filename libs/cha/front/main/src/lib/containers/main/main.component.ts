@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthFacade } from '@cha/domain/auth';
-import { DisplayFacade } from '@cha/domain/core';
+import { DisplayFacade, UserTeamFacade } from '@cha/domain/core';
 import { TeamDto, UserDto } from '@cha/shared/entities';
-import { UserTeamFacade } from 'libs/cha/domain/core/src/lib/states/user-team/user-team.facade';
-import { MenuItem } from 'primeng/api';
 import { Observable, filter, first } from 'rxjs';
-import { mainMenuItems } from './main-menu-items';
+import { menuItems } from './menu-items';
+import { BladeNavListItemModel } from '@blade/angular/ui/multi-level-menu';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cha-front-main',
@@ -19,12 +19,16 @@ export class MainComponent implements OnInit {
   currentUser$: Observable<UserDto | null>;
   isMobile$: Observable<boolean>;
 
-  items: MenuItem[] = mainMenuItems;
+  menuItems: BladeNavListItemModel[] = menuItems;
+  numberOfSubMenusToShow = 0;
+  isMenuOpen = false;
+  isMenuCollapsed = false;
 
   constructor(
     private authFacade: AuthFacade,
     private userTeamFacade: UserTeamFacade,
-    private displayFacade: DisplayFacade
+    private displayFacade: DisplayFacade,
+    private router: Router
   ) {
     this.isLoading$ = this.userTeamFacade.isLoading$;
     this.currentTeam$ = this.userTeamFacade.currentUserTeam$;
@@ -43,5 +47,41 @@ export class MainComponent implements OnInit {
           this.userTeamFacade.get(user.id);
         }
       });
+  }
+
+  getWidth(): string {
+    if (this.isMenuOpen) {
+      if (this.numberOfSubMenusToShow > 0) {
+        if (this.isMenuCollapsed) {
+          return '30px';
+        } else {
+          return (265 + 35 * this.numberOfSubMenusToShow).toString() + 'px';
+        }
+      } else {
+        if (this.isMenuCollapsed) {
+          return '30px';
+        } else {
+          return '265px';
+        }
+      }
+    } else {
+      return '0px';
+    }
+  }
+
+  onShowSubMenu(event: number): void {
+    this.numberOfSubMenusToShow = event;
+  }
+
+  onIsMenuOpen(event: boolean): void {
+    this.isMenuOpen = event;
+  }
+
+  onIsMenuCollapsed(event: boolean): void {
+    this.isMenuCollapsed = event;
+  }
+
+  onLogout(): void {
+    this.router.navigate(['/logout']);
   }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -22,15 +22,16 @@ import { HasRelatedActiveRoutePipe } from './utils';
     ButtonDirective,
     Button,
     DividerModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    NgOptimizedImage,
   ],
   declarations: [
     MultiLevelMenuComponent,
     MultiLevelMenuFooterComponent,
     MultiLevelMenuItemComponent,
     MultiLevelMainMenuComponent,
-    HasRelatedActiveRoutePipe
+    HasRelatedActiveRoutePipe,
   ],
-  exports: [MultiLevelMenuComponent]
+  exports: [MultiLevelMenuComponent],
 })
 export class BladeAngularUiMultiLevelMenuModule {}

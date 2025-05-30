@@ -1,69 +1,22 @@
-<ng-scrollbar [style]="isMobile ? panelStyleMobile : panelStyleDesktop">
-  <blade-layout-feature>
-    <blade-layout-feature-content>
-      <div
-        class="flex justify-content-center row-gap-3 pl-2 pr-2 w-full flex-wrap"
-      >
-        <p-progressBar
-          mode="indeterminate"
-          [style]="{ height: '6px' }"
-          *ngIf="isLoading$ | async"
-        ></p-progressBar>
+<blade-layout-feature>
+  <blade-layout-feature-content>
+    <div class="overflow-hidden h-full w-full">
+      <p-progressBar
+        mode="indeterminate"
+        [style]="{ height: '6px' }"
+        *ngIf="isLoading$ | async"
+      ></p-progressBar>
 
+      <div class="w-full h-full px-2 flex flex-column row-gap-2 overflow-hidden">
         <cha-front-home-summary-team-banner
           class="w-full pt-3 pb-1"
         ></cha-front-home-summary-team-banner>
 
-        <div
-          class="w-full pb-3"
-          [ngClass]="{ 'flex flex-column row-gap-3': isMobile }"
-          *ngIf="(isLoading$ | async) === false"
-        >
-          <p-carousel
-            [value]="pages"
-            [numVisible]="1"
-            [numScroll]="1"
-            [page]="pages.indexOf(selectedEntity)"
-            [showNavigators]="false"
-            *ngIf="!isMobile"
-          >
-            <ng-template let-page pTemplate="item">
-              <ng-container *ngIf="page.name === 'Depth Chart'">
-                <cha-front-home-summary-depth-chart
-                  [isOffSeason]="isOffSeason"
-                ></cha-front-home-summary-depth-chart>
-              </ng-container>
-              <ng-container *ngIf="page.name === 'Salaries'">
-                <cha-front-home-summary-salaries
-                  [isMobile]="isMobile"
-                ></cha-front-home-summary-salaries>
-              </ng-container>
-            </ng-template>
-          </p-carousel>
-
-          <p-dropdown
-            [options]="pages"
-            [(ngModel)]="selectedEntity"
-            optionLabel="name"
-            class="w-full"
-            *ngIf="isMobile"
-            scrollHeight="500px"
-          ></p-dropdown>
-
-          <ng-container *ngIf="isMobile">
-            <ng-container *ngIf="selectedEntity.name === 'Depth Chart'">
-              <cha-front-home-summary-depth-chart
-                [isOffSeason]="isOffSeason"
-              ></cha-front-home-summary-depth-chart>
-            </ng-container>
-            <ng-container *ngIf="selectedEntity.name === 'Salaries'">
-              <cha-front-home-summary-salaries
-                [isMobile]="isMobile"
-              ></cha-front-home-summary-salaries>
-            </ng-container>
-          </ng-container>
+        <div class="overflow-y-auto">
+          <router-outlet></router-outlet>
         </div>
       </div>
-    </blade-layout-feature-content>
-  </blade-layout-feature>
-</ng-scrollbar>
+
+    </div>
+  </blade-layout-feature-content>
+</blade-layout-feature>

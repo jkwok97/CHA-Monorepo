@@ -32,8 +32,6 @@ export class HomeSummaryComponent {
     { page: 2, name: 'Salaries' },
   ];
 
-  selectedEntity = this.pages[0];
-
   constructor(
     private displayFacade: DisplayFacade,
     private homeSummaryFacade: HomeSummaryFacade,

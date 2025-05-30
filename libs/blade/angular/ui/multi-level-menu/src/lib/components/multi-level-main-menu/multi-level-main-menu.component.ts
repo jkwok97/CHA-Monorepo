@@ -5,7 +5,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { BladeMultiLevelNav, BladeNavListItemModel } from '../../models';
   templateUrl: './multi-level-main-menu.component.html',
   styleUrl: './multi-level-main-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [bladeMultiLevelMenuAnimations.fadeInOut]
+  animations: [bladeMultiLevelMenuAnimations.fadeInOut],
 })
 export class MultiLevelMainMenuComponent {
   _title!: string;
@@ -42,6 +42,9 @@ export class MultiLevelMainMenuComponent {
   }
   @Input() logo?: string;
   @Input() inSubMenu!: boolean;
+  @Input() teamColor: string | undefined;
+  @Input() teamTextColor: string | undefined;
+  @Input() teamLogo: string | undefined;
 
   @Output() menuItemClicked = new EventEmitter<BladeNavListItemModel>();
   @Output() navigateBackByIcon = new EventEmitter<{
@@ -71,8 +74,8 @@ export class MultiLevelMainMenuComponent {
     if (menuItem.routerLink) {
       this.router.navigate(menuItem.routerLink, {
         state: {
-          fromInsideMenu: true
-        }
+          fromInsideMenu: true,
+        },
       });
     }
   }
@@ -100,7 +103,7 @@ export class MultiLevelMainMenuComponent {
 
     this.navigateBackByIcon.emit({
       menuItems: this.menuList,
-      level: this.level
+      level: this.level,
     });
   }
 
@@ -109,14 +112,15 @@ export class MultiLevelMainMenuComponent {
 
     this.navigateBackByName.emit({
       menuItems: this.menuList,
-      level: this.level
+      level: this.level,
     });
   }
 
   checkInSubMenu(): void {
     if (this.inSubMenu) {
       const hasSubItems = this.menuList?.some(
-        (item: BladeNavListItemModel) => item.subItems && item.subItems.length > 0
+        (item: BladeNavListItemModel) =>
+          item.subItems && item.subItems.length > 0
       );
 
       if (!hasSubItems) {

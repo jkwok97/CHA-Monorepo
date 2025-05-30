@@ -1,0 +1,25 @@
+<blade-layout-feature>
+
+  <blade-layout-feature-content>
+
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"
+      *ngIf="isLoading$ | async"
+    ></p-progressBar>
+
+    <div class="p-2">
+
+      <cha-front-home-team-banner />
+
+      <div class="dashboard">
+        Future development for Dashboard, navigate to "LEAGUE/TEAMS/YOUR TEAM" to see your team and salaries
+      </div>
+
+      <router-outlet></router-outlet>
+
+    </div>
+
+  </blade-layout-feature-content>
+
+</blade-layout-feature>

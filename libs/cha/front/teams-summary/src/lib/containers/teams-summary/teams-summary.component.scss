@@ -4,7 +4,7 @@
 
 .button-back {
   color: white;
-  position: fixed;
+  position: relative;
   top: 50%;
   left: 25px;
   z-index: 1099;
@@ -19,4 +19,8 @@
   right: 25px;
   z-index: 1099;
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+}
+
+.some-border {
+  border: 3px solid white;
 }

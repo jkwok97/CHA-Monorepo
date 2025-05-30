@@ -8,14 +8,20 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <blade-button-select
-      class="flex justify-content-center"
-      [options]="selectSeasonOptions"
-      (optionChanged)="onSeasonOptionChanged($event)"
-    ></blade-button-select>
+    <div class="league-stats-players-header">
+
+      <blade-button-select
+        class="flex justify-content-center"
+        [options]="selectSeasonOptions"
+        (optionChanged)="onSeasonOptionChanged($event)"
+      ></blade-button-select>
+
+    </div>
 
     <ng-container *ngIf="isLoaded$ | async">
+
       <div class="league-stats-players-section">
+
         <div class="league-stats-players-section-body">
           <blade-cha-leader-card
             [leaders]="pointsLeaders$ | async"
@@ -35,22 +41,22 @@
         <div
           class="league-stats-players-section-body"
           *ngIf="
-            isPlayoffs === false &&
-            (pointsAboveExpectedLeaders$ | async) &&
-            (pointsBelowExpectedLeaders$ | async)
-          "
+        isPlayoffs === false &&
+        (pointsAboveExpectedLeaders$ | async) &&
+        (pointsBelowExpectedLeaders$ | async)
+      "
         >
           <blade-cha-leader-card
             *ngIf="
-              pointsAboveExpectedLeaders$ | async as pointsAboveExpectedLeaders
-            "
+          pointsAboveExpectedLeaders$ | async as pointsAboveExpectedLeaders
+        "
             [leaders]="pointsAboveExpectedLeaders"
             [type]="'points above expected'"
           ></blade-cha-leader-card>
           <blade-cha-leader-card
             *ngIf="
-              pointsBelowExpectedLeaders$ | async as pointsBelowExpectedLeaders
-            "
+          pointsBelowExpectedLeaders$ | async as pointsBelowExpectedLeaders
+        "
             [leaders]="pointsBelowExpectedLeaders"
             [type]="'points below expected'"
           ></blade-cha-leader-card>
@@ -158,7 +164,10 @@
             [type]="'longest streak'"
           ></blade-cha-leader-card>
         </div>
+
       </div>
+
     </ng-container>
+
   </div>
 </blade-layout-feature-content>

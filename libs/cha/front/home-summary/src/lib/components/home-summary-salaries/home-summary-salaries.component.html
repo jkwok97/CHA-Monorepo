@@ -1,10 +1,10 @@
 <blade-card
   *ngIf="userTeam$ | async as userTeam"
   [ngStyle]="{
-    'background-color': userTeam.teamcolor,
-    'font-weight': 300,
-    color: userTeam.teamtextcolor
-  }"
+  'background-color': userTeam.teamcolor,
+  'font-weight': 300,
+  color: userTeam.teamtextcolor
+}"
   class="w-full"
 >
   <ng-container *ngIf="(isLoading$ | async) === false">
@@ -20,9 +20,9 @@
           [data]="forwardSalaries"
           [title]="'Forwards'"
           [ngStyle]="{
-            width: !isMobile ? '400px' : '325px',
-            color: 'whitesmoke'
-          }"
+          width: !isMobile ? '400px' : '325px',
+          color: 'whitesmoke'
+        }"
         ></blade-list>
 
         <div class="flex flex-column flex-wrap justify-content-start row-gap-2">
@@ -31,9 +31,9 @@
             [data]="defenseSalaries"
             [title]="'Defense'"
             [ngStyle]="{
-              width: !isMobile ? '400px' : '325px',
-              color: 'whitesmoke'
-            }"
+            width: !isMobile ? '400px' : '325px',
+            color: 'whitesmoke'
+          }"
           ></blade-list>
 
           <blade-list
@@ -41,9 +41,9 @@
             [data]="goalieSalaries"
             [title]="'Goalies'"
             [ngStyle]="{
-              width: !isMobile ? '400px' : '325px',
-              color: 'whitesmoke'
-            }"
+            width: !isMobile ? '400px' : '325px',
+            color: 'whitesmoke'
+          }"
           ></blade-list>
         </div>
       </div>

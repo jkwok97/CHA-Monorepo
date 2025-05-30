@@ -1,12 +1,14 @@
 <blade-layout-feature-content>
-  <div>
+  <div class="h-full overflow-hidden">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <div class="grid justify-content-center row-gap-2 pt-2">
+    <div class="grid justify-content-center row-gap-2 pt-2" [ngStyle]="{ height: '250px'}">
+
       <div class="text-lg col-12 text-center" style="font-weight: 100">
         CHA History Players Stats
       </div>
@@ -31,43 +33,46 @@
           (optionChanged)="selectPositionOptionChanged($event)"
         ></blade-button-select>
       </div>
+
     </div>
 
-    <blade-divider></blade-divider>
-
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
-        <ng-container
-          *ngIf="positionOption === 'all' && (allStats$ | async) as allStats"
-        >
-          <cha-front-history-players-table
-            [stats]="allStats"
-            [statType]="statType"
-          ></cha-front-history-players-table>
-        </ng-container>
-        <ng-container
-          *ngIf="
+    <div [ngStyle]="{ height: 'calc(100% - 250px)'}" class="overflow-y-auto">
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body>
+          <ng-container
+            *ngIf="positionOption === 'all' && (allStats$ | async) as allStats"
+          >
+            <cha-front-history-players-table
+              [stats]="allStats"
+              [statType]="statType"
+            ></cha-front-history-players-table>
+          </ng-container>
+          <ng-container
+            *ngIf="
             positionOption === 'defense' &&
             (defenseStats$ | async) as defenseStats
           "
-        >
-          <cha-front-history-players-table
-            [stats]="defenseStats"
-            [statType]="statType"
-          ></cha-front-history-players-table>
-        </ng-container>
-        <ng-container
-          *ngIf="
+          >
+            <cha-front-history-players-table
+              [stats]="defenseStats"
+              [statType]="statType"
+            ></cha-front-history-players-table>
+          </ng-container>
+          <ng-container
+            *ngIf="
             positionOption === 'forwards' &&
             (forwardStats$ | async) as forwardStats
           "
-        >
-          <cha-front-history-players-table
-            [stats]="forwardStats"
-            [statType]="statType"
-          ></cha-front-history-players-table>
-        </ng-container>
-      </blade-card-body>
-    </blade-card>
+          >
+            <cha-front-history-players-table
+              [stats]="forwardStats"
+              [statType]="statType"
+            ></cha-front-history-players-table>
+          </ng-container>
+        </blade-card-body>
+      </blade-card>
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

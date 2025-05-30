@@ -2,20 +2,27 @@
   [backgroundColor]="(currentTeam$ | async) ? backgroundColor : null"
 >
   <div class="league-stats-goalies">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <blade-button-select
-      class="flex justify-content-center"
-      [options]="selectSeasonOptions"
-      (optionChanged)="onSeasonOptionChanged($event)"
-    ></blade-button-select>
+    <div class="league-stats-goalies-header">
+
+      <blade-button-select
+        class="flex justify-content-center"
+        [options]="selectSeasonOptions"
+        (optionChanged)="onSeasonOptionChanged($event)"
+      ></blade-button-select>
+
+    </div>
 
     <ng-container *ngIf="isLoaded$ | async">
+
       <div class="league-stats-goalies-section">
+
         <div class="league-stats-goalies-section-body">
           <blade-cha-leader-card
             [goalieLeaders]="winsLeaders$ | async"
@@ -52,7 +59,11 @@
             ></blade-cha-leader-card>
           </ng-container>
         </div>
+
       </div>
+
     </ng-container>
+
   </div>
+
 </blade-layout-feature-content>

@@ -1,57 +1,51 @@
 <blade-layout-feature-content>
-  <div
-    [ngClass]="{
-      'rules-egr': (isMobile$ | async) === false,
-      'rules-egr-mobile': (isMobile$ | async) === true
-    }"
-  >
-    <div *ngIf="(isMobile$ | async) === false" class="rules-egr-image">
-      <img [src]="background" />
-    </div>
-    <blade-card class="rules-egr-card">
-      <blade-card-header class="rules-egr-card-header"
-        >Emergency Goaltender</blade-card-header
-      >
 
-      <blade-card-body class="rules-egr-card-content">
-        <ul>
-          <li>
-            Teams may carry no more than 3 and no less than 2 goaltenders at any
-            given time.
-          </li>
-          <li>
-            Any team opting to carry 3 goaltenders is elegible for the Emergency
-            Goaltender Rule (hereafter referred to as the EGR)
-          </li>
-          <li>
-            In the case of an EGR eligible team losing all 3 goaltenders to
-            injury, said team will receive the worst available goaltender from
-            the waiver pool on loan until at least one of said team's roster
-            goaltenders become available.
-          </li>
-          <li>
-            Should another EGR eligible team require this service while the
-            worst waiver pool goaltender is already in use, the next worse
-            goaltender will be loaned and so on and so forth
-          </li>
-          <li>
-            Any team opting to carry only 2 goaltenders is not eligible for the
-            EGR
-          </li>
-          <li>
-            In the case of a non-EGR eligible team losing both it's goaltenders
-            to injury, said team will have a concurrently scratched roster
-            player play goal
-          </li>
-          <li>
-            During the playoffs, any goaltender qualifies as a backup regardless
-            of NHL games played. Should a team's starting goaltender get
-            injured, any roster goaltender then becomes available to start until
-            the starter returns
-          </li>
-          <li>The EGR applies in the playoffs as well.</li>
-        </ul>
-      </blade-card-body>
-    </blade-card>
+  <div class="rules-egr">
+
+    <div class="rules-egr-header">
+      <span><u>Emergency Goaltender</u></span>
+    </div>
+
+    <div class="rules-egr-content">
+      <ul>
+        <li>
+          Teams may carry no more than 3 and no less than 2 goaltenders at any
+          given time.
+        </li>
+        <li>
+          Any team opting to carry 3 goaltenders is elegible for the Emergency
+          Goaltender Rule (hereafter referred to as the EGR)
+        </li>
+        <li>
+          In the case of an EGR eligible team losing all 3 goaltenders to
+          injury, said team will receive the worst available goaltender from
+          the waiver pool on loan until at least one of said team's roster
+          goaltenders become available.
+        </li>
+        <li>
+          Should another EGR eligible team require this service while the
+          worst waiver pool goaltender is already in use, the next worse
+          goaltender will be loaned and so on and so forth
+        </li>
+        <li>
+          Any team opting to carry only 2 goaltenders is not eligible for the
+          EGR
+        </li>
+        <li>
+          In the case of a non-EGR eligible team losing both it's goaltenders
+          to injury, said team will have a concurrently scratched roster
+          player play goal
+        </li>
+        <li>
+          During the playoffs, any goaltender qualifies as a backup regardless
+          of NHL games played. Should a team's starting goaltender get
+          injured, any roster goaltender then becomes available to start until
+          the starter returns
+        </li>
+        <li>The EGR applies in the playoffs as well.</li>
+      </ul>
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

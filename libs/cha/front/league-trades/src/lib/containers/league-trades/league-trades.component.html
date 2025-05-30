@@ -1,12 +1,14 @@
 <blade-layout-feature-content>
-  <div>
+
+  <div class="h-full overflow-hidden">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <div class="grid justify-content-center row-gap-2 pt-2">
+    <div class="grid justify-content-center row-gap-2 pt-2" [ngStyle]="{ height: '200px'}">
       <div class="text-lg col-12 text-center" style="font-weight: 100">
         CHA Trades
       </div>
@@ -39,42 +41,46 @@
       </div>
     </div>
 
-    <blade-divider></blade-divider>
+    <div [ngStyle]="{ height: 'calc(100% - 200px)'}" class="overflow-y-auto">
 
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body *ngIf="transactions$ | async as transactions">
-        <blade-card
-          *ngFor="let transaction of transactions"
-          class="mb-3"
-          style="background-color: var(--background-100)"
-        >
-          <blade-card-header>
-            {{ transaction.transactionDate | date }}
-          </blade-card-header>
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body *ngIf="transactions$ | async as transactions">
+          <blade-card
+            *ngFor="let transaction of transactions"
+            class="mb-3"
+            style="background-color: var(--background-100)"
+          >
+            <blade-card-header>
+              {{ transaction.transactionDate | date }}
+            </blade-card-header>
 
-          <blade-card-body>
-            <div class="league-trades-content">
-              <cha-front-league-trades-team-card
-                [teamInfo]="transaction.teamOneInfo"
-                [teamPicks]="transaction.teamOnePicks"
-                [teamPlayers]="transaction.teamOnePlayers"
-              ></cha-front-league-trades-team-card>
+            <blade-card-body>
+              <div class="league-trades-content">
+                <cha-front-league-trades-team-card
+                  [teamInfo]="transaction.teamOneInfo"
+                  [teamPicks]="transaction.teamOnePicks"
+                  [teamPlayers]="transaction.teamOnePlayers"
+                ></cha-front-league-trades-team-card>
 
-              <cha-front-league-trades-team-card
-                [teamInfo]="transaction.teamTwoInfo"
-                [teamPicks]="transaction.teamTwoPicks"
-                [teamPlayers]="transaction.teamTwoPlayers"
-              ></cha-front-league-trades-team-card>
-            </div>
-          </blade-card-body>
-        </blade-card>
-      </blade-card-body>
-    </blade-card>
+                <cha-front-league-trades-team-card
+                  [teamInfo]="transaction.teamTwoInfo"
+                  [teamPicks]="transaction.teamTwoPicks"
+                  [teamPlayers]="transaction.teamTwoPlayers"
+                ></cha-front-league-trades-team-card>
+              </div>
+            </blade-card-body>
+          </blade-card>
+        </blade-card-body>
+      </blade-card>
 
-    <ng-container *ngIf="(isLoaded$ | async) === false">
-      <div class="p-6 text-xl text-center" [style.fontWeight]="100">
-        No Data To Display
-      </div>
-    </ng-container>
+      <ng-container *ngIf="(isLoaded$ | async) === false">
+        <div class="p-6 text-xl text-center" [style.fontWeight]="100">
+          No Data To Display
+        </div>
+      </ng-container>
+
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

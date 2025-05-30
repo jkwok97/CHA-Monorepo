@@ -1,10 +1,12 @@
+@import 'apps/cha-front/src/scss/variables';
+
 .feature-content {
   display: flex;
   flex-direction: column;
   justify-items: center;
   flex-grow: 1;
   height: 100%;
-  margin: 10px;
-  border-radius: 5px;
-  max-width: calc(100vw - 20px);
+  overflow-y: hidden;
+  padding-bottom: 20px;
+  background: $cha-gray-2;
 }

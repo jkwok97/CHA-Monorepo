@@ -13,7 +13,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -32,8 +32,8 @@ import { BladeMultiLevelNavItem } from '../../models/blade-multi-level-nav-item.
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     bladeMultiLevelMenuAnimations.fadeInOut,
-    bladeSlideInLeftAnimation.slideInLeft
-  ]
+    bladeSlideInLeftAnimation.slideInLeft,
+  ],
 })
 export class MultiLevelMenuComponent implements OnInit {
   private readonly destroyRef: DestroyRef = inject(DestroyRef);
@@ -54,7 +54,10 @@ export class MultiLevelMenuComponent implements OnInit {
   @Input() customHeightClassName? = '';
   @Input() homeTitle?: string;
   @Input() logo?: string;
-  @Input() hasTopNav = true;
+  @Input() hasTopNav = false;
+  @Input() teamColor: string | undefined;
+  @Input() teamTextColor: string | undefined;
+  @Input() teamLogo: string | undefined;
 
   @Input() set menuList(value: BladeNavListItemModel[]) {
     this.mainMenuList = value;
@@ -132,7 +135,8 @@ export class MultiLevelMenuComponent implements OnInit {
 
     if (!this._overlayRef) {
       this._overlayRef = this._overlay.create({
-        hasBackdrop: true
+        hasBackdrop: true,
+        panelClass: 'overlay-backdrop',
       });
 
       this._overlayRef
@@ -170,7 +174,7 @@ export class MultiLevelMenuComponent implements OnInit {
         const matchingKey = url.includes(subItem.key);
         const matchingRelatedRoute = subItem.relatedRoutes?.some((route) => {
           return url.includes(route);
-        })
+        });
         return matchingKey || matchingRelatedRoute;
       });
 
@@ -213,7 +217,7 @@ export class MultiLevelMenuComponent implements OnInit {
       icon: menuItemClicked.icon,
       title: menuItemClicked.label ? menuItemClicked.label : '',
       zIndex: this.menuItemList[this.menuItemList.length - 1].zIndex + 1,
-      items: menuItemClicked.subItems ? menuItemClicked.subItems : []
+      items: menuItemClicked.subItems ? menuItemClicked.subItems : [],
     };
 
     this.menuItemList.push(menuItem);
@@ -234,7 +238,7 @@ export class MultiLevelMenuComponent implements OnInit {
 
   onNavigateBackByIcon(event: {
     menuItems: BladeNavListItemModel[];
-    level: number
+    level: number;
   }): void {
     if (event.level === 1) {
       this.setLevelOneMenuItems(event.level);
@@ -319,7 +323,7 @@ export class MultiLevelMenuComponent implements OnInit {
       zIndex: 500,
       title: this.homeTitle,
       logo: this.logo,
-      items: list
+      items: list,
     };
 
     return [menuItem];

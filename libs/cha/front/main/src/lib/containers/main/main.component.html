@@ -1,31 +1,40 @@
-<section *ngIf="currentTeam$ | async">
-  <div class="pt-3 pb-3">
-    <div class="main-menu">
-      <blade-menu
-        [items]="items"
-        [logo]="teamLogo"
-        [isMobile]="isMobile$ | async"
-      ></blade-menu>
+<ng-container *ngIf="currentTeam$ | async as currentTeam">
+
+  <div class="layout">
+
+    <div class="blade-content-container m-0 h-full">
+
+      <aside [ngStyle]="{ width: getWidth() }">
+        <blade-multi-level-menu
+          [menuList]="menuItems"
+          [homeTitle]="currentTeam.nickname"
+          [teamColor]="currentTeam.teamcolor"
+          [teamTextColor]="currentTeam.teamtextcolor"
+          [teamLogo]="currentTeam.teamlogo"
+          (numberOfSubMenusShown)="onShowSubMenu($event)"
+          (isMenuOpen)="onIsMenuOpen($event)"
+          (isMenuCollapsed)="onIsMenuCollapsed($event)"
+          [footerTmpl]="bottomTmpl"
+        />
+
+        <ng-template #bottomTmpl>
+          <p-button
+            icon="pi pi-sign-out"
+            [rounded]="true"
+            [outlined]="true"
+            (click)="onLogout()"
+          />
+        </ng-template>
+      </aside>
+
+      <article>
+        <blade-layout-feature>
+          <router-outlet></router-outlet>
+        </blade-layout-feature>
+      </article>
+
     </div>
 
-    <blade-layout-feature>
-      <router-outlet></router-outlet>
-    </blade-layout-feature>
   </div>
-</section>
 
-<ng-template #teamLogo>
-  <ng-container *ngIf="currentTeam$ | async as team">
-    <div class="flex align-items-center w-full">
-      <cha-logo
-        class="pl-2"
-        [height]="40"
-        [width]="40"
-        [userTeamLogo]="team.teamlogo"
-      ></cha-logo>
-      <div *ngIf="isMobile$ | async" class="pl-2 pr-2">
-        {{ team.city }} {{ team.nickname }}
-      </div>
-    </div>
-  </ng-container>
-</ng-template>
+</ng-container>

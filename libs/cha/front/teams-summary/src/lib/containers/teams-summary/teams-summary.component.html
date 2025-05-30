@@ -1,115 +1,124 @@
 <blade-layout-feature>
+
   <blade-layout-feature-content>
-    <p-progressBar
-      mode="indeterminate"
-      [style]="{ height: '6px' }"
-      *ngIf="isLoading$ | async"
-    ></p-progressBar>
 
-    <button
-      pButton
-      type="button"
-      icon="pi pi-chevron-left"
-      class="p-button-rounded p-button-lg button-back"
-      [ngStyle]="{
-        'background-color': 'var(--team-100)',
-        'border-color': 'var(--team-100)'
-      }"
-      (click)="selectBackTeam()"
-    ></button>
+    <div class="overflow-hidden h-full w-full">
 
-    <button
-      pButton
-      type="button"
-      icon="pi pi-chevron-right"
-      class="p-button-rounded p-button-lg button-forward"
-      [ngStyle]="{
-        'background-color': 'var(--team-100)',
-        'border-color': 'var(--team-100)'
-      }"
-      (click)="selectForwardTeam()"
-    ></button>
-    <div
-      class="flex flex-column row-gap-2"
-      *ngIf="(isLoading$ | async) === false"
-    >
-      <div class="p-2">
-        <cha-front-summary-team-banner></cha-front-summary-team-banner>
-      </div>
-      <div
-        class="p-2 w-full"
-        [ngClass]="{ 'flex flex-column row-gap-3': isMobile }"
-      >
-        <p-carousel
-          [value]="pages"
-          [numVisible]="1"
-          [numScroll]="1"
-          [page]="pages.indexOf(selectedEntity)"
-          [showNavigators]="false"
-          *ngIf="!isMobile"
+      <p-progressBar
+        mode="indeterminate"
+        [style]="{ height: '6px' }"
+        *ngIf="isLoading$ | async"
+      ></p-progressBar>
+
+      <div class="w-full h-full px-2 flex flex-column row-gap-2 overflow-hidden" *ngIf="(isLoading$ | async) === false">
+
+        <button
+          pButton
+          type="button"
+          icon="pi pi-chevron-left"
+          class="p-button-rounded p-button-lg button-back"
+          (click)="selectBackTeam()"
+          [ngStyle]="{
+            'background-color': 'var(--team-100)',
+            'border-color': 'var(--team-100)'
+          }"
+        ></button>
+
+        <div class="px-2">
+          <cha-front-summary-team-banner></cha-front-summary-team-banner>
+        </div>
+
+        <div
+          class="px-2 w-full overflow-y-auto"
+          [ngClass]="{ 'flex flex-column row-gap-3': isMobile }"
         >
-          <ng-template let-page pTemplate="item">
-            <ng-container *ngIf="page.name === 'Depth Chart'">
+          <p-carousel
+            [value]="pages"
+            [numVisible]="1"
+            [numScroll]="1"
+            [page]="pages.indexOf(selectedEntity)"
+            [showNavigators]="false"
+            *ngIf="!isMobile"
+          >
+            <ng-template let-page pTemplate="item">
+              <ng-container *ngIf="page.name === 'Depth Chart'">
+                <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Salaries'">
+                <cha-front-teams-summary-salaries
+                  [isMobile]="isMobile"
+                ></cha-front-teams-summary-salaries>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Future Depth Chart'">
+                <cha-front-teams-summary-future-depth></cha-front-teams-summary-future-depth>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Team Stats'">
+                <cha-front-teams-summary-team></cha-front-teams-summary-team>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Player Stats'">
+                <cha-front-teams-summary-players></cha-front-teams-summary-players>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Goalie Stats'">
+                <cha-front-teams-summary-goalies></cha-front-teams-summary-goalies>
+              </ng-container>
+              <ng-container *ngIf="page.name === 'Awards'">
+                <cha-front-teams-summary-awards></cha-front-teams-summary-awards>
+              </ng-container>
+            </ng-template>
+          </p-carousel>
+
+          <p-dropdown
+            [options]="pages"
+            [(ngModel)]="selectedEntity"
+            optionLabel="name"
+            class="w-full"
+            *ngIf="isMobile"
+            scrollHeight="500px"
+          ></p-dropdown>
+
+          <ng-container *ngIf="isMobile">
+            <ng-container *ngIf="selectedEntity.name === 'Depth Chart'">
               <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
             </ng-container>
-            <ng-container *ngIf="page.name === 'Salaries'">
+            <ng-container *ngIf="selectedEntity.name === 'Salaries'">
               <cha-front-teams-summary-salaries
                 [isMobile]="isMobile"
               ></cha-front-teams-summary-salaries>
             </ng-container>
-            <ng-container *ngIf="page.name === 'Future Depth Chart'">
+            <ng-container *ngIf="selectedEntity.name === 'Future Depth Chart'">
               <cha-front-teams-summary-future-depth></cha-front-teams-summary-future-depth>
             </ng-container>
-            <ng-container *ngIf="page.name === 'Team Stats'">
+            <ng-container *ngIf="selectedEntity.name === 'Team Stats'">
               <cha-front-teams-summary-team></cha-front-teams-summary-team>
             </ng-container>
-            <ng-container *ngIf="page.name === 'Player Stats'">
+            <ng-container *ngIf="selectedEntity.name === 'Player Stats'">
               <cha-front-teams-summary-players></cha-front-teams-summary-players>
             </ng-container>
-            <ng-container *ngIf="page.name === 'Goalie Stats'">
+            <ng-container *ngIf="selectedEntity.name === 'Goalie Stats'">
               <cha-front-teams-summary-goalies></cha-front-teams-summary-goalies>
             </ng-container>
-            <ng-container *ngIf="page.name === 'Awards'">
+            <ng-container *ngIf="selectedEntity.name === 'Awards'">
               <cha-front-teams-summary-awards></cha-front-teams-summary-awards>
             </ng-container>
-          </ng-template>
-        </p-carousel>
+          </ng-container>
+        </div>
 
-        <p-dropdown
-          [options]="pages"
-          [(ngModel)]="selectedEntity"
-          optionLabel="name"
-          class="w-full"
-          *ngIf="isMobile"
-          scrollHeight="500px"
-        ></p-dropdown>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-chevron-right"
+          class="p-button-rounded p-button-lg button-forward"
+          [ngStyle]="{
+        'background-color': 'var(--team-100)',
+        'border-color': 'var(--team-100)'
+      }"
+          (click)="selectForwardTeam()"
+        ></button>
 
-        <ng-container *ngIf="isMobile">
-          <ng-container *ngIf="selectedEntity.name === 'Depth Chart'">
-            <cha-front-teams-summary-depth></cha-front-teams-summary-depth>
-          </ng-container>
-          <ng-container *ngIf="selectedEntity.name === 'Salaries'">
-            <cha-front-teams-summary-salaries
-              [isMobile]="isMobile"
-            ></cha-front-teams-summary-salaries>
-          </ng-container>
-          <ng-container *ngIf="selectedEntity.name === 'Future Depth Chart'">
-            <cha-front-teams-summary-future-depth></cha-front-teams-summary-future-depth>
-          </ng-container>
-          <ng-container *ngIf="selectedEntity.name === 'Team Stats'">
-            <cha-front-teams-summary-team></cha-front-teams-summary-team>
-          </ng-container>
-          <ng-container *ngIf="selectedEntity.name === 'Player Stats'">
-            <cha-front-teams-summary-players></cha-front-teams-summary-players>
-          </ng-container>
-          <ng-container *ngIf="selectedEntity.name === 'Goalie Stats'">
-            <cha-front-teams-summary-goalies></cha-front-teams-summary-goalies>
-          </ng-container>
-          <ng-container *ngIf="selectedEntity.name === 'Awards'">
-            <cha-front-teams-summary-awards></cha-front-teams-summary-awards>
-          </ng-container>
-        </ng-container>
       </div>
+
     </div>
+
   </blade-layout-feature-content>
+
 </blade-layout-feature>

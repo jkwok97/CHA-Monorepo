@@ -1,15 +1,19 @@
 <blade-layout-feature-content>
-  <div>
+
+  <div class="h-full overflow-hidden">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <div class="grid justify-content-center row-gap-2 pt-2">
+    <div class="grid justify-content-center row-gap-2 pt-2" [ngStyle]="{ height: '200px'}">
+
       <div class="text-lg col-12 text-center" style="font-weight: 100">
         CHA History Goalies Stats
       </div>
+
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
       >
@@ -27,17 +31,21 @@
       </div>
     </div>
 
-    <blade-divider></blade-divider>
+    <div [ngStyle]="{ height: 'calc(100% - 200px)'}" class="overflow-y-auto">
 
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
-        <ng-container *ngIf="allStats$ | async as allStats">
-          <cha-front-history-goalies-table
-            [stats]="allStats"
-            [statType]="statType"
-          ></cha-front-history-goalies-table>
-        </ng-container>
-      </blade-card-body>
-    </blade-card>
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body>
+          <ng-container *ngIf="allStats$ | async as allStats">
+            <cha-front-history-goalies-table
+              [stats]="allStats"
+              [statType]="statType"
+            ></cha-front-history-goalies-table>
+          </ng-container>
+        </blade-card-body>
+      </blade-card>
+
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

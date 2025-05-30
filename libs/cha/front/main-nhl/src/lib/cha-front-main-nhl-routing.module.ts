@@ -13,14 +13,14 @@ const ROUTES: Route[] = [
         redirectTo: 'leaders',
       },
       {
-        path: 'leaders',
+        path: 'nhl-leaders',
         loadChildren: () =>
           import('@cha/front/nhl-leaders').then(
             (mod) => mod.ChaFrontNhlLeadersModule
           ),
       },
       {
-        path: 'stats',
+        path: 'nhl-stats',
         loadChildren: () =>
           import('@cha/front/nhl-stats').then(
             (mod) => mod.ChaFrontNhlStatsModule
