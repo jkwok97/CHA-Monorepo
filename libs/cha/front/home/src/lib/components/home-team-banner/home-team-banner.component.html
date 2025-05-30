@@ -5,8 +5,9 @@
 >
   <blade-card-body>
     <div
-      class="flex flex-wrap column-gap-2 row-gap-2 align-items-center justify-content-between w-full"
+      class="flex flex-row flex-wrap column-gap-1 row-gap-2 align-items-center justify-content-between w-full"
     >
+
       <div class="flex align-items-center column-gap-2">
         <div>
           <img [src]="getString(userTeam.teamlogo)" style="width: 75px" />
@@ -20,7 +21,8 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isTeamRecordLoaded$ | async">
+
+      <div *ngIf="isTeamRecordLoaded$ | async" class="w-4 md:w-auto">
         <ng-container *ngIf="teamRecord$ | async as teamRecord">
           <cha-front-home-team-record
             [teamRecord]="teamRecord"
@@ -28,7 +30,8 @@
           ></cha-front-home-team-record>
         </ng-container>
       </div>
-      <div>
+
+      <div class="w-7 md:w-auto">
         <ng-container *ngIf="totalSalary$ | async as totalSalary">
           <ng-container *ngIf="nextTotalSalary$ | async as nextTotalSalary">
             <ng-container *ngIf="totalPlayers$ | async as totalPlayers">

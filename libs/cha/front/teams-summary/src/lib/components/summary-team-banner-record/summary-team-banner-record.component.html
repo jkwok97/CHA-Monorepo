@@ -3,22 +3,18 @@
   style="background-color: var(--background-100); color: whitesmoke"
 >
   <div class="w-full md:w-max">
-    Overall: {{ teamRecord.wins }} - {{ teamRecord.loss }} -
-    {{ teamRecord.ties }}
+    Overall: {{ teamRecord.wins }}-{{ teamRecord.loss }}-{{ teamRecord.ties }}
   </div>
   <div *ngIf="!isMobile">|</div>
   <div class="w-full md:w-max">
-    Division: {{ teamRecord.div_win }} - {{ teamRecord.div_loss }} -
-    {{ teamRecord.div_tie }}
+    Division: {{ teamRecord.div_win }}-{{ teamRecord.div_loss }}-{{ teamRecord.div_tie }}
   </div>
   <div *ngIf="!isMobile">|</div>
   <div class="w-full md:w-max">
-    Home: {{ teamRecord.home_wins }} - {{ teamRecord.home_loss }} -
-    {{ teamRecord.home_ties }}
+    Home: {{ teamRecord.home_wins }}-{{ teamRecord.home_loss }}-{{ teamRecord.home_ties }}
   </div>
   <div *ngIf="!isMobile">|</div>
   <div class="w-full md:w-max">
-    Road: {{ teamRecord.road_wins }} - {{ teamRecord.road_loss }} -
-    {{ teamRecord.road_ties }}
+    Road: {{ teamRecord.road_wins }}-{{ teamRecord.road_loss }}-{{ teamRecord.road_ties }}
   </div>
 </div>
