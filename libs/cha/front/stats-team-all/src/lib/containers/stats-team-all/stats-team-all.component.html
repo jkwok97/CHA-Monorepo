@@ -1,15 +1,19 @@
 <blade-layout-feature-content>
-  <div>
+
+  <div class="h-full overflow-hidden">
+
     <p-progressBar
       mode="indeterminate"
       [style]="{ height: '6px' }"
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <div class="grid justify-content-center row-gap-2 pt-2">
-      <div class="text-lg col-12 text-center" style="font-weight: 100">
+    <div class="flex flex-column row-gap-2 pt-2" [ngStyle]="{ height: '170px'}">
+
+      <div class="text-lg text-center" [ngStyle]="{'font-weight': 100}">
         CHA Team Stats
       </div>
+
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
       >
@@ -25,26 +29,31 @@
           (optionChanged)="onSeasonOptionChanged($event)"
         ></blade-button-select>
       </div>
+
     </div>
 
-    <blade-divider></blade-divider>
+    <div class="overflow-y-auto" [ngStyle]="{ height: 'calc(100% - 170px)'}">
 
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
-        <ng-container *ngIf="showLeague">
-          <ng-container *ngIf="teamStats$ | async as teamStats">
-            <cha-front-stats-team-all-table
-              [stats]="teamStats"
-            ></cha-front-stats-team-all-table>
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body>
+          <ng-container *ngIf="showLeague">
+            <ng-container *ngIf="teamStats$ | async as teamStats">
+              <cha-front-stats-team-all-table
+                [stats]="teamStats"
+              ></cha-front-stats-team-all-table>
+            </ng-container>
           </ng-container>
-        </ng-container>
-        <ng-container *ngIf="showConference">
-          <cha-front-stats-team-all-conference></cha-front-stats-team-all-conference>
-        </ng-container>
-        <ng-container *ngIf="showDivisions">
-          <cha-front-stats-team-all-divisions></cha-front-stats-team-all-divisions>
-        </ng-container>
-      </blade-card-body>
-    </blade-card>
+          <ng-container *ngIf="showConference">
+            <cha-front-stats-team-all-conference></cha-front-stats-team-all-conference>
+          </ng-container>
+          <ng-container *ngIf="showDivisions">
+            <cha-front-stats-team-all-divisions></cha-front-stats-team-all-divisions>
+          </ng-container>
+        </blade-card-body>
+      </blade-card>
+
+    </div>
+
   </div>
+
 </blade-layout-feature-content>

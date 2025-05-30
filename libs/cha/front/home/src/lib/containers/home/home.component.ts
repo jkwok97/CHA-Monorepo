@@ -7,6 +7,7 @@ import { TeamDto } from '@cha/shared/entities';
 @Component({
   selector: 'cha-front-home',
   templateUrl: 'home.component.html',
+  styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
