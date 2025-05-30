@@ -33,7 +33,7 @@ export class MainResolver {
           if (item) {
             const route = JSON.parse(item);
 
-            if (route === '/' || route === '/login') {
+            if (route === '/' || route === '/login' || route === '/logout') {
               this.router.navigate(['/home']);
             } else {
               const route = JSON.parse(item);
