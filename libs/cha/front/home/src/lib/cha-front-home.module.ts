@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BladeAngularUiCardModule } from '@blade/angular/ui/card';
+import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { AvatarModule } from 'primeng/avatar';
 
 import { ChaFrontHomeRoutingModule } from './cha-front-home-routing.module';
 
@@ -16,12 +19,13 @@ import { HomeService } from './services';
 import { HomeComponent } from './containers';
 
 import {
+  HomeDashboardComponent,
+  HomeDashboardTradesCardComponent,
+  HomeDashboardTradesComponent,
   HomeTeamBannerComponent,
   HomeTeamCapComponent,
   HomeTeamRecordComponent,
 } from './components';
-import { BladeAngularUiLayoutModule } from '@blade/angular/ui/layout';
-import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   imports: [
@@ -32,12 +36,16 @@ import { ProgressBarModule } from 'primeng/progressbar';
     EffectsModule.forFeature([HomeEffects]),
     BladeAngularUiLayoutModule,
     ProgressBarModule,
+    AvatarModule,
   ],
   declarations: [
     HomeComponent,
     HomeTeamRecordComponent,
     HomeTeamCapComponent,
     HomeTeamBannerComponent,
+    HomeDashboardComponent,
+    HomeDashboardTradesComponent,
+    HomeDashboardTradesCardComponent,
   ],
   providers: [HomeService, HomeFacade],
 })

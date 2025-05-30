@@ -1,0 +1,53 @@
+<blade-card [style.background-color]="teamInfo.teamcolor">
+  <blade-card-header>
+    <div
+      class="flex align-items-center column-gap-2 text-md"
+      [style.fontWeight]="300"
+    >
+      <p-avatar
+        [image]="getString(teamInfo.teamlogo)"
+        size="large"
+        shape="square"
+      ></p-avatar>
+
+      <div [style.color]="teamInfo.teamtextcolor">
+        {{ teamInfo.city }} {{ teamInfo.nickname }}
+      </div>
+    </div>
+  </blade-card-header>
+
+  <blade-card-body class="league-trades-team-card-content">
+    <div
+      *ngIf="teamPlayers.length > 0"
+      [style.fontWeight]="200"
+      [style.color]="teamInfo.teamtextcolor"
+    >
+      <div class="p-2 text-sm">Players</div>
+      <div
+        *ngFor="let player of teamPlayers"
+        [style.color]="teamInfo.teamtextcolor"
+        class="flex align-items-center column-gap-2 text-sm"
+      >
+        <p-avatar
+          [image]="getPlayerPicture(player?.player?.nhl_id)"
+          size="large"
+          shape="circle"
+          [style]="{ 'background-color': 'white' }"
+        ></p-avatar>
+
+        {{ player?.player?.firstname }} {{ player?.player?.lastname }}
+      </div>
+    </div>
+
+    <div
+      *ngIf="teamPicks.length > 0"
+      [style.color]="teamInfo.teamtextcolor"
+      [style.fontWeight]="200"
+    >
+      <div class="p-2 text-sm">Picks</div>
+      <div *ngFor="let pick of teamPicks" class="text-sm">
+        {{ pick }}
+      </div>
+    </div>
+  </blade-card-body>
+</blade-card>

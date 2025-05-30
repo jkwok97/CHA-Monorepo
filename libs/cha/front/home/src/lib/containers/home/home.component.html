@@ -2,21 +2,21 @@
 
   <blade-layout-feature-content>
 
-    <p-progressBar
-      mode="indeterminate"
-      [style]="{ height: '6px' }"
-      *ngIf="isLoading$ | async"
-    ></p-progressBar>
+    <div class="h-full overflow-hidden">
 
-    <div class="p-2">
+      <p-progressBar
+        mode="indeterminate"
+        [style]="{ height: '6px' }"
+        *ngIf="isLoading$ | async"
+      ></p-progressBar>
 
-      <cha-front-home-team-banner />
-
-      <div class="dashboard">
-        Future development for Dashboard, navigate to "LEAGUE/TEAMS/YOUR TEAM" to see your team and salaries
+      <div class="p-2" [ngStyle]="{ height: '170px' }">
+        <cha-front-home-team-banner />
       </div>
 
-      <router-outlet></router-outlet>
+      <div class="px-2 overflow-y-auto" [ngStyle]="{ height: 'calc(100% - 170px)' }">
+        <cha-front-home-dashboard />
+      </div>
 
     </div>
 

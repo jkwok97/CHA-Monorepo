@@ -1,0 +1,49 @@
+<blade-card
+  *ngIf="userTeam$ | async as userTeam"
+  class="w-full font-light dashboard-trades"
+>
+
+  <blade-card-header>
+    Recent Trades
+  </blade-card-header>
+
+  <blade-card-body>
+
+    <ng-container *ngIf="recentTrades$ | async as recentTrades">
+
+      <div class="flex flex-column row-gap-2">
+
+        @if (recentTrades.length > 0) {
+          @for (trade of recentTrades; track trade.id) {
+
+            <div class="flex flex-column row-gap-1">
+
+              <div class="text-sm">
+                {{ trade.transactionDate | date }}
+              </div>
+
+              <cha-front-home-dashboard-trades-card
+                [teamInfo]="trade.teamOneInfo"
+                [teamPicks]="trade.teamOnePicks"
+                [teamPlayers]="trade.teamOnePlayers"
+              />
+
+              <cha-front-home-dashboard-trades-card
+                [teamInfo]="trade.teamTwoInfo"
+                [teamPicks]="trade.teamTwoPicks"
+                [teamPlayers]="trade.teamTwoPlayers"
+              />
+            </div>
+          }
+        } @else {
+          <div class="text-sm">
+            None available
+          </div>
+        }
+
+      </div>
+
+    </ng-container>
+
+  </blade-card-body>
+</blade-card>

@@ -1,4 +1,5 @@
 import {
+  GetTransactionDto,
   NhlGoalieStatDto,
   NhlPlayerStatDto,
   SalariesAndRatingsDto,
@@ -23,6 +24,7 @@ export interface State {
   currentGoalieStat: StatGoalieAllDto[];
   currentNhlStat: NhlGoalieStatDto | NhlPlayerStatDto | null;
   statsLoading: boolean;
+  trades: GetTransactionDto[];
 }
 
 const initialState: State = {
@@ -39,6 +41,7 @@ const initialState: State = {
   currentGoalieStat: [],
   currentNhlStat: null,
   statsLoading: false,
+  trades: [],
 };
 
 const r = createReducer(
@@ -59,6 +62,11 @@ const r = createReducer(
       teamRecordLoaded: true,
     })
   ),
+
+  on(HomeActions.getTradesSuccess, (state, action) => ({
+    ...state,
+    trades: action.transactions,
+  })),
 
   on(HomeActions.getUserTeamGoaliesSalaries, (state) => ({
     ...state,
@@ -141,3 +149,5 @@ export const getCurrentGoalieStat = (state: State) =>
 export const getCurrentNHLStat = (state: State) => state.currentNhlStat;
 
 export const getStatsLoading = (state: State) => state.statsLoading;
+
+export const getTrades = (state: State): GetTransactionDto[] => state.trades;
