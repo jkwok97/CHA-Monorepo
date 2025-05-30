@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { HomeFacade } from '../../+state/home.facade';
-import { UserTeamFacade } from '@cha/domain/core';
+import { DisplayFacade, UserTeamFacade } from '@cha/domain/core';
 import { TeamDto } from '@cha/shared/entities';
 
 @Component({
@@ -15,10 +15,12 @@ export class HomeComponent implements OnInit {
   isLoading$: Observable<boolean>;
   userTeam$: Observable<TeamDto | undefined> =
     this.userTeamFacade.currentUserTeam$;
+  isMobile$: Observable<boolean> = this.displayFacade.isMobile$;
 
   constructor(
     private homeFacade: HomeFacade,
-    private userTeamFacade: UserTeamFacade
+    private userTeamFacade: UserTeamFacade,
+    private displayFacade: DisplayFacade
   ) {
     this.isLoaded$ = combineLatest([
       this.homeFacade.goalieSalaryLoaded$,
