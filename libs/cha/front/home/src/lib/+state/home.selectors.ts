@@ -179,7 +179,11 @@ const selectTrades = createSelector(selectState, HomeReducer.getTrades);
 
 const selectRecentTrades = createSelector(
   selectTrades,
-  (trades: GetTransactionDto[]) => trades.filter((e, i) => i < 10)
+  (trades: GetTransactionDto[]) => {
+    const recentTrades: GetTransactionDto[] = [...trades];
+
+    return recentTrades.reverse().filter((e, i) => i < 10);
+  }
 );
 
 export const HomeSelectors = {
