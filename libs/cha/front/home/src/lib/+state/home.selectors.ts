@@ -182,7 +182,7 @@ const selectRecentTrades = createSelector(
   (trades: GetTransactionDto[]) => {
     const recentTrades: GetTransactionDto[] = [...trades];
 
-    return recentTrades.reverse().filter((e, i) => i < 10);
+    return recentTrades.filter((e, i) => i < 10);
   }
 );
 
