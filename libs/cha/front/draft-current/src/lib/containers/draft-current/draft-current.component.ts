@@ -18,7 +18,7 @@ export class DraftCurrentComponent implements OnInit {
   teams!: TeamDto[];
 
   selectOptions = [
-    { label: '2025', value: '2025' },
+    // { label: '2025', value: '2025' },
     { label: '2026', value: '2026' },
   ];
 
@@ -56,7 +56,7 @@ export class DraftCurrentComponent implements OnInit {
       .pipe(
         first(),
         tap(
-          (data: LeagueDataDto) => this.draftCurrentFacade.getDraftTable(2025) // THIS CHANGES
+          (data: LeagueDataDto) => this.draftCurrentFacade.getDraftTable(2026) // THIS CHANGES
         )
       )
       .subscribe();
