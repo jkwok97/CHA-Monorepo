@@ -47,7 +47,7 @@
                       ? player.nextNhlStats?.goals
                       : isOffSeason
                       ? player.nhlStats?.goals
-                      : player.ratings.goals
+                      : player.ratings?.goals
                   }}
                 </div>
                 <div class="text-xs" *ngIf="!player.player_id.isgoalie">
@@ -57,7 +57,7 @@
                       ? player.nextNhlStats?.points
                       : isOffSeason
                       ? player.nhlStats?.points
-                      : player.ratings.points
+                      : player.ratings?.points
                   }}
                 </div>
                 <div class="text-xs" *ngIf="player.player_id.isgoalie">
