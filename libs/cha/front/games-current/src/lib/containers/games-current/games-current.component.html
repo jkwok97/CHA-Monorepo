@@ -1,9 +1,12 @@
 <blade-layout-feature-content>
-  <div>
-    <div class="grid justify-content-center row-gap-2 pt-2">
+  <div class="h-full overflow-hidden">
+
+    <div class="justify-content-center row-gap-2 pt-2">
+
       <div class="text-lg col-12 text-center" style="font-weight: 100">
         CHA Games
       </div>
+
       <div
         class="flex flex-wrap column-gap-6 row-gap-2 col-12 justify-content-center"
       >
@@ -14,9 +17,8 @@
           [index]="1"
         ></blade-button-select>
       </div>
-    </div>
 
-    <blade-divider></blade-divider>
+    </div>
 
     <p-progressBar
       mode="indeterminate"
@@ -24,16 +26,20 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
-        <ng-container *ngIf="games$ | async as days">
-          <ng-container *ngFor="let games of groupGames">
-            <cha-front-games-current-day
-              [dayGames]="games"
-            ></cha-front-games-current-day>
+    <div class="px-2 overflow-y-auto games-days pb-8">
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body >
+          <ng-container *ngIf="games$ | async as days">
+            <ng-container *ngFor="let games of groupGames">
+              <cha-front-games-current-day
+                [dayGames]="games"
+              ></cha-front-games-current-day>
+            </ng-container>
           </ng-container>
-        </ng-container>
-      </blade-card-body>
-    </blade-card>
+        </blade-card-body>
+      </blade-card>
+    </div>
+
   </div>
+
 </blade-layout-feature-content>
