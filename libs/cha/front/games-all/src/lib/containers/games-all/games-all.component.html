@@ -1,5 +1,5 @@
 <blade-layout-feature-content>
-  <div>
+  <div class="h-full overflow-hidden">
     <div class="pt-2" *ngIf="season$ | async">
       <div class="text-lg text-center" style="font-weight: 100">
         {{ season$ | async }} Season
@@ -14,14 +14,17 @@
       *ngIf="isLoading$ | async"
     ></p-progressBar>
 
-    <blade-card *ngIf="isLoaded$ | async">
-      <blade-card-body>
-        <ng-container *ngIf="schedule$ | async as schedule">
-          <cha-front-games-all-table
-            [schedule]="schedule"
-          ></cha-front-games-all-table>
-        </ng-container>
-      </blade-card-body>
-    </blade-card>
+    <div class="px-2 overflow-y-auto games-days pb-8">
+      <blade-card *ngIf="isLoaded$ | async">
+        <blade-card-body>
+          <ng-container *ngIf="schedule$ | async as schedule">
+            <cha-front-games-all-table
+              [schedule]="schedule"
+            ></cha-front-games-all-table>
+          </ng-container>
+        </blade-card-body>
+      </blade-card>
+    </div>
+
   </div>
 </blade-layout-feature-content>
