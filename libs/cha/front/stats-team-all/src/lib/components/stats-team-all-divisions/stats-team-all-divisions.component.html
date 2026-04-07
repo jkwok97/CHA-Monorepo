@@ -1,6 +1,6 @@
 <div class="flex flex-wrap row-gap-5">
   <div class="w-full">
-    <div class="p-2 text-lg" style="font-weight: 100">North West Division</div>
+    <div class="p-2 text-lg" style="font-weight: 100">Adams Division</div>
     <ng-container *ngIf="northWestStats$ | async as teamStats">
       <cha-front-stats-team-all-table
         [stats]="teamStats"
@@ -9,7 +9,7 @@
   </div>
 
   <div class="w-full">
-    <div class="p-2 text-lg" style="font-weight: 100">South West Division</div>
+    <div class="p-2 text-lg" style="font-weight: 100">Patrick Division</div>
     <ng-container *ngIf="southWestStats$ | async as teamStats">
       <cha-front-stats-team-all-table
         [stats]="teamStats"
@@ -18,7 +18,7 @@
   </div>
 
   <div class="w-full text-lg" style="font-weight: 100">
-    <div class="p-2">North East Division</div>
+    <div class="p-2">Norris Division</div>
     <ng-container *ngIf="northEastStats$ | async as teamStats">
       <cha-front-stats-team-all-table
         [stats]="teamStats"
@@ -27,7 +27,7 @@
   </div>
 
   <div class="w-full text-lg" style="font-weight: 100">
-    <div class="p-2">South East Division</div>
+    <div class="p-2">Smythe Division</div>
     <ng-container *ngIf="southEastStats$ | async as teamStats">
       <cha-front-stats-team-all-table
         [stats]="teamStats"
