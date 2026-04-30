@@ -22,7 +22,8 @@
                   [visTeam]="westernTeams[7]"
                   [isWest]="true"
                   [gameFile]="'2026-R1-W1'"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
+                  [seriesDone]="true"
                   [winningTeam]="westernTeams[0]"
                   [losingTeam]="westernTeams[7]"
                 ></cha-front-games-playoffs-matchup-card>
@@ -33,10 +34,10 @@
                   [visTeam]="westernTeams[4]"
                   [isWest]="true"
                   [gameFile]="'2026-R1-W2'"
-                  [seriesTied]="true"
-                  [seriesScore]="'2-2'"
-                  [winningTeam]="westernTeams[4]"
-                  [losingTeam]="westernTeams[3]"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-3'"
+                  [winningTeam]="westernTeams[3]"
+                  [losingTeam]="westernTeams[4]"
                 ></cha-front-games-playoffs-matchup-card>
 
                 <!-- MEM / IND -->
@@ -65,11 +66,12 @@
               </div>
 
               <div class="round-container">
-                <!-- WIT / MEM -->
+                <!-- MIL / KEL -->
                 <cha-front-games-playoffs-matchup-card
-
+                  [homeTeam]="westernTeams[0]"
+                  [visTeam]="westernTeams[3]"
                 ></cha-front-games-playoffs-matchup-card>
-                <!-- CHY / OAK -->
+                <!-- IND / MSG -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="westernTeams[1]"
                   [visTeam]="westernTeams[2]"
@@ -113,13 +115,15 @@
               </div>
 
               <div class="round-container">
-                <!-- MIL / MSG -->
+                <!-- SSW / PEO -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[0]"
+                  [visTeam]="easternTeams[3]"
                 ></cha-front-games-playoffs-matchup-card>
                 <!--  GB / CIN -->
                 <cha-front-games-playoffs-matchup-card
                   [homeTeam]="easternTeams[1]"
+                  [visTeam]="easternTeams[2]"
                 ></cha-front-games-playoffs-matchup-card>
               </div>
 
@@ -142,8 +146,8 @@
                   [visTeam]="easternTeams[4]"
                   [isEast]="true"
                   [gameFile]="'2026-R1-E2'"
-                  [seriesTied]="true"
-                  [seriesScore]="'2-2'"
+                  [seriesDone]="true"
+                  [seriesScore]="'4-2'"
                   [winningTeam]="easternTeams[3]"
                   [losingTeam]="easternTeams[4]"
                 ></cha-front-games-playoffs-matchup-card>
@@ -154,7 +158,7 @@
                   [visTeam]="easternTeams[5]"
                   [isEast]="true"
                   [gameFile]="'2026-R1-E3'"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
                   [winningTeam]="easternTeams[2]"
                   [losingTeam]="easternTeams[5]"
                 ></cha-front-games-playoffs-matchup-card>
