@@ -98,8 +98,8 @@
                   [visTeam]="westernTeams[1]"
                   [isWest]="true"
                   [gameFile]="'2026-R3-W1'"
-                  [seriesScore]="'3-1'"
-                  [seriesTied]="false"
+                  [seriesScore]="'4-2'"
+                  [seriesDone]="true"
                   [winningTeam]="westernTeams[0]"
                   [losingTeam]="westernTeams[1]"
                 ></cha-front-games-playoffs-matchup-card>
@@ -114,6 +114,8 @@
               <img src="assets/images/libertycup.jpg" />
 
               <cha-front-games-playoffs-matchup-final-card
+                [homeTeam]="easternTeams[0]"
+                [visTeam]="westernTeams[0]"
               ></cha-front-games-playoffs-matchup-final-card>
             </div>
 
@@ -136,7 +138,8 @@
                   [visTeam]="easternTeams[2]"
                   [isEast]="true"
                   [gameFile]="'2026-R3-E1'"
-                  [seriesScore]="'3-1'"
+                  [seriesScore]="'4-1'"
+                  [seriesDone]="true"
                   [winningTeam]="easternTeams[0]"
                   [losingTeam]="easternTeams[2]"
                 ></cha-front-games-playoffs-matchup-card>
