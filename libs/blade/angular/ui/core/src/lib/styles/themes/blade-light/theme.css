@@ -1195,7 +1195,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 }
 
 .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
-  color: white;
+  color: black;
   background: #eef2ff;
 }
 

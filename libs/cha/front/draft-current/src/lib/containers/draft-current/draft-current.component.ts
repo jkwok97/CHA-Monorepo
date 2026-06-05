@@ -20,6 +20,7 @@ export class DraftCurrentComponent implements OnInit {
   selectOptions = [
     // { label: '2025', value: '2025' },
     { label: '2026', value: '2026' },
+    { label: '2027', value: '2027' },
   ];
 
   tableColumns = [
