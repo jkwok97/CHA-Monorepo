@@ -26,4 +26,5 @@ export interface SalaryDto {
   season_2026: string | null;
   season_2027: string | null;
   season_2028: string | null;
+  season_2029: string | null;
 }

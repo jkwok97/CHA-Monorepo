@@ -86,7 +86,7 @@ const selectForwardSalaries = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2025) - Number(a.salaries.season_2025) // TODO UPDATE EVERY SEASON
+          Number(b.salaries.season_2026) - Number(a.salaries.season_2026) // TODO UPDATE EVERY SEASON
       )
       .map((playerSalary: SalariesAndRatingsDto) => ({
         player_id: playerSalary.player_id,
@@ -105,7 +105,7 @@ const selectDefenseSalaries = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2025) - Number(a.salaries.season_2025) // TODO UPDATE EVERY SEASON
+          Number(b.salaries.season_2026) - Number(a.salaries.season_2026) // TODO UPDATE EVERY SEASON
       )
       .map((playerSalary: SalariesAndRatingsDto) => ({
         player_id: playerSalary.player_id,
@@ -369,7 +369,7 @@ const selectGoalieSalariesFiltered = createSelector(
       )
       .sort(
         (a, b) =>
-          Number(b.salaries.season_2025) - Number(a.salaries.season_2025) // TODO UPDATE EVERY SEASON
+          Number(b.salaries.season_2026) - Number(a.salaries.season_2026) // TODO UPDATE EVERY SEASON
       )
       .map((goalieSalary: SalariesAndRatingsDto) => ({
         player_id: goalieSalary.player_id,
@@ -539,11 +539,11 @@ function getCurrentTotal(salaries: SalariesAndRatingsDto[]) {
 
   salaries.forEach((salary: SalariesAndRatingsDto) => {
     if (
-      salary.salaries.season_2025 && // TODO UPDATE EVERY SEASON
-      !isNaN(Number(salary.salaries.season_2025)) && // TODO UPDATE EVERY SEASON
+      salary.salaries.season_2026 && // TODO UPDATE EVERY SEASON
+      !isNaN(Number(salary.salaries.season_2026)) && // TODO UPDATE EVERY SEASON
       !salary.player_id.is_protected
     ) {
-      total += Number(salary.salaries.season_2025); // TODO UPDATE EVERY SEASON
+      total += Number(salary.salaries.season_2026); // TODO UPDATE EVERY SEASON
     }
   });
 
