@@ -42,7 +42,7 @@ export class HomeDashboardTradesComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO UPDATE EVERY SEASON
-    this.homeFacade.getTransactions('26');
+    this.homeFacade.getTransactions('27');
   }
 
   // TODO TEMP WILL NEED TO ADJUST USER TEAM LOGO STRING WHEN READY
