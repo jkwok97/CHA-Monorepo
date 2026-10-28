@@ -353,6 +353,8 @@ export class ApiSalariesService {
 
     const response = await firstValueFrom(stats);
 
+    console.log('NHL PLAYER STATS:', response);
+
     return response.data.seasonTotals.find(
       (s: SeasonTotal) => s.season === Number(season)
     );
