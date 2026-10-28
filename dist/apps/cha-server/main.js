@@ -5895,9 +5895,10 @@ let ApiNhlService = class ApiNhlService {
         return leaders;
     }
     getNhlPlayerStatsByPlayerId(playerId, season) {
-        return this.httpService
-            .get(`${this.nhlAPI}/${playerId}/player-stats`)
-            .pipe((0, rxjs_1.map)((response) => response.data.find((s) => s.season === Number(season))));
+        return this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`).pipe((0, rxjs_1.map)((response) => {
+            console.log('NHL PLAYER STATS:', response);
+            return response.data.find((s) => s.season === Number(season));
+        }));
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
         const string1 = season.slice(2, 4);
@@ -7070,8 +7071,11 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
         return new Promise((resolve) => {
             this.httpService
                 .get(`${this.nhlAPI}/${playerId}/landing`)
-                .pipe((0, rxjs_1.map)((response) => response.data.seasonTotals.find((playingSeason) => playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
-            ).points))
+                .pipe((0, rxjs_1.map)((response) => {
+                console.log('NHL PLAYER STATS:', response);
+                return response.data.seasonTotals.find((playingSeason) => playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
+                ).points;
+            }))
                 .subscribe((data) => {
                 resolve(data);
             });
@@ -8651,6 +8655,7 @@ let ApiSalariesService = class ApiSalariesService {
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
+        console.log('NHL PLAYER STATS:', response);
         return response.data.seasonTotals.find((s) => s.season === Number(season));
     }
     async getAll() {
