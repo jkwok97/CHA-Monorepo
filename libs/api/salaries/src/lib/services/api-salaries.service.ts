@@ -1,4 +1,5 @@
 import {
+  getNhlTeamAbbr,
   Goalie_Ratings_V2,
   Goalies_Stats_V2,
   Player_Ratings_V2,
@@ -14,7 +15,6 @@ import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom, Observable } from 'rxjs';
 import { SalaryAllDto } from '@cha/shared/entities';
-import { getNhlTeamAbbr } from '../../../../entities/src/lib/utils/get-nhl-team-abbr';
 
 @Injectable()
 export class ApiSalariesService {
