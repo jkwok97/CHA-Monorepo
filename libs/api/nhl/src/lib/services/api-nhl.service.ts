@@ -9,7 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AxiosResponse } from 'axios';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -30,21 +30,21 @@ export class ApiNhlService {
   nhlComLeaders = 'https://api.nhle.com/stats/rest/en/leaders';
   sportsNet = 'https://stats-api.sportsnet.ca/web_player_table';
 
-  getNhlLeaders(
-    playerType: string,
-    statType: string,
-    season: string
-  ): Observable<any[]> {
-    const leaders = this.httpService
+  getNhlLeaders(playerType: string, statType: string, season: string) {
+    const t = Date.now();
+    return this.httpService
       .get(
-        `${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`
+        `${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`,
+        { timeout: 8000 }
       )
       .pipe(
+        tap(() => console.log(`NHL API: ${Date.now() - t}ms`)),
         map((response) => response.data),
-        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
+        switchMap((response) =>
+          this.setChaTeamInfo(response.data, season, 'p')
+        ),
+        tap(() => console.log(`Total incl. DB: ${Date.now() - t}ms`))
       );
-
-    return leaders;
   }
 
   getNhlGoalieLeaders(

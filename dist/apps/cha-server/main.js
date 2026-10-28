@@ -5859,10 +5859,10 @@ let ApiNhlService = class ApiNhlService {
         this.sportsNet = 'https://stats-api.sportsnet.ca/web_player_table';
     }
     getNhlLeaders(playerType, statType, season) {
-        const leaders = this.httpService
-            .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
-        return leaders;
+        const t = Date.now();
+        return this.httpService
+            .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`, { timeout: 8000 })
+            .pipe((0, rxjs_1.tap)(() => console.log(`NHL API: ${Date.now() - t}ms`)), (0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')), (0, rxjs_1.tap)(() => console.log(`Total incl. DB: ${Date.now() - t}ms`)));
     }
     getNhlGoalieLeaders(playerType, statType, season, minGames) {
         const leaders = this.httpService
