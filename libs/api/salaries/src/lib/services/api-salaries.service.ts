@@ -1,22 +1,25 @@
 import {
-  Goalies_Stats_V2,
   Goalie_Ratings_V2,
+  Goalies_Stats_V2,
+  Player_Ratings_V2,
   Players_Stats_V2,
   Players_V2,
-  Player_Ratings_V2,
   Salaries_V2,
+  SeasonTotal,
   Teams_V2,
 } from '@api/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom, Observable, of } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { SalaryAllDto } from '@cha/shared/entities';
+import { getNhlTeamAbbr } from '../../../../entities/src/lib/utils/get-nhl-team-abbr';
 
 @Injectable()
 export class ApiSalariesService {
-  nhlAPI = 'https://api-web.nhle.com/v1/player';
+  nhlAPI = 'https://api-web.nhle.com/v2/player';
+  nhlMugshotAPI = 'https://assests.nhl.com/mugs/nhl';
 
   constructor(
     @InjectRepository(Salaries_V2)
@@ -324,11 +327,11 @@ export class ApiSalariesService {
         ),
         nhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20242025'
+          '20252026'
         ), // TODO UPDATE EVERY SEASON
         nextNhlStats: await this.getNhlPlayerStatsByPlayerId(
           item.player_id.nhl_id,
-          '20252026'
+          '20262027'
         ), // TODO UPDATE EVERY SEASON
       }))
     );
@@ -337,30 +340,42 @@ export class ApiSalariesService {
   async getNhlPlayerHeadShotByPlayerId(
     playerId: number
   ): Promise<Observable<any>> {
-    const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
+    const stats = this.httpService.get(
+      `${this.nhlAPI}/${playerId}/player-stats`
+    );
 
     const response = await firstValueFrom(stats);
 
-    return response.data.headshot;
+    const teamAbbr = getNhlTeamAbbr(
+      response.data.seasonTotals.teamName.default
+    );
+
+    const mugShot = this.httpService.get(
+      `${this.nhlMugshotAPI}/20262027/${teamAbbr}/${playerId}.png`
+    );
+
+    return mugShot;
   }
 
   async getNhlPlayerStatsByPlayerId(
     playerId: number,
     season: string
   ): Promise<Observable<any>> {
-    const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/landing`);
+    const stats = this.httpService.get(
+      `${this.nhlAPI}/${playerId}/player-stats`
+    );
 
     const response = await firstValueFrom(stats);
 
-    return response.data.featuredStats.regularSeason?.subSeason;
+    return response.data.seasonTotals.find(
+      (s: SeasonTotal) => s.season === Number(season)
+    );
   }
 
   async getAll(): Promise<Salaries_V2[]> {
     const salaries = await this.repo.find();
 
-    const salariesWithPlayerInfo = await this.setPlayerInfo(salaries);
-
-    return salariesWithPlayerInfo;
+    return await this.setPlayerInfo(salaries);
   }
 
   private async setPlayerInfo(array: any[]) {

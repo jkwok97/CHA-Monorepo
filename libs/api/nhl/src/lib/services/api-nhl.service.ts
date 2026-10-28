@@ -1,4 +1,9 @@
-import { Goalies_Stats_V2, Players_Stats_V2, Teams_V2 } from '@api/entities';
+import {
+  Goalies_Stats_V2,
+  Players_Stats_V2,
+  SeasonTotal,
+  Teams_V2,
+} from '@api/entities';
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,10 +24,10 @@ export class ApiNhlService {
   ) {}
 
   nhlCOM = 'https://api.nhle.com/stats/rest/en/season';
-  nhlAPI = 'https://api-web.nhle.com/v1/player';
+  nhlAPI = 'https://api-web.nhle.com/v2/player';
   nhlComSummary = 'https://api.nhle.com/stats/rest/en';
   nhlComLeaders = 'https://api.nhle.com/stats/rest/en/leaders';
-  sportsNet = 'https://mobile-statsv2.sportsnet.ca/web_player_table';
+  sportsNet = 'https://stats-api.sportsnet.ca/web_player_table';
 
   getNhlLeaders(
     playerType: string,
@@ -138,9 +143,11 @@ export class ApiNhlService {
     season: string
   ): Observable<AxiosResponse<any[]>> {
     return this.httpService
-      .get(`${this.nhlAPI}/${playerId}/landing`)
+      .get(`${this.nhlAPI}/${playerId}/player-stats`)
       .pipe(
-        map((response) => response.data.featuredStats.regularSeason?.subSeason)
+        map((response) =>
+          response.data.find((s: SeasonTotal) => s.season === Number(season))
+        )
       );
   }
 
@@ -260,9 +267,7 @@ export class ApiNhlService {
       });
     }
 
-    const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
-
-    return playerStatTeamWithInfo;
+    return await this.getChaTeamInfo(playerStatTeam);
   }
 
   private async getChaTeamSportsnet(id: number, season: string, type: string) {
@@ -306,9 +311,7 @@ export class ApiNhlService {
       });
     }
 
-    const playerStatTeamWithInfo = await this.getChaTeamInfo(playerStatTeam);
-
-    return playerStatTeamWithInfo;
+    return await this.getChaTeamInfo(playerStatTeam);
   }
 
   private async getChaTeamInfo(playerStatTeam: Players_Stats_V2) {

@@ -1,4 +1,4 @@
-import { Players_Stats_V2, Teams_V2 } from '@api/entities';
+import { Players_Stats_V2, SeasonTotal, Teams_V2 } from '@api/entities';
 import {
   StatPlayerLeaderDto,
   StatPlayerLeadersDto,
@@ -19,7 +19,7 @@ export class ApiPlayerLeadersStatsService {
     private httpService: HttpService
   ) {}
 
-  nhlAPI = 'https://api-web.nhle.com/v1/player';
+  nhlAPI = 'https://api-web.nhle.com/v2/player';
 
   async getPlayerStatsLeaders(
     season: string,
@@ -440,7 +440,8 @@ export class ApiPlayerLeadersStatsService {
           map(
             (response) =>
               response.data.seasonTotals.find(
-                (playingSeason) => playingSeason.season === 20232024 // NEED TO UPDATE EVERY YEAR
+                (playingSeason: SeasonTotal) =>
+                  playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
               ).points
           )
         )
