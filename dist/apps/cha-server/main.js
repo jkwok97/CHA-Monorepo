@@ -7068,20 +7068,17 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
         const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(topPointsAboveExpectedLeaders);
         return chaPointsLeadersWithTeamInfo;
     }
-    getNhlStatByPlayerId(playerId) {
-        return new Promise((resolve) => {
-            this.httpService
-                .get(`${this.nhlAPI}/${playerId}/player-stats`)
-                .pipe((0, rxjs_1.map)((response) => {
-                console.log('NHL PLAYER STATS:', response);
-                response.data?.seasonTotals?.find((s) => s.season === 20262027 && //TODO UPDATE EVERY SEASON
-                    s.gameTypeId === 2 &&
-                    s.leagueAbbrev.default === 'NHL').points;
-            }))
-                .subscribe((data) => {
-                resolve(data);
-            });
-        });
+    async getNhlStatByPlayerId(playerId) {
+        try {
+            const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`));
+            return (response.data?.seasonTotals?.find((s) => s.season === 20262027 && // TODO UPDATE EVERY SEASON
+                s.gameTypeId === 2 &&
+                s.leagueAbbrev.default === 'NHL')?.points ?? 0);
+        }
+        catch (err) {
+            console.error(`NHL stats failed for player ${playerId}`, err.message);
+            return 0;
+        }
     }
     async getPointsBelowNhlStats(pointsLeaders) {
         return await Promise.all(pointsLeaders.map(async (leader) => ({

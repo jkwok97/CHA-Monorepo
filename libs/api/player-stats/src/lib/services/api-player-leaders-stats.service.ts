@@ -1,4 +1,9 @@
-import { Players_Stats_V2, SeasonTotal, Teams_V2 } from '@api/entities';
+import {
+  NhlPlayerStatsV2,
+  Players_Stats_V2,
+  SeasonTotal,
+  Teams_V2,
+} from '@api/entities';
 import {
   StatPlayerLeaderDto,
   StatPlayerLeadersDto,
@@ -6,7 +11,7 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 
 @Injectable()
@@ -432,26 +437,25 @@ export class ApiPlayerLeadersStatsService {
     return chaPointsLeadersWithTeamInfo;
   }
 
-  private getNhlStatByPlayerId(playerId) {
-    return new Promise((resolve) => {
-      this.httpService
-        .get(`${this.nhlAPI}/${playerId}/player-stats`)
-        .pipe(
-          map((response) => {
-            console.log('NHL PLAYER STATS:', response);
-
-            response.data?.seasonTotals?.find(
-              (s: SeasonTotal) =>
-                s.season === 20262027 && //TODO UPDATE EVERY SEASON
-                s.gameTypeId === 2 &&
-                s.leagueAbbrev.default === 'NHL'
-            ).points;
-          })
+  private async getNhlStatByPlayerId(playerId: number): Promise<number> {
+    try {
+      const response = await firstValueFrom(
+        this.httpService.get<NhlPlayerStatsV2>(
+          `${this.nhlAPI}/${playerId}/player-stats`
         )
-        .subscribe((data) => {
-          resolve(data);
-        });
-    });
+      );
+      return (
+        response.data?.seasonTotals?.find(
+          (s: SeasonTotal) =>
+            s.season === 20262027 && // TODO UPDATE EVERY SEASON
+            s.gameTypeId === 2 &&
+            s.leagueAbbrev.default === 'NHL'
+        )?.points ?? 0
+      );
+    } catch (err) {
+      console.error(`NHL stats failed for player ${playerId}`, err.message);
+      return 0;
+    }
   }
 
   private async getPointsBelowNhlStats(pointsLeaders) {
