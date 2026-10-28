@@ -7070,7 +7070,7 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
     getNhlStatByPlayerId(playerId) {
         return new Promise((resolve) => {
             this.httpService
-                .get(`${this.nhlAPI}/${playerId}/landing`)
+                .get(`${this.nhlAPI}/${playerId}/player-stats`)
                 .pipe((0, rxjs_1.map)((response) => {
                 console.log('NHL PLAYER STATS:', response);
                 return response.data.seasonTotals.find((playingSeason) => playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
