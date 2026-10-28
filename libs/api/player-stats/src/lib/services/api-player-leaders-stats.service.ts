@@ -437,13 +437,12 @@ export class ApiPlayerLeadersStatsService {
       this.httpService
         .get(`${this.nhlAPI}/${playerId}/landing`)
         .pipe(
-          map(
-            (response) =>
-              response.data.seasonTotals.find(
-                (playingSeason: SeasonTotal) =>
-                  playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
-              ).points
-          )
+          map((response) => {
+            console.log('NHL PLAYER STATS:', response);
+            return response.data.seasonTotals.find(
+              (playingSeason: SeasonTotal) => playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
+            ).points;
+          })
         )
         .subscribe((data) => {
           resolve(data);

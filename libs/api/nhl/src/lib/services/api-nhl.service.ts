@@ -142,13 +142,14 @@ export class ApiNhlService {
     playerId: number,
     season: string
   ): Observable<AxiosResponse<any[]>> {
-    return this.httpService
-      .get(`${this.nhlAPI}/${playerId}/player-stats`)
-      .pipe(
-        map((response) =>
-          response.data.find((s: SeasonTotal) => s.season === Number(season))
-        )
-      );
+    return this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`).pipe(
+      map((response) => {
+        console.log('NHL PLAYER STATS:', response);
+        return response.data.find(
+          (s: SeasonTotal) => s.season === Number(season)
+        );
+      })
+    );
   }
 
   private async setChaTeamInfoForSportsnet(
