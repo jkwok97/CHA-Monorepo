@@ -27,7 +27,6 @@ export class DraftCurrentFacade {
   constructor(private store: Store<State>) {}
 
   getDraftTable(season: number): void {
-    console.log(season);
     this.store.dispatch(DraftCurrentActions.getDraftTable({ season }));
   }
 
