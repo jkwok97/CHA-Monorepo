@@ -8429,7 +8429,7 @@ let ApiSalariesService = class ApiSalariesService {
         this.goalieRatingsRepo = goalieRatingsRepo;
         this.httpService = httpService;
         this.nhlAPI = 'https://api-web.nhle.com/v2/player';
-        this.nhlMugshotAPI = 'https://assests.nhl.com/mugs/nhl';
+        this.nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest/';
     }
     async getAllPlayerSalaries(season, ratingSeason) {
         const allPlayersInSeason = await this.playersStatsRepo.find({
@@ -8646,11 +8646,7 @@ let ApiSalariesService = class ApiSalariesService {
         })));
     }
     async getNhlPlayerHeadShotByPlayerId(playerId) {
-        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`);
-        const response = await (0, rxjs_1.firstValueFrom)(stats);
-        const teamAbbr = (0, entities_1.getNhlTeamAbbr)(response.data.seasonTotals.teamName.default);
-        const mugShot = this.httpService.get(`${this.nhlMugshotAPI}/20262027/${teamAbbr}/${playerId}.png`);
-        return mugShot;
+        return this.httpService.get(`${this.nhlMugshotAPI}/${playerId}.png`);
     }
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`);
