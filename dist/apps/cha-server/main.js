@@ -8657,7 +8657,7 @@ let ApiSalariesService = class ApiSalariesService {
         })));
     }
     async getNhlPlayerHeadShotByPlayerId(playerId) {
-        return this.httpService.get(`${this.nhlMugshotAPI}/${playerId}.png`);
+        return `${this.nhlMugshotAPI}/${playerId}.png`;
     }
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`);
