@@ -355,8 +355,11 @@ export class ApiSalariesService {
 
     console.log('NHL PLAYER STATS:', response);
 
-    return response.data.seasonTotals.find(
-      (s: SeasonTotal) => s.season === Number(season)
+    return response.data?.seasonTotals?.find(
+      (s: SeasonTotal) =>
+        s.season === Number(season) &&
+        s.gameTypeId === 2 &&
+        s.leagueAbbrev.default === 'NHL'
     );
   }
 
