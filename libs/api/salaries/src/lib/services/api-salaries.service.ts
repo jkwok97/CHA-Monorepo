@@ -337,10 +337,8 @@ export class ApiSalariesService {
     );
   }
 
-  async getNhlPlayerHeadShotByPlayerId(
-    playerId: number
-  ): Promise<Observable<any>> {
-    return this.httpService.get(`${this.nhlMugshotAPI}/${playerId}.png`);
+  async getNhlPlayerHeadShotByPlayerId(playerId: number): Promise<string> {
+    return `${this.nhlMugshotAPI}/${playerId}.png`;
   }
 
   async getNhlPlayerStatsByPlayerId(
