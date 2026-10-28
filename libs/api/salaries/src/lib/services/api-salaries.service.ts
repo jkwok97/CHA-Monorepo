@@ -19,7 +19,7 @@ import { SalaryAllDto } from '@cha/shared/entities';
 @Injectable()
 export class ApiSalariesService {
   nhlAPI = 'https://api-web.nhle.com/v2/player';
-  nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest/';
+  nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest';
 
   constructor(
     @InjectRepository(Salaries_V2)
