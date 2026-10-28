@@ -435,7 +435,7 @@ export class ApiPlayerLeadersStatsService {
   private getNhlStatByPlayerId(playerId) {
     return new Promise((resolve) => {
       this.httpService
-        .get(`${this.nhlAPI}/${playerId}/landing`)
+        .get(`${this.nhlAPI}/${playerId}/player-stats`)
         .pipe(
           map((response) => {
             console.log('NHL PLAYER STATS:', response);
