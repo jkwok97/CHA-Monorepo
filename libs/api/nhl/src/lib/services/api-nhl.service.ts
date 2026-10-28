@@ -1,5 +1,6 @@
 import {
   Goalies_Stats_V2,
+  NhlPlayerStatsV2,
   Players_Stats_V2,
   SeasonTotal,
   Teams_V2,
@@ -141,15 +142,19 @@ export class ApiNhlService {
   getNhlPlayerStatsByPlayerId(
     playerId: number,
     season: string
-  ): Observable<AxiosResponse<any[]>> {
-    return this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`).pipe(
-      map((response) => {
-        console.log('NHL PLAYER STATS:', response);
-        return response.data.find(
-          (s: SeasonTotal) => s.season === Number(season)
-        );
-      })
-    );
+  ): Observable<SeasonTotal | undefined> {
+    return this.httpService
+      .get<NhlPlayerStatsV2>(`${this.nhlAPI}/${playerId}/player-stats`)
+      .pipe(
+        map((response) =>
+          response.data?.seasonTotals?.find(
+            (s) =>
+              s.season === Number(season) &&
+              s.gameTypeId === 2 &&
+              s.leagueAbbrev.default === 'NHL'
+          )
+        )
+      );
   }
 
   private async setChaTeamInfoForSportsnet(

@@ -439,8 +439,12 @@ export class ApiPlayerLeadersStatsService {
         .pipe(
           map((response) => {
             console.log('NHL PLAYER STATS:', response);
-            return response.data.seasonTotals.find(
-              (playingSeason: SeasonTotal) => playingSeason.season === 20262027 // TODO NEED TO UPDATE EVERY YEAR
+
+            response.data?.seasonTotals?.find(
+              (s: SeasonTotal) =>
+                s.season === 20262027 && //TODO UPDATE EVERY SEASON
+                s.gameTypeId === 2 &&
+                s.leagueAbbrev.default === 'NHL'
             ).points;
           })
         )
