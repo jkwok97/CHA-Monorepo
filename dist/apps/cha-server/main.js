@@ -8440,7 +8440,7 @@ let ApiSalariesService = class ApiSalariesService {
         this.goalieRatingsRepo = goalieRatingsRepo;
         this.httpService = httpService;
         this.nhlAPI = 'https://api-web.nhle.com/v2/player';
-        this.nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest/';
+        this.nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest';
     }
     async getAllPlayerSalaries(season, ratingSeason) {
         const allPlayersInSeason = await this.playersStatsRepo.find({
