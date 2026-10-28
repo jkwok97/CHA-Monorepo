@@ -19,7 +19,7 @@ import { SalaryAllDto } from '@cha/shared/entities';
 @Injectable()
 export class ApiSalariesService {
   nhlAPI = 'https://api-web.nhle.com/v2/player';
-  nhlMugshotAPI = 'https://assests.nhl.com/mugs/nhl';
+  nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest/';
 
   constructor(
     @InjectRepository(Salaries_V2)
@@ -340,21 +340,7 @@ export class ApiSalariesService {
   async getNhlPlayerHeadShotByPlayerId(
     playerId: number
   ): Promise<Observable<any>> {
-    const stats = this.httpService.get(
-      `${this.nhlAPI}/${playerId}/player-stats`
-    );
-
-    const response = await firstValueFrom(stats);
-
-    const teamAbbr = getNhlTeamAbbr(
-      response.data.seasonTotals.teamName.default
-    );
-
-    const mugShot = this.httpService.get(
-      `${this.nhlMugshotAPI}/20262027/${teamAbbr}/${playerId}.png`
-    );
-
-    return mugShot;
+    return this.httpService.get(`${this.nhlMugshotAPI}/${playerId}.png`);
   }
 
   async getNhlPlayerStatsByPlayerId(
