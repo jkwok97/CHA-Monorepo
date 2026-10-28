@@ -33,14 +33,16 @@ export class ApiPlayerLeadersStatsService {
   ): Promise<StatPlayerLeadersDto> {
     const hitsLeaders = await this.getHitsLeaders(season, seasonType);
     const pointsLeaders = await this.getPointsLeaders(season, seasonType);
-    const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
-      season,
-      seasonType
-    );
-    const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
-      season,
-      seasonType
-    );
+    const pointsAboveExpectedLeaders = [];
+    const pointsBelowExpectedLeaders = [];
+    // const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
+    //   season,
+    //   seasonType
+    // );
+    // const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
+    //   season,
+    //   seasonType
+    // );
     const assistLeaders = await this.getAssistLeaders(season, seasonType);
     const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(
       season,
