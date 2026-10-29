@@ -5896,6 +5896,7 @@ let ApiNhlService = class ApiNhlService {
             s.leagueAbbrev.default === 'NHL')));
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
+        console.log('setChaTeamInfoForSportsnet', statObject, season);
         const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
         const { skaters, goalies } = statObject.player_stats;
         const [skaterTeams, goalieTeams] = await Promise.all([
