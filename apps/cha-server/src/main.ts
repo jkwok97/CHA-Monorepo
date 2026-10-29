@@ -16,7 +16,7 @@ async function bootstrap() {
   const globalPrefix = 'api';
   const port = process.env.PORT || 3333;
 
-  console.log(process.env.DATABASE_URL);
+  // console.log(process.env.DATABASE_URL);
 
   app.setGlobalPrefix(globalPrefix);
   app.useStaticAssets(join(__dirname, '..', 'public'));

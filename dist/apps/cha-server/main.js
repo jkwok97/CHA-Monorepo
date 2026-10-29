@@ -3653,7 +3653,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let AwardsMiddleware = class AwardsMiddleware {
     use(req, res, next) {
-        console.log('Request Awards...');
         next();
     }
 };
@@ -3914,7 +3913,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let UserMiddleware = class UserMiddleware {
     use(req, res, next) {
-        console.log('Request User...');
         next();
     }
 };
@@ -4187,7 +4185,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let DraftTableMiddleware = class DraftTableMiddleware {
     use(req, res, next) {
-        console.log('Request Draft Table...');
         next();
     }
 };
@@ -4421,7 +4418,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let EntryDraftMiddleware = class EntryDraftMiddleware {
     use(req, res, next) {
-        console.log('Request Entry Draft Table...');
         next();
     }
 };
@@ -5468,7 +5464,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let GoalieStatsMiddleware = class GoalieStatsMiddleware {
     use(req, res, next) {
-        console.log('Request Goalie Stats...');
         next();
     }
 };
@@ -5631,7 +5626,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let LeagueMiddleware = class LeagueMiddleware {
     use(req, res, next) {
-        console.log('Request League...');
         next();
     }
 };
@@ -6280,7 +6274,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let PlayerInfoMiddleware = class PlayerInfoMiddleware {
     use(req, res, next) {
-        console.log('Request Player Info...');
         next();
     }
 };
@@ -6503,7 +6496,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let PlayerRatingsMiddleware = class PlayerRatingsMiddleware {
     use(req, res, next) {
-        console.log('Request Player Ratings...');
         next();
     }
 };
@@ -8219,7 +8211,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let PlayerStatsMiddleware = class PlayerStatsMiddleware {
     use(req, res, next) {
-        console.log('Request Player Stats...');
         next();
     }
 };
@@ -8662,7 +8653,6 @@ let ApiSalariesService = class ApiSalariesService {
     async getNhlPlayerStatsByPlayerId(playerId, season) {
         const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`);
         const response = await (0, rxjs_1.firstValueFrom)(stats);
-        console.log('NHL PLAYER STATS:', response);
         return response.data?.seasonTotals?.find((s) => s.season === Number(season) &&
             s.gameTypeId === 2 &&
             s.leagueAbbrev.default === 'NHL');
@@ -8742,7 +8732,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let SalariesMiddleware = class SalariesMiddleware {
     use(req, res, next) {
-        console.log('Request Salaries...');
         next();
     }
 };
@@ -9101,7 +9090,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let ScheduleMiddleware = class ScheduleMiddleware {
     use(req, res, next) {
-        console.log('Request Schedule...');
         next();
     }
 };
@@ -9848,7 +9836,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let TeamStatsMiddleware = class TeamStatsMiddleware {
     use(req, res, next) {
-        console.log('Request Team Stats...');
         next();
     }
 };
@@ -10114,7 +10101,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let TeamsMiddleware = class TeamsMiddleware {
     use(req, res, next) {
-        console.log('Request Teams...');
         next();
     }
 };
@@ -10940,7 +10926,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let TransactionsMiddleware = class TransactionsMiddleware {
     use(req, res, next) {
-        console.log('Request Transactions...');
         next();
     }
 };
@@ -11148,7 +11133,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let WaiversMiddleware = class WaiversMiddleware {
     use(req, res, next) {
-        console.log('Request Waivers...');
         next();
     }
 };
@@ -11372,7 +11356,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let DivisionsMiddleware = class DivisionsMiddleware {
     use(req, res, next) {
-        console.log('Request Divisions...');
         next();
     }
 };
@@ -11578,7 +11561,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let GoalieRatingsMiddleware = class GoalieRatingsMiddleware {
     use(req, res, next) {
-        console.log('Request Goalie Ratings...');
         next();
     }
 };
@@ -11784,7 +11766,6 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 let ConferencesMiddleware = class ConferencesMiddleware {
     use(req, res, next) {
-        console.log('Request Conferences...');
         next();
     }
 };
@@ -11896,7 +11877,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const globalPrefix = 'api';
     const port = process.env.PORT || 3333;
-    console.log(process.env.DATABASE_URL);
+    // console.log(process.env.DATABASE_URL);
     app.setGlobalPrefix(globalPrefix);
     app.useStaticAssets((0, path_1.join)(__dirname, '..', 'public'));
     app.setBaseViewsDir((0, path_1.join)(__dirname, 'assets/views'));
