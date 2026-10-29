@@ -5877,10 +5877,12 @@ let ApiNhlService = class ApiNhlService {
         return leaders;
     }
     getNhlSummaryFromSportsnet(season, seasonType) {
-        const leaders = this.httpService
+        return this.httpService
             .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
-            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfoForSportsnet(response.data, season)));
-        return leaders;
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => {
+            console.log('response from sportsnet', response);
+            return this.setChaTeamInfoForSportsnet(response.data, season);
+        }));
     }
     getNhlRookieSummary(season, player, statsType, sort, start, pageSize) {
         const leaders = this.httpService

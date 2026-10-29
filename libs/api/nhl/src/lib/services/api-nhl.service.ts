@@ -102,18 +102,17 @@ export class ApiNhlService {
     season: string,
     seasonType: string
   ): Observable<{ player_stats: { skaters: any[]; goalies: any[] } }> {
-    const leaders = this.httpService
+    return this.httpService
       .get(
         `${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`
       )
       .pipe(
         map((response) => response.data),
-        switchMap((response) =>
-          this.setChaTeamInfoForSportsnet(response.data, season)
-        )
+        switchMap((response) => {
+          console.log('response from sportsnet', response);
+          return this.setChaTeamInfoForSportsnet(response.data, season);
+        })
       );
-
-    return leaders;
   }
 
   getNhlRookieSummary(
