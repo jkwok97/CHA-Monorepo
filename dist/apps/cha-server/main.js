@@ -5520,33 +5520,17 @@ const typeorm_2 = __webpack_require__(13);
 let LeagueService = class LeagueService {
     constructor(repo) {
         this.repo = repo;
-        this.cachedLeagueData = null;
-        this.cacheExpiresAt = 0;
-        this.CACHE_TTL_MS = 60 * 1000; // 60 seconds
     }
     async getCurrentLeagueData() {
-        const now = Date.now();
-        if (this.cachedLeagueData && now < this.cacheExpiresAt) {
-            return this.cachedLeagueData;
-        }
-        const data = await this.repo.findOneBy({ id: 1 });
-        if (!data) {
-            throw new common_1.NotFoundException('Current league data not found');
-        }
-        this.cachedLeagueData = data;
-        this.cacheExpiresAt = now + this.CACHE_TTL_MS;
-        return this.cachedLeagueData;
+        return (await this.repo.find());
     }
     async updateCurrentLeagueData(attrs) {
-        const data = await this.repo.findOneBy({ id: 1 });
+        const data = await this.repo.findOneByOrFail({ id: 1 });
         if (!data) {
-            throw new common_1.NotFoundException('Current league data with id 1 not found');
+            throw new common_1.NotFoundException('data not found');
         }
         Object.assign(data, attrs);
-        const updated = await this.repo.save(data);
-        this.cachedLeagueData = null;
-        this.cacheExpiresAt = 0;
-        return updated;
+        return this.repo.save(data);
     }
 };
 exports.LeagueService = LeagueService;
