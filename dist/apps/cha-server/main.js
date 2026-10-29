@@ -5141,20 +5141,20 @@ let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type, 
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(minutes_played) as minutes_played, 
-      sum(en_goals) as en_goals, 
-      sum(shutouts) as shutouts, 
-      sum(goals_against) as goals_against, 
-      sum(saves) as saves, 
-      sum(shots_for) as shots_for, 
-      sum(goals) as goals, 
-      sum(assists) as assists, 
-      sum(points) as points, 
+      a.season_type as season_type,
+      sum(games_played) as games_played,
+      sum(wins) as wins,
+      sum(loss) as loss,
+      sum(ties) as ties,
+      sum(minutes_played) as minutes_played,
+      sum(en_goals) as en_goals,
+      sum(shutouts) as shutouts,
+      sum(goals_against) as goals_against,
+      sum(saves) as saves,
+      sum(shots_for) as shots_for,
+      sum(goals) as goals,
+      sum(assists) as assists,
+      sum(points) as points,
       sum(penalty_minutes) as penalty_minutes
       from
       goalies_stats_v2 as a
@@ -5306,21 +5306,21 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type, 
+      a.season_type as season_type,
       a.team_name as team_name,
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(minutes_played) as minutes_played, 
-      sum(en_goals) as en_goals, 
-      sum(shutouts) as shutouts, 
-      sum(goals_against) as goals_against, 
-      sum(saves) as saves, 
-      sum(shots_for) as shots_for, 
-      sum(goals) as goals, 
-      sum(assists) as assists, 
-      sum(points) as points, 
+      sum(games_played) as games_played,
+      sum(wins) as wins,
+      sum(loss) as loss,
+      sum(ties) as ties,
+      sum(minutes_played) as minutes_played,
+      sum(en_goals) as en_goals,
+      sum(shutouts) as shutouts,
+      sum(goals_against) as goals_against,
+      sum(saves) as saves,
+      sum(shots_for) as shots_for,
+      sum(goals) as goals,
+      sum(assists) as assists,
+      sum(points) as points,
       sum(penalty_minutes) as penalty_minutes
       from
       goalies_stats_v2 as a
@@ -7826,20 +7826,20 @@ let ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type, 
+      a.season_type as season_type,
       a.position as position,
-      sum(a.games_played) as games_played, 
-      sum(a.goals) as goals, 
-      sum(a.assists) as assists, 
-      sum(a.points) as points, 
-      sum(a.plus_minus) as plus_minus, 
-      sum(a.penalty_minutes) as penalty_minutes, 
-      sum(a.sh_goals) as sh_goals, 
-      sum(a.pp_goals) as pp_goals, 
-      sum(a.gw_goals) as gw_goals, 
-      sum(a.shots) as shots, 
-      sum(a.minutes_played) as minutes_played, 
-      sum(a.hits) as hits, 
+      sum(a.games_played) as games_played,
+      sum(a.goals) as goals,
+      sum(a.assists) as assists,
+      sum(a.points) as points,
+      sum(a.plus_minus) as plus_minus,
+      sum(a.penalty_minutes) as penalty_minutes,
+      sum(a.sh_goals) as sh_goals,
+      sum(a.pp_goals) as pp_goals,
+      sum(a.gw_goals) as gw_goals,
+      sum(a.shots) as shots,
+      sum(a.minutes_played) as minutes_played,
+      sum(a.hits) as hits,
       sum(a.blocked_shots) as blocked_shots
       from
       players_stats_v2 as a
@@ -7998,21 +7998,21 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type, 
+      a.season_type as season_type,
       a.team_name as team_name,
-      sum(a.games_played) as games_played, 
-      sum(a.goals) as goals, 
-      sum(a.assists) as assists, 
-      sum(a.points) as points, 
-      sum(a.plus_minus) as plus_minus, 
-      sum(a.penalty_minutes) as penalty_minutes, 
-      sum(a.sh_goals) as sh_goals, 
-      sum(a.pp_goals) as pp_goals, 
-      sum(a.gw_goals) as gw_goals, 
-      sum(a.gt_goals) as gt_goals, 
-      sum(a.shots) as shots, 
-      sum(a.minutes_played) as minutes_played, 
-      sum(a.hits) as hits, 
+      sum(a.games_played) as games_played,
+      sum(a.goals) as goals,
+      sum(a.assists) as assists,
+      sum(a.points) as points,
+      sum(a.plus_minus) as plus_minus,
+      sum(a.penalty_minutes) as penalty_minutes,
+      sum(a.sh_goals) as sh_goals,
+      sum(a.pp_goals) as pp_goals,
+      sum(a.gw_goals) as gw_goals,
+      sum(a.gt_goals) as gt_goals,
+      sum(a.shots) as shots,
+      sum(a.minutes_played) as minutes_played,
+      sum(a.hits) as hits,
       sum(a.blocked_shots) as blocked_shots
       from
       players_stats_v2 as a
@@ -9489,27 +9489,27 @@ let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
     async getAllTimeTeamStatsSummedBySeasonByType(seasonType) {
         const result = await this.dataSource.query(` select
       a.team_id as team_id,
-      a.season_type as season_type, 
-      c.city as city, 
+      a.season_type as season_type,
+      c.city as city,
       c.nickname as nickname,
       c.shortname,
       c.teamlogo,
       c.isactive,
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(points) as points, 
-      sum(goals_for) as goals_for, 
-      sum(goals_against) as goals_against, 
-      sum(pp_attempts) as pp_attempts, 
-      sum(pp_goals) as pp_goals, 
-      sum(pk_attempts) as pk_attempts, 
-      sum(pk_goals) as pk_goals, 
-      sum(sh_goals) as sh_goals, 
-      sum(penalty_minutes) as penalty_minutes, 
-      sum(shots_for) as shots_for, 
-      sum(shots_against) as shots_against, 
+      sum(games_played) as games_played,
+      sum(wins) as wins,
+      sum(loss) as loss,
+      sum(ties) as ties,
+      sum(points) as points,
+      sum(goals_for) as goals_for,
+      sum(goals_against) as goals_against,
+      sum(pp_attempts) as pp_attempts,
+      sum(pp_goals) as pp_goals,
+      sum(pk_attempts) as pk_attempts,
+      sum(pk_goals) as pk_goals,
+      sum(sh_goals) as sh_goals,
+      sum(penalty_minutes) as penalty_minutes,
+      sum(shots_for) as shots_for,
+      sum(shots_against) as shots_against,
       sum(shut_outs) as shut_outs,
       sum(face_off_won) as face_off_won,
       sum(face_off_lost) as face_off_lost,
@@ -11788,7 +11788,7 @@ exports.AppService = AppService = tslib_1.__decorate([
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -11802,14 +11802,14 @@ exports.AppService = AppService = tslib_1.__decorate([
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
