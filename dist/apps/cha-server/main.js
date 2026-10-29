@@ -5141,20 +5141,20 @@ let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type,
-      sum(games_played) as games_played,
-      sum(wins) as wins,
-      sum(loss) as loss,
-      sum(ties) as ties,
-      sum(minutes_played) as minutes_played,
-      sum(en_goals) as en_goals,
-      sum(shutouts) as shutouts,
-      sum(goals_against) as goals_against,
-      sum(saves) as saves,
-      sum(shots_for) as shots_for,
-      sum(goals) as goals,
-      sum(assists) as assists,
-      sum(points) as points,
+      a.season_type as season_type, 
+      sum(games_played) as games_played, 
+      sum(wins) as wins, 
+      sum(loss) as loss, 
+      sum(ties) as ties, 
+      sum(minutes_played) as minutes_played, 
+      sum(en_goals) as en_goals, 
+      sum(shutouts) as shutouts, 
+      sum(goals_against) as goals_against, 
+      sum(saves) as saves, 
+      sum(shots_for) as shots_for, 
+      sum(goals) as goals, 
+      sum(assists) as assists, 
+      sum(points) as points, 
       sum(penalty_minutes) as penalty_minutes
       from
       goalies_stats_v2 as a
@@ -5306,21 +5306,21 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type,
+      a.season_type as season_type, 
       a.team_name as team_name,
-      sum(games_played) as games_played,
-      sum(wins) as wins,
-      sum(loss) as loss,
-      sum(ties) as ties,
-      sum(minutes_played) as minutes_played,
-      sum(en_goals) as en_goals,
-      sum(shutouts) as shutouts,
-      sum(goals_against) as goals_against,
-      sum(saves) as saves,
-      sum(shots_for) as shots_for,
-      sum(goals) as goals,
-      sum(assists) as assists,
-      sum(points) as points,
+      sum(games_played) as games_played, 
+      sum(wins) as wins, 
+      sum(loss) as loss, 
+      sum(ties) as ties, 
+      sum(minutes_played) as minutes_played, 
+      sum(en_goals) as en_goals, 
+      sum(shutouts) as shutouts, 
+      sum(goals_against) as goals_against, 
+      sum(saves) as saves, 
+      sum(shots_for) as shots_for, 
+      sum(goals) as goals, 
+      sum(assists) as assists, 
+      sum(points) as points, 
       sum(penalty_minutes) as penalty_minutes
       from
       goalies_stats_v2 as a
@@ -5935,6 +5935,7 @@ let ApiNhlService = class ApiNhlService {
     async getChaTeamsByPlayerIds(ids, season, type, idField = 'nhl_id') {
         const repo = (type === 'p' ? this.playerStatsRepo : this.goalieStatsRepo);
         const stringIds = ids.map(String);
+        console.log('lookup', type, idField, season, stringIds.slice(0, 5), stringIds.length);
         // Query 1: every player's team name in one go
         const stats = await repo.find({
             select: {
@@ -7763,118 +7764,138 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const CACHE_TTL_MS = 10 * 60 * 1000;
 let ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
         this.dataSource = dataSource;
+        this.cache = new Map();
     }
-    async getAllTimePlayerStatsBySeasonByType(seasonType) {
-        const allStats = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                position: true,
-                games_played: true,
-                goals: true,
-                assists: true,
-                points: true,
-                plus_minus: true,
-                penalty_minutes: true,
-                pp_goals: true,
-                sh_goals: true,
-                gw_goals: true,
-                shots: true,
-                shooting_pct: true,
-                minutes_played: true,
-                minutes_per_game: true,
-                fo_pct: true,
-                pass_pct: true,
-                corner_pct: true,
-                hit_per_game: true,
-                blocked_shots: true,
-                playing_year: true,
-                player_id: {
+    getAllTimePlayerStatsBySeasonByType(seasonType) {
+        return this.cached(`bySeason:${seasonType}`, async () => {
+            const allStats = await this.repo.find({
+                select: {
                     id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isdefense: true,
-                    isforward: true,
+                    team_name: true,
+                    position: true,
+                    games_played: true,
+                    goals: true,
+                    assists: true,
+                    points: true,
+                    plus_minus: true,
+                    penalty_minutes: true,
+                    pp_goals: true,
+                    sh_goals: true,
+                    gw_goals: true,
+                    shots: true,
+                    shooting_pct: true,
+                    minutes_played: true,
+                    minutes_per_game: true,
+                    fo_pct: true,
+                    pass_pct: true,
+                    corner_pct: true,
+                    hit_per_game: true,
+                    blocked_shots: true,
+                    playing_year: true,
+                    player_id: {
+                        id: true,
+                        firstname: true,
+                        lastname: true,
+                        nhl_id: true,
+                        isdefense: true,
+                        isforward: true,
+                    },
                 },
-            },
-            relations: ['player_id'],
-            where: {
-                season_type: seasonType,
-            },
-            take: 1500,
-            order: {
-                points: 'DESC',
-            },
+                relations: ['player_id'],
+                where: {
+                    season_type: seasonType,
+                },
+                take: 1500,
+                order: {
+                    points: 'DESC',
+                },
+            });
+            const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
+            return this.convertStats(allStatsWithTeamInfo, false);
         });
-        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo, false);
-        return allStatsWithTeamInfoConverted;
     }
-    async getAllTimePlayerStatsSummedBySeasonByType(seasonType) {
-        const result = await this.dataSource.query(`select
-      b.firstname as firstname,
-      b.lastname as lastname,
-      b.isdefense as isdefense,
-      b.isforward as isforward,
-      b.isgoalie as isgoalie,
-      b.nhl_id as nhl_id,
-      a.player_id as player_id,
-      a.season_type as season_type,
-      a.position as position,
-      sum(a.games_played) as games_played,
-      sum(a.goals) as goals,
-      sum(a.assists) as assists,
-      sum(a.points) as points,
-      sum(a.plus_minus) as plus_minus,
-      sum(a.penalty_minutes) as penalty_minutes,
-      sum(a.sh_goals) as sh_goals,
-      sum(a.pp_goals) as pp_goals,
-      sum(a.gw_goals) as gw_goals,
-      sum(a.shots) as shots,
-      sum(a.minutes_played) as minutes_played,
-      sum(a.hits) as hits,
-      sum(a.blocked_shots) as blocked_shots
-      from
-      players_stats_v2 as a
-      left join players_v2 as b
-      on b.id = a.player_id
-      where (a.player_id = b.id
-      and
-      a.points > '0'
-      and
-      a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
-      order by points DESC`);
-        const allTimeStatsConverted = await this.convertStats(result, true);
-        return allTimeStatsConverted;
+    getAllTimePlayerStatsSummedBySeasonByType(seasonType) {
+        return this.cached(`summed:${seasonType}`, async () => {
+            const result = await this.dataSource.query(`select
+        b.firstname as firstname,
+        b.lastname as lastname,
+        b.isdefense as isdefense,
+        b.isforward as isforward,
+        b.isgoalie as isgoalie,
+        b.nhl_id as nhl_id,
+        a.player_id as player_id,
+        a.season_type as season_type,
+        a.position as position,
+        sum(a.games_played) as games_played,
+        sum(a.goals) as goals,
+        sum(a.assists) as assists,
+        sum(a.points) as points,
+        sum(a.plus_minus) as plus_minus,
+        sum(a.penalty_minutes) as penalty_minutes,
+        sum(a.sh_goals) as sh_goals,
+        sum(a.pp_goals) as pp_goals,
+        sum(a.gw_goals) as gw_goals,
+        sum(a.shots) as shots,
+        sum(a.minutes_played) as minutes_played,
+        sum(a.hits) as hits,
+        sum(a.blocked_shots) as blocked_shots
+        from players_stats_v2 as a
+        join players_v2 as b on b.id = a.player_id
+        where a.points > 0
+          and a.season_type = $1
+        group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.position
+        order by points DESC`, [seasonType]);
+            return this.convertStats(result, true);
+        });
     }
+    // Results only change when stats are loaded, so share them between requests
+    cached(key, load) {
+        const hit = this.cache.get(key);
+        if (hit && hit.expires > Date.now()) {
+            return hit.data;
+        }
+        const data = load().catch((err) => {
+            this.cache.delete(key); // don't cache failures
+            throw err;
+        });
+        this.cache.set(key, { expires: Date.now() + CACHE_TTL_MS, data });
+        return data;
+    }
+    // One query for all teams instead of one per row
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
+        const teamNames = [
+            ...new Set(array.map((item) => item.team_name).filter(Boolean)),
+        ];
+        const teams = teamNames.length
+            ? await this.teamInfoRepo.find({
+                select: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    nickname: true,
+                    shortname: true,
+                },
+                where: { shortname: (0, typeorm_2.In)(teamNames) },
+            })
+            : [];
+        const teamByName = new Map();
+        for (const { shortname, ...team } of teams) {
+            if (!teamByName.has(shortname))
+                teamByName.set(shortname, team);
+        }
+        return array.map((item) => ({
             ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
+            teamInfo: teamByName.get(item.team_name) ?? null,
+        }));
     }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    async convertStats(array, raw) {
-        return await Promise.all(array.map((stat) => ({
+    convertStats(array, raw) {
+        return array.map((stat) => ({
             playing_year: stat.playing_year,
             season_type: stat.season_type,
             teamInfo: !raw ? stat['teamInfo'] : null,
@@ -7916,7 +7937,7 @@ let ApiPlayerAllTimeStatsService = class ApiPlayerAllTimeStatsService {
                 ? Number(stat.hit_per_game)
                 : Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
             blocked_shots: Number(stat.blocked_shots),
-        })));
+        }));
     }
 };
 exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService;
@@ -7997,21 +8018,21 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
       b.isgoalie as isgoalie,
       b.nhl_id as nhl_id,
       a.player_id as player_id,
-      a.season_type as season_type,
+      a.season_type as season_type, 
       a.team_name as team_name,
-      sum(a.games_played) as games_played,
-      sum(a.goals) as goals,
-      sum(a.assists) as assists,
-      sum(a.points) as points,
-      sum(a.plus_minus) as plus_minus,
-      sum(a.penalty_minutes) as penalty_minutes,
-      sum(a.sh_goals) as sh_goals,
-      sum(a.pp_goals) as pp_goals,
-      sum(a.gw_goals) as gw_goals,
-      sum(a.gt_goals) as gt_goals,
-      sum(a.shots) as shots,
-      sum(a.minutes_played) as minutes_played,
-      sum(a.hits) as hits,
+      sum(a.games_played) as games_played, 
+      sum(a.goals) as goals, 
+      sum(a.assists) as assists, 
+      sum(a.points) as points, 
+      sum(a.plus_minus) as plus_minus, 
+      sum(a.penalty_minutes) as penalty_minutes, 
+      sum(a.sh_goals) as sh_goals, 
+      sum(a.pp_goals) as pp_goals, 
+      sum(a.gw_goals) as gw_goals, 
+      sum(a.gt_goals) as gt_goals, 
+      sum(a.shots) as shots, 
+      sum(a.minutes_played) as minutes_played, 
+      sum(a.hits) as hits, 
       sum(a.blocked_shots) as blocked_shots
       from
       players_stats_v2 as a
@@ -9539,27 +9560,27 @@ let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
     async getAllTimeTeamStatsSummedBySeasonByType(seasonType) {
         const result = await this.dataSource.query(` select
       a.team_id as team_id,
-      a.season_type as season_type,
-      c.city as city,
+      a.season_type as season_type, 
+      c.city as city, 
       c.nickname as nickname,
       c.shortname,
       c.teamlogo,
       c.isactive,
-      sum(games_played) as games_played,
-      sum(wins) as wins,
-      sum(loss) as loss,
-      sum(ties) as ties,
-      sum(points) as points,
-      sum(goals_for) as goals_for,
-      sum(goals_against) as goals_against,
-      sum(pp_attempts) as pp_attempts,
-      sum(pp_goals) as pp_goals,
-      sum(pk_attempts) as pk_attempts,
-      sum(pk_goals) as pk_goals,
-      sum(sh_goals) as sh_goals,
-      sum(penalty_minutes) as penalty_minutes,
-      sum(shots_for) as shots_for,
-      sum(shots_against) as shots_against,
+      sum(games_played) as games_played, 
+      sum(wins) as wins, 
+      sum(loss) as loss, 
+      sum(ties) as ties, 
+      sum(points) as points, 
+      sum(goals_for) as goals_for, 
+      sum(goals_against) as goals_against, 
+      sum(pp_attempts) as pp_attempts, 
+      sum(pp_goals) as pp_goals, 
+      sum(pk_attempts) as pk_attempts, 
+      sum(pk_goals) as pk_goals, 
+      sum(sh_goals) as sh_goals, 
+      sum(penalty_minutes) as penalty_minutes, 
+      sum(shots_for) as shots_for, 
+      sum(shots_against) as shots_against, 
       sum(shut_outs) as shut_outs,
       sum(face_off_won) as face_off_won,
       sum(face_off_lost) as face_off_lost,
@@ -11838,7 +11859,7 @@ exports.AppService = AppService = tslib_1.__decorate([
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -11852,14 +11873,14 @@ exports.AppService = AppService = tslib_1.__decorate([
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.

@@ -244,6 +244,15 @@ export class ApiNhlService {
 
     const stringIds = ids.map(String);
 
+    console.log(
+      'lookup',
+      type,
+      idField,
+      season,
+      stringIds.slice(0, 5),
+      stringIds.length
+    );
+
     // Query 1: every player's team name in one go
     const stats = await repo.find({
       select: {
