@@ -5856,7 +5856,7 @@ let ApiNhlService = class ApiNhlService {
         const t = Date.now();
         return this.httpService
             .get(`${this.nhlComLeaders}/${playerType}s/${statType}?cayenneExp=season=${season}%20and%20gameType=2`, { timeout: 8000 })
-            .pipe((0, rxjs_1.tap)(() => console.log(`NHL API: ${Date.now() - t}ms`)), (0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')), (0, rxjs_1.tap)(() => console.log(`Total incl. DB: ${Date.now() - t}ms`)));
+            .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => this.setChaTeamInfo(response.data, season, 'p')));
     }
     getNhlGoalieLeaders(playerType, statType, season, minGames) {
         const leaders = this.httpService
@@ -5899,20 +5899,19 @@ let ApiNhlService = class ApiNhlService {
     async setChaTeamInfoForSportsnet(statObject, season) {
         const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
         const { skaters, goalies } = statObject.player_stats;
-        console.log(Object.keys(skaters[0]), skaters[0]);
         const [skaterTeams, goalieTeams] = await Promise.all([
-            this.getChaTeamsByPlayerIds(skaters.map((s) => s.player_id), newSeasonString, 'p', 'sportsnet_id'),
-            this.getChaTeamsByPlayerIds(goalies.map((g) => g.player_id), newSeasonString, 'g', 'sportsnet_id'),
+            this.getChaTeamsByPlayerIds(skaters.map((s) => s.id), newSeasonString, 'p', 'sportsnet_id'),
+            this.getChaTeamsByPlayerIds(goalies.map((g) => g.id), newSeasonString, 'g', 'sportsnet_id'),
         ]);
         return {
             player_stats: {
                 skaters: skaters.map((s) => ({
                     ...s,
-                    chaPlayerTeam: skaterTeams.get(String(s.player_id)) ?? [],
+                    chaPlayerTeam: skaterTeams.get(String(s.id)) ?? [],
                 })),
                 goalies: goalies.map((g) => ({
                     ...g,
-                    chaPlayerTeam: goalieTeams.get(String(g.player_id)) ?? [],
+                    chaPlayerTeam: goalieTeams.get(String(g.id)) ?? [],
                 })),
             },
         };
@@ -5936,7 +5935,6 @@ let ApiNhlService = class ApiNhlService {
     async getChaTeamsByPlayerIds(ids, season, type, idField = 'nhl_id') {
         const repo = (type === 'p' ? this.playerStatsRepo : this.goalieStatsRepo);
         const stringIds = ids.map(String);
-        console.log('lookup', type, idField, season, stringIds.slice(0, 5), stringIds.length);
         // Query 1: every player's team name in one go
         const stats = await repo.find({
             select: {
@@ -5951,7 +5949,6 @@ let ApiNhlService = class ApiNhlService {
                 season_type: 'Regular',
             },
         });
-        console.log(type, idField, stats.length, stats[0]?.player_id);
         const teamNameById = new Map(stats.map((s) => [String(s.player_id[idField]), s.team_name]));
         // Query 2: every distinct team in one go ('FA' for players with no row)
         const shortnames = [...new Set([...teamNameById.values(), 'FA'])];
