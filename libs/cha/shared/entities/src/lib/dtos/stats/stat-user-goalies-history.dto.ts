@@ -12,7 +12,7 @@ export interface StatUserGoaliesHistoryDto {
   teamcolor: string;
   teamtextcolor: string;
   divisions_id: {
-    id: 5;
+    id: string;
     divisionname: string;
     conference_id: number;
     isactive: boolean;
