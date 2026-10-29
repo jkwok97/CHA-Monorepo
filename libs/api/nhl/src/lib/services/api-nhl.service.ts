@@ -104,7 +104,7 @@ export class ApiNhlService {
   ): Observable<{ player_stats: { skaters: any[]; goalies: any[] } }> {
     return this.httpService
       .get(
-        `${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`
+        `${this.sportsNet}?league=nhl&season_year=${season}&season_type=${seasonType}`
       )
       .pipe(
         map((response) => response.data),

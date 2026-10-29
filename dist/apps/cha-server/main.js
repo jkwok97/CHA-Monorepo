@@ -5878,7 +5878,7 @@ let ApiNhlService = class ApiNhlService {
     }
     getNhlSummaryFromSportsnet(season, seasonType) {
         return this.httpService
-            .get(`${this.sportsNet}?league=nhl&season=${season}&season_type=${seasonType}`)
+            .get(`${this.sportsNet}?league=nhl&season_year=${season}&season_type=${seasonType}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => {
             console.log('response from sportsnet', response);
             return this.setChaTeamInfoForSportsnet(response.data, season);
