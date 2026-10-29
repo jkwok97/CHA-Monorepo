@@ -37,12 +37,8 @@ export class ApiNhlService {
         { timeout: 8000 }
       )
       .pipe(
-        tap(() => console.log(`NHL API: ${Date.now() - t}ms`)),
         map((response) => response.data),
-        switchMap((response) =>
-          this.setChaTeamInfo(response.data, season, 'p')
-        ),
-        tap(() => console.log(`Total incl. DB: ${Date.now() - t}ms`))
+        switchMap((response) => this.setChaTeamInfo(response.data, season, 'p'))
       );
   }
 
@@ -170,13 +166,13 @@ export class ApiNhlService {
 
     const [skaterTeams, goalieTeams] = await Promise.all([
       this.getChaTeamsByPlayerIds(
-        skaters.map((s) => s.player_id),
+        skaters.map((s) => s.id),
         newSeasonString,
         'p',
         'sportsnet_id'
       ),
       this.getChaTeamsByPlayerIds(
-        goalies.map((g) => g.player_id),
+        goalies.map((g) => g.id),
         newSeasonString,
         'g',
         'sportsnet_id'
@@ -187,11 +183,11 @@ export class ApiNhlService {
       player_stats: {
         skaters: skaters.map((s) => ({
           ...s,
-          chaPlayerTeam: skaterTeams.get(String(s.player_id)) ?? [],
+          chaPlayerTeam: skaterTeams.get(String(s.id)) ?? [],
         })),
         goalies: goalies.map((g) => ({
           ...g,
-          chaPlayerTeam: goalieTeams.get(String(g.player_id)) ?? [],
+          chaPlayerTeam: goalieTeams.get(String(g.id)) ?? [],
         })),
       },
     };
@@ -246,15 +242,6 @@ export class ApiNhlService {
 
     const stringIds = ids.map(String);
 
-    console.log(
-      'lookup',
-      type,
-      idField,
-      season,
-      stringIds.slice(0, 5),
-      stringIds.length
-    );
-
     // Query 1: every player's team name in one go
     const stats = await repo.find({
       select: {
@@ -269,8 +256,6 @@ export class ApiNhlService {
         season_type: 'Regular',
       } as any,
     });
-
-    console.log(type, idField, stats.length, stats[0]?.player_id);
 
     const teamNameById = new Map(
       stats.map((s: any) => [String(s.player_id[idField]), s.team_name])
