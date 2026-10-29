@@ -5896,97 +5896,61 @@ let ApiNhlService = class ApiNhlService {
             s.leagueAbbrev.default === 'NHL')));
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
-        const string1 = season.slice(2, 4);
-        const newSeasonString = `${season}-${Number(string1) + 1}`;
-        return (statObject = {
+        const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
+        const { skaters, goalies } = statObject.player_stats;
+        const [skaterTeams, goalieTeams] = await Promise.all([
+            this.getChaTeamsByPlayerIds(skaters.map((s) => s.player_id), newSeasonString, 'p', 'sportsnet_id'),
+            this.getChaTeamsByPlayerIds(goalies.map((g) => g.player_id), newSeasonString, 'g', 'sportsnet_id'),
+        ]);
+        return {
             player_stats: {
-                skaters: await Promise.all(statObject.player_stats.skaters.map(async (skater) => ({
-                    ...skater,
-                    chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'p'),
-                }))),
-                goalies: await Promise.all(statObject.player_stats.goalies.map(async (skater) => ({
-                    ...skater,
-                    chaPlayerTeam: await this.getChaTeamSportsnet(skater.player_id, newSeasonString, 'g'),
-                }))),
+                skaters: skaters.map((s) => ({
+                    ...s,
+                    chaPlayerTeam: skaterTeams.get(String(s.player_id)) ?? [],
+                })),
+                goalies: goalies.map((g) => ({
+                    ...g,
+                    chaPlayerTeam: goalieTeams.get(String(g.player_id)) ?? [],
+                })),
             },
-        });
+        };
     }
-    // private async setChaTeamInfo(
-    //   array: any[],
-    //   season: string,
-    //   type: string
-    // ): Promise<any[]> {
-    //   const string1 = season.slice(0, 4);
-    //   const string2 = season.slice(6, 8);
-    //
-    //   const newSeasonString = `${string1}-${string2}`;
-    //
-    //   return await Promise.all(
-    //     array.map(async (item) => ({
-    //       ...item,
-    //       chaPlayerTeam: await this.getChaTeam(
-    //         item.player.id,
-    //         newSeasonString,
-    //         type
-    //       ),
-    //     }))
-    //   );
-    // }
     async setChaTeamInfoRookies(array, season) {
         const newSeasonString = `${season.slice(0, 4)}-${season.slice(6, 8)}`;
-        const teamsByNhlId = await this.getChaTeamsByNhlIds(array.map((item) => item.playerId), newSeasonString, 'p');
+        const teamsByNhlId = await this.getChaTeamsByPlayerIds(array.map((item) => item.playerId), newSeasonString, 'p');
         return array.map((item) => ({
             ...item,
             chaPlayerTeam: teamsByNhlId.get(String(item.playerId)) ?? [],
         }));
     }
-    // private async setChaTeamInfoRookies(
-    //   array: any[],
-    //   season: string
-    // ): Promise<any[]> {
-    //   const string1 = season.slice(0, 4);
-    //   const string2 = season.slice(6, 8);
-    //
-    //   const newSeasonString = `${string1}-${string2}`;
-    //
-    //   return await Promise.all(
-    //     array.map(async (item) => ({
-    //       ...item,
-    //       chaPlayerTeam: await this.getChaTeam(
-    //         item.playerId,
-    //         newSeasonString,
-    //         'p'
-    //       ),
-    //     }))
-    //   );
-    // }
     async setChaTeamInfo(array, season, type) {
         const newSeasonString = `${season.slice(0, 4)}-${season.slice(6, 8)}`;
-        const teamsByNhlId = await this.getChaTeamsByNhlIds(array.map((item) => item.player.id), newSeasonString, type);
+        const teamsByNhlId = await this.getChaTeamsByPlayerIds(array.map((item) => item.player.id), newSeasonString, type);
         return array.map((item) => ({
             ...item,
             chaPlayerTeam: teamsByNhlId.get(String(item.player.id)) ?? [],
         }));
     }
-    async getChaTeamsByNhlIds(nhlIds, season, type) {
+    async getChaTeamsByPlayerIds(ids, season, type, idField = 'nhl_id') {
         const repo = (type === 'p' ? this.playerStatsRepo : this.goalieStatsRepo);
+        const stringIds = ids.map(String);
         // Query 1: every player's team name in one go
         const stats = await repo.find({
             select: {
                 id: true,
                 team_name: true,
-                player_id: { id: true, nhl_id: true },
+                player_id: { id: true, [idField]: true },
             },
             relations: { player_id: true },
             where: {
-                player_id: { nhl_id: (0, typeorm_2.In)(nhlIds.map(String)) },
+                player_id: { [idField]: (0, typeorm_2.In)(stringIds) },
                 playing_year: season,
                 season_type: 'Regular',
             },
         });
-        const teamNameByNhlId = new Map(stats.map((s) => [s.player_id.nhl_id, s.team_name]));
+        const teamNameById = new Map(stats.map((s) => [s.player_id[idField], s.team_name]));
         // Query 2: every distinct team in one go ('FA' for players with no row)
-        const shortnames = [...new Set([...teamNameByNhlId.values(), 'FA'])];
+        const shortnames = [...new Set([...teamNameById.values(), 'FA'])];
         const teams = await this.teamsRepo.find({
             select: {
                 id: true,
@@ -6006,108 +5970,10 @@ let ApiNhlService = class ApiNhlService {
         }
         // Same output as before: an array of team rows per player
         const result = new Map();
-        for (const id of nhlIds.map(String)) {
-            const teamName = teamNameByNhlId.get(id) ?? 'FA';
-            result.set(id, teamsByShortname.get(teamName) ?? []);
+        for (const id of stringIds) {
+            result.set(id, teamsByShortname.get(teamNameById.get(id) ?? 'FA') ?? []);
         }
         return result;
-    }
-    async getChaTeam(id, season, type) {
-        let playerStatTeam;
-        if (type === 'p') {
-            playerStatTeam = await this.playerStatsRepo.findOne({
-                select: {
-                    id: true,
-                    player_id: {
-                        id: true,
-                        nhl_id: true,
-                    },
-                    team_name: true,
-                },
-                where: {
-                    player_id: {
-                        nhl_id: id.toString(),
-                    },
-                    playing_year: season,
-                    season_type: 'Regular',
-                },
-            });
-        }
-        else {
-            playerStatTeam = await this.goalieStatsRepo.findOne({
-                select: {
-                    id: true,
-                    player_id: {
-                        id: true,
-                        nhl_id: true,
-                    },
-                    team_name: true,
-                },
-                where: {
-                    player_id: {
-                        nhl_id: id.toString(),
-                    },
-                    playing_year: season,
-                    season_type: 'Regular',
-                },
-            });
-        }
-        return await this.getChaTeamInfo(playerStatTeam);
-    }
-    async getChaTeamSportsnet(id, season, type) {
-        let playerStatTeam;
-        if (type === 'p') {
-            playerStatTeam = await this.playerStatsRepo.findOne({
-                select: {
-                    id: true,
-                    player_id: {
-                        id: true,
-                        sportsnet_id: true,
-                    },
-                    team_name: true,
-                },
-                where: {
-                    player_id: {
-                        sportsnet_id: id.toString(),
-                    },
-                    playing_year: season,
-                    season_type: 'Regular',
-                },
-            });
-        }
-        else {
-            playerStatTeam = await this.goalieStatsRepo.findOne({
-                select: {
-                    id: true,
-                    player_id: {
-                        id: true,
-                        sportsnet_id: true,
-                    },
-                    team_name: true,
-                },
-                where: {
-                    player_id: {
-                        sportsnet_id: id.toString(),
-                    },
-                    playing_year: season,
-                    season_type: 'Regular',
-                },
-            });
-        }
-        return await this.getChaTeamInfo(playerStatTeam);
-    }
-    async getChaTeamInfo(playerStatTeam) {
-        return this.teamsRepo.find({
-            select: {
-                id: true,
-                teamlogo: true,
-                city: true,
-                nickname: true,
-            },
-            where: {
-                shortname: playerStatTeam ? playerStatTeam.team_name : 'FA',
-            },
-        });
     }
 };
 exports.ApiNhlService = ApiNhlService;
