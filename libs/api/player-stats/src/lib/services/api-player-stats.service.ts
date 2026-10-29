@@ -2,15 +2,48 @@ import { Players_Stats_V2, Teams_V2 } from '@api/entities';
 import { StatPlayerAllDto } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, In, Repository } from 'typeorm';
+
+const COMMON_PLAYER_STATS_SELECT = {
+  id: true,
+  team_name: true,
+  position: true,
+  games_played: true,
+  goals: true,
+  assists: true,
+  points: true,
+  plus_minus: true,
+  penalty_minutes: true,
+  pp_goals: true,
+  sh_goals: true,
+  gw_goals: true,
+  gt_goals: true,
+  shots: true,
+  shooting_pct: true,
+  minutes_played: true,
+  minutes_per_game: true,
+  fo_pct: true,
+  pass_pct: true,
+  corner_pct: true,
+  hits: true,
+  blocked_shots: true,
+  player_id: {
+    id: true,
+    firstname: true,
+    lastname: true,
+    nhl_id: true,
+    isdefense: true,
+    isforward: true,
+  },
+} as const;
 
 @Injectable()
 export class ApiPlayerStatsService {
   constructor(
     @InjectRepository(Players_Stats_V2)
-    private repo: Repository<Players_Stats_V2>,
+    private readonly repo: Repository<Players_Stats_V2>,
     @InjectRepository(Teams_V2)
-    private teamInfoRepo: Repository<Teams_V2>
+    private readonly teamInfoRepo: Repository<Teams_V2>
   ) {}
 
   async getAll(season: string): Promise<StatPlayerAllDto[]> {
@@ -20,19 +53,18 @@ export class ApiPlayerStatsService {
       },
     });
 
-    const playersWithTeamInfo = this.setTeamInfo(players);
-
-    return playersWithTeamInfo;
+    const playersWithTeamInfo = await this.attachTeamInfo(players);
+    return playersWithTeamInfo as unknown as StatPlayerAllDto[];
   }
 
   async updatePlayerById(
     id: number,
     season: string,
     attrs: Partial<Players_Stats_V2>
-  ) {
-    const player = await this.repo.findOneByOrFail({
+  ): Promise<Players_Stats_V2> {
+    const player = await this.repo.findOneBy({
       player_id: {
-        id: id,
+        id,
       },
       playing_year: season,
     });
@@ -42,12 +74,11 @@ export class ApiPlayerStatsService {
     }
 
     Object.assign(player, attrs);
-
     return this.repo.save(player);
   }
 
   async deletePlayer(id: number, season: string): Promise<Players_Stats_V2> {
-    const player = await this.repo.findOneByOrFail({
+    const player = await this.repo.findOneBy({
       id,
       playing_year: season,
     });
@@ -55,170 +86,105 @@ export class ApiPlayerStatsService {
     if (!player) {
       throw new NotFoundException('player not found');
     }
+
     return this.repo.remove(player);
   }
 
-  async getAllStats(season: string, seasonType: 'Regular' | 'Playoffs') {
-    const allStats = await this.repo.find({
-      select: {
-        id: true,
-        team_name: true,
-        position: true,
-        games_played: true,
-        goals: true,
-        assists: true,
-        points: true,
-        plus_minus: true,
-        penalty_minutes: true,
-        pp_goals: true,
-        sh_goals: true,
-        gw_goals: true,
-        gt_goals: true,
-        shots: true,
-        shooting_pct: true,
-        minutes_played: true,
-        minutes_per_game: true,
-        fo_pct: true,
-        pass_pct: true,
-        corner_pct: true,
-        hits: true,
-        blocked_shots: true,
-        player_id: {
-          id: true,
-          firstname: true,
-          lastname: true,
-          nhl_id: true,
-          isdefense: true,
-          isforward: true,
-        },
-      },
-      relations: ['player_id'],
-      where: {
-        playing_year: season,
-        season_type: seasonType,
-      },
-      order: {
-        points: 'DESC',
-      },
+  async getAllStats(
+    season: string,
+    seasonType: 'Regular' | 'Playoffs'
+  ): Promise<StatPlayerAllDto[]> {
+    return this.fetchAndFormatPlayerStats({
+      playing_year: season,
+      season_type: seasonType,
     });
-
-    const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-
-    const allStatsWithTeamInfoConverted = await this.convertStats(
-      allStatsWithTeamInfo
-    );
-
-    return allStatsWithTeamInfoConverted;
   }
 
   async getPlayerStatsByPlayerId(
     season: string,
     seasonType: 'Regular' | 'Playoffs',
     playerId: number
-  ) {
+  ): Promise<StatPlayerAllDto[]> {
+    return this.fetchAndFormatPlayerStats({
+      playing_year: season,
+      season_type: seasonType,
+      player_id: {
+        id: playerId,
+      },
+    });
+  }
+
+  private async fetchAndFormatPlayerStats(
+    whereClause: FindOptionsWhere<Players_Stats_V2>
+  ): Promise<StatPlayerAllDto[]> {
     const allStats = await this.repo.find({
-      select: {
-        id: true,
-        team_name: true,
-        position: true,
-        games_played: true,
-        goals: true,
-        assists: true,
-        points: true,
-        plus_minus: true,
-        penalty_minutes: true,
-        pp_goals: true,
-        sh_goals: true,
-        gw_goals: true,
-        gt_goals: true,
-        shots: true,
-        shooting_pct: true,
-        minutes_played: true,
-        minutes_per_game: true,
-        fo_pct: true,
-        pass_pct: true,
-        corner_pct: true,
-        hits: true,
-        blocked_shots: true,
-        player_id: {
-          id: true,
-          firstname: true,
-          lastname: true,
-          nhl_id: true,
-          isdefense: true,
-          isforward: true,
-        },
+      select: COMMON_PLAYER_STATS_SELECT,
+      relations: {
+        player_id: true,
       },
-      relations: ['player_id'],
-      where: {
-        playing_year: season,
-        season_type: seasonType,
-        player_id: {
-          id: playerId,
-        },
-      },
+      where: whereClause,
       order: {
         points: 'DESC',
       },
     });
 
-    const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
+    if (allStats.length === 0) {
+      return [];
+    }
 
-    const allStatsWithTeamInfoConverted = await this.convertStats(
-      allStatsWithTeamInfo
-    );
+    const allStatsWithTeamInfo = await this.attachTeamInfo(allStats);
 
-    return allStatsWithTeamInfoConverted;
+    return allStatsWithTeamInfo.map((stat) => ({
+      ...stat,
+      games_played: Number(stat.games_played),
+      goals: Number(stat.goals),
+      assists: Number(stat.assists),
+      points: Number(stat.points),
+      plus_minus: Number(stat.plus_minus),
+      penalty_minutes: Number(stat.penalty_minutes),
+      pp_goals: Number(stat.pp_goals),
+      sh_goals: Number(stat.sh_goals),
+      gw_goals: Number(stat.gw_goals),
+      gt_goals: Number(stat.gt_goals),
+      shots: Number(stat.shots),
+      shooting_pct: Number(stat.shooting_pct),
+      minutes_played: Number(stat.minutes_played),
+      minutes_per_game: Number(stat.minutes_per_game),
+      fo_pct: Number(stat.fo_pct),
+      pass_pct: Number(stat.pass_pct),
+      corner_pct: Number(stat.corner_pct),
+      hits: Number(stat.hits),
+      blocked_shots: Number(stat.blocked_shots),
+    })) as unknown as StatPlayerAllDto[];
   }
 
-  private async setTeamInfo(array: Players_Stats_V2[]) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        teamInfo: await this.getTeamInfo(item.team_name),
-      }))
+  private async attachTeamInfo<T extends { team_name: string }>(
+    items: T[]
+  ): Promise<(T & { teamInfo: Teams_V2 | null })[]> {
+    const uniqueTeamNames = Array.from(
+      new Set(items.map((item) => item.team_name).filter(Boolean))
     );
-  }
 
-  private async getTeamInfo(teamName: string) {
-    return await this.teamInfoRepo.findOne({
-      select: {
-        id: true,
-        city: true,
-        teamlogo: true,
-        nickname: true,
-        shortname: true,
-      },
-      where: {
-        shortname: teamName,
-      },
-    });
-  }
+    const teams = uniqueTeamNames.length
+      ? await this.teamInfoRepo.find({
+          select: {
+            id: true,
+            city: true,
+            teamlogo: true,
+            nickname: true,
+            shortname: true,
+          },
+          where: {
+            shortname: In(uniqueTeamNames),
+          },
+        })
+      : [];
 
-  private async convertStats(array: Players_Stats_V2[]) {
-    return await Promise.all(
-      array.map((stat: Players_Stats_V2) => ({
-        ...stat,
-        games_played: Number(stat.games_played),
-        goals: Number(stat.goals),
-        assists: Number(stat.assists),
-        points: Number(stat.points),
-        plus_minus: Number(stat.plus_minus),
-        penalty_minutes: Number(stat.penalty_minutes),
-        pp_goals: Number(stat.pp_goals),
-        sh_goals: Number(stat.sh_goals),
-        gw_goals: Number(stat.gw_goals),
-        gt_goals: Number(stat.gt_goals),
-        shots: Number(stat.shots),
-        shooting_pct: Number(stat.shooting_pct),
-        minutes_played: Number(stat.minutes_played),
-        minutes_per_game: Number(stat.minutes_per_game),
-        fo_pct: Number(stat.fo_pct),
-        pass_pct: Number(stat.pass_pct),
-        corner_pct: Number(stat.corner_pct),
-        hits: Number(stat.hits),
-        blocked_shots: Number(stat.blocked_shots),
-      }))
-    );
+    const teamMap = new Map(teams.map((team) => [team.shortname, team]));
+
+    return items.map((item) => ({
+      ...item,
+      teamInfo: teamMap.get(item.team_name) ?? null,
+    }));
   }
 }
