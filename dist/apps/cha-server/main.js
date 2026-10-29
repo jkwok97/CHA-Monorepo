@@ -5899,6 +5899,7 @@ let ApiNhlService = class ApiNhlService {
     async setChaTeamInfoForSportsnet(statObject, season) {
         const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
         const { skaters, goalies } = statObject.player_stats;
+        console.log(Object.keys(skaters[0]), skaters[0]);
         const [skaterTeams, goalieTeams] = await Promise.all([
             this.getChaTeamsByPlayerIds(skaters.map((s) => s.id), newSeasonString, 'p', 'sportsnet_id'),
             this.getChaTeamsByPlayerIds(goalies.map((g) => g.id), newSeasonString, 'g', 'sportsnet_id'),

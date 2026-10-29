@@ -162,6 +162,8 @@ export class ApiNhlService {
     const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
     const { skaters, goalies } = statObject.player_stats;
 
+    console.log(Object.keys(skaters[0]), skaters[0]);
+
     const [skaterTeams, goalieTeams] = await Promise.all([
       this.getChaTeamsByPlayerIds(
         skaters.map((s) => s.id),
