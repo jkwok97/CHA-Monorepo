@@ -79,7 +79,7 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.filterInput.nativeElement.value = '26';
+    this.filterInput.nativeElement.value = '27';
 
     this.applyFilterGlobal(
       { target: { value: this.filterInput.nativeElement.value } },
