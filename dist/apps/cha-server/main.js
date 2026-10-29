@@ -5880,7 +5880,6 @@ let ApiNhlService = class ApiNhlService {
         return this.httpService
             .get(`${this.sportsNet}?league=nhl&season_year=${season}&season_type=${seasonType}`)
             .pipe((0, rxjs_1.map)((response) => response.data), (0, rxjs_1.switchMap)((response) => {
-            console.log('response from sportsnet', response);
             return this.setChaTeamInfoForSportsnet(response.data, season);
         }));
     }
@@ -5898,7 +5897,6 @@ let ApiNhlService = class ApiNhlService {
             s.leagueAbbrev.default === 'NHL')));
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
-        console.log('setChaTeamInfoForSportsnet', statObject, season);
         const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
         const { skaters, goalies } = statObject.player_stats;
         const [skaterTeams, goalieTeams] = await Promise.all([
@@ -5951,7 +5949,8 @@ let ApiNhlService = class ApiNhlService {
                 season_type: 'Regular',
             },
         });
-        const teamNameById = new Map(stats.map((s) => [s.player_id[idField], s.team_name]));
+        console.log(type, idField, stats.length, stats[0]?.player_id);
+        const teamNameById = new Map(stats.map((s) => [String(s.player_id[idField]), s.team_name]));
         // Query 2: every distinct team in one go ('FA' for players with no row)
         const shortnames = [...new Set([...teamNameById.values(), 'FA'])];
         const teams = await this.teamsRepo.find({
@@ -8372,6 +8371,22 @@ const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
 const axios_1 = __webpack_require__(169);
 const rxjs_1 = __webpack_require__(174);
+const NHL_CONCURRENCY = 10;
+const NHL_TIMEOUT_MS = 8000;
+const NHL_CACHE_TTL_MS = 10 * 60 * 1000;
+/** Runs `fn` over `items` with at most `limit` in flight; keeps input order. */
+async function mapWithConcurrency(items, limit, fn) {
+    const results = new Array(items.length);
+    let next = 0;
+    const worker = async () => {
+        while (next < items.length) {
+            const i = next++;
+            results[i] = await fn(items[i]);
+        }
+    };
+    await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+    return results;
+}
 let ApiSalariesService = class ApiSalariesService {
     constructor(repo, teamsRepo, playersRepo, playersStatsRepo, playerRatingsRepo, goaliesStatsRepo, goalieRatingsRepo, httpService) {
         this.repo = repo;
@@ -8384,6 +8399,7 @@ let ApiSalariesService = class ApiSalariesService {
         this.httpService = httpService;
         this.nhlAPI = 'https://api-web.nhle.com/v2/player';
         this.nhlMugshotAPI = 'https://assets.nhle.com/mugs/nhl/latest';
+        this.nhlSeasonTotalsCache = new Map();
     }
     async getAllPlayerSalaries(season, ratingSeason) {
         const allPlayersInSeason = await this.playersStatsRepo.find({
@@ -8405,8 +8421,7 @@ let ApiSalariesService = class ApiSalariesService {
         });
         const allSalariesForPlayersInSeason = await this.setPlayersSalaries(allPlayersInSeason);
         const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(allSalariesForPlayersInSeason, ratingSeason);
-        const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo = await this.setTeamInfo(allSalariesAndRatingsForPlayersInSeason);
-        return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
+        return this.setTeamInfo(allSalariesAndRatingsForPlayersInSeason);
     }
     async getAllGoaliesSalaries(season, ratingSeason) {
         const allGoaliesInSeason = await this.goaliesStatsRepo.find({
@@ -8427,8 +8442,7 @@ let ApiSalariesService = class ApiSalariesService {
         });
         const allSalariesForGoaliesInSeason = await this.setPlayersSalaries(allGoaliesInSeason);
         const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(allSalariesForGoaliesInSeason, ratingSeason);
-        const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo = await this.setTeamInfo(allSalariesAndRatingsForGoaliesInSeason);
-        return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
+        return this.setTeamInfo(allSalariesAndRatingsForGoaliesInSeason);
     }
     async getUserTeamPlayerSalaries(teamName, season, ratingsSeason) {
         const allPlayersInSeason = await this.playersStatsRepo.find({
@@ -8437,6 +8451,7 @@ let ApiSalariesService = class ApiSalariesService {
                 team_name: true,
                 player_id: {
                     id: true,
+                    nhl_id: true, // needed by setNHLStats
                 },
             },
             where: {
@@ -8451,8 +8466,7 @@ let ApiSalariesService = class ApiSalariesService {
         const allSalariesForPlayersInSeason = await this.setPlayersSalaries(allPlayersInSeason);
         const allSalariesAndRatingsForPlayersInSeason = await this.setPlayerRating(allSalariesForPlayersInSeason, ratingsSeason);
         const allSalariesRatingsNHLStatsForPlayersInSeason = await this.setNHLStats(allSalariesAndRatingsForPlayersInSeason);
-        const allSalariesAndRatingsForPlayersInSeasonWithTeamInfo = await this.setTeamInfo(allSalariesRatingsNHLStatsForPlayersInSeason);
-        return allSalariesAndRatingsForPlayersInSeasonWithTeamInfo;
+        return this.setTeamInfo(allSalariesRatingsNHLStatsForPlayersInSeason);
     }
     async getUserTeamGoaliesSalaries(teamName, season, ratingsSeason) {
         const allGoaliesInSeason = await this.goaliesStatsRepo.find({
@@ -8461,6 +8475,7 @@ let ApiSalariesService = class ApiSalariesService {
                 team_name: true,
                 player_id: {
                     id: true,
+                    nhl_id: true, // needed by setNHLStats
                 },
             },
             where: {
@@ -8475,18 +8490,14 @@ let ApiSalariesService = class ApiSalariesService {
         const allSalariesForGoaliesInSeason = await this.setPlayersSalaries(allGoaliesInSeason);
         const allSalariesAndRatingsForGoaliesInSeason = await this.setGoalieRating(allSalariesForGoaliesInSeason, ratingsSeason);
         const allSalariesRatingsNHLStatsForPlayersInSeason = await this.setNHLStats(allSalariesAndRatingsForGoaliesInSeason);
-        const allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo = await this.setTeamInfo(allSalariesRatingsNHLStatsForPlayersInSeason);
-        return allSalariesAndRatingsForGoaliesInSeasonWithTeamInfo;
+        return this.setTeamInfo(allSalariesRatingsNHLStatsForPlayersInSeason);
     }
+    // One query for all salaries instead of one per player
     async setPlayersSalaries(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            salaries: await this.getSalary(item.player_id.id),
-        })));
-    }
-    async getSalary(playerId) {
+        if (!array.length)
+            return array;
         // TODO UPDATE EVERY SEASON
-        return await this.repo.findOne({
+        const salaries = await this.repo.find({
             select: {
                 id: true,
                 player_id: true,
@@ -8496,145 +8507,184 @@ let ApiSalariesService = class ApiSalariesService {
                 season_2028: true,
             },
             where: {
-                player_id: playerId.toString(),
+                player_id: (0, typeorm_2.In)(array.map((item) => String(item.player_id.id))),
             },
         });
-    }
-    async setPlayerRating(array, season) {
-        return await Promise.all(array.map(async (item) => ({
+        const salaryByPlayerId = new Map();
+        for (const salary of salaries) {
+            const key = String(salary.player_id);
+            if (!salaryByPlayerId.has(key))
+                salaryByPlayerId.set(key, salary);
+        }
+        return array.map((item) => ({
             ...item,
-            ratings: await this.getPlayerRating(item.player_id.id, season),
-        })));
+            salaries: salaryByPlayerId.get(String(item.player_id.id)) ?? null,
+        }));
     }
-    async setGoalieRating(array, season) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            ratings: await this.getGoalieRating(item.player_id.id, season),
-        })));
+    setPlayerRating(array, season) {
+        return this.setRatings(array, this.playerRatingsRepo, season, {
+            id: true,
+            c_rate: true,
+            l_rate: true,
+            r_rate: true,
+            ld_rate: true,
+            rd_rate: true,
+            skating: true,
+            speed: true,
+            passing: true,
+            shooting: true,
+            face_off: true,
+            forecheck: true,
+            assist_rating: true,
+            clear_crease: true,
+            shot_block: true,
+            pk: true,
+            physical: true,
+            rock: true,
+            intimidation: true,
+            game_fatigue: true,
+            shift_fatigue: true,
+            points: true,
+            goals: true,
+            assists: true,
+            shots: true,
+            shooting_pct: true,
+            games_played: true,
+        });
     }
-    async getGoalieRating(playerId, season) {
-        return await this.goalieRatingsRepo.findOne({
-            select: {
-                id: true,
-                passing: true,
-                speed: true,
-                skating: true,
-                wins: true,
-                goals_against_avg: true,
-                save_pct: true,
-                games_played: true,
-            },
+    setGoalieRating(array, season) {
+        return this.setRatings(array, this.goalieRatingsRepo, season, {
+            id: true,
+            passing: true,
+            speed: true,
+            skating: true,
+            wins: true,
+            goals_against_avg: true,
+            save_pct: true,
+            games_played: true,
+        });
+    }
+    // One query for all ratings instead of one per player
+    async setRatings(array, ratingsRepo, season, select) {
+        if (!array.length)
+            return array;
+        const ratings = await ratingsRepo.find({
+            // player_id is only selected so rows can be matched back to players
+            select: { ...select, player_id: true },
             where: {
-                player_id: playerId,
+                player_id: (0, typeorm_2.In)(array.map((item) => item.player_id.id)),
                 playing_year: season,
             },
         });
+        const ratingByPlayerId = new Map();
+        for (const { player_id, ...rating } of ratings) {
+            const key = String(player_id?.id ?? player_id);
+            if (!ratingByPlayerId.has(key))
+                ratingByPlayerId.set(key, rating);
+        }
+        return array.map((item) => ({
+            ...item,
+            ratings: ratingByPlayerId.get(String(item.player_id.id)) ?? null,
+        }));
     }
-    async getPlayerRating(playerId, season) {
-        return await this.playerRatingsRepo.findOne({
-            select: {
-                id: true,
-                c_rate: true,
-                l_rate: true,
-                r_rate: true,
-                ld_rate: true,
-                rd_rate: true,
-                skating: true,
-                speed: true,
-                passing: true,
-                shooting: true,
-                face_off: true,
-                forecheck: true,
-                assist_rating: true,
-                clear_crease: true,
-                shot_block: true,
-                pk: true,
-                physical: true,
-                rock: true,
-                intimidation: true,
-                game_fatigue: true,
-                shift_fatigue: true,
-                points: true,
-                goals: true,
-                assists: true,
-                shots: true,
-                shooting_pct: true,
-                games_played: true,
-            },
-            where: {
-                player_id: playerId,
-                playing_year: season,
-            },
-        });
-    }
+    // One query for all teams instead of one per row
     async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
-    }
-    async getTeamInfo(teamName) {
-        if (teamName) {
-            return await this.teamsRepo.findOne({
+        const teamNames = [
+            ...new Set(array.map((item) => item.team_name).filter(Boolean)),
+        ];
+        const teams = teamNames.length
+            ? await this.teamsRepo.find({
                 select: {
                     id: true,
                     city: true,
                     teamlogo: true,
                     nickname: true,
+                    shortname: true,
                 },
-                where: {
-                    shortname: teamName,
-                },
-            });
+                where: { shortname: (0, typeorm_2.In)(teamNames) },
+            })
+            : [];
+        const teamByName = new Map();
+        for (const { shortname, ...team } of teams) {
+            if (!teamByName.has(shortname))
+                teamByName.set(shortname, team);
         }
-        else {
-            return {};
-        }
-    }
-    async setNHLStats(array) {
-        return await Promise.all(array.map(async (item) => ({
+        return array.map((item) => ({
             ...item,
-            nhlHeadShot: await this.getNhlPlayerHeadShotByPlayerId(item.player_id.nhl_id),
-            nhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20252026'), // TODO UPDATE EVERY SEASON
-            nextNhlStats: await this.getNhlPlayerStatsByPlayerId(item.player_id.nhl_id, '20262027'), // TODO UPDATE EVERY SEASON
-        })));
+            teamInfo: item.team_name ? teamByName.get(item.team_name) ?? null : {},
+        }));
+    }
+    // One NHL request per player (cached), max NHL_CONCURRENCY at a time
+    async setNHLStats(array) {
+        return mapWithConcurrency(array, NHL_CONCURRENCY, async (item) => {
+            const nhlId = item.player_id.nhl_id;
+            const seasonTotals = await this.getNhlSeasonTotals(nhlId);
+            return {
+                ...item,
+                nhlHeadShot: await this.getNhlPlayerHeadShotByPlayerId(nhlId),
+                nhlStats: this.findNhlSeason(seasonTotals, '20252026'), // TODO UPDATE EVERY SEASON
+                nextNhlStats: this.findNhlSeason(seasonTotals, '20262027'), // TODO UPDATE EVERY SEASON
+            };
+        });
     }
     async getNhlPlayerHeadShotByPlayerId(playerId) {
         return `${this.nhlMugshotAPI}/${playerId}.png`;
     }
     async getNhlPlayerStatsByPlayerId(playerId, season) {
-        const stats = this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`);
-        const response = await (0, rxjs_1.firstValueFrom)(stats);
-        return response.data?.seasonTotals?.find((s) => s.season === Number(season) &&
+        const seasonTotals = await this.getNhlSeasonTotals(playerId);
+        return this.findNhlSeason(seasonTotals, season);
+    }
+    findNhlSeason(seasonTotals, season) {
+        return seasonTotals.find((s) => s.season === Number(season) &&
             s.gameTypeId === 2 &&
             s.leagueAbbrev.default === 'NHL');
+    }
+    // Cached per player so repeat requests and both seasons share one call
+    getNhlSeasonTotals(playerId) {
+        const key = String(playerId);
+        const cached = this.nhlSeasonTotalsCache.get(key);
+        if (cached && cached.expires > Date.now()) {
+            return cached.data;
+        }
+        const data = (0, rxjs_1.firstValueFrom)(this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`, { timeout: NHL_TIMEOUT_MS }))
+            .then((response) => response.data?.seasonTotals ?? [])
+            .catch((err) => {
+            console.error(`NHL stats failed for player ${playerId}:`, err.message);
+            this.nhlSeasonTotalsCache.delete(key); // don't cache failures
+            return [];
+        });
+        this.nhlSeasonTotalsCache.set(key, {
+            expires: Date.now() + NHL_CACHE_TTL_MS,
+            data,
+        });
+        return data;
     }
     async getAll() {
         const salaries = await this.repo.find();
         return await this.setPlayerInfo(salaries);
     }
+    // One query for all players instead of one per salary row
     async setPlayerInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            playerInfo: await this.getPlayerInfo(item.player_id),
-        })));
-    }
-    async getPlayerInfo(playerId) {
-        if (playerId) {
-            return await this.playersRepo.findOne({
+        const playerIds = [
+            ...new Set(array.map((item) => item.player_id).filter(Boolean)),
+        ];
+        const players = playerIds.length
+            ? await this.playersRepo.find({
                 select: {
                     id: true,
                     firstname: true,
                     lastname: true,
                 },
-                where: {
-                    id: playerId,
-                },
-            });
-        }
-        else {
-            return {};
-        }
+                where: { id: (0, typeorm_2.In)(playerIds.map(Number)) },
+            })
+            : [];
+        const playerById = new Map(players.map((p) => [String(p.id), p]));
+        return array.map((item) => ({
+            ...item,
+            playerInfo: item.player_id
+                ? playerById.get(String(item.player_id)) ?? null
+                : {},
+        }));
     }
     async addSalary(body) {
         const salary = await this.repo.create(body);
