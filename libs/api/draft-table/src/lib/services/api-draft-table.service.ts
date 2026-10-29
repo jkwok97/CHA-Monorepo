@@ -1,132 +1,133 @@
 import { Draft_Order_V2, Team_Stats_V2 } from '@api/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
+
+const TEAM_INFO_SELECT = {
+  team_id: {
+    id: true,
+    shortname: true,
+    city: true,
+    nickname: true,
+    teamlogo: true,
+  },
+} as const;
 
 @Injectable()
 export class ApiDraftTableService {
   constructor(
-    @InjectRepository(Draft_Order_V2) private repo: Repository<Draft_Order_V2>,
+    @InjectRepository(Draft_Order_V2)
+    private readonly repo: Repository<Draft_Order_V2>,
     @InjectRepository(Team_Stats_V2)
-    private teamStatsRepo: Repository<Team_Stats_V2>
+    private readonly teamStatsRepo: Repository<Team_Stats_V2>
   ) {}
 
-  async getAll(draftYear: string) {
-    return await this.repo.find({
-      relations: ['team_id'],
-      select: {
-        team_id: {
-          id: true,
-          shortname: true,
-          city: true,
-          nickname: true,
-          teamlogo: true,
-        },
+  async getAll(draftYear: string): Promise<Draft_Order_V2[]> {
+    return this.repo.find({
+      relations: {
+        team_id: true,
       },
+      select: TEAM_INFO_SELECT,
       where: {
         draft_year: draftYear,
       },
     });
   }
 
-  async updateTableById(id: number, attrs: Partial<Draft_Order_V2>) {
-    const item = await this.repo.findOneByOrFail({ id });
+  async updateTableById(
+    id: number,
+    attrs: Partial<Draft_Order_V2>
+  ): Promise<Draft_Order_V2> {
+    const item = await this.repo.findOneBy({ id });
 
     if (!item) {
-      throw new NotFoundException('item not found');
+      throw new NotFoundException(`Draft table record with id ${id} not found`);
     }
 
     Object.assign(item, attrs);
-
     return this.repo.save(item);
   }
 
   async getDraftTableByYearByStandings(
     draftYear: string,
     playingYear: string
-  ): Promise<Draft_Order_V2[]> {
+  ): Promise<(Draft_Order_V2 & { stats: Team_Stats_V2 | null })[]> {
     const draftTable = await this.repo.find({
-      relations: ['team_id'],
+      relations: {
+        team_id: true,
+      },
+      select: TEAM_INFO_SELECT,
       where: {
         draft_year: draftYear,
       },
-      select: {
-        team_id: {
-          id: true,
-          shortname: true,
-          city: true,
-          nickname: true,
-          teamlogo: true,
-        },
-      },
     });
 
-    const draftTableWithStandings = await this.setTableStandings(
-      draftTable,
-      playingYear
+    if (draftTable.length === 0) {
+      return [];
+    }
+
+    const uniqueTeamIds = Array.from(
+      new Set(
+        draftTable
+          .map((entry) => entry.team_id?.id)
+          .filter((id): id is number => typeof id === 'number')
+      )
     );
 
-    const draftTableByStandings = this.getDraftByStandings(
-      draftTableWithStandings
-    );
+    const teamStats = uniqueTeamIds.length
+      ? await this.teamStatsRepo.find({
+          relations: {
+            team_id: true,
+          },
+          select: {
+            id: true,
+            wins: true,
+            goals_for: true,
+            goals_against: true,
+            points: true,
+            team_id: {
+              id: true,
+            },
+          },
+          where: {
+            team_id: { id: In(uniqueTeamIds) },
+            playing_year: playingYear,
+            season_type: 'Regular',
+          },
+        })
+      : [];
 
-    return draftTableByStandings;
+    const statsMap = new Map(teamStats.map((stat) => [stat.team_id.id, stat]));
+
+    const draftTableWithStandings = draftTable.map((item) => ({
+      ...item,
+      stats: statsMap.get(item.team_id?.id) ?? null,
+    }));
+
+    return this.sortByReverseStandings(draftTableWithStandings);
   }
 
-  private async setTableStandings(
-    array: Draft_Order_V2[],
-    playingYear: string
-  ) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        stats: await this.getTeamStats(item.team_id.id, playingYear),
-      }))
-    );
-  }
+  private sortByReverseStandings<
+    T extends { stats: Partial<Team_Stats_V2> | null }
+  >(data: T[]): T[] {
+    return [...data].sort((a, b) => {
+      const aPoints = Number(a.stats?.points ?? 0);
+      const bPoints = Number(b.stats?.points ?? 0);
+      if (aPoints !== bPoints) return aPoints - bPoints;
 
-  private async getTeamStats(teamId: number, playingYear: string) {
-    return await this.teamStatsRepo.findOne({
-      relations: ['team_id'],
-      select: {
-        id: true,
-        wins: true,
-        goals_for: true,
-        goals_against: true,
-        points: true,
-      },
-      where: {
-        team_id: { id: teamId },
-        playing_year: playingYear,
-        season_type: 'Regular',
-      },
+      const aWins = Number(a.stats?.wins ?? 0);
+      const bWins = Number(b.stats?.wins ?? 0);
+      if (aWins !== bWins) return aWins - bWins;
+
+      const aGoalDiff =
+        Number(a.stats?.goals_for ?? 0) - Number(a.stats?.goals_against ?? 0);
+      const bGoalDiff =
+        Number(b.stats?.goals_for ?? 0) - Number(b.stats?.goals_against ?? 0);
+      if (aGoalDiff !== bGoalDiff) return aGoalDiff - bGoalDiff;
+
+      const aGoalsFor = Number(a.stats?.goals_for ?? 0);
+      const bGoalsFor = Number(b.stats?.goals_for ?? 0);
+      return aGoalsFor - bGoalsFor;
     });
   }
-
-  private getDraftByStandings = (data) => {
-    return data
-      .sort((a: any, b: any) => {
-        if (b.stats.points === a.stats.points) {
-          if (b.stats.wins === a.stats.wins) {
-            if (
-              b.stats.goals_for - b.stats.goals_against ===
-              a.stats.goals_for - a.stats.goals_against
-            ) {
-              return b.stats.goals_for - a.stats.goals_for;
-            } else {
-              return (
-                b.stats.goals_for -
-                b.stats.goals_against -
-                (a.stats.goals_for - a.stats.goals_against)
-              );
-            }
-          } else {
-            return b.stats.wins - a.stats.wins;
-          }
-        } else {
-          return b.stats.points - a.stats.points;
-        }
-      })
-      .reverse();
-  };
 }

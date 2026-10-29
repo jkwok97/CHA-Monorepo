@@ -2,17 +2,23 @@ import { Schedule_V2, Teams_V2, Team_Stats_V2 } from '@api/entities';
 import { ScheduleAllDto } from '@cha/shared/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Brackets, Repository } from 'typeorm';
+import { Between, In, IsNull, Not, Repository } from 'typeorm';
+
+interface TeamVersusRecord {
+  wins: number;
+  loss: number;
+  ties: number;
+}
 
 @Injectable()
 export class ApiScheduleService {
   constructor(
     @InjectRepository(Schedule_V2)
-    private repo: Repository<Schedule_V2>,
+    private readonly repo: Repository<Schedule_V2>,
     @InjectRepository(Teams_V2)
-    private teamInfoRepo: Repository<Teams_V2>,
+    private readonly teamInfoRepo: Repository<Teams_V2>,
     @InjectRepository(Team_Stats_V2)
-    private teamStatsRepo: Repository<Team_Stats_V2>
+    private readonly teamStatsRepo: Repository<Team_Stats_V2>
   ) {}
 
   async getCompleteScheduleBySeason(season: string) {
@@ -25,9 +31,17 @@ export class ApiScheduleService {
       },
     });
 
-    const scheduleTeamInfo = await this.setTeamInfo(schedule);
+    if (schedule.length === 0) return [];
 
-    return scheduleTeamInfo;
+    const teamMap = await this.getTeamInfoMap(
+      this.extractUniqueTeamIds(schedule)
+    );
+
+    return schedule.map((item) => ({
+      ...item,
+      visTeamInfo: teamMap.get(item.vis_team_id) ?? null,
+      homeTeamInfo: teamMap.get(item.home_team_id) ?? null,
+    }));
   }
 
   async getNextDays(season: string, currentDay: number) {
@@ -41,204 +55,83 @@ export class ApiScheduleService {
       },
     });
 
-    const scheduleTeamInfo = await this.setTeamNextInfo(schedule);
+    if (schedule.length === 0) return [];
 
-    return scheduleTeamInfo;
+    const uniqueTeamIds = this.extractUniqueTeamIds(schedule);
+
+    const [teamMap, seasonRecordMap, finishedGames] = await Promise.all([
+      this.getTeamInfoMap(uniqueTeamIds),
+      this.getTeamSeasonRecordsMap(uniqueTeamIds, season),
+      this.getCompletedGamesForSeason(season),
+    ]);
+
+    const teamGamesMap = this.buildTeamCompletedGamesMap(finishedGames);
+    const matchupGamesMap = this.buildMatchupGamesMap(finishedGames);
+
+    return schedule.map((item) => {
+      const visId = Number(item.vis_team_id);
+      const homeId = Number(item.home_team_id);
+
+      const headToHeadGames =
+        matchupGamesMap.get(this.getMatchupKey(visId, homeId)) ?? [];
+      const visVersus = this.calculateVersusRecord(headToHeadGames, visId);
+      const homeVersus: TeamVersusRecord = {
+        wins: visVersus.loss,
+        loss: visVersus.wins,
+        ties: visVersus.ties,
+      };
+
+      return {
+        id: item.id,
+        gameDay: item.game_day,
+        visTeamScore: item.vis_team_score,
+        visTeamInfo: teamMap.get(visId) ?? null,
+        visTeamLastFive: this.calculateLastFive(
+          teamGamesMap.get(visId) ?? [],
+          visId
+        ),
+        visTeamRecord: seasonRecordMap.get(visId) ?? null,
+        visTeamVersus: visVersus,
+        homeTeamScore: item.home_team_score,
+        homeTeamInfo: teamMap.get(homeId) ?? null,
+        homeTeamLastFive: this.calculateLastFive(
+          teamGamesMap.get(homeId) ?? [],
+          homeId
+        ),
+        homeTeamRecord: seasonRecordMap.get(homeId) ?? null,
+        homeTeamVersus: homeVersus,
+      };
+    });
   }
 
   async updateGameById(gameId: number, gameData: ScheduleAllDto) {
-    const game = await this.repo.findOneByOrFail({ id: gameId });
+    const game = await this.repo.findOneBy({ id: gameId });
 
     if (!game) {
-      throw new NotFoundException('player not found');
+      throw new NotFoundException(`Game with id ${gameId} not found`);
     }
 
-    const attrs: Partial<Schedule_V2> = {
-      home_team_score: gameData.home_team_score,
-      vis_team_score: gameData.vis_team_score,
-    };
-
-    Object.assign(game, attrs);
+    game.home_team_score = gameData.home_team_score;
+    game.vis_team_score = gameData.vis_team_score;
 
     return this.repo.save(game);
   }
 
-  private async getTeamLastFive(teamId: number, season: string) {
-    const lastFive = await this.repo
-      .createQueryBuilder('schedule')
-      .where('schedule.playing_year = :year', { year: season })
-      .andWhere(
-        new Brackets((qb) => {
-          qb.where('schedule.home_team_id = :teamId', { teamId }).orWhere(
-            'schedule.vis_team_id = :teamId',
-            { teamId }
-          );
-        })
-      )
-      .andWhere('schedule.home_team_score is not null')
-      .orderBy('schedule.game_day', 'DESC')
-      .limit(5)
-      .getMany();
-
-    return await this.getLastFiveRecord(lastFive, Number(teamId));
+  private extractUniqueTeamIds(games: Schedule_V2[]): number[] {
+    const ids = new Set<number>();
+    for (const g of games) {
+      if (g.home_team_id) ids.add(Number(g.home_team_id));
+      if (g.vis_team_id) ids.add(Number(g.vis_team_id));
+    }
+    return Array.from(ids);
   }
 
-  private async getLastFiveRecord(lastFive: Schedule_V2[], teamId: number) {
-    const lastFiveRecord = [];
+  private async getTeamInfoMap(
+    teamIds: number[]
+  ): Promise<Map<number, Teams_V2>> {
+    if (!teamIds.length) return new Map();
 
-    await lastFive.forEach((record: Schedule_V2) => {
-      if (record.home_team_id === teamId) {
-        if (Number(record.home_team_score) > Number(record.vis_team_score)) {
-          lastFiveRecord.push('W');
-        } else if (
-          Number(record.home_team_score) < Number(record.vis_team_score)
-        ) {
-          lastFiveRecord.push('L');
-        } else {
-          lastFiveRecord.push('T');
-        }
-      } else {
-        if (Number(record.vis_team_score) > Number(record.home_team_score)) {
-          lastFiveRecord.push('W');
-        } else if (
-          Number(record.vis_team_score) < Number(record.home_team_score)
-        ) {
-          lastFiveRecord.push('L');
-        } else {
-          lastFiveRecord.push('T');
-        }
-      }
-    });
-
-    return lastFiveRecord;
-  }
-
-  private async getVersusRecord(data: Schedule_V2[], teamId: number) {
-    let wins = 0;
-    let loss = 0;
-    let ties = 0;
-
-    await data.forEach((game: Schedule_V2) => {
-      if (game.vis_team_id === teamId) {
-        Number(game.vis_team_score) > Number(game.home_team_score)
-          ? wins++
-          : Number(game.vis_team_score) === Number(game.home_team_score)
-          ? ties++
-          : loss++;
-      } else if (game.home_team_id === teamId) {
-        Number(game.home_team_score) > Number(game.vis_team_score)
-          ? wins++
-          : Number(game.home_team_score) === Number(game.vis_team_score)
-          ? ties++
-          : loss++;
-      }
-    });
-
-    return {
-      wins,
-      loss,
-      ties,
-    };
-  }
-
-  private async setTeamNextInfo(array: Schedule_V2[]) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        id: item.id,
-        gameDay: item.game_day,
-        visTeamScore: item.vis_team_score,
-        visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-        visTeamLastFive: await this.getTeamLastFive(
-          Number(item.vis_team_id),
-          item.playing_year
-        ),
-        visTeamRecord: await this.getTeamSeasonRecord(
-          Number(item.vis_team_id),
-          item.playing_year
-        ),
-        visTeamVersus: await this.getTeamRecordVersus(
-          Number(item.vis_team_id),
-          Number(item.home_team_id),
-          item.playing_year
-        ),
-        homeTeamScore: item.home_team_score,
-        homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-        homeTeamLastFive: await this.getTeamLastFive(
-          Number(item.home_team_id),
-          item.playing_year
-        ),
-        homeTeamRecord: await this.getTeamSeasonRecord(
-          Number(item.home_team_id),
-          item.playing_year
-        ),
-        homeTeamVersus: await this.getTeamRecordVersus(
-          Number(item.home_team_id),
-          Number(item.vis_team_id),
-          item.playing_year
-        ),
-      }))
-    );
-  }
-
-  private async setTeamInfo(array: Schedule_V2[]) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-        homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-      }))
-    );
-  }
-
-  private async getTeamRecordVersus(
-    teamOneId: number,
-    teamTwoId: number,
-    season: string
-  ) {
-    const versus = await this.repo
-      .createQueryBuilder('schedule')
-      .where('schedule.playing_year = :year', { year: season })
-      .where(
-        new Brackets((qb) => {
-          qb.where('schedule.vis_team_id = :teamOneId', { teamOneId })
-            .andWhere('schedule.home_team_id = :teamTwoId', { teamTwoId })
-            .andWhere('schedule.playing_year = :year', { year: season })
-            .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
-        })
-      )
-      .orWhere(
-        new Brackets((qb) => {
-          qb.where('schedule.vis_team_id = :teamTwoId', { teamTwoId })
-            .andWhere('schedule.home_team_id = :teamOneId', { teamOneId })
-            .andWhere('schedule.playing_year = :year', { year: season })
-            .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
-        })
-      )
-      .getMany();
-
-    return await this.getVersusRecord(versus, Number(teamOneId));
-  }
-
-  private async getTeamSeasonRecord(teamId: number, season: string) {
-    return await this.teamStatsRepo.findOne({
-      select: {
-        id: true,
-        wins: true,
-        loss: true,
-        ties: true,
-      },
-      where: {
-        team_id: {
-          id: teamId,
-        },
-        playing_year: season,
-        season_type: 'Regular',
-      },
-    });
-  }
-
-  private async getTeamInfo(teamId: number) {
-    return await this.teamInfoRepo.findOne({
+    const teams = await this.teamInfoRepo.find({
       select: {
         id: true,
         city: true,
@@ -246,9 +139,155 @@ export class ApiScheduleService {
         nickname: true,
         teamcolor: true,
       },
+      where: { id: In(teamIds) },
+    });
+
+    return new Map(teams.map((t) => [t.id, t]));
+  }
+
+  private async getTeamSeasonRecordsMap(
+    teamIds: number[],
+    season: string
+  ): Promise<Map<number, Team_Stats_V2>> {
+    if (!teamIds.length) return new Map();
+
+    const records = await this.teamStatsRepo.find({
+      select: {
+        id: true,
+        wins: true,
+        loss: true,
+        ties: true,
+        team_id: { id: true },
+      },
+      relations: { team_id: true },
       where: {
-        id: teamId,
+        team_id: { id: In(teamIds) },
+        playing_year: season,
+        season_type: 'Regular',
       },
     });
+
+    return new Map(records.map((r) => [r.team_id.id, r]));
+  }
+
+  private async getCompletedGamesForSeason(
+    season: string
+  ): Promise<Schedule_V2[]> {
+    return this.repo.find({
+      select: {
+        id: true,
+        game_day: true,
+        home_team_id: true,
+        vis_team_id: true,
+        home_team_score: true,
+        vis_team_score: true,
+      },
+      where: {
+        playing_year: season,
+        home_team_score: Not(IsNull()),
+        vis_team_score: Not(IsNull()),
+      },
+      order: {
+        game_day: 'DESC',
+      },
+    });
+  }
+
+  private buildTeamCompletedGamesMap(
+    games: Schedule_V2[]
+  ): Map<number, Schedule_V2[]> {
+    const map = new Map<number, Schedule_V2[]>();
+    for (const game of games) {
+      const homeId = Number(game.home_team_id);
+      const visId = Number(game.vis_team_id);
+
+      if (!map.has(homeId)) map.set(homeId, []);
+      if (!map.has(visId)) map.set(visId, []);
+
+      map.get(homeId)!.push(game);
+      map.get(visId)!.push(game);
+    }
+    return map;
+  }
+
+  private buildMatchupGamesMap(
+    games: Schedule_V2[]
+  ): Map<string, Schedule_V2[]> {
+    const map = new Map<string, Schedule_V2[]>();
+    for (const game of games) {
+      const key = this.getMatchupKey(
+        Number(game.home_team_id),
+        Number(game.vis_team_id)
+      );
+      const list = map.get(key);
+      if (list) {
+        list.push(game);
+      } else {
+        map.set(key, [game]);
+      }
+    }
+    return map;
+  }
+
+  private getMatchupKey(teamA: number, teamB: number): string {
+    return teamA < teamB ? `${teamA}_${teamB}` : `${teamB}_${teamA}`;
+  }
+
+  private calculateLastFive(
+    games: Schedule_V2[],
+    teamId: number
+  ): ('W' | 'L' | 'T')[] {
+    const results: ('W' | 'L' | 'T')[] = [];
+    const limit = Math.min(games.length, 5);
+
+    for (let i = 0; i < limit; i++) {
+      const game = games[i];
+      const isHome = Number(game.home_team_id) === teamId;
+      const teamScore = Number(
+        isHome ? game.home_team_score : game.vis_team_score
+      );
+      const oppScore = Number(
+        isHome ? game.vis_team_score : game.home_team_score
+      );
+
+      if (teamScore > oppScore) {
+        results.push('W');
+      } else if (teamScore < oppScore) {
+        results.push('L');
+      } else {
+        results.push('T');
+      }
+    }
+
+    return results;
+  }
+
+  private calculateVersusRecord(
+    games: Schedule_V2[],
+    teamId: number
+  ): TeamVersusRecord {
+    let wins = 0;
+    let loss = 0;
+    let ties = 0;
+
+    for (const game of games) {
+      const isHome = Number(game.home_team_id) === teamId;
+      const teamScore = Number(
+        isHome ? game.home_team_score : game.vis_team_score
+      );
+      const oppScore = Number(
+        isHome ? game.vis_team_score : game.home_team_score
+      );
+
+      if (teamScore > oppScore) {
+        wins++;
+      } else if (teamScore < oppScore) {
+        loss++;
+      } else {
+        ties++;
+      }
+    }
+
+    return { wins, loss, ties };
   }
 }

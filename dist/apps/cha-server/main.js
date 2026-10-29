@@ -4056,102 +4056,101 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const TEAM_INFO_SELECT = {
+    team_id: {
+        id: true,
+        shortname: true,
+        city: true,
+        nickname: true,
+        teamlogo: true,
+    },
+};
 let ApiDraftTableService = class ApiDraftTableService {
     constructor(repo, teamStatsRepo) {
         this.repo = repo;
         this.teamStatsRepo = teamStatsRepo;
-        this.getDraftByStandings = (data) => {
-            return data
-                .sort((a, b) => {
-                if (b.stats.points === a.stats.points) {
-                    if (b.stats.wins === a.stats.wins) {
-                        if (b.stats.goals_for - b.stats.goals_against ===
-                            a.stats.goals_for - a.stats.goals_against) {
-                            return b.stats.goals_for - a.stats.goals_for;
-                        }
-                        else {
-                            return (b.stats.goals_for -
-                                b.stats.goals_against -
-                                (a.stats.goals_for - a.stats.goals_against));
-                        }
-                    }
-                    else {
-                        return b.stats.wins - a.stats.wins;
-                    }
-                }
-                else {
-                    return b.stats.points - a.stats.points;
-                }
-            })
-                .reverse();
-        };
     }
     async getAll(draftYear) {
-        return await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    shortname: true,
-                    city: true,
-                    nickname: true,
-                    teamlogo: true,
-                },
+        return this.repo.find({
+            relations: {
+                team_id: true,
             },
+            select: TEAM_INFO_SELECT,
             where: {
                 draft_year: draftYear,
             },
         });
     }
     async updateTableById(id, attrs) {
-        const item = await this.repo.findOneByOrFail({ id });
+        const item = await this.repo.findOneBy({ id });
         if (!item) {
-            throw new common_1.NotFoundException('item not found');
+            throw new common_1.NotFoundException(`Draft table record with id ${id} not found`);
         }
         Object.assign(item, attrs);
         return this.repo.save(item);
     }
     async getDraftTableByYearByStandings(draftYear, playingYear) {
         const draftTable = await this.repo.find({
-            relations: ['team_id'],
+            relations: {
+                team_id: true,
+            },
+            select: TEAM_INFO_SELECT,
             where: {
                 draft_year: draftYear,
             },
-            select: {
-                team_id: {
-                    id: true,
-                    shortname: true,
-                    city: true,
-                    nickname: true,
-                    teamlogo: true,
-                },
-            },
         });
-        const draftTableWithStandings = await this.setTableStandings(draftTable, playingYear);
-        const draftTableByStandings = this.getDraftByStandings(draftTableWithStandings);
-        return draftTableByStandings;
-    }
-    async setTableStandings(array, playingYear) {
-        return await Promise.all(array.map(async (item) => ({
+        if (draftTable.length === 0) {
+            return [];
+        }
+        const uniqueTeamIds = Array.from(new Set(draftTable
+            .map((entry) => entry.team_id?.id)
+            .filter((id) => typeof id === 'number')));
+        const teamStats = uniqueTeamIds.length
+            ? await this.teamStatsRepo.find({
+                relations: {
+                    team_id: true,
+                },
+                select: {
+                    id: true,
+                    wins: true,
+                    goals_for: true,
+                    goals_against: true,
+                    points: true,
+                    team_id: {
+                        id: true,
+                    },
+                },
+                where: {
+                    team_id: { id: (0, typeorm_2.In)(uniqueTeamIds) },
+                    playing_year: playingYear,
+                    season_type: 'Regular',
+                },
+            })
+            : [];
+        const statsMap = new Map(teamStats.map((stat) => [stat.team_id.id, stat]));
+        const draftTableWithStandings = draftTable.map((item) => ({
             ...item,
-            stats: await this.getTeamStats(item.team_id.id, playingYear),
-        })));
+            stats: statsMap.get(item.team_id?.id) ?? null,
+        }));
+        return this.sortByReverseStandings(draftTableWithStandings);
     }
-    async getTeamStats(teamId, playingYear) {
-        return await this.teamStatsRepo.findOne({
-            relations: ['team_id'],
-            select: {
-                id: true,
-                wins: true,
-                goals_for: true,
-                goals_against: true,
-                points: true,
-            },
-            where: {
-                team_id: { id: teamId },
-                playing_year: playingYear,
-                season_type: 'Regular',
-            },
+    sortByReverseStandings(data) {
+        return [...data].sort((a, b) => {
+            const aPoints = Number(a.stats?.points ?? 0);
+            const bPoints = Number(b.stats?.points ?? 0);
+            if (aPoints !== bPoints)
+                return aPoints - bPoints;
+            const aWins = Number(a.stats?.wins ?? 0);
+            const bWins = Number(b.stats?.wins ?? 0);
+            if (aWins !== bWins)
+                return aWins - bWins;
+            const aGoalDiff = Number(a.stats?.goals_for ?? 0) - Number(a.stats?.goals_against ?? 0);
+            const bGoalDiff = Number(b.stats?.goals_for ?? 0) - Number(b.stats?.goals_against ?? 0);
+            if (aGoalDiff !== bGoalDiff)
+                return aGoalDiff - bGoalDiff;
+            const aGoalsFor = Number(a.stats?.goals_for ?? 0);
+            const bGoalsFor = Number(b.stats?.goals_for ?? 0);
+            return aGoalsFor - bGoalsFor;
         });
     }
 };
@@ -4334,57 +4333,69 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const DRAFT_PICK_SELECT = {
+    id: true,
+    draft_year: true,
+    draft_round: true,
+    draft_overall: true,
+    team_id: {
+        id: true,
+        city: true,
+        nickname: true,
+        teamlogo: true,
+    },
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+    },
+    pick_team_id: {
+        id: true,
+        city: true,
+        nickname: true,
+        teamlogo: true,
+    },
+};
 let ApiEntryDraftService = class ApiEntryDraftService {
     constructor(repo) {
         this.repo = repo;
     }
-    async getAll() {
-        const draftTable = await this.repo.find({
-            relations: ['team_id', 'player_id', 'pick_team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    nickname: true,
-                    teamlogo: true,
-                },
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                },
-                pick_team_id: {
-                    id: true,
-                    city: true,
-                    nickname: true,
-                    teamlogo: true,
-                },
+    async getAll(draftYear) {
+        const whereClause = draftYear
+            ? { draft_year: draftYear }
+            : {};
+        return this.repo.find({
+            relations: {
+                team_id: true,
+                player_id: true,
+                pick_team_id: true,
             },
+            select: DRAFT_PICK_SELECT,
+            where: whereClause,
             order: {
                 draft_year: 'DESC',
                 draft_round: 'ASC',
                 draft_overall: 'ASC',
             },
         });
-        return draftTable;
     }
     async updatePickById(id, attrs) {
-        const pick = await this.repo.findOneByOrFail({ id });
+        const pick = await this.repo.findOneBy({ id });
         if (!pick) {
-            throw new common_1.NotFoundException('player not found');
+            throw new common_1.NotFoundException(`Draft pick with id ${id} not found`);
         }
         Object.assign(pick, attrs);
         return this.repo.save(pick);
     }
     async addPick(body) {
-        const pick = await this.repo.create(body);
+        const pick = this.repo.create(body);
         return this.repo.save(pick);
     }
     async deletePick(id) {
-        const pick = await this.repo.findOneByOrFail({ id });
+        const pick = await this.repo.findOneBy({ id });
         if (!pick) {
-            throw new common_1.NotFoundException('player not found');
+            throw new common_1.NotFoundException(`Draft pick with id ${id} not found`);
         }
         return this.repo.remove(pick);
     }
@@ -4680,38 +4691,74 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const COMMON_GOALIE_SELECT = {
+    id: true,
+    team_name: true,
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isgoalie: true,
+    },
+};
 let ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
     }
     async getGoalieStatsLeaders(season, seasonType, minGames) {
-        const shotsFacedLeaders = await this.getShotsFacedLeaders(season, seasonType, minGames);
-        const gaaLeaders = await this.getGaaLeaders(season, seasonType, minGames);
-        const savePctLeaders = await this.getSavePctLeaders(season, seasonType, minGames);
-        const shutoutsLeaders = await this.getShutoutLeaders(season, seasonType);
-        const winsLeaders = await this.getWinsLeaders(season, seasonType);
+        const minGamesNum = Number(minGames) || 0;
+        const minGamesFilter = {
+            games_played: (0, typeorm_2.MoreThanOrEqual)(minGamesNum),
+        };
+        const [shotsFaced, gaa, savePct, shutouts, wins] = await Promise.all([
+            this.getLeaders(season, seasonType, 'shots_for', 'DESC', minGamesFilter),
+            this.getLeaders(season, seasonType, 'goals_against_avg', 'ASC', minGamesFilter),
+            this.getLeaders(season, seasonType, 'save_pct', 'DESC', minGamesFilter),
+            this.getLeaders(season, seasonType, 'shutouts', 'DESC'),
+            this.getLeaders(season, seasonType, 'wins', 'DESC'),
+        ]);
+        const allResults = [
+            ...shotsFaced,
+            ...gaa,
+            ...savePct,
+            ...shutouts,
+            ...wins,
+        ];
+        const uniqueTeamNames = Array.from(new Set(allResults.map((r) => r.team_name).filter(Boolean)));
+        const teams = uniqueTeamNames.length
+            ? await this.teamInfoRepo.find({
+                select: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    nickname: true,
+                    shortname: true,
+                },
+                where: {
+                    shortname: (0, typeorm_2.In)(uniqueTeamNames),
+                },
+            })
+            : [];
+        const teamMap = new Map(teams.map((team) => [team.shortname, team]));
+        const attachTeamInfo = (leaders) => leaders.map((item) => ({
+            ...item,
+            teamInfo: teamMap.get(item.team_name) ?? null,
+        }));
         return {
-            shotsFaced: shotsFacedLeaders,
-            gaa: gaaLeaders,
-            savePct: savePctLeaders,
-            shutouts: shutoutsLeaders,
-            wins: winsLeaders,
+            shotsFaced: attachTeamInfo(shotsFaced),
+            gaa: attachTeamInfo(gaa),
+            savePct: attachTeamInfo(savePct),
+            shutouts: attachTeamInfo(shutouts),
+            wins: attachTeamInfo(wins),
         };
     }
-    async getShotsFacedLeaders(season, seasonType, minGames) {
-        const shotsFacedLeaders = await this.repo.find({
+    async getLeaders(season, seasonType, statField, orderDirection, extraWhere = {}, limit = 10) {
+        return this.repo.find({
             select: {
-                id: true,
-                shots_for: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
+                ...COMMON_GOALIE_SELECT,
+                [statField]: true,
             },
             relations: {
                 player_id: true,
@@ -4719,151 +4766,12 @@ let ApiGoalieStatsLeadersService = class ApiGoalieStatsLeadersService {
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThanOrEqual)(Number(minGames)),
+                ...extraWhere,
             },
             order: {
-                shots_for: 'DESC',
+                [statField]: orderDirection,
             },
-            take: 10,
-        });
-        const shotsFacedLeadersWithTeamInfo = await this.setTeamInfo(shotsFacedLeaders);
-        return shotsFacedLeadersWithTeamInfo;
-    }
-    async getGaaLeaders(season, seasonType, minGames) {
-        const gaaLeaders = await this.repo.find({
-            select: {
-                id: true,
-                goals_against_avg: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThanOrEqual)(Number(minGames)),
-            },
-            order: {
-                goals_against_avg: 'ASC',
-            },
-            take: 10,
-        });
-        const gaaLeadersWithTeamInfo = await this.setTeamInfo(gaaLeaders);
-        return gaaLeadersWithTeamInfo;
-    }
-    async getSavePctLeaders(season, seasonType, minGames) {
-        const savePctLeaders = await this.repo.find({
-            select: {
-                id: true,
-                save_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                games_played: (0, typeorm_2.MoreThanOrEqual)(Number(minGames)),
-            },
-            order: {
-                save_pct: 'DESC',
-            },
-            take: 10,
-        });
-        const savePctLeadersWithTeamInfo = await this.setTeamInfo(savePctLeaders);
-        return savePctLeadersWithTeamInfo;
-    }
-    async getShutoutLeaders(season, seasonType) {
-        const shutoutLeaders = await this.repo.find({
-            select: {
-                id: true,
-                shutouts: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                shutouts: 'DESC',
-            },
-            take: 10,
-        });
-        const shutoutLeadersWithTeamInfo = await this.setTeamInfo(shutoutLeaders);
-        return shutoutLeadersWithTeamInfo;
-    }
-    async getWinsLeaders(season, seasonType) {
-        const winLeaders = await this.repo.find({
-            select: {
-                id: true,
-                wins: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                wins: 'DESC',
-            },
-            take: 10,
-        });
-        const winLeadersWithTeamInfo = await this.setTeamInfo(winLeaders);
-        return winLeadersWithTeamInfo;
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
+            take: limit,
         });
     }
 };
@@ -4889,6 +4797,34 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const COMMON_GOALIE_STATS_SELECT = {
+    id: true,
+    games_played: true,
+    minutes_played: true,
+    goals_against_avg: true,
+    wins: true,
+    loss: true,
+    ties: true,
+    en_goals: true,
+    shutouts: true,
+    goals_against: true,
+    saves: true,
+    shots_for: true,
+    save_pct: true,
+    goals: true,
+    assists: true,
+    points: true,
+    penalty_minutes: true,
+    pass_pct: true,
+    team_name: true,
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isgoalie: true,
+    },
+};
 let ApiGoalieStatsService = class ApiGoalieStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
@@ -4900,13 +4836,13 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
                 playing_year: season,
             },
         });
-        const playersWithTeamInfo = this.setTeamInfo(players);
+        const playersWithTeamInfo = await this.attachTeamInfo(players);
         return playersWithTeamInfo;
     }
     async updateGoalieById(id, season, attrs) {
-        const player = await this.repo.findOneByOrFail({
+        const player = await this.repo.findOneBy({
             player_id: {
-                id: id,
+                id,
             },
             playing_year: season,
         });
@@ -4917,7 +4853,7 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
         return this.repo.save(player);
     }
     async deleteGoalie(id, season) {
-        const player = await this.repo.findOneByOrFail({
+        const player = await this.repo.findOneBy({
             id,
             playing_year: season,
         });
@@ -4927,124 +4863,40 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
         return this.repo.remove(player);
     }
     async getAllGoalieStats(season, seasonType) {
-        const allGoalieStats = await this.repo.find({
-            select: {
-                id: true,
-                games_played: true,
-                minutes_played: true,
-                goals_against_avg: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                en_goals: true,
-                shutouts: true,
-                goals_against: true,
-                saves: true,
-                shots_for: true,
-                save_pct: true,
-                goals: true,
-                assists: true,
-                points: true,
-                penalty_minutes: true,
-                pass_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                wins: 'DESC',
-            },
+        return this.fetchAndFormatGoalieStats({
+            playing_year: season,
+            season_type: seasonType,
         });
-        const goalieStatsWithTeamInfo = await this.setTeamInfo(allGoalieStats);
-        const goalieStatsWithTeamInfoConverted = await this.convertStats(goalieStatsWithTeamInfo);
-        return goalieStatsWithTeamInfoConverted;
     }
     async getGoalieStatsByPlayerId(season, seasonType, playerId) {
-        const allGoalieStats = await this.repo.find({
-            select: {
-                id: true,
-                games_played: true,
-                minutes_played: true,
-                goals_against_avg: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                en_goals: true,
-                shutouts: true,
-                goals_against: true,
-                saves: true,
-                shots_for: true,
-                save_pct: true,
-                goals: true,
-                assists: true,
-                points: true,
-                penalty_minutes: true,
-                pass_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
+        return this.fetchAndFormatGoalieStats({
+            playing_year: season,
+            season_type: seasonType,
+            player_id: {
+                id: playerId,
             },
+        });
+    }
+    async fetchAndFormatGoalieStats(whereClause) {
+        const records = await this.repo.find({
+            select: COMMON_GOALIE_STATS_SELECT,
             relations: {
                 player_id: true,
             },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                player_id: {
-                    id: playerId,
-                },
-            },
+            where: whereClause,
             order: {
                 wins: 'DESC',
             },
         });
-        const goalieStatsWithTeamInfo = await this.setTeamInfo(allGoalieStats);
-        const goalieStatsWithTeamInfoConverted = await this.convertStats(goalieStatsWithTeamInfo);
-        return goalieStatsWithTeamInfoConverted;
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-                shortname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    async convertStats(array) {
-        return await Promise.all(array.map((stat) => ({
+        if (records.length === 0) {
+            return [];
+        }
+        const recordsWithTeams = await this.attachTeamInfo(records);
+        return recordsWithTeams.map((stat) => ({
             ...stat,
             games_played: Number(stat.games_played),
             minutes_played: Number(stat.minutes_played),
-            goals_against_avg: Number(Number(stat.goals_against_avg).toFixed(2)),
+            goals_against_avg: Number(Number(stat.goals_against_avg || 0).toFixed(2)),
             wins: Number(stat.wins),
             loss: Number(stat.loss),
             ties: Number(stat.ties),
@@ -5053,13 +4905,35 @@ let ApiGoalieStatsService = class ApiGoalieStatsService {
             goals_against: Number(stat.goals_against),
             saves: Number(stat.saves),
             shots_for: Number(stat.shots_for),
-            save_pct: Number(Number(stat.save_pct).toFixed(3)),
+            save_pct: Number(Number(stat.save_pct || 0).toFixed(3)),
             goals: Number(stat.goals),
             assists: Number(stat.assists),
             points: Number(stat.points),
             penalty_minutes: Number(stat.penalty_minutes),
-            pass_pct: Number(stat.pass_pct),
-        })));
+            pass_pct: Number(stat.pass_pct || 0),
+        }));
+    }
+    async attachTeamInfo(items) {
+        const uniqueTeamNames = Array.from(new Set(items.map((item) => item.team_name).filter(Boolean)));
+        const teams = uniqueTeamNames.length
+            ? await this.teamInfoRepo.find({
+                select: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    nickname: true,
+                    shortname: true,
+                },
+                where: {
+                    shortname: (0, typeorm_2.In)(uniqueTeamNames),
+                },
+            })
+            : [];
+        const teamMap = new Map(teams.map((team) => [team.shortname, team]));
+        return items.map((item) => ({
+            ...item,
+            teamInfo: teamMap.get(item.team_name) ?? null,
+        }));
     }
 };
 exports.ApiGoalieStatsService = ApiGoalieStatsService;
@@ -5121,7 +4995,9 @@ let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
                     isforward: true,
                 },
             },
-            relations: ['player_id'],
+            relations: {
+                player_id: true,
+            },
             where: {
                 season_type: seasonType,
                 games_played: (0, typeorm_2.MoreThan)(0),
@@ -5130,89 +5006,33 @@ let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
                 wins: 'DESC',
             },
         });
-        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo, false);
-        return allStatsWithTeamInfoConverted;
-    }
-    async getAllTimeGoalieStatsSummedBySeasonByType(seasonType) {
-        const result = await this.dataSource.query(`select
-      b.firstname as firstname,
-      b.lastname as lastname,
-      b.isgoalie as isgoalie,
-      b.nhl_id as nhl_id,
-      a.player_id as player_id,
-      a.season_type as season_type, 
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(minutes_played) as minutes_played, 
-      sum(en_goals) as en_goals, 
-      sum(shutouts) as shutouts, 
-      sum(goals_against) as goals_against, 
-      sum(saves) as saves, 
-      sum(shots_for) as shots_for, 
-      sum(goals) as goals, 
-      sum(assists) as assists, 
-      sum(points) as points, 
-      sum(penalty_minutes) as penalty_minutes
-      from
-      goalies_stats_v2 as a
-      left join players_v2 as b
-      on b.id = a.player_id
-      where (a.player_id = b.id
-      and
-      a.games_played > '0'
-      and
-      a.season_type = '${seasonType}')
-      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
-      order by wins DESC`);
-        const allTimeStatsConverted = await this.convertStats(result, true);
-        return allTimeStatsConverted;
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    async convertStats(array, raw) {
-        return await Promise.all(array.map((stat) => ({
+        if (allStats.length === 0) {
+            return [];
+        }
+        const uniqueTeamNames = Array.from(new Set(allStats.map((stat) => stat.team_name).filter(Boolean)));
+        const teams = uniqueTeamNames.length
+            ? await this.teamInfoRepo.find({
+                select: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    nickname: true,
+                    shortname: true,
+                },
+                where: {
+                    shortname: (0, typeorm_2.In)(uniqueTeamNames),
+                },
+            })
+            : [];
+        const teamMap = new Map(teams.map((team) => [team.shortname, team]));
+        return allStats.map((stat) => ({
             playing_year: stat.playing_year,
             season_type: stat.season_type,
-            teamInfo: !raw ? stat['teamInfo'] : null,
-            player_id: !raw
-                ? stat.player_id
-                : {
-                    id: stat['player_id'],
-                    firstname: stat['firstname'],
-                    lastname: stat['lastname'],
-                    nhl_id: stat['nhl_id'],
-                    isactive: null,
-                    isgoalie: stat['isgoalie'],
-                    isdefense: null,
-                    isforward: null,
-                    is_protected: null,
-                },
+            teamInfo: teamMap.get(stat.team_name) ?? null,
+            player_id: stat.player_id,
             games_played: Number(stat.games_played),
             minutes_played: Number(stat.minutes_played),
-            goals_against_avg: !raw
-                ? Number(Number(stat.goals_against_avg).toFixed(2))
-                : Number(((Number(stat.goals_against) * 60) /
-                    Number(stat.minutes_played)).toFixed(2)),
+            goals_against_avg: Number(Number(stat.goals_against_avg || 0).toFixed(2)),
             wins: Number(stat.wins),
             loss: Number(stat.loss),
             ties: Number(stat.ties),
@@ -5220,14 +5040,80 @@ let ApiGoalieAllTimeStatsService = class ApiGoalieAllTimeStatsService {
             goals_against: Number(stat.goals_against),
             saves: Number(stat.saves),
             shots_for: Number(stat.shots_for),
-            save_pct: !raw
-                ? Number(Number(stat.save_pct).toFixed(3))
-                : Number((Number(stat.saves) / Number(stat.shots_for)).toFixed(3)),
+            save_pct: Number(Number(stat.save_pct || 0).toFixed(3)),
             goals: Number(stat.goals),
             assists: Number(stat.assists),
             points: Number(stat.points),
             penalty_minutes: Number(stat.penalty_minutes),
-        })));
+        }));
+    }
+    async getAllTimeGoalieStatsSummedBySeasonByType(seasonType) {
+        const rawSummedStats = await this.dataSource.query(`SELECT
+         b.firstname AS firstname,
+         b.lastname AS lastname,
+         b.isgoalie AS isgoalie,
+         b.nhl_id AS nhl_id,
+         a.player_id AS player_id,
+         a.season_type AS season_type,
+         SUM(a.games_played) AS games_played,
+         SUM(a.wins) AS wins,
+         SUM(a.loss) AS loss,
+         SUM(a.ties) AS ties,
+         SUM(a.minutes_played) AS minutes_played,
+         SUM(a.en_goals) AS en_goals,
+         SUM(a.shutouts) AS shutouts,
+         SUM(a.goals_against) AS goals_against,
+         SUM(a.saves) AS saves,
+         SUM(a.shots_for) AS shots_for,
+         SUM(a.goals) AS goals,
+         SUM(a.assists) AS assists,
+         SUM(a.points) AS points,
+         SUM(a.penalty_minutes) AS penalty_minutes
+       FROM goalies_stats_v2 a
+              INNER JOIN players_v2 b ON b.id = a.player_id
+       WHERE a.games_played > 0
+         AND a.season_type = $1
+       GROUP BY b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type
+       ORDER BY wins DESC`, [seasonType]);
+        return rawSummedStats.map((stat) => {
+            const minutesPlayed = Number(stat.minutes_played) || 0;
+            const goalsAgainst = Number(stat.goals_against) || 0;
+            const shotsFor = Number(stat.shots_for) || 0;
+            const saves = Number(stat.saves) || 0;
+            const gaa = minutesPlayed > 0 ? (goalsAgainst * 60) / minutesPlayed : 0;
+            const savePct = shotsFor > 0 ? saves / shotsFor : 0;
+            return {
+                playing_year: null,
+                season_type: stat.season_type,
+                teamInfo: null,
+                player_id: {
+                    id: stat.player_id,
+                    firstname: stat.firstname,
+                    lastname: stat.lastname,
+                    nhl_id: stat.nhl_id,
+                    isactive: null,
+                    isgoalie: stat.isgoalie,
+                    isdefense: null,
+                    isforward: null,
+                    is_protected: null,
+                },
+                games_played: Number(stat.games_played),
+                minutes_played: minutesPlayed,
+                goals_against_avg: Number(gaa.toFixed(2)),
+                wins: Number(stat.wins),
+                loss: Number(stat.loss),
+                ties: Number(stat.ties),
+                shutouts: Number(stat.shutouts),
+                goals_against: goalsAgainst,
+                saves,
+                shots_for: shotsFor,
+                save_pct: Number(savePct.toFixed(3)),
+                goals: Number(stat.goals),
+                assists: Number(stat.assists),
+                points: Number(stat.points),
+                penalty_minutes: Number(stat.penalty_minutes),
+            };
+        });
     }
 };
 exports.ApiGoalieAllTimeStatsService = ApiGoalieAllTimeStatsService;
@@ -5253,6 +5139,35 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const COMMON_GOALIE_STATS_SELECT = {
+    id: true,
+    games_played: true,
+    minutes_played: true,
+    goals_against_avg: true,
+    wins: true,
+    loss: true,
+    ties: true,
+    en_goals: true,
+    shutouts: true,
+    goals_against: true,
+    saves: true,
+    shots_for: true,
+    save_pct: true,
+    goals: true,
+    assists: true,
+    points: true,
+    penalty_minutes: true,
+    pass_pct: true,
+    team_name: true,
+    playing_year: true,
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isgoalie: true,
+    },
+};
 let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
@@ -5261,24 +5176,108 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
     }
     async getUserGoaliesStatsBySeasonType(userId, seasonType) {
         const userTeams = await this.teamInfoRepo.findBy({ users_id: userId });
-        const userTeamsWithGoalieStats = await this.setGoalieStats(userTeams, seasonType);
-        const userTeamsWithGoaliesStatsConverted = await this.setConvertedGoaliesStats(userTeamsWithGoalieStats, false);
-        return userTeamsWithGoaliesStatsConverted;
+        if (userTeams.length === 0)
+            return [];
+        const teamShortNames = userTeams.map((t) => t.shortname).filter(Boolean);
+        if (teamShortNames.length === 0)
+            return [];
+        const allStats = await this.repo.find({
+            select: COMMON_GOALIE_STATS_SELECT,
+            relations: {
+                player_id: true,
+            },
+            where: {
+                team_name: (0, typeorm_2.In)(teamShortNames),
+                season_type: seasonType,
+            },
+            order: {
+                wins: 'DESC',
+            },
+        });
+        const statsByTeam = new Map();
+        for (const stat of allStats) {
+            const stats = statsByTeam.get(stat.team_name);
+            if (stats) {
+                stats.push(stat);
+            }
+            else {
+                statsByTeam.set(stat.team_name, [stat]);
+            }
+        }
+        return userTeams.map((team) => {
+            const rawTeamStats = statsByTeam.get(team.shortname) ?? [];
+            return {
+                ...team,
+                goalieStats: this.convertRegularStats(rawTeamStats, team),
+            };
+        });
     }
     async getUserGoaliesStatsAllTimeBySeasonType(userId, seasonType) {
         const userTeams = await this.teamInfoRepo.findBy({ users_id: userId });
-        const userTeamsWithGoalieStats = await this.setGoalieAllTimeStats(userTeams, seasonType);
-        const userTeamsWithGoaliesStatsConverted = await this.setConvertedGoaliesStats(userTeamsWithGoalieStats, true);
-        return userTeamsWithGoaliesStatsConverted;
+        if (userTeams.length === 0)
+            return [];
+        const teamShortNames = userTeams.map((t) => t.shortname).filter(Boolean);
+        if (teamShortNames.length === 0)
+            return [];
+        const rawStats = await this.dataSource.query(`SELECT
+         b.firstname AS firstname,
+         b.lastname AS lastname,
+         b.isgoalie AS isgoalie,
+         b.nhl_id AS nhl_id,
+         a.player_id AS player_id,
+         a.season_type AS season_type,
+         a.team_name AS team_name,
+         SUM(a.games_played) AS games_played,
+         SUM(a.wins) AS wins,
+         SUM(a.loss) AS loss,
+         SUM(a.ties) AS ties,
+         SUM(a.minutes_played) AS minutes_played,
+         SUM(a.en_goals) AS en_goals,
+         SUM(a.shutouts) AS shutouts,
+         SUM(a.goals_against) AS goals_against,
+         SUM(a.saves) AS saves,
+         SUM(a.shots_for) AS shots_for,
+         SUM(a.goals) AS goals,
+         SUM(a.assists) AS assists,
+         SUM(a.points) AS points,
+         SUM(a.penalty_minutes) AS penalty_minutes
+       FROM goalies_stats_v2 a
+              INNER JOIN players_v2 b ON b.id = a.player_id
+       WHERE a.games_played > 0
+         AND a.season_type = $1
+         AND a.team_name = ANY($2)
+       GROUP BY b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type, a.team_name
+       ORDER BY wins DESC`, [seasonType, teamShortNames]);
+        // Group aggregated stats by team_name
+        const statsByTeam = new Map();
+        for (const stat of rawStats) {
+            const stats = statsByTeam.get(stat.team_name);
+            if (stats) {
+                stats.push(stat);
+            }
+            else {
+                statsByTeam.set(stat.team_name, [stat]);
+            }
+        }
+        return userTeams.map((team) => {
+            const rawTeamStats = statsByTeam.get(team.shortname) ?? [];
+            return {
+                ...team,
+                goalieStats: this.convertAllTimeStats(rawTeamStats),
+            };
+        });
     }
     async getTeamPlayersByTeamName(teamName, season) {
-        return await this.repo.find({
+        return this.repo.find({
             select: {
                 player_id: {
                     id: true,
                     firstname: true,
                     lastname: true,
                 },
+            },
+            relations: {
+                player_id: true,
             },
             where: {
                 team_name: teamName,
@@ -5287,135 +5286,22 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
             },
         });
     }
-    async setGoalieStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            goalieStats: await this.getGoalieStats(item.shortname, seasonType),
-        })));
-    }
-    async setGoalieAllTimeStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            goalieStats: await this.getGoalieAllTimeStats(item.shortname, seasonType),
-        })));
-    }
-    async getGoalieAllTimeStats(teamShortName, seasonType) {
-        return await this.dataSource.query(`select
-      b.firstname as firstname,
-      b.lastname as lastname,
-      b.isgoalie as isgoalie,
-      b.nhl_id as nhl_id,
-      a.player_id as player_id,
-      a.season_type as season_type, 
-      a.team_name as team_name,
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(minutes_played) as minutes_played, 
-      sum(en_goals) as en_goals, 
-      sum(shutouts) as shutouts, 
-      sum(goals_against) as goals_against, 
-      sum(saves) as saves, 
-      sum(shots_for) as shots_for, 
-      sum(goals) as goals, 
-      sum(assists) as assists, 
-      sum(points) as points, 
-      sum(penalty_minutes) as penalty_minutes
-      from
-      goalies_stats_v2 as a
-      left join players_v2 as b
-      on b.id = a.player_id
-      where (a.player_id = b.id
-      and
-      a.games_played > '0'
-      and
-      a.season_type = '${seasonType}'
-      and a.team_name = '${teamShortName}')
-      group by b.firstname, b.lastname, b.isgoalie, b.nhl_id, a.player_id, a.season_type, a.team_name
-      order by wins DESC`);
-    }
-    async getGoalieStats(teamShortName, seasonType) {
-        return await this.repo.find({
-            select: {
-                id: true,
-                games_played: true,
-                minutes_played: true,
-                goals_against_avg: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                en_goals: true,
-                shutouts: true,
-                goals_against: true,
-                saves: true,
-                shots_for: true,
-                save_pct: true,
-                goals: true,
-                assists: true,
-                points: true,
-                penalty_minutes: true,
-                pass_pct: true,
-                team_name: true,
-                playing_year: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                team_name: teamShortName,
-                season_type: seasonType,
-            },
-            order: {
-                wins: 'DESC',
-            },
-        });
-    }
-    async setConvertedGoaliesStats(array, raw) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            goalieStats: await this.convertStats(item.goalieStats, raw, item),
-        })));
-    }
-    async convertStats(array, raw, teamInfo) {
-        return await Promise.all(array.map((stat) => ({
+    convertRegularStats(stats, team) {
+        const teamMetadata = {
+            id: team.id,
+            city: team.city,
+            nickname: team.nickname,
+            teamlogo: team.teamlogo,
+        };
+        return stats.map((stat) => ({
             playing_year: stat.playing_year,
             season_type: stat.season_type,
             team_name: stat.team_name,
-            teamInfo: !raw
-                ? {
-                    id: teamInfo.id,
-                    city: teamInfo.city,
-                    nickname: teamInfo.nickname,
-                    teamlogo: teamInfo.teamlogo,
-                }
-                : null,
-            player_id: !raw
-                ? stat.player_id
-                : {
-                    id: stat['player_id'],
-                    firstname: stat['firstname'],
-                    lastname: stat['lastname'],
-                    nhl_id: stat['nhl_id'],
-                    isactive: null,
-                    isgoalie: stat['isgoalie'],
-                    isdefense: null,
-                    isforward: null,
-                    is_protected: null,
-                },
+            teamInfo: teamMetadata,
+            player_id: stat.player_id,
             games_played: Number(stat.games_played),
             minutes_played: Number(stat.minutes_played),
-            goals_against_avg: !raw
-                ? Number(Number(stat.goals_against_avg).toFixed(2))
-                : Number(((Number(stat.goals_against) * 60) /
-                    Number(stat.minutes_played)).toFixed(2)),
+            goals_against_avg: Number(Number(stat.goals_against_avg || 0).toFixed(2)),
             wins: Number(stat.wins),
             loss: Number(stat.loss),
             ties: Number(stat.ties),
@@ -5423,14 +5309,54 @@ let ApiUserGoalieStatsService = class ApiUserGoalieStatsService {
             goals_against: Number(stat.goals_against),
             saves: Number(stat.saves),
             shots_for: Number(stat.shots_for),
-            save_pct: !raw
-                ? Number(Number(stat.save_pct).toFixed(3))
-                : Number((Number(stat.saves) / Number(stat.shots_for)).toFixed(3)),
+            save_pct: Number(Number(stat.save_pct || 0).toFixed(3)),
             goals: Number(stat.goals),
             assists: Number(stat.assists),
             points: Number(stat.points),
             penalty_minutes: Number(stat.penalty_minutes),
-        })));
+        }));
+    }
+    convertAllTimeStats(stats) {
+        return stats.map((stat) => {
+            const minutesPlayed = Number(stat.minutes_played) || 0;
+            const goalsAgainst = Number(stat.goals_against) || 0;
+            const shotsFor = Number(stat.shots_for) || 0;
+            const saves = Number(stat.saves) || 0;
+            const gaa = minutesPlayed > 0 ? (goalsAgainst * 60) / minutesPlayed : 0;
+            const savePct = shotsFor > 0 ? saves / shotsFor : 0;
+            return {
+                playing_year: null,
+                season_type: stat.season_type,
+                team_name: stat.team_name,
+                teamInfo: null,
+                player_id: {
+                    id: stat.player_id,
+                    firstname: stat.firstname,
+                    lastname: stat.lastname,
+                    nhl_id: stat.nhl_id,
+                    isactive: null,
+                    isgoalie: stat.isgoalie,
+                    isdefense: null,
+                    isforward: null,
+                    is_protected: null,
+                },
+                games_played: Number(stat.games_played),
+                minutes_played: minutesPlayed,
+                goals_against_avg: Number(gaa.toFixed(2)),
+                wins: Number(stat.wins),
+                loss: Number(stat.loss),
+                ties: Number(stat.ties),
+                shutouts: Number(stat.shutouts),
+                goals_against: goalsAgainst,
+                saves,
+                shots_for: shotsFor,
+                save_pct: Number(savePct.toFixed(3)),
+                goals: Number(stat.goals),
+                assists: Number(stat.assists),
+                points: Number(stat.points),
+                penalty_minutes: Number(stat.penalty_minutes),
+            };
+        });
     }
 };
 exports.ApiUserGoalieStatsService = ApiUserGoalieStatsService;
@@ -5594,17 +5520,33 @@ const typeorm_2 = __webpack_require__(13);
 let LeagueService = class LeagueService {
     constructor(repo) {
         this.repo = repo;
+        this.cachedLeagueData = null;
+        this.cacheExpiresAt = 0;
+        this.CACHE_TTL_MS = 60 * 1000; // 60 seconds
     }
     async getCurrentLeagueData() {
-        return (await this.repo.find());
+        const now = Date.now();
+        if (this.cachedLeagueData && now < this.cacheExpiresAt) {
+            return this.cachedLeagueData;
+        }
+        const data = await this.repo.findOneBy({ id: 1 });
+        if (!data) {
+            throw new common_1.NotFoundException('Current league data not found');
+        }
+        this.cachedLeagueData = data;
+        this.cacheExpiresAt = now + this.CACHE_TTL_MS;
+        return this.cachedLeagueData;
     }
     async updateCurrentLeagueData(attrs) {
-        const data = await this.repo.findOneByOrFail({ id: 1 });
+        const data = await this.repo.findOneBy({ id: 1 });
         if (!data) {
-            throw new common_1.NotFoundException('data not found');
+            throw new common_1.NotFoundException('Current league data with id 1 not found');
         }
         Object.assign(data, attrs);
-        return this.repo.save(data);
+        const updated = await this.repo.save(data);
+        this.cachedLeagueData = null;
+        this.cacheExpiresAt = 0;
+        return updated;
     }
 };
 exports.LeagueService = LeagueService;
@@ -6375,44 +6317,49 @@ let ApiPlayerRatingsService = class ApiPlayerRatingsService {
                 playing_year: season,
             },
         });
-        const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
-        return ratingsWithPlayerInfo;
-    }
-    async updatePlayerById(id, attrs) {
-        const player = await this.repo.findOneByOrFail({ id });
-        if (!player) {
-            throw new common_1.NotFoundException('player not found');
+        if (ratings.length === 0) {
+            return [];
         }
-        Object.assign(player, attrs);
-        return this.repo.save(player);
-    }
-    async setPlayerInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            playerInfo: await this.getPlayerInfo(item.player_id),
-        })));
-    }
-    async getPlayerInfo(playerId) {
-        if (playerId) {
-            return await this.playersRepo.findOne({
+        const uniquePlayerIds = Array.from(new Set(ratings
+            .map((r) => typeof r.player_id === 'object' && r.player_id !== null
+            ? r.player_id.id
+            : r.player_id)
+            .filter(Boolean)));
+        const players = uniquePlayerIds.length
+            ? await this.playersRepo.find({
                 select: {
                     id: true,
                     firstname: true,
                     lastname: true,
                 },
                 where: {
-                    id: playerId,
+                    id: (0, typeorm_2.In)(uniquePlayerIds),
                 },
-            });
+            })
+            : [];
+        const playerMap = new Map(players.map((p) => [p.id, p]));
+        return ratings.map((item) => {
+            const pid = typeof item.player_id === 'object' && item.player_id !== null
+                ? item.player_id.id
+                : item.player_id;
+            return {
+                ...item,
+                playerInfo: playerMap.get(pid) ?? null,
+            };
+        });
+    }
+    async updatePlayerById(id, attrs) {
+        const player = await this.repo.findOneBy({ id });
+        if (!player) {
+            throw new common_1.NotFoundException(`Player rating with id ${id} not found`);
         }
-        else {
-            return {};
-        }
+        Object.assign(player, attrs);
+        return this.repo.save(player);
     }
     async deleteRating(id) {
-        const rating = await this.repo.findOneByOrFail({ id });
+        const rating = await this.repo.findOneBy({ id });
         if (!rating) {
-            throw new common_1.NotFoundException('rating not found');
+            throw new common_1.NotFoundException(`Player rating with id ${id} not found`);
         }
         return this.repo.remove(rating);
     }
@@ -6702,6 +6649,7 @@ tslib_1.__exportStar(__webpack_require__(201), exports);
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
+var ApiPlayerLeadersStatsService_1;
 var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiPlayerLeadersStatsService = void 0;
@@ -6710,90 +6658,142 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
-const rxjs_1 = __webpack_require__(174);
 const axios_1 = __webpack_require__(169);
-let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
+const COMMON_PLAYER_SELECT = {
+    id: true,
+    team_name: true,
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isgoalie: true,
+    },
+};
+let ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService_1 = class ApiPlayerLeadersStatsService {
     constructor(repo, teamInfoRepo, httpService) {
         this.repo = repo;
         this.teamInfoRepo = teamInfoRepo;
         this.httpService = httpService;
+        this.logger = new common_1.Logger(ApiPlayerLeadersStatsService_1.name);
         this.nhlAPI = 'https://api-web.nhle.com/v2/player';
     }
     async getPlayerStatsLeaders(season, seasonType, minGamesStats) {
-        const hitsLeaders = await this.getHitsLeaders(season, seasonType);
-        const pointsLeaders = await this.getPointsLeaders(season, seasonType);
-        const pointsAboveExpectedLeaders = [];
-        const pointsBelowExpectedLeaders = [];
-        // const pointsAboveExpectedLeaders = await this.getPointsAboveExpectedLeaders(
-        //   season,
-        //   seasonType
-        // );
-        // const pointsBelowExpectedLeaders = await this.getPointsBelowExpectedLeaders(
-        //   season,
-        //   seasonType
-        // );
-        const assistLeaders = await this.getAssistLeaders(season, seasonType);
-        const bestPlusMinusLeaders = await this.getBestPlusMinusLeaders(season, seasonType);
-        const worstPlusMinusLeaders = await this.getWorstPlusMinusLeaders(season, seasonType);
-        const blockedShotLeaders = await this.getblockedShotLeaders(season, seasonType);
-        const currSteakLeaders = await this.getCurrSteakLeaders(season, seasonType);
-        const defenseLeaders = await this.getDefenseLeaders(season, seasonType);
-        const goalLeaders = await this.getGoalLeaders(season, seasonType);
-        const longStreakLeaders = await this.getLongStreakLeaders(season, seasonType);
-        const minutesLeaders = await this.getMinutesLeaders(season, seasonType);
-        const penaltyLeaders = await this.getPenaltyLeaders(season, seasonType);
-        const ppGoalsLeaders = await this.getPpgoalsLeaders(season, seasonType);
-        const gwGoalsLeaders = await this.getGwgoalsLeaders(season, seasonType);
-        const rookieLeaders = await this.getRookieLeaders(season, seasonType);
-        const rookieGoalLeaders = await this.getRookieGoalsLeaders(season, seasonType);
-        const shGoalsLeaders = await this.getShGoalsLeaders(season, seasonType);
-        const shotsLeaders = await this.getShotsLeaders(season, seasonType);
-        const defenseGoalLeaders = await this.getDefenseGoalLeaders(season, seasonType);
-        const faceOffLeaders = await this.getFaceOffLeaders(season, seasonType, minGamesStats);
-        const shootingLeaders = await this.getShootingLeaders(season, seasonType, minGamesStats);
-        const passingLeaders = await this.getPassingLeaders(season, seasonType, minGamesStats);
-        const cornersLeaders = await this.getCornersLeaders(season, seasonType, minGamesStats);
+        const [hits, points, assists, bestPlusMinus, worstPlusMinus, blockedShots, currStreak, defense, defenseGoals, goals, longStreak, minutes, penalties, ppGoals, gwGoals, rookies, rookieGoals, shGoals, shots, faceoffs, shooting, passing, corners,] = await Promise.all([
+            this.getTopLeaders(season, seasonType, 'hits', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'points', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'assists', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'plus_minus', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'plus_minus', 'ASC'),
+            this.getTopLeaders(season, seasonType, 'blocked_shots', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'current_points_streak', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'points', 'DESC', {
+                player_id: { isdefense: true },
+            }),
+            this.getTopLeaders(season, seasonType, 'goals', 'DESC', {
+                player_id: { isdefense: true },
+            }),
+            this.getTopLeaders(season, seasonType, 'goals', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'longest_points_streak', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'minutes_played', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'penalty_minutes', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'pp_goals', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'gw_goals', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'points', 'DESC', {
+                player_status: 'Rookie',
+            }),
+            this.getTopLeaders(season, seasonType, 'goals', 'DESC', {
+                player_status: 'Rookie',
+            }),
+            this.getTopLeaders(season, seasonType, 'sh_goals', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'shots', 'DESC'),
+            this.getTopLeaders(season, seasonType, 'fo_pct', 'DESC', {
+                fo_won: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
+            }),
+            this.getShootingLeaders(season, seasonType, minGamesStats),
+            this.getTopLeaders(season, seasonType, 'pass_pct', 'DESC', {
+                pass_attempts: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
+            }),
+            this.getTopLeaders(season, seasonType, 'corner_pct', 'DESC', {
+                corner_total: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
+            }),
+        ]);
+        const allResults = [
+            ...hits,
+            ...points,
+            ...assists,
+            ...bestPlusMinus,
+            ...worstPlusMinus,
+            ...blockedShots,
+            ...currStreak,
+            ...defense,
+            ...defenseGoals,
+            ...goals,
+            ...longStreak,
+            ...minutes,
+            ...penalties,
+            ...ppGoals,
+            ...gwGoals,
+            ...rookies,
+            ...rookieGoals,
+            ...shGoals,
+            ...shots,
+            ...faceoffs,
+            ...shooting,
+            ...passing,
+            ...corners,
+        ];
+        const uniqueTeamNames = Array.from(new Set(allResults.map((r) => r.team_name).filter(Boolean)));
+        const teams = uniqueTeamNames.length
+            ? await this.teamInfoRepo.find({
+                select: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    nickname: true,
+                    shortname: true,
+                },
+                where: { shortname: (0, typeorm_2.In)(uniqueTeamNames) },
+            })
+            : [];
+        const teamMap = new Map(teams.map((team) => [team.shortname, team]));
+        const attachTeamInfo = (items) => items.map((item) => ({
+            ...item,
+            teamInfo: teamMap.get(item.team_name) ?? null,
+        }));
         return {
-            hits: hitsLeaders,
-            points: pointsLeaders,
-            assists: assistLeaders,
-            bestPlusMinus: bestPlusMinusLeaders,
-            worstPlusMinus: worstPlusMinusLeaders,
-            blockedShots: blockedShotLeaders,
-            currStreak: currSteakLeaders,
-            defense: defenseLeaders,
-            defenseGoals: defenseGoalLeaders,
-            goals: goalLeaders,
-            longStreak: longStreakLeaders,
-            minutes: minutesLeaders,
-            penalties: penaltyLeaders,
-            ppGoals: ppGoalsLeaders,
-            gwGoals: gwGoalsLeaders,
-            rookies: rookieLeaders,
-            rookieGoals: rookieGoalLeaders,
-            shGoals: shGoalsLeaders,
-            shots: shotsLeaders,
-            faceoffs: faceOffLeaders,
-            shooting: shootingLeaders,
-            passing: passingLeaders,
-            corners: cornersLeaders,
-            pointsAboveExpected: pointsAboveExpectedLeaders,
-            pointsBelowExpected: pointsBelowExpectedLeaders,
+            hits: attachTeamInfo(hits),
+            points: attachTeamInfo(points),
+            assists: attachTeamInfo(assists),
+            bestPlusMinus: attachTeamInfo(bestPlusMinus),
+            worstPlusMinus: attachTeamInfo(worstPlusMinus),
+            blockedShots: attachTeamInfo(blockedShots),
+            currStreak: attachTeamInfo(currStreak),
+            defense: attachTeamInfo(defense),
+            defenseGoals: attachTeamInfo(defenseGoals),
+            goals: attachTeamInfo(goals),
+            longStreak: attachTeamInfo(longStreak),
+            minutes: attachTeamInfo(minutes),
+            penalties: attachTeamInfo(penalties),
+            ppGoals: attachTeamInfo(ppGoals),
+            gwGoals: attachTeamInfo(gwGoals),
+            rookies: attachTeamInfo(rookies),
+            rookieGoals: attachTeamInfo(rookieGoals),
+            shGoals: attachTeamInfo(shGoals),
+            shots: attachTeamInfo(shots),
+            faceoffs: attachTeamInfo(faceoffs),
+            shooting: attachTeamInfo(shooting),
+            passing: attachTeamInfo(passing),
+            corners: attachTeamInfo(corners),
+            pointsAboveExpected: [],
+            pointsBelowExpected: [],
         };
     }
-    async getCornersLeaders(season, seasonType, minGamesStats) {
-        const cornersLeaders = await this.repo.find({
+    async getTopLeaders(season, seasonType, statField, orderDirection, extraWhere = {}, limit = 10) {
+        return this.repo.find({
             select: {
-                id: true,
-                corner_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
+                ...COMMON_PLAYER_SELECT,
+                [statField]: true,
             },
             relations: {
                 player_id: true,
@@ -6801,59 +6801,19 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
             where: {
                 playing_year: season,
                 season_type: seasonType,
-                corner_total: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
+                ...extraWhere,
             },
             order: {
-                corner_pct: 'DESC',
+                [statField]: orderDirection,
             },
-            take: 10,
+            take: limit,
         });
-        const cornersLeadersWithTeamInfo = await this.setTeamInfo(cornersLeaders);
-        return cornersLeadersWithTeamInfo;
-    }
-    async getPassingLeaders(season, seasonType, minGamesStats) {
-        const passingLeaders = await this.repo.find({
-            select: {
-                id: true,
-                pass_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                pass_attempts: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
-            },
-            order: {
-                pass_pct: 'DESC',
-            },
-            take: 10,
-        });
-        const passingLeadersWithTeamInfo = await this.setTeamInfo(passingLeaders);
-        return passingLeadersWithTeamInfo;
     }
     async getShootingLeaders(season, seasonType, minGamesStats) {
-        const qualifiedShootingLeaders = await this.repo.find({
+        return this.repo.find({
             select: {
-                id: true,
+                ...COMMON_PLAYER_SELECT,
                 shooting_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
             },
             relations: {
                 player_id: true,
@@ -6863,685 +6823,15 @@ let ApiPlayerLeadersStatsService = class ApiPlayerLeadersStatsService {
                 season_type: seasonType,
                 shots: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
             },
-        });
-        const shootingLeaders = await this.setShootingLeaders(qualifiedShootingLeaders);
-        const shootingLeadersSorted = shootingLeaders
-            .sort((a, b) => b.shooting_pct - a.shooting_pct)
-            .slice(0, 10);
-        const shootingLeadersWithTeamInfo = await this.setTeamInfo(shootingLeadersSorted);
-        return shootingLeadersWithTeamInfo;
-    }
-    async getFaceOffLeaders(season, seasonType, minGamesStats) {
-        const faceOffLeaders = await this.repo.find({
-            select: {
-                id: true,
-                fo_pct: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                fo_won: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
-            },
             order: {
-                fo_pct: 'DESC',
+                shooting_pct: 'DESC',
             },
             take: 10,
-        });
-        const faceOffLeadersWithTeamInfo = await this.setTeamInfo(faceOffLeaders);
-        return faceOffLeadersWithTeamInfo;
-    }
-    async getHitsLeaders(season, seasonType) {
-        const hitsLeaders = await this.repo.find({
-            select: {
-                id: true,
-                hits: true,
-                team_name: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                hits: 'DESC',
-            },
-            take: 10,
-        });
-        const hitsLeadersWithTeamInfo = await this.setTeamInfo(hitsLeaders);
-        return hitsLeadersWithTeamInfo;
-    }
-    async getPointsLeaders(season, seasonType) {
-        const pointsLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                points: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                points: 'DESC',
-            },
-            take: 10,
-        });
-        const pointsLeadersWithTeamInfo = await this.setTeamInfo(pointsLeaders);
-        return pointsLeadersWithTeamInfo;
-    }
-    async getPointsBelowExpectedLeaders(season, seasonType) {
-        const chaPlayerPoints = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                points: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                points: 'DESC',
-            },
-            take: 500,
-        });
-        const pointsLeaderWithNhlStats = await this.getPointsBelowNhlStats(chaPlayerPoints);
-        const topPointsBelowExpectedLeaders = await pointsLeaderWithNhlStats
-            .sort((a, b) => a.pointsBelowExpected - b.pointsBelowExpected)
-            .slice(0, 10);
-        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(topPointsBelowExpectedLeaders);
-        return chaPointsLeadersWithTeamInfo;
-    }
-    async getPointsAboveExpectedLeaders(season, seasonType) {
-        const chaPlayerPoints = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                points: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                points: 'DESC',
-            },
-            take: 500,
-        });
-        const pointsLeaderWithNhlStats = await this.getPointsAboveNhlStats(chaPlayerPoints);
-        const topPointsAboveExpectedLeaders = await pointsLeaderWithNhlStats
-            .sort((a, b) => b.pointsAboveExpected - a.pointsAboveExpected)
-            .slice(0, 10);
-        const chaPointsLeadersWithTeamInfo = await this.setTeamInfo(topPointsAboveExpectedLeaders);
-        return chaPointsLeadersWithTeamInfo;
-    }
-    async getNhlStatByPlayerId(playerId) {
-        try {
-            const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(`${this.nhlAPI}/${playerId}/player-stats`));
-            return (response.data?.seasonTotals?.find((s) => s.season === 20262027 && // TODO UPDATE EVERY SEASON
-                s.gameTypeId === 2 &&
-                s.leagueAbbrev.default === 'NHL')?.points ?? 0);
-        }
-        catch (err) {
-            console.error(`NHL stats failed for player ${playerId}`, err.message);
-            return 0;
-        }
-    }
-    async getPointsBelowNhlStats(pointsLeaders) {
-        return await Promise.all(pointsLeaders.map(async (leader) => ({
-            ...leader,
-            pointsBelowExpected: await (leader.points -
-                Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id))),
-        })));
-    }
-    async getPointsAboveNhlStats(pointsLeaders) {
-        return await Promise.all(pointsLeaders.map(async (leader) => ({
-            ...leader,
-            pointsAboveExpected: await (leader.points -
-                Number(await this.getNhlStatByPlayerId(leader.player_id.nhl_id))),
-        })));
-    }
-    async getAssistLeaders(season, seasonType) {
-        const assistLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                assists: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                assists: 'DESC',
-            },
-            take: 10,
-        });
-        const assistLeadersWithTeamInfo = await this.setTeamInfo(assistLeaders);
-        return assistLeadersWithTeamInfo;
-    }
-    async getWorstPlusMinusLeaders(season, seasonType) {
-        const bestPlusMinusLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                plus_minus: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                plus_minus: 'ASC',
-            },
-            take: 10,
-        });
-        const bestPlusMinusLeadersWithTeamInfo = await this.setTeamInfo(bestPlusMinusLeaders);
-        return bestPlusMinusLeadersWithTeamInfo;
-    }
-    async getBestPlusMinusLeaders(season, seasonType) {
-        const bestPlusMinusLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                plus_minus: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                plus_minus: 'DESC',
-            },
-            take: 10,
-        });
-        const bestPlusMinusLeadersWithTeamInfo = await this.setTeamInfo(bestPlusMinusLeaders);
-        return bestPlusMinusLeadersWithTeamInfo;
-    }
-    async getblockedShotLeaders(season, seasonType) {
-        const blockedShotLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                blocked_shots: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                blocked_shots: 'DESC',
-            },
-            take: 10,
-        });
-        const blockedShotLeadersWithTeamInfo = await this.setTeamInfo(blockedShotLeaders);
-        return blockedShotLeadersWithTeamInfo;
-    }
-    async getCurrSteakLeaders(season, seasonType) {
-        const currStreakLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                current_points_streak: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                current_points_streak: 'DESC',
-            },
-            take: 10,
-        });
-        const currStreakLeadersWithTeamInfo = await this.setTeamInfo(currStreakLeaders);
-        return currStreakLeadersWithTeamInfo;
-    }
-    async getDefenseGoalLeaders(season, seasonType) {
-        const defenseGoalLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                goals: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                    isdefense: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                player_id: {
-                    isdefense: true,
-                },
-            },
-            order: {
-                goals: 'DESC',
-            },
-            take: 10,
-        });
-        const defenseLeadersWithTeamInfo = await this.setTeamInfo(defenseGoalLeaders);
-        return defenseLeadersWithTeamInfo;
-    }
-    async getDefenseLeaders(season, seasonType) {
-        const defenseLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                points: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                    isdefense: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                player_id: {
-                    isdefense: true,
-                },
-            },
-            order: {
-                points: 'DESC',
-            },
-            take: 10,
-        });
-        const defenseLeadersWithTeamInfo = await this.setTeamInfo(defenseLeaders);
-        return defenseLeadersWithTeamInfo;
-    }
-    async getGoalLeaders(season, seasonType) {
-        const goalLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                goals: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                goals: 'DESC',
-            },
-            take: 10,
-        });
-        const goalLeadersWithTeamInfo = await this.setTeamInfo(goalLeaders);
-        return goalLeadersWithTeamInfo;
-    }
-    async getLongStreakLeaders(season, seasonType) {
-        const longStreakLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                longest_points_streak: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                longest_points_streak: 'DESC',
-            },
-            take: 10,
-        });
-        const longStreakLeadersWithTeamInfo = await this.setTeamInfo(longStreakLeaders);
-        return longStreakLeadersWithTeamInfo;
-    }
-    async getMinutesLeaders(season, seasonType) {
-        const minutesLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                minutes_played: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                minutes_played: 'DESC',
-            },
-            take: 10,
-        });
-        const minutesLeadersWithTeamInfo = await this.setTeamInfo(minutesLeaders);
-        return minutesLeadersWithTeamInfo;
-    }
-    async getPenaltyLeaders(season, seasonType) {
-        const penaltyLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                penalty_minutes: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                penalty_minutes: 'DESC',
-            },
-            take: 10,
-        });
-        const penaltyLeadersWithTeamInfo = await this.setTeamInfo(penaltyLeaders);
-        return penaltyLeadersWithTeamInfo;
-    }
-    async getGwgoalsLeaders(season, seasonType) {
-        const ppGoalsLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                gw_goals: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                gw_goals: 'DESC',
-            },
-            take: 10,
-        });
-        const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
-        return ppGoalsLeadersWithTeamInfo;
-    }
-    async getPpgoalsLeaders(season, seasonType) {
-        const ppGoalsLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                pp_goals: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                pp_goals: 'DESC',
-            },
-            take: 10,
-        });
-        const ppGoalsLeadersWithTeamInfo = await this.setTeamInfo(ppGoalsLeaders);
-        return ppGoalsLeadersWithTeamInfo;
-    }
-    async getRookieGoalsLeaders(season, seasonType) {
-        const rookieLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                goals: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                player_status: 'Rookie',
-            },
-            order: {
-                goals: 'DESC',
-            },
-            take: 10,
-        });
-        const rookieLeadersWithTeamInfo = await this.setTeamInfo(rookieLeaders);
-        return rookieLeadersWithTeamInfo;
-    }
-    async getRookieLeaders(season, seasonType) {
-        const rookieLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                points: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                player_status: 'Rookie',
-            },
-            order: {
-                points: 'DESC',
-            },
-            take: 10,
-        });
-        const rookieLeadersWithTeamInfo = await this.setTeamInfo(rookieLeaders);
-        return rookieLeadersWithTeamInfo;
-    }
-    async getShGoalsLeaders(season, seasonType) {
-        const shGoalsLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                sh_goals: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                sh_goals: 'DESC',
-            },
-            take: 10,
-        });
-        const shGoalsLeadersWithTeamInfo = await this.setTeamInfo(shGoalsLeaders);
-        return shGoalsLeadersWithTeamInfo;
-    }
-    async getShotsLeaders(season, seasonType) {
-        const shotsLeaders = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                shots: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isgoalie: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                shots: 'DESC',
-            },
-            take: 10,
-        });
-        const shotsLeadersWithTeamInfo = await this.setTeamInfo(shotsLeaders);
-        return shotsLeadersWithTeamInfo;
-    }
-    async setShootingLeaders(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            shooting_pct: Number(item.shooting_pct),
-        })));
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
         });
     }
 };
 exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService;
-exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService = tslib_1.__decorate([
+exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService_1 = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(0, (0, typeorm_1.InjectRepository)(entities_1.Players_Stats_V2)),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
@@ -7562,6 +6852,38 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const COMMON_PLAYER_STATS_SELECT = {
+    id: true,
+    team_name: true,
+    position: true,
+    games_played: true,
+    goals: true,
+    assists: true,
+    points: true,
+    plus_minus: true,
+    penalty_minutes: true,
+    pp_goals: true,
+    sh_goals: true,
+    gw_goals: true,
+    gt_goals: true,
+    shots: true,
+    shooting_pct: true,
+    minutes_played: true,
+    minutes_per_game: true,
+    fo_pct: true,
+    pass_pct: true,
+    corner_pct: true,
+    hits: true,
+    blocked_shots: true,
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isdefense: true,
+        isforward: true,
+    },
+};
 let ApiPlayerStatsService = class ApiPlayerStatsService {
     constructor(repo, teamInfoRepo) {
         this.repo = repo;
@@ -7573,13 +6895,13 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
                 playing_year: season,
             },
         });
-        const playersWithTeamInfo = this.setTeamInfo(players);
+        const playersWithTeamInfo = await this.attachTeamInfo(players);
         return playersWithTeamInfo;
     }
     async updatePlayerById(id, season, attrs) {
-        const player = await this.repo.findOneByOrFail({
+        const player = await this.repo.findOneBy({
             player_id: {
-                id: id,
+                id,
             },
             playing_year: season,
         });
@@ -7590,7 +6912,7 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         return this.repo.save(player);
     }
     async deletePlayer(id, season) {
-        const player = await this.repo.findOneByOrFail({
+        const player = await this.repo.findOneBy({
             id,
             playing_year: season,
         });
@@ -7600,124 +6922,36 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
         return this.repo.remove(player);
     }
     async getAllStats(season, seasonType) {
-        const allStats = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                position: true,
-                games_played: true,
-                goals: true,
-                assists: true,
-                points: true,
-                plus_minus: true,
-                penalty_minutes: true,
-                pp_goals: true,
-                sh_goals: true,
-                gw_goals: true,
-                gt_goals: true,
-                shots: true,
-                shooting_pct: true,
-                minutes_played: true,
-                minutes_per_game: true,
-                fo_pct: true,
-                pass_pct: true,
-                corner_pct: true,
-                hits: true,
-                blocked_shots: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isdefense: true,
-                    isforward: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-            },
-            order: {
-                points: 'DESC',
-            },
+        return this.fetchAndFormatPlayerStats({
+            playing_year: season,
+            season_type: seasonType,
         });
-        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo);
-        return allStatsWithTeamInfoConverted;
     }
     async getPlayerStatsByPlayerId(season, seasonType, playerId) {
+        return this.fetchAndFormatPlayerStats({
+            playing_year: season,
+            season_type: seasonType,
+            player_id: {
+                id: playerId,
+            },
+        });
+    }
+    async fetchAndFormatPlayerStats(whereClause) {
         const allStats = await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                position: true,
-                games_played: true,
-                goals: true,
-                assists: true,
-                points: true,
-                plus_minus: true,
-                penalty_minutes: true,
-                pp_goals: true,
-                sh_goals: true,
-                gw_goals: true,
-                gt_goals: true,
-                shots: true,
-                shooting_pct: true,
-                minutes_played: true,
-                minutes_per_game: true,
-                fo_pct: true,
-                pass_pct: true,
-                corner_pct: true,
-                hits: true,
-                blocked_shots: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isdefense: true,
-                    isforward: true,
-                },
+            select: COMMON_PLAYER_STATS_SELECT,
+            relations: {
+                player_id: true,
             },
-            relations: ['player_id'],
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                player_id: {
-                    id: playerId,
-                },
-            },
+            where: whereClause,
             order: {
                 points: 'DESC',
             },
         });
-        const allStatsWithTeamInfo = await this.setTeamInfo(allStats);
-        const allStatsWithTeamInfoConverted = await this.convertStats(allStatsWithTeamInfo);
-        return allStatsWithTeamInfoConverted;
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getTeamInfo(item.team_name),
-        })));
-    }
-    async getTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-                shortname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    async convertStats(array) {
-        return await Promise.all(array.map((stat) => ({
+        if (allStats.length === 0) {
+            return [];
+        }
+        const allStatsWithTeamInfo = await this.attachTeamInfo(allStats);
+        return allStatsWithTeamInfo.map((stat) => ({
             ...stat,
             games_played: Number(stat.games_played),
             goals: Number(stat.goals),
@@ -7738,7 +6972,29 @@ let ApiPlayerStatsService = class ApiPlayerStatsService {
             corner_pct: Number(stat.corner_pct),
             hits: Number(stat.hits),
             blocked_shots: Number(stat.blocked_shots),
-        })));
+        }));
+    }
+    async attachTeamInfo(items) {
+        const uniqueTeamNames = Array.from(new Set(items.map((item) => item.team_name).filter(Boolean)));
+        const teams = uniqueTeamNames.length
+            ? await this.teamInfoRepo.find({
+                select: {
+                    id: true,
+                    city: true,
+                    teamlogo: true,
+                    nickname: true,
+                    shortname: true,
+                },
+                where: {
+                    shortname: (0, typeorm_2.In)(uniqueTeamNames),
+                },
+            })
+            : [];
+        const teamMap = new Map(teams.map((team) => [team.shortname, team]));
+        return items.map((item) => ({
+            ...item,
+            teamInfo: teamMap.get(item.team_name) ?? null,
+        }));
     }
 };
 exports.ApiPlayerStatsService = ApiPlayerStatsService;
@@ -7962,6 +7218,40 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const COMMON_PLAYER_STATS_SELECT = {
+    id: true,
+    team_name: true,
+    position: true,
+    games_played: true,
+    goals: true,
+    assists: true,
+    points: true,
+    plus_minus: true,
+    penalty_minutes: true,
+    pp_goals: true,
+    sh_goals: true,
+    gw_goals: true,
+    gt_goals: true,
+    shots: true,
+    shooting_pct: true,
+    minutes_played: true,
+    minutes_per_game: true,
+    fo_pct: true,
+    pass_pct: true,
+    corner_pct: true,
+    hits: true,
+    blocked_shots: true,
+    playing_year: true,
+    season_type: true,
+    player_id: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        nhl_id: true,
+        isdefense: true,
+        isforward: true,
+    },
+};
 let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
     constructor(repo, teamInfoRepo, dataSource) {
         this.repo = repo;
@@ -7970,24 +7260,109 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
     }
     async getUserPlayerStatsBySeasonType(userId, seasonType) {
         const userTeams = await this.teamInfoRepo.findBy({ users_id: userId });
-        const userTeamsWithPlayerStats = await this.setPlayerStats(userTeams, seasonType);
-        const userTeamsWithPlayersStatsConverted = await this.setConvertedPlayersStats(userTeamsWithPlayerStats, false);
-        return userTeamsWithPlayersStatsConverted;
+        if (userTeams.length === 0)
+            return [];
+        const teamShortNames = userTeams.map((t) => t.shortname).filter(Boolean);
+        if (teamShortNames.length === 0)
+            return [];
+        const allStats = await this.repo.find({
+            select: COMMON_PLAYER_STATS_SELECT,
+            relations: {
+                player_id: true,
+            },
+            where: {
+                team_name: (0, typeorm_2.In)(teamShortNames),
+                season_type: seasonType,
+            },
+            order: {
+                points: 'DESC',
+            },
+        });
+        const statsByTeam = new Map();
+        for (const stat of allStats) {
+            const stats = statsByTeam.get(stat.team_name);
+            if (stats) {
+                stats.push(stat);
+            }
+            else {
+                statsByTeam.set(stat.team_name, [stat]);
+            }
+        }
+        return userTeams.map((team) => {
+            const rawTeamStats = statsByTeam.get(team.shortname) ?? [];
+            return {
+                ...team,
+                playerStats: this.convertRegularStats(rawTeamStats, team),
+            };
+        });
     }
     async getUserPlayerStatsAllTimeBySeasonType(userId, seasonType) {
         const userTeams = await this.teamInfoRepo.findBy({ users_id: userId });
-        const userTeamsWithPlayerStats = await this.setPlayerAllTimeStats(userTeams, seasonType);
-        const userTeamsWithPlayersStatsConverted = await this.setConvertedPlayersStats(userTeamsWithPlayerStats, true);
-        return userTeamsWithPlayersStatsConverted;
+        if (userTeams.length === 0)
+            return [];
+        const teamShortNames = userTeams.map((t) => t.shortname).filter(Boolean);
+        if (teamShortNames.length === 0)
+            return [];
+        const rawStats = await this.dataSource.query(`SELECT
+        b.firstname AS firstname,
+        b.lastname AS lastname,
+        b.isdefense AS isdefense,
+        b.isforward AS isforward,
+        b.isgoalie AS isgoalie,
+        b.nhl_id AS nhl_id,
+        a.player_id AS player_id,
+        a.season_type AS season_type,
+        a.team_name AS team_name,
+        SUM(a.games_played) AS games_played,
+        SUM(a.goals) AS goals,
+        SUM(a.assists) AS assists,
+        SUM(a.points) AS points,
+        SUM(a.plus_minus) AS plus_minus,
+        SUM(a.penalty_minutes) AS penalty_minutes,
+        SUM(a.sh_goals) AS sh_goals,
+        SUM(a.pp_goals) AS pp_goals,
+        SUM(a.gw_goals) AS gw_goals,
+        SUM(a.gt_goals) AS gt_goals,
+        SUM(a.shots) AS shots,
+        SUM(a.minutes_played) AS minutes_played,
+        SUM(a.hits) AS hits,
+        SUM(a.blocked_shots) AS blocked_shots
+      FROM players_stats_v2 a
+      INNER JOIN players_v2 b ON b.id = a.player_id
+      WHERE a.points > 0
+        AND a.season_type = $1
+        AND a.team_name = ANY($2)
+      GROUP BY b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.team_name
+      ORDER BY points DESC`, [seasonType, teamShortNames]);
+        const statsByTeam = new Map();
+        for (const stat of rawStats) {
+            const stats = statsByTeam.get(stat.team_name);
+            if (stats) {
+                stats.push(stat);
+            }
+            else {
+                statsByTeam.set(stat.team_name, [stat]);
+            }
+        }
+        return userTeams.map((team) => {
+            const rawTeamStats = statsByTeam.get(team.shortname) ?? [];
+            return {
+                ...team,
+                playerStats: this.convertAllTimeStats(rawTeamStats),
+            };
+        });
     }
     async getTeamPlayersByTeamName(teamName, season) {
-        return await this.repo.find({
+        return this.repo.find({
             select: {
                 player_id: {
                     id: true,
                     firstname: true,
                     lastname: true,
                 },
+            },
+            relations: {
+                player_id: true,
             },
             where: {
                 team_name: teamName,
@@ -7996,159 +7371,101 @@ let ApiUserPlayerStatsService = class ApiUserPlayerStatsService {
             },
         });
     }
-    async setPlayerStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            playerStats: await this.getPlayerStats(item.shortname, seasonType),
-        })));
-    }
-    async setPlayerAllTimeStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            playerStats: await this.getPlayerAllTimeStats(item.shortname, seasonType),
-        })));
-    }
-    async getPlayerAllTimeStats(teamShortName, seasonType) {
-        return await this.dataSource.query(`select
-      b.firstname as firstname,
-      b.lastname as lastname,
-      b.isdefense as isdefense,
-      b.isforward as isforward,
-      b.isgoalie as isgoalie,
-      b.nhl_id as nhl_id,
-      a.player_id as player_id,
-      a.season_type as season_type, 
-      a.team_name as team_name,
-      sum(a.games_played) as games_played, 
-      sum(a.goals) as goals, 
-      sum(a.assists) as assists, 
-      sum(a.points) as points, 
-      sum(a.plus_minus) as plus_minus, 
-      sum(a.penalty_minutes) as penalty_minutes, 
-      sum(a.sh_goals) as sh_goals, 
-      sum(a.pp_goals) as pp_goals, 
-      sum(a.gw_goals) as gw_goals, 
-      sum(a.gt_goals) as gt_goals, 
-      sum(a.shots) as shots, 
-      sum(a.minutes_played) as minutes_played, 
-      sum(a.hits) as hits, 
-      sum(a.blocked_shots) as blocked_shots
-      from
-      players_stats_v2 as a
-      left join players_v2 as b
-      on b.id = a.player_id
-      where (a.player_id = b.id
-      and
-      a.points > '0'
-      and
-      a.season_type = '${seasonType}'
-      and a.team_name = '${teamShortName}')
-      group by b.firstname, b.lastname, b.isgoalie, b.isdefense, b.isforward, b.nhl_id, a.player_id, a.season_type, a.team_name
-      order by points DESC`);
-    }
-    async getPlayerStats(teamShortName, seasonType) {
-        return await this.repo.find({
-            select: {
-                id: true,
-                team_name: true,
-                position: true,
-                games_played: true,
-                goals: true,
-                assists: true,
-                points: true,
-                plus_minus: true,
-                penalty_minutes: true,
-                pp_goals: true,
-                sh_goals: true,
-                gw_goals: true,
-                gt_goals: true,
-                shots: true,
-                shooting_pct: true,
-                minutes_played: true,
-                minutes_per_game: true,
-                fo_pct: true,
-                pass_pct: true,
-                corner_pct: true,
-                hits: true,
-                blocked_shots: true,
-                playing_year: true,
-                player_id: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                    nhl_id: true,
-                    isdefense: true,
-                    isforward: true,
-                },
-            },
-            relations: ['player_id'],
-            where: {
-                team_name: teamShortName,
-                season_type: seasonType,
-            },
-            order: {
-                points: 'DESC',
-            },
+    convertRegularStats(stats, team) {
+        const teamMetadata = {
+            id: team.id,
+            city: team.city,
+            nickname: team.nickname,
+            teamlogo: team.teamlogo,
+        };
+        return stats.map((stat) => {
+            const gamesPlayed = Number(stat.games_played) || 0;
+            const minutesPlayed = Number(stat.minutes_played) || 0;
+            const points = Number(stat.points) || 0;
+            const hits = Number(stat.hits) || 0;
+            return {
+                playing_year: stat.playing_year,
+                season_type: stat.season_type,
+                team_name: stat.team_name,
+                teamInfo: teamMetadata,
+                player_id: stat.player_id,
+                games_played: gamesPlayed,
+                goals: Number(stat.goals),
+                assists: Number(stat.assists),
+                points,
+                plus_minus: Number(stat.plus_minus),
+                penalty_minutes: Number(stat.penalty_minutes),
+                pp_goals: Number(stat.pp_goals),
+                sh_goals: Number(stat.sh_goals),
+                gw_goals: Number(stat.gw_goals),
+                gt_goals: Number(stat.gt_goals),
+                shots: Number(stat.shots),
+                shooting_pct: Number(stat.shooting_pct),
+                minutes_per_game: Number(stat.minutes_per_game),
+                fo_pct: Number(stat.fo_pct),
+                pass_pct: Number(stat.pass_pct),
+                corner_pct: Number(stat.corner_pct),
+                minutes_played: minutesPlayed,
+                hits,
+                blocked_shots: Number(stat.blocked_shots),
+                pointsPerSixty: minutesPlayed > 0
+                    ? Number(((points / minutesPlayed) * 60).toFixed(2))
+                    : 0,
+                hit_per_game: gamesPlayed > 0 ? Number((hits / gamesPlayed).toFixed(1)) : 0,
+            };
         });
     }
-    async setConvertedPlayersStats(array, raw) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            playerStats: await this.convertStats(item.playerStats, raw, item),
-        })));
-    }
-    async convertStats(array, raw, teamInfo) {
-        return await Promise.all(array.map((stat) => ({
-            playing_year: stat.playing_year,
-            season_type: stat.season_type,
-            team_name: stat.team_name,
-            teamInfo: !raw
-                ? {
-                    id: teamInfo.id,
-                    city: teamInfo.city,
-                    nickname: teamInfo.nickname,
-                    teamlogo: teamInfo.teamlogo,
-                }
-                : null,
-            games_played: Number(stat.games_played),
-            goals: Number(stat.goals),
-            assists: Number(stat.assists),
-            points: Number(stat.points),
-            plus_minus: Number(stat.plus_minus),
-            penalty_minutes: Number(stat.penalty_minutes),
-            pp_goals: Number(stat.pp_goals),
-            sh_goals: Number(stat.sh_goals),
-            gw_goals: Number(stat.gw_goals),
-            gt_goals: Number(stat.gt_goals),
-            shots: Number(stat.shots),
-            shooting_pct: !raw
-                ? Number(stat.shooting_pct)
-                : Number(((Number(stat.goals) / Number(stat.shots)) * 100).toFixed(1)),
-            minutes_per_game: !raw
-                ? Number(stat.minutes_per_game)
-                : Number((Number(stat.minutes_played) / Number(stat.games_played)).toFixed(1)),
-            fo_pct: !raw ? Number(stat.fo_pct) : null,
-            pass_pct: !raw ? Number(stat.pass_pct) : null,
-            corner_pct: !raw ? Number(stat.corner_pct) : null,
-            minutes_played: Number(stat.minutes_played),
-            hits: Number(stat.hits),
-            blocked_shots: Number(stat.blocked_shots),
-            pointsPerSixty: Number(((Number(stat.points) / Number(stat.minutes_played)) * 60).toFixed(2)),
-            hit_per_game: Number((Number(stat.hits) / Number(stat.games_played)).toFixed(1)),
-            player_id: !raw
-                ? stat.player_id
-                : {
-                    id: stat['player_id'],
-                    firstname: stat['firstname'],
-                    lastname: stat['lastname'],
-                    nhl_id: stat['nhl_id'],
+    convertAllTimeStats(stats) {
+        return stats.map((stat) => {
+            const gamesPlayed = Number(stat.games_played) || 0;
+            const minutesPlayed = Number(stat.minutes_played) || 0;
+            const shots = Number(stat.shots) || 0;
+            const goals = Number(stat.goals) || 0;
+            const points = Number(stat.points) || 0;
+            const hits = Number(stat.hits) || 0;
+            return {
+                playing_year: null,
+                season_type: stat.season_type,
+                team_name: stat.team_name,
+                teamInfo: null,
+                player_id: {
+                    id: stat.player_id,
+                    firstname: stat.firstname,
+                    lastname: stat.lastname,
+                    nhl_id: stat.nhl_id,
                     isactive: null,
                     isgoalie: null,
-                    isdefense: stat['isdefense'],
-                    isforward: stat['isforward'],
+                    isdefense: stat.isdefense,
+                    isforward: stat.isforward,
                     is_protected: null,
                 },
-        })));
+                games_played: gamesPlayed,
+                goals,
+                assists: Number(stat.assists),
+                points,
+                plus_minus: Number(stat.plus_minus),
+                penalty_minutes: Number(stat.penalty_minutes),
+                pp_goals: Number(stat.pp_goals),
+                sh_goals: Number(stat.sh_goals),
+                gw_goals: Number(stat.gw_goals),
+                gt_goals: Number(stat.gt_goals),
+                shots,
+                shooting_pct: shots > 0 ? Number(((goals / shots) * 100).toFixed(1)) : 0,
+                minutes_per_game: gamesPlayed > 0
+                    ? Number((minutesPlayed / gamesPlayed).toFixed(1))
+                    : 0,
+                fo_pct: null,
+                pass_pct: null,
+                corner_pct: null,
+                minutes_played: minutesPlayed,
+                hits,
+                blocked_shots: Number(stat.blocked_shots),
+                pointsPerSixty: minutesPlayed > 0
+                    ? Number(((points / minutesPlayed) * 60).toFixed(2))
+                    : 0,
+                hit_per_game: gamesPlayed > 0 ? Number((hits / gamesPlayed).toFixed(1)) : 0,
+            };
+        });
     }
 };
 exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService;
@@ -8912,8 +8229,14 @@ let ApiScheduleService = class ApiScheduleService {
                 game_day: 'ASC',
             },
         });
-        const scheduleTeamInfo = await this.setTeamInfo(schedule);
-        return scheduleTeamInfo;
+        if (schedule.length === 0)
+            return [];
+        const teamMap = await this.getTeamInfoMap(this.extractUniqueTeamIds(schedule));
+        return schedule.map((item) => ({
+            ...item,
+            visTeamInfo: teamMap.get(item.vis_team_id) ?? null,
+            homeTeamInfo: teamMap.get(item.home_team_id) ?? null,
+        }));
     }
     async getNextDays(season, currentDay) {
         const schedule = await this.repo.find({
@@ -8925,149 +8248,65 @@ let ApiScheduleService = class ApiScheduleService {
                 game_day: 'ASC',
             },
         });
-        const scheduleTeamInfo = await this.setTeamNextInfo(schedule);
-        return scheduleTeamInfo;
+        if (schedule.length === 0)
+            return [];
+        const uniqueTeamIds = this.extractUniqueTeamIds(schedule);
+        const [teamMap, seasonRecordMap, finishedGames] = await Promise.all([
+            this.getTeamInfoMap(uniqueTeamIds),
+            this.getTeamSeasonRecordsMap(uniqueTeamIds, season),
+            this.getCompletedGamesForSeason(season),
+        ]);
+        const teamGamesMap = this.buildTeamCompletedGamesMap(finishedGames);
+        const matchupGamesMap = this.buildMatchupGamesMap(finishedGames);
+        return schedule.map((item) => {
+            const visId = Number(item.vis_team_id);
+            const homeId = Number(item.home_team_id);
+            const headToHeadGames = matchupGamesMap.get(this.getMatchupKey(visId, homeId)) ?? [];
+            const visVersus = this.calculateVersusRecord(headToHeadGames, visId);
+            const homeVersus = {
+                wins: visVersus.loss,
+                loss: visVersus.wins,
+                ties: visVersus.ties,
+            };
+            return {
+                id: item.id,
+                gameDay: item.game_day,
+                visTeamScore: item.vis_team_score,
+                visTeamInfo: teamMap.get(visId) ?? null,
+                visTeamLastFive: this.calculateLastFive(teamGamesMap.get(visId) ?? [], visId),
+                visTeamRecord: seasonRecordMap.get(visId) ?? null,
+                visTeamVersus: visVersus,
+                homeTeamScore: item.home_team_score,
+                homeTeamInfo: teamMap.get(homeId) ?? null,
+                homeTeamLastFive: this.calculateLastFive(teamGamesMap.get(homeId) ?? [], homeId),
+                homeTeamRecord: seasonRecordMap.get(homeId) ?? null,
+                homeTeamVersus: homeVersus,
+            };
+        });
     }
     async updateGameById(gameId, gameData) {
-        const game = await this.repo.findOneByOrFail({ id: gameId });
+        const game = await this.repo.findOneBy({ id: gameId });
         if (!game) {
-            throw new common_1.NotFoundException('player not found');
+            throw new common_1.NotFoundException(`Game with id ${gameId} not found`);
         }
-        const attrs = {
-            home_team_score: gameData.home_team_score,
-            vis_team_score: gameData.vis_team_score,
-        };
-        Object.assign(game, attrs);
+        game.home_team_score = gameData.home_team_score;
+        game.vis_team_score = gameData.vis_team_score;
         return this.repo.save(game);
     }
-    async getTeamLastFive(teamId, season) {
-        const lastFive = await this.repo
-            .createQueryBuilder('schedule')
-            .where('schedule.playing_year = :year', { year: season })
-            .andWhere(new typeorm_2.Brackets((qb) => {
-            qb.where('schedule.home_team_id = :teamId', { teamId }).orWhere('schedule.vis_team_id = :teamId', { teamId });
-        }))
-            .andWhere('schedule.home_team_score is not null')
-            .orderBy('schedule.game_day', 'DESC')
-            .limit(5)
-            .getMany();
-        return await this.getLastFiveRecord(lastFive, Number(teamId));
+    extractUniqueTeamIds(games) {
+        const ids = new Set();
+        for (const g of games) {
+            if (g.home_team_id)
+                ids.add(Number(g.home_team_id));
+            if (g.vis_team_id)
+                ids.add(Number(g.vis_team_id));
+        }
+        return Array.from(ids);
     }
-    async getLastFiveRecord(lastFive, teamId) {
-        const lastFiveRecord = [];
-        await lastFive.forEach((record) => {
-            if (record.home_team_id === teamId) {
-                if (Number(record.home_team_score) > Number(record.vis_team_score)) {
-                    lastFiveRecord.push('W');
-                }
-                else if (Number(record.home_team_score) < Number(record.vis_team_score)) {
-                    lastFiveRecord.push('L');
-                }
-                else {
-                    lastFiveRecord.push('T');
-                }
-            }
-            else {
-                if (Number(record.vis_team_score) > Number(record.home_team_score)) {
-                    lastFiveRecord.push('W');
-                }
-                else if (Number(record.vis_team_score) < Number(record.home_team_score)) {
-                    lastFiveRecord.push('L');
-                }
-                else {
-                    lastFiveRecord.push('T');
-                }
-            }
-        });
-        return lastFiveRecord;
-    }
-    async getVersusRecord(data, teamId) {
-        let wins = 0;
-        let loss = 0;
-        let ties = 0;
-        await data.forEach((game) => {
-            if (game.vis_team_id === teamId) {
-                Number(game.vis_team_score) > Number(game.home_team_score)
-                    ? wins++
-                    : Number(game.vis_team_score) === Number(game.home_team_score)
-                        ? ties++
-                        : loss++;
-            }
-            else if (game.home_team_id === teamId) {
-                Number(game.home_team_score) > Number(game.vis_team_score)
-                    ? wins++
-                    : Number(game.home_team_score) === Number(game.vis_team_score)
-                        ? ties++
-                        : loss++;
-            }
-        });
-        return {
-            wins,
-            loss,
-            ties,
-        };
-    }
-    async setTeamNextInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            id: item.id,
-            gameDay: item.game_day,
-            visTeamScore: item.vis_team_score,
-            visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-            visTeamLastFive: await this.getTeamLastFive(Number(item.vis_team_id), item.playing_year),
-            visTeamRecord: await this.getTeamSeasonRecord(Number(item.vis_team_id), item.playing_year),
-            visTeamVersus: await this.getTeamRecordVersus(Number(item.vis_team_id), Number(item.home_team_id), item.playing_year),
-            homeTeamScore: item.home_team_score,
-            homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-            homeTeamLastFive: await this.getTeamLastFive(Number(item.home_team_id), item.playing_year),
-            homeTeamRecord: await this.getTeamSeasonRecord(Number(item.home_team_id), item.playing_year),
-            homeTeamVersus: await this.getTeamRecordVersus(Number(item.home_team_id), Number(item.vis_team_id), item.playing_year),
-        })));
-    }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            visTeamInfo: await this.getTeamInfo(item.vis_team_id),
-            homeTeamInfo: await this.getTeamInfo(item.home_team_id),
-        })));
-    }
-    async getTeamRecordVersus(teamOneId, teamTwoId, season) {
-        const versus = await this.repo
-            .createQueryBuilder('schedule')
-            .where('schedule.playing_year = :year', { year: season })
-            .where(new typeorm_2.Brackets((qb) => {
-            qb.where('schedule.vis_team_id = :teamOneId', { teamOneId })
-                .andWhere('schedule.home_team_id = :teamTwoId', { teamTwoId })
-                .andWhere('schedule.playing_year = :year', { year: season })
-                .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
-        }))
-            .orWhere(new typeorm_2.Brackets((qb) => {
-            qb.where('schedule.vis_team_id = :teamTwoId', { teamTwoId })
-                .andWhere('schedule.home_team_id = :teamOneId', { teamOneId })
-                .andWhere('schedule.playing_year = :year', { year: season })
-                .andWhere('schedule.vis_team_score >= :empty', { empty: 0 });
-        }))
-            .getMany();
-        return await this.getVersusRecord(versus, Number(teamOneId));
-    }
-    async getTeamSeasonRecord(teamId, season) {
-        return await this.teamStatsRepo.findOne({
-            select: {
-                id: true,
-                wins: true,
-                loss: true,
-                ties: true,
-            },
-            where: {
-                team_id: {
-                    id: teamId,
-                },
-                playing_year: season,
-                season_type: 'Regular',
-            },
-        });
-    }
-    async getTeamInfo(teamId) {
-        return await this.teamInfoRepo.findOne({
+    async getTeamInfoMap(teamIds) {
+        if (!teamIds.length)
+            return new Map();
+        const teams = await this.teamInfoRepo.find({
             select: {
                 id: true,
                 city: true,
@@ -9075,10 +8314,120 @@ let ApiScheduleService = class ApiScheduleService {
                 nickname: true,
                 teamcolor: true,
             },
+            where: { id: (0, typeorm_2.In)(teamIds) },
+        });
+        return new Map(teams.map((t) => [t.id, t]));
+    }
+    async getTeamSeasonRecordsMap(teamIds, season) {
+        if (!teamIds.length)
+            return new Map();
+        const records = await this.teamStatsRepo.find({
+            select: {
+                id: true,
+                wins: true,
+                loss: true,
+                ties: true,
+                team_id: { id: true },
+            },
+            relations: { team_id: true },
             where: {
-                id: teamId,
+                team_id: { id: (0, typeorm_2.In)(teamIds) },
+                playing_year: season,
+                season_type: 'Regular',
             },
         });
+        return new Map(records.map((r) => [r.team_id.id, r]));
+    }
+    async getCompletedGamesForSeason(season) {
+        return this.repo.find({
+            select: {
+                id: true,
+                game_day: true,
+                home_team_id: true,
+                vis_team_id: true,
+                home_team_score: true,
+                vis_team_score: true,
+            },
+            where: {
+                playing_year: season,
+                home_team_score: (0, typeorm_2.Not)((0, typeorm_2.IsNull)()),
+                vis_team_score: (0, typeorm_2.Not)((0, typeorm_2.IsNull)()),
+            },
+            order: {
+                game_day: 'DESC',
+            },
+        });
+    }
+    buildTeamCompletedGamesMap(games) {
+        const map = new Map();
+        for (const game of games) {
+            const homeId = Number(game.home_team_id);
+            const visId = Number(game.vis_team_id);
+            if (!map.has(homeId))
+                map.set(homeId, []);
+            if (!map.has(visId))
+                map.set(visId, []);
+            map.get(homeId).push(game);
+            map.get(visId).push(game);
+        }
+        return map;
+    }
+    buildMatchupGamesMap(games) {
+        const map = new Map();
+        for (const game of games) {
+            const key = this.getMatchupKey(Number(game.home_team_id), Number(game.vis_team_id));
+            const list = map.get(key);
+            if (list) {
+                list.push(game);
+            }
+            else {
+                map.set(key, [game]);
+            }
+        }
+        return map;
+    }
+    getMatchupKey(teamA, teamB) {
+        return teamA < teamB ? `${teamA}_${teamB}` : `${teamB}_${teamA}`;
+    }
+    calculateLastFive(games, teamId) {
+        const results = [];
+        const limit = Math.min(games.length, 5);
+        for (let i = 0; i < limit; i++) {
+            const game = games[i];
+            const isHome = Number(game.home_team_id) === teamId;
+            const teamScore = Number(isHome ? game.home_team_score : game.vis_team_score);
+            const oppScore = Number(isHome ? game.vis_team_score : game.home_team_score);
+            if (teamScore > oppScore) {
+                results.push('W');
+            }
+            else if (teamScore < oppScore) {
+                results.push('L');
+            }
+            else {
+                results.push('T');
+            }
+        }
+        return results;
+    }
+    calculateVersusRecord(games, teamId) {
+        let wins = 0;
+        let loss = 0;
+        let ties = 0;
+        for (const game of games) {
+            const isHome = Number(game.home_team_id) === teamId;
+            const teamScore = Number(isHome ? game.home_team_score : game.vis_team_score);
+            const oppScore = Number(isHome ? game.vis_team_score : game.home_team_score);
+            if (teamScore > oppScore) {
+                wins++;
+            }
+            else if (teamScore < oppScore) {
+                loss++;
+            }
+            else {
+                ties++;
+            }
+        }
+        return { wins, loss, ties };
     }
 };
 exports.ApiScheduleService = ApiScheduleService;
@@ -9322,62 +8671,107 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const BASIC_TEAM_STATS_SELECT = {
+    team_id: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        shortname: true,
+        nickname: true,
+    },
+    games_played: true,
+    points: true,
+    wins: true,
+    loss: true,
+    ties: true,
+    long_win_streak: true,
+    penalty_minutes: true,
+    goals_for: true,
+    goals_against: true,
+    pk_goals: true,
+    pk_attempts: true,
+    pp_goals: true,
+    pp_attempts: true,
+    shots_for: true,
+    shots_against: true,
+    face_off_won: true,
+    face_off_lost: true,
+    pass_complete: true,
+    pass_incomplete: true,
+};
+const DETAILED_TEAM_STATS_SELECT = {
+    team_id: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        shortname: true,
+        nickname: true,
+        divisions_id: {
+            id: true,
+            divisionname: true,
+            conference_id: true,
+        },
+    },
+    div_loss: true,
+    div_tie: true,
+    div_win: true,
+    games_played: true,
+    goals_against: true,
+    goals_for: true,
+    home_loss: true,
+    home_ties: true,
+    home_wins: true,
+    loss: true,
+    penalty_minutes: true,
+    pk_attempts: true,
+    pk_goals: true,
+    pk_min: true,
+    playing_year: true,
+    points: true,
+    pp_attempts: true,
+    pp_goals: true,
+    road_loss: true,
+    road_ties: true,
+    road_wins: true,
+    season_type: true,
+    ties: true,
+    trail_after_two_loss: true,
+    trail_after_two_ties: true,
+    trail_after_two_wins: true,
+    wins: true,
+};
+const PLAYOFF_STANDINGS_SELECT = {
+    team_id: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        teamcolor: true,
+        shortname: true,
+        nickname: true,
+        divisions_id: {
+            id: true,
+            divisionname: true,
+            conference_id: true,
+        },
+    },
+    goals_against: true,
+    goals_for: true,
+    playing_year: true,
+    points: true,
+    season_type: true,
+    wins: true,
+};
 let ApiTeamStatsService = class ApiTeamStatsService {
     constructor(repo, divisionsRepo) {
         this.repo = repo;
         this.divisionsRepo = divisionsRepo;
-        this.sortTeamStatsByStandings = (data) => {
-            return data.sort((a, b) => {
-                if (b.points === a.points) {
-                    if (b.wins === a.wins) {
-                        if (b.goals_for - b.goals_against === a.goals_for - a.goals_against) {
-                            return b.goals_for - a.goals_for;
-                        }
-                        else {
-                            return (b.goals_for - b.goals_against - (a.goals_for - a.goals_against));
-                        }
-                    }
-                    else {
-                        return b.wins - a.wins;
-                    }
-                }
-                else {
-                    return b.points - a.points;
-                }
-            });
-        };
     }
     async getTeamStatsBySeasonByType(season, seasonType) {
-        return await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                },
-                games_played: true,
-                points: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                long_win_streak: true,
-                penalty_minutes: true,
-                goals_for: true,
-                goals_against: true,
-                pk_goals: true,
-                pk_attempts: true,
-                pp_goals: true,
-                pp_attempts: true,
-                shots_for: true,
-                shots_against: true,
-                face_off_won: true,
-                face_off_lost: true,
-                pass_complete: true,
-                pass_incomplete: true,
+        return this.repo.find({
+            relations: {
+                team_id: true,
             },
+            select: BASIC_TEAM_STATS_SELECT,
             where: {
                 playing_year: season,
                 season_type: seasonType,
@@ -9386,101 +8780,75 @@ let ApiTeamStatsService = class ApiTeamStatsService {
     }
     async getAllTeamStatsBySeasonByType(season, seasonType) {
         const teamStats = await this.repo.find({
-            relations: ['team_id'],
-            select: {
+            relations: {
                 team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                    divisions_id: {
-                        id: true,
-                        divisionname: true,
-                        conference_id: true,
-                    },
+                    divisions_id: true,
                 },
-                div_loss: true,
-                div_tie: true,
-                div_win: true,
-                games_played: true,
-                goals_against: true,
-                goals_for: true,
-                home_loss: true,
-                home_ties: true,
-                home_wins: true,
-                loss: true,
-                penalty_minutes: true,
-                pk_attempts: true,
-                pk_goals: true,
-                pk_min: true,
-                playing_year: true,
-                points: true,
-                pp_attempts: true,
-                pp_goals: true,
-                road_loss: true,
-                road_ties: true,
-                road_wins: true,
-                season_type: true,
-                ties: true,
-                trail_after_two_loss: true,
-                trail_after_two_ties: true,
-                trail_after_two_wins: true,
-                wins: true,
             },
+            select: DETAILED_TEAM_STATS_SELECT,
             where: {
                 playing_year: season,
                 season_type: seasonType,
             },
         });
-        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
-        return teamStatsWithDivision;
+        return this.attachDivisionInfo(teamStats);
     }
     async getTeamStandingsForPlayoffs(season, seasonType) {
         const teamStats = await this.repo.find({
-            relations: ['team_id'],
-            select: {
+            relations: {
                 team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    teamcolor: true,
-                    shortname: true,
-                    nickname: true,
-                    divisions_id: {
-                        id: true,
-                        divisionname: true,
-                        conference_id: true,
-                    },
+                    divisions_id: true,
                 },
-                goals_against: true,
-                goals_for: true,
-                playing_year: true,
-                points: true,
-                season_type: true,
-                wins: true,
             },
+            select: PLAYOFF_STANDINGS_SELECT,
             where: {
                 playing_year: season,
                 season_type: seasonType,
             },
         });
-        const teamStatsWithDivision = await this.setDivisionInfo(teamStats);
-        const teamStatsWithDivisionSorted = await this.sortTeamStatsByStandings(teamStatsWithDivision);
-        return teamStatsWithDivisionSorted;
+        const teamStatsWithDivision = await this.attachDivisionInfo(teamStats);
+        return this.sortTeamStatsByStandings(teamStatsWithDivision);
     }
-    async setDivisionInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            division: await this.getDivisionInfo(item.team_id.divisions_id.id),
-        })));
+    async attachDivisionInfo(items) {
+        if (items.length === 0)
+            return [];
+        const uniqueDivisionIds = Array.from(new Set(items
+            .map((item) => item.team_id?.divisions_id?.id)
+            .filter((id) => typeof id === 'number')));
+        const divisions = uniqueDivisionIds.length
+            ? await this.divisionsRepo.find({
+                relations: ['conference_id'],
+                where: {
+                    id: (0, typeorm_2.In)(uniqueDivisionIds),
+                },
+            })
+            : [];
+        const divisionMap = new Map(divisions.map((d) => [d.id, d]));
+        return items.map((item) => {
+            const divisionId = item.team_id?.divisions_id?.id;
+            return {
+                ...item,
+                division: divisionId ? divisionMap.get(divisionId) ?? null : null,
+            };
+        });
     }
-    async getDivisionInfo(divisionId) {
-        return await this.divisionsRepo.findOne({
-            relations: ['conference_id'],
-            where: {
-                id: divisionId,
-            },
+    sortTeamStatsByStandings(data) {
+        return [...data].sort((a, b) => {
+            const aPoints = Number(a.points) || 0;
+            const bPoints = Number(b.points) || 0;
+            if (bPoints !== aPoints)
+                return bPoints - aPoints;
+            const aWins = Number(a.wins) || 0;
+            const bWins = Number(b.wins) || 0;
+            if (bWins !== aWins)
+                return bWins - aWins;
+            const aGoalDiff = (Number(a.goals_for) || 0) - (Number(a.goals_against) || 0);
+            const bGoalDiff = (Number(b.goals_for) || 0) - (Number(b.goals_against) || 0);
+            if (bGoalDiff !== aGoalDiff)
+                return bGoalDiff - aGoalDiff;
+            const aGoalsFor = Number(a.goals_for) || 0;
+            const bGoalsFor = Number(b.goals_for) || 0;
+            return bGoalsFor - aGoalsFor;
         });
     }
 };
@@ -9506,6 +8874,39 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const TEAM_STATS_SELECT = {
+    team_id: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        shortname: true,
+        nickname: true,
+    },
+    games_played: true,
+    points: true,
+    wins: true,
+    loss: true,
+    ties: true,
+    penalty_minutes: true,
+    goals_for: true,
+    goals_against: true,
+    shots_for: true,
+    shots_against: true,
+    pk_goals: true,
+    pk_attempts: true,
+    pp_goals: true,
+    pp_attempts: true,
+    sh_goals: true,
+    playing_year: true,
+    season_type: true,
+    shut_outs: true,
+    face_off_won: true,
+    face_off_lost: true,
+    corner_won: true,
+    corner_lost: true,
+    pass_complete: true,
+    pass_incomplete: true,
+};
 let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
     constructor(repo, dataSource) {
         this.repo = repo;
@@ -9513,38 +8914,10 @@ let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
     }
     async getAllTimeTeamStatsBySeasonByType(seasonType) {
         const allTimeStats = await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                },
-                games_played: true,
-                points: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                penalty_minutes: true,
-                goals_for: true,
-                goals_against: true,
-                pk_goals: true,
-                pk_attempts: true,
-                pp_goals: true,
-                pp_attempts: true,
-                sh_goals: true,
-                playing_year: true,
-                season_type: true,
-                shut_outs: true,
-                face_off_won: true,
-                face_off_lost: true,
-                corner_won: true,
-                corner_lost: true,
-                pass_complete: true,
-                pass_incomplete: true,
+            relations: {
+                team_id: true,
             },
+            select: TEAM_STATS_SELECT,
             where: {
                 season_type: seasonType,
                 games_played: (0, typeorm_2.MoreThan)(0),
@@ -9553,67 +8926,72 @@ let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
                 points: 'DESC',
             },
         });
-        const allTimeStatsConverted = await this.convertStats(allTimeStats, false);
-        return allTimeStatsConverted;
+        return this.convertStats(allTimeStats, false);
     }
     async getAllTimeTeamStatsSummedBySeasonByType(seasonType) {
-        const result = await this.dataSource.query(` select
-      a.team_id as team_id,
-      a.season_type as season_type, 
-      c.city as city, 
-      c.nickname as nickname,
-      c.shortname,
-      c.teamlogo,
-      c.isactive,
-      sum(games_played) as games_played, 
-      sum(wins) as wins, 
-      sum(loss) as loss, 
-      sum(ties) as ties, 
-      sum(points) as points, 
-      sum(goals_for) as goals_for, 
-      sum(goals_against) as goals_against, 
-      sum(pp_attempts) as pp_attempts, 
-      sum(pp_goals) as pp_goals, 
-      sum(pk_attempts) as pk_attempts, 
-      sum(pk_goals) as pk_goals, 
-      sum(sh_goals) as sh_goals, 
-      sum(penalty_minutes) as penalty_minutes, 
-      sum(shots_for) as shots_for, 
-      sum(shots_against) as shots_against, 
-      sum(shut_outs) as shut_outs,
-      sum(face_off_won) as face_off_won,
-      sum(face_off_lost) as face_off_lost,
-      sum(corner_won) as corner_won,
-      sum(corner_lost) as corner_lost,
-      sum(pass_complete) as pass_complete,
-      sum(pass_incomplete) as pass_incomplete
-      from
-      team_stats_v2 as a
-      left join teams_v2 as c
-      on c.id = a.team_id
-      where a.season_type = '${seasonType}'
-      group by a.team_id, a.season_type, c.city, c.nickname, c.shortname, c.teamlogo, c.isactive
-      order by points DESC`);
-        const allTimeStatsConverted = await this.convertStats(result, true);
-        return allTimeStatsConverted;
+        const rawSummedStats = await this.dataSource.query(`SELECT
+         a.team_id AS team_id,
+         a.season_type AS season_type,
+         c.city AS city,
+         c.nickname AS nickname,
+         c.shortname AS shortname,
+         c.teamlogo AS teamlogo,
+         c.isactive AS isactive,
+         SUM(a.games_played) AS games_played,
+         SUM(a.wins) AS wins,
+         SUM(a.loss) AS loss,
+         SUM(a.ties) AS ties,
+         SUM(a.points) AS points,
+         SUM(a.goals_for) AS goals_for,
+         SUM(a.goals_against) AS goals_against,
+         SUM(a.pp_attempts) AS pp_attempts,
+         SUM(a.pp_goals) AS pp_goals,
+         SUM(a.pk_attempts) AS pk_attempts,
+         SUM(a.pk_goals) AS pk_goals,
+         SUM(a.sh_goals) AS sh_goals,
+         SUM(a.penalty_minutes) AS penalty_minutes,
+         SUM(a.shots_for) AS shots_for,
+         SUM(a.shots_against) AS shots_against,
+         SUM(a.shut_outs) AS shut_outs,
+         SUM(a.face_off_won) AS face_off_won,
+         SUM(a.face_off_lost) AS face_off_lost,
+         SUM(a.corner_won) AS corner_won,
+         SUM(a.corner_lost) AS corner_lost,
+         SUM(a.pass_complete) AS pass_complete,
+         SUM(a.pass_incomplete) AS pass_incomplete
+       FROM team_stats_v2 a
+              INNER JOIN teams_v2 c ON c.id = a.team_id
+       WHERE a.season_type = $1
+       GROUP BY a.team_id, a.season_type, c.city, c.nickname, c.shortname, c.teamlogo, c.isactive
+       ORDER BY points DESC`, [seasonType]);
+        return this.convertStats(rawSummedStats, true);
     }
-    async convertStats(array, raw) {
-        return await Promise.all(array.map((stat) => ({
-            goalsForPerGame: Number((stat.goals_for / stat.games_played).toFixed(2)),
-            goalsAgainstPerGame: Number((stat.goals_against / stat.games_played).toFixed(2)),
-            goalDiff: stat.goals_for - stat.goals_against,
-            winPct: Number(((stat.wins / stat.games_played) * 100).toFixed(1)),
-            ppPct: Number(((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1)),
-            pkPct: Number((((stat.pk_attempts - stat.pk_goals) / stat.pk_attempts) *
-                100).toFixed(1)),
-            foPct: Number(this.getPct(Number(stat.face_off_won), Number(stat.face_off_lost)).toFixed(1)),
-            passPct: Number(this.getPct(Number(stat.pass_complete), Number(stat.pass_incomplete)).toFixed(1)),
-            cornerPct: Number(this.getPct(Number(stat.corner_won), Number(stat.corner_lost)).toFixed(1)),
-            pimPerGame: Number((stat.penalty_minutes / stat.games_played).toFixed(1)),
-            team_name: raw
-                ? `${stat.city} ${stat.nickname}`
-                : `${stat.team_id.city} ${stat.team_id.nickname}`,
-            team_id: !raw
+    convertStats(array, raw) {
+        return array.map((stat) => {
+            const gp = Number(stat.games_played) || 0;
+            const gf = Number(stat.goals_for) || 0;
+            const ga = Number(stat.goals_against) || 0;
+            const wins = Number(stat.wins) || 0;
+            const pim = Number(stat.penalty_minutes) || 0;
+            const ppAttempts = Number(stat.pp_attempts) || 0;
+            const ppGoals = Number(stat.pp_goals) || 0;
+            const pkAttempts = Number(stat.pk_attempts) || 0;
+            const pkGoals = Number(stat.pk_goals) || 0;
+            const goalsForPerGame = gp > 0 ? Number((gf / gp).toFixed(2)) : 0;
+            const goalsAgainstPerGame = gp > 0 ? Number((ga / gp).toFixed(2)) : 0;
+            const winPct = gp > 0 ? Number(((wins / gp) * 100).toFixed(1)) : 0;
+            const pimPerGame = gp > 0 ? Number((pim / gp).toFixed(1)) : 0;
+            const ppPct = ppAttempts > 0 ? Number(((ppGoals / ppAttempts) * 100).toFixed(1)) : 0;
+            const pkPct = pkAttempts > 0
+                ? Number((((pkAttempts - pkGoals) / pkAttempts) * 100).toFixed(1))
+                : 0;
+            const foPct = Number(this.calculateRatioPct(Number(stat.face_off_won), Number(stat.face_off_lost)).toFixed(1));
+            const passPct = Number(this.calculateRatioPct(Number(stat.pass_complete), Number(stat.pass_incomplete)).toFixed(1));
+            const cornerPct = Number(this.calculateRatioPct(Number(stat.corner_won), Number(stat.corner_lost)).toFixed(1));
+            const teamName = raw
+                ? `${stat.city ?? ''} ${stat.nickname ?? ''}`.trim()
+                : `${stat.team_id?.city ?? ''} ${stat.team_id?.nickname ?? ''}`.trim();
+            const teamInfo = !raw
                 ? stat.team_id
                 : {
                     id: stat.team_id,
@@ -9621,36 +8999,50 @@ let ApiAllTimeTeamStatsService = class ApiAllTimeTeamStatsService {
                     teamlogo: stat.teamlogo,
                     shortname: stat.shortname,
                     nickname: stat.nickname,
-                },
-            games_played: Number(stat.games_played),
-            wins: Number(stat.wins),
-            loss: Number(stat.loss),
-            ties: Number(stat.ties),
-            points: Number(stat.points),
-            goals_for: Number(stat.goals_for),
-            goals_against: Number(stat.goals_against),
-            shots_against: Number(stat.shots_against),
-            shots_for: Number(stat.shots_for),
-            pp_goals: Number(stat.pp_goals),
-            pp_attempts: Number(stat.pp_attempts),
-            pk_goals: Number(stat.pk_goals),
-            pk_attempts: Number(stat.pk_attempts),
-            sh_goals: Number(stat.sh_goals),
-            penalty_minutes: Number(stat.penalty_minutes),
-            face_off_won: Number(stat.face_off_won),
-            face_off_lost: Number(stat.face_off_lost),
-            corner_won: Number(stat.corner_won),
-            corner_lost: Number(stat.corner_lost),
-            pass_complete: Number(stat.pass_complete),
-            pass_incomplete: Number(stat.pass_incomplete),
-            shut_outs: Number(stat.shut_outs),
-            season_type: stat.season_type,
-            playing_year: stat.playing_year,
-        })));
+                };
+            return {
+                goalsForPerGame,
+                goalsAgainstPerGame,
+                goalDiff: gf - ga,
+                winPct,
+                ppPct,
+                pkPct,
+                foPct,
+                passPct,
+                cornerPct,
+                pimPerGame,
+                team_name: teamName,
+                team_id: teamInfo,
+                games_played: gp,
+                wins,
+                loss: Number(stat.loss) || 0,
+                ties: Number(stat.ties) || 0,
+                points: Number(stat.points) || 0,
+                goals_for: gf,
+                goals_against: ga,
+                shots_against: Number(stat.shots_against) || 0,
+                shots_for: Number(stat.shots_for) || 0,
+                pp_goals: ppGoals,
+                pp_attempts: ppAttempts,
+                pk_goals: pkGoals,
+                pk_attempts: pkAttempts,
+                sh_goals: Number(stat.sh_goals) || 0,
+                penalty_minutes: pim,
+                face_off_won: Number(stat.face_off_won) || 0,
+                face_off_lost: Number(stat.face_off_lost) || 0,
+                corner_won: Number(stat.corner_won) || 0,
+                corner_lost: Number(stat.corner_lost) || 0,
+                pass_complete: Number(stat.pass_complete) || 0,
+                pass_incomplete: Number(stat.pass_incomplete) || 0,
+                shut_outs: Number(stat.shut_outs) || 0,
+                season_type: stat.season_type,
+                playing_year: stat.playing_year ?? null,
+            };
+        });
     }
-    getPct(high, low) {
-        const total = high + low;
-        return (high / total) * 100;
+    calculateRatioPct(high, low) {
+        const total = (high || 0) + (low || 0);
+        return total > 0 ? ((high || 0) / total) * 100 : 0;
     }
 };
 exports.ApiAllTimeTeamStatsService = ApiAllTimeTeamStatsService;
@@ -9675,37 +9067,74 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const TEAM_RECORD_SELECT = {
+    team_id: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        shortname: true,
+        nickname: true,
+    },
+    id: true,
+    wins: true,
+    loss: true,
+    ties: true,
+    points: true,
+    home_wins: true,
+    home_loss: true,
+    home_ties: true,
+    road_wins: true,
+    road_loss: true,
+    road_ties: true,
+    div_win: true,
+    div_loss: true,
+    div_tie: true,
+};
+const TEAM_STATS_DETAILED_SELECT = {
+    team_id: {
+        id: true,
+        city: true,
+        teamlogo: true,
+        shortname: true,
+        nickname: true,
+    },
+    id: true,
+    games_played: true,
+    points: true,
+    wins: true,
+    loss: true,
+    ties: true,
+    penalty_minutes: true,
+    goals_for: true,
+    goals_against: true,
+    pk_goals: true,
+    pk_attempts: true,
+    pp_goals: true,
+    pp_attempts: true,
+    sh_goals: true,
+    playing_year: true,
+    season_type: true,
+    shut_outs: true,
+    face_off_won: true,
+    face_off_lost: true,
+    corner_won: true,
+    corner_lost: true,
+    pass_complete: true,
+    pass_incomplete: true,
+    shots_against: true,
+    shots_for: true,
+};
 let ApiUserTeamStatsService = class ApiUserTeamStatsService {
     constructor(repo, teamsRepo) {
         this.repo = repo;
         this.teamsRepo = teamsRepo;
     }
     async getUserTeamRecordBySeasonBySeasonType(teamId, season, seasonType) {
-        return await this.repo.findOne({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                },
-                id: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                points: true,
-                home_wins: true,
-                home_loss: true,
-                home_ties: true,
-                road_wins: true,
-                road_loss: true,
-                road_ties: true,
-                div_win: true,
-                div_loss: true,
-                div_tie: true,
+        return (await this.repo.findOne({
+            relations: {
+                team_id: true,
             },
+            select: TEAM_RECORD_SELECT,
             where: {
                 team_id: {
                     id: teamId,
@@ -9713,66 +9142,23 @@ let ApiUserTeamStatsService = class ApiUserTeamStatsService {
                 playing_year: season,
                 season_type: seasonType,
             },
-        });
+        }));
     }
     async getUserTeamStatsBySeasonType(userId, seasonType) {
         const userTeams = await this.teamsRepo.findBy({ users_id: userId });
-        const userTeamsWithTeamStats = await this.setTeamStats(userTeams, seasonType);
-        const userTeamsWithTeamStatsConverted = await this.setConvertedTeamStats(userTeamsWithTeamStats);
-        return userTeamsWithTeamStatsConverted;
-    }
-    async setConvertedTeamStats(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamStats: await this.convertStats(item.teamStats),
-        })));
-    }
-    async setTeamStats(array, seasonType) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamStats: await this.getTeamStats(item.id, seasonType),
-        })));
-    }
-    async getTeamStats(teamId, seasonType) {
-        return await this.repo.find({
-            relations: ['team_id'],
-            select: {
-                team_id: {
-                    id: true,
-                    city: true,
-                    teamlogo: true,
-                    shortname: true,
-                    nickname: true,
-                },
-                id: true,
-                games_played: true,
-                points: true,
-                wins: true,
-                loss: true,
-                ties: true,
-                penalty_minutes: true,
-                goals_for: true,
-                goals_against: true,
-                pk_goals: true,
-                pk_attempts: true,
-                pp_goals: true,
-                pp_attempts: true,
-                sh_goals: true,
-                playing_year: true,
-                season_type: true,
-                shut_outs: true,
-                face_off_won: true,
-                face_off_lost: true,
-                corner_won: true,
-                corner_lost: true,
-                pass_complete: true,
-                pass_incomplete: true,
-                shots_against: true,
-                shots_for: true,
+        if (userTeams.length === 0)
+            return [];
+        const teamIds = userTeams.map((t) => t.id).filter(Boolean);
+        if (teamIds.length === 0)
+            return [];
+        const allStats = await this.repo.find({
+            relations: {
+                team_id: true,
             },
+            select: TEAM_STATS_DETAILED_SELECT,
             where: {
                 team_id: {
-                    id: teamId,
+                    id: (0, typeorm_2.In)(teamIds),
                 },
                 games_played: (0, typeorm_2.MoreThan)(0),
                 season_type: seasonType,
@@ -9781,51 +9167,93 @@ let ApiUserTeamStatsService = class ApiUserTeamStatsService {
                 playing_year: 'DESC',
             },
         });
+        const statsByTeamId = new Map();
+        for (const stat of allStats) {
+            const tid = stat.team_id?.id;
+            if (!tid)
+                continue;
+            const existing = statsByTeamId.get(tid);
+            if (existing) {
+                existing.push(stat);
+            }
+            else {
+                statsByTeamId.set(tid, [stat]);
+            }
+        }
+        // Type assertion at the return boundary resolves class-to-object mismatch
+        return userTeams.map((team) => ({
+            ...team,
+            teamStats: this.convertStats(statsByTeamId.get(team.id) ?? []),
+        }));
     }
-    async convertStats(array) {
-        return await Promise.all(array.map((stat) => ({
-            goalsForPerGame: Number((stat.goals_for / stat.games_played).toFixed(2)),
-            goalsAgainstPerGame: Number((stat.goals_against / stat.games_played).toFixed(2)),
-            goalDiff: stat.goals_for - stat.goals_against,
-            winPct: Number(((stat.wins / stat.games_played) * 100).toFixed(1)),
-            ppPct: Number(((stat.pp_goals / stat.pp_attempts) * 100).toFixed(1)),
-            pkPct: Number((((stat.pk_attempts - stat.pk_goals) / stat.pk_attempts) *
-                100).toFixed(1)),
-            foPct: Number(this.getPct(Number(stat.face_off_won), Number(stat.face_off_lost)).toFixed(1)),
-            passPct: Number(this.getPct(Number(stat.pass_complete), Number(stat.pass_incomplete)).toFixed(1)),
-            cornerPct: Number(this.getPct(Number(stat.corner_won), Number(stat.corner_lost)).toFixed(1)),
-            pimPerGame: Number((stat.penalty_minutes / stat.games_played).toFixed(1)),
-            team_name: `${stat.team_id.city} ${stat.team_id.nickname}`,
-            team_id: stat.team_id,
-            games_played: Number(stat.games_played),
-            wins: Number(stat.wins),
-            loss: Number(stat.loss),
-            ties: Number(stat.ties),
-            points: Number(stat.points),
-            goals_for: Number(stat.goals_for),
-            goals_against: Number(stat.goals_against),
-            shots_against: Number(stat.shots_against),
-            shots_for: Number(stat.shots_for),
-            pp_goals: Number(stat.pp_goals),
-            pp_attempts: Number(stat.pp_attempts),
-            pk_goals: Number(stat.pk_goals),
-            pk_attempts: Number(stat.pk_attempts),
-            sh_goals: Number(stat.sh_goals),
-            penalty_minutes: Number(stat.penalty_minutes),
-            face_off_won: Number(stat.face_off_won),
-            face_off_lost: Number(stat.face_off_lost),
-            corner_won: Number(stat.corner_won),
-            corner_lost: Number(stat.corner_lost),
-            pass_complete: Number(stat.pass_complete),
-            pass_incomplete: Number(stat.pass_incomplete),
-            shut_outs: Number(stat.shut_outs),
-            season_type: stat.season_type,
-            playing_year: stat.playing_year,
-        })));
+    convertStats(stats) {
+        return stats.map((stat) => {
+            const gp = Number(stat.games_played) || 0;
+            const gf = Number(stat.goals_for) || 0;
+            const ga = Number(stat.goals_against) || 0;
+            const wins = Number(stat.wins) || 0;
+            const pim = Number(stat.penalty_minutes) || 0;
+            const ppAttempts = Number(stat.pp_attempts) || 0;
+            const ppGoals = Number(stat.pp_goals) || 0;
+            const pkAttempts = Number(stat.pk_attempts) || 0;
+            const pkGoals = Number(stat.pk_goals) || 0;
+            const goalsForPerGame = gp > 0 ? Number((gf / gp).toFixed(2)) : 0;
+            const goalsAgainstPerGame = gp > 0 ? Number((ga / gp).toFixed(2)) : 0;
+            const winPct = gp > 0 ? Number(((wins / gp) * 100).toFixed(1)) : 0;
+            const pimPerGame = gp > 0 ? Number((pim / gp).toFixed(1)) : 0;
+            const ppPct = ppAttempts > 0 ? Number(((ppGoals / ppAttempts) * 100).toFixed(1)) : 0;
+            const pkPct = pkAttempts > 0
+                ? Number((((pkAttempts - pkGoals) / pkAttempts) * 100).toFixed(1))
+                : 0;
+            const foPct = Number(this.calculateRatioPct(Number(stat.face_off_won), Number(stat.face_off_lost)).toFixed(1));
+            const passPct = Number(this.calculateRatioPct(Number(stat.pass_complete), Number(stat.pass_incomplete)).toFixed(1));
+            const cornerPct = Number(this.calculateRatioPct(Number(stat.corner_won), Number(stat.corner_lost)).toFixed(1));
+            const teamCity = stat.team_id?.city ?? '';
+            const teamNickname = stat.team_id?.nickname ?? '';
+            const teamName = `${teamCity} ${teamNickname}`.trim();
+            return {
+                goalsForPerGame,
+                goalsAgainstPerGame,
+                goalDiff: gf - ga,
+                winPct,
+                ppPct,
+                pkPct,
+                foPct,
+                passPct,
+                cornerPct,
+                pimPerGame,
+                team_name: teamName,
+                team_id: stat.team_id,
+                games_played: gp,
+                wins,
+                loss: Number(stat.loss) || 0,
+                ties: Number(stat.ties) || 0,
+                points: Number(stat.points) || 0,
+                goals_for: gf,
+                goals_against: ga,
+                shots_against: Number(stat.shots_against) || 0,
+                shots_for: Number(stat.shots_for) || 0,
+                pp_goals: ppGoals,
+                pp_attempts: ppAttempts,
+                pk_goals: pkGoals,
+                pk_attempts: pkAttempts,
+                sh_goals: Number(stat.sh_goals) || 0,
+                penalty_minutes: pim,
+                face_off_won: Number(stat.face_off_won) || 0,
+                face_off_lost: Number(stat.face_off_lost) || 0,
+                corner_won: Number(stat.corner_won) || 0,
+                corner_lost: Number(stat.corner_lost) || 0,
+                pass_complete: Number(stat.pass_complete) || 0,
+                pass_incomplete: Number(stat.pass_incomplete) || 0,
+                shut_outs: Number(stat.shut_outs) || 0,
+                season_type: stat.season_type,
+                playing_year: stat.playing_year,
+            };
+        });
     }
-    getPct(high, low) {
-        const total = high + low;
-        return (high / total) * 100;
+    calculateRatioPct(high, low) {
+        const total = (high || 0) + (low || 0);
+        return total > 0 ? ((high || 0) / total) * 100 : 0;
     }
 };
 exports.ApiUserTeamStatsService = ApiUserTeamStatsService;
@@ -10324,6 +9752,29 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
+const TEAM_SELECT = {
+    id: true,
+    city: true,
+    teamlogo: true,
+    nickname: true,
+    teamcolor: true,
+    teamtextcolor: true,
+};
+const PLAYER_SELECT = {
+    id: true,
+    firstname: true,
+    lastname: true,
+    nhl_id: true,
+};
+const SEASON_DATES = {
+    '27': { start: '2026-06-02', end: '2027-06-01' },
+    '26': { start: '2025-06-02', end: '2026-06-01' },
+    '25': { start: '2024-06-02', end: '2025-06-01' },
+    '24': { start: '2023-06-02', end: '2024-06-01' },
+    '23': { start: '2022-06-02', end: '2023-06-01' },
+    '22': { start: '2021-07-15', end: '2022-06-01' },
+    '21': { start: '2020-04-27', end: '2021-07-15' },
+};
 let ApiTransactionsService = class ApiTransactionsService {
     constructor(repo, teamInfoRepo, playersRepo) {
         this.repo = repo;
@@ -10336,11 +9787,13 @@ let ApiTransactionsService = class ApiTransactionsService {
                 transaction_date: 'DESC',
             },
         });
-        const transactionsWithInfo = await this.setInfo(transactions);
-        return transactionsWithInfo;
+        return this.enrichTransactions(transactions);
     }
     async getTransactionsBySeason(year) {
-        const season = this.findSeasonDates(year);
+        const season = SEASON_DATES[year];
+        if (!season) {
+            throw new common_1.BadRequestException(`Season key '${year}' not found`);
+        }
         const transactions = await this.repo.find({
             where: {
                 transaction_date: (0, typeorm_2.Between)(new Date(season.start), new Date(season.end)),
@@ -10349,82 +9802,77 @@ let ApiTransactionsService = class ApiTransactionsService {
                 transaction_date: 'DESC',
             },
         });
-        const transactionsTeamInfo = await this.setTransactionInfo(transactions);
-        return transactionsTeamInfo;
+        return this.enrichTransactions(transactions);
     }
     async updateTradeById(id, attrs) {
-        const trade = await this.repo.findOneByOrFail({ id });
+        const trade = await this.repo.findOneBy({ id });
         if (!trade) {
-            throw new common_1.NotFoundException('trade not found');
+            throw new common_1.NotFoundException(`Trade with id ${id} not found`);
         }
         Object.assign(trade, attrs);
         return this.repo.save(trade);
     }
-    async setTransactionInfo(transactions) {
-        return await Promise.all(transactions.map(async (transaction) => ({
-            id: transaction.id,
-            transactionDate: transaction.transaction_date,
-            teamOneInfo: await this.getTeamInfo(transaction.team_one_id),
-            teamOnePlayers: await this.setPlayersInfo(transaction.team_one_players),
-            teamOnePicks: transaction.team_one_picks,
-            teamTwoInfo: await this.getTeamInfo(transaction.team_two_id),
-            teamTwoPlayers: await this.setPlayersInfo(transaction.team_two_players),
-            teamTwoPicks: transaction.team_two_picks,
-        })));
+    async enrichTransactions(transactions) {
+        if (transactions.length === 0)
+            return [];
+        const teamIds = new Set();
+        const playerIds = new Set();
+        for (const t of transactions) {
+            if (t.team_one_id)
+                teamIds.add(Number(t.team_one_id));
+            if (t.team_two_id)
+                teamIds.add(Number(t.team_two_id));
+            if (Array.isArray(t.team_one_players)) {
+                for (const pid of t.team_one_players) {
+                    if (pid)
+                        playerIds.add(Number(pid));
+                }
+            }
+            if (Array.isArray(t.team_two_players)) {
+                for (const pid of t.team_two_players) {
+                    if (pid)
+                        playerIds.add(Number(pid));
+                }
+            }
+        }
+        const [teamMap, playerMap] = await Promise.all([
+            this.getTeamsMap(Array.from(teamIds)),
+            this.getPlayersMap(Array.from(playerIds)),
+        ]);
+        return transactions.map((t) => ({
+            id: t.id,
+            transactionDate: t.transaction_date,
+            teamOneInfo: teamMap.get(Number(t.team_one_id)) ?? null,
+            teamOnePlayers: (t.team_one_players || []).map((pid) => ({
+                player: playerMap.get(Number(pid)) ?? null,
+            })),
+            teamOnePicks: t.team_one_picks,
+            teamTwoInfo: teamMap.get(Number(t.team_two_id)) ?? null,
+            teamTwoPlayers: (t.team_two_players || []).map((pid) => ({
+                player: playerMap.get(Number(pid)) ?? null,
+            })),
+            teamTwoPicks: t.team_two_picks,
+        }));
     }
-    async setPlayersInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            player: await this.getPlayerInfo(item),
-        })));
-    }
-    async setInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            team_one_id: await this.getTeamInfo(item.team_one_id),
-            team_two_id: await this.getTeamInfo(item.team_two_id),
-            team_one_players: await this.setPlayersInfo(item.team_one_players),
-            team_two_players: await this.setPlayersInfo(item.team_two_players),
-        })));
-    }
-    async getTeamInfo(teamId) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                city: true,
-                teamlogo: true,
-                nickname: true,
-                teamcolor: true,
-                teamtextcolor: true,
-            },
-            where: {
-                id: teamId,
-            },
+    async getTeamsMap(teamIds) {
+        if (teamIds.length === 0) {
+            return new Map();
+        }
+        const teams = await this.teamInfoRepo.find({
+            select: TEAM_SELECT,
+            where: { id: (0, typeorm_2.In)(teamIds) },
         });
+        return new Map(teams.map((t) => [t.id, t]));
     }
-    async getPlayerInfo(playerId) {
-        return await this.playersRepo.findOne({
-            select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                nhl_id: true,
-            },
-            where: {
-                id: playerId,
-            },
+    async getPlayersMap(playerIds) {
+        if (playerIds.length === 0) {
+            return new Map();
+        }
+        const players = await this.playersRepo.find({
+            select: PLAYER_SELECT,
+            where: { id: (0, typeorm_2.In)(playerIds) },
         });
-    }
-    findSeasonDates(year) {
-        const seasons = [
-            { year: '27', start: '2026-06-02', end: '2027-06-01' },
-            { year: '26', start: '2025-06-02', end: '2026-06-01' },
-            { year: '25', start: '2024-06-02', end: '2025-06-01' },
-            { year: '24', start: '2023-06-02', end: '2024-06-01' },
-            { year: '23', start: '2022-06-02', end: '2023-06-01' },
-            { year: '22', start: '2021-07-15', end: '2022-06-01' },
-            { year: '21', start: '2020-04-27', end: '2021-07-15' },
-        ];
-        return seasons.find((season) => season.year === year);
+        return new Map(players.map((p) => [p.id, p]));
     }
 };
 exports.ApiTransactionsService = ApiTransactionsService;
@@ -10442,6 +9890,7 @@ exports.ApiTransactionsService = ApiTransactionsService = tslib_1.__decorate([
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
+var ApiTransactionsTradesService_1;
 var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ApiTransactionsTradesService = void 0;
@@ -10452,7 +9901,7 @@ const typeorm_1 = __webpack_require__(38);
 const typeorm_2 = __webpack_require__(13);
 const axios_1 = __webpack_require__(169);
 const rxjs_1 = __webpack_require__(174);
-let ApiTransactionsTradesService = class ApiTransactionsTradesService {
+let ApiTransactionsTradesService = ApiTransactionsTradesService_1 = class ApiTransactionsTradesService {
     constructor(httpService, repo, teamInfoRepo, playerStatsRepo, goalieStatsRepo, draftRepo, playersRepo) {
         this.httpService = httpService;
         this.repo = repo;
@@ -10461,461 +9910,261 @@ let ApiTransactionsTradesService = class ApiTransactionsTradesService {
         this.goalieStatsRepo = goalieStatsRepo;
         this.draftRepo = draftRepo;
         this.playersRepo = playersRepo;
+        this.logger = new common_1.Logger(ApiTransactionsTradesService_1.name);
         this.waiversHookURL = process.env.SLACK_WAIVERS_WEBHOOK;
         this.tradeHookURL = process.env.SLACK_WEBHOOK;
     }
     async getTeamBySeason(team, season, draftYear) {
-        const players = await this.playerStatsRepo.find({
-            select: {
-                id: true,
-                team_name: true,
-                player_id: {
+        const draftTeam = await this.teamInfoRepo.findOne({
+            select: { id: true, shortname: true },
+            where: { shortname: team },
+        });
+        if (!draftTeam) {
+            throw new common_1.NotFoundException(`Team '${team}' not found`);
+        }
+        const nextDraftYear = (Number(draftYear) + 1).toString();
+        const [players, goalies, draftPicks] = await Promise.all([
+            this.playerStatsRepo.find({
+                select: {
                     id: true,
-                    firstname: true,
-                    lastname: true,
+                    team_name: true,
+                    player_id: { id: true, firstname: true, lastname: true },
                 },
-            },
-            where: {
-                team_name: team,
-                playing_year: season,
-            },
-            order: {
-                player_id: {
-                    lastname: 'ASC',
-                },
-            },
-        });
-        const goalies = await this.goalieStatsRepo.find({
-            select: {
-                id: true,
-                team_name: true,
-                player_id: {
+                relations: { player_id: true },
+                where: { team_name: team, playing_year: season },
+                order: { player_id: { lastname: 'ASC' } },
+            }),
+            this.goalieStatsRepo.find({
+                select: {
                     id: true,
-                    firstname: true,
-                    lastname: true,
+                    team_name: true,
+                    player_id: { id: true, firstname: true, lastname: true },
                 },
-            },
-            where: {
-                team_name: team,
-                playing_year: season,
-            },
-            order: {
-                player_id: {
-                    lastname: 'ASC',
-                },
-            },
-        });
-        const draftTeam = await this.getPlayerTeamInfo(team);
-        const currentDraftPicks = await this.draftRepo.find({
-            relations: ['team_id'],
-            where: [
-                {
-                    draft_year: draftYear,
-                    team_id: {
-                        id: draftTeam.id,
+                relations: { player_id: true },
+                where: { team_name: team, playing_year: season },
+                order: { player_id: { lastname: 'ASC' } },
+            }),
+            this.draftRepo.find({
+                relations: { team_id: true },
+                where: [
+                    {
+                        draft_year: (0, typeorm_2.In)([draftYear, nextDraftYear]),
+                        team_id: { id: draftTeam.id },
                     },
-                },
-                { draft_year: draftYear, round_one: draftTeam.id },
-                { draft_year: draftYear, round_two: draftTeam.id },
-                { draft_year: draftYear, round_three: draftTeam.id },
-                { draft_year: draftYear, round_four: draftTeam.id },
-                { draft_year: draftYear, round_five: draftTeam.id },
-            ],
-        });
-        const nextDraftPicks = await this.draftRepo.find({
-            relations: ['team_id'],
-            where: [
-                {
-                    draft_year: (Number(draftYear) + 1).toString(),
-                    team_id: {
-                        id: draftTeam.id,
+                    {
+                        draft_year: (0, typeorm_2.In)([draftYear, nextDraftYear]),
+                        round_one: draftTeam.id,
                     },
-                },
-                {
-                    draft_year: (Number(draftYear) + 1).toString(),
-                    round_one: draftTeam.id,
-                },
-                {
-                    draft_year: (Number(draftYear) + 1).toString(),
-                    round_two: draftTeam.id,
-                },
-                {
-                    draft_year: (Number(draftYear) + 1).toString(),
-                    round_three: draftTeam.id,
-                },
-                {
-                    draft_year: (Number(draftYear) + 1).toString(),
-                    round_four: draftTeam.id,
-                },
-                {
-                    draft_year: (Number(draftYear) + 1).toString(),
-                    round_five: draftTeam.id,
-                },
-            ],
-        });
-        const draftPicks = currentDraftPicks.concat(nextDraftPicks);
-        const playersWithTeamInfo = await this.setTeamInfo(players);
-        const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
+                    {
+                        draft_year: (0, typeorm_2.In)([draftYear, nextDraftYear]),
+                        round_two: draftTeam.id,
+                    },
+                    {
+                        draft_year: (0, typeorm_2.In)([draftYear, nextDraftYear]),
+                        round_three: draftTeam.id,
+                    },
+                    {
+                        draft_year: (0, typeorm_2.In)([draftYear, nextDraftYear]),
+                        round_four: draftTeam.id,
+                    },
+                    {
+                        draft_year: (0, typeorm_2.In)([draftYear, nextDraftYear]),
+                        round_five: draftTeam.id,
+                    },
+                ],
+            }),
+        ]);
+        const attachTeam = (items) => items.map((item) => ({ ...item, teamInfo: draftTeam }));
         return {
-            players: playersWithTeamInfo,
-            goalies: goaliesWithTeamInfo,
-            draftPicks: draftPicks,
+            players: attachTeam(players),
+            goalies: attachTeam(goalies),
+            draftPicks,
         };
     }
-    async setTeamInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            teamInfo: await this.getPlayerTeamInfo(item.team_name),
-        })));
-    }
-    async getPlayerTeamInfo(teamName) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-                shortname: true,
-            },
-            where: {
-                shortname: teamName,
-            },
-        });
-    }
-    // WAIVER ACQUISITIONS
     async waiverAcquire(body) {
-        const team = body.team;
-        const players = body.players;
-        const season = body.season;
-        if (players && players.length > 0) {
-            await players.forEach(async (player) => {
-                if (player.includes('p-')) {
-                    await this.updateTeamForPlayer(player, team, season);
-                }
-                else if (player.includes('g-')) {
-                    await this.updateTeamForGoalie(player, team, season);
-                }
-            });
-        }
-        const playersWithInfo = await this.setPlayerInfo(players);
-        const playerArray = [];
-        await playersWithInfo.forEach(async (player) => {
-            const string = await this.getPlayerString(player);
-            playerArray.push(string);
-        });
+        const { team, players = [], season } = body;
+        await this.batchUpdatePlayerRosters(players, team, season);
+        const playerStrings = await this.resolvePlayerStrings(players);
         const postJson = {
-            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerArray.join('\n')}`,
+            text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerStrings.join('\n')}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
         };
-        return await this.sendToSlack(postJson, this.waiversHookURL);
+        return this.sendToSlack(postJson, this.waiversHookURL);
     }
-    // WAIVER RELEASE
     async waiverRelease(body) {
-        const team = body.team;
-        const players = body.players;
-        const season = body.season;
-        if (players && players.length > 0) {
-            await players.forEach(async (player) => {
-                if (player.includes('p-')) {
-                    await this.updateTeamForPlayer(player, 'FA', season);
-                }
-                else if (player.includes('g-')) {
-                    await this.updateTeamForGoalie(player, 'FA', season);
-                }
-            });
-        }
-        const playersWithInfo = await this.setPlayerInfo(players);
-        const playerArray = [];
-        await playersWithInfo.forEach(async (player) => {
-            const string = await this.getPlayerString(player);
-            playerArray.push(string);
-        });
+        const { team, players = [], season } = body;
+        await this.batchUpdatePlayerRosters(players, 'FA', season);
+        const playerStrings = await this.resolvePlayerStrings(players);
         const postJson = {
-            text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerArray.join('\n')}`,
+            text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerStrings.join('\n')}`,
             channel: '#waivers-and-drops',
             username: 'League Office',
             icon_emoji: ':office',
         };
-        return await this.sendToSlack(postJson, this.waiversHookURL);
+        return this.sendToSlack(postJson, this.waiversHookURL);
     }
-    // TRADES
     async trade(body) {
-        const teamOne = body.teamOne;
-        const teamOnePlayers = await this.getPlayersFromArray(body.teamOnePicks);
-        const teamOnePicks = await this.getDraftPicksFromArray(body.teamOnePicks);
-        const teamTwo = body.teamTwo;
-        const teamTwoPlayers = await this.getPlayersFromArray(body.teamTwoPicks);
-        const teamTwoPicks = await this.getDraftPicksFromArray(body.teamTwoPicks);
-        const season = body.season;
-        if (teamOnePlayers && teamOnePlayers.length > 0) {
-            await teamOnePlayers.forEach(async (player) => {
-                if (player.includes('p-')) {
-                    await this.updateTeamForPlayer(player, teamTwo, season);
-                }
-                else if (player.includes('g-')) {
-                    await this.updateTeamForGoalie(player, teamTwo, season);
-                }
-            });
+        const { teamOne, teamTwo, season } = body;
+        const teamOnePicksArray = body.teamOnePicks || [];
+        const teamTwoPicksArray = body.teamTwoPicks || [];
+        const teamOnePlayers = teamOnePicksArray.filter((p) => p.includes('p-') || p.includes('g-'));
+        const teamTwoPlayers = teamTwoPicksArray.filter((p) => p.includes('p-') || p.includes('g-'));
+        const teamOneDraftPicks = this.parseDraftPicks(teamOnePicksArray);
+        const teamTwoDraftPicks = this.parseDraftPicks(teamTwoPicksArray);
+        const [teamOneEntity, teamTwoEntity] = await Promise.all([
+            this.teamInfoRepo.findOne({
+                select: { id: true, shortname: true },
+                where: { shortname: teamOne },
+            }),
+            this.teamInfoRepo.findOne({
+                select: { id: true, shortname: true },
+                where: { shortname: teamTwo },
+            }),
+        ]);
+        if (!teamOneEntity || !teamTwoEntity) {
+            throw new common_1.NotFoundException(`One or both teams not found (${teamOne}, ${teamTwo})`);
         }
-        if (teamOnePicks && teamOnePicks.length > 0) {
-            await teamOnePicks.forEach(async (pick) => {
-                await this.updateTeamForPick(pick, teamTwo);
-            });
-        }
-        if (teamTwoPlayers && teamTwoPlayers.length > 0) {
-            await teamTwoPlayers.forEach(async (player) => {
-                if (player.includes('p-')) {
-                    await this.updateTeamForPlayer(player, teamOne, season);
-                }
-                else if (player.includes('g-')) {
-                    await this.updateTeamForGoalie(player, teamOne, season);
-                }
-            });
-        }
-        if (teamTwoPicks && teamTwoPicks.length > 0) {
-            await teamTwoPicks.forEach(async (pick) => {
-                await this.updateTeamForPick(pick, teamOne);
-            });
-        }
-        await this.addTransaction(body);
-        const teamOneplayersWithInfo = await this.setPlayerInfo(teamOnePlayers);
-        const teamTwoplayersWithInfo = await this.setPlayerInfo(teamTwoPlayers);
-        const teamOneplayerArray = [];
-        const teamTwoplayerArray = [];
-        await teamOneplayersWithInfo.forEach(async (player) => {
-            const string = await this.getPlayerString(player);
-            teamOneplayerArray.push(string);
-        });
-        await teamTwoplayersWithInfo.forEach(async (player) => {
-            const string = await this.getPlayerString(player);
-            teamTwoplayerArray.push(string);
-        });
-        const teamOnePickString = await this.getDraftPickStringArray(teamOnePicks);
-        const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
+        await Promise.all([
+            this.batchUpdatePlayerRosters(teamOnePlayers, teamTwo, season),
+            this.batchUpdatePlayerRosters(teamTwoPlayers, teamOne, season),
+            this.batchUpdatePicks(teamOneDraftPicks, teamTwoEntity.id),
+            this.batchUpdatePicks(teamTwoDraftPicks, teamOneEntity.id),
+            this.createTransactionRecord(teamOneEntity.id, teamTwoEntity.id, teamOnePlayers, teamTwoPlayers, teamOneDraftPicks, teamTwoDraftPicks),
+        ]);
+        const [t1PlayerStrings, t2PlayerStrings] = await Promise.all([
+            this.resolvePlayerStrings(teamOnePlayers),
+            this.resolvePlayerStrings(teamTwoPlayers),
+        ]);
+        const t1PickStrings = teamOneDraftPicks.map((p) => `- ${p.team} ${p.value} ${p.year}`);
+        const t2PickStrings = teamTwoDraftPicks.map((p) => `- ${p.team} ${p.value} ${p.year}`);
+        const toTeamOne = [...t2PlayerStrings, ...t2PickStrings].join('\n');
+        const toTeamTwo = [...t1PlayerStrings, ...t1PickStrings].join('\n');
         const postJson = {
-            text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: \n ${teamTwoplayerArray.length > 0
-                ? teamTwoplayerArray.join('\n')
-                : teamTwoPicks.length > 0
-                    ? teamTwoPickString.join('\n')
-                    : ''} \n ${teamTwoplayerArray.length > 0
-                ? teamTwoPicks.length > 0
-                    ? teamTwoPickString.join('\n')
-                    : ''
-                : ''} \n \n To ${teamTwo}: \n ${teamOneplayerArray.length > 0
-                ? teamOneplayerArray.join('\n')
-                : teamOnePicks.length > 0
-                    ? teamOnePickString.join('\n')
-                    : ''} \n ${teamOneplayerArray.length > 0
-                ? teamOnePicks.length > 0
-                    ? teamOnePickString.join('\n')
-                    : ''
-                : ''} \n`,
+            text: `:rotating_light: TRADE ALERT :rotating_light:\n\nTo ${teamOne}:\n${toTeamOne}\n\nTo ${teamTwo}:\n${toTeamTwo}\n`,
             channel: '#trades',
             username: 'League Office',
             icon_emoji: ':office',
         };
-        return await this.sendToSlack(postJson, this.tradeHookURL);
+        return this.sendToSlack(postJson, this.tradeHookURL);
     }
-    async addTransaction(body) {
-        const transaction_date = await this.getDate();
-        const teamOneId = await this.getTeamInfo(body.teamOne);
-        const teamTwoId = await this.getTeamInfo(body.teamTwo);
-        const teamOnePlayers = await this.getPlayerIds(body.teamOnePicks);
-        const teamTwoPlayers = await this.getPlayerIds(body.teamTwoPicks);
-        const teamOnePicks = await this.getPicks(body.teamOnePicks);
-        const teamTwoPicks = await this.getPicks(body.teamTwoPicks);
-        const createTransaction = {
-            transaction_date,
-            team_one_id: teamOneId.id,
-            team_two_id: teamTwoId.id,
-            team_one_players: teamTwoPlayers,
-            team_two_players: teamOnePlayers,
-            team_one_picks: teamTwoPicks,
-            team_two_picks: teamOnePicks,
-        };
-        const trade = await this.repo.create(createTransaction);
-        return this.repo.save(trade);
-    }
-    async getPicks(array) {
-        const picks = [];
-        await array.forEach((pick) => {
-            if (!pick.includes('-')) {
-                picks.push(pick);
-            }
-        });
-        return picks;
-    }
-    async getPlayerIds(array) {
-        const players = [];
-        await array.forEach((pick) => {
-            if (pick.includes('p-') || pick.includes('g-')) {
-                const newPick = pick.split('-');
-                players.push(newPick[1]);
-            }
-        });
-        return players;
-    }
-    async getDate() {
-        const today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1;
-        const yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = `0${dd}`;
+    async batchUpdatePlayerRosters(playerTokens, targetTeam, season) {
+        const skaterIds = [];
+        const goalieIds = [];
+        for (const token of playerTokens) {
+            const parts = token.split('-');
+            const id = Number(parts[1]);
+            if (isNaN(id))
+                continue;
+            if (token.startsWith('p-'))
+                skaterIds.push(id);
+            else if (token.startsWith('g-'))
+                goalieIds.push(id);
         }
-        if (mm < 10) {
-            mm = `0${mm}`;
+        const updates = [];
+        if (skaterIds.length > 0) {
+            updates.push(this.playerStatsRepo
+                .createQueryBuilder()
+                .update(entities_1.Players_Stats_V2)
+                .set({ team_name: targetTeam })
+                .where('player_id IN (:...ids)', { ids: skaterIds })
+                .andWhere('playing_year = :season', { season })
+                .execute());
         }
-        return `${yyyy}-${mm}-${dd}`;
-    }
-    async getDraftPickStringArray(picks) {
-        return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year}`);
-    }
-    async updateTeamForPick(pick, team) {
-        const teamId = await this.getTeamInfo(team);
-        let attrs;
-        if (pick.value.includes('1')) {
-            attrs = {
-                round_one: teamId.id,
-            };
+        if (goalieIds.length > 0) {
+            updates.push(this.goalieStatsRepo
+                .createQueryBuilder()
+                .update(entities_1.Goalies_Stats_V2)
+                .set({ team_name: targetTeam })
+                .where('player_id IN (:...ids)', { ids: goalieIds })
+                .andWhere('playing_year = :season', { season })
+                .execute());
         }
-        else if (pick.value.includes('2')) {
-            attrs = {
-                round_two: teamId.id,
-            };
-        }
-        else if (pick.value.includes('3')) {
-            attrs = {
-                round_three: teamId.id,
-            };
-        }
-        else if (pick.value.includes('4')) {
-            attrs = {
-                round_four: teamId.id,
-            };
-        }
-        else if (pick.value.includes('5')) {
-            attrs = {
-                round_five: teamId.id,
-            };
-        }
-        const draftRow = await this.draftRepo.findOneByOrFail({
-            draft_year: pick.year,
-            team_id: {
-                shortname: pick.team,
-            },
-        });
-        if (!draftRow) {
-            throw new common_1.NotFoundException('player not found');
-        }
-        Object.assign(draftRow, attrs);
-        return this.draftRepo.save(draftRow);
+        await Promise.all(updates);
     }
-    async getDraftPicksFromArray(picksArray) {
-        const picks = [];
-        await picksArray.forEach((pick) => {
-            if (!pick.includes('-')) {
-                const newPick = pick.split(' ');
-                const pickObject = {
-                    team: newPick[0],
-                    value: newPick[1],
-                    year: newPick[2],
-                };
-                picks.push(pickObject);
-            }
-        });
-        return picks;
-    }
-    async getPlayersFromArray(picksArray) {
-        const players = [];
-        await picksArray.forEach((pick) => {
-            if (pick.includes('p-') || pick.includes('g-')) {
-                players.push(pick);
-            }
-        });
-        return players;
-    }
-    getPlayerString(player) {
-        return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
-    }
-    async setPlayerInfo(players) {
-        return await Promise.all(players.map(async (item) => ({
-            playerInfo: await this.getPlayerInfo(item.split('-')[1]),
-        })));
-    }
-    async getTeamInfo(shortname) {
-        return await this.teamInfoRepo.findOne({
-            select: {
-                id: true,
-            },
-            where: {
-                shortname,
-            },
-        });
-    }
-    async getPlayerInfo(playerId) {
-        if (playerId) {
-            return await this.playersRepo.findOne({
-                select: {
-                    id: true,
-                    firstname: true,
-                    lastname: true,
-                },
+    async batchUpdatePicks(picks, newOwnerTeamId) {
+        await Promise.all(picks.map(async (pick) => {
+            const roundField = this.mapRoundValueToField(pick.value);
+            if (!roundField)
+                return;
+            const draftRow = await this.draftRepo.findOne({
                 where: {
-                    id: playerId,
+                    draft_year: pick.year,
+                    team_id: { shortname: pick.team },
                 },
             });
-        }
-        else {
-            return {};
-        }
+            if (draftRow) {
+                draftRow[roundField] = newOwnerTeamId;
+                await this.draftRepo.save(draftRow);
+            }
+        }));
     }
-    async updateTeamForPlayer(playerId, team, season) {
-        const stringId = playerId.split('-');
-        const attrs = {
-            team_name: team,
-        };
-        const player = await this.playerStatsRepo.findOneByOrFail({
-            player_id: { id: Number(stringId[1]) },
-            playing_year: season,
-        });
-        if (!player) {
-            throw new common_1.NotFoundException('player not found');
-        }
-        Object.assign(player, attrs);
-        return this.playerStatsRepo.save(player);
+    mapRoundValueToField(value) {
+        if (value.includes('1'))
+            return 'round_one';
+        if (value.includes('2'))
+            return 'round_two';
+        if (value.includes('3'))
+            return 'round_three';
+        if (value.includes('4'))
+            return 'round_four';
+        if (value.includes('5'))
+            return 'round_five';
+        return null;
     }
-    async updateTeamForGoalie(playerId, team, season) {
-        const stringId = playerId.split('-');
-        const attrs = {
-            team_name: team,
-        };
-        const player = await this.goalieStatsRepo.findOneByOrFail({
-            player_id: { id: Number(stringId[1]) },
-            playing_year: season,
+    parseDraftPicks(items) {
+        return items
+            .filter((item) => !item.includes('p-') && !item.includes('g-') && item.includes(' '))
+            .map((item) => {
+            const [team, value, year] = item.split(' ');
+            return { team, value, year };
         });
-        if (!player) {
-            throw new common_1.NotFoundException('player not found');
-        }
-        Object.assign(player, attrs);
-        return this.goalieStatsRepo.save(player);
     }
-    async sendToSlack(message, hook) {
-        const options = {
-            headers: {
-                'Content-type': 'application/json',
-            },
-        };
-        this.httpService
-            .post(`${hook}`, message, options)
-            .pipe((0, rxjs_1.map)((response) => response.data))
-            .subscribe({
-            complete: () => console.log('completed'),
-            error: (err) => console.log(err),
+    async resolvePlayerStrings(playerTokens) {
+        const rawIds = playerTokens
+            .map((token) => Number(token.split('-')[1]))
+            .filter((id) => !isNaN(id));
+        if (rawIds.length === 0)
+            return [];
+        const players = await this.playersRepo.find({
+            select: { id: true, firstname: true, lastname: true },
+            where: { id: (0, typeorm_2.In)(rawIds) },
         });
+        const playerMap = new Map(players.map((p) => [p.id, `${p.firstname} ${p.lastname}`]));
+        return rawIds.map((id) => `- ${playerMap.get(id) ?? 'Unknown Player'}`);
+    }
+    async createTransactionRecord(teamOneId, teamTwoId, teamOnePlayers, teamTwoPlayers, teamOnePicks, teamTwoPicks) {
+        const extractIds = (tokens) => tokens.map((t) => t.split('-')[1]).filter(Boolean);
+        const formatPicks = (picks) => picks.map((p) => `${p.team} ${p.value} ${p.year}`);
+        const newTransaction = this.repo.create({
+            transaction_date: new Date().toISOString().split('T')[0],
+            team_one_id: teamOneId,
+            team_two_id: teamTwoId,
+            team_one_players: extractIds(teamTwoPlayers),
+            team_two_players: extractIds(teamOnePlayers),
+            team_one_picks: formatPicks(teamTwoPicks),
+            team_two_picks: formatPicks(teamOnePicks),
+        });
+        return this.repo.save(newTransaction);
+    }
+    async sendToSlack(message, hookUrl) {
+        if (!hookUrl) {
+            this.logger.warn('Slack webhook URL is not configured');
+            return;
+        }
+        try {
+            await (0, rxjs_1.firstValueFrom)(this.httpService.post(hookUrl, message, {
+                headers: { 'Content-type': 'application/json' },
+            }));
+        }
+        catch (err) {
+            this.logger.error(`Failed sending Slack webhook: ${err.message}`, err.stack);
+        }
     }
 };
 exports.ApiTransactionsTradesService = ApiTransactionsTradesService;
-exports.ApiTransactionsTradesService = ApiTransactionsTradesService = tslib_1.__decorate([
+exports.ApiTransactionsTradesService = ApiTransactionsTradesService = ApiTransactionsTradesService_1 = tslib_1.__decorate([
     (0, common_1.Injectable)(),
     tslib_1.__param(1, (0, typeorm_1.InjectRepository)(entities_1.Transactions_V2)),
     tslib_1.__param(2, (0, typeorm_1.InjectRepository)(entities_1.Teams_V2)),
@@ -11518,39 +10767,44 @@ let ApiGoalieRatingsService = class ApiGoalieRatingsService {
                 playing_year: season,
             },
         });
-        const ratingsWithPlayerInfo = await this.setPlayerInfo(ratings);
-        return ratingsWithPlayerInfo;
-    }
-    async updatePlayerById(id, attrs) {
-        const player = await this.repo.findOneByOrFail({ id });
-        if (!player) {
-            throw new common_1.NotFoundException('player not found');
+        if (ratings.length === 0) {
+            return [];
         }
-        Object.assign(player, attrs);
-        return this.repo.save(player);
-    }
-    async setPlayerInfo(array) {
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            playerInfo: await this.getPlayerInfo(item.player_id),
-        })));
-    }
-    async getPlayerInfo(playerId) {
-        if (playerId) {
-            return await this.playersRepo.findOne({
+        const uniquePlayerIds = Array.from(new Set(ratings
+            .map((r) => typeof r.player_id === 'object' && r.player_id !== null
+            ? r.player_id.id
+            : r.player_id)
+            .filter(Boolean)));
+        const players = uniquePlayerIds.length
+            ? await this.playersRepo.find({
                 select: {
                     id: true,
                     firstname: true,
                     lastname: true,
                 },
                 where: {
-                    id: playerId,
+                    id: (0, typeorm_2.In)(uniquePlayerIds),
                 },
-            });
+            })
+            : [];
+        const playerMap = new Map(players.map((p) => [p.id, p]));
+        return ratings.map((item) => {
+            const pid = typeof item.player_id === 'object' && item.player_id !== null
+                ? item.player_id.id
+                : item.player_id;
+            return {
+                ...item,
+                playerInfo: playerMap.get(pid) ?? null,
+            };
+        });
+    }
+    async updatePlayerById(id, attrs) {
+        const player = await this.repo.findOneBy({ id });
+        if (!player) {
+            throw new common_1.NotFoundException(`Goalie rating with id ${id} not found`);
         }
-        else {
-            return {};
-        }
+        Object.assign(player, attrs);
+        return this.repo.save(player);
     }
 };
 exports.ApiGoalieRatingsService = ApiGoalieRatingsService;

@@ -11,31 +11,38 @@ import {
   TradeDto,
   WaiverAcquisitionDto,
 } from '@cha/shared/entities';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
-import { map } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
+
+interface ParsedPick {
+  team: string;
+  value: string;
+  year: string;
+}
 
 @Injectable()
 export class ApiTransactionsTradesService {
-  waiversHookURL = process.env.SLACK_WAIVERS_WEBHOOK;
-  tradeHookURL = process.env.SLACK_WEBHOOK;
+  private readonly logger = new Logger(ApiTransactionsTradesService.name);
+  private readonly waiversHookURL = process.env.SLACK_WAIVERS_WEBHOOK;
+  private readonly tradeHookURL = process.env.SLACK_WEBHOOK;
 
   constructor(
-    private httpService: HttpService,
+    private readonly httpService: HttpService,
     @InjectRepository(Transactions_V2)
-    private repo: Repository<Transactions_V2>,
+    private readonly repo: Repository<Transactions_V2>,
     @InjectRepository(Teams_V2)
-    private teamInfoRepo: Repository<Teams_V2>,
+    private readonly teamInfoRepo: Repository<Teams_V2>,
     @InjectRepository(Players_Stats_V2)
-    private playerStatsRepo: Repository<Players_Stats_V2>,
+    private readonly playerStatsRepo: Repository<Players_Stats_V2>,
     @InjectRepository(Goalies_Stats_V2)
-    private goalieStatsRepo: Repository<Goalies_Stats_V2>,
+    private readonly goalieStatsRepo: Repository<Goalies_Stats_V2>,
     @InjectRepository(Draft_Order_V2)
-    private draftRepo: Repository<Draft_Order_V2>,
+    private readonly draftRepo: Repository<Draft_Order_V2>,
     @InjectRepository(Players_V2)
-    private playersRepo: Repository<Players_V2>
+    private readonly playersRepo: Repository<Players_V2>
   ) {}
 
   async getTeamBySeason(
@@ -43,159 +50,87 @@ export class ApiTransactionsTradesService {
     season: string,
     draftYear: string
   ): Promise<GetTeamTransactionDto> {
-    const players = await this.playerStatsRepo.find({
-      select: {
-        id: true,
-        team_name: true,
-        player_id: {
+    const draftTeam = await this.teamInfoRepo.findOne({
+      select: { id: true, shortname: true },
+      where: { shortname: team },
+    });
+
+    if (!draftTeam) {
+      throw new NotFoundException(`Team '${team}' not found`);
+    }
+
+    const nextDraftYear = (Number(draftYear) + 1).toString();
+
+    const [players, goalies, draftPicks] = await Promise.all([
+      this.playerStatsRepo.find({
+        select: {
           id: true,
-          firstname: true,
-          lastname: true,
+          team_name: true,
+          player_id: { id: true, firstname: true, lastname: true },
         },
-      },
-      where: {
-        team_name: team,
-        playing_year: season,
-      },
-      order: {
-        player_id: {
-          lastname: 'ASC',
-        },
-      },
-    });
-
-    const goalies = await this.goalieStatsRepo.find({
-      select: {
-        id: true,
-        team_name: true,
-        player_id: {
+        relations: { player_id: true },
+        where: { team_name: team, playing_year: season },
+        order: { player_id: { lastname: 'ASC' } },
+      }),
+      this.goalieStatsRepo.find({
+        select: {
           id: true,
-          firstname: true,
-          lastname: true,
+          team_name: true,
+          player_id: { id: true, firstname: true, lastname: true },
         },
-      },
-      where: {
-        team_name: team,
-        playing_year: season,
-      },
-      order: {
-        player_id: {
-          lastname: 'ASC',
-        },
-      },
-    });
-
-    const draftTeam = await this.getPlayerTeamInfo(team);
-
-    const currentDraftPicks = await this.draftRepo.find({
-      relations: ['team_id'],
-      where: [
-        {
-          draft_year: draftYear,
-          team_id: {
-            id: draftTeam.id,
+        relations: { player_id: true },
+        where: { team_name: team, playing_year: season },
+        order: { player_id: { lastname: 'ASC' } },
+      }),
+      this.draftRepo.find({
+        relations: { team_id: true },
+        where: [
+          {
+            draft_year: In([draftYear, nextDraftYear]),
+            team_id: { id: draftTeam.id },
           },
-        },
-        { draft_year: draftYear, round_one: draftTeam.id },
-        { draft_year: draftYear, round_two: draftTeam.id },
-        { draft_year: draftYear, round_three: draftTeam.id },
-        { draft_year: draftYear, round_four: draftTeam.id },
-        { draft_year: draftYear, round_five: draftTeam.id },
-      ],
-    });
-
-    const nextDraftPicks = await this.draftRepo.find({
-      relations: ['team_id'],
-      where: [
-        {
-          draft_year: (Number(draftYear) + 1).toString(),
-          team_id: {
-            id: draftTeam.id,
+          {
+            draft_year: In([draftYear, nextDraftYear]),
+            round_one: draftTeam.id,
           },
-        },
-        {
-          draft_year: (Number(draftYear) + 1).toString(),
-          round_one: draftTeam.id,
-        },
-        {
-          draft_year: (Number(draftYear) + 1).toString(),
-          round_two: draftTeam.id,
-        },
-        {
-          draft_year: (Number(draftYear) + 1).toString(),
-          round_three: draftTeam.id,
-        },
-        {
-          draft_year: (Number(draftYear) + 1).toString(),
-          round_four: draftTeam.id,
-        },
-        {
-          draft_year: (Number(draftYear) + 1).toString(),
-          round_five: draftTeam.id,
-        },
-      ],
-    });
+          {
+            draft_year: In([draftYear, nextDraftYear]),
+            round_two: draftTeam.id,
+          },
+          {
+            draft_year: In([draftYear, nextDraftYear]),
+            round_three: draftTeam.id,
+          },
+          {
+            draft_year: In([draftYear, nextDraftYear]),
+            round_four: draftTeam.id,
+          },
+          {
+            draft_year: In([draftYear, nextDraftYear]),
+            round_five: draftTeam.id,
+          },
+        ],
+      }),
+    ]);
 
-    const draftPicks = currentDraftPicks.concat(nextDraftPicks);
-
-    const playersWithTeamInfo = await this.setTeamInfo(players);
-    const goaliesWithTeamInfo = await this.setTeamInfo(goalies);
+    const attachTeam = (items: (Players_Stats_V2 | Goalies_Stats_V2)[]) =>
+      items.map((item) => ({ ...item, teamInfo: draftTeam }));
 
     return {
-      players: playersWithTeamInfo,
-      goalies: goaliesWithTeamInfo,
-      draftPicks: draftPicks,
+      players: attachTeam(players) as any,
+      goalies: attachTeam(goalies) as any,
+      draftPicks,
     };
   }
 
-  private async setTeamInfo(array: Players_Stats_V2[] | Goalies_Stats_V2[]) {
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        teamInfo: await this.getPlayerTeamInfo(item.team_name),
-      }))
-    );
-  }
-
-  private async getPlayerTeamInfo(teamName: string) {
-    return await this.teamInfoRepo.findOne({
-      select: {
-        id: true,
-        shortname: true,
-      },
-      where: {
-        shortname: teamName,
-      },
-    });
-  }
-
-  // WAIVER ACQUISITIONS
   async waiverAcquire(body: WaiverAcquisitionDto) {
-    const team = body.team;
-    const players = body.players;
-    const season = body.season;
+    const { team, players = [], season } = body;
 
-    if (players && players.length > 0) {
-      await players.forEach(async (player: string) => {
-        if (player.includes('p-')) {
-          await this.updateTeamForPlayer(player, team, season);
-        } else if (player.includes('g-')) {
-          await this.updateTeamForGoalie(player, team, season);
-        }
-      });
-    }
+    await this.batchUpdatePlayerRosters(players, team, season);
 
-    const playersWithInfo = await this.setPlayerInfo(players);
-
-    const playerArray = [];
-
-    await playersWithInfo.forEach(async (player) => {
-      const string = await this.getPlayerString(player);
-      playerArray.push(string);
-    });
-
+    const playerStrings = await this.resolvePlayerStrings(players);
     const postJson = {
-      text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerArray.join(
+      text: `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: \n ${playerStrings.join(
         '\n'
       )}`,
       channel: '#waivers-and-drops',
@@ -203,36 +138,21 @@ export class ApiTransactionsTradesService {
       icon_emoji: ':office',
     };
 
-    return await this.sendToSlack(postJson, this.waiversHookURL);
+    return this.sendToSlack(postJson, this.waiversHookURL);
   }
 
-  // WAIVER RELEASE
-  async waiverRelease(body: any) {
-    const team = body.team;
-    const players = body.players;
-    const season = body.season;
+  async waiverRelease(body: {
+    team: string;
+    players: string[];
+    season: string;
+  }) {
+    const { team, players = [], season } = body;
 
-    if (players && players.length > 0) {
-      await players.forEach(async (player: string) => {
-        if (player.includes('p-')) {
-          await this.updateTeamForPlayer(player, 'FA', season);
-        } else if (player.includes('g-')) {
-          await this.updateTeamForGoalie(player, 'FA', season);
-        }
-      });
-    }
+    await this.batchUpdatePlayerRosters(players, 'FA', season);
 
-    const playersWithInfo = await this.setPlayerInfo(players);
-
-    const playerArray = [];
-
-    await playersWithInfo.forEach(async (player) => {
-      const string = await this.getPlayerString(player);
-      playerArray.push(string);
-    });
-
+    const playerStrings = await this.resolvePlayerStrings(players);
     const postJson = {
-      text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerArray.join(
+      text: `:rotating_light: WAIVER DROP ALERT :rotating_light: \n \n To Waivers From ${team}: \n ${playerStrings.join(
         '\n'
       )}`,
       channel: '#waivers-and-drops',
@@ -240,359 +160,234 @@ export class ApiTransactionsTradesService {
       icon_emoji: ':office',
     };
 
-    return await this.sendToSlack(postJson, this.waiversHookURL);
+    return this.sendToSlack(postJson, this.waiversHookURL);
   }
 
-  // TRADES
   async trade(body: TradeDto) {
-    const teamOne = body.teamOne;
-    const teamOnePlayers = await this.getPlayersFromArray(body.teamOnePicks);
-    const teamOnePicks = await this.getDraftPicksFromArray(body.teamOnePicks);
-    const teamTwo = body.teamTwo;
-    const teamTwoPlayers = await this.getPlayersFromArray(body.teamTwoPicks);
-    const teamTwoPicks = await this.getDraftPicksFromArray(body.teamTwoPicks);
-    const season = body.season;
+    const { teamOne, teamTwo, season } = body;
+    const teamOnePicksArray = body.teamOnePicks || [];
+    const teamTwoPicksArray = body.teamTwoPicks || [];
 
-    if (teamOnePlayers && teamOnePlayers.length > 0) {
-      await teamOnePlayers.forEach(async (player: string) => {
-        if (player.includes('p-')) {
-          await this.updateTeamForPlayer(player, teamTwo, season);
-        } else if (player.includes('g-')) {
-          await this.updateTeamForGoalie(player, teamTwo, season);
-        }
-      });
-    }
+    const teamOnePlayers = teamOnePicksArray.filter(
+      (p) => p.includes('p-') || p.includes('g-')
+    );
+    const teamTwoPlayers = teamTwoPicksArray.filter(
+      (p) => p.includes('p-') || p.includes('g-')
+    );
 
-    if (teamOnePicks && teamOnePicks.length > 0) {
-      await teamOnePicks.forEach(
-        async (pick: { team: string; value: string; year: string }) => {
-          await this.updateTeamForPick(pick, teamTwo);
-        }
+    const teamOneDraftPicks = this.parseDraftPicks(teamOnePicksArray);
+    const teamTwoDraftPicks = this.parseDraftPicks(teamTwoPicksArray);
+
+    const [teamOneEntity, teamTwoEntity] = await Promise.all([
+      this.teamInfoRepo.findOne({
+        select: { id: true, shortname: true },
+        where: { shortname: teamOne },
+      }),
+      this.teamInfoRepo.findOne({
+        select: { id: true, shortname: true },
+        where: { shortname: teamTwo },
+      }),
+    ]);
+
+    if (!teamOneEntity || !teamTwoEntity) {
+      throw new NotFoundException(
+        `One or both teams not found (${teamOne}, ${teamTwo})`
       );
     }
 
-    if (teamTwoPlayers && teamTwoPlayers.length > 0) {
-      await teamTwoPlayers.forEach(async (player: string) => {
-        if (player.includes('p-')) {
-          await this.updateTeamForPlayer(player, teamOne, season);
-        } else if (player.includes('g-')) {
-          await this.updateTeamForGoalie(player, teamOne, season);
-        }
-      });
-    }
+    await Promise.all([
+      this.batchUpdatePlayerRosters(teamOnePlayers, teamTwo, season),
+      this.batchUpdatePlayerRosters(teamTwoPlayers, teamOne, season),
+      this.batchUpdatePicks(teamOneDraftPicks, teamTwoEntity.id),
+      this.batchUpdatePicks(teamTwoDraftPicks, teamOneEntity.id),
+      this.createTransactionRecord(
+        teamOneEntity.id,
+        teamTwoEntity.id,
+        teamOnePlayers,
+        teamTwoPlayers,
+        teamOneDraftPicks,
+        teamTwoDraftPicks
+      ),
+    ]);
 
-    if (teamTwoPicks && teamTwoPicks.length > 0) {
-      await teamTwoPicks.forEach(
-        async (pick: { team: string; value: string; year: string }) => {
-          await this.updateTeamForPick(pick, teamOne);
-        }
-      );
-    }
+    const [t1PlayerStrings, t2PlayerStrings] = await Promise.all([
+      this.resolvePlayerStrings(teamOnePlayers),
+      this.resolvePlayerStrings(teamTwoPlayers),
+    ]);
 
-    await this.addTransaction(body);
+    const t1PickStrings = teamOneDraftPicks.map(
+      (p) => `- ${p.team} ${p.value} ${p.year}`
+    );
+    const t2PickStrings = teamTwoDraftPicks.map(
+      (p) => `- ${p.team} ${p.value} ${p.year}`
+    );
 
-    const teamOneplayersWithInfo = await this.setPlayerInfo(teamOnePlayers);
-    const teamTwoplayersWithInfo = await this.setPlayerInfo(teamTwoPlayers);
-
-    const teamOneplayerArray = [];
-    const teamTwoplayerArray = [];
-
-    await teamOneplayersWithInfo.forEach(async (player) => {
-      const string = await this.getPlayerString(player);
-      teamOneplayerArray.push(string);
-    });
-
-    await teamTwoplayersWithInfo.forEach(async (player) => {
-      const string = await this.getPlayerString(player);
-      teamTwoplayerArray.push(string);
-    });
-
-    const teamOnePickString = await this.getDraftPickStringArray(teamOnePicks);
-    const teamTwoPickString = await this.getDraftPickStringArray(teamTwoPicks);
+    const toTeamOne = [...t2PlayerStrings, ...t2PickStrings].join('\n');
+    const toTeamTwo = [...t1PlayerStrings, ...t1PickStrings].join('\n');
 
     const postJson = {
-      text: `:rotating_light: TRADE ALERT :rotating_light: \n \n To ${teamOne}: \n ${
-        teamTwoplayerArray.length > 0
-          ? teamTwoplayerArray.join('\n')
-          : teamTwoPicks.length > 0
-          ? teamTwoPickString.join('\n')
-          : ''
-      } \n ${
-        teamTwoplayerArray.length > 0
-          ? teamTwoPicks.length > 0
-            ? teamTwoPickString.join('\n')
-            : ''
-          : ''
-      } \n \n To ${teamTwo}: \n ${
-        teamOneplayerArray.length > 0
-          ? teamOneplayerArray.join('\n')
-          : teamOnePicks.length > 0
-          ? teamOnePickString.join('\n')
-          : ''
-      } \n ${
-        teamOneplayerArray.length > 0
-          ? teamOnePicks.length > 0
-            ? teamOnePickString.join('\n')
-            : ''
-          : ''
-      } \n`,
+      text: `:rotating_light: TRADE ALERT :rotating_light:\n\nTo ${teamOne}:\n${toTeamOne}\n\nTo ${teamTwo}:\n${toTeamTwo}\n`,
       channel: '#trades',
       username: 'League Office',
       icon_emoji: ':office',
     };
 
-    return await this.sendToSlack(postJson, this.tradeHookURL);
+    return this.sendToSlack(postJson, this.tradeHookURL);
   }
 
-  private async addTransaction(body: TradeDto) {
-    const transaction_date = await this.getDate();
-    const teamOneId = await this.getTeamInfo(body.teamOne);
-    const teamTwoId = await this.getTeamInfo(body.teamTwo);
-    const teamOnePlayers = await this.getPlayerIds(body.teamOnePicks);
-    const teamTwoPlayers = await this.getPlayerIds(body.teamTwoPicks);
-    const teamOnePicks = await this.getPicks(body.teamOnePicks);
-    const teamTwoPicks = await this.getPicks(body.teamTwoPicks);
-
-    const createTransaction = {
-      transaction_date,
-      team_one_id: teamOneId.id,
-      team_two_id: teamTwoId.id,
-      team_one_players: teamTwoPlayers,
-      team_two_players: teamOnePlayers,
-      team_one_picks: teamTwoPicks,
-      team_two_picks: teamOnePicks,
-    };
-
-    const trade = await this.repo.create(createTransaction);
-
-    return this.repo.save(trade);
-  }
-
-  private async getPicks(array: string[]) {
-    const picks = [];
-
-    await array.forEach((pick: string) => {
-      if (!pick.includes('-')) {
-        picks.push(pick);
-      }
-    });
-
-    return picks;
-  }
-
-  private async getPlayerIds(array: string[]) {
-    const players = [];
-
-    await array.forEach((pick: string) => {
-      if (pick.includes('p-') || pick.includes('g-')) {
-        const newPick = pick.split('-');
-        players.push(newPick[1]);
-      }
-    });
-
-    return players;
-  }
-
-  private async getDate() {
-    const today = new Date();
-    let dd: string | number = today.getDate();
-    let mm: string | number = today.getMonth() + 1;
-    const yyyy = today.getFullYear();
-
-    if (dd < 10) {
-      dd = `0${dd}`;
-    }
-    if (mm < 10) {
-      mm = `0${mm}`;
-    }
-    return `${yyyy}-${mm}-${dd}`;
-  }
-
-  private async getDraftPickStringArray(
-    picks: { team: string; value: string; year: string }[]
+  private async batchUpdatePlayerRosters(
+    playerTokens: string[],
+    targetTeam: string,
+    season: string
   ) {
-    return picks.map((pick) => `- ${pick.team} ${pick.value} ${pick.year}`);
-  }
+    const skaterIds: number[] = [];
+    const goalieIds: number[] = [];
 
-  private async updateTeamForPick(
-    pick: { team: string; value: string; year: string },
-    team: string
-  ) {
-    const teamId = await this.getTeamInfo(team);
+    for (const token of playerTokens) {
+      const parts = token.split('-');
+      const id = Number(parts[1]);
+      if (isNaN(id)) continue;
 
-    let attrs: Partial<Draft_Order_V2>;
-
-    if (pick.value.includes('1')) {
-      attrs = {
-        round_one: teamId.id,
-      };
-    } else if (pick.value.includes('2')) {
-      attrs = {
-        round_two: teamId.id,
-      };
-    } else if (pick.value.includes('3')) {
-      attrs = {
-        round_three: teamId.id,
-      };
-    } else if (pick.value.includes('4')) {
-      attrs = {
-        round_four: teamId.id,
-      };
-    } else if (pick.value.includes('5')) {
-      attrs = {
-        round_five: teamId.id,
-      };
+      if (token.startsWith('p-')) skaterIds.push(id);
+      else if (token.startsWith('g-')) goalieIds.push(id);
     }
 
-    const draftRow = await this.draftRepo.findOneByOrFail({
-      draft_year: pick.year,
-      team_id: {
-        shortname: pick.team,
-      },
-    });
+    const updates: Promise<any>[] = [];
 
-    if (!draftRow) {
-      throw new NotFoundException('player not found');
+    if (skaterIds.length > 0) {
+      updates.push(
+        this.playerStatsRepo
+          .createQueryBuilder()
+          .update(Players_Stats_V2)
+          .set({ team_name: targetTeam })
+          .where('player_id IN (:...ids)', { ids: skaterIds })
+          .andWhere('playing_year = :season', { season })
+          .execute()
+      );
     }
 
-    Object.assign(draftRow, attrs);
+    if (goalieIds.length > 0) {
+      updates.push(
+        this.goalieStatsRepo
+          .createQueryBuilder()
+          .update(Goalies_Stats_V2)
+          .set({ team_name: targetTeam })
+          .where('player_id IN (:...ids)', { ids: goalieIds })
+          .andWhere('playing_year = :season', { season })
+          .execute()
+      );
+    }
 
-    return this.draftRepo.save(draftRow);
+    await Promise.all(updates);
   }
 
-  private async getDraftPicksFromArray(picksArray: string[]) {
-    const picks = [];
+  private async batchUpdatePicks(picks: ParsedPick[], newOwnerTeamId: number) {
+    await Promise.all(
+      picks.map(async (pick) => {
+        const roundField = this.mapRoundValueToField(pick.value);
+        if (!roundField) return;
 
-    await picksArray.forEach((pick: string) => {
-      if (!pick.includes('-')) {
-        const newPick = pick.split(' ');
+        const draftRow = await this.draftRepo.findOne({
+          where: {
+            draft_year: pick.year,
+            team_id: { shortname: pick.team },
+          },
+        });
 
-        const pickObject = {
-          team: newPick[0],
-          value: newPick[1],
-          year: newPick[2],
-        };
-
-        picks.push(pickObject);
-      }
-    });
-
-    return picks;
-  }
-
-  private async getPlayersFromArray(picksArray: string[]) {
-    const players = [];
-
-    await picksArray.forEach((pick: string) => {
-      if (pick.includes('p-') || pick.includes('g-')) {
-        players.push(pick);
-      }
-    });
-
-    return players;
-  }
-
-  private getPlayerString(player: any) {
-    return `- ${player.playerInfo.firstname} ${player.playerInfo.lastname}`;
-  }
-
-  private async setPlayerInfo(players) {
-    return await Promise.all(
-      players.map(async (item) => ({
-        playerInfo: await this.getPlayerInfo(item.split('-')[1]),
-      }))
+        if (draftRow) {
+          (draftRow as any)[roundField] = newOwnerTeamId;
+          await this.draftRepo.save(draftRow);
+        }
+      })
     );
   }
 
-  private async getTeamInfo(shortname: string) {
-    return await this.teamInfoRepo.findOne({
-      select: {
-        id: true,
-      },
-      where: {
-        shortname,
-      },
-    });
+  private mapRoundValueToField(value: string): string | null {
+    if (value.includes('1')) return 'round_one';
+    if (value.includes('2')) return 'round_two';
+    if (value.includes('3')) return 'round_three';
+    if (value.includes('4')) return 'round_four';
+    if (value.includes('5')) return 'round_five';
+    return null;
   }
 
-  private async getPlayerInfo(playerId: number) {
-    if (playerId) {
-      return await this.playersRepo.findOne({
-        select: {
-          id: true,
-          firstname: true,
-          lastname: true,
-        },
-        where: {
-          id: playerId,
-        },
+  private parseDraftPicks(items: string[]): ParsedPick[] {
+    return items
+      .filter(
+        (item) =>
+          !item.includes('p-') && !item.includes('g-') && item.includes(' ')
+      )
+      .map((item) => {
+        const [team, value, year] = item.split(' ');
+        return { team, value, year };
       });
-    } else {
-      return {};
-    }
   }
 
-  private async updateTeamForPlayer(
-    playerId: string,
-    team: string,
-    season: string
-  ) {
-    const stringId = playerId.split('-');
-    const attrs: Partial<Players_Stats_V2> = {
-      team_name: team,
-    };
+  private async resolvePlayerStrings(
+    playerTokens: string[]
+  ): Promise<string[]> {
+    const rawIds = playerTokens
+      .map((token) => Number(token.split('-')[1]))
+      .filter((id) => !isNaN(id));
 
-    const player = await this.playerStatsRepo.findOneByOrFail({
-      player_id: { id: Number(stringId[1]) },
-      playing_year: season,
+    if (rawIds.length === 0) return [];
+
+    const players = await this.playersRepo.find({
+      select: { id: true, firstname: true, lastname: true },
+      where: { id: In(rawIds) },
     });
 
-    if (!player) {
-      throw new NotFoundException('player not found');
-    }
+    const playerMap = new Map(
+      players.map((p) => [p.id, `${p.firstname} ${p.lastname}`])
+    );
 
-    Object.assign(player, attrs);
-
-    return this.playerStatsRepo.save(player);
+    return rawIds.map((id) => `- ${playerMap.get(id) ?? 'Unknown Player'}`);
   }
 
-  private async updateTeamForGoalie(
-    playerId: string,
-    team: string,
-    season: string
+  private async createTransactionRecord(
+    teamOneId: number,
+    teamTwoId: number,
+    teamOnePlayers: string[],
+    teamTwoPlayers: string[],
+    teamOnePicks: ParsedPick[],
+    teamTwoPicks: ParsedPick[]
   ) {
-    const stringId = playerId.split('-');
-    const attrs: Partial<Goalies_Stats_V2> = {
-      team_name: team,
-    };
+    const extractIds = (tokens: string[]) =>
+      tokens.map((t) => t.split('-')[1]).filter(Boolean);
 
-    const player = await this.goalieStatsRepo.findOneByOrFail({
-      player_id: { id: Number(stringId[1]) },
-      playing_year: season,
+    const formatPicks = (picks: ParsedPick[]) =>
+      picks.map((p) => `${p.team} ${p.value} ${p.year}`);
+
+    const newTransaction = this.repo.create({
+      transaction_date: new Date().toISOString().split('T')[0],
+      team_one_id: teamOneId,
+      team_two_id: teamTwoId,
+      team_one_players: extractIds(teamTwoPlayers) as any,
+      team_two_players: extractIds(teamOnePlayers) as any,
+      team_one_picks: formatPicks(teamTwoPicks) as any,
+      team_two_picks: formatPicks(teamOnePicks) as any,
     });
 
-    if (!player) {
-      throw new NotFoundException('player not found');
-    }
-
-    Object.assign(player, attrs);
-
-    return this.goalieStatsRepo.save(player);
+    return this.repo.save(newTransaction);
   }
 
-  private async sendToSlack(message, hook) {
-    const options = {
-      headers: {
-        'Content-type': 'application/json',
-      },
-    };
+  private async sendToSlack(message: object, hookUrl?: string) {
+    if (!hookUrl) {
+      this.logger.warn('Slack webhook URL is not configured');
+      return;
+    }
 
-    this.httpService
-      .post(`${hook}`, message, options)
-      .pipe(map((response) => response.data))
-      .subscribe({
-        complete: () => console.log('completed'),
-        error: (err) => console.log(err),
-      });
+    try {
+      await firstValueFrom(
+        this.httpService.post(hookUrl, message, {
+          headers: { 'Content-type': 'application/json' },
+        })
+      );
+    } catch (err: any) {
+      this.logger.error(
+        `Failed sending Slack webhook: ${err.message}`,
+        err.stack
+      );
+    }
   }
 }
