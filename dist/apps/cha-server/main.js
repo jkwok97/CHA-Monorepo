@@ -5911,23 +5911,106 @@ let ApiNhlService = class ApiNhlService {
             },
         });
     }
-    async setChaTeamInfo(array, season, type) {
-        const string1 = season.slice(0, 4);
-        const string2 = season.slice(6, 8);
-        const newSeasonString = `${string1}-${string2}`;
-        return await Promise.all(array.map(async (item) => ({
-            ...item,
-            chaPlayerTeam: await this.getChaTeam(item.player.id, newSeasonString, type),
-        })));
-    }
+    // private async setChaTeamInfo(
+    //   array: any[],
+    //   season: string,
+    //   type: string
+    // ): Promise<any[]> {
+    //   const string1 = season.slice(0, 4);
+    //   const string2 = season.slice(6, 8);
+    //
+    //   const newSeasonString = `${string1}-${string2}`;
+    //
+    //   return await Promise.all(
+    //     array.map(async (item) => ({
+    //       ...item,
+    //       chaPlayerTeam: await this.getChaTeam(
+    //         item.player.id,
+    //         newSeasonString,
+    //         type
+    //       ),
+    //     }))
+    //   );
+    // }
     async setChaTeamInfoRookies(array, season) {
-        const string1 = season.slice(0, 4);
-        const string2 = season.slice(6, 8);
-        const newSeasonString = `${string1}-${string2}`;
-        return await Promise.all(array.map(async (item) => ({
+        const newSeasonString = `${season.slice(0, 4)}-${season.slice(6, 8)}`;
+        const teamsByNhlId = await this.getChaTeamsByNhlIds(array.map((item) => item.playerId), newSeasonString, 'p');
+        return array.map((item) => ({
             ...item,
-            chaPlayerTeam: await this.getChaTeam(item.playerId, newSeasonString, 'p'),
-        })));
+            chaPlayerTeam: teamsByNhlId.get(String(item.playerId)) ?? [],
+        }));
+    }
+    // private async setChaTeamInfoRookies(
+    //   array: any[],
+    //   season: string
+    // ): Promise<any[]> {
+    //   const string1 = season.slice(0, 4);
+    //   const string2 = season.slice(6, 8);
+    //
+    //   const newSeasonString = `${string1}-${string2}`;
+    //
+    //   return await Promise.all(
+    //     array.map(async (item) => ({
+    //       ...item,
+    //       chaPlayerTeam: await this.getChaTeam(
+    //         item.playerId,
+    //         newSeasonString,
+    //         'p'
+    //       ),
+    //     }))
+    //   );
+    // }
+    async setChaTeamInfo(array, season, type) {
+        const newSeasonString = `${season.slice(0, 4)}-${season.slice(6, 8)}`;
+        const teamsByNhlId = await this.getChaTeamsByNhlIds(array.map((item) => item.player.id), newSeasonString, type);
+        return array.map((item) => ({
+            ...item,
+            chaPlayerTeam: teamsByNhlId.get(String(item.player.id)) ?? [],
+        }));
+    }
+    async getChaTeamsByNhlIds(nhlIds, season, type) {
+        const repo = (type === 'p' ? this.playerStatsRepo : this.goalieStatsRepo);
+        // Query 1: every player's team name in one go
+        const stats = await repo.find({
+            select: {
+                id: true,
+                team_name: true,
+                player_id: { id: true, nhl_id: true },
+            },
+            relations: { player_id: true },
+            where: {
+                player_id: { nhl_id: (0, typeorm_2.In)(nhlIds.map(String)) },
+                playing_year: season,
+                season_type: 'Regular',
+            },
+        });
+        const teamNameByNhlId = new Map(stats.map((s) => [s.player_id.nhl_id, s.team_name]));
+        // Query 2: every distinct team in one go ('FA' for players with no row)
+        const shortnames = [...new Set([...teamNameByNhlId.values(), 'FA'])];
+        const teams = await this.teamsRepo.find({
+            select: {
+                id: true,
+                teamlogo: true,
+                city: true,
+                nickname: true,
+                shortname: true,
+            },
+            where: { shortname: (0, typeorm_2.In)(shortnames) },
+        });
+        const teamsByShortname = new Map();
+        for (const { shortname, ...team } of teams) {
+            teamsByShortname.set(shortname, [
+                ...(teamsByShortname.get(shortname) ?? []),
+                team,
+            ]);
+        }
+        // Same output as before: an array of team rows per player
+        const result = new Map();
+        for (const id of nhlIds.map(String)) {
+            const teamName = teamNameByNhlId.get(id) ?? 'FA';
+            result.set(id, teamsByShortname.get(teamName) ?? []);
+        }
+        return result;
     }
     async getChaTeam(id, season, type) {
         let playerStatTeam;
