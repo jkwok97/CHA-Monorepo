@@ -4247,7 +4247,7 @@ tslib_1.__exportStar(__webpack_require__(144), exports);
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e, _f, _g;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EntryDraftController = void 0;
 const tslib_1 = __webpack_require__(5);
@@ -4260,19 +4260,21 @@ let EntryDraftController = class EntryDraftController {
     }
     async getAll() {
         const entries = await this.draftService.getAll();
-        if (!entries || entries.length < 1) {
+        if (!entries || entries.length === 0) {
             throw new common_1.NotFoundException('Entry Draft Table not found');
         }
         return entries;
     }
-    updatePickById(param, body) {
-        return this.draftService.updatePickById(parseInt(param.id), body);
+    async updatePickById(id, body) {
+        const updated = await this.draftService.updatePickById(id, body);
+        return updated;
     }
-    addPick(body) {
-        return this.draftService.addPick(body);
+    async addPick(body) {
+        const pick = await this.draftService.addPick(body);
+        return pick;
     }
-    deletePick(param) {
-        return this.draftService.deletePick(parseInt(param.id));
+    async deletePick(id) {
+        return this.draftService.deletePick(id);
     }
 };
 exports.EntryDraftController = EntryDraftController;
@@ -4284,25 +4286,25 @@ tslib_1.__decorate([
 ], EntryDraftController.prototype, "getAll", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     tslib_1.__param(1, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_c = typeof Promise !== "undefined" && Promise) === "function" ? _c : Object)
+    tslib_1.__metadata("design:paramtypes", [Number, typeof (_c = typeof Partial !== "undefined" && Partial) === "function" ? _c : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_d = typeof Promise !== "undefined" && Promise) === "function" ? _d : Object)
 ], EntryDraftController.prototype, "updatePickById", null);
 tslib_1.__decorate([
     (0, common_1.Post)('/add'),
     tslib_1.__param(0, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [typeof (_d = typeof entities_1.CreateDraftPickDto !== "undefined" && entities_1.CreateDraftPickDto) === "function" ? _d : Object]),
-    tslib_1.__metadata("design:returntype", void 0)
+    tslib_1.__metadata("design:paramtypes", [typeof (_e = typeof entities_1.CreateDraftPickDto !== "undefined" && entities_1.CreateDraftPickDto) === "function" ? _e : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
 ], EntryDraftController.prototype, "addPick", null);
 tslib_1.__decorate([
     (0, common_1.Delete)('/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
+    tslib_1.__metadata("design:paramtypes", [Number]),
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], EntryDraftController.prototype, "deletePick", null);
 exports.EntryDraftController = EntryDraftController = tslib_1.__decorate([
     (0, common_1.Controller)('entry-draft'),
@@ -4389,7 +4391,16 @@ let ApiEntryDraftService = class ApiEntryDraftService {
         return this.repo.save(pick);
     }
     async addPick(body) {
-        const pick = this.repo.create(body);
+        const pick = this.repo.create({
+            draft_year: body.draft_year,
+            draft_round: body.draft_round,
+            draft_overall: body.draft_overall,
+            player_id: body.player_id ? { id: body.player_id } : undefined,
+            team_id: body.team_id ? { id: body.team_id } : undefined,
+            pick_team_id: body.pick_team_id
+                ? { id: body.pick_team_id }
+                : undefined,
+        });
         return this.repo.save(pick);
     }
     async deletePick(id) {
@@ -4497,7 +4508,7 @@ tslib_1.__exportStar(__webpack_require__(152), exports);
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GoalieStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
@@ -4510,72 +4521,74 @@ let GoalieStatsController = class GoalieStatsController {
         this.goalieAllTimeStatsService = goalieAllTimeStatsService;
         this.userGoalieStatsService = userGoalieStatsService;
     }
-    async getAllPlayers(param) {
-        const players = await this.goalieStatsService.getAll(param.season);
-        if (!players || players.length < 1) {
-            throw new common_1.NotFoundException('players not found');
+    async getAllPlayers(season) {
+        const players = await this.goalieStatsService.getAll(season);
+        if (!players || players.length === 0) {
+            throw new common_1.NotFoundException(`No goalies found for season ${season}`);
         }
         return players;
     }
-    updatePlayerById(param, body) {
-        return this.goalieStatsService.updateGoalieById(parseInt(param.id), param.season, body);
+    async updatePlayerById(season, id, body) {
+        return this.goalieStatsService.updateGoalieById(id, season, body);
     }
-    deletePlayer(param) {
-        return this.goalieStatsService.deleteGoalie(parseInt(param.id), param.season);
+    async deletePlayer(season, id) {
+        return this.goalieStatsService.deleteGoalie(id, season);
     }
-    async getGoalieStatsLeaders(param) {
-        const stats = await this.goalieStatsLeadersService.getGoalieStatsLeaders(param.season, param.seasonType, param.minGames);
+    async getGoalieStatsLeaders(season, seasonType, minGames) {
+        const stats = await this.goalieStatsLeadersService.getGoalieStatsLeaders(season, seasonType, minGames);
         if (!stats) {
-            throw new common_1.NotFoundException('Player Stats not found');
+            throw new common_1.NotFoundException('Goalie leader stats not found');
         }
         return stats;
     }
-    async getAllGoalieStats(param) {
-        const stats = await this.goalieStatsService.getAllGoalieStats(param.season, param.seasonType);
-        if (!stats || stats.length < 1) {
-            throw new common_1.NotFoundException('Player Stats not found');
+    async getAllGoalieStats(season, seasonType) {
+        const stats = await this.goalieStatsService.getAllGoalieStats(season, seasonType);
+        if (!stats || stats.length === 0) {
+            throw new common_1.NotFoundException('Goalie stats not found');
         }
         return stats;
     }
-    async getGoalieStatsByPlayerId(param) {
-        const stats = await this.goalieStatsService.getGoalieStatsByPlayerId(param.season, param.seasonType, param.playerId);
-        if (!stats || stats.length < 1) {
-            throw new common_1.NotFoundException('Player Stats not found');
+    async getGoalieStatsByPlayerId(season, seasonType, playerId) {
+        const stats = await this.goalieStatsService.getGoalieStatsByPlayerId(season, seasonType, playerId);
+        if (!stats || stats.length === 0) {
+            throw new common_1.NotFoundException(`Goalie stats not found for player ID ${playerId}`);
         }
         return stats;
     }
-    async getAllTimePlayerStatsBySeasonByType(param) {
-        const stats = await this.goalieAllTimeStatsService.getAllTimeGoalieStatsBySeasonByType(param.seasonType);
-        if (!stats || stats.length < 1) {
-            throw new common_1.NotFoundException('Goalie Stats not found');
+    async getAllTimePlayerStatsBySeasonByType(seasonType) {
+        const stats = await this.goalieAllTimeStatsService.getAllTimeGoalieStatsBySeasonByType(seasonType);
+        if (!stats || stats.length === 0) {
+            throw new common_1.NotFoundException('Goalie history stats not found');
         }
         return stats;
     }
-    async getAllTimeGoalieStatsSummedBySeasonByType(param) {
-        const stats = await this.goalieAllTimeStatsService.getAllTimeGoalieStatsSummedBySeasonByType(param.seasonType);
-        if (!stats || stats.length < 1) {
-            throw new common_1.NotFoundException('Goalie Stats not found');
+    async getAllTimeGoalieStatsSummedBySeasonByType(seasonType) {
+        const stats = await this.goalieAllTimeStatsService.getAllTimeGoalieStatsSummedBySeasonByType(seasonType);
+        if (!stats || stats.length === 0) {
+            throw new common_1.NotFoundException('Goalie summed history stats not found');
         }
         return stats;
     }
-    async getTeamGaoliesStatsBySeasonType(param) {
-        const record = await this.userGoalieStatsService.getUserGoaliesStatsBySeasonType(param.userId, param.seasonType);
-        if (!record) {
-            throw new common_1.NotFoundException('Team Goalies Stats not found');
+    async getTeamGoaliesStatsBySeasonType(userId, seasonType) {
+        const record = await this.userGoalieStatsService.getUserGoaliesStatsBySeasonType(userId, seasonType);
+        if (!record || record.length === 0) {
+            throw new common_1.NotFoundException('Team goalies stats not found');
         }
+        // Resolves TypeORM Divisions_V2.id (number) vs StatUserGoaliesHistoryDto literal ID (5)
         return record;
     }
-    async getTeamGoaliesStatsAllTimeBySeasonType(param) {
-        const record = await this.userGoalieStatsService.getUserGoaliesStatsAllTimeBySeasonType(param.userId, param.seasonType);
-        if (!record) {
-            throw new common_1.NotFoundException('Team Goalies Stats not found');
+    async getTeamGoaliesStatsAllTimeBySeasonType(userId, seasonType) {
+        const record = await this.userGoalieStatsService.getUserGoaliesStatsAllTimeBySeasonType(userId, seasonType);
+        if (!record || record.length === 0) {
+            throw new common_1.NotFoundException('Team goalies all-time stats not found');
         }
+        // Resolves TypeORM Divisions_V2.id (number) vs StatUserGoaliesHistoryDto literal ID (5)
         return record;
     }
-    async getTeamPlayersByTeamName(param) {
-        const record = await this.userGoalieStatsService.getTeamPlayersByTeamName(param.teamName, param.season);
-        if (!record) {
-            throw new common_1.NotFoundException('Team Players Stats not found');
+    async getTeamPlayersByTeamName(teamName, season) {
+        const record = await this.userGoalieStatsService.getTeamPlayersByTeamName(teamName, season);
+        if (!record || record.length === 0) {
+            throw new common_1.NotFoundException(`Team goalies not found for team ${teamName}`);
         }
         return record;
     }
@@ -4583,81 +4596,91 @@ let GoalieStatsController = class GoalieStatsController {
 exports.GoalieStatsController = GoalieStatsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:paramtypes", [String]),
     tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], GoalieStatsController.prototype, "getAllPlayers", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/:season/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    tslib_1.__param(2, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+    tslib_1.__metadata("design:paramtypes", [String, Number, typeof (_f = typeof Partial !== "undefined" && Partial) === "function" ? _f : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], GoalieStatsController.prototype, "updatePlayerById", null);
 tslib_1.__decorate([
     (0, common_1.Delete)('/:season/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
+    tslib_1.__metadata("design:paramtypes", [String, Number]),
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], GoalieStatsController.prototype, "deletePlayer", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/leaders/:season/:seasonType/:minGames'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
+    tslib_1.__param(2, (0, common_1.Param)('minGames')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String, String]),
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], GoalieStatsController.prototype, "getGoalieStatsLeaders", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/all/:season/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String]),
+    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
 ], GoalieStatsController.prototype, "getAllGoalieStats", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/current/:season/:seasonType/:playerId'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
+    tslib_1.__param(2, (0, common_1.Param)('playerId', common_1.ParseIntPipe)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String, Number]),
+    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
 ], GoalieStatsController.prototype, "getGoalieStatsByPlayerId", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/history/season/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
+    tslib_1.__metadata("design:paramtypes", [String]),
+    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
 ], GoalieStatsController.prototype, "getAllTimePlayerStatsBySeasonByType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/history/all-time/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
+    tslib_1.__metadata("design:paramtypes", [String]),
+    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
 ], GoalieStatsController.prototype, "getAllTimeGoalieStatsSummedBySeasonByType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId/history/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('userId', common_1.ParseIntPipe)),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
-], GoalieStatsController.prototype, "getTeamGaoliesStatsBySeasonType", null);
+    tslib_1.__metadata("design:paramtypes", [Number, String]),
+    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
+], GoalieStatsController.prototype, "getTeamGoaliesStatsBySeasonType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId/history/all/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('userId', common_1.ParseIntPipe)),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
+    tslib_1.__metadata("design:paramtypes", [Number, String]),
+    tslib_1.__metadata("design:returntype", typeof (_q = typeof Promise !== "undefined" && Promise) === "function" ? _q : Object)
 ], GoalieStatsController.prototype, "getTeamGoaliesStatsAllTimeBySeasonType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/team/:teamName/:season'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('teamName')),
+    tslib_1.__param(1, (0, common_1.Param)('season')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String]),
+    tslib_1.__metadata("design:returntype", typeof (_r = typeof Promise !== "undefined" && Promise) === "function" ? _r : Object)
 ], GoalieStatsController.prototype, "getTeamPlayersByTeamName", null);
 exports.GoalieStatsController = GoalieStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('goalie-stats'),
@@ -5520,33 +5543,17 @@ const typeorm_2 = __webpack_require__(13);
 let LeagueService = class LeagueService {
     constructor(repo) {
         this.repo = repo;
-        this.cachedLeagueData = null;
-        this.cacheExpiresAt = 0;
-        this.CACHE_TTL_MS = 60 * 1000; // 60 seconds
     }
     async getCurrentLeagueData() {
-        const now = Date.now();
-        if (this.cachedLeagueData && now < this.cacheExpiresAt) {
-            return this.cachedLeagueData;
-        }
-        const data = await this.repo.findOneBy({ id: 1 });
-        if (!data) {
-            throw new common_1.NotFoundException('Current league data not found');
-        }
-        this.cachedLeagueData = data;
-        this.cacheExpiresAt = now + this.CACHE_TTL_MS;
-        return this.cachedLeagueData;
+        return (await this.repo.find());
     }
     async updateCurrentLeagueData(attrs) {
-        const data = await this.repo.findOneBy({ id: 1 });
+        const data = await this.repo.findOneByOrFail({ id: 1 });
         if (!data) {
-            throw new common_1.NotFoundException('Current league data with id 1 not found');
+            throw new common_1.NotFoundException('data not found');
         }
         Object.assign(data, attrs);
-        const updated = await this.repo.save(data);
-        this.cachedLeagueData = null;
-        this.cacheExpiresAt = 0;
-        return updated;
+        return this.repo.save(data);
     }
 };
 exports.LeagueService = LeagueService;
@@ -6463,7 +6470,7 @@ tslib_1.__exportStar(__webpack_require__(196), exports);
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
@@ -6476,72 +6483,73 @@ let PlayerStatsController = class PlayerStatsController {
         this.playerAllTimeStatsService = playerAllTimeStatsService;
         this.userPlayersStatsService = userPlayersStatsService;
     }
-    async getAllPlayers(param) {
-        const players = await this.playerStatsService.getAll(param.season);
-        if (!players || players.length < 1) {
-            throw new common_1.NotFoundException('players not found');
+    async getAllPlayers(season) {
+        const players = await this.playerStatsService.getAll(season);
+        if (!players || players.length === 0) {
+            throw new common_1.NotFoundException(`No players found for season ${season}`);
         }
         return players;
     }
-    updatePlayerById(param, body) {
-        return this.playerStatsService.updatePlayerById(parseInt(param.id), param.season, body);
+    async updatePlayerById(season, id, body) {
+        return this.playerStatsService.updatePlayerById(id, season, body);
     }
-    deletePlayer(param) {
-        return this.playerStatsService.deletePlayer(parseInt(param.id), param.season);
+    async deletePlayer(season, id) {
+        return this.playerStatsService.deletePlayer(id, season);
     }
-    async getPlayerStatsLeaders(param) {
-        const stats = await this.playerLeaderStatsService.getPlayerStatsLeaders(param.season, param.seasonType, param.minGamesStats);
+    async getPlayerStatsLeaders(season, seasonType, minGamesStats) {
+        const stats = await this.playerLeaderStatsService.getPlayerStatsLeaders(season, seasonType, minGamesStats);
         if (!stats) {
             throw new common_1.NotFoundException('Player Leader Stats not found');
         }
         return stats;
     }
-    async getPlayerStatsAll(param) {
-        const stats = await this.playerStatsService.getAllStats(param.season, param.seasonType);
-        if (!stats || stats.length < 1) {
+    async getPlayerStatsAll(season, seasonType) {
+        const stats = await this.playerStatsService.getAllStats(season, seasonType);
+        if (!stats || stats.length === 0) {
             throw new common_1.NotFoundException('Player Stats not found');
         }
         return stats;
     }
-    async getPlayerStatsByPlayerId(param) {
-        const stats = await this.playerStatsService.getPlayerStatsByPlayerId(param.season, param.seasonType, param.playerId);
-        if (!stats || stats.length < 1) {
+    async getPlayerStatsByPlayerId(season, seasonType, playerId) {
+        const stats = await this.playerStatsService.getPlayerStatsByPlayerId(season, seasonType, playerId);
+        if (!stats || stats.length === 0) {
+            throw new common_1.NotFoundException(`Player stats not found for player ID ${playerId}`);
+        }
+        return stats;
+    }
+    async getAllTimePlayerStatsBySeasonByType(seasonType) {
+        const stats = await this.playerAllTimeStatsService.getAllTimePlayerStatsBySeasonByType(seasonType);
+        if (!stats || stats.length === 0) {
             throw new common_1.NotFoundException('Player Stats not found');
         }
         return stats;
     }
-    async getAllTimePlayerStatsBySeasonByType(param) {
-        const stats = await this.playerAllTimeStatsService.getAllTimePlayerStatsBySeasonByType(param.seasonType);
-        if (!stats || stats.length < 1) {
+    async getAllTimePlayerStatsSummedBySeasonByType(seasonType) {
+        const stats = await this.playerAllTimeStatsService.getAllTimePlayerStatsSummedBySeasonByType(seasonType);
+        if (!stats || stats.length === 0) {
             throw new common_1.NotFoundException('Player Stats not found');
         }
         return stats;
     }
-    async getAllTimePlayerStatsSummedBySeasonByType(param) {
-        const stats = await this.playerAllTimeStatsService.getAllTimePlayerStatsSummedBySeasonByType(param.seasonType);
-        if (!stats || stats.length < 1) {
-            throw new common_1.NotFoundException('Player Stats not found');
+    async getTeamPlayerStatsBySeasonType(userId, seasonType) {
+        const record = await this.userPlayersStatsService.getUserPlayerStatsBySeasonType(userId, seasonType);
+        if (!record || record.length === 0) {
+            throw new common_1.NotFoundException('Team Players Stats not found');
         }
-        return stats;
+        // Cast via unknown to resolve strict entity-to-DTO literal mismatches (e.g., divisions_id.id: number vs literal)
+        return record;
     }
-    async getTeamPlayerStatsBySeasonType(param) {
-        const record = await this.userPlayersStatsService.getUserPlayerStatsBySeasonType(param.userId, param.seasonType);
-        if (!record) {
+    async getTeamPlayerStatsAllTimeBySeasonType(userId, seasonType) {
+        const record = await this.userPlayersStatsService.getUserPlayerStatsAllTimeBySeasonType(userId, seasonType);
+        if (!record || record.length === 0) {
             throw new common_1.NotFoundException('Team Players Stats not found');
         }
         return record;
     }
-    async getTeamPlayerStatsAllTimeBySeasonType(param) {
-        const record = await this.userPlayersStatsService.getUserPlayerStatsAllTimeBySeasonType(param.userId, param.seasonType);
-        if (!record) {
-            throw new common_1.NotFoundException('Team Players Stats not found');
-        }
-        return record;
-    }
-    async getTeamPlayersByTeamName(param) {
-        const record = await this.userPlayersStatsService.getTeamPlayersByTeamName(param.teamName, param.season);
-        if (!record) {
-            throw new common_1.NotFoundException('Team Players Stats not found');
+    async getTeamPlayersByTeamName(teamName, season) {
+        const record = await this.userPlayersStatsService.getTeamPlayersByTeamName(teamName, season);
+        if (!record || record.length === 0) {
+            throw new common_1.NotFoundException(`Team players not found for team ${teamName}`);
         }
         return record;
     }
@@ -6549,81 +6557,91 @@ let PlayerStatsController = class PlayerStatsController {
 exports.PlayerStatsController = PlayerStatsController;
 tslib_1.__decorate([
     (0, common_1.Get)('/:season'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:paramtypes", [String]),
     tslib_1.__metadata("design:returntype", typeof (_e = typeof Promise !== "undefined" && Promise) === "function" ? _e : Object)
 ], PlayerStatsController.prototype, "getAllPlayers", null);
 tslib_1.__decorate([
     (0, common_1.Put)('/:season/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
-    tslib_1.__param(1, (0, common_1.Body)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    tslib_1.__param(2, (0, common_1.Body)()),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object, Object]),
-    tslib_1.__metadata("design:returntype", typeof (_f = typeof Promise !== "undefined" && Promise) === "function" ? _f : Object)
+    tslib_1.__metadata("design:paramtypes", [String, Number, typeof (_f = typeof Partial !== "undefined" && Partial) === "function" ? _f : Object]),
+    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
 ], PlayerStatsController.prototype, "updatePlayerById", null);
 tslib_1.__decorate([
     (0, common_1.Delete)('/:season/:id'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", void 0)
+    tslib_1.__metadata("design:paramtypes", [String, Number]),
+    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
 ], PlayerStatsController.prototype, "deletePlayer", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/leaders/:season/:seasonType/:minGamesStats'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
+    tslib_1.__param(2, (0, common_1.Param)('minGamesStats', common_1.ParseIntPipe)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_g = typeof Promise !== "undefined" && Promise) === "function" ? _g : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String, Number]),
+    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
 ], PlayerStatsController.prototype, "getPlayerStatsLeaders", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/all/:season/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_h = typeof Promise !== "undefined" && Promise) === "function" ? _h : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String]),
+    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
 ], PlayerStatsController.prototype, "getPlayerStatsAll", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/current/:season/:seasonType/:playerId'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('season')),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
+    tslib_1.__param(2, (0, common_1.Param)('playerId', common_1.ParseIntPipe)),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_j = typeof Promise !== "undefined" && Promise) === "function" ? _j : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String, Number]),
+    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
 ], PlayerStatsController.prototype, "getPlayerStatsByPlayerId", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/history/season/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_k = typeof Promise !== "undefined" && Promise) === "function" ? _k : Object)
+    tslib_1.__metadata("design:paramtypes", [String]),
+    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
 ], PlayerStatsController.prototype, "getAllTimePlayerStatsBySeasonByType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/history/all-time/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_l = typeof Promise !== "undefined" && Promise) === "function" ? _l : Object)
+    tslib_1.__metadata("design:paramtypes", [String]),
+    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
 ], PlayerStatsController.prototype, "getAllTimePlayerStatsSummedBySeasonByType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId/history/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('userId', common_1.ParseIntPipe)),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_m = typeof Promise !== "undefined" && Promise) === "function" ? _m : Object)
+    tslib_1.__metadata("design:paramtypes", [Number, String]),
+    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
 ], PlayerStatsController.prototype, "getTeamPlayerStatsBySeasonType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/user/:userId/history/all/:seasonType'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('userId', common_1.ParseIntPipe)),
+    tslib_1.__param(1, (0, common_1.Param)('seasonType')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_o = typeof Promise !== "undefined" && Promise) === "function" ? _o : Object)
+    tslib_1.__metadata("design:paramtypes", [Number, String]),
+    tslib_1.__metadata("design:returntype", typeof (_q = typeof Promise !== "undefined" && Promise) === "function" ? _q : Object)
 ], PlayerStatsController.prototype, "getTeamPlayerStatsAllTimeBySeasonType", null);
 tslib_1.__decorate([
     (0, common_1.Get)('/team/:teamName/:season'),
-    tslib_1.__param(0, (0, common_1.Param)()),
+    tslib_1.__param(0, (0, common_1.Param)('teamName')),
+    tslib_1.__param(1, (0, common_1.Param)('season')),
     tslib_1.__metadata("design:type", Function),
-    tslib_1.__metadata("design:paramtypes", [Object]),
-    tslib_1.__metadata("design:returntype", typeof (_p = typeof Promise !== "undefined" && Promise) === "function" ? _p : Object)
+    tslib_1.__metadata("design:paramtypes", [String, String]),
+    tslib_1.__metadata("design:returntype", typeof (_r = typeof Promise !== "undefined" && Promise) === "function" ? _r : Object)
 ], PlayerStatsController.prototype, "getTeamPlayersByTeamName", null);
 exports.PlayerStatsController = PlayerStatsController = tslib_1.__decorate([
     (0, common_1.Controller)('player-stats'),

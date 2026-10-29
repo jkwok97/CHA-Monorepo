@@ -2,6 +2,7 @@ import { Drafts_V2 } from '@api/entities';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeepPartial, FindOptionsWhere, Repository } from 'typeorm';
+import { CreateDraftPickDto } from '@cha/shared/entities';
 
 const DRAFT_PICK_SELECT = {
   id: true,
@@ -70,8 +71,18 @@ export class ApiEntryDraftService {
     return this.repo.save(pick);
   }
 
-  async addPick(body: DeepPartial<Drafts_V2>): Promise<Drafts_V2> {
-    const pick = this.repo.create(body);
+  async addPick(body: CreateDraftPickDto): Promise<Drafts_V2> {
+    const pick = this.repo.create({
+      draft_year: body.draft_year,
+      draft_round: body.draft_round,
+      draft_overall: body.draft_overall,
+      player_id: body.player_id ? ({ id: body.player_id } as any) : undefined,
+      team_id: body.team_id ? ({ id: body.team_id } as any) : undefined,
+      pick_team_id: body.pick_team_id
+        ? ({ id: body.pick_team_id } as any)
+        : undefined,
+    });
+
     return this.repo.save(pick);
   }
 

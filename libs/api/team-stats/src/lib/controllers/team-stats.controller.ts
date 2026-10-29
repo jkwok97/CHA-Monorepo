@@ -8,6 +8,7 @@ import {
   ApiAllTimeTeamStatsService,
   ApiTeamStatsService,
   ApiUserTeamStatsService,
+  UserTeamWithStats,
 } from '../services';
 
 @Controller('team-stats')
@@ -109,7 +110,7 @@ export class TeamStatsController {
   @Get('/user/:userId/history/:seasonType')
   async getUserTeamStatsBySeasonType(
     @Param() param
-  ): Promise<StatUserTeamRecordDto> {
+  ): Promise<(UserTeamWithStats)[]> {
     const record = await this.userTeamStatsService.getUserTeamStatsBySeasonType(
       param.userId,
       param.seasonType

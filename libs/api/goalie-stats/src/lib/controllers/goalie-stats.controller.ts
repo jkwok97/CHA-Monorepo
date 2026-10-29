@@ -13,6 +13,7 @@ import {
   Get,
   NotFoundException,
   Param,
+  ParseIntPipe,
   Put,
 } from '@nestjs/common';
 import {
@@ -25,154 +26,179 @@ import {
 @Controller('goalie-stats')
 export class GoalieStatsController {
   constructor(
-    private goalieStatsLeadersService: ApiGoalieStatsLeadersService,
-    private goalieStatsService: ApiGoalieStatsService,
-    private goalieAllTimeStatsService: ApiGoalieAllTimeStatsService,
-    private userGoalieStatsService: ApiUserGoalieStatsService
+    private readonly goalieStatsLeadersService: ApiGoalieStatsLeadersService,
+    private readonly goalieStatsService: ApiGoalieStatsService,
+    private readonly goalieAllTimeStatsService: ApiGoalieAllTimeStatsService,
+    private readonly userGoalieStatsService: ApiUserGoalieStatsService
   ) {}
 
   @Get('/:season')
-  async getAllPlayers(@Param() param): Promise<StatGoalieAllDto[]> {
-    const players = await this.goalieStatsService.getAll(param.season);
+  async getAllPlayers(
+    @Param('season') season: string
+  ): Promise<StatGoalieAllDto[]> {
+    const players = await this.goalieStatsService.getAll(season);
 
-    if (!players || players.length < 1) {
-      throw new NotFoundException('players not found');
+    if (!players || players.length === 0) {
+      throw new NotFoundException(`No goalies found for season ${season}`);
     }
     return players;
   }
 
   @Put('/:season/:id')
-  updatePlayerById(@Param() param, @Body() body): Promise<Goalies_Stats_V2> {
-    return this.goalieStatsService.updateGoalieById(
-      parseInt(param.id),
-      param.season,
-      body
-    );
+  async updatePlayerById(
+    @Param('season') season: string,
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: Partial<Goalies_Stats_V2>
+  ): Promise<Goalies_Stats_V2> {
+    return this.goalieStatsService.updateGoalieById(id, season, body);
   }
 
   @Delete('/:season/:id')
-  deletePlayer(@Param() param) {
-    return this.goalieStatsService.deleteGoalie(
-      parseInt(param.id),
-      param.season
-    );
+  async deletePlayer(
+    @Param('season') season: string,
+    @Param('id', ParseIntPipe) id: number
+  ): Promise<Goalies_Stats_V2> {
+    return this.goalieStatsService.deleteGoalie(id, season);
   }
 
   @Get('/leaders/:season/:seasonType/:minGames')
-  async getGoalieStatsLeaders(@Param() param): Promise<StatGoalieLeadersDto> {
+  async getGoalieStatsLeaders(
+    @Param('season') season: string,
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs',
+    @Param('minGames') minGames: string
+  ): Promise<StatGoalieLeadersDto> {
     const stats = await this.goalieStatsLeadersService.getGoalieStatsLeaders(
-      param.season,
-      param.seasonType,
-      param.minGames
+      season,
+      seasonType,
+      minGames
     );
 
     if (!stats) {
-      throw new NotFoundException('Player Stats not found');
+      throw new NotFoundException('Goalie leader stats not found');
     }
     return stats;
   }
 
   @Get('/all/:season/:seasonType')
-  async getAllGoalieStats(@Param() param): Promise<any[]> {
+  async getAllGoalieStats(
+    @Param('season') season: string,
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs'
+  ): Promise<StatGoalieAllDto[]> {
     const stats = await this.goalieStatsService.getAllGoalieStats(
-      param.season,
-      param.seasonType
+      season,
+      seasonType
     );
 
-    if (!stats || stats.length < 1) {
-      throw new NotFoundException('Player Stats not found');
+    if (!stats || stats.length === 0) {
+      throw new NotFoundException('Goalie stats not found');
     }
     return stats;
   }
 
   @Get('/current/:season/:seasonType/:playerId')
-  async getGoalieStatsByPlayerId(@Param() param): Promise<any[]> {
+  async getGoalieStatsByPlayerId(
+    @Param('season') season: string,
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs',
+    @Param('playerId', ParseIntPipe) playerId: number
+  ): Promise<StatGoalieAllDto[]> {
     const stats = await this.goalieStatsService.getGoalieStatsByPlayerId(
-      param.season,
-      param.seasonType,
-      param.playerId
+      season,
+      seasonType,
+      playerId
     );
 
-    if (!stats || stats.length < 1) {
-      throw new NotFoundException('Player Stats not found');
+    if (!stats || stats.length === 0) {
+      throw new NotFoundException(
+        `Goalie stats not found for player ID ${playerId}`
+      );
     }
     return stats;
   }
 
   @Get('/history/season/:seasonType')
   async getAllTimePlayerStatsBySeasonByType(
-    @Param() param
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatGoaliesHistoryDto[]> {
     const stats =
       await this.goalieAllTimeStatsService.getAllTimeGoalieStatsBySeasonByType(
-        param.seasonType
+        seasonType
       );
 
-    if (!stats || stats.length < 1) {
-      throw new NotFoundException('Goalie Stats not found');
+    if (!stats || stats.length === 0) {
+      throw new NotFoundException('Goalie history stats not found');
     }
     return stats;
   }
 
   @Get('/history/all-time/:seasonType')
   async getAllTimeGoalieStatsSummedBySeasonByType(
-    @Param() param
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatGoaliesHistoryDto[]> {
     const stats =
       await this.goalieAllTimeStatsService.getAllTimeGoalieStatsSummedBySeasonByType(
-        param.seasonType
+        seasonType
       );
 
-    if (!stats || stats.length < 1) {
-      throw new NotFoundException('Goalie Stats not found');
+    if (!stats || stats.length === 0) {
+      throw new NotFoundException('Goalie summed history stats not found');
     }
     return stats;
   }
 
   @Get('/user/:userId/history/:seasonType')
-  async getTeamGaoliesStatsBySeasonType(
-    @Param() param
+  async getTeamGoaliesStatsBySeasonType(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatUserGoaliesHistoryDto[]> {
     const record =
       await this.userGoalieStatsService.getUserGoaliesStatsBySeasonType(
-        param.userId,
-        param.seasonType
+        userId,
+        seasonType
       );
 
-    if (!record) {
-      throw new NotFoundException('Team Goalies Stats not found');
+    if (!record || record.length === 0) {
+      throw new NotFoundException('Team goalies stats not found');
     }
-    return record;
+
+    // Resolves TypeORM Divisions_V2.id (number) vs StatUserGoaliesHistoryDto literal ID (5)
+    return record as unknown as StatUserGoaliesHistoryDto[];
   }
 
   @Get('/user/:userId/history/all/:seasonType')
   async getTeamGoaliesStatsAllTimeBySeasonType(
-    @Param() param
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('seasonType') seasonType: 'Regular' | 'Playoffs'
   ): Promise<StatUserGoaliesHistoryDto[]> {
     const record =
       await this.userGoalieStatsService.getUserGoaliesStatsAllTimeBySeasonType(
-        param.userId,
-        param.seasonType
+        userId,
+        seasonType
       );
 
-    if (!record) {
-      throw new NotFoundException('Team Goalies Stats not found');
+    if (!record || record.length === 0) {
+      throw new NotFoundException('Team goalies all-time stats not found');
     }
-    return record;
+
+    // Resolves TypeORM Divisions_V2.id (number) vs StatUserGoaliesHistoryDto literal ID (5)
+    return record as unknown as StatUserGoaliesHistoryDto[];
   }
 
   @Get('/team/:teamName/:season')
   async getTeamPlayersByTeamName(
-    @Param() param
+    @Param('teamName') teamName: string,
+    @Param('season') season: string
   ): Promise<StatPlayerAwardDto[]> {
     const record = await this.userGoalieStatsService.getTeamPlayersByTeamName(
-      param.teamName,
-      param.season
+      teamName,
+      season
     );
 
-    if (!record) {
-      throw new NotFoundException('Team Players Stats not found');
+    if (!record || record.length === 0) {
+      throw new NotFoundException(
+        `Team goalies not found for team ${teamName}`
+      );
     }
-    return record;
+
+    return record as unknown as StatPlayerAwardDto[];
   }
 }
