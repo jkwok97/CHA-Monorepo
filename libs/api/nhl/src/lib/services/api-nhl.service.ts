@@ -8,9 +8,8 @@ import {
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AxiosResponse } from 'axios';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 
 @Injectable()
 export class ApiNhlService {
@@ -196,40 +195,142 @@ export class ApiNhlService {
     });
   }
 
-  private async setChaTeamInfo(array: any[], season: string, type: string) {
-    const string1 = season.slice(0, 4);
-    const string2 = season.slice(6, 8);
+  // private async setChaTeamInfo(
+  //   array: any[],
+  //   season: string,
+  //   type: string
+  // ): Promise<any[]> {
+  //   const string1 = season.slice(0, 4);
+  //   const string2 = season.slice(6, 8);
+  //
+  //   const newSeasonString = `${string1}-${string2}`;
+  //
+  //   return await Promise.all(
+  //     array.map(async (item) => ({
+  //       ...item,
+  //       chaPlayerTeam: await this.getChaTeam(
+  //         item.player.id,
+  //         newSeasonString,
+  //         type
+  //       ),
+  //     }))
+  //   );
+  // }
 
-    const newSeasonString = `${string1}-${string2}`;
+  private async setChaTeamInfoRookies(
+    array: any[],
+    season: string
+  ): Promise<any[]> {
+    const newSeasonString = `${season.slice(0, 4)}-${season.slice(6, 8)}`;
 
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        chaPlayerTeam: await this.getChaTeam(
-          item.player.id,
-          newSeasonString,
-          type
-        ),
-      }))
+    const teamsByNhlId = await this.getChaTeamsByNhlIds(
+      array.map((item) => item.playerId),
+      newSeasonString,
+      'p'
     );
+
+    return array.map((item) => ({
+      ...item,
+      chaPlayerTeam: teamsByNhlId.get(String(item.playerId)) ?? [],
+    }));
   }
 
-  private async setChaTeamInfoRookies(array: any[], season: string) {
-    const string1 = season.slice(0, 4);
-    const string2 = season.slice(6, 8);
+  // private async setChaTeamInfoRookies(
+  //   array: any[],
+  //   season: string
+  // ): Promise<any[]> {
+  //   const string1 = season.slice(0, 4);
+  //   const string2 = season.slice(6, 8);
+  //
+  //   const newSeasonString = `${string1}-${string2}`;
+  //
+  //   return await Promise.all(
+  //     array.map(async (item) => ({
+  //       ...item,
+  //       chaPlayerTeam: await this.getChaTeam(
+  //         item.playerId,
+  //         newSeasonString,
+  //         'p'
+  //       ),
+  //     }))
+  //   );
+  // }
 
-    const newSeasonString = `${string1}-${string2}`;
+  private async setChaTeamInfo(
+    array: any[],
+    season: string,
+    type: string
+  ): Promise<any[]> {
+    const newSeasonString = `${season.slice(0, 4)}-${season.slice(6, 8)}`;
 
-    return await Promise.all(
-      array.map(async (item) => ({
-        ...item,
-        chaPlayerTeam: await this.getChaTeam(
-          item.playerId,
-          newSeasonString,
-          'p'
-        ),
-      }))
+    const teamsByNhlId = await this.getChaTeamsByNhlIds(
+      array.map((item) => item.player.id),
+      newSeasonString,
+      type
     );
+
+    return array.map((item) => ({
+      ...item,
+      chaPlayerTeam: teamsByNhlId.get(String(item.player.id)) ?? [],
+    }));
+  }
+
+  private async getChaTeamsByNhlIds(
+    nhlIds: number[],
+    season: string,
+    type: string
+  ) {
+    const repo = (
+      type === 'p' ? this.playerStatsRepo : this.goalieStatsRepo
+    ) as Repository<Players_Stats_V2>;
+
+    // Query 1: every player's team name in one go
+    const stats = await repo.find({
+      select: {
+        id: true,
+        team_name: true,
+        player_id: { id: true, nhl_id: true },
+      },
+      relations: { player_id: true },
+      where: {
+        player_id: { nhl_id: In(nhlIds.map(String)) },
+        playing_year: season,
+        season_type: 'Regular',
+      },
+    });
+
+    const teamNameByNhlId = new Map(
+      stats.map((s) => [s.player_id.nhl_id, s.team_name])
+    );
+
+    // Query 2: every distinct team in one go ('FA' for players with no row)
+    const shortnames = [...new Set([...teamNameByNhlId.values(), 'FA'])];
+    const teams = await this.teamsRepo.find({
+      select: {
+        id: true,
+        teamlogo: true,
+        city: true,
+        nickname: true,
+        shortname: true,
+      },
+      where: { shortname: In(shortnames) },
+    });
+
+    const teamsByShortname = new Map<string, any[]>();
+    for (const { shortname, ...team } of teams) {
+      teamsByShortname.set(shortname, [
+        ...(teamsByShortname.get(shortname) ?? []),
+        team,
+      ]);
+    }
+
+    // Same output as before: an array of team rows per player
+    const result = new Map<string, any[]>();
+    for (const id of nhlIds.map(String)) {
+      const teamName = teamNameByNhlId.get(id) ?? 'FA';
+      result.set(id, teamsByShortname.get(teamName) ?? []);
+    }
+    return result;
   }
 
   private async getChaTeam(id: number, season: string, type: string) {
