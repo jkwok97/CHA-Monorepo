@@ -109,7 +109,6 @@ export class ApiNhlService {
       .pipe(
         map((response) => response.data),
         switchMap((response) => {
-          console.log('response from sportsnet', response);
           return this.setChaTeamInfoForSportsnet(response.data, season);
         })
       );
@@ -164,7 +163,6 @@ export class ApiNhlService {
     },
     season: string
   ) {
-    console.log('setChaTeamInfoForSportsnet', statObject, season);
     const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
     const { skaters, goalies } = statObject.player_stats;
 
@@ -261,8 +259,10 @@ export class ApiNhlService {
       } as any,
     });
 
+    console.log(type, idField, stats.length, stats[0]?.player_id);
+
     const teamNameById = new Map(
-      stats.map((s: any) => [s.player_id[idField], s.team_name])
+      stats.map((s: any) => [String(s.player_id[idField]), s.team_name])
     );
 
     // Query 2: every distinct team in one go ('FA' for players with no row)
