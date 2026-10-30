@@ -224,10 +224,11 @@ export class ApiPlayerLeadersStatsService {
     return this.repo
       .createQueryBuilder('stats')
       .leftJoinAndSelect('stats.player_id', 'player')
-      .orderBy('CAST(stats.shooting_pct AS FLOAT)', 'DESC')
+      .addSelect('CAST(stats.shooting_pct AS DECIMAL(5,2))', 'numeric_pct')
       .where('stats.playing_year = :season', { season })
       .andWhere('stats.season_type = :seasonType', { seasonType })
       .andWhere('stats.shots >= :minShots', { minShots })
+      .orderBy('numeric_pct', 'DESC')
       .take(10)
       .getMany();
   }
