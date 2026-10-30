@@ -6827,25 +6827,16 @@ let ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService_1 = class ApiPla
             take: limit,
         });
     }
-    async getShootingLeaders(season, seasonType, minGamesStats) {
-        return this.repo.find({
-            select: {
-                ...COMMON_PLAYER_SELECT,
-                shooting_pct: true,
-            },
-            relations: {
-                player_id: true,
-            },
-            where: {
-                playing_year: season,
-                season_type: seasonType,
-                shots: (0, typeorm_2.MoreThanOrEqual)(minGamesStats),
-            },
-            order: {
-                shooting_pct: 'DESC',
-            },
-            take: 10,
-        });
+    async getShootingLeaders(season, seasonType, minShots) {
+        return this.repo
+            .createQueryBuilder('stats')
+            .leftJoinAndSelect('stats.player_id', 'player')
+            .orderBy('CAST(stats.shooting_pct AS FLOAT)', 'DESC')
+            .where('stats.playing_year = :season', { season })
+            .andWhere('stats.season_type = :seasonType', { seasonType })
+            .andWhere('stats.shots >= :minShots', { minShots })
+            .take(10)
+            .getMany();
     }
 };
 exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService;

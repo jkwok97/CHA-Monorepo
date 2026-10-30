@@ -219,25 +219,16 @@ export class ApiPlayerLeadersStatsService {
   private async getShootingLeaders(
     season: string,
     seasonType: 'Regular' | 'Playoffs',
-    minGamesStats: number
+    minShots: number
   ): Promise<Players_Stats_V2[]> {
-    return this.repo.find({
-      select: {
-        ...COMMON_PLAYER_SELECT,
-        shooting_pct: true,
-      },
-      relations: {
-        player_id: true,
-      },
-      where: {
-        playing_year: season,
-        season_type: seasonType,
-        shots: MoreThanOrEqual(minGamesStats),
-      },
-      order: {
-        shooting_pct: 'DESC',
-      },
-      take: 10,
-    });
+    return this.repo
+      .createQueryBuilder('stats')
+      .leftJoinAndSelect('stats.player_id', 'player')
+      .orderBy('CAST(stats.shooting_pct AS FLOAT)', 'DESC')
+      .where('stats.playing_year = :season', { season })
+      .andWhere('stats.season_type = :seasonType', { seasonType })
+      .andWhere('stats.shots >= :minShots', { minShots })
+      .take(10)
+      .getMany();
   }
 }
