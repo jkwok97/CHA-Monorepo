@@ -1,4 +1,5 @@
 export interface StatPlayerAllDto {
+  id: number;
   player_id: {
     id: number;
     firstname: string;

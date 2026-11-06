@@ -52,7 +52,7 @@ export class PlayerMgmtPlayerCurrentEditComponent {
 
   onDelete() {
     if (this.player) {
-      this.playerMgmtPlayerCurrentFacade.deletePlayer(this.player.player_id.id);
+      this.playerMgmtPlayerCurrentFacade.deletePlayer(this.player.id);
 
       this.playerMgmtPlayerCurrentFacade.isSaving$
         .pipe(

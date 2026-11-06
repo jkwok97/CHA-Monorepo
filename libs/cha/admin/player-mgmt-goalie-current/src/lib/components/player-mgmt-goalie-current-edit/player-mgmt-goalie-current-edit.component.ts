@@ -51,7 +51,7 @@ export class PlayerMgmtGoalieCurrentEditComponent {
 
   onDelete() {
     if (this.goalie) {
-      this.playerMgmtGoalieCurrentFacade.deleteGoalie(this.goalie.player_id.id);
+      this.playerMgmtGoalieCurrentFacade.deleteGoalie(this.goalie.id);
 
       this.playerMgmtGoalieCurrentFacade.isSaving$
         .pipe(
