@@ -30,10 +30,10 @@ const tslib_1 = __webpack_require__(5);
 const core_1 = __webpack_require__(6);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
-const config_1 = __webpack_require__(278);
+const config_1 = __webpack_require__(283);
 const typeorm_1 = __webpack_require__(38);
-const app_controller_1 = __webpack_require__(279);
-const app_service_1 = __webpack_require__(280);
+const app_controller_1 = __webpack_require__(284);
+const app_service_1 = __webpack_require__(285);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -118,18 +118,18 @@ const entry_draft_1 = __webpack_require__(141);
 const goalie_stats_1 = __webpack_require__(149);
 const league_1 = __webpack_require__(160);
 const nhl_1 = __webpack_require__(167);
-const player_info_1 = __webpack_require__(177);
-const player_ratings_1 = __webpack_require__(185);
-const player_stats_1 = __webpack_require__(193);
-const salaries_1 = __webpack_require__(204);
-const schedule_1 = __webpack_require__(212);
-const team_stats_1 = __webpack_require__(220);
-const teams_1 = __webpack_require__(230);
-const transactions_1 = __webpack_require__(237);
-const waivers_1 = __webpack_require__(246);
-const divisions_1 = __webpack_require__(254);
-const goalie_ratings_1 = __webpack_require__(262);
-const conferences_1 = __webpack_require__(270);
+const player_info_1 = __webpack_require__(182);
+const player_ratings_1 = __webpack_require__(190);
+const player_stats_1 = __webpack_require__(198);
+const salaries_1 = __webpack_require__(209);
+const schedule_1 = __webpack_require__(217);
+const team_stats_1 = __webpack_require__(225);
+const teams_1 = __webpack_require__(235);
+const transactions_1 = __webpack_require__(242);
+const waivers_1 = __webpack_require__(251);
+const divisions_1 = __webpack_require__(259);
+const goalie_ratings_1 = __webpack_require__(267);
+const conferences_1 = __webpack_require__(275);
 let ApiCoreModule = class ApiCoreModule {
 };
 exports.ApiCoreModule = ApiCoreModule;
@@ -5605,7 +5605,7 @@ const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
 const axios_1 = __webpack_require__(169);
 const controllers_1 = __webpack_require__(170);
-const middlewares_1 = __webpack_require__(175);
+const middlewares_1 = __webpack_require__(180);
 const services_1 = __webpack_require__(172);
 const entities_1 = __webpack_require__(10);
 const typeorm_1 = __webpack_require__(38);
@@ -5789,6 +5789,7 @@ const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const rxjs_1 = __webpack_require__(174);
 const typeorm_2 = __webpack_require__(13);
+const helpers_1 = __webpack_require__(175);
 let ApiNhlService = class ApiNhlService {
     constructor(httpService, playerStatsRepo, goalieStatsRepo, teamsRepo) {
         this.httpService = httpService;
@@ -5841,9 +5842,14 @@ let ApiNhlService = class ApiNhlService {
     getNhlPlayerStatsByPlayerId(playerId, season) {
         return this.httpService
             .get(`${this.nhlAPI}/${playerId}/player-stats`)
-            .pipe((0, rxjs_1.map)((response) => response.data?.seasonTotals?.find((s) => s.season === Number(season) &&
-            s.gameTypeId === 2 &&
-            s.leagueAbbrev.default === 'NHL')));
+            .pipe((0, rxjs_1.map)((response) => {
+            const records = (response.data?.seasonTotals ?? []).filter((s) => s.season === Number(season) &&
+                s.gameTypeId === 2 &&
+                s.leagueAbbrev?.default === 'NHL');
+            if (!records.length)
+                return undefined;
+            return (0, helpers_1.aggregateSeasonStats)(records);
+        }));
     }
     async setChaTeamInfoForSportsnet(statObject, season) {
         const newSeasonString = `${season}-${Number(season.slice(2, 4)) + 1}`;
@@ -5951,10 +5957,113 @@ module.exports = require("rxjs");
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
 tslib_1.__exportStar(__webpack_require__(176), exports);
+tslib_1.__exportStar(__webpack_require__(179), exports);
+tslib_1.__exportStar(__webpack_require__(177), exports);
+tslib_1.__exportStar(__webpack_require__(178), exports);
 
 
 /***/ }),
 /* 176 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.aggregateSeasonStats = aggregateSeasonStats;
+const strip_team_info_1 = __webpack_require__(177);
+const sum_counting_stats_1 = __webpack_require__(178);
+const compute_weighted_avg_toi_1 = __webpack_require__(179);
+function aggregateSeasonStats(records) {
+    if (records.length === 1) {
+        return (0, strip_team_info_1.stripTeamInfo)(records[0]);
+    }
+    const totals = (0, sum_counting_stats_1.sumCountingStats)(records);
+    const avgToi = (0, compute_weighted_avg_toi_1.computeWeightedAvgToi)(records, totals.gamesPlayed);
+    const shootingPctg = totals.shots > 0 ? Number((totals.goals / totals.shots).toFixed(3)) : 0;
+    return {
+        ...totals,
+        avgToi,
+        shootingPctg,
+        faceoffWinningPctg: 0,
+        gameTypeId: 2,
+        leagueAbbrev: { default: 'NHL' },
+        season: records[0].season,
+    };
+}
+
+
+/***/ }),
+/* 177 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.stripTeamInfo = stripTeamInfo;
+function stripTeamInfo(record) {
+    const { teamName, teamCommonName, teamPlaceNameWithPreposition, sequence, ...statsOnly } = record;
+    return statsOnly;
+}
+
+
+/***/ }),
+/* 178 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.sumCountingStats = sumCountingStats;
+function sumCountingStats(records) {
+    const sum = (key) => records.reduce((total, r) => total + (Number(r[key]) || 0), 0);
+    return {
+        gamesPlayed: sum('gamesPlayed'),
+        goals: sum('goals'),
+        assists: sum('assists'),
+        points: sum('points'),
+        plusMinus: sum('plusMinus'),
+        pim: sum('pim'),
+        shots: sum('shots'),
+        gameWinningGoals: sum('gameWinningGoals'),
+        otGoals: sum('otGoals'),
+        powerPlayGoals: sum('powerPlayGoals'),
+        powerPlayPoints: sum('powerPlayPoints'),
+        shorthandedGoals: sum('shorthandedGoals'),
+        shorthandedPoints: sum('shorthandedPoints'),
+    };
+}
+
+
+/***/ }),
+/* 179 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.computeWeightedAvgToi = computeWeightedAvgToi;
+function computeWeightedAvgToi(records, totalGames) {
+    if (!totalGames)
+        return '00:00';
+    const totalToiSeconds = records.reduce((sum, r) => {
+        const [mins = 0, secs = 0] = (r.avgToi || '0:0').split(':').map(Number);
+        return sum + (mins * 60 + secs) * (r.gamesPlayed || 0);
+    }, 0);
+    const avgSeconds = Math.round(totalToiSeconds / totalGames);
+    const mins = Math.floor(avgSeconds / 60);
+    const secs = (avgSeconds % 60).toString().padStart(2, '0');
+    return `${mins}:${secs}`;
+}
+
+
+/***/ }),
+/* 180 */
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __webpack_require__(5);
+tslib_1.__exportStar(__webpack_require__(181), exports);
+
+
+/***/ }),
+/* 181 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -5975,17 +6084,17 @@ exports.NhlMiddleware = NhlMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 177 */
+/* 182 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(178), exports);
+tslib_1.__exportStar(__webpack_require__(183), exports);
 
 
 /***/ }),
-/* 178 */
+/* 183 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -5995,9 +6104,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(179);
-const middlewares_1 = __webpack_require__(183);
-const services_1 = __webpack_require__(181);
+const controllers_1 = __webpack_require__(184);
+const middlewares_1 = __webpack_require__(188);
+const services_1 = __webpack_require__(186);
 let ApiPlayerInfoModule = class ApiPlayerInfoModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerInfoMiddleware).forRoutes('*');
@@ -6014,17 +6123,17 @@ exports.ApiPlayerInfoModule = ApiPlayerInfoModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 179 */
+/* 184 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(180), exports);
+tslib_1.__exportStar(__webpack_require__(185), exports);
 
 
 /***/ }),
-/* 180 */
+/* 185 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6034,7 +6143,7 @@ exports.PlayerInfoController = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(41);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(181);
+const services_1 = __webpack_require__(186);
 let PlayerInfoController = class PlayerInfoController {
     constructor(playerInfoService) {
         this.playerInfoService = playerInfoService;
@@ -6092,17 +6201,17 @@ exports.PlayerInfoController = PlayerInfoController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 181 */
+/* 186 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(182), exports);
+tslib_1.__exportStar(__webpack_require__(187), exports);
 
 
 /***/ }),
-/* 182 */
+/* 187 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6154,17 +6263,17 @@ exports.ApiPlayerInfoService = ApiPlayerInfoService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 183 */
+/* 188 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(184), exports);
+tslib_1.__exportStar(__webpack_require__(189), exports);
 
 
 /***/ }),
-/* 184 */
+/* 189 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6184,17 +6293,17 @@ exports.PlayerInfoMiddleware = PlayerInfoMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 185 */
+/* 190 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(186), exports);
+tslib_1.__exportStar(__webpack_require__(191), exports);
 
 
 /***/ }),
-/* 186 */
+/* 191 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6204,9 +6313,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(187);
-const middlewares_1 = __webpack_require__(191);
-const services_1 = __webpack_require__(189);
+const controllers_1 = __webpack_require__(192);
+const middlewares_1 = __webpack_require__(196);
+const services_1 = __webpack_require__(194);
 let ApiPlayerRatingsModule = class ApiPlayerRatingsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerRatingsMiddleware).forRoutes('*');
@@ -6223,17 +6332,17 @@ exports.ApiPlayerRatingsModule = ApiPlayerRatingsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 187 */
+/* 192 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(188), exports);
+tslib_1.__exportStar(__webpack_require__(193), exports);
 
 
 /***/ }),
-/* 188 */
+/* 193 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6242,7 +6351,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerRatingsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(189);
+const services_1 = __webpack_require__(194);
 let PlayerRatingsController = class PlayerRatingsController {
     constructor(playerRatingsService) {
         this.playerRatingsService = playerRatingsService;
@@ -6291,17 +6400,17 @@ exports.PlayerRatingsController = PlayerRatingsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 189 */
+/* 194 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(190), exports);
+tslib_1.__exportStar(__webpack_require__(195), exports);
 
 
 /***/ }),
-/* 190 */
+/* 195 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6381,17 +6490,17 @@ exports.ApiPlayerRatingsService = ApiPlayerRatingsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 191 */
+/* 196 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(192), exports);
+tslib_1.__exportStar(__webpack_require__(197), exports);
 
 
 /***/ }),
-/* 192 */
+/* 197 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6411,17 +6520,17 @@ exports.PlayerRatingsMiddleware = PlayerRatingsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 193 */
+/* 198 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(194), exports);
+tslib_1.__exportStar(__webpack_require__(199), exports);
 
 
 /***/ }),
-/* 194 */
+/* 199 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6432,9 +6541,9 @@ const entities_1 = __webpack_require__(10);
 const axios_1 = __webpack_require__(169);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(195);
-const middlewares_1 = __webpack_require__(202);
-const services_1 = __webpack_require__(197);
+const controllers_1 = __webpack_require__(200);
+const middlewares_1 = __webpack_require__(207);
+const services_1 = __webpack_require__(202);
 let ApiPlayerStatsModule = class ApiPlayerStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.PlayerStatsMiddleware).forRoutes('*');
@@ -6456,17 +6565,17 @@ exports.ApiPlayerStatsModule = ApiPlayerStatsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 195 */
+/* 200 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(196), exports);
+tslib_1.__exportStar(__webpack_require__(201), exports);
 
 
 /***/ }),
-/* 196 */
+/* 201 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6475,7 +6584,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PlayerStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(197);
+const services_1 = __webpack_require__(202);
 let PlayerStatsController = class PlayerStatsController {
     constructor(playerLeaderStatsService, playerStatsService, playerAllTimeStatsService, userPlayersStatsService) {
         this.playerLeaderStatsService = playerLeaderStatsService;
@@ -6650,20 +6759,20 @@ exports.PlayerStatsController = PlayerStatsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 197 */
+/* 202 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(198), exports);
-tslib_1.__exportStar(__webpack_require__(199), exports);
-tslib_1.__exportStar(__webpack_require__(200), exports);
-tslib_1.__exportStar(__webpack_require__(201), exports);
+tslib_1.__exportStar(__webpack_require__(203), exports);
+tslib_1.__exportStar(__webpack_require__(204), exports);
+tslib_1.__exportStar(__webpack_require__(205), exports);
+tslib_1.__exportStar(__webpack_require__(206), exports);
 
 
 /***/ }),
-/* 198 */
+/* 203 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -6850,7 +6959,7 @@ exports.ApiPlayerLeadersStatsService = ApiPlayerLeadersStatsService = ApiPlayerL
 
 
 /***/ }),
-/* 199 */
+/* 204 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7017,7 +7126,7 @@ exports.ApiPlayerStatsService = ApiPlayerStatsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 200 */
+/* 205 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7216,7 +7325,7 @@ exports.ApiPlayerAllTimeStatsService = ApiPlayerAllTimeStatsService = tslib_1.__
 
 
 /***/ }),
-/* 201 */
+/* 206 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7489,17 +7598,17 @@ exports.ApiUserPlayerStatsService = ApiUserPlayerStatsService = tslib_1.__decora
 
 
 /***/ }),
-/* 202 */
+/* 207 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(203), exports);
+tslib_1.__exportStar(__webpack_require__(208), exports);
 
 
 /***/ }),
-/* 203 */
+/* 208 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7519,17 +7628,17 @@ exports.PlayerStatsMiddleware = PlayerStatsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 204 */
+/* 209 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(205), exports);
+tslib_1.__exportStar(__webpack_require__(210), exports);
 
 
 /***/ }),
-/* 205 */
+/* 210 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7540,9 +7649,9 @@ const entities_1 = __webpack_require__(10);
 const axios_1 = __webpack_require__(169);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(206);
-const middlewares_1 = __webpack_require__(210);
-const services_1 = __webpack_require__(208);
+const controllers_1 = __webpack_require__(211);
+const middlewares_1 = __webpack_require__(215);
+const services_1 = __webpack_require__(213);
 let ApiSalariesModule = class ApiSalariesModule {
     configure(consumer) {
         consumer.apply(middlewares_1.SalariesMiddleware).forRoutes('*');
@@ -7570,17 +7679,17 @@ exports.ApiSalariesModule = ApiSalariesModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 206 */
+/* 211 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(207), exports);
+tslib_1.__exportStar(__webpack_require__(212), exports);
 
 
 /***/ }),
-/* 207 */
+/* 212 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -7590,7 +7699,7 @@ exports.SalariesController = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(41);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(208);
+const services_1 = __webpack_require__(213);
 let SalariesController = class SalariesController {
     constructor(salariesService) {
         this.salariesService = salariesService;
@@ -7694,17 +7803,17 @@ exports.SalariesController = SalariesController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 208 */
+/* 213 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(209), exports);
+tslib_1.__exportStar(__webpack_require__(214), exports);
 
 
 /***/ }),
-/* 209 */
+/* 214 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8061,17 +8170,17 @@ exports.ApiSalariesService = ApiSalariesService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 210 */
+/* 215 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(211), exports);
+tslib_1.__exportStar(__webpack_require__(216), exports);
 
 
 /***/ }),
-/* 211 */
+/* 216 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8091,17 +8200,17 @@ exports.SalariesMiddleware = SalariesMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 212 */
+/* 217 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(213), exports);
+tslib_1.__exportStar(__webpack_require__(218), exports);
 
 
 /***/ }),
-/* 213 */
+/* 218 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8111,9 +8220,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(214);
-const middlewares_1 = __webpack_require__(218);
-const services_1 = __webpack_require__(216);
+const controllers_1 = __webpack_require__(219);
+const middlewares_1 = __webpack_require__(223);
+const services_1 = __webpack_require__(221);
 let ApiScheduleModule = class ApiScheduleModule {
     configure(consumer) {
         consumer.apply(middlewares_1.ScheduleMiddleware).forRoutes('*');
@@ -8130,17 +8239,17 @@ exports.ApiScheduleModule = ApiScheduleModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 214 */
+/* 219 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(215), exports);
+tslib_1.__exportStar(__webpack_require__(220), exports);
 
 
 /***/ }),
-/* 215 */
+/* 220 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8149,7 +8258,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ScheduleController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(216);
+const services_1 = __webpack_require__(221);
 let ScheduleController = class ScheduleController {
     constructor(scheduleService) {
         this.scheduleService = scheduleService;
@@ -8202,17 +8311,17 @@ exports.ScheduleController = ScheduleController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 216 */
+/* 221 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(217), exports);
+tslib_1.__exportStar(__webpack_require__(222), exports);
 
 
 /***/ }),
-/* 217 */
+/* 222 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8451,17 +8560,17 @@ exports.ApiScheduleService = ApiScheduleService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 218 */
+/* 223 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(219), exports);
+tslib_1.__exportStar(__webpack_require__(224), exports);
 
 
 /***/ }),
-/* 219 */
+/* 224 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8481,17 +8590,17 @@ exports.ScheduleMiddleware = ScheduleMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 220 */
+/* 225 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(221), exports);
+tslib_1.__exportStar(__webpack_require__(226), exports);
 
 
 /***/ }),
-/* 221 */
+/* 226 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8501,9 +8610,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(222);
-const middlewares_1 = __webpack_require__(228);
-const services_1 = __webpack_require__(224);
+const controllers_1 = __webpack_require__(227);
+const middlewares_1 = __webpack_require__(233);
+const services_1 = __webpack_require__(229);
 let ApiTeamStatsModule = class ApiTeamStatsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.TeamStatsMiddleware).forRoutes('*');
@@ -8524,17 +8633,17 @@ exports.ApiTeamStatsModule = ApiTeamStatsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 222 */
+/* 227 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(223), exports);
+tslib_1.__exportStar(__webpack_require__(228), exports);
 
 
 /***/ }),
-/* 223 */
+/* 228 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8543,7 +8652,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TeamStatsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(224);
+const services_1 = __webpack_require__(229);
 let TeamStatsController = class TeamStatsController {
     constructor(teamsStatsService, allTimeTeamsStatsService, userTeamStatsService) {
         this.teamsStatsService = teamsStatsService;
@@ -8657,19 +8766,19 @@ exports.TeamStatsController = TeamStatsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 224 */
+/* 229 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(225), exports);
-tslib_1.__exportStar(__webpack_require__(226), exports);
-tslib_1.__exportStar(__webpack_require__(227), exports);
+tslib_1.__exportStar(__webpack_require__(230), exports);
+tslib_1.__exportStar(__webpack_require__(231), exports);
+tslib_1.__exportStar(__webpack_require__(232), exports);
 
 
 /***/ }),
-/* 225 */
+/* 230 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -8872,7 +8981,7 @@ exports.ApiTeamStatsService = ApiTeamStatsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 226 */
+/* 231 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9065,7 +9174,7 @@ exports.ApiAllTimeTeamStatsService = ApiAllTimeTeamStatsService = tslib_1.__deco
 
 
 /***/ }),
-/* 227 */
+/* 232 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9276,17 +9385,17 @@ exports.ApiUserTeamStatsService = ApiUserTeamStatsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 228 */
+/* 233 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(229), exports);
+tslib_1.__exportStar(__webpack_require__(234), exports);
 
 
 /***/ }),
-/* 229 */
+/* 234 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9306,17 +9415,17 @@ exports.TeamStatsMiddleware = TeamStatsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 230 */
+/* 235 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(231), exports);
+tslib_1.__exportStar(__webpack_require__(236), exports);
 
 
 /***/ }),
-/* 231 */
+/* 236 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9326,9 +9435,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(232);
-const teams_middleware_1 = __webpack_require__(236);
-const services_1 = __webpack_require__(234);
+const controllers_1 = __webpack_require__(237);
+const teams_middleware_1 = __webpack_require__(241);
+const services_1 = __webpack_require__(239);
 let ApiTeamsModule = class ApiTeamsModule {
     configure(consumer) {
         consumer.apply(teams_middleware_1.TeamsMiddleware).forRoutes('*');
@@ -9345,17 +9454,17 @@ exports.ApiTeamsModule = ApiTeamsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 232 */
+/* 237 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(233), exports);
+tslib_1.__exportStar(__webpack_require__(238), exports);
 
 
 /***/ }),
-/* 233 */
+/* 238 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9365,7 +9474,7 @@ exports.TeamsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(41);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(234);
+const services_1 = __webpack_require__(239);
 let TeamsController = class TeamsController {
     constructor(teamsService) {
         this.teamsService = teamsService;
@@ -9464,17 +9573,17 @@ exports.TeamsController = TeamsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 234 */
+/* 239 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(235), exports);
+tslib_1.__exportStar(__webpack_require__(240), exports);
 
 
 /***/ }),
-/* 235 */
+/* 240 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9551,7 +9660,7 @@ exports.TeamsService = TeamsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 236 */
+/* 241 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9571,17 +9680,17 @@ exports.TeamsMiddleware = TeamsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 237 */
+/* 242 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(238), exports);
+tslib_1.__exportStar(__webpack_require__(243), exports);
 
 
 /***/ }),
-/* 238 */
+/* 243 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9592,9 +9701,9 @@ const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
 const axios_1 = __webpack_require__(169);
-const controllers_1 = __webpack_require__(239);
-const middlewares_1 = __webpack_require__(244);
-const services_1 = __webpack_require__(241);
+const controllers_1 = __webpack_require__(244);
+const middlewares_1 = __webpack_require__(249);
+const services_1 = __webpack_require__(246);
 let ApiTransactionsModule = class ApiTransactionsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.TransactionsMiddleware).forRoutes('*');
@@ -9621,17 +9730,17 @@ exports.ApiTransactionsModule = ApiTransactionsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 239 */
+/* 244 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(240), exports);
+tslib_1.__exportStar(__webpack_require__(245), exports);
 
 
 /***/ }),
-/* 240 */
+/* 245 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9641,7 +9750,7 @@ exports.TransactionsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(41);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(241);
+const services_1 = __webpack_require__(246);
 let TransactionsController = class TransactionsController {
     constructor(transactionsService, transactionsTradesService) {
         this.transactionsService = transactionsService;
@@ -9739,18 +9848,18 @@ exports.TransactionsController = TransactionsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 241 */
+/* 246 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(242), exports);
-tslib_1.__exportStar(__webpack_require__(243), exports);
+tslib_1.__exportStar(__webpack_require__(247), exports);
+tslib_1.__exportStar(__webpack_require__(248), exports);
 
 
 /***/ }),
-/* 242 */
+/* 247 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -9896,7 +10005,7 @@ exports.ApiTransactionsService = ApiTransactionsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 243 */
+/* 248 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10187,17 +10296,17 @@ exports.ApiTransactionsTradesService = ApiTransactionsTradesService = ApiTransac
 
 
 /***/ }),
-/* 244 */
+/* 249 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(245), exports);
+tslib_1.__exportStar(__webpack_require__(250), exports);
 
 
 /***/ }),
-/* 245 */
+/* 250 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10217,17 +10326,17 @@ exports.TransactionsMiddleware = TransactionsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 246 */
+/* 251 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(247), exports);
+tslib_1.__exportStar(__webpack_require__(252), exports);
 
 
 /***/ }),
-/* 247 */
+/* 252 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10237,9 +10346,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(248);
-const middlewares_1 = __webpack_require__(252);
-const services_1 = __webpack_require__(250);
+const controllers_1 = __webpack_require__(253);
+const middlewares_1 = __webpack_require__(257);
+const services_1 = __webpack_require__(255);
 let ApiWaiversModule = class ApiWaiversModule {
     configure(consumer) {
         consumer.apply(middlewares_1.WaiversMiddleware).forRoutes('*');
@@ -10256,17 +10365,17 @@ exports.ApiWaiversModule = ApiWaiversModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 248 */
+/* 253 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(249), exports);
+tslib_1.__exportStar(__webpack_require__(254), exports);
 
 
 /***/ }),
-/* 249 */
+/* 254 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10275,7 +10384,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WaiversController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(250);
+const services_1 = __webpack_require__(255);
 let WaiversController = class WaiversController {
     constructor(waiversService) {
         this.waiversService = waiversService;
@@ -10312,17 +10421,17 @@ exports.WaiversController = WaiversController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 250 */
+/* 255 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(251), exports);
+tslib_1.__exportStar(__webpack_require__(256), exports);
 
 
 /***/ }),
-/* 251 */
+/* 256 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10394,17 +10503,17 @@ exports.ApiWaiversService = ApiWaiversService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 252 */
+/* 257 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(253), exports);
+tslib_1.__exportStar(__webpack_require__(258), exports);
 
 
 /***/ }),
-/* 253 */
+/* 258 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10424,17 +10533,17 @@ exports.WaiversMiddleware = WaiversMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 254 */
+/* 259 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(255), exports);
+tslib_1.__exportStar(__webpack_require__(260), exports);
 
 
 /***/ }),
-/* 255 */
+/* 260 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10444,9 +10553,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(256);
-const middlewares_1 = __webpack_require__(260);
-const services_1 = __webpack_require__(258);
+const controllers_1 = __webpack_require__(261);
+const middlewares_1 = __webpack_require__(265);
+const services_1 = __webpack_require__(263);
 let ApiDivisionsModule = class ApiDivisionsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.DivisionsMiddleware).forRoutes('*');
@@ -10463,17 +10572,17 @@ exports.ApiDivisionsModule = ApiDivisionsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 256 */
+/* 261 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(257), exports);
+tslib_1.__exportStar(__webpack_require__(262), exports);
 
 
 /***/ }),
-/* 257 */
+/* 262 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10483,7 +10592,7 @@ exports.DivisionsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(41);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(258);
+const services_1 = __webpack_require__(263);
 let DivisionsController = class DivisionsController {
     constructor(divisionsService) {
         this.divisionsService = divisionsService;
@@ -10554,17 +10663,17 @@ exports.DivisionsController = DivisionsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 258 */
+/* 263 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(259), exports);
+tslib_1.__exportStar(__webpack_require__(264), exports);
 
 
 /***/ }),
-/* 259 */
+/* 264 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10617,17 +10726,17 @@ exports.ApiDivisionsService = ApiDivisionsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 260 */
+/* 265 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(261), exports);
+tslib_1.__exportStar(__webpack_require__(266), exports);
 
 
 /***/ }),
-/* 261 */
+/* 266 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10647,17 +10756,17 @@ exports.DivisionsMiddleware = DivisionsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 262 */
+/* 267 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(263), exports);
+tslib_1.__exportStar(__webpack_require__(268), exports);
 
 
 /***/ }),
-/* 263 */
+/* 268 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10667,9 +10776,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(264);
-const middlewares_1 = __webpack_require__(268);
-const services_1 = __webpack_require__(266);
+const controllers_1 = __webpack_require__(269);
+const middlewares_1 = __webpack_require__(273);
+const services_1 = __webpack_require__(271);
 let ApiGoalieRatingsModule = class ApiGoalieRatingsModule {
     configure(consumer) {
         consumer.apply(middlewares_1.GoalieRatingsMiddleware).forRoutes('*');
@@ -10686,17 +10795,17 @@ exports.ApiGoalieRatingsModule = ApiGoalieRatingsModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 264 */
+/* 269 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(265), exports);
+tslib_1.__exportStar(__webpack_require__(270), exports);
 
 
 /***/ }),
-/* 265 */
+/* 270 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10705,7 +10814,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GoalieRatingsController = void 0;
 const tslib_1 = __webpack_require__(5);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(266);
+const services_1 = __webpack_require__(271);
 let GoalieRatingsController = class GoalieRatingsController {
     constructor(goalieRatingsService) {
         this.goalieRatingsService = goalieRatingsService;
@@ -10744,17 +10853,17 @@ exports.GoalieRatingsController = GoalieRatingsController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 266 */
+/* 271 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(267), exports);
+tslib_1.__exportStar(__webpack_require__(272), exports);
 
 
 /***/ }),
-/* 267 */
+/* 272 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10827,17 +10936,17 @@ exports.ApiGoalieRatingsService = ApiGoalieRatingsService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 268 */
+/* 273 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(269), exports);
+tslib_1.__exportStar(__webpack_require__(274), exports);
 
 
 /***/ }),
-/* 269 */
+/* 274 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10857,17 +10966,17 @@ exports.GoalieRatingsMiddleware = GoalieRatingsMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 270 */
+/* 275 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(271), exports);
+tslib_1.__exportStar(__webpack_require__(276), exports);
 
 
 /***/ }),
-/* 271 */
+/* 276 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10877,9 +10986,9 @@ const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(10);
 const common_1 = __webpack_require__(1);
 const typeorm_1 = __webpack_require__(38);
-const controllers_1 = __webpack_require__(272);
-const middlewares_1 = __webpack_require__(276);
-const services_1 = __webpack_require__(274);
+const controllers_1 = __webpack_require__(277);
+const middlewares_1 = __webpack_require__(281);
+const services_1 = __webpack_require__(279);
 let ApiConferencesModule = class ApiConferencesModule {
     configure(consumer) {
         consumer.apply(middlewares_1.ConferencesMiddleware).forRoutes('*');
@@ -10896,17 +11005,17 @@ exports.ApiConferencesModule = ApiConferencesModule = tslib_1.__decorate([
 
 
 /***/ }),
-/* 272 */
+/* 277 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(273), exports);
+tslib_1.__exportStar(__webpack_require__(278), exports);
 
 
 /***/ }),
-/* 273 */
+/* 278 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -10916,7 +11025,7 @@ exports.ConferencesController = void 0;
 const tslib_1 = __webpack_require__(5);
 const entities_1 = __webpack_require__(41);
 const common_1 = __webpack_require__(1);
-const services_1 = __webpack_require__(274);
+const services_1 = __webpack_require__(279);
 let ConferencesController = class ConferencesController {
     constructor(conferencesService) {
         this.conferencesService = conferencesService;
@@ -10974,17 +11083,17 @@ exports.ConferencesController = ConferencesController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 274 */
+/* 279 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(275), exports);
+tslib_1.__exportStar(__webpack_require__(280), exports);
 
 
 /***/ }),
-/* 275 */
+/* 280 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -11032,17 +11141,17 @@ exports.ApiConferencesService = ApiConferencesService = tslib_1.__decorate([
 
 
 /***/ }),
-/* 276 */
+/* 281 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __webpack_require__(5);
-tslib_1.__exportStar(__webpack_require__(277), exports);
+tslib_1.__exportStar(__webpack_require__(282), exports);
 
 
 /***/ }),
-/* 277 */
+/* 282 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -11062,13 +11171,13 @@ exports.ConferencesMiddleware = ConferencesMiddleware = tslib_1.__decorate([
 
 
 /***/ }),
-/* 278 */
+/* 283 */
 /***/ ((module) => {
 
 module.exports = require("@nestjs/config");
 
 /***/ }),
-/* 279 */
+/* 284 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
@@ -11095,7 +11204,7 @@ exports.AppController = AppController = tslib_1.__decorate([
 
 
 /***/ }),
-/* 280 */
+/* 285 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 

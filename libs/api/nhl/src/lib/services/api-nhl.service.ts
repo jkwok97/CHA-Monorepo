@@ -10,6 +10,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { In, Repository } from 'typeorm';
+import { aggregateSeasonStats } from '../helpers';
 
 @Injectable()
 export class ApiNhlService {
@@ -139,14 +140,18 @@ export class ApiNhlService {
     return this.httpService
       .get<NhlPlayerStatsV2>(`${this.nhlAPI}/${playerId}/player-stats`)
       .pipe(
-        map((response) =>
-          response.data?.seasonTotals?.find(
+        map((response) => {
+          const records = (response.data?.seasonTotals ?? []).filter(
             (s) =>
               s.season === Number(season) &&
               s.gameTypeId === 2 &&
-              s.leagueAbbrev.default === 'NHL'
-          )
-        )
+              s.leagueAbbrev?.default === 'NHL'
+          );
+
+          if (!records.length) return undefined;
+
+          return aggregateSeasonStats(records);
+        })
       );
   }
 
